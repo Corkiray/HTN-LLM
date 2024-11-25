@@ -1,0 +1,37 @@
+==>
+1 selectDirection r3 t1 t2 t3
+2 rotateTower t1 t3 t2
+3 move_abstract t1 t2
+4 move_abstract t1 t3
+5 rotateTower t2 t3 t1
+6 move_abstract t3 t1
+7 rotateTower t2 t3 t1
+8 move r3 t1 t1 t2 t2
+9 move r2 r3 t2 t3 t3
+10 move r1 r2 t3 t2 t2
+11 move r1 r2 t2 t3 t3
+12 move r3 r1 t3 t1 t1
+<==
+
+root 0
+0 shiftTower t1 t2 t3 -> m-shiftTower 1 
+1 selectDirection r3 t1 t2 t3 -> selectedDirection 2 
+2 rotateTower t1 t3 t2 -> m-rotateTower 3 4 5 
+3 move_abstract t1 t2 -> newMethod21 8 
+4 move_abstract t1 t3 -> newMethod21 (not applicable, backtracked)
+   -> exchangeLR (not applicable, backtracked)
+   -> exchangeRL (not applicable, backtracked)
+   -> **re-planning**: selectDirection with different parameters (see below)
+1' selectDirection r3 t1 t3 t2 -> m-selectDirection 6 
+6 move_abstract t3 t1 -> newMethod21 12 
+5' rotateTower t2 t3 t1 -> m-rotateTower 9 10 11 
+9 move r2 r3 t2 t3 t3 -> move (preconditions met)
+10 move r1 r2 t3 t2 t2 -> move (preconditions met)
+11 move r1 r2 t2 t3 t3 -> move (preconditions met)
+
+**Note:**
+
+* The plan starts with `selectDirection` as per `m-shiftTower`.
+* Initially, `move_abstract t1 t3` (step 4) didn't have a applicable method. After backtracking, the planner re-evaluated `selectDirection` with different parameters, leading to a new decomposition path.
+* Some steps (e.g., `exchangeClear`, `exchangeLR`, `exchangeRL`) were not applicable due to the problem's initial state and goals, hence not included in the final plan.
+* The `move` actions (steps 8, 9, 10, 11, 12) are the result of applying method `newMethod21` to the respective `move_abstract` tasks.

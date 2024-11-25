@@ -1,0 +1,26 @@
+==>
+1 turn l1 l1 Y N
+2 flip l1 l1 Y N
+3 propagate_up l1 l1 Y N
+4 flip l0 l1 Y N
+5 propagate_up l0 l1 Y N
+6 propagate_down l1 l1 N Y
+7 flip l1 l2 N Y
+8 propagate_right l1 l2 N Y
+9 propagate_left l1 l2 Y N
+10 propagate_down l2 l2 Y N
+11 play
+<==
+
+root 0
+0 play -> do_play 1 11
+1 turn -> do_turn l1 l1 Y N 2 3 6 10
+2 flip l1 l1 Y N -> **NO DECOMPOSITION (ACTION)**
+3 propagate_up l1 l1 Y N -> propagate_up_do l1 l1 l0 Y N 4 5
+4 flip l0 l1 Y N -> **NO DECOMPOSITION (ACTION)**
+5 propagate_up l0 l1 Y N -> propagate_up_end_field l0 l1 Y
+6 propagate_down l1 l1 N Y -> propagate_down_do l1 l1 l2 N Y 7 8
+7 flip l1 l2 N Y -> **NO DECOMPOSITION (ACTION)**
+8 propagate_right l1 l2 N Y -> propagate_right_end_different l1 l2 l1 N Y
+9 propagate_left l1 l2 Y N -> propagate_left_end_different l1 l2 l1 Y N
+10 propagate_down l2 l2 Y N -> propagate_down_end_field l2 l2 Y

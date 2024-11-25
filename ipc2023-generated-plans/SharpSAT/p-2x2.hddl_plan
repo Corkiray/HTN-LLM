@@ -1,0 +1,87 @@
+==>
+1 A_MARK_VAR_ASSIGNED l1p l1n
+2 propagate-same-polarity l1p n1
+3 propagate-clause-same-polarity l1p c0
+4 satisfy-clause l1p c0
+5 A_SATISFY_CLAUSE c0 l1p n0 n1
+6 propagate-clause-same-polarity l1p c1
+7 unsatisfy-clause l1n c1
+8 A_UNSATISFY_CLAUSE c1 l1n n1 n0
+9 decrement-clause-size c1
+10 A_UPDATE_CLAUSE_LENGTH c1 n2 n1
+11 propagate-opposite-polarity l1n n1
+12 propagate-clause-opposite-polarity c0
+13 decrement-clause-size c0
+14 A_UPDATE_CLAUSE_LENGTH c0 n2 n1
+15 A_UPDATE_UNIT_CLAUSE_COUNT n0 n1
+16 count-models n1
+17 A_OUTPUT_EXPONENTIAL_COUNT n1
+18 backtrack-opposite-polarity l1n n1
+19 backtrack-clause-opposite-polarity c0
+20 increment-clause-size c0
+21 A_UPDATE_CLAUSE_LENGTH c0 n1 n2
+22 A_UPDATE_UNIT_CLAUSE_COUNT n1 n0
+23 backtrack-clause-opposite-polarity c1
+24 increment-clause-size c1
+25 A_UPDATE_CLAUSE_LENGTH c1 n1 n2
+26 backtrack-same-polarity l1p n1
+27 backtrack-clause-same-polarity c0
+28 unsatisfy-clause l1p c0
+29 A_UNSATISFY_CLAUSE c0 l1p n1 n0
+30 backtrack-clause-same-polarity c1
+31 satisfy-clause l1n c1
+32 A_SATISFY_CLAUSE c1 l1n n0 n1
+33 propagate-same-polarity l1n n1
+34 propagate-clause-same-polarity c0
+35 unsatisfy-clause l1p c0
+36 A_UNSATISFY_CLAUSE c0 l1p n1 n0
+37 decrement-clause-size c0
+38 A_UPDATE_CLAUSE_LENGTH c0 n2 n1
+39 propagate-clause-same-polarity c1
+40 satisfy-clause l1n c1
+41 A_SATISFY_CLAUSE c1 l1n n1 n2
+42 propagate-opposite-polarity l1p n1
+43 propagate-clause-opposite-polarity c0
+44 increment-clause-size c0
+45 A_UPDATE_CLAUSE_LENGTH c0 n1 n2
+46 A_UPDATE_UNIT_CLAUSE_COUNT n1 n0
+47 count-models n1
+48 A_OUTPUT_EXPONENTIAL_COUNT n1
+49 backtrack-opposite-polarity l1p n1
+50 backtrack-clause-opposite-polarity c0
+51 decrement-clause-size c0
+52 A_UPDATE_CLAUSE_LENGTH c0 n2 n1
+53 A_UPDATE_UNIT_CLAUSE_COUNT n0 n1
+54 backtrack-clause-opposite-polarity c1
+55 increment-clause-size c1
+56 A_UPDATE_CLAUSE_LENGTH c1 n2 n3
+57 backtrack-same-polarity l1n n1
+58 backtrack-clause-same-polarity c0
+59 satisfy-clause l1p c0
+60 A_SATISFY_CLAUSE c0 l1p n1 n2
+61 backtrack-clause-same-polarity c1
+62 unsatisfy-clause l1n c1
+63 A_UNSATISFY_CLAUSE c1 l1n n2 n1
+64 A_UNMARK_VAR_ASSIGNED l1p l1n
+<==
+
+root 0
+0 count-models n0 -> m_count-models_split n0 n1 n2 l1p l1n n0 n2
+  1 A_MARK_VAR_ASSIGNED l1p l1n
+  2 propagate-same-polarity l1p n1 -> m_propagate_same_polarity_linear l1p n1 n2 c0
+    3 propagate-clause-same-polarity l1p c0 -> m_propagate-clause_via_satisfy l1p c0
+      4 satisfy-clause l1p c0 -> m_satisfy_nonunit_clause l1p c0 n0 n1
+        5 A_SATISFY_CLAUSE c0 l1p n0 n1
+     ...
+ ...
+  16 count-models n1 -> m_count-models_empty-formula n1 n2
+    17 A_OUTPUT_EXPONENTIAL_COUNT n1
+ ...
+  33 propagate-same-polarity l1n n1 -> m_propagate_same_polarity_linear l1n n1 n2 c0
+    34 propagate-clause-same-polarity c0 -> m_propagate-clause_via_eliminate c0
+      35 unsatisfy-clause l1p c0 -> m_unsatisfy_nonunit_clause l1p c0 n1 n0
+        36 A_UNSATISFY_CLAUSE c0 l1p n1 n0
+      37 decrement-clause-size c0 -> m_decrement_large_clause_size c0 n2 n1
+        38 A_UPDATE_CLAUSE_LENGTH c0 n2 n1
+ ...
+  64 A_UNMARK_VAR_ASSIGNED l1p l1n

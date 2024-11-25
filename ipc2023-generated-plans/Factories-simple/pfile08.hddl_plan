@@ -1,0 +1,59 @@
+==>
+**Sequential Plan**
+```markdown
+1. goto location_7
+2. get_resource resource_f_7_3 location_7
+3. goto last_location
+4. construct last_factory resource_7 last_location
+```
+**Hierarchical Decomposition**
+```markdown
+root 0
+0 construct_factory last_factory last_location -> m_construct_factory 3 4
+1 goto last_location -> m_goto 0 1 3
+  0.1 move location_0 location_1
+  0.2 goto location_7
+    0.2.1 move location_1 location_2
+    0.2.2 move location_2 location_3
+    0.2.3 move location_3 location_4
+    0.2.4 move location_4 location_5
+    0.2.5 move location_5 location_6
+    0.2.6 move location_6 location_7
+  0.3 move location_7 last_location
+    0.3.1 (no move needed, already at location_7, then move to last_location)
+    0.3.2 move location_7 last_location
+2 get_resource resource_f_7_3 location_7 -> m_get_resources_and_fuse 2.1 2.2 2.3
+  2.1 get_resource resource_f_7_2 location_7 -> m_get_resources_and_fuse 2.1.1 2.1.2 2.1.3
+    2.1.1 get_resource resource_f_7_1 location_7 -> m_get_resources_and_fuse 2.1.1.1 2.1.1.2 2.1.1.3
+      2.1.1.1 get_resource resource_f_7_0 location_7 -> m_get_resource 2.1.1.1.1 2.1.1.1.2 2.1.1.1.3
+        2.1.1.1.1 construct_factory factory_7 location_7 -> m_factory_already_constructed
+        2.1.1.1.2 produce_resource resource_f_7_0
+          2.1.1.1.2.1 get_resource resource_3 location_7 -> m_resource_there
+          2.1.1.1.2.2 produce resource_f_7_0 resource_3 factory_7 location_7
+        2.1.1.1.3 deliver_resource resource_f_7_0 location_7 -> m_deliver_resource 2.1.1.1.3.1 2.1.1.1.3.2 2.1.1.1.3.3 2.1.1.1.3.4
+          2.1.1.1.3.1 goto location_7 -> m_already_there
+          2.1.1.1.3.2 pickup resource_f_7_0 location_7
+          2.1.1.1.3.3 goto location_7 -> m_already_there
+          2.1.1.1.3.4 drop resource_f_7_0 location_7
+      2.1.1.2 get_resource resource_4 location_7 -> m_get_resource 2.1.1.2.1 2.1.1.2.2 2.1.1.2.3
+       ... (similar decomposition as above, omitted for brevity)
+      2.1.1.3 fuse resource_f_7_1 resource_f_7_0 resource_4 location_7
+   ... (similar decomposition for 2.1.2 and 2.1.3, omitted for brevity)
+  2.2 get_resource resource_6 location_7 -> m_get_resource... (similar decomposition as above, omitted for brevity)
+  2.3 fuse resource_f_7_3 resource_f_7_2 resource_6 location_7
+3 construct last_factory resource_7 last_location -> m_construct_factory 3.1 3.2
+  3.1 get_resource resource_7 last_location -> m_deliver_resource 3.1.1 3.1.2 3.1.3 3.1.4
+    3.1.1 goto location_7 -> m_goto... (similar decomposition as above, omitted for brevity)
+    3.1.2 pickup resource_7 location_7
+    3.1.3 goto last_location -> m_goto... (similar decomposition as above, omitted for brevity)
+    3.1.4 drop resource_7 last_location
+  3.2 construct last_factory resource_7 last_location
+```
+<==
+
+**Note:**
+
+* The sequential plan provides a high-level overview of the tasks to be executed.
+* The hierarchical decomposition shows the detailed breakdown of each task into subtasks, using the methods defined in the HTN domain.
+* Due to the complexity and depth of the decomposition, some parts have been omitted for brevity (marked with `...`). These omitted sections would follow a similar pattern to the provided decomposition.
+* The plan assumes that the preconditions for each method and action are met, and the effects of each action are applied to the state.

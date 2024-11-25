@@ -1,0 +1,116 @@
+==>
+1 DO-ON-MOVE3 S8 S6 C4
+2 DO-ON-MOVE3 S6 S3 S4
+3 DO-ON-MOVE3 S3 S5 DA
+4 DO-ON-MOVE3 S5 D6 C2
+5 DO-ON-MOVE3 D6 C2 H2
+6 DO-ON-MOVE3 C2 H2 D7
+7 DO-ON-SENDTOFREE3 D7 H2 N4 N5
+8 DO-ON-MOVE3 H2 H8 C9
+9 DO-ON-MOVE3 H8 C9 CA
+10 DO-ON-MOVE3 C9 CA H9
+11 DO-ON-MOVE3 CA H9 D9
+12 DO-ON-MOVE3 H9 D9 CJ
+13 DO-ON-MOVE3 D9 CJ S9
+14 DO-ON-MOVE3 CJ S9 D10
+15 DO-ON-MOVE3 S9 D10 S7
+16 DO-ON-MOVE3 D10 S7 H7
+17 DO-ON-MOVE3 S7 H7 H10
+18 DO-ON-SENDTOHOME3 H7 H10 S N1 N0
+19 DO-ON-MOVE3 H10 H4 S10
+20 DO-ON-MOVE3 H4 S10 D8
+21 DO-ON-MOVE3 S10 D8 S8
+22 DO-ON-MOVE3 D8 S8 C8
+23 DO-ON-MOVE3 S8 C8 SJ
+24 DO-ON-MOVE3 C8 SJ C10
+25 DO-ON-MOVE3 SJ C10 DJ
+26 DO-ON-MOVE3 C10 DJ HJ
+27 DO-ON-SENDTOHOME3 DJ HJ D N11 N10
+28 DO-ON-MOVE3 HJ D3 S2
+29 DO-ON-MOVE3 D3 S2 C7
+30 DO-ON-MOVE3 S2 C7 C6
+31 DO-ON-MOVE3 C7 C6 H6
+32 DO-ON-MOVE3 C6 H6 C3
+33 DO-ON-MOVE3 H6 C3 H3
+34 DO-ON-MOVE3 C3 H3 HA
+35 DO-ON-MOVE3 H3 HA S3
+36 DO-ON-MOVE3 HA S3 H2
+37 DO-ON-MOVE3 S3 H2 D2
+38 DO-ON-MOVE3 H2 D2 DA
+39 DO-ON-MOVE3 D2 DA S5
+40 DO-ON-MOVE3 DA S5 SA
+41 DO-ON-MOVE3 S5 SA S4
+42 DO-ON-MOVE3 SA S4 H5
+43 DO-ON-MOVE3 S4 H5 S6
+44 DO-ON-MOVE3 H5 S6 H4
+45 DO-ON-MOVE3 S6 H4 S7
+46 DO-ON-MOVE3 H4 S7 H8
+47 DO-ON-MOVE3 S7 H7 H9
+48 DO-ON-SENDTOHOME3 H8 H9 H N9 N8
+49 DO-ON-SENDTOHOME3 S7 H7 S N7 N6
+50 DO-ON-SENDTOHOME3 S4 H4 S N4 N3
+51 DO-ON-SENDTOHOME3 S3 H3 S N3 N2
+52 DO-ON-SENDTOHOME3 S2 D2 S N2 N1
+53 DO-ON-SENDTOHOME3 D8 S8 D N8 N7
+54 DO-ON-SENDTOHOME3 D7 H2 D N5 N4
+55 DO-ON-SENDTOHOME3 D6 C2 D N6 N5
+56 DO-ON-SENDTOHOME3 D5 D2 D N5 N4
+57 DO-ON-SENDTOHOME3 D4 D10 D N4 N3
+58 DO-ON-SENDTOHOME3 D3 S2 D N3 N2
+59 DO-ON-SENDTOHOME3 D2 DA D N2 N1
+60 DO-ON-SENDTOHOME3 C9 CA C N9 N8
+61 DO-ON-SENDTOHOME3 C8 SJ C N8 N7
+62 DO-ON-SENDTOHOME3 C7 C6 C N7 N6
+63 DO-ON-SENDTOHOME3 C6 H6 C N6 N5
+64 DO-ON-SENDTOHOME3 C5 D5 C N5 N4
+65 DO-ON-SENDTOHOME3 C4 S8 C N4 N3
+66 DO-ON-SENDTOHOME3 C3 H3 C N3 N2
+67 DO-ON-SENDTOHOME3 C2 H2 C N2 N1
+68 DO-ON-SENDTOHOME3 CA H9 C N1 N0
+<==
+
+root 0
+0 solve_freecell -> m1_solve_freecell_0 1 68
+1 m1_solve_freecell_0 -> m2_solve_freecell_0 2 67
+2 m2_solve_freecell_0 -> m3_solve_freecell_0 3 66
+3 m3_solve_freecell_0 -> m4_solve_freecell_0 4 65
+4 m4_solve_freecell_0 -> m5_solve_freecell_0 5 64
+5 m5_solve_freecell_0 -> m6_solve_freecell_0 6 63
+6 m6_solve_freecell_0 -> m7_solve_freecell_0 7 62
+7 m7_solve_freecell_0 -> m8_solve_freecell_0 8 61
+8 m8_solve_freecell_0 -> m9_solve_freecell_0 9 60
+9 m9_solve_freecell_0 -> m10_solve_freecell_0 10 59
+10 m10_solve_freecell_0 -> m11_solve_freecell_0 11 58
+11 m11_solve_freecell_0 -> m12_solve_freecell_0 12 57
+12 m12_solve_freecell_0 -> m13_solve_freecell_0 13 56
+13 m13_solve_freecell_0 -> m14_solve_freecell_0 14 55
+14 m14_solve_freecell_0 -> m15_solve_freecell_0 15 54
+15 m15_solve_freecell_0 -> m16_solve_freecell_0 16 53
+16 m16_solve_freecell_0 -> m17_solve_freecell_0 17 52
+17 m17_solve_freecell_0 -> m18_solve_freecell_0 18 51
+18 m18_solve_freecell_0 -> m19_solve_freecell_0 19 50
+19 m19_solve_freecell_0 -> m20_solve_freecell_0 20 49
+20 m20_solve_freecell_0 -> m21_solve_freecell_0 21 48
+21 m21_solve_freecell_0 -> m22_solve_freecell_0 22 47
+22 m22_solve_freecell_0 -> m23_solve_freecell_0 23 46
+23 m23_solve_freecell_0 -> m24_solve_freecell_0 24 45
+24 m24_solve_freecell_0 -> m25_solve_freecell_0 25 44
+25 m25_solve_freecell_0 -> m26_solve_freecell_0 26 43
+26 m26_solve_freecell_0 -> m27_solve_freecell_0 27 42
+27 m27_solve_freecell_0 -> m28_solve_freecell_0 28 41
+28 m28_solve_freecell_0 -> m29_solve_freecell_0 29 40
+29 m29_solve_freecell_0 -> m30_solve_freecell_0 30 39
+30 m30_solve_freecell_0 -> m31_solve_freecell_0 31 38
+31 m31_solve_freecell_0 -> m32_solve_freecell_0 32 37
+32 m32_solve_freecell_0 -> m33_solve_freecell_0 33 36
+33 m33_solve_freecell_0 -> m34_solve_freecell_0 34 35
+34 m34_solve_freecell_0 -> m35_solve_freecell_0 35 34
+35 m35_solve_freecell_0 -> m36_solve_freecell_0 36 33
+36 m36_solve_freecell_0 -> m37_solve_freecell_0 37 32
+37 m37_solve_freecell_0 -> m38_solve_freecell_0 38 31
+38 m38_solve_freecell_0 -> m39_solve_freecell_0 39 30
+39 m39_solve_freecell_0 -> m40_solve_freecell_0 40 29
+40 m40_solve_freecell_0 -> m41_solve_freecell_0 41 28
+41 m41_solve_freecell_0 -> m42_solve_freecell_0 42 27
+42 m42_solve_freecell_0 -> m43_solve_freecell_0 43 26
+43 m43_solve_freecell_0

@@ -1,0 +1,62 @@
+==>
+**Sequential Plan**
+1. AchieveContainsShakerCocktail shaker1 cocktail1
+2. AchieveCleanShot shot6
+3. AchieveHolding right shaker1
+4. DoPourShakerToShot shaker1 shot6 cocktail1
+5. AchieveContainsShakerCocktail shaker1 cocktail2
+6. AchieveCleanShot shot8
+7. AchieveHolding right shaker1
+8. DoPourShakerToShot shaker1 shot8 cocktail2
+9. AchieveContainsShakerCocktail shaker1 cocktail3
+10. AchieveCleanShot shot3
+11. AchieveHolding right shaker1
+12. DoPourShakerToShot shaker1 shot3 cocktail3
+
+**Hierarchical Decomposition**
+root 0
+0 AchieveContainsShotCocktail shot6 cocktail1 -> m1_MakeAndPourCocktail 1 2 3 4
+1 AchieveContainsShakerCocktail shaker1 cocktail1 -> m2_MakeCocktail 13 14 15 16 17 18
+2 AchieveCleanShot shot6 -> m3_CleanEmptyShot 19 20 21
+3 AchieveHolding right shaker1 -> m4_PickUp 22 23 24
+4 DoPourShakerToShot shaker1 shot6 cocktail1 -> m5_pour_shaker_to_shot_action 25
+
+5 AchieveContainsShotCocktail shot8 cocktail2 -> m1_MakeAndPourCocktail 6 7 8
+6 AchieveContainsShakerCocktail shaker1 cocktail2 -> m2_MakeCocktail 26 27 28 29 30 31
+7 AchieveCleanShot shot8 -> m3_CleanEmptyShot 32 33 34
+8 AchieveHolding right shaker1 -> m4_HoldingNull (already holding)
+
+9 AchieveContainsShotCocktail shot3 cocktail3 -> m1_MakeAndPourCocktail 10 11 12
+10 AchieveContainsShakerCocktail shaker1 cocktail3 -> m2_MakeCocktail 35 36 37 38 39 40
+11 AchieveCleanShot shot3 -> m3_CleanEmptyShot 41 42 43
+12 AchieveHolding right shaker1 -> m4_HoldingNull (already holding)
+
+**Sub-Task Decomposition**
+m1_MakeAndPourCocktail
+* 1: AchieveContainsShakerCocktail shaker1 cocktail1
+	+ 13: AchieveCleanShaker shaker1 -> m6_CleanEmptyShaker 44 45 46
+	+ 14: AchieveContainsShakerIngredient shaker1 ingredient9 -> m7_AddIngredientToEmptyShaker 47 48 49
+	+ 15: AchieveContainsShakerIngredient shaker1 ingredient1 -> m8_AddIngredientToUsedShaker 50 51 52
+	+ 16: AchieveHolding left shaker1 -> m9_PickUp 53 54 55
+	+ 17: AchieveHandEmpty right -> m10_EmptyHand 56
+	+ 18: shake cocktail1 ingredient9 ingredient1 shaker1 left right
+*... (similar decomposition for other m1_MakeAndPourCocktail instances)
+
+m2_MakeCocktail
+* 13: AchieveCleanShaker shaker1
+	+ 44: AchieveHolding left shaker1 -> m11_PickUp 57 58 59
+	+ 45: AchieveHandEmpty right -> m12_EmptyHand 60
+	+ 46: clean-shaker shaker1 left right
+
+m3_CleanEmptyShot
+* 19: AchieveHolding left shot6
+	+ 61: AchieveHandEmpty left -> m13_HandEmptyNull (already empty)
+	+ 62: AchieveOnTable shot6 -> m14_OnTableNull (already on table)
+	+ 63: grasp left shot6
+* 20: AchieveHandEmpty right
+	+ 64: AchieveHolding right shot6 -> m15_EmptyHand 65
+* 21: clean-shot shot6 shot6's_bevervage left right
+
+... (similar decomposition for other methods and tasks)
+
+<==

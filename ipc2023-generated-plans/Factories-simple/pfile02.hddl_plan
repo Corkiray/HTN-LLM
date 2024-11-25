@@ -1,0 +1,133 @@
+==>
+1 goto location_2
+2 construct_factory factory_2 location_2
+3 produce_resource resource_f_2_0
+4 get_resource resource_f_2_1 location_2
+5 produce resource_2 resource_f_2_1 factory_2 location_2
+6 get_resource resource_2 last_location
+7 construct last_factory resource_2 last_location
+8 deliver_resource resource_2 last_location
+<==
+
+root 0
+0 construct_factory last_factory last_location -> m_construct_factory 7
+1 m_construct_factory 7 -> 
+  :parameters (last_factory resource_2 last_location)
+  :precondition (and (demands last_factory resource_2) (location-free last_location) (not (factory-constructed last_factory)))
+  :ordered-subtasks (and 
+    6 get_resource 6 
+    7 construct 7 
+  )
+  
+root 1
+1 get_resource 6 -> m_get_resource 4
+  :parameters (resource_2 factory_2 location_2 last_location)
+  :precondition (and (produces factory_2 resource_2))
+  :ordered-subtasks (and 
+    2 construct_factory 2 
+    3 produce_resource 3 
+    4 deliver_resource 4 
+    5 produce 5 
+    6 deliver_resource 6 
+  )
+
+root 2
+2 construct_factory 2 -> m_factory_already_constructed ( skipped, not applicable )
+  -> m_construct_factory 2
+  :parameters (factory_2 resource_f_2_1 location_2)
+  :precondition (and (demands factory_2 resource_f_2_1) (location-free location_2) (not (factory-constructed factory_2)))
+  :ordered-subtasks (and 
+    2.1 get_resource 2.1 
+    2.2 construct 2.2 
+  )
+
+root 2.1
+2.1 get_resource 2.1 -> m_get_resources_and_fuse 4
+  :parameters (resource_f_2_1 resource_f_2_0 resource_1 location_2)
+  :precondition (and (fuses resource_f_2_1 resource_f_2_0 resource_1))
+  :ordered-subtasks (and 
+    2.1.1 get_resource 2.1.1 
+    2.1.2 get_resource 2.1.2 
+    2.1.3 fuse 2.1.3 
+  )
+
+root 2.1.1
+2.1.1 get_resource 2.1.1 -> m_get_resource 3
+  :parameters (resource_f_2_0 factory_0 location_0 location_2)
+  :precondition (and (produces factory_0 resource_f_2_0))
+  :ordered-subtasks (and 
+    1 goto 1 
+    2.1.1.1 construct_factory 2.1.1.1 
+    3 produce_resource 3 
+    2.1.1.4 deliver_resource 2.1.1.4 
+  )
+
+root 2.1.1.1
+2.1.1.1 construct_factory 2.1.1.1 -> m_factory_already_constructed ( already constructed, skipped )
+
+root 2.1.2
+2.1.2 get_resource 2.1.2 -> m_get_resource 2.1.2
+  :parameters (resource_1 factory_1 location_1 location_2)
+  :precondition (and (produces factory_1 resource_1))
+  :ordered-subtasks (and 
+    2.1.2.1 goto 2.1.2.1 
+    2.1.2.2 construct_factory 2.1.2.2 
+    2.1.2.3 produce_resource 2.1.2.3 
+    2.1.2.4 deliver_resource 2.1.2.4 
+  )
+
+root 2.1.2.2
+2.1.2.2 construct_factory 2.1.2.2 -> m_construct_factory 2.1.2.2
+  :parameters (factory_1 resource_0 location_1)
+  :precondition (and (demands factory_1 resource_0) (location-free location_1) (not (factory-constructed factory_1)))
+  :ordered-subtasks (and 
+    2.1.2.2.1 get_resource 2.1.2.2.1 
+    2.1.2.2.2 construct 2.1.2.2.2 
+  )
+
+root 2.1.2.2.1
+2.1.2.2.1 get_resource 2.1.2.2.1 -> m_resource_there ( resource already there, skipped )
+  -> m_get_resource 2.1.2.2.1
+  :parameters (resource_0 factory_0 location_0 location_1)
+  :precondition (and (produces factory_0 resource_0))
+  :ordered-subtasks (and 
+    2.1.2.2.1.1 goto 2.1.2.2.1.1 
+    2.1.2.2.1.2 deliver_resource 2.1.2.2.1.2 
+  )
+
+root 3
+3 produce_resource 3 -> m_produce_resource 3
+  :parameters (resource_f_2_0 factory_0 location_0)
+  :precondition (and (produces factory_0 resource_f_2_0) (factory-at factory_0 location_0) (factory-without-demands factory_0))
+  :subtasks (produce-without-demands 3)
+
+root 5
+5 produce 5 -> (action produce)
+  :parameters (resource_2 resource_f_2_1 factory_2 location_2)
+  :precondition (and (produces factory_2 resource_2) (demands factory_2 resource_f_2_1) (factory-at factory_2 location_2) (resource-at resource_f_2_1 location_2))
+  :effect (and (not (resource-at resource_f_2_1 location_2)) (resource-at resource_2 location_2))
+
+root 6
+6 get_resource 6 -> m_deliver_resource 6
+  :parameters (resource_2 location_2 last_location)
+  :precondition (and (resource-at resource_2 location_2))
+  :ordered-subtasks (and 
+    6.1 goto 6.1 
+    6.2 pickup 6.2 
+    6.3 goto 6.3 
+    6.4 drop 6.4 
+  )
+
+root 6.1, 6.3
+6.1, 6.3 goto -> m_goto
+  :parameters (location_2 location_1 last_location) (last_location location_2 last_location)
+  :precondition (and (truck-at location_2) (connected location_2 location_1)) (and (truck-at last_location) (connected last_location location_2))
+  :ordered-subtasks (and 
+    6.1.1 move 6.1.1 
+    6.1.2 goto 6.1.2 
+  ) (and 
+    6.3.1 move 6.3.1 
+    6.3.2 goto 6.3.2 
+  ) 
+
+Note: The plan is quite extensive, and some parts have been condensed for brevity while maintaining the essential structure and actions. Each "root" denotes a new decomposition level, showing the task, method applied, parameters, preconditions, and subtasks or actions. Actions are directly executable, while tasks may require further decomposition. The plan assumes the planner successfully resolves all preconditions and applicable methods for each task.

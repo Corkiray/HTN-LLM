@@ -1,0 +1,58 @@
+==>
+**Sequential Plan**
+1. prepare_trip place0
+2. trip_to1 couple0 place7
+3. prepare_trip place0
+4. trip_to1 couple1 place7
+5. prepare_trip place0
+6. trip_to1 couple2 place7
+7. prepare_trip place0
+8. trip_to1 couple3 place7
+9. prepare_trip place0
+10. trip_to1 couple4 place7
+
+**Hierarchical Decomposition**
+root 0
+0 everyone_go_hiking place7 -> m14_everyone_go_hiking 1 2
+  1 prepare_trip place0 -> m6_prepare_trip 3 4
+    3 bring_tent place0 -> m10_bring_tent 5 (tent4 is already at place0 and up)
+      5 put_down guy4 place0 tent4
+    4 bring_cars place0 -> m11_bring_cars (all cars are already at place0)
+      (nop)
+  2 trip_to1 couple0 place7 -> m0_trip_to1 6 
+    6 trip_to2 couple0 place0 place7 -> m2_trip_to2 7 8
+      7 trip_to2 couple0 place0 place6 -> m2_trip_to2 9 10
+        9 trip_to2 couple0 place0 place5 -> m2_trip_to2 11 12
+          11 trip_to2 couple0 place0 place4 -> m2_trip_to2 13 14
+            13 trip_to2 couple0 place0 place3 -> m2_trip_to2 15 16
+              15 trip_to2 couple0 place0 place2 -> m2_trip_to2 17 18
+                17 trip_to2 couple0 place0 place1 -> m3_trip_to2 19-26
+                  19 drive_tent guy0 place0 place1 car0 tent0
+                  20 drive girl0 place0 place1 car1
+                  21 put_up guy0 place1 tent0
+                  22 drive_passenger girl0 place1 place0 car1 guy0
+                  23 walk_everyone tent0 place1 place0 -> m5_walk_everyone 27 28
+                    27 walk_together tent0 place1 guy0 place0 girl0 couple0
+                    28 walk_everyone tent0 place1 place0 -> m4_walk_everyone (nop)
+                  24 put_down girl0 place1 tent0
+                  25 drive_passenger guy0 place1 place0 car0 girl0
+                  26 drive guy0 place0 place1 car0
+                18 trip_to2 couple0 place1 place2 -> m3_trip_to2 29-36
+               ...
+              16 trip_to2 couple0 place2 place3 -> m3_trip_to2...
+            14 trip_to2 couple0 place3 place4 -> m3_trip_to2...
+          12 trip_to2 couple0 place4 place5 -> m3_trip_to2...
+        10 trip_to2 couple0 place5 place6 -> m3_trip_to2...
+      8 trip_to2 couple0 place6 place7 -> m3_trip_to2 37-44
+        37 drive_tent guy0 place6 place7 car0 tent0
+        38 drive girl0 place6 place7 car1
+        39 put_up guy0 place7 tent0
+        40 drive_passenger girl0 place7 place6 car1 guy0
+        41 walk_everyone tent0 place7 place6 -> m5_walk_everyone 45 46
+          45 walk_together tent0 place7 guy0 place6 girl0 couple0
+          46 walk_everyone tent0 place7 place6 -> m4_walk_everyone (nop)
+        42 put_down girl0 place7 tent0
+        43 drive_passenger guy0 place7 place6 car0 girl0
+        44 drive guy0 place6 place7 car0
+  **Repeat for couple1, couple2, couple3, couple4 with similar decompositions**
+<==

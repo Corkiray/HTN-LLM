@@ -1,0 +1,114 @@
+==>
+1 navigate rover0 waypoint22 waypoint8
+2 sample_soil rover0 rover0store waypoint8
+3 drop rover0 rover0store
+4 communicate_soil_data2 rover0 general waypoint8 waypoint8
+5 navigate rover0 waypoint8 waypoint0
+6 sample_soil rover0 rover0store waypoint0
+7 drop rover0 rover0store
+8 communicate_soil_data2 rover0 general waypoint0 waypoint0
+9 navigate rover0 waypoint0 waypoint21
+10 sample_soil rover0 rover0store waypoint21
+11 drop rover0 rover0store
+12 communicate_soil_data2 rover0 general waypoint21 waypoint21
+13 navigate rover0 waypoint21 waypoint25
+14 sample_soil rover0 rover0store waypoint25
+15 drop rover0 rover0store
+16 communicate_soil_data2 rover0 general waypoint25 waypoint25
+17 navigate rover0 waypoint25 waypoint10
+18 sample_soil rover0 rover0store waypoint10
+19 drop rover0 rover0store
+20 communicate_soil_data2 rover0 general waypoint10 waypoint10
+21 navigate rover0 waypoint10 waypoint8
+22 sample_soil rover0 rover0store waypoint8
+23 drop rover0 rover0store
+24 communicate_soil_data2 rover0 general waypoint8 waypoint8
+25 navigate rover0 waypoint8 waypoint3
+26 sample_soil rover0 rover0store waypoint3
+27 drop rover0 rover0store
+28 communicate_soil_data2 rover0 general waypoint3 waypoint3
+29 navigate rover0 waypoint3 waypoint14
+30 sample_soil rover0 rover0store waypoint14
+31 drop rover0 rover0store
+32 communicate_soil_data2 rover0 general waypoint14 waypoint14
+33 navigate rover0 waypoint14 waypoint32
+34 sample_rock rover0 rover0store waypoint32
+35 drop rover0 rover0store
+36 communicate_rock_data2 rover0 general waypoint32 waypoint32
+37 navigate rover0 waypoint32 waypoint29
+38 sample_rock rover0 rover0store waypoint29
+39 drop rover0 rover0store
+40 communicate_rock_data2 rover0 general waypoint29 waypoint29
+41 navigate rover0 waypoint29 waypoint28
+42 sample_rock rover0 rover0store waypoint28
+43 drop rover0 rover0store
+44 communicate_rock_data2 rover0 general waypoint28 waypoint28
+45 navigate rover0 waypoint28 waypoint11
+46 sample_rock rover0 rover0store waypoint11
+47 drop rover0 rover0store
+48 communicate_rock_data2 rover0 general waypoint11 waypoint11
+49 navigate rover0 waypoint11 waypoint10
+50 sample_rock rover0 rover0store waypoint10
+51 drop rover0 rover0store
+52 communicate_rock_data2 rover0 general waypoint10 waypoint10
+53 navigate rover0 waypoint10 waypoint9
+54 sample_rock rover0 rover0store waypoint9
+55 drop rover0 rover0store
+56 communicate_rock_data2 rover0 general waypoint9 waypoint9
+57 navigate rover0 waypoint9 waypoint4
+58 sample_rock rover0 rover0store waypoint4
+59 drop rover0 rover0store
+60 communicate_rock_data2 rover0 general waypoint4 waypoint4
+61 navigate rover0 waypoint4 waypoint26
+62 sample_rock rover0 rover0store waypoint26
+63 drop rover0 rover0store
+64 communicate_rock_data2 rover0 general waypoint26 waypoint26
+65 do_calibrate rover0 camera10
+66 navigate rover0 waypoint26 waypoint7
+67 take_image rover0 waypoint7 objective7 camera10 colour
+68 communicate_image_data rover0 general objective7 colour waypoint7 waypoint6
+69 navigate rover0 waypoint7 waypoint2
+70 do_calibrate rover0 camera10
+71 take_image rover0 waypoint2 objective5 camera10 high_res
+72 communicate_image_data rover0 general objective5 high_res waypoint2 waypoint6
+73 navigate rover0 waypoint2 waypoint25
+74 do_calibrate rover0 camera10
+75 take_image rover0 waypoint25 objective5 camera10 colour
+76 communicate_image_data rover0 general objective5 colour waypoint25 waypoint6
+77 navigate rover0 waypoint25 waypoint0
+78 do_calibrate rover0 camera10
+79 take_image rover0 waypoint0 objective0 camera10 high_res
+80 communicate_image_data rover0 general objective0 high_res waypoint0 waypoint6
+<==
+
+root 0
+0 solve_problem -> m7_get_soil_data 1 2 3 4 
+  -> m7_get_soil_data 5 6 7 8 
+  -> m7_get_soil_data 9 10 11 12 
+  -> m7_get_soil_data 13 14 15 16 
+  -> m7_get_soil_data 17 18 19 20 
+  -> m7_get_soil_data 21 22 23 24 
+  -> m7_get_soil_data 25 26 27 28 
+  -> m10_get_rock_data 29 30 31 32 
+  -> m10_get_rock_data 33 34 35 36 
+  -> m10_get_rock_data 37 38 39 40 
+  -> m10_get_rock_data 41 42 43 44 
+  -> m10_get_rock_data 45 46 47 48 
+  -> m10_get_rock_data 49 50 51 52 
+  -> m10_get_rock_data 53 54 55 56 
+  -> m10_get_rock_data 57 58 59 60 
+  -> m10_get_rock_data 61 62 63 64 
+  -> m13_get_image_data 65 66 67 68 
+  -> m13_get_image_data 69 70 71 72 
+  -> m13_get_image_data 73 74 75 76 
+  -> m13_get_image_data 77 78 79 80 
+
+Note: The plan provided is a sequential plan, where each action is executed one after the other. The hierarchical decomposition is represented by the `root` section, which shows how the top-level task `solve_problem` is decomposed into smaller sub-tasks using various methods (e.g., `m7_get_soil_data`, `m10_get_rock_data`, `m13_get_image_data`).
+
+**Assumptions and Simplifications:**
+
+1. **Single Rover**: The plan is generated assuming only one rover (`rover0`) is available to perform all tasks.
+2. **No Resource Conflicts**: The plan does not consider potential resource conflicts, such as multiple tasks requiring the same camera or store at the same time.
+3. **Simplified Navigation**: The plan uses `navigate` actions to move the rover between waypoints, assuming a direct path is always available.
+4. **No Error Handling**: The plan does not include error handling or contingency actions in case of failures or unexpected events.
+5. **Method Selection**: The plan selects methods (e.g., `m7_get_soil_data`) based on a simple matching of task parameters, without considering other factors like optimality or resource utilization.

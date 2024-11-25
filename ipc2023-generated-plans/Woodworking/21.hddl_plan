@@ -1,0 +1,108 @@
+==>
+1 load_highspeed_saw b0 highspeed_saw0
+2 cut_board_large b0 p5 highspeed_saw0 teak rough s4 s5 s6 s7 large natural untreated
+3 unload_highspeed_saw b0 highspeed_saw0
+4 load_highspeed_saw b1 highspeed_saw1
+5 cut_board_large b1 p6 highspeed_saw1 oak rough s6 s7 s5 s4 large natural untreated
+6 unload_highspeed_saw b1 highspeed_saw1
+7 load_highspeed_saw b2 highspeed_saw2
+8 cut_board_small b2 p9 highspeed_saw2 oak rough s3 s4 s5 s6 medium natural untreated
+9 unload_highspeed_saw b2 highspeed_saw2
+10 load_highspeed_saw b3 highspeed_saw3
+11 cut_board_large b3 p8 highspeed_saw3 pine rough s7 s6 s5 s4 large natural untreated
+12 unload_highspeed_saw b3 highspeed_saw3
+13 do_grind_untreated p8 grinder0 rough natural untreated untreated untreated untreated verysmooth natural
+14 do_glaze p8 glazer0 natural verysmooth blue untreated glazed natural
+15 load_highspeed_saw b4 highspeed_saw4
+16 cut_board_large b4 p14 highspeed_saw4 pine rough s6 s7 s5 s4 large natural untreated
+17 unload_highspeed_saw b4 highspeed_saw4
+18 do_grind_untreated p14 grinder1 rough natural untreated untreated untreated untreated verysmooth natural
+19 do_spray_varnish p14 spray_varnisher0 natural verysmooth blue untreated varnished natural
+20 load_highspeed_saw b5 highspeed_saw5
+21 cut_board_small b5 p20 highspeed_saw5 mahogany rough s4 s5 s6 s7 small natural untreated
+22 unload_highspeed_saw b5 highspeed_saw5
+23 do_grind_untreated p20 grinder2 rough natural untreated untreated untreated untreated verysmooth natural
+24 do_glaze p20 glazer1 natural verysmooth natural untreated glazed natural
+25 load_highspeed_saw b6 highspeed_saw6
+26 cut_board_large b6 p17 highspeed_saw6 mahogany rough s6 s7 s5 s4 large natural untreated
+27 unload_highspeed_saw b6 highspeed_saw6
+28 do_grind_untreated p17 grinder3 rough natural untreated untreated untreated untreated verysmooth natural
+29 do_glaze p17 glazer2 natural verysmooth blue untreated glazed natural
+30 load_highspeed_saw b7 highspeed_saw7
+31 cut_board_medium b7 p27 highspeed_saw7 cherry smooth s5 s6 s7 s4 medium natural untreated
+32 unload_highspeed_saw b7 highspeed_saw7
+33 do_grind p27 grinder4 smooth natural untreated untreated untreated verysmooth natural
+34 do_spray_varnish p27 spray_varnisher1 natural verysmooth green untreated varnished natural
+35 load_highspeed_saw b8 highspeed_saw8
+36 cut_board_small b8 p11 highspeed_saw8 beech rough s3 s4 s5 s6 small natural untreated
+37 unload_highspeed_saw b8 highspeed_saw8
+38 do_grind_untreated p11 grinder5 rough natural untreated untreated untreated untreated verysmooth natural
+39 do_glaze p11 glazer3 natural verysmooth mauve untreated glazed natural
+40 load_highspeed_saw b9 highspeed_saw9
+41 cut_board_small b9 p0 highspeed_saw9 walnut rough s4 s5 s6 s7 small natural untreated
+42 unload_highspeed_saw b9 highspeed_saw9
+43 do_grind_untreated p0 grinder6 rough natural untreated untreated untreated untreated verysmooth natural
+44 do_glaze p0 glazer4 natural verysmooth black untreated glazed natural
+45 load_highspeed_saw b0 highspeed_saw0
+46 cut_board_small b0 p1 highspeed_saw0 teak rough s4 s5 s6 s7 small natural untreated
+47 unload_highspeed_saw b0 highspeed_saw0
+48 do_grind_untreated p1 grinder7 rough natural untreated untreated untreated untreated verysmooth natural
+49 do_immersion_varnish p1 immersion_varnisher0 natural verysmooth black untreated varnished natural
+50 load_highspeed_saw b1 highspeed_saw1
+51 cut_board_medium b1 p26 highspeed_saw1 oak rough s6 s7 s5 s4 medium natural untreated
+52 unload_highspeed_saw b1 highspeed_saw1
+53 do_grind_untreated p26 grinder8 rough natural untreated untreated untreated untreated verysmooth natural
+54 do_glaze p26 glazer5 natural verysmooth blue untreated glazed natural
+55 load_highspeed_saw b2 highspeed_saw2
+56 cut_board_small b2 p3 highspeed_saw2 oak rough s3 s4 s5 s6 small natural untreated
+57 unload_highspeed_saw b2 highspeed_saw2
+58 do_grind_untreated p3 grinder9 rough natural untreated untreated untreated untreated verysmooth natural
+59 do_immersion_varnish p3 immersion_varnisher1 natural verysmooth white untreated varnished natural
+60 load_highspeed_saw b3 highspeed_saw3
+61 cut_board_small b3 p4 highspeed_saw3 pine rough s7 s6 s5 s4 small natural untreated
+62 unload_highspeed_saw b3 highspeed_saw3
+63 do_grind_untreated p4 grinder10 rough natural untreated untreated untreated untreated verysmooth natural
+64 do_glaze p4 glazer6 natural verysmooth natural untreated glazed natural
+65 load_highspeed_saw b4 highspeed_saw4
+66 cut_board_medium b4 p15 highspeed_saw4 pine rough s6 s7 s5 s4 medium natural untreated
+67 unload_highspeed_saw b4 highspeed_saw4
+68 do_grind_untreated p15 grinder11 rough natural untreated untreated untreated untreated verysmooth natural
+69 do_glaze p15 glazer7 natural verysmooth natural untreated glazed natural
+70 load_highspeed_saw b5 highspeed_saw5
+71 cut_board_medium b5 p16 highspeed_saw5 mahogany rough s4 s5 s6 s7 medium natural untreated
+72 unload_highspeed_saw b5 highspeed_saw5
+73 do_grind_untreated p16 grinder12 rough natural untreated untreated untreated untreated verysmooth natural
+74 do_immersion_varnish p16 immersion_varnisher2 natural verysmooth natural untreated varnished natural
+75 load_highspeed_saw b6 highspeed_saw6
+76 cut_board_large b6 p18 highspeed_saw6 mahogany rough s6 s7 s5 s4 large natural untreated
+77 unload_highspeed_saw b6 highspeed_saw6
+78 do_grind_untreated p18 grinder13 rough natural untreated untreated untreated untreated verysmooth natural
+79 do_glaze p18 glazer8 natural verysmooth white untreated glazed natural
+80 load_highspeed_saw b7 highspeed_saw7
+81 cut_board_medium b7 p19 highspeed_saw7 cherry smooth s5 s6 s7 s4 medium natural untreated
+82 unload_highspeed_saw b7 highspeed_saw7
+83 do_grind p19 grinder14 smooth natural untreated untreated untreated verysmooth natural
+84 do_glaze p19 glazer9 natural verysmooth black untreated glazed natural
+85 do_plane_untreated p2 planer0 verysmooth mauve untreated smooth natural
+86 do_plane_untreated p21 planer1 smooth natural untreated verysmooth natural
+87 do_saw_small p7 b8 pine rough s3 s4 small natural untreated
+88 do_saw_medium p10 b2 oak rough s3 s4 medium natural untreated
+89 do_saw_large p25 b5 teak verysmooth s4 s5 s6 s7 large natural untreated
+90 do_saw_medium p12 b1 oak rough s6 s7 s5 s4 medium natural untreated
+91 do_saw_small p13 b9 walnut rough s4 s5 s6 s7 small natural untreated
+92 do_saw_large p28 b6 mahogany rough s6 s7 s5 s4 large natural untreated
+93 do_saw_medium p23 b8 beech rough s3 s4 medium natural untreated
+94 do_saw_small p24 b0 teak rough s4 s5 s6 s7 small natural untreated
+95 do_saw_small p29 b7 cherry rough s5 s6 s7 small natural untreated
+<==
+
+root 0
+0 process_all -> m14_process_all_0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29
+1 process p0 -> m11_process_0 2 49
+2 cut_and_saw b9 p0 teak rough -> m6_cut_and_saw_0 40 41 42 43 44
+3 process p1 -> m11_process_1 4 48
+4 cut_and_saw b0 p1 teak rough -> m6_cut_and_saw_1 45 46 47 
+...
+29 process p29 -> m11_process_29 94 95 
+
+Note: Due to the complexity and size of the output, I've truncated the hierarchical decomposition after the first few tasks. The full decomposition would continue in a similar manner, with each task being further

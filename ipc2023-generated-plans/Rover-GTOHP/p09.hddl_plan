@@ -1,0 +1,91 @@
+==>
+**Sequential Plan**
+1. navigate rover0 waypoint2 waypoint14
+2. sample_soil rover0 rover0store waypoint14
+3. drop rover0 rover0store
+4. communicate_soil_data2 rover0 general waypoint14 waypoint17
+5. navigate rover0 waypoint14 waypoint2
+6. navigate rover0 waypoint2 waypoint0
+7. sample_soil rover0 rover0store waypoint0
+8. drop rover0 rover0store
+9. communicate_soil_data2 rover0 general waypoint0 waypoint17
+10. navigate rover1 waypoint9 waypoint4
+11. sample_rock rover1 rover1store waypoint4
+12. drop rover1 rover1store
+13. communicate_rock_data2 rover1 general waypoint4 waypoint17
+14. navigate rover1 waypoint4 waypoint7
+15. sample_rock rover1 rover1store waypoint7
+16. drop rover1 rover1store
+17. communicate_rock_data2 rover1 general waypoint7 waypoint17
+18. navigate rover1 waypoint7 waypoint2
+19. sample_rock rover1 rover1store waypoint2
+20. drop rover1 rover1store
+21. communicate_rock_data2 rover1 general waypoint2 waypoint17
+22. navigate rover1 waypoint2 waypoint5
+23. sample_rock rover1 rover1store waypoint5
+24. drop rover1 rover1store
+25. communicate_rock_data2 rover1 general waypoint5 waypoint17
+26. navigate rover1 waypoint5 waypoint6
+27. sample_rock rover1 rover1store waypoint6
+28. drop rover1 rover1store
+29. communicate_rock_data2 rover1 general waypoint6 waypoint17
+30. do_calibrate rover4 camera2
+31. navigate rover4 waypoint3 waypoint19
+32. take_image rover4 waypoint19 objective5 camera2 colour
+33. navigate rover4 waypoint19 waypoint17
+34. communicate_image_data rover4 general objective5 colour waypoint17
+35. do_calibrate rover2 camera1
+36. navigate rover2 waypoint0 waypoint19
+37. take_image rover2 waypoint19 objective3 camera1 low_res
+38. navigate rover2 waypoint19 waypoint17
+39. communicate_image_data rover2 general objective3 low_res waypoint17
+40. do_calibrate rover0 camera5
+41. navigate rover0 waypoint2 waypoint19
+42. take_image rover0 waypoint19 objective2 camera5 colour
+43. navigate rover0 waypoint19 waypoint17
+44. communicate_image_data rover0 general objective2 colour waypoint17
+45. do_calibrate rover1 camera0
+46. navigate rover1 waypoint9 waypoint19
+47. take_image rover1 waypoint19 objective4 camera0 high_res
+48. navigate rover1 waypoint19 waypoint17
+49. communicate_image_data rover1 general objective4 high_res waypoint17
+
+**Hierarchical Decomposition**
+```
+root 0
+0 HTN_PB9 -> m7_get_soil_data 1 2 3 4
+  1 get_soil_data waypoint14 -> m7_get_soil_data 1 2 3
+    1 do_navigate1 rover0 waypoint14 -> m1_do_navigate1 1 2 3
+      1 visit waypoint2
+      2 do_navigate2 rover0 waypoint2 waypoint14 -> m3_do_navigate2
+        1 navigate rover0 waypoint2 waypoint14
+      3 unvisit waypoint2
+    2 empty_store rover0store rover0 -> m6_empty_store
+      1 drop rover0 rover0store
+    3 sample_soil rover0 rover0store waypoint14
+    4 send_soil_data rover0 waypoint14 -> m9_send_soil_data
+      1 communicate_soil_data2 rover0 general waypoint14 waypoint17
+  2 get_soil_data waypoint0 -> m7_get_soil_data 5 6 7 8
+   ... (similar decomposition as above)
+  3 get_rock_data waypoint4 -> m10_get_rock_data 9 10 11 12
+   ... (similar decomposition as above)
+  4 get_rock_data waypoint7 -> m10_get_rock_data 13 14 15 16
+   ... (similar decomposition as above)
+ ... (similar decomposition for the remaining tasks)
+  8 get_image_data objective5 colour -> m13_get_image_data 30 31 32 33
+    30 do_calibrate rover4 camera2 -> m15_do_calibrate
+     ... (similar decomposition as above)
+    31 do_navigate1 rover4 waypoint19
+    32 take_image rover4 waypoint19 objective5 camera2 colour
+    33 send_image_data rover4 objective5 colour -> m14_send_image_data
+     ... (similar decomposition as above)
+ ... (similar decomposition for the remaining image tasks)
+<==
+```
+Note that this plan assumes the following:
+
+* The `do_calibrate` action is only performed once for each camera-objective pair, even if the same camera is used for multiple image tasks.
+* The `navigate` actions are only performed when necessary, i.e., when the rover is not already at the desired waypoint.
+* The `visit` and `unvisit` actions are only performed when necessary, i.e., when the waypoint has not been visited before.
+* The `drop` action is only performed when the store is full.
+* The `communicate_*_data` actions are only performed when the corresponding data is available.

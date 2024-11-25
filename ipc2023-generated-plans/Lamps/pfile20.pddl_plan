@@ -1,0 +1,41 @@
+==>
+**Sequential Plan**
+```
+1. flip l0 l0 N Y
+2. flip l0 l3 N Y
+3. flip l0 l6 N Y
+4. flip l0 l7 N Y
+5. flip l0 l8 N Y
+6. turn l0 l0 Y N
+7. propagate_up l0 l0 Y
+8. propagate_down l0 l0 Y
+9. propagate_left l0 l0 Y
+10. propagate_right l0 l0 Y
+11. play
+```
+**Hierarchical Decomposition**
+```
+root 0
+0 play -> do_play 1 11
+1 turn -> do_turn l0 l0 N Y 2-10
+2 flip -> (no decomposition, primitive action)
+3 flip -> (no decomposition, primitive action)
+4 flip -> (no decomposition, primitive action)
+5 flip -> (no decomposition, primitive action)
+6 flip -> (no decomposition, primitive action)
+7 propagate_up -> propagate_up_do l0 l0 l1 Y N 12
+  12 propagate_up -> propagate_up_do l1 l0 l2 Y N 13
+    13 propagate_up -> propagate_up_end_field l2 l0 Y (max reached)
+8 propagate_down -> propagate_down_do l0 l0 l1 Y N 14
+  14 propagate_down -> propagate_down_end_field l1 l0 Y (min reached)
+9 propagate_left -> propagate_left_end_field l0 l0 Y (max reached)
+10 propagate_right -> propagate_right_end_field l0 l9 Y (min reached)
+11 play -> do_play 1 11 (recursive, but assumed to terminate)
+```
+**Notes:**
+
+* The sequential plan only shows the first set of actions required to start solving the problem. The `play` task is recursive, and the plan will continue to expand until the goal is reached.
+* The hierarchical decomposition shows how each task is broken down into subtasks. Some tasks, like `flip`, are primitive actions and do not require further decomposition.
+* The `propagate_*` tasks are decomposed recursively until they reach the boundary conditions (max or min coordinates).
+* The `do_turn` method is applied to the initial coordinate `l0 l0` with the initial status `N` and the target status `Y`. This leads to a series of `flip` actions to change the status of adjacent coordinates.
+* The `do_play` method is recursive, and the plan will continue to expand until the goal is reached. For brevity, only the first iteration is shown.

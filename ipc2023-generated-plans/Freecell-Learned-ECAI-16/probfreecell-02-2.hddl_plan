@@ -1,0 +1,30 @@
+==>
+1 DO-ON-MOVE3 S2 SA HA N1 N0
+2 DO-ON-SENDTOHOME3 HA SA S N1 S0 N0
+3 DO-ON-MOVE3 D2 DA C2 N1 N0
+4 DO-ON-SENDTOHOME3 C2 DA C N1 C0 N0
+5 DO-ON-MOVE3 H2 HA S2 N1 N0
+6 DO-ON-SENDTOHOME3 S2 HA S N1 S0 N0
+<==
+
+root 0
+0 solve_freecell -> m1_solve_freecell_0 1 2 3 4 5 6
+1 task0 (ACHIEVE-HOME C2) -> m2_achieve_home_0 C2 1
+2 task1 (ACHIEVE-HOME D2) -> m3_achieve_home_0 D2 3
+3 task2 (ACHIEVE-HOME H2) -> m4_achieve_home_0 H2 5
+4 task3 (ACHIEVE-HOME S2) -> m5_achieve_home_0 S2 2
+5 m2_achieve_home_0 C2 -> m6_achieve_home3_0 C2 CA N1 N0
+6 m3_achieve_home_0 D2 -> m7_achieve_home3_0 D2 DA N1 N0
+7 m4_achieve_home_0 H2 -> m8_achieve_home3_0 H2 HA N1 N0
+8 m5_achieve_home_0 S2 -> m9_achieve_home3_0 S2 SA N1 N0
+9 m6_achieve_home3_0 C2 CA N1 N0 -> m10_do_on_move3_0 CA C2 DA N1 N0
+10 m7_achieve_home3_0 D2 DA N1 N0 -> m11_do_on_move3_0 DA D2 C2 N1 N0
+11 m8_achieve_home3_0 H2 HA N1 N0 -> m12_do_on_move3_0 HA H2 S2 N1 N0
+12 m9_achieve_home3_0 S2 SA N1 N0 -> m13_do_on_sendtohome3_0 SA S2 S N1 S0 N0
+13 m10_do_on_move3_0 CA C2 DA N1 N0 -> m14_do_on_sendtohome3_0 DA C2 C N1 C0 N0
+14 m11_do_on_move3_0 DA D2 C2 N1 N0 -> m15_do_on_sendtohome3_0 C2 D2 D N1 D0 N0
+15 m12_do_on_move3_0 HA H2 S2 N1 N0 -> m16_do_on_sendtohome3_0 S2 H2 S N1 S0 N0
+16 m13_do_on_sendtohome3_0 SA S2 S N1 S0 N0 -> i-LOCK-HOME S2
+17 m14_do_on_sendtohome3_0 DA C2 C N1 C0 N0 -> i-LOCK-HOME C2
+18 m15_do_on_sendtohome3_0 C2 D2 D N1 D0 N0 -> i-LOCK-HOME D2
+19 m16_do_on_sendtohome3_0 S2 H2 S N1 S0 N0 -> i-LOCK-HOME H2

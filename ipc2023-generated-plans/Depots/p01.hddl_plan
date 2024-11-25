@@ -1,0 +1,43 @@
+==>
+**Sequential Plan:**
+1. Drive truck1 distributor1 depot0
+2. do_get_truck truck1 distributor1
+3. do_clear pallet0 distributor1 crate1 truck1 hoist1
+4. Lift hoist1 crate1 pallet0 distributor1
+5. Load hoist1 crate1 truck1 distributor1
+6. Drive truck1 distributor1 distributor0
+7. do_unload_truck crate1 pallet1 distributor0 truck1 hoist1
+8. Drop hoist1 crate1 pallet1 distributor0
+9. do_clear pallet1 distributor0 crate0
+10. Lift hoist1 crate0 pallet1 distributor0
+11. Load hoist1 crate0 truck1 distributor0
+12. Drive truck1 distributor0 distributor1
+13. do_unload_truck crate0 pallet2 distributor1 truck1 hoist2
+14. Drop hoist2 crate0 pallet2 distributor1
+
+**Hierarchical Decomposition:**
+root 0
+0 solve_depotprob1818 -> m3_do_put_on 1 2
+1 do_put_on crate1 pallet1 -> m2_do_put_on 3 4 5 6 7 8
+  3 do_get_truck truck1 distributor1 -> m7_do_get_truck 1
+  4 do_clear pallet0 distributor1 -> m5_do_clear 3 4 5 6 (preconditions not met, assuming pallet0 is clear)
+    -> m4_do_clear (no tasks, as precondition clear?s1 is true)
+  5 Lift hoist1 crate1 pallet0 distributor1 -> (action, no decomposition)
+  6 Load hoist1 crate1 truck1 distributor1 -> (action, no decomposition)
+  7 do_unload_truck crate1 pallet1 distributor0 -> m11_do_unload_truck 7 8 9
+    9 Drop hoist1 crate1 pallet1 distributor0 -> (action, no decomposition)
+2 do_put_on crate0 pallet2 -> m2_do_put_on 10 11 12 13 14
+  10 do_clear pallet1 distributor0 -> m5_do_clear 10 11 12 13 (preconditions not met, assuming pallet1 is clear after task1)
+    -> m4_do_clear (no tasks, as precondition clear?s1 is true)
+  11 Lift hoist1 crate0 pallet1 distributor0 -> (action, no decomposition)
+  12 Load hoist1 crate0 truck1 distributor0 -> (action, no decomposition)
+  13 do_unload_truck crate0 pallet2 distributor1 -> m11_do_unload_truck 13 14 15
+    15 Drop hoist2 crate0 pallet2 distributor1 -> (action, no decomposition)
+<==
+
+**Notes:**
+
+* The plan assumes that some preconditions are met or will be met by the execution of previous tasks (e.g., `clear pallet0` and `clear pallet1` after the respective unloading tasks).
+* The `nop` actions from the original methods (e.g., `m0_do_put_on`) are omitted in the plan, as they do not contribute to the solution.
+* The `Drive` actions are included to ensure the trucks are at the correct locations for the subsequent tasks.
+* The decomposition follows the method parameters and preconditions. If a method's preconditions are not met, an alternative method is chosen (if available). If no suitable method is found, the plan may not be executable (e.g., `m5_do_clear` for `pallet0` and `pallet1`).

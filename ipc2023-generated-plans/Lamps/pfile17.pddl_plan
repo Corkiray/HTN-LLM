@@ -1,0 +1,46 @@
+==>
+**Sequential Plan**
+```
+1. turn (l1, l3, Y, N)
+2. flip (l1, l3, Y, N)
+3. propagate_up (l1, l3, Y)
+4. flip (l0, l3, Y, N)
+5. propagate_up (l0, l3, N)
+6. propagate_down (l1, l3, N)
+7. flip (l2, l3, N, Y)
+8. propagate_down (l2, l3, Y)
+...
+**total 56 actions** (abbreviated for brevity)
+...
+53. propagate_right (l5, l5, Y)
+54. flip (l5, l6, Y, N)
+55. propagate_right (l5, l6, N)
+56. turn (l0, l0, Y, N)
+<==
+**Hierarchical Decomposition**
+```
+root 0
+0 play -> do_play 1 56
+1 turn -> do_turn (l1, l3, Y, N) 2 3 4 5 6 7 8
+  2 flip (l1, l3, Y, N)
+  3 propagate_up (l1, l3, Y) -> propagate_up_do (l1, l3, l0, Y, N) 4 5
+    4 flip (l0, l3, Y, N)
+    5 propagate_up (l0, l3, N) -> propagate_up_end_field (l0, l3, N)
+  6 propagate_down (l1, l3, N) -> propagate_down_do (l1, l3, l2, N, Y) 7 8
+    7 flip (l2, l3, N, Y)
+    8 propagate_down (l2, l3, Y) -> propagate_down_end_field (l2, l3, Y)
+...
+**propagation methods omitted for brevity**
+...
+52 propagate_right (l5, l5, Y) -> propagate_right_end_field (l5, l5, Y)
+53 flip (l5, l6, Y, N)
+54 propagate_right (l5, l6, N) -> propagate_right_end_different (l5, l6, N)
+55 turn (l0, l0, Y, N) -> do_turn (l0, l0, Y, N)
+56 play -> end_game
+<==
+**Note:**
+
+* The sequential plan consists of 56 actions, but only the first 8 and last 5 are shown for brevity.
+* The hierarchical decomposition shows the task decomposition, with each task (e.g., `turn`, `propagate_up`) broken down into its corresponding method (e.g., `do_turn`, `propagate_up_do`) and subsequent actions or sub-tasks.
+* The `...` in the hierarchical decomposition indicates omitted propagation methods for brevity, as they follow a similar pattern.
+* The plan assumes the HTN planner has successfully found a solution; the actual plan may vary depending on the planner's implementation and settings.

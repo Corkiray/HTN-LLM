@@ -1,0 +1,39 @@
+==>
+**Sequential Plan**
+1. `flip l1 l1 Y N` (to satisfy `do_turn`'s `flip` requirement)
+2. `flip l0 l2 Y N` (preparation for propagation)
+3. `flip l0 l2 N Y` (to satisfy goal `(on l0 l2 Y)` and trigger propagation)
+4. `flip l2 l2 N Y` (propagation right from `l0 l2`)
+5. `flip l2 l1 Y N` (propagation right from `l0 l2`, to allow further propagation)
+6. `flip l2 l1 N Y` (propagation right from `l0 l2`, finalizing right propagation)
+7. `flip l2 l0 Y N` (propagation down from `l1 l1`, triggered by initial `flip`)
+8. `flip l2 l0 N Y` (propagation down from `l1 l1`, finalizing down propagation)
+9. `flip l0 l0 Y N` (to satisfy goal `(on l0 l0 N)`)
+10. `flip l0 l1 Y N` (to satisfy goal `(on l0 l1 N)`)
+
+**Hierarchical Decomposition**
+```
+root 0
+0 play -> do_play 1 10
+1 turn -> do_turn l1 l1 Y N 1 2
+  1.1 flip l1 l1 Y N
+  1.2 propagate_up l1 l1 Y -> propagate_up_do l1 l1 l2 Y N 2
+    2.1 flip l2 l2 Y N (not directly in sequence, but implied for propagation)
+    2.2 propagate_up l2 l1 Y -> propagate_up_end_field l2 l1 Y
+  1.3 propagate_down l1 l1 Y -> propagate_down_do l1 l0 Y N 3
+    3.1 flip l0 l0 Y N (not directly in sequence, but implied for propagation)
+    3.2 propagate_down l0 l0 Y -> propagate_down_end_field l0 l0 Y
+  1.4 propagate_left l1 l1 Y -> propagate_left_end_different l1 l1 l0 Y
+  1.5 propagate_right l1 l1 Y -> propagate_right_do l1 l1 l2 Y N 4
+    4.1 flip l2 l2 Y N (implied, see step 2 in sequence)
+    4.2 propagate_right l2 l1 Y -> propagate_right_end_different l2 l1 l0 Y
+2 play -> end_game (no further actions needed, goal achieved)
+```
+<==
+
+**Notes:**
+
+- The plan assumes that the `flip` action's effects are immediate and that the propagation methods are correctly handling the `next`, `max`, and `min` predicates as defined in the domain.
+- Some `flip` actions (e.g., `flip l2 l2 Y N`) are implied by the propagation methods and are not directly listed in the sequential plan but are crucial for understanding the full execution flow.
+- The hierarchical decomposition focuses on the primary task decompositions, omitting some of the implicit `flip` actions for brevity, as they are already accounted for in the sequential plan.
+- The goal state is achieved through a combination of direct `flip` actions and the propagation effects, ensuring all specified goal conditions are met.

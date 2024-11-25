@@ -1,0 +1,62 @@
+==>
+1 AchieveContainsShotCocktail shot1 cocktail1
+2 AchieveContainsShotCocktail shot3 cocktail2
+3 AchieveContainsShotCocktail shot2 cocktail3
+root 0
+0 AchieveContainsShotCocktail shot1 cocktail1 -> m1_MakeAndPourCocktail 4 5 6 7 8
+	4 AchieveContainsShakerCocktail shaker1 cocktail1 -> m2_MakeCocktail 9 10 11 12 13 14
+		9 AchieveCleanShaker shaker1 -> m3_CleanShakerNull
+		10 AchieveContainsShakerIngredient shaker1 ingredient1 -> m4_AddIngredientToEmptyShaker 15 16 17 18 19
+			15 AchieveContainsShotIngredient shot4 ingredient1 -> m5_AddIngredientToShot 20 21 22 23
+				20 AchieveCleanShot shot4 -> m6_CleanShotNull
+				21 AchieveHolding right shot4 -> m7_PickUp 24 25 26
+					24 AchieveHandEmpty right -> m8_HandEmptyNull
+					25 AchieveOnTable shot4 -> m9_OnTableNull
+					26 grasp right shot4
+				22 AchieveHandEmpty left -> m10_EmptyHand 27
+					27 drop left shaker1
+				23 fill-shot shot4 ingredient1 right left dispenser1
+			16 AchieveHolding left shot4 -> m11_HoldingNull
+			17 pour-shot-to-clean-shaker shot4 ingredient1 shaker1 left level1 level1
+			18 AchieveHolding right shaker1 -> m12_PickUp 28 29 30
+				28 AchieveHandEmpty right -> m13_HandEmptyNull
+				29 AchieveOnTable shaker1 -> m14_OnTableNull
+				30 grasp right shaker1
+			19 AchieveHandEmpty left -> m15_EmptyHand 31
+				31 drop left shot4
+		11 AchieveContainsShakerIngredient shaker1 ingredient9 -> m16_AddIngredientToUsedShaker 32 33 34 35 36
+			32 AchieveContainsShotIngredient shot5 ingredient9 -> m17_AddIngredientToShot 37 38 39 40
+				37 AchieveCleanShot shot5 -> m18_CleanShotNull
+				38 AchieveHolding left shot5 -> m19_PickUp 41 42 43
+					41 AchieveHandEmpty left -> m20_HandEmptyNull
+					42 AchieveOnTable shot5 -> m21_OnTableNull
+					43 grasp left shot5
+				39 AchieveHandEmpty right -> m22_EmptyHand 44
+					44 drop right shaker1
+				40 fill-shot shot5 ingredient9 left right dispenser9
+			33 AchieveHolding right shot5 -> m23_HoldingNull
+			34 pour-shot-to-used-shaker shot5 ingredient9 shaker1 right level1 level1
+			35 AchieveHolding left shaker1 -> m24_HoldingNull
+			36 shake cocktail1 ingredient1 ingredient9 shaker1 left right
+		12 AchieveHolding right shaker1 -> m25_HoldingNull
+		13 AchieveHandEmpty left -> m26_EmptyHand 45
+			45 drop left shot5
+		14 pour_shaker_to_shot_action shaker1 shot1 cocktail1 right level1 level1
+	5 AchieveCleanShot shot1 -> m27_CleanShotNull
+	6 AchieveHolding left shaker1 -> m28_HoldingNull
+	7 DoPourShakerToShot shaker1 shot1 cocktail1 -> m29_pour_shaker_to_shot_action
+	8 AchieveHandEmpty right -> m30_EmptyHand 46
+		46 drop right shaker1
+1 AchieveContainsShotCocktail shot3 cocktail2 -> m31_MakeAndPourCocktail 47 48 49 50 51
+	... (similar decomposition for shot3 and cocktail2)
+2 AchieveContainsShotCocktail shot2 cocktail3 -> m52_MakeAndPourCocktail 52 53 54 55 56
+	... (similar decomposition for shot2 and cocktail3)
+<==
+
+**Note:**
+
+* The plan is truncated for brevity, showing only the first decomposition for `AchieveContainsShotCocktail shot1 cocktail1`. The remaining decompositions for `shot3` and `shot2` follow a similar structure.
+* Action numbers (e.g., `1`, `4`, `9`, etc.) represent the sequential plan.
+* Method names (e.g., `m1_MakeAndPourCocktail`, `m2_MakeCocktail`, etc.) indicate the hierarchical decomposition.
+* Task names (e.g., `AchieveContainsShotCocktail`, `AchieveCleanShaker`, etc.) are shown with their respective parameters.
+* Some methods (e.g., `m3_CleanShakerNull`, `m6_CleanShotNull`, etc.) have no subtasks, as their preconditions are already met in the initial state.

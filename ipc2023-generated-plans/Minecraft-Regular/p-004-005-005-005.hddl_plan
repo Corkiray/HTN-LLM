@@ -1,0 +1,52 @@
+==>
+1 placeblock l-1-0-0 stone
+2 placeblock l-1-0-1 stone
+3 placeblock l-1-0-2 stone
+4 placeblock l-1-0-3 stone
+5 placeblock l-1-0-4 stone
+6 placeblock l-1-1-0 stone
+7 placeblock l-1-1-1 stone
+8 placeblock l-1-1-2 stone
+9 placeblock l-1-1-3 stone
+10 placeblock l-1-1-4 stone
+11 placeblock l-1-3-0 stone
+12 placeblock l-1-3-1 stone
+13 placeblock l-1-3-2 stone
+14 placeblock l-1-3-3 stone
+15 placeblock l-1-3-4 stone
+16 removeblock l-1-1-0 earth
+17 removeblock l-1-2-0 earth
+18 placeblock l-1-2-0 stone
+19 placeblock l-1-2-1 stone
+20 placeblock l-1-2-2 stone
+21 placeblock l-1-2-3 stone
+22 placeblock l-1-2-4 stone
+23 placeblock l-1-2-5 stone
+24 placeblock l-6-0-0 stone
+25 placeblock l-6-0-1 stone
+26 placeblock l-6-0-2 stone
+27 placeblock l-6-0-3 stone
+28 placeblock l-6-0-4 stone
+29 placeblock l-6-0-5 stone
+30 removeblock l-1-1-5 earth
+31 removeblock l-1-2-5 earth
+<==
+
+root 0
+0 buildhouse l-1-0-0 l-1-0-4 l-1-3-4 l-1-3-0 l-1-1-0 l-6-0-0 n5 n4 n5 stone -> m1_build-house-1 1-15,16-22,23-29,30-31
+    1 buildwall l-1-0-0 n5 n5 e stone -> m2_build-wall-2 l-1-1-0 n5 n4 e stone 1-5,16-22
+        2 buildrow l-1-0-0 n5 e stone -> m3_build-row-2 l-1-0-1 n5 n4 e stone 1-5
+        3 buildwall l-1-1-0 n4 n5 e stone -> m2_build-wall-2 l-1-2-0 n4 n3 e stone 16-22
+            4 buildrow l-1-1-0 n4 e stone -> m3_build-row-2 l-1-1-1 n4 n3 e stone 16-22
+            5 buildwall l-1-2-0 n3 n5 e stone -> m2_build-wall-2 l-1-3-0 n3 n2 e stone 23-29
+                6 buildrow l-1-2-0 n3 e stone -> m3_build-row-2 l-1-2-1 n3 n2 e stone 23-29
+                7 buildwall l-1-3-0 n2 n5 e stone -> m2_build-wall-1 11-15
+                    8 buildrow l-1-3-0 n2 e stone -> m3_build-row-1 11-15
+                9 removeblockabstract l-1-1-0 -> m4_remove-block-abstract-2 l-1-1-0 earth 16
+                10 removeblockabstract l-1-2-0 -> m4_remove-block-abstract-2 l-1-2-0 earth 17
+    32 builddoor l-1-1-5 -> m5_build-door-1 l-1-2-5 30-31
+        33 removeblockabstract l-1-1-5 -> m4_remove-block-abstract-2 l-1-1-5 earth 30
+        34 removeblockabstract l-1-2-5 -> m4_remove-block-abstract-2 l-1-2-5 earth 31
+    35 buildroof l-6-0-0 n5 n4 e n stone -> m6_build-roof-2 l-6-0-1 n5 n4 e n stone 24-29
+        36 buildrow l-6-0-0 n5 e stone -> m3_build-row-2 l-6-0-1 n5 n4 e stone 24-29
+        37 buildroof l-6-0-1 n4 n4 e n stone -> m6_build-roof-1 25-29

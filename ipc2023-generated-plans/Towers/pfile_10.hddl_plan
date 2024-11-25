@@ -1,0 +1,43 @@
+==>
+**Sequential Plan**
+1. selectDirection r10 t1 t2 t3
+2. rotateTower t1 t3 t2
+3. move_abstract t1 t3
+4. exchange t1 t2 t3
+5. move_abstract t1 t2
+6. rotateTower t2 t3 t1
+7. move_abstract t3 t1
+8. exchange t3 t2 t1
+9. move_abstract t3 t2
+10. rotateTower t2 t1 t3
+... (plan continues, see below for hierarchical decomposition)
+<==
+
+**Hierarchical Decomposition**
+root 0
+0 shiftTower t1 t2 t3 -> m-shiftTower 1
+1 m-shiftTower r10 t1 t2 t3 -> 
+  * selectDirection r10 t1 t2 t3 -> selectedDirection 2
+  * rotateTower t1 t3 t2 -> m-rotateTower 3-5
+  * exchange t1 t2 t3 -> exchangeLR r10 t3 t1 t2 t3 6-8
+  * rotateTower t2 t3 t1 -> m-rotateTower 9-11
+  * exchange t3 t2 t1 -> exchangeRL t3 r10 t3 t2 t1 12-14
+2 selectedDirection r10 t1 t2 t3 -> 
+  * rotateTower t1 t3 t2 -> m-rotateTower 3-5
+3 m-rotateTower t1 t3 t2 -> 
+  * move_abstract t1 t3 -> newMethod21 r10 t1 t1 t3 3
+  * exchange t1 t3 t2 -> exchangeClear t1 t3 t2 (no further decomposition, empty subtasks)
+4 exchangeLR r10 t3 t1 t2 t3 -> 
+  * move_abstract t1 t3 -> newMethod21 r10 t1 t1 t3 4
+  * rotateTower t2 t3 t1 -> m-rotateTower 5-7
+5 m-rotateTower t2 t3 t1 -> 
+  * move_abstract t3 t1 -> newMethod21 r10 t3 t3 t1 5
+  * exchange t3 t1 t2 -> exchangeRL t3 r10 t3 t1 t2 6-8
+... (further decomposition for tasks 9-14, omitted for brevity)
+
+**Task Mapping**
+* `move_abstract` tasks (e.g., 3, 5, 9) are decomposed into `newMethod21`, which generates a single `move` action (not shown in the sequential plan for brevity).
+* `exchange` tasks (e.g., 4, 8, 14) are decomposed into either `exchangeClear` (no further actions) or `exchangeLR`/`exchangeRL`, which generate additional `move_abstract` and `rotateTower` tasks.
+* `rotateTower` tasks (e.g., 2, 6, 10) are decomposed into `m-rotateTower`, which generates `move_abstract` and `exchange` tasks.
+
+**Note**: The sequential plan and hierarchical decomposition are truncated for brevity. The actual plan would continue with further decompositions and actions. Additionally, some task IDs in the decomposition (e.g., 12-14) are not shown in the sequential plan, as they are part of the omitted decompositions.

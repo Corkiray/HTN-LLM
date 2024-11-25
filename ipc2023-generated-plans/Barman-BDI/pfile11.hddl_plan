@@ -1,0 +1,64 @@
+==>
+**Sequential Plan**
+1. AchieveContainsShakerCocktail shaker1 cocktail1 (via MakeCocktail)
+2. AchieveContainsShakerCocktail shaker1 cocktail2 (via MakeCocktail)
+3. AchieveContainsShakerCocktail shaker1 cocktail3 (via MakeCocktail)
+4. AchieveContainsShakerCocktail shaker1 cocktail4 (via MakeCocktail)
+5. AchieveContainsShakerCocktail shaker1 cocktail5 (via MakeCocktail)
+6. AchieveContainsShakerCocktail shaker1 cocktail6 (via MakeCocktail)
+7. DoPourShakerToShot shaker1 shot1 cocktail1 (via pour_shaker_to_shot_action)
+8. DoPourShakerToShot shaker1 shot2 cocktail2 (via pour_shaker_to_shot_action)
+9. DoPourShakerToShot shaker1 shot6 cocktail3 (via pour_shaker_to_shot_action)
+10. DoPourShakerToShot shaker1 shot3 cocktail4 (via pour_shaker_to_shot_action)
+11. DoPourShakerToShot shaker1 shot5 cocktail5 (via pour_shaker_to_shot_action)
+12. DoPourShakerToShot shaker1 shot8 cocktail6 (via pour_shaker_to_shot_action)
+
+**Hierarchical Decomposition**
+root 0
+0 AchieveContainsShotCocktail shot1 cocktail1 -> m1_make_cocktail_1 1 2 3 4 5 6
+  1 AchieveContainsShakerCocktail shaker1 cocktail1 -> m2_make_cocktail_1 7 8 9
+    7 AchieveCleanShaker shaker1 -> m3_clean_shaker_null (already clean)
+    8 AchieveContainsShakerIngredient shaker1 ingredient3 -> m4_add_ingredient_to_empty_shaker_1 10 11 12
+      10 AchieveContainsShotIngredient shot4 ingredient3 -> m5_add_ingredient_to_shot_1 13 14 15 16
+       ...
+    9 AchieveContainsShakerIngredient shaker1 ingredient6 -> m6_add_ingredient_to_used_shaker_1 17 18 19
+     ...
+  2 AchieveCleanShot shot1 -> m7_clean_shot_null (already clean)
+  3 AchieveHolding right shaker1 -> m8_pick_up_1 20
+  4 DoPourShakerToShot shaker1 shot1 cocktail1 -> m9_pour_shaker_to_shot_action_1 21
+  5 AchieveContainsShotCocktail shot2 cocktail2 -> m10_make_cocktail_2... (similar decomposition as 1)
+  6 AchieveContainsShotCocktail shot6 cocktail3 -> m11_make_cocktail_3... (similar decomposition as 1)
+ ... (decomposition for shot3, shot5, shot8 follows similar patterns)
+
+**Detailed Sub-Task Expansion for AchieveContainsShakerCocktail shaker1 cocktail1**
+m2_make_cocktail_1:
+  7 AchieveCleanShaker shaker1 -> m3_clean_shaker_null (already clean, no tasks)
+  8 AchieveContainsShakerIngredient shaker1 ingredient3 -> m4_add_ingredient_to_empty_shaker_1:
+    10 AchieveContainsShotIngredient shot4 ingredient3 -> m5_add_ingredient_to_shot_1:
+      13 AchieveCleanShot shot4 -> m12_clean_shot_null (already clean, no tasks)
+      14 AchieveHolding left shot4 -> m13_pick_up_2:
+        22 AchieveHandEmpty left -> m14_hand_empty_null (already empty, no tasks)
+        23 AchieveOnTable shot4 -> m15_on_table_null (already on table, no tasks)
+        24 grasp left shot4
+      15 AchieveHandEmpty right -> m16_hand_empty_null (already empty, no tasks)
+      16 fill-shot shot4 ingredient3 left right dispenser1
+    11 AchieveHolding right shot4 -> m17_pick_up_3:
+     ...
+    12 pour-shot-to-clean-shaker shot4 ingredient3 shaker1 right level1 level2
+  9 AchieveContainsShakerIngredient shaker1 ingredient6 -> m6_add_ingredient_to_used_shaker_1:
+   ... (similar to m4_add_ingredient_to_empty_shaker_1 but for ingredient6)
+
+**Action Sequence for AchieveContainsShakerCocktail shaker1 cocktail1**
+1. 24 grasp left shot4
+2. 16 fill-shot shot4 ingredient3 left right dispenser1
+3.... (actions for AchieveContainsShakerIngredient shaker1 ingredient6)
+4. 25 shake cocktail1 ingredient3 ingredient6 shaker1 right left
+5. 26 empty-shaker right shaker1 cocktail1 level2 level1
+6. 27 clean-shaker shaker1 right left
+7. 28 grasp right shaker1
+8. 29 pour-shaker-to-shot cocktail1 shot1 right shaker1 level1 level2
+
+**Full Action Sequence for the Entire Problem**
+... (concatenation of action sequences for each AchieveContainsShotCocktail task, adjusting for shared resources like hands and ensuring proper cleanup and reuse of containers)
+
+<==

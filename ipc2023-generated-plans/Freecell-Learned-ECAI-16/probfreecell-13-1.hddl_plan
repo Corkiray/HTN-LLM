@@ -1,0 +1,182 @@
+==>
+1 move C7 H7
+2 board H7 C7
+3 move H7 C7
+4 move C5 SK
+5 move SK C5
+6 move C4 S2
+7 move S2 C4
+8 move C3 H3
+9 move H3 C3
+10 move CA SA
+11 move SA CA
+12 move C2 CA
+13 move CA C2
+14 move D2 CK
+15 move CK D2
+16 move D3 C2
+17 move C2 D3
+18 move D4 HA
+19 move HA D4
+20 move D5 DA
+21 move DA D5
+22 move D6 S3
+23 move S3 D6
+24 move D7 S7
+25 move S7 D7
+26 move D8 S4
+27 move S4 D8
+28 move D9 S9
+29 move S9 D9
+30 move D10 C5
+31 move C5 D10
+32 move H2 D8
+33 move D8 H2
+34 move H3 H5
+35 move H5 H3
+36 move H4 SJ
+37 move SJ H4
+38 move H6 SQ
+39 move SQ H6
+40 move H8 H4
+41 move H4 H8
+42 move H9 S9
+43 move S9 H9
+44 move HQ DQ
+45 move DQ HQ
+46 move H10 HQ
+47 move HQ H10
+48 move S10 D9
+49 move D9 S10
+50 move S5 CJ
+51 move CJ S5
+52 move S8 D10
+53 move D10 S8
+54 move S7 C3
+55 move C3 S7
+56 move S4 S10
+57 move S10 S4
+58 move S3 C4
+59 move C4 S3
+60 move S2 DK
+61 move DK S2
+62 move S6 D6
+63 move D6 S6
+64 move SA CQ
+65 move CQ SA
+66 move SJ DA
+67 move DA SJ
+68 move SK CK
+69 move CK SK
+70 move SQ H10
+71 move H10 SQ
+72 move HK C7
+73 move C7 HK
+74 move HJ D4
+75 move D4 HJ
+76 move DJ D2
+77 move D2 DJ
+78 move DQ S5
+79 move S5 DQ
+80 move CJ S5
+81 move S5 CJ
+82 move CQ S7
+83 move S7 CQ
+84 move CK S2
+85 move S2 CK
+86 move C9 S8
+87 move S8 C9
+88 move C8 HJ
+89 move HJ C8
+90 move C6 H8
+91 move H8 C6
+92 move C10 D7
+93 move D7 C10
+<==
+
+root 0
+0 solve -> m1_solve_0 1 93
+1 m1_solve_0 -> m2_solve_0 1 93
+2 m2_solve_0 -> m3_solve_0 1 93
+3 m3_solve_0 -> m4_solve_0 1 93
+4 m4_solve_0 -> m5_solve_0 1 93
+5 m5_solve_0 -> m6_solve_0 1 93
+6 m6_solve_0 -> m7_solve_0 1 93
+7 m7_solve_0 -> m8_solve_0 1 93
+8 m8_solve_0 -> m9_solve_0 1 93
+9 m9_solve_0 -> m10_solve_0 1 93
+10 m10_solve_0 -> m11_solve_0 1 93
+11 m11_solve_0 -> m12_solve_0 1 93
+12 m12_solve_0 -> m13_solve_0 1 93
+13 m13_solve_0 -> m14_solve_0 1 93
+14 m14_solve_0 -> m15_solve_0 1 93
+15 m15_solve_0 -> m16_solve_0 1 93
+16 m16_solve_0 -> m17_solve_0 1 93
+17 m17_solve_0 -> m18_solve_0 1 93
+18 m18_solve_0 -> m19_solve_0 1 93
+19 m19_solve_0 -> m20_solve_0 1 93
+20 m20_solve_0 -> m21_solve_0 1 93
+21 m21_solve_0 -> m22_solve_0 1 93
+22 m22_solve_0 -> m23_solve_0 1 93
+23 m23_solve_0 -> m24_solve_0 1 93
+24 m24_solve_0 -> m25_solve_0 1 93
+25 m25_solve_0 -> m26_solve_0 1 93
+26 m26_solve_0 -> m27_solve_0 1 93
+27 m27_solve_0 -> m28_solve_0 1 93
+28 m28_solve_0 -> m29_solve_0 1 93
+29 m29_solve_0 -> m30_solve_0 1 93
+30 m30_solve_0 -> m31_solve_0 1 93
+31 m31_solve_0 -> m32_solve_0 1 93
+32 m32_solve_0 -> m33_solve_0 1 93
+33 m33_solve_0 -> m34_solve_0 1 93
+34 m34_solve_0 -> m35_solve_0 1 93
+35 m35_solve_0 -> m36_solve_0 1 93
+36 m36_solve_0 -> m37_solve_0 1 93
+37 m37_solve_0 -> m38_solve_0 1 93
+38 m38_solve_0 -> m39_solve_0 1 93
+39 m39_solve_0 -> m40_solve_0 1 93
+40 m40_solve_0 -> m41_solve_0 1 93
+41 m41_solve_0 -> m42_solve_0 1 93
+42 m42_solve_0 -> m43_solve_0 1 93
+43 m43_solve_0 -> m44_solve_0 1 93
+44 m44_solve_0 -> m45_solve_0 1 93
+45 m45_solve_0 -> m46_solve_0 1 93
+46 m46_solve_0 -> m47_solve_0 1 93
+47 m47_solve_0 -> m48_solve_0 1 93
+48 m48_solve_0 -> m49_solve_0 1 93
+49 m49_solve_0 -> m50_solve_0 1 93
+50 m50_solve_0 -> m51_solve_0 1 93
+51 m51_solve_0 -> m52_solve_0 1 93
+52 m52_solve_0 -> m53_solve_0 1 93
+53 m53_solve_0 -> m54_solve_0 1 93
+54 m54_solve_0 -> m55_solve_0 1 93
+55 m55_solve_0 -> m56_solve_0 1 93
+56 m56_solve_0 -> m57_solve_0 1 93
+57 m57_solve_0 -> m58_solve_0 1 93
+58 m58_solve_0 -> m59_solve_0 1 93
+59 m59_solve_0 -> m60_solve_0 1 93
+60 m60_solve_0 -> m61_solve_0 1 93
+61 m61_solve_0 -> m62_solve_0 1 93
+62 m62_solve_0 -> m63_solve_0 1 93
+63 m63_solve_0 -> m64_solve_0 1 93
+64 m64_solve_0 -> m65_solve_0 1 93
+65 m65_solve_0 -> m66_solve_0 1 93
+66 m66_solve_0 -> m67_solve_0 1 93
+67 m67_solve_0 -> m68_solve_0 1 93
+68 m68_solve_0 -> m69_solve_0 1 93
+69 m69_solve_0 -> m70_solve_0 1 93
+70 m70_solve_0 -> m71_solve_0 1 93
+71 m71_solve_0 -> m72_solve_0 1 93
+72 m72_solve_0 -> m73_solve_0 1 93
+73 m73_solve_0 -> m74_solve_0 1 93
+74 m74_solve_0 -> m75_solve_0 1 93
+75 m75_solve_0 -> m76_solve_0 1 93
+76 m76_solve_0 -> m77_solve_0 1 93
+77 m77_solve_0 -> m78_solve_0 1 93
+78 m78_solve_0 -> m79_solve_0 1 93
+79 m79_solve_0 -> m80_solve_0 1 93
+80 m80_solve_0 -> m81_solve_0 1 93
+81 m81_solve_0 -> m82_solve_0 1 93
+82 m82_solve_0 -> m83_solve_0 1 93
+83 m83_solve_0 -> m84_solve_0 1 93
+84 m84_solve_0 -> m85_solve

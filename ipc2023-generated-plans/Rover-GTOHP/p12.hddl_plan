@@ -1,0 +1,123 @@
+==>
+1 navigate rover0 waypoint14 waypoint5
+2 visit waypoint5
+3 do_navigate2 rover0 waypoint5 waypoint1
+4 unvisit waypoint5
+5 empty_store rover0store rover0
+6 sample_soil rover0 rover0store waypoint1
+7 send_soil_data rover0 waypoint1
+8 navigate rover0 waypoint1 waypoint11
+9 visit waypoint11
+10 do_navigate2 rover0 waypoint11 waypoint12
+11 unvisit waypoint11
+12 empty_store rover0store rover0
+13 sample_soil rover0 rover0store waypoint12
+14 send_soil_data rover0 waypoint12
+15 navigate rover0 waypoint12 waypoint25
+16 visit waypoint25
+17 do_navigate2 rover0 waypoint25 waypoint24
+18 unvisit waypoint25
+19 empty_store rover0store rover0
+20 sample_soil rover0 rover0store waypoint24
+21 send_soil_data rover0 waypoint24
+22 navigate rover0 waypoint24 waypoint2
+23 visit waypoint2
+24 do_navigate2 rover0 waypoint2 waypoint9
+25 unvisit waypoint2
+26 empty_store rover0store rover0
+27 sample_soil rover0 rover0store waypoint9
+28 send_soil_data rover0 waypoint9
+29 navigate rover0 waypoint9 waypoint16
+30 visit waypoint16
+31 do_navigate2 rover0 waypoint16 waypoint6
+32 unvisit waypoint16
+33 drop rover0 rover0store
+34 sample_rock rover0 rover0store waypoint6
+35 send_rock_data rover0 waypoint6
+36 navigate rover0 waypoint6 waypoint28
+37 visit waypoint28
+38 do_navigate2 rover0 waypoint28 waypoint20
+39 unvisit waypoint28
+40 drop rover0 rover0store
+41 sample_rock rover0 rover0store waypoint20
+42 send_rock_data rover0 waypoint20
+43 navigate rover0 waypoint20 waypoint15
+44 visit waypoint15
+45 do_calibrate rover0 camera4
+46 do_navigate1 rover0 waypoint15
+47 take_image rover0 waypoint15 objective1 camera4 low_res
+48 send_image_data rover0 objective1 low_res
+49 navigate rover0 waypoint15 waypoint22
+50 visit waypoint22
+51 do_navigate2 rover0 waypoint22 waypoint29
+52 unvisit waypoint22
+53 do_calibrate rover0 camera4
+54 do_navigate1 rover0 waypoint29
+55 take_image rover0 waypoint29 objective5 camera4 high_res
+56 send_image_data rover0 objective5 high_res
+57 navigate rover0 waypoint29 waypoint10
+58 visit waypoint10
+59 do_navigate2 rover0 waypoint10 waypoint3
+60 unvisit waypoint10
+61 do_calibrate rover0 camera4
+62 do_navigate1 rover0 waypoint3
+63 take_image rover0 waypoint3 objective0 camera4 high_res
+64 send_image_data rover0 objective0 high_res
+65 navigate rover0 waypoint3 waypoint21
+66 visit waypoint21
+67 do_navigate2 rover0 waypoint21 waypoint3
+68 unvisit waypoint21
+69 empty_store rover0store rover0
+70 sample_soil rover0 rover0store waypoint3
+71 send_soil_data rover0 waypoint3
+72 navigate rover0 waypoint3 waypoint8
+73 visit waypoint8
+74 do_navigate2 rover0 waypoint8 waypoint25
+75 unvisit waypoint8
+76 empty_store rover0store rover0
+77 sample_soil rover0 rover0store waypoint25
+78 send_soil_data rover0 waypoint25
+79 navigate rover0 waypoint25 waypoint21
+80 visit waypoint21
+81 do_navigate2 rover0 waypoint21 waypoint1
+82 unvisit waypoint21
+83 empty_store rover0store rover0
+84 sample_soil rover0 rover0store waypoint1
+85 send_soil_data rover0 waypoint1
+<==
+
+root 0
+0 solve_problem -> m7_get_soil_data 1 2 5 6 7 
+  -> m7_get_soil_data 8 9 12 13 14 
+  -> m7_get_soil_data 15 16 20 21 22 
+  -> m7_get_soil_data 22 23 27 28 29 
+  -> m7_get_soil_data 29 30 34 35 36 
+  -> m7_get_soil_data 36 37 41 42 43 
+  -> m13_get_image_data 44 45 46 47 48 
+  -> m13_get_image_data 49 50 54 55 56 
+  -> m13_get_image_data 57 58 61 62 63 64 
+  -> m7_get_soil_data 65 66 69 70 71 
+  -> m7_get_soil_data 72 73 76 77 78 
+  -> m7_get_soil_data 79 80 83 84 85 
+
+Note:
+- The plan is a sequence of actions (1-85) that achieve the goal.
+- The hierarchical decomposition (root 0) shows the tasks and their corresponding methods, with the action indices in parentheses.
+- The plan assumes that `rover0` is the only available rover, and it is equipped with the necessary instruments (e.g., `camera4` for imaging).
+- The plan might not be optimal, as the HTN planner's output depends on the domain and problem definitions, as well as the planner's configuration.
+- Some actions (e.g., `visit` and `unvisit`) are auxiliary and help with navigation and task management.
+
+Task explanations:
+
+* `m7_get_soil_data`: Get soil data from a specific waypoint.
+	+ Subtasks:
+		1. Navigate to the waypoint (e.g., `do_navigate2` or `do_navigate1`).
+		2. Empty the store (if not already empty).
+		3. Sample soil.
+		4. Send soil data.
+* `m13_get_image_data`: Get image data from a specific objective and mode.
+	+ Subtasks:
+		1. Navigate to a visible waypoint for the objective (e.g., `do_navigate2` or `do_navigate1`).
+		2. Calibrate the camera (if not already calibrated).
+		3. Take an image.
+		4. Send image data.

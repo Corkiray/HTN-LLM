@@ -1,0 +1,58 @@
+==>
+**Sequential Plan**
+1. AchieveContainsShakerCocktail shaker1 cocktail1 (via MakeCocktail)
+2. DoPourShakerToShot shaker1 shot3 cocktail1 (via pour_shaker_to_shot_action)
+3. AchieveContainsShakerCocktail shaker1 cocktail2 (via MakeCocktail)
+4. DoPourShakerToShot shaker1 shot2 cocktail2 (via pour_shaker_to_shot_action)
+5. AchieveContainsShakerCocktail shaker1 cocktail3 (via MakeCocktail)
+6. DoPourShakerToShot shaker1 shot4 cocktail3 (via pour_shaker_to_shot_action)
+7. AchieveContainsShakerCocktail shaker1 cocktail4 (via MakeCocktail)
+8. DoPourShakerToShot shaker1 shot1 cocktail4 (via pour_shaker_to_shot_action)
+
+**Hierarchical Decomposition**
+root 0
+0 AchieveContainsShotCocktail shot3 cocktail1 1 2
+1 MakeCocktail shaker1 cocktail1 ingredient1 ingredient5 left right 3 4 5 6 7
+	3 AchieveCleanShaker shaker1 -> CleanShakerNull 9
+	4 AchieveContainsShakerIngredient shaker1 ingredient5 -> AddIngredientToEmptyShaker 10 11 12
+	5 AchieveContainsShakerIngredient shaker1 ingredient1 -> AddIngredientToUsedShaker 13 14 15
+	6 AchieveHolding right shaker1 -> PickUp 16 17 18
+	7 shake cocktail1 ingredient5 ingredient1 shaker1 right left
+2 pour_shaker_to_shot_action shaker1 shot3 cocktail1 level1 level1 right
+
+3 AchieveContainsShotCocktail shot2 cocktail2 19 20
+19 MakeCocktail shaker1 cocktail2 ingredient3 ingredient5 left right 21 22 23 24 25
+	21 AchieveCleanShaker shaker1 -> CleanFullShaker 26 27 28 29 30
+	22 AchieveContainsShakerIngredient shaker1 ingredient5 -> AddIngredientToUsedShaker 31 32 33
+	23 AchieveContainsShakerIngredient shaker1 ingredient3 -> AddIngredientToUsedShaker 34 35 36
+	24 AchieveHolding right shaker1 -> HoldingNull
+	25 shake cocktail2 ingredient5 ingredient3 shaker1 right left
+20 pour_shaker_to_shot_action shaker1 shot2 cocktail2 level1 level1 right
+
+4 AchieveContainsShotCocktail shot4 cocktail3 37 38
+37 MakeCocktail shaker1 cocktail3 ingredient4 ingredient5 left right 39 40 41 42 43
+	39 AchieveCleanShaker shaker1 -> CleanFullShaker 44 45 46 47 48
+	40 AchieveContainsShakerIngredient shaker1 ingredient5 -> AddIngredientToUsedShaker 49 50 51
+	41 AchieveContainsShakerIngredient shaker1 ingredient4 -> AddIngredientToUsedShaker 52 53 54
+	42 AchieveHolding right shaker1 -> HoldingNull
+	43 shake cocktail3 ingredient5 ingredient4 shaker1 right left
+38 pour_shaker_to_shot_action shaker1 shot4 cocktail3 level1 level1 right
+
+5 AchieveContainsShotCocktail shot1 cocktail4 55 56
+55 MakeCocktail shaker1 cocktail4 ingredient2 ingredient4 left right 57 58 59 60 61
+	57 AchieveCleanShaker shaker1 -> CleanFullShaker 62 63 64 65 66
+	58 AchieveContainsShakerIngredient shaker1 ingredient4 -> AddIngredientToUsedShaker 67 68 69
+	59 AchieveContainsShakerIngredient shaker1 ingredient2 -> AddIngredientToUsedShaker 70 71 72
+	60 AchieveHolding right shaker1 -> HoldingNull
+	61 shake cocktail4 ingredient4 ingredient2 shaker1 right left
+56 pour_shaker_to_shot_action shaker1 shot1 cocktail4 level1 level1 right
+
+**Subtask Decomposition (only showing one level for brevity)**
+9 CleanShakerNull shaker1 (no subtasks)
+10 AddIngredientToEmptyShaker shaker1 ingredient5 level1 level1 shot1 left
+	* AchieveContainsShotIngredient shot1 ingredient5 (via AddIngredientToShot)
+	* AchieveHolding left shot1 (via PickUp)
+	* pour-shot-to-clean-shaker shot1 ingredient5 shaker1 left level1 level1
+11-72: Similar decompositions for each subtask (omitted for brevity)
+
+<==

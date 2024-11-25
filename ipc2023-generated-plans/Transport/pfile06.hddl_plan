@@ -1,0 +1,66 @@
+==>
+**Sequential Plan**
+1. drive truck_0 city_loc_4 city_loc_2
+2. pick_up truck_0 city_loc_2 package_2 capacity_1 capacity_2
+3. drive truck_0 city_loc_2 city_loc_1
+4. drive truck_0 city_loc_1 city_loc_3
+5. pick_up truck_0 city_loc_3 package_1 capacity_0 capacity_1
+6. drive truck_0 city_loc_3 city_loc_1
+7. drive truck_0 city_loc_1 city_loc_2
+8. drop truck_0 city_loc_2 package_2 capacity_1 capacity_2
+9. drive truck_0 city_loc_2 city_loc_1
+10. drive truck_0 city_loc_1 city_loc_3
+11. pick_up truck_0 city_loc_3 package_3 capacity_0 capacity_1
+12. drive truck_0 city_loc_3 city_loc_1
+13. drive truck_0 city_loc_1 city_loc_2
+14. drop truck_0 city_loc_2 package_3 capacity_0 capacity_1
+15. drop truck_0 city_loc_2 package_1 capacity_0 capacity_1
+16. drive truck_0 city_loc_2 city_loc_1
+17. drive truck_0 city_loc_1 city_loc_0
+18. drive truck_0 city_loc_0 city_loc_1
+19. drive truck_0 city_loc_1 city_loc_3
+20. pick_up truck_0 city_loc_3 package_0 capacity_0 capacity_1
+21. drive truck_0 city_loc_3 city_loc_1
+22. drive truck_0 city_loc_1 city_loc_0
+23. drop truck_0 city_loc_0 package_0 capacity_0 capacity_1
+24. drive truck_0 city_loc_0 city_loc_1
+25. drive truck_0 city_loc_1 city_loc_2
+26. drive truck_0 city_loc_2 city_loc_4
+27. pick_up truck_0 city_loc_1 package_4 capacity_0 capacity_1
+28. drive truck_0 city_loc_1 city_loc_2
+29. drive truck_0 city_loc_2 city_loc_4
+30. drop truck_0 city_loc_4 package_1 capacity_0 capacity_1
+31. drop truck_0 city_loc_4 package_4 capacity_0 capacity_1
+32. drop truck_0 city_loc_4 package_2 capacity_1 capacity_2
+
+**Hierarchical Decomposition**
+root 0
+0 solve_htn -> m_deliver_ordering_0 1 2 3 4
+1 deliver package_1 city_loc_4 -> m_deliver_ordering_0 5 6 7 8
+	* 5 get_to truck_0 city_loc_3 -> m_drive_to_ordering_0
+		+ 5.1 drive truck_0 city_loc_4 city_loc_1
+		+ 5.2 drive truck_0 city_loc_1 city_loc_3
+	* 6 load truck_0 city_loc_3 package_1 -> m_load_ordering_0
+		+ 6.1 pick_up truck_0 city_loc_3 package_1 capacity_0 capacity_1
+	* 7 get_to truck_0 city_loc_4 -> m_drive_to_ordering_0
+		+ 7.1 drive truck_0 city_loc_3 city_loc_1
+		+ 7.2 drive truck_0 city_loc_1 city_loc_2
+		+ 7.3 drive truck_0 city_loc_2 city_loc_4
+	* 8 unload truck_0 city_loc_4 package_1 -> m_unload_ordering_0
+		+ 8.1 drop truck_0 city_loc_4 package_1 capacity_0 capacity_1
+2 deliver package_2 city_loc_4 -> m_deliver_ordering_0 9 10 11 12
+	*... (similar decomposition as above, adjusted for package_2)
+3 deliver package_3 city_loc_2 -> m_deliver_ordering_0 13 14 15 16
+	*... (similar decomposition as above, adjusted for package_3)
+4 deliver package_0 city_loc_0 -> m_deliver_ordering_0 17 18 19 20
+	*... (similar decomposition as above, adjusted for package_0)
+<== 
+
+Note: 
+- The numbers in the sequential plan correspond to the actions.
+- In the hierarchical decomposition:
+	+ `root 0` indicates the start of the decomposition.
+	+ Each line represents a task decomposition using a method (e.g., `m_deliver_ordering_0`).
+	+ The numbers after the `->` symbol (e.g., `1 2 3 4`) refer to the subtasks in the method's definition.
+	+ Indented lines (`*`) show further decomposition of subtasks into actions or smaller subtasks, using other methods or primitive actions.
+	+ Actions in the decomposition (e.g., `5.1 drive...`) correspond to actions in the sequential plan but are numbered for clarity within the decomposition.

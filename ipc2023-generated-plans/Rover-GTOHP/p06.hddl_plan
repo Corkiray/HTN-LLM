@@ -1,0 +1,55 @@
+==>
+1 navigate rover1 waypoint4 waypoint5
+2 navigate rover1 waypoint5 waypoint0
+3 sample_soil rover1 rover1store waypoint0
+4 drop rover1 rover1store
+5 communicate_soil_data2 rover1 general waypoint0 waypoint5
+6 navigate rover1 waypoint5 waypoint2
+7 navigate rover1 waypoint2 waypoint3
+8 sample_rock rover1 rover1store waypoint3
+9 drop rover1 rover1store
+10 communicate_rock_data2 rover1 general waypoint3 waypoint2
+11 navigate rover1 waypoint2 waypoint5
+12 navigate rover1 waypoint5 waypoint6
+13 sample_rock rover1 rover1store waypoint6
+14 drop rover1 rover1store
+15 communicate_rock_data2 rover1 general waypoint6 waypoint5
+16 navigate rover3 waypoint7 waypoint0
+17 do_calibrate rover3 camera3
+18 navigate rover3 waypoint0 waypoint1
+19 take_image rover3 waypoint1 objective2 camera3 low_res
+20 navigate rover3 waypoint1 waypoint5
+21 communicate_image_data rover3 general objective2 low_res waypoint5 waypoint2
+22 navigate rover2 waypoint7 waypoint2
+23 do_calibrate rover2 camera1
+24 navigate rover2 waypoint2 waypoint1
+25 take_image rover2 waypoint1 objective1 camera1 high_res
+26 navigate rover2 waypoint1 waypoint5
+27 communicate_image_data rover2 general objective1 high_res waypoint5 waypoint2
+28 navigate rover3 waypoint5 waypoint0
+29 take_image rover3 waypoint0 objective3 camera3 low_res
+30 navigate rover3 waypoint0 waypoint2
+31 communicate_image_data rover3 general objective3 low_res waypoint2 waypoint2
+<==
+
+root 0
+0 HTN_PB9 -> m7_get_soil_data 1 2 3 4 5
+1 get_soil_data waypoint0 -> m7_get_soil_data 6 7 8 9 10
+6 do_navigate1 rover1 waypoint0 -> m1_do_navigate1 1 2
+2 do_navigate2 rover1 waypoint4 waypoint5 -> m3_do_navigate2 1
+7 empty_store rover1store rover1 -> m6_empty_store 4
+10 send_soil_data rover1 waypoint0 -> m9_send_soil_data 5
+0 HTN_PB9 -> m10_get_rock_data 11 12 13 14 15
+11 get_rock_data waypoint3 -> m10_get_rock_data 6 7 8 9 10
+12 get_rock_data waypoint6 -> m10_get_rock_data 16 17 18 19 20
+16 do_navigate1 rover1 waypoint6 -> m1_do_navigate1 11 12 13 14
+14 send_rock_data rover1 waypoint6 -> m9_send_soil_data 15
+0 HTN_PB9 -> m13_get_image_data 21 22 23 24 25
+21 get_image_data objective2 low_res -> m13_get_image_data 16 17 18 19 20
+22 get_image_data objective1 high_res -> m13_get_image_data 26 27 28 29 30
+26 do_calibrate rover2 camera1 -> m15_do_calibrate 23
+28 send_image_data rover2 objective1 high_res -> m14_send_image_data 27
+0 HTN_PB9 -> m13_get_image_data 31 32 33 34 35
+31 get_image_data objective3 low_res -> m13_get_image_data 28 29 30 31
+32 do_calibrate rover3 camera3 -> m15_do_calibrate 17
+34 send_image_data rover3 objective3 low_res -> m14_send_image_data 31

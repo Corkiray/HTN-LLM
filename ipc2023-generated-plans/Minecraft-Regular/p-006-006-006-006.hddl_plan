@@ -1,0 +1,38 @@
+==>
+1 buildwall l-1-0-0 n6 n6 stone e
+2 buildwall l-1-0-5 n6 n6 stone n
+3 buildwall l-1-5-5 n6 n6 stone w
+4 buildwall l-1-5-0 n6 n6 stone s
+5 builddoor l-1-2-0
+6 buildroof l-7-0-0 n6 n6 e n stone
+<==
+
+root 0
+0 buildhouse l-1-0-0 l-1-0-5 l-1-5-5 l-1-5-0 l-1-2-0 l-7-0-0 n6 n6 n6 stone -> m1_house_1 1 2 3 4 5 6
+1 buildwall l-1-0-0 n6 n6 stone e -> m2_wall_2 l-1-0-0 l-1-1-0 n6 n5 stone e 1
+2 buildwall l-1-0-5 n6 n6 stone n -> m2_wall_2 l-1-0-5 l-1-1-5 n6 n5 stone n 2
+3 buildwall l-1-5-5 n6 n6 stone w -> m2_wall_2 l-1-5-5 l-1-6-5 n6 n5 stone w 3
+4 buildwall l-1-5-0 n6 n6 stone s -> m2_wall_2 l-1-5-0 l-1-4-0 n6 n5 stone s 4
+5 builddoor l-1-2-0 -> m3_door_1 l-1-2-0 l-1-3-0 5
+6 buildroof l-7-0-0 n6 n6 e n stone -> m4_roof_2 l-7-0-0 l-7-1-0 n6 n5 e n stone 6
+
+root 1
+1 buildwall l-1-0-0 n6 n6 stone e -> m2_wall_2 l-1-0-0 l-1-1-0 n6 n5 stone e
+  1.1 buildrow l-1-0-0 n6 e stone -> m5_row_2 l-1-0-0 l-1-0-1 n6 n5 e stone 1
+  1.2 buildwall l-1-1-0 n5 n6 stone e -> m2_wall_2 l-1-1-0 l-1-2-0 n5 n4 stone e 2
+
+root 1.1
+1.1 buildrow l-1-0-0 n6 e stone -> m5_row_2 l-1-0-0 l-1-0-1 n6 n5 e stone
+  1.1.1 placeblockabstract l-1-0-0 stone -> m7_placeblockabstract_1 l-1-0-0 stone 1
+  1.1.2 buildrow l-1-0-1 n5 e stone -> m5_row_2 l-1-0-1 l-1-0-2 n5 n4 e stone 2
+
+root 1.1.1
+1.1.1 placeblockabstract l-1-0-0 stone -> m7_placeblockabstract_1 l-1-0-0 stone
+  1.1.1.1 placeblock l-1-0-0 stone 1
+
+root 1.1.2
+1.1.2 buildrow l-1-0-1 n5 e stone -> m5_row_2 l-1-0-1 l-1-0-2 n5 n4 e stone
+  1.1.2.1 placeblockabstract l-1-0-1 stone -> m7_placeblockabstract_1 l-1-0-1 stone 1
+  1.1.2.2 buildrow l-1-0-2 n4 e stone -> m5_row_2 l-1-0-2 l-1-0-3 n4 n3 e stone 2
+
+... (the plan continues in this manner, recursively decomposing tasks until primitive actions are reached)

@@ -1,0 +1,33 @@
+==>
+**Sequential Plan**
+1. turn (initial turn)
+2. flip l1 l1 Y N (flip middle-left to N)
+3. propagate_up l1 l1 Y (start propagating up from middle-left)
+4. flip l0 l1 Y N (flip top-left to N)
+5. propagate_up l0 l1 Y (start propagating up from top-left, but already at top)
+6. propagate_down l1 l1 Y (start propagating down from middle-left)
+7. flip l2 l1 Y N (flip bottom-left to N)
+8. propagate_down l2 l1 Y (start propagating down from bottom-left, but already at bottom)
+9. propagate_right l1 l1 Y (start propagating right from middle-left)
+10. flip l1 l2 N Y (flip middle-right to Y)
+11. propagate_right l1 l2 Y (start propagating right from middle-right, but already at rightmost column for middle row)
+12. play (continue playing, but goal is already achieved)
+13. turn (next turn, but not necessary as goal is achieved)
+
+**Hierarchical Decomposition**
+root 0
+0 play -> do_play 1 12
+1 turn -> do_turn l1 l1 Y N 2 3 6 9
+2 flip l1 l1 Y N -> **(primitive action, no further decomposition)**
+3 propagate_up l1 l1 Y -> propagate_up_end_field l1 l1 Y (since next step would be out of bounds)
+4 flip l0 l1 Y N -> **(primitive action, no further decomposition)**
+5 propagate_up l0 l1 Y -> propagate_up_end_field l0 l1 Y (since already at top)
+6 propagate_down l1 l1 Y -> propagate_down_do l1 l2 l1 Y N 7
+7 flip l2 l1 Y N -> **(primitive action, no further decomposition)**
+8 propagate_down l2 l1 Y -> propagate_down_end_field l2 l1 Y (since already at bottom)
+9 propagate_right l1 l1 Y -> propagate_right_do l1 l1 l2 l1 Y N 10
+10 flip l1 l2 N Y -> **(primitive action, no further decomposition)**
+11 propagate_right l1 l2 Y -> propagate_right_end_field l1 l2 Y (since already at rightmost column for middle row)
+12 play -> end_game (no further tasks, goal achieved or play can end)
+13 turn -> do_turn **(not necessary, omitted for brevity)**
+<==

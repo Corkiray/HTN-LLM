@@ -1,0 +1,51 @@
+==>
+**Sequential Plan**
+```
+1. flip l3 l2 N Y
+2. flip l3 l2 Y N
+3. flip l2 l2 Y N
+4. flip l2 l3 N Y
+5. flip l2 l3 Y N
+6. flip l1 l1 Y N
+7. flip l1 l2 N Y
+8. flip l1 l2 Y N
+9. flip l0 l3 Y N
+10. flip l0 l3 N Y
+11. flip l0 l4 Y N
+12. flip l0 l4 N Y
+13. flip l4 l4 N Y
+14. flip l4 l3 N Y
+15. flip l4 l2 N Y
+16. flip l4 l1 N Y
+17. flip l4 l0 Y N
+```
+**Hierarchical Decomposition**
+```
+root 0
+0 play -> do_play 1 18
+1 turn -> do_turn l3 l2 N Y 2 3 4 5
+2 propagate_up l3 l2 N -> propagate_up_do l3 l2 l2 N Y 6
+3 propagate_down l3 l2 N -> propagate_down_do l3 l2 l2 N Y 7
+4 propagate_left l3 l2 N -> propagate_left_end_different l3 l2 l1 N Y (no further decomposition)
+5 propagate_right l3 l2 N -> propagate_right_end_different l3 l2 l4 N Y (no further decomposition)
+6 propagate_up l2 l2 N -> propagate_up_end_field l2 l2 N (no further decomposition)
+7 propagate_down l2 l2 N -> propagate_down_do l2 l2 l1 N Y 8
+8 propagate_down l1 l2 N -> propagate_down_do l1 l2 l0 N Y 9
+9 propagate_down l0 l2 N -> propagate_down_end_field l0 l2 N (no further decomposition)
+10 turn -> do_turn l0 l4 Y N 11 12 13 14
+11 propagate_up l0 l4 Y -> propagate_up_do l0 l4 l1 Y N 15
+12 propagate_down l0 l4 Y -> propagate_down_end_field l0 l4 Y (no further decomposition)
+13 propagate_left l0 l4 Y -> propagate_left_end_different l0 l4 l3 Y N (no further decomposition)
+14 propagate_right l0 l4 Y -> propagate_right_do l0 l4 l3 Y N 16
+15 propagate_up l1 l4 Y -> propagate_up_do l1 l4 l2 Y N 17
+16 propagate_right l0 l4 Y -> propagate_right_do l0 l3 Y N (no further decomposition)
+17 propagate_up l2 l4 Y -> propagate_up_end_field l2 l4 Y (no further decomposition)
+18 play -> end_game (no further decomposition)
+<==
+```
+**Note:**
+
+* The sequential plan consists of 17 `flip` actions, which are the only actions available in the domain.
+* The hierarchical decomposition shows how the `play` task is decomposed into `turn` tasks, which are further decomposed into `propagate_*` tasks. The `propagate_*` tasks may be decomposed again if their preconditions are met.
+* Some tasks, like `propagate_up_end_field` or `propagate_down_end_field`, have no further decomposition since their preconditions (e.g., `max` or `min`) are met, and no additional actions are required.
+* The plan assumes that the `next` and `max`/`min` predicates are correctly defined in the problem instance, as they are used to determine the decomposition of the `propagate_*` tasks.

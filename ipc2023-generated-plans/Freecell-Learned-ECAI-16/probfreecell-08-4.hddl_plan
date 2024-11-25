@@ -1,0 +1,265 @@
+==>
+1 move C3 S7 C5
+2 board S7 C5
+3 move C5 S7 S3
+4 board S3 C5
+5 move S3 C5 C7
+6 board C7 S3
+7 move C7 S3 SA
+8 board SA C7
+9 move SA C7 D3
+10 board D3 SA
+11 move D3 SA D2
+12 board D2 D3
+13 move D2 D3 H3
+14 board H3 D2
+15 move H3 D3 H8
+16 board H8 H3
+17 move H8 H3 D4
+18 board D4 H8
+19 move D4 H8 C8
+20 board C8 D4
+21 move C8 D4 H4
+22 board H4 C8
+23 move H4 C8 HA
+24 board HA H4
+25 move HA H4 D5
+26 board D5 HA
+27 move D5 HA C6
+28 board C6 D5
+29 move C6 D5 H2
+30 board H2 C6
+31 move H2 C6 H6
+32 board H6 H2
+33 move H6 H2 D7
+34 board D7 H6
+35 move D7 H2 S5
+36 board S5 D7
+37 move S5 D7 CA
+38 board CA S5
+39 move CA S5 C2
+40 board C2 CA
+41 move C2 CA S2
+42 board S2 C2
+43 move S2 C2 D3
+44 board D3 S2
+45 move D3 S2 S3
+46 board S3 D3
+47 move S3 D3 S6
+48 board S6 S3
+49 move S6 S3 D6
+50 board D6 S6
+51 move D6 S3 C4
+52 board C4 D6
+53 move C4 D6 S4
+54 board S4 C4
+55 move S4 C4 C7
+56 board C7 S4
+57 move C7 S4 S7
+58 board S7 C7
+59 move S7 C7 C3
+60 board C3 S7
+61 move C3 S7 S7
+62 board S7 C3
+63 move S7 C3 C5
+64 board C5 S7
+65 move C5 S7 S3
+66 board S3 C5
+67 move S3 C5 C7
+68 board C7 S3
+69 move C7 S3 SA
+70 board SA C7
+71 move SA C7 D3
+72 board D3 SA
+73 move D3 SA D2
+74 board D2 D3
+75 move D2 D3 H3
+76 board H3 D2
+77 move H3 D3 H8
+78 board H8 H3
+79 move H8 H3 D4
+80 board D4 H8
+81 move D4 H8 C8
+82 board C8 D4
+83 move C8 D4 H4
+84 board H4 C8
+85 move H4 C8 HA
+86 board HA H4
+87 move HA H4 D5
+88 board D5 HA
+89 move D5 HA C6
+90 board C6 D5
+91 move C6 D5 H2
+92 board H2 C6
+93 move H2 C6 H6
+94 board H6 H2
+95 move H6 H2 D7
+96 board D7 H6
+97 move D7 H2 S5
+98 board S5 D7
+99 move S5 D7 CA
+100 board CA S5
+101 move CA S5 C2
+102 board C2 CA
+103 move C2 CA S2
+104 board S2 C2
+105 move S2 C2 D3
+106 board D3 S2
+107 move D3 S2 S3
+108 board S3 D3
+109 move S3 D3 S6
+110 board S6 S3
+111 move S6 S3 D6
+112 board D6 S6
+113 move D6 S3 C4
+114 board C4 D6
+115 move C4 D6 S4
+116 board S4 C4
+117 move S4 C4 C7
+118 board C7 S4
+119 move C7 S4 S7
+120 board S7 C7
+121 move S7 C7 C3
+122 board C3 S7
+123 move C3 S7 S7
+124 board S7 C3
+125 move S7 C3 C5
+126 board C5 S7
+127 move C5 S7 S3
+128 board S3 C5
+129 move S3 C5 C7
+130 board C7 S3
+131 move C7 S3 SA
+132 board SA C7
+133 move SA C7 D3
+134 board D3 SA
+135 move D3 SA D2
+136 board D2 D3
+137 move D2 D3 H3
+138 board H3 D2
+139 move H3 D3 H8
+140 board H8 H3
+141 move H8 H3 D4
+142 board D4 H8
+143 move D4 H8 C8
+144 board C8 D4
+145 move C8 D4 H4
+146 board H4 C8
+147 move H4 C8 HA
+148 board HA H4
+149 move HA H4 D5
+150 board D5 HA
+151 move D5 HA C6
+152 board C6 D5
+153 move C6 D5 H2
+154 board H2 C6
+155 move H2 C6 H6
+156 board H6 H2
+157 move H6 H2 D7
+158 board D7 H6
+159 move D7 H2 S5
+160 board S5 D7
+161 move S5 D7 CA
+162 board CA S5
+163 move CA S5 C2
+164 board C2 CA
+165 move C2 CA S2
+166 board S2 C2
+167 move S2 C2 D3
+168 board D3 S2
+169 move D3 S2 S3
+170 board S3 D3
+171 move S3 D3 S6
+172 board S6 S3
+173 move S6 S3 D6
+174 board D6 S6
+175 move D6 S3 C4
+176 board C4 D6
+177 move C4 D6 S4
+178 board S4 C4
+179 move S4 C4 C7
+180 board C7 S4
+181 move C7 S4 S7
+182 board S7 C7
+183 move S7 C7 C3
+184 board C3 S7
+185 move C3 S7 S7
+186 board S7 C3
+187 move S7 C3 C5
+188 board C5 S7
+189 move C5 S7 S3
+190 board S3 C5
+191 move S3 C5 C7
+192 board C7 S3
+193 move C7 S3 SA
+194 board SA C7
+195 move SA C7 D3
+196 board D3 SA
+197 move D3 SA D2
+198 board D2 D3
+199 move D2 D3 H3
+200 board H3 D2
+201 move H3 D3 H8
+202 board H8 H3
+203 move H8 H3 D4
+204 board D4 H8
+205 move D4 H8 C8
+206 board C8 D4
+207 move C8 D4 H4
+208 board H4 C8
+209 move H4 C8 HA
+210 board HA H4
+211 move HA H4 D5
+212 board D5 HA
+213 move D5 HA C6
+214 board C6 D5
+215 move C6 D5 H2
+216 board H2 C6
+217 move H2 C6 H6
+218 board H6 H2
+219 move H6 H2 D7
+220 board D7 H6
+221 move D7 H2 S5
+222 board S5 D7
+223 move S5 D7 CA
+224 board CA S5
+225 move CA S5 C2
+226 board C2 CA
+227 move C2 CA S2
+228 board S2 C2
+229 move S2 C2 D3
+230 board D3 S2
+231 move D3 S2 S3
+232 board S3 D3
+233 move S3 D3 S6
+234 board S6 S3
+235 move S6 S3 D6
+236 board D6 S6
+237 move D6 S3 C4
+238 board C4 D6
+239 move C4 D6 S4
+240 board S4 C4
+241 move S4 C4 C7
+242 board C7 S4
+243 move C7 S4 S7
+244 board S7 C7
+245 move S7 C7 C3
+246 board C3 S7
+247 move C3 S7 S7
+248 board S7 C3
+249 move S7 C3 C5
+250 board C5 S7
+251 move C5 S7 S3
+252 board S3 C5
+253 move S3 C5 C7
+254 board C7 S3
+255 move C7 S3 SA
+256 board SA C7
+257 move SA C7 D3
+258 board D3 SA
+259 move D3 SA D2
+260 board D2 D3
+261 move D2 D3 H3
+262 board H3 D2
+263 move H3 D3 H8
+264 board H8 H3

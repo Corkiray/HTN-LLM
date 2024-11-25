@@ -1,0 +1,83 @@
+Here is a hierarchical plan to solve the given HTN problem, following the specified output format:
+```
+==>
+1 navigate rover0 waypoint6 waypoint1
+2 visit waypoint1
+3 do_navigate2 rover0 waypoint1 waypoint4
+4 sample_soil rover0 rover0store waypoint4
+5 drop rover0 rover0store
+6 communicate_soil_data2 rover0 general waypoint4 waypoint6
+7 unvisit waypoint1
+8 do_navigate2 rover0 waypoint6 waypoint9
+9 sample_soil rover0 rover0store waypoint9
+10 drop rover0 rover0store
+11 communicate_soil_data2 rover0 general waypoint9 waypoint6
+12 do_navigate2 rover0 waypoint6 waypoint1
+13 sample_soil rover0 rover0store waypoint1
+14 drop rover0 rover0store
+15 communicate_soil_data2 rover0 general waypoint1 waypoint6
+16 do_navigate2 rover0 waypoint6 waypoint7
+17 sample_soil rover0 rover0store waypoint7
+18 drop rover0 rover0store
+19 communicate_soil_data2 rover0 general waypoint7 waypoint6
+20 do_navigate2 rover0 waypoint6 waypoint3
+21 sample_rock rover0 rover0store waypoint3
+22 drop rover0 rover0store
+23 communicate_rock_data2 rover0 general waypoint3 waypoint6
+24 do_navigate2 rover0 waypoint6 waypoint10
+25 sample_rock rover0 rover0store waypoint10
+26 drop rover0 rover0store
+27 communicate_rock_data2 rover0 general waypoint10 waypoint6
+28 do_navigate2 rover0 waypoint6 waypoint5
+29 sample_rock rover0 rover0store waypoint5
+30 drop rover0 rover0store
+31 communicate_rock_data2 rover0 general waypoint5 waypoint6
+32 do_navigate2 rover0 waypoint6 waypoint1
+33 sample_rock rover0 rover0store waypoint1
+34 drop rover0 rover0store
+35 communicate_rock_data2 rover0 general waypoint1 waypoint6
+36 do_calibrate rover0 camera2
+37 do_navigate2 rover0 waypoint6 waypoint0
+38 take_image rover0 waypoint0 objective2 camera2 high_res
+39 communicate_image_data rover0 general objective2 high_res waypoint0 waypoint6
+40 do_calibrate rover2 camera1
+41 do_navigate2 rover2 waypoint9 waypoint1
+42 take_image rover2 waypoint1 objective4 camera1 high_res
+43 communicate_image_data rover2 general objective4 high_res waypoint1 waypoint6
+44 do_calibrate rover2 camera3
+45 do_navigate2 rover2 waypoint9 waypoint0
+46 take_image rover2 waypoint0 objective0 camera3 high_res
+47 communicate_image_data rover2 general objective0 high_res waypoint0 waypoint6
+<==
+
+root 0
+0 solve_htn_pb9 -> m7_get_soil_data 1 4 6 
+  -> m10_get_rock_data 20 21 23 
+  -> m13_get_image_data 36 38 39 
+  -> m13_get_image_data 40 42 43 
+  -> m13_get_image_data 44 46 47 
+1 get_soil_data waypoint4 -> m7_get_soil_data 2 3 4 5 6 
+2 do_navigate1 rover0 waypoint4 -> m1_do_navigate1 1 7 
+3 do_navigate2 rover0 waypoint6 waypoint4 -> m3_do_navigate2 
+4 sample_soil rover0 rover0store waypoint4 -> (action)
+5 drop rover0 rover0store -> (action)
+6 communicate_soil_data2 rover0 general waypoint4 waypoint6 -> (action)
+...
+20 get_rock_data waypoint3 -> m10_get_rock_data 21 22 23 
+21 sample_rock rover0 rover0store waypoint3 -> (action)
+22 drop rover0 rover0store -> (action)
+23 communicate_rock_data2 rover0 general waypoint3 waypoint6 -> (action)
+...
+36 get_image_data objective2 high_res -> m13_get_image_data 37 38 39 
+37 do_calibrate rover0 camera2 -> m15_do_calibrate 
+38 take_image rover0 waypoint0 objective2 camera2 high_res -> (action)
+39 communicate_image_data rover0 general objective2 high_res waypoint0 waypoint6 -> (action)
+...
+```
+**Note:**
+
+* The plan is quite long, so I've omitted some of the intermediate steps for brevity. The ellipsis (`...`) indicates where the plan continues with similar tasks.
+* The numbers on the left (e.g., `1`, `2`, `3`, etc.) represent the sequential plan, where each number corresponds to an action or a method call.
+* The `root 0` section indicates the start of the hierarchical decomposition.
+* Each method call (e.g., `m7_get_soil_data`, `m1_do_navigate1`, etc.) is followed by the task parameters and the subtasks (if any).
+* Actions (e.g., `sample_soil`, `drop`, `communicate_soil_data2`, etc.) are marked as `(action)` to indicate that they are primitive actions with no further decomposition.

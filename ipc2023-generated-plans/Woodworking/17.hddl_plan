@@ -1,0 +1,50 @@
+==>
+1 load_highspeed_saw b0 highspeed_saw0
+2 cut_board b0 p0 highspeed_saw0 walnut rough s4 s3
+3 unload_highspeed_saw b0 highspeed_saw0
+4 load_highspeed_saw b1 highspeed_saw1
+5 cut_board b1 p1 highspeed_saw1 beech smooth s4 s3
+6 unload_highspeed_saw b1 highspeed_saw1
+7 load_highspeed_saw b2 highspeed_saw2
+8 cut_board b2 p2 highspeed_saw2 beech rough s2 s1
+9 unload_highspeed_saw b2 highspeed_saw2
+10 load_highspeed_saw b0 highspeed_saw3
+11 cut_board b0 p3 highspeed_saw3 walnut rough s3 s2
+12 unload_highspeed_saw b0 highspeed_saw3
+13 load_highspeed_saw b1 highspeed_saw4
+14 cut_board b1 p4 highspeed_saw4 beech smooth s3 s2
+15 unload_highspeed_saw b1 highspeed_saw4
+16 load_highspeed_saw b2 highspeed_saw5
+17 cut_board b2 p5 highspeed_saw5 beech rough s1 s0
+18 unload_highspeed_saw b2 highspeed_saw5
+19 do_grind_untreated p0 grinder0 rough natural untreated untreated untreated untreated verysmooth natural
+20 do_glaze p1 glazer0 natural untreated glazed natural
+21 do_immersion_varnish p2 immersion_varnisher0 smooth untreated varnished natural
+22 do_grind_untreated p3 grinder1 rough natural untreated untreated untreated untreated verysmooth natural
+23 do_glaze p3 glazer1 verysmooth untreated glazed natural
+24 do_spray_varnish p4 spray_varnisher0 smooth untreated varnished natural
+25 do_plane_untreated p5 planer0 rough untreated untreated smooth natural
+26 do_glaze p5 glazer2 smooth untreated glazed natural
+27 do_spray_varnish p6 spray_varnisher1 verysmooth varnished varnished natural
+28 do_grind p7 grinder2 smooth glazed untreated verysmooth natural
+29 do_glaze p7 glazer3 verysmooth untreated glazed natural
+30 do_spray_varnish p8 spray_varnisher2 smooth colourfragments varnished natural
+<==
+
+root 0
+0 process p0?v_1_1?v_1_2?v_1_3 -> m14 1 2 3 19
+1 process p1?v_2_1?v_2_2?v_2_3 -> m12 4 5 6 20
+2 process p2?v_3_1?v_3_2?v_3_3 -> m11 7 8 9 21
+3 process p3?v_4_1?v_4_2?v_4_3 -> m14 10 11 12 22 23
+4 process p4?v_5_1?v_5_2?v_5_3 -> m11 13 14 15 24
+5 process p5?v_6_1?v_6_2?v_6_3 -> m16 16 17 18 25 26
+6 process p6?v_7_1?v_7_2?v_7_3 -> m10 27
+7 process p7?v_8_1?v_8_2?v_8_3 -> m13 28 29
+8 process p8?v_9_1?v_9_2?v_9_3 -> m10 30
+
+Note:
+- The numbers in the sequential plan (between `==>` and `<==`) represent the order of actions to be executed.
+- Each action is instantiated with the specific objects from the problem domain (e.g., `b0`, `p0`, `highspeed_saw0`, etc.).
+- The hierarchical decomposition (below `root 0`) shows how each high-level task (`process` for each part) is decomposed into lower-level tasks or actions using specific methods (`mX`).
+- The method numbers (`mX`) refer to the methods defined in the HTN domain (e.g., `method0` to `method16`).
+- The parameters for each method call (e.g., `?v_1_1?v_1_2?v_1_3`) are placeholders for the actual values that would be determined during the planning process, based on the problem's initial state and goal.

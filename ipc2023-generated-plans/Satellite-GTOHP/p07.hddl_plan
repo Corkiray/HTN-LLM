@@ -1,0 +1,92 @@
+==>
+**Sequential Plan**
+```
+1. turn_to satellite5 Planet6 Star15
+2. switch_on instrument11 satellite5
+3. calibrate satellite5 instrument11 Planet6
+4. take_image satellite5 Planet6 instrument11 infrared4
+5. turn_to satellite7 Star3 Planet11
+6. switch_on instrument17 satellite7
+7. calibrate satellite7 instrument17 Star3
+8. take_image satellite7 Star3 instrument17 infrared4
+9. turn_to satellite8 Star15 GroundStation4
+10. switch_on instrument19 satellite8
+11. calibrate satellite8 instrument19 Star15
+12. take_image satellite8 Star15 instrument19 image0
+13. turn_to satellite9 Star16 Planet11
+14. switch_on instrument22 satellite9
+15. calibrate satellite9 instrument22 Star16
+16. take_image satellite9 Star16 instrument22 infrared4
+17. take_image satellite0 Phenomenon5 instrument2 thermograph1
+18. take_image satellite1 Planet7 instrument3 image0
+19. take_image satellite1 Planet8 instrument3 thermograph1
+20. take_image satellite3 Phenomenon9 instrument7 infrared4
+21. take_image satellite4 Planet10 instrument9 image0
+22. take_image satellite4 Planet11 instrument9 infrared4
+23. take_image satellite6 Star12 instrument14 image0
+24. take_image satellite6 Star13 instrument14 image0
+25. take_image satellite6 Star14 instrument14 thermograph1
+26. take_image satellite6 Phenomenon17 instrument12 infrared4
+27. take_image satellite6 Phenomenon18 instrument13 spectrograph3
+28. take_image satellite7 Star20 instrument17 image0
+29. take_image satellite8 Planet21 instrument19 thermograph1
+30. take_image satellite9 Planet22 instrument22 image2
+31. take_image satellite0 Phenomenon23 instrument2 image0
+32. take_image satellite9 Star24 instrument22 infrared4
+```
+**Hierarchical Decomposition**
+```
+root 0
+0 do_mission Phenomenon5 thermograph1 -> m0_do_mission 17
+1 do_mission Planet6 infrared4 -> m0_do_mission 4
+2 do_mission Planet7 image0 -> m0_do_mission 18
+3 do_mission Planet8 thermograph1 -> m0_do_mission 19
+4 do_mission Phenomenon9 image2 -> m0_do_mission 20
+5 do_mission Planet10 image0 -> m0_do_mission 21
+6 do_mission Planet11 infrared4 -> m0_do_mission 22
+7 do_mission Star12 image0 -> m0_do_mission 23
+8 do_mission Star13 image0 -> m0_do_mission 24
+9 do_mission Star14 thermograph1 -> m0_do_mission 25
+10 do_mission Star15 image0 -> m0_do_mission 12
+11 do_mission Star16 thermograph1 -> m0_do_mission 16
+12 do_mission Phenomenon17 infrared4 -> m0_do_mission 26
+13 do_mission Phenomenon18 spectrograph3 -> m0_do_mission 27
+14 do_mission Star20 image0 -> m0_do_mission 28
+15 do_mission Planet21 thermograph1 -> m0_do_mission 29
+16 do_mission Planet22 image2 -> m0_do_mission 30
+17 do_mission Phenomenon23 image0 -> m0_do_mission 31
+18 do_mission Star24 infrared4 -> m0_do_mission 32
+
+0.1 m0_do_mission 17
+  17 do_prepare satellite0 instrument2 Phenomenon5 -> m1_do_prepare 33 34 35
+  34 take_image satellite0 Phenomenon5 instrument2 thermograph1
+
+0.2 m0_do_mission 4
+  1 do_prepare satellite5 instrument11 Planet6 -> m1_do_prepare 1 2 3
+  4 take_image satellite5 Planet6 instrument11 infrared4
+
+... (similar decomposition for each do_mission task)
+
+0.18 m0_do_mission 32
+  32 do_prepare satellite9 instrument22 Star24 -> m1_do_prepare 29 30 31
+  32 take_image satellite9 Star24 instrument22 infrared4
+
+0.1.1 m1_do_prepare 33
+  33 do_switching satellite0 instrument2 -> m4_do_switching 36
+  34 do_turning satellite0 Phenomenon5 -> m9_do_turning 37
+
+... (similar decomposition for each do_prepare task)
+
+0.1.1.1 m4_do_switching 36
+  (nop)
+
+0.1.1.2 m9_do_turning 37
+  (nop)
+<==
+```
+Note:
+
+* The sequential plan consists of 32 actions to achieve the goals.
+* The hierarchical decomposition shows the task decomposition for each `do_mission` task, which in turn decomposes into `do_prepare` and `take_image` tasks. The `do_prepare` tasks further decompose into `do_switching` and `do_turning` tasks.
+* Some tasks, like `do_switching` and `do_turning`, have preconditions that are already met in the initial state, so their decomposition is trivial (e.g., `m4_do_switching` and `m9_do_turning`).
+* The decomposition is not exhaustive for all tasks, but it should give you an idea of the hierarchical structure of the plan.

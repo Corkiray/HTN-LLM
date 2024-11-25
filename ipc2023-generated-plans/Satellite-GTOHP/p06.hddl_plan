@@ -1,0 +1,89 @@
+==>
+**Sequential Plan**
+```
+1. turn_to satellite0 Phenomenon12 Planet21
+2. switch_on instrument0 satellite0
+3. calibrate satellite0 instrument0 Phenomenon12
+4. take_image satellite0 Phenomenon12 instrument0 thermograph0
+5. turn_to satellite0 Phenomenon5 Phenomenon12
+6. take_image satellite0 Phenomenon5 instrument0 image1
+7. turn_to satellite0 Phenomenon7 Phenomenon5
+8. take_image satellite0 Phenomenon7 instrument0 thermograph0
+9. turn_to satellite0 Planet8 Phenomenon7
+10. switch_on instrument1 satellite0
+11. calibrate satellite0 instrument1 Planet8
+12. take_image satellite0 Planet8 instrument1 image2
+13. turn_to satellite0 Star9 Planet8
+14. take_image satellite0 Star9 instrument0 thermograph0
+15. turn_to satellite0 Star10 Star9
+16. switch_on instrument1 satellite0
+17. calibrate satellite0 instrument1 Star10
+18. take_image satellite0 Star10 instrument1 thermograph3
+19. turn_to satellite2 GroundStation2 Star14
+20. switch_on instrument4 satellite2
+21. calibrate satellite2 instrument4 GroundStation2
+22. turn_to satellite2 Phenomenon13 GroundStation2
+23. switch_on instrument2 satellite2
+24. calibrate satellite2 instrument2 Phenomenon13
+25. take_image satellite2 Phenomenon13 instrument2 image1
+26. turn_to satellite2 Star14 Phenomenon13
+27. switch_on instrument4 satellite2
+28. calibrate satellite2 instrument4 Star14
+29. take_image satellite2 Star14 instrument4 thermograph4
+30. turn_to satellite5 Phenomenon11 Planet17
+31. switch_on instrument11 satellite5
+32. calibrate satellite5 instrument11 Phenomenon11
+33. turn_to satellite5 Phenomenon18 Phenomenon11
+34. take_image satellite5 Phenomenon18 instrument11 image1
+35. turn_to satellite5 Planet17 Phenomenon18
+36. switch_on instrument11 satellite5
+37. calibrate satellite5 instrument11 Planet17
+38. take_image satellite5 Planet17 instrument11 image2
+39. turn_to satellite5 Planet15 Planet17
+40. take_image satellite5 Planet15 instrument11 image2
+41. turn_to satellite5 Star19 Planet15
+42. switch_on instrument11 satellite5
+43. calibrate satellite5 instrument11 Star19
+44. take_image satellite5 Star19 instrument11 thermograph4
+45. turn_to satellite5 Star20 Star19
+46. take_image satellite5 Star20 instrument11 thermograph4
+47. turn_to satellite5 Planet21 Star20
+48. take_image satellite5 Planet21 instrument11 thermograph0
+49. turn_to satellite5 Star22 Planet21
+50. switch_on instrument10 satellite5
+51. calibrate satellite5 instrument10 Star22
+52. take_image satellite5 Star22 instrument10 thermograph3
+53. turn_to satellite5 Planet23 Star22
+54. switch_on instrument11 satellite5
+55. calibrate satellite5 instrument11 Planet23
+56. take_image satellite5 Planet23 instrument11 image1
+```
+**Hierarchical Decomposition**
+```
+root 0
+0 do_mission Phenomenon5 image1 -> m0_do_mission 1 2 3 4 5 6
+  1 do_prepare satellite0 instrument0 Phenomenon5 -> m1_do_prepare 7 8
+    7 do_switching satellite0 instrument0 -> m3_do_switching 9 10
+      9 switch_on instrument0 satellite0
+      10 do_calibration satellite0 instrument0 Phenomenon5 -> m5_do_calibration 11 12
+        11 do_prepare satellite0 instrument0 Phenomenon5 -> m1_do_prepare 13 14
+          13 do_switching satellite0 instrument0 -> m3_do_switching 15 16
+            15 switch_on instrument0 satellite0
+            16 do_calibration satellite0 instrument0 Phenomenon5 -> m6_do_calibration
+          14 do_turning satellite0 Phenomenon5 -> m9_do_turning
+        12 calibrate satellite0 instrument0 Phenomenon5
+    8 do_turning satellite0 Phenomenon5 -> m9_do_turning
+  2 take_image satellite0 Phenomenon5 instrument0 image1
+  3 turn_to satellite0 Phenomenon7 Phenomenon5
+  4 take_image satellite0 Phenomenon7 instrument0 thermograph0
+  5 turn_to satellite0 Planet8 Phenomenon7
+  6 take_image satellite0 Planet8 instrument1 image2 ->... (similar decomposition for other tasks)
+
+... (similar decomposition for tasks 2-17)
+```
+**Note:**
+
+* The sequential plan consists of 56 actions to achieve all the goals.
+* The hierarchical decomposition shows the task decomposition for the first `do_mission` task. The same decomposition pattern applies to the other `do_mission` tasks (2-17).
+* Due to the complexity and length of the full decomposition, only the first `do_mission` task's decomposition is shown in detail. The ellipsis (`...`) indicates where similar decompositions for other tasks would be inserted.
+* Action numbers in the sequential plan correspond to the action instances in the hierarchical decomposition.

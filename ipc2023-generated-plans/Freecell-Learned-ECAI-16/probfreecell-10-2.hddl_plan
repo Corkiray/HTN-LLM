@@ -1,0 +1,53 @@
+==>
+1 move C10 C8
+2 board p0 f1
+3 move C8 C6
+4 move C6 H6
+5 move H6 C3
+6 move C3 H4
+7 move H4 S4
+8 move S4 D6
+9 move D6 C2
+10 move C2 D3
+11 move D3 S2
+12 move S2 C7
+13 move C7 C6
+14 move C6 H6
+15 move H6 C3
+16 move C3 H4
+17 move H4 S4
+18 move S4 D6
+19 move D6 C2
+20 move C2 D3
+21 move D3 S2
+22 move S2 C7
+23 move C7 C9
+24 move C9 C5
+25 move C5 CA
+26 move CA D5
+27 move D5 D2
+28 move D2 DA
+29 move DA S9
+30 move S9 D9
+31 move D9 D10
+32 move D10 D4
+33 move D4 D7
+34 move D7 H2
+35 move H2 H8
+36 move H8 S10
+37 move S10 H4
+38 move H4 H5
+39 move H5 H9
+40 move H9 CA
+41 move CA H3
+42 move H3 HA
+43 move HA H7
+44 move H7 H10
+45 move H10 C10
+46 debark p0 f0
+<==
+
+root 0
+0 solve_elevator -> m1_go_ordering_0 1 2
+1 deliver_person p0 f1 f0 -> m2_ordering_0 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45
+2 solve_elevator -> m1_abort_ordering_0

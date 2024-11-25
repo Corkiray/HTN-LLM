@@ -1,0 +1,39 @@
+==>
+1 i-LOCK-AT OBJ12 POS1
+2 ACHIEVE-AT OBJ12 POS1 (task0)
+3 i-LOCK-AT OBJ23 POS1
+4 DO-IN-UNLOAD-TRUCK0 OBJ23 TRU1 POS1
+5 ACHIEVE-AT OBJ23 POS1 (task1)
+6 i-LOCK-AT OBJ11 APT1
+7 DO-AT-LOAD-TRUCK0 OBJ11 TRU1 POS1
+8 DRIVE-TRUCK TRU1 POS1 APT1 CIT1
+9 ACHIEVE-AT OBJ11 APT1 (task2)
+10 i-LOCK-AT OBJ22 APT1
+11 DO-IN-UNLOAD-TRUCK0 OBJ22 TRU1 APT1
+12 ACHIEVE-AT OBJ22 APT1 (task3)
+13 i-LOCK-AT OBJ13 POS2
+14 ACHIEVE-AT OBJ13 POS2 (task4)
+15 i-LOCK-AT OBJ21 POS2
+16 ACHIEVE-AT OBJ21 POS2 (task5)
+<==
+
+root 0
+0 solve_logistics -> m10-ACHIEVE-AT 1 2
+1 task0 (ACHIEVE-AT OBJ12 POS1) -> m9-ACHIEVE-AT 1
+2 task1 (ACHIEVE-AT OBJ23 POS1) -> m14-ACHIEVE-AT0 3 4 5
+3 DO-IN-UNLOAD-TRUCK0 OBJ23 TRU1 POS1 -> m6-DO-IN-UNLOAD-TRUCK0
+4 ACHIEVE-AT0 OBJ23 POS1 -> m11-ACHIEVE-AT0
+5 task2 (ACHIEVE-AT OBJ11 APT1) -> m13-ACHIEVE-AT0 6 7 8 9
+6 DO-AT-LOAD-TRUCK0 OBJ11 TRU1 POS1 -> m4-DO-AT-LOAD-TRUCK0
+7 ACHIEVE-AT-TRK TRU1 APT1 -> m36-ACHIEVE-AT1 8
+8 DRIVE-TRUCK TRU1 POS1 APT1 CIT1 -> 
+9 task3 (ACHIEVE-AT OBJ22 APT1) -> m14-ACHIEVE-AT0 10 11 12
+10 DO-IN-UNLOAD-TRUCK0 OBJ22 TRU1 APT1 -> m6-DO-IN-UNLOAD-TRUCK0
+11 ACHIEVE-AT0 OBJ22 APT1 -> m11-ACHIEVE-AT0
+12 task4 (ACHIEVE-AT OBJ13 POS2) -> m9-ACHIEVE-AT 13
+13 task5 (ACHIEVE-AT OBJ21 POS2) -> m9-ACHIEVE-AT 14 
+Note: The plan assumes that the `i-LOCK-AT` actions are necessary to achieve the `ACHIEVE-AT` tasks, as the problem definition does not specify the initial locking state of the objects. If the objects are initially unlocked, the `i-LOCK-AT` actions can be removed. 
+
+Also, note that the plan does not involve the airplane (APN1) or the airport (APT2) in city CIT2, as the problem tasks do not require their use. The plan focuses on achieving the specified tasks using the available trucks (TRU1 and TRU2) and locations (POS1 and POS2). 
+
+The hierarchical decomposition shows how each task is broken down into subtasks using the methods defined in the domain. The numbers in the decomposition refer to the action numbers in the sequential plan.

@@ -1,0 +1,101 @@
+==>
+1 A_MARK_VAR_ASSIGNED l1p l1n
+2 propagate-same-polarity l1p n1
+3 propagate-opposite-polarity l1n n1
+4 count-models n1
+5 backtrack-opposite-polarity l1n n1
+6 backtrack-same-polarity l1p n1
+7 A_UNMARK_VAR_ASSIGNED l1p l1n
+8 A_MARK_VAR_ASSIGNED l2p l2n
+9 propagate-same-polarity l2p n1
+10 propagate-opposite-polarity l2n n1
+11 count-models n2
+12 backtrack-opposite-polarity l2n n1
+13 backtrack-same-polarity l2p n1
+14 A_UNMARK_VAR_ASSIGNED l2p l2n
+15 A_MARK_VAR_ASSIGNED l3p l3n
+16 propagate-same-polarity l3p n1
+17 propagate-opposite-polarity l3n n1
+18 count-models n3
+19 backtrack-opposite-polarity l3n n1
+20 backtrack-same-polarity l3p n1
+21 A_UNMARK_VAR_ASSIGNED l3p l3n
+22 A_MARK_VAR_ASSIGNED l4p l4n
+23 propagate-same-polarity l4p n1
+24 propagate-opposite-polarity l4n n1
+25 count-models n4
+26 backtrack-opposite-polarity l4n n1
+27 backtrack-same-polarity l4p n1
+28 A_UNMARK_VAR_ASSIGNED l4p l4n
+29 A_MARK_VAR_ASSIGNED l5p l5n
+30 propagate-same-polarity l5p n1
+31 propagate-opposite-polarity l5n n1
+32 count-models n5
+33 backtrack-opposite-polarity l5n n1
+34 backtrack-same-polarity l5p n1
+35 A_UNMARK_VAR_ASSIGNED l5p l5n
+36 A_MARK_VAR_ASSIGNED l6p l6n
+37 propagate-same-polarity l6p n1
+38 propagate-opposite-polarity l6n n1
+39 count-models n6
+40 backtrack-opposite-polarity l6n n1
+41 backtrack-same-polarity l6p n1
+42 A_UNMARK_VAR_ASSIGNED l6p l6n
+43 A_MARK_VAR_ASSIGNED l7p l7n
+44 propagate-same-polarity l7p n1
+45 propagate-opposite-polarity l7n n1
+46 count-models n7
+47 backtrack-opposite-polarity l7n n1
+48 backtrack-same-polarity l7p n1
+49 A_UNMARK_VAR_ASSIGNED l7p l7n
+50 A_MARK_VAR_ASSIGNED l8p l8n
+51 propagate-same-polarity l8p n1
+52 propagate-opposite-polarity l8n n1
+53 count-models n8
+54 backtrack-opposite-polarity l8n n1
+55 backtrack-same-polarity l8p n1
+56 A_UNMARK_VAR_ASSIGNED l8p l8n
+57 A_MARK_VAR_ASSIGNED l9p l9n
+58 propagate-same-polarity l9p n1
+59 propagate-opposite-polarity l9n n1
+60 count-models n9
+61 backtrack-opposite-polarity l9n n1
+62 backtrack-same-polarity l9p n1
+63 A_UNMARK_VAR_ASSIGNED l9p l9n
+64 A_MARK_VAR_ASSIGNED l10p l10n
+65 propagate-same-polarity l10p n1
+66 propagate-opposite-polarity l10n n1
+67 count-models n10
+68 A_OUTPUT_EXPONENTIAL_COUNT n10
+<==
+
+root 0
+0 count-models n0 -> m_count-models_split n0 n1 l1p l1n n6 n2
+  1 A_MARK_VAR_ASSIGNED l1p l1n
+  2 propagate-same-polarity l1p n1 -> m_propagate_same_polarity_linear l1p n1 n2 c2
+    2.1 propagate-clause-same-polarity l1p c2 -> m_propagate-clause_via_satisfy l1p c2
+      2.1.1 A_SATISFY_CLAUSE c2 l1p n0 n1
+    2.2 propagate-same-polarity l1p n2 -> m_propagate_same_polarity_linear l1p n2 n3 c4
+      2.2.1 propagate-clause-same-polarity l1p c4 -> m_propagate-clause_via_satisfy l1p c4
+        2.2.1.1 A_SATISFY_CLAUSE c4 l1p n1 n2
+      2.2.2 propagate-same-polarity l1p n3 ->... (further recursive decomposition)
+  3 propagate-opposite-polarity l1n n1 -> m_propagate_opposite_polarity_linear l1n n1 n2 c0
+    3.1 propagate-clause-opposite-polarity c0 -> m_propagate-clause_via_eliminate c0
+      3.1.1 decrement-clause-size c0 -> m_decrement_large_clause_size c0 n3 n2
+        3.1.1.1 A_UPDATE_CLAUSE_LENGTH c0 n3 n2
+    3.2 propagate-opposite-polarity l1n n2 ->... (further recursive decomposition)
+  4 count-models n1 -> m_count-models_split n1 n2 l2p l2n n2 n3
+    4.1 A_MARK_VAR_ASSIGNED l2p l2n
+    4.2 propagate-same-polarity l2p n1 ->... (further recursive decomposition)
+   ...
+  5 backtrack-opposite-polarity l1n n1 -> m_backtrack_opposite_polarity_linear l1n n1 n2 c0
+    5.1 backtrack-clause-opposite-polarity c0 -> m_backtrack-clause_via_eliminate c0
+      5.1.1 increment-clause-size c0 -> m_increment_large_clause_size c0 n2 n3
+        5.1.1.1 A_UPDATE_CLAUSE_LENGTH c0 n2 n3
+    5.2 backtrack-opposite-polarity l1n n2 ->... (further recursive decomposition)
+  6 backtrack-same-polarity l1p n1 -> m_backtrack_same_polarity_linear l1p n1 n2 c2
+    6.1 backtrack-clause-same-polarity l1p c2 -> m_backtrack-clause_via_satisfy l1p c2
+      6.1.1 A_UNSATISFY_CLAUSE c2 l1p n1 n0
+    6.2 backtrack-same-polarity l1p n2 ->... (further recursive decomposition)
+  7 A_UNMARK_VAR_ASSIGNED l1p l1n
+  8... (further recursive decomposition for other literals and decision levels)

@@ -1,0 +1,65 @@
+==>
+1 AchieveContainsShotCocktail shot4 cocktail1
+2 AchieveContainsShotCocktail shot5 cocktail2
+root 0
+0 AchieveContainsShotCocktail shot4 cocktail1 -> m1_go_ordering_0 1 2 3 4 5 6 7 8 9 10 11 12
+  1 MakeAndPourCocktail shot4 cocktail1 shaker1 right -> m2_ordering_0 1.1 1.2 1.3 1.4
+    1.1 AchieveContainsShakerCocktail shaker1 cocktail1 -> m3_ordering_0 1.1.1 1.1.2 1.1.3 1.1.4 1.1.5 1.1.6
+      1.1.1 AchieveCleanShaker shaker1 -> m4_ordering_0 (CleanShakerNull)
+      1.1.2 AchieveContainsShakerIngredient shaker1 ingredient3 -> m5_ordering_0 1.1.2.1 1.1.2.2 1.1.2.3
+        1.1.2.1 AchieveContainsShotIngredient shot1 ingredient3 -> m6_ordering_0 1.1.2.1.1 1.1.2.1.2 1.1.2.1.3
+          1.1.2.1.1 AchieveCleanShot shot1 -> m7_ordering_0 (CleanShotNull)
+          1.1.2.1.2 AchieveHolding right shot1 -> m8_ordering_0 1.1.2.1.2.1 1.1.2.1.2.2 1.1.2.1.2.3
+            1.1.2.1.2.1 AchieveHandEmpty right -> m9_ordering_0 (HandEmptyNull)
+            1.1.2.1.2.2 AchieveOnTable shot1 -> m10_ordering_0 (OnTableNull)
+            1.1.2.1.2.3 PickUp right shot1
+          1.1.2.1.3 AddIngredientToShot shot1 ingredient3 dispenser3 right left
+        1.1.2.2 AchieveHolding left shot1 -> m11_ordering_0 (HoldingNull)
+        1.1.2.3 pour-shot-to-clean-shaker shot1 ingredient3 shaker1 left level1 level2
+      1.1.3 AchieveContainsShakerIngredient shaker1 ingredient4 -> m12_ordering_0 1.1.3.1 1.1.3.2 1.1.3.3
+       ... (similar to 1.1.2, with different ingredients and shots)
+      1.1.4 AchieveHolding left shaker1 -> m13_ordering_0 (HoldingNull)
+      1.1.5 AchieveHandEmpty right -> m14_ordering_0 (HandEmptyNull)
+      1.1.6 shake cocktail1 ingredient3 ingredient4 shaker1 left right
+    1.2 AchieveCleanShot shot4 -> m15_ordering_0 (CleanShotNull)
+    1.3 AchieveHolding right shaker1 -> m16_ordering_0 (HoldingNull)
+    1.4 pour_shaker_to_shot_action shaker1 shot4 cocktail1 level2 level1 right
+2 AchieveContainsShotCocktail shot5 cocktail2 -> m17_ordering_0 2.1 2.2 2.3 2.4 2.5 2.6 2.7 2.8 2.9 2.10 2.11 2.12
+ ... (similar to 1, with different shots and cocktails)
+<==
+
+**Sequential Plan:**
+
+1. AchieveContainsShotCocktail shot4 cocktail1
+2. AchieveContainsShotCocktail shot5 cocktail2
+
+**Hierarchical Decomposition:**
+
+* **0 AchieveContainsShotCocktail shot4 cocktail1**
+	+ **1 MakeAndPourCocktail shot4 cocktail1 shaker1 right**
+		- **1.1 AchieveContainsShakerCocktail shaker1 cocktail1**
+			- **1.1.1 AchieveCleanShaker shaker1** (CleanShakerNull)
+			- **1.1.2 AchieveContainsShakerIngredient shaker1 ingredient3**
+				- **1.1.2.1 AchieveContainsShotIngredient shot1 ingredient3**
+					- **1.1.2.1.1 AchieveCleanShot shot1** (CleanShotNull)
+					- **1.1.2.1.2 AchieveHolding right shot1**
+						- **1.1.2.1.2.1 AchieveHandEmpty right** (HandEmptyNull)
+						- **1.1.2.1.2.2 AchieveOnTable shot1** (OnTableNull)
+						- **1.1.2.1.2.3 PickUp right shot1**
+					- **1.1.2.1.3 AddIngredientToShot shot1 ingredient3 dispenser3 right left**
+				- **1.1.2.2 AchieveHolding left shot1** (HoldingNull)
+				- **1.1.2.3 pour-shot-to-clean-shaker shot1 ingredient3 shaker1 left level1 level2**
+			-... (similar for other ingredients and shots)
+		- **1.2 AchieveCleanShot shot4** (CleanShotNull)
+		- **1.3 AchieveHolding right shaker1** (HoldingNull)
+		- **1.4 pour_shaker_to_shot_action shaker1 shot4 cocktail1 level2 level1 right**
+* **2 AchieveContainsShotCocktail shot5 cocktail2**
+	+... (similar to above, with different shots and cocktails)
+
+**Actions:**
+
+* `PickUp hand container`
+* `AddIngredientToShot shot ingredient dispenser hand1 hand2`
+* `pour-shot-to-clean-shaker shot ingredient shaker hand level1 level2`
+* `pour_shaker_to_shot_action shaker shot cocktail level1 level2 hand`
+*... (other actions, e.g., `clean-shaker`, `clean-shot`, `drop`, `empty-shaker`, `empty-shot`, `fill-shot`, `grasp`, `shake`)

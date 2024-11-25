@@ -1,0 +1,75 @@
+==>
+**Sequential Plan**
+1. navigate rover0 waypoint1 waypoint2
+2. navigate rover0 waypoint2 waypoint3
+3. sample_soil rover0 rover0store waypoint3
+4. drop rover0 rover0store
+5. navigate rover0 waypoint3 waypoint7
+6. communicate_soil_data1 rover0 general waypoint3 waypoint8 waypoint7
+7. navigate rover0 waypoint7 waypoint8
+8. sample_rock rover0 rover0store waypoint8
+9. drop rover0 rover0store
+10. navigate rover0 waypoint8 waypoint7
+11. communicate_rock_data1 rover0 general waypoint8 waypoint1 waypoint7
+12. navigate rover1 waypoint4 waypoint5
+13. sample_rock rover1 rover1store waypoint5
+14. drop rover1 rover1store
+15. navigate rover1 waypoint5 waypoint7
+16. communicate_rock_data1 rover1 general waypoint5 waypoint4 waypoint7
+17. navigate rover1 waypoint7 waypoint4
+18. sample_soil rover1 rover1store waypoint4
+19. drop rover1 rover1store
+20. navigate rover1 waypoint4 waypoint7
+21. communicate_soil_data1 rover1 general waypoint4 waypoint9 waypoint7
+22. navigate rover1 waypoint7 waypoint9
+23. sample_soil rover1 rover1store waypoint6
+24. drop rover1 rover1store
+25. navigate rover1 waypoint9 waypoint7
+26. communicate_soil_data1 rover1 general waypoint6 waypoint0 waypoint7
+27. do_calibrate rover3 camera0
+28. navigate rover3 waypoint2 waypoint0
+29. take_image rover3 waypoint0 objective0 camera0 colour
+30. navigate rover3 waypoint0 waypoint7
+31. communicate_image_data rover3 general objective0 colour waypoint8 waypoint7
+32. navigate rover3 waypoint7 waypoint8
+33. do_calibrate rover3 camera0
+34. navigate rover3 waypoint8 waypoint2
+35. take_image rover3 waypoint2 objective2 camera0 low_res
+36. navigate rover3 waypoint2 waypoint7
+37. communicate_image_data rover3 general objective2 low_res waypoint1 waypoint7
+38. navigate rover3 waypoint7 waypoint1
+39. do_calibrate rover1 camera3
+40. navigate rover1 waypoint1 waypoint3
+41. take_image rover1 waypoint3 objective0 camera3 low_res
+42. navigate rover1 waypoint3 waypoint7
+43. communicate_image_data rover1 general objective0 low_res waypoint5 waypoint7
+
+**Hierarchical Decomposition**
+root 0
+0 HTN_PB9 -> m7_get_soil_data 1 2 3 4 5 
+  1 get_soil_data waypoint3 -> m7_get_soil_data 6 7 8 9 10 
+    6 do_navigate1 rover0 waypoint3 -> m1_do_navigate1 1 2 3 
+      1 visit waypoint1
+      2 do_navigate2 rover0 waypoint1 waypoint3 -> m3_do_navigate2 4 
+        4 navigate rover0 waypoint1 waypoint3
+      3 unvisit waypoint1
+    7 empty_store rover0store rover0 -> m6_empty_store 11 
+      11 drop rover0 rover0store
+    8 sample_soil rover0 rover0store waypoint3
+    9 send_soil_data rover0 waypoint3 -> m9_send_soil_data 12 
+      12 communicate_soil_data1 rover0 general waypoint3 waypoint8 waypoint7
+    10 navigate rover0 waypoint3 waypoint7 -> m1_do_navigate1 13 14 15 
+      13 visit waypoint8
+      14 do_navigate2 rover0 waypoint3 waypoint7 -> m3_do_navigate2 16 
+        16 navigate rover0 waypoint3 waypoint7
+      15 unvisit waypoint8
+  2 get_soil_data waypoint6 -> m7_get_soil_data 17 18 19 20 21 
+   ... (similar decomposition as task 1, omitted for brevity)
+  3 get_rock_data waypoint5 -> m10_get_rock_data 22 23 24 25 26 
+   ... (similar decomposition as task 1, omitted for brevity)
+  4 get_rock_data waypoint4 -> m10_get_rock_data 27 28 29 30 31 
+   ... (similar decomposition as task 1, omitted for brevity)
+  5 get_rock_data waypoint8 -> m10_get_rock_data 32 33 34 35 36 
+   ... (similar decomposition as task 1, omitted for brevity)
+ ... (similar decomposition for tasks 6, 7, and 8, omitted for brevity)
+<==

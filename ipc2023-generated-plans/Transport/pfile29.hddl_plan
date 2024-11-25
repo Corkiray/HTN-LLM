@@ -1,0 +1,96 @@
+==>
+**Sequential Plan**
+```
+1. drive truck_4 city_loc_1 city_loc_18
+2. pick_up truck_4 city_loc_18 package_0 capacity_2 capacity_3
+3. drive truck_4 city_loc_18 city_loc_12
+4. drop truck_4 city_loc_12 package_0 capacity_1 capacity_2
+5. drive truck_4 city_loc_12 city_loc_21
+6. pick_up truck_4 city_loc_21 package_11 capacity_2 capacity_3
+7. drive truck_4 city_loc_21 city_loc_21
+8. drop truck_4 city_loc_21 package_11 capacity_1 capacity_2
+...
+** truncated for brevity, see below for full plan **
+...
+41. drive truck_2 city_loc_6 city_loc_23
+42. drop truck_2 city_loc_23 package_2 capacity_1 capacity_2
+43. noop truck_2 city_loc_23
+```
+**Hierarchical Decomposition**
+```
+root 0
+0 solve_htn -> m_deliver_ordering_0 1 2... 24
+  1 deliver package_0 city_loc_12 -> m_drive_to_ordering_0 1 2 3 4
+    1.1 get_to truck_4 city_loc_18 -> m_drive_to_ordering_0 1
+      1.1.1 drive truck_4 city_loc_1 city_loc_18
+    1.2 load truck_4 city_loc_18 package_0 -> m_load_ordering_0 2
+      1.2.1 pick_up truck_4 city_loc_18 package_0 capacity_2 capacity_3
+    1.3 get_to truck_4 city_loc_12 -> m_drive_to_ordering_0 3
+      1.3.1 drive truck_4 city_loc_18 city_loc_12
+    1.4 unload truck_4 city_loc_12 package_0 -> m_unload_ordering_0 4
+      1.4.1 drop truck_4 city_loc_12 package_0 capacity_1 capacity_2
+ ...
+  2 deliver package_1 city_loc_22 -> m_deliver_ordering_0 5 6... 8
+ ...
+  24 deliver package_24 city_loc_15 -> m_deliver_ordering_0 41 42 43
+    24.1 get_to truck_2 city_loc_15 -> m_i_am_there_ordering_0 (already at location)
+      24.1.1 noop truck_2 city_loc_15
+    24.2 load truck_2 city_loc_15 package_24 -> m_load_ordering_0 41
+      24.2.1 pick_up truck_2 city_loc_15 package_24 capacity_2 capacity_3
+    24.3 get_to truck_2 city_loc_15 -> m_i_am_there_ordering_0 (already at location)
+      24.3.1 noop truck_2 city_loc_15
+    24.4 unload truck_2 city_loc_15 package_24 -> m_unload_ordering_0 42
+      24.4.1 drop truck_2 city_loc_15 package_24 capacity_1 capacity_2
+```
+**Full Sequential Plan (truncated above)**
+```
+1. drive truck_4 city_loc_1 city_loc_18
+2. pick_up truck_4 city_loc_18 package_0 capacity_2 capacity_3
+3. drive truck_4 city_loc_18 city_loc_12
+4. drop truck_4 city_loc_12 package_0 capacity_1 capacity_2
+5. drive truck_4 city_loc_12 city_loc_21
+6. pick_up truck_4 city_loc_21 package_11 capacity_2 capacity_3
+7. drive truck_4 city_loc_21 city_loc_21
+8. drop truck_4 city_loc_21 package_11 capacity_1 capacity_2
+9. drive truck_1 city_loc_16 city_loc_20
+10. pick_up truck_1 city_loc_20 package_16 capacity_2 capacity_3
+11. drive truck_1 city_loc_20 city_loc_22
+12. drop truck_1 city_loc_22 package_16 capacity_1 capacity_2
+13. drive truck_1 city_loc_22 city_loc_12
+14. pick_up truck_1 city_loc_12 package_5 capacity_2 capacity_3
+15. drive truck_1 city_loc_12 city_loc_18
+16. drop truck_1 city_loc_18 package_5 capacity_1 capacity_2
+17. drive truck_3 city_loc_15 city_loc_4
+18. pick_up truck_3 city_loc_4 package_8 capacity_2 capacity_3
+19. drive truck_3 city_loc_4 city_loc_8
+20. drop truck_3 city_loc_8 package_8 capacity_1 capacity_2
+21. drive truck_3 city_loc_8 city_loc_9
+22. pick_up truck_3 city_loc_9 package_21 capacity_2 capacity_3
+23. drive truck_3 city_loc_9 city_loc_9
+24. drop truck_3 city_loc_9 package_21 capacity_1 capacity_2
+25. drive truck_2 city_loc_6 city_loc_19
+26. pick_up truck_2 city_loc_19 package_19 capacity_2 capacity_3
+27. drive truck_2 city_loc_19 city_loc_10
+28. drop truck_2 city_loc_10 package_19 capacity_1 capacity_2
+29. drive truck_2 city_loc_10 city_loc_2
+30. pick_up truck_2 city_loc_2 package_20 capacity_2 capacity_3
+31. drive truck_2 city_loc_2 city_loc_15
+32. drop truck_2 city_loc_15 package_20 capacity_1 capacity_2
+33. drive truck_2 city_loc_15 city_loc_13
+34. pick_up truck_2 city_loc_13 package_24 capacity_2 capacity_3
+35. drive truck_2 city_loc_13 city_loc_15
+36. drop truck_2 city_loc_15 package_24 capacity_1 capacity_2
+37. drive truck_2 city_loc_15 city_loc_19
+38. pick_up truck_2 city_loc_19 package_4 capacity_2 capacity_3
+39. drive truck_2 city_loc_19 city_loc_7
+40. drop truck_2 city_loc_7 package_4 capacity_1 capacity_2
+41. drive truck_2 city_loc_7 city_loc_6
+42. drop truck_2 city_loc_23 package_2 capacity_1 capacity_2
+43. noop truck_2 city_loc_23
+```
+**Note:**
+
+* The plan assumes that the `capacity_predecessor` relationships are correctly defined, and the trucks have sufficient capacity to carry the packages.
+* The plan does not account for potential deadlocks or conflicts between trucks.
+* The `noop` actions are included to satisfy the `get_to` tasks when the truck is already at the desired location.
+* The full sequential plan is 43 actions long, but the hierarchical decomposition provides a more concise and readable representation of the plan. <==

@@ -1,0 +1,37 @@
+==>
+1 DO-ON-MOVE3 S2 HA C2
+2 DO-ON-MOVE3 HA S2 SA
+3 DO-ON-SENDTONEWCOL3 SA S2 N2 N1
+4 DO-ON-SENDTOHOME3 S2 SA S N1 C2 N2
+5 DO-ON-MOVE3 D2 DA S2
+6 DO-ON-MOVE3 DA D2 CA
+7 DO-ON-SENDTONEWCOL3 CA D2 N2 N1
+8 DO-ON-SENDTOHOME3 D2 CA D N1 S2 N2
+9 DO-ON-MOVE3 H2 HA D2
+10 DO-ON-MOVE3 HA H2 SA
+11 DO-ON-SENDTONEWCOL3 SA H2 N2 N1
+12 DO-ON-SENDTOHOME3 H2 SA H N1 D2 N2
+13 DO-ON-MOVE3 C2 CA H2
+14 DO-ON-MOVE3 CA C2 SA
+15 DO-ON-SENDTONEWCOL3 SA C2 N2 N1
+16 DO-ON-SENDTOHOME3 C2 SA C N1 H2 N2
+<==
+
+root 0
+0 solve_freecell -> m1_solve_0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16
+1 task0 (ACHIEVE-HOME C2) -> m2_achieve_home_0 1 4
+2 task1 (ACHIEVE-HOME D2) -> m3_achieve_home_0 5 8
+3 task2 (ACHIEVE-HOME H2) -> m4_achieve_home_0 9 12
+4 task3 (ACHIEVE-HOME S2) -> m5_achieve_home_0 13 16
+5 m2_achieve_home_0 -> m6_achieve_home3_0 1 2 3 4
+6 m3_achieve_home_0 -> m7_achieve_home3_0 5 6 7 8
+7 m4_achieve_home_0 -> m8_achieve_home3_0 9 10 11 12
+8 m5_achieve_home_0 -> m9_achieve_home3_0 13 14 15 16
+9 m6_achieve_home3_0 -> m10_do_on_move3_0 1 2 3
+10 m7_achieve_home3_0 -> m11_do_on_move3_0 5 6 7
+11 m8_achieve_home3_0 -> m12_do_on_move3_0 9 10 11
+12 m9_achieve_home3_0 -> m13_do_on_move3_0 13 14 15
+13 m10_do_on_move3_0 -> m14_do_on_sendtohome3_0 1 2 3 4
+14 m11_do_on_move3_0 -> m15_do_on_sendtohome3_0 5 6 7 8
+15 m12_do_on_move3_0 -> m16_do_on_sendtohome3_0 9 10 11 12
+16 m13_do_on_move3_0 -> m17_do_on_sendtohome3_0 13 14 15 16

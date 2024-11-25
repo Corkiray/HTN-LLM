@@ -1,0 +1,75 @@
+==>
+1 navigate rover1 waypoint0 waypoint1
+2 sample_soil rover1 rover1store waypoint1
+3 drop rover1 rover1store
+4 communicate_soil_data2 rover1 general waypoint1 waypoint3
+5 navigate rover1 waypoint1 waypoint0
+6 sample_rock rover1 rover1store waypoint0
+7 drop rover1 rover1store
+8 communicate_rock_data2 rover1 general waypoint0 waypoint3
+9 navigate rover1 waypoint0 waypoint1
+10 sample_rock rover1 rover1store waypoint1
+11 drop rover1 rover1store
+12 communicate_rock_data2 rover1 general waypoint1 waypoint3
+13 navigate rover1 waypoint1 waypoint2
+14 navigate rover1 waypoint2 waypoint0
+15 calibrate rover0 camera2 objective0 waypoint0
+16 navigate rover0 waypoint0 waypoint1
+17 take_image rover0 waypoint1 objective0 camera2 high_res
+18 navigate rover0 waypoint1 waypoint3
+19 communicate_image_data rover0 general objective0 high_res waypoint3 waypoint3
+20 navigate rover0 waypoint3 waypoint2
+21 navigate rover0 waypoint2 waypoint0
+22 calibrate rover0 camera2 objective2 waypoint0
+23 navigate rover0 waypoint0 waypoint1
+24 take_image rover0 waypoint1 objective2 camera2 high_res
+25 navigate rover0 waypoint1 waypoint3
+26 communicate_image_data rover0 general objective2 high_res waypoint3 waypoint3
+27 navigate rover1 waypoint1 waypoint0
+28 navigate rover1 waypoint0 waypoint2
+29 navigate rover1 waypoint2 waypoint0
+30 calibrate rover1 camera1 objective0 waypoint0
+31 navigate rover1 waypoint0 waypoint1
+32 take_image rover1 waypoint1 objective0 camera1 colour
+33 navigate rover1 waypoint1 waypoint3
+34 communicate_image_data rover1 general objective0 colour waypoint3 waypoint3
+35 navigate rover1 waypoint3 waypoint1
+36 navigate rover1 waypoint1 waypoint2
+37 sample_soil rover1 rover1store waypoint2
+38 drop rover1 rover1store
+39 communicate_soil_data2 rover1 general waypoint2 waypoint3
+<==
+
+root 0
+0 htn_problem -> m7_get_soil_data 1 2 3 4
+1 get_soil_data waypoint1 -> m7_get_soil_data 5 6 7 8
+2 get_soil_data waypoint2 -> m10_get_rock_data 13 14 15 16 17 18 19 20 21 22 23 24 25 26
+3 get_rock_data waypoint0 -> m10_get_rock_data 5 6 7 8
+4 get_rock_data waypoint1 -> m10_get_rock_data 9 10 11 12
+5 get_image_data objective0 high_res -> m13_get_image_data 15 16 17 18 19
+6 get_image_data objective2 high_res -> m13_get_image_data 20 21 22 23 24 25 26
+7 get_image_data objective0 colour -> m13_get_image_data 27 28 29 30 31 32 33 34 35 36 37 38 39
+root 1
+1 do_navigate1 rover1 waypoint1 -> m1_do_navigate1 1 5 27
+2 do_navigate1 rover1 waypoint0 -> m1_do_navigate1 5 9
+3 do_navigate1 rover0 waypoint1 -> m1_do_navigate1 16 23
+4 do_navigate1 rover0 waypoint0 -> m1_do_navigate1 20 
+5 do_navigate2 rover1 waypoint0 waypoint1 -> m3_do_navigate2 1
+6 do_navigate2 rover1 waypoint1 waypoint0 -> m3_do_navigate2 5
+7 do_navigate2 rover1 waypoint0 waypoint2 -> m4_do_navigate2 28 29 13 14
+8 do_navigate2 rover0 waypoint0 waypoint1 -> m3_do_navigate2 16
+9 do_navigate2 rover0 waypoint1 waypoint0 -> m3_do_navigate2 20
+10 do_navigate2 rover0 waypoint2 waypoint0 -> m4_do_navigate2 21 22 20 
+11 empty_store rover1store rover1 -> m6_empty_store 3
+12 empty_store rover1store rover1 -> m6_empty_store 11
+13 empty_store rover1store rover1 -> m6_empty_store 37
+14 send_soil_data rover1 waypoint1 -> m9_send_soil_data 4
+15 send_soil_data rover1 waypoint0 -> m9_send_soil_data 8
+16 send_soil_data rover1 waypoint2 -> m9_send_soil_data 39
+17 send_rock_data rover1 waypoint0 -> m12_send_rock_data 8
+18 send_rock_data rover1 waypoint1 -> m12_send_rock_data 12
+19 do_calibrate rover0 camera2 -> m15_do_calibrate 15
+20 do_calibrate rover1 camera1 -> m15_do_calibrate 30
+21 get_image_data objective0 high_res -> m13_get_image_data 15 16 17 18 19 (already in root 0)
+22 get_image_data objective2 high_res -> m13_get_image_data 20 21 22 23 24 25 26 (already in root 0)
+23 get_image_data objective0 colour -> m13_get_image_data 27 28 29 30 31 32 33 34 35 36 37 38 39 (already in root 0)

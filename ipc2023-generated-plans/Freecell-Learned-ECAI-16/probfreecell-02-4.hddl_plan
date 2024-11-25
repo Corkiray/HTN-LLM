@@ -1,0 +1,17 @@
+==>
+1 DO-ON-MOVE3 S2 H2 DA
+2 DO-ON-SENDTOFREE3 DA H2 N4 N5
+3 DO-ON-SENDTONEWCOL3 H2 S2 N5 N6
+4 DO-ON-SENDTOHOME3 H2 S2 S N6 S2
+5 DO-ON-MOVE3 CA DA S2
+6 DO-ON-SENDTOFREE3 DA CA N4 N7
+7 DO-ON-SENDTONEWCOL3 CA DA N7 N8
+8 DO-ON-SENDTOHOME3 CA DA C N8 C2
+<==
+
+root 0
+0 solve_freecell -> m1_solve_freecell_0 1 2 3
+1 task0 (ACHIEVE-HOME C2) -> m2_achieve_home_0 C2 4 5 6 7 8
+2 task1 (ACHIEVE-HOME D2) -> m3_achieve_home_0 D2
+3 task2 (ACHIEVE-HOME H2) -> m4_achieve_home_0 H2
+4 task3 (ACHIEVE-HOME S2) -> m5_achieve_home_0 S2

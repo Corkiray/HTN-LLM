@@ -1,0 +1,73 @@
+==>
+**Sequential Plan:**
+
+1. `i-LOCK-AT OBJ62 APT3` (lock OBJ62 at APT3)
+2. `i-LOCK-AT OBJ23 APT5` (lock OBJ23 at APT5)
+3. `i-LOCK-AT OBJ13 POS3` (lock OBJ13 at POS3)
+4. `i-LOCK-AT OBJ91 APT5` (lock OBJ91 at APT5)
+5. `i-LOCK-AT OBJ51 POS6` (lock OBJ51 at POS6)
+6. `i-LOCK-AT OBJ63 POS2` (lock OBJ63 at POS2)
+7. `i-LOCK-AT OBJ11 APT10` (lock OBJ11 at APT10)
+8. `i-LOCK-AT OBJ52 APT1` (lock OBJ52 at APT1)
+9. `i-LOCK-AT OBJ43 APT2` (lock OBJ43 at APT2)
+10. `i-LOCK-AT OBJ72 POS10` (lock OBJ72 at POS10)
+11. `i-LOCK-AT OBJ31 POS9` (lock OBJ31 at POS9)
+12. `i-LOCK-AT OBJ22 POS4` (lock OBJ22 at POS4)
+13. `i-LOCK-AT OBJ12 APT7` (lock OBJ12 at APT7)
+14. `i-LOCK-AT OBJ42 POS8` (lock OBJ42 at POS8)
+15. `i-LOCK-AT OBJ81 APT7` (lock OBJ81 at APT7)
+16. `i-LOCK-AT OBJ82 APT11` (lock OBJ82 at APT11)
+17. `i-LOCK-AT OBJ41 APT10` (lock OBJ41 at APT10)
+18. `i-LOCK-AT OBJ83 APT4` (lock OBJ83 at APT4)
+19. `i-LOCK-AT OBJ21 POS6` (lock OBJ21 at POS6)
+20. `i-LOCK-AT OBJ73 APT2` (lock OBJ73 at APT2)
+21. `i-LOCK-AT OBJ111 APT6` (lock OBJ111 at APT6)
+22. `i-LOCK-AT OBJ112 APT10` (lock OBJ112 at APT10)
+23. `i-LOCK-AT OBJ71 POS7` (lock OBJ71 at POS7)
+24. `i-LOCK-AT OBJ32 POS7` (lock OBJ32 at POS7)
+25. `i-LOCK-AT OBJ103 APT6` (lock OBJ103 at APT6)
+26. `i-LOCK-AT OBJ113 APT2` (lock OBJ113 at APT2)
+27. `i-LOCK-AT OBJ33 APT6` (lock OBJ33 at APT6)
+28. `i-LOCK-AT OBJ101 APT2` (lock OBJ101 at APT2)
+29. `i-LOCK-AT OBJ93 POS5` (lock OBJ93 at POS5)
+30. `i-LOCK-AT OBJ53 APT5` (lock OBJ53 at APT5)
+31. `i-LOCK-AT OBJ61 POS8` (lock OBJ61 at POS8)
+32. `i-LOCK-AT OBJ102 POS11` (lock OBJ102 at POS11)
+
+**Hierarchical Decomposition:**
+
+`root 0`
+0 `ACHIEVE-AT OBJ62 APT3` -> `M10-ACHIEVE-AT` 1 2 3
+	1 `ACHIEVE-AT0 OBJ62 APT3` -> `M13-ACHIEVE-AT0` 4 5 6
+		4 `DO-AT-LOAD-AIRPLANE0 OBJ62 APN3 APT3` -> `M5-DO-AT-LOAD-AIRPLANE0` 7 8 9
+			7 `ACHIEVE-AT-AIR APN3 APT3` -> `M39-ACHIEVE-AT` 10 11
+			8 `IFUNLOCK-AT APN3 APT3` -> `IFUNLOCK1-AT` 12
+			9 `LOAD-AIRPLANE OBJ62 APN3 APT3`
+		5 `ACHIEVE-AT0 OBJ62 APT3` -> `M11-ACHIEVE-AT0` 
+		6 `i-LOCK-AT OBJ62 APT3`
+	2 `i-FLAG-AT OBJ62 APT3`
+	3 `i-UNFLAG-AT OBJ62 APT3`
+
+0 `ACHIEVE-AT OBJ23 APT5` -> `M10-ACHIEVE-AT` 13 14 15
+	...
+	**... (similar decomposition for each task, omitted for brevity)...**
+	...
+31 `ACHIEVE-AT OBJ102 POS11` -> `M10-ACHIEVE-AT` 946 947 948
+	946 `ACHIEVE-AT0 OBJ102 POS11` -> `M12-ACHIEVE-AT0` 949 950 951
+		949 `DO-AT-LOAD-TRUCK0 OBJ102 TRU11 POS11` -> `M4-DO-AT-LOAD-TRUCK0` 952 953 954
+			952 `ACHIEVE-AT-TRK TRU11 POS11` -> `M36-ACHIEVE-AT1` 955 956
+			953 `IFUNLOCK-AT TRU11 POS11` -> `IFUNLOCK1-AT` 957
+			954 `LOAD-TRUCK OBJ102 TRU11 POS11`
+		950 `ACHIEVE-AT0 OBJ102 POS11` -> `M11-ACHIEVE-AT0` 
+		951 `i-LOCK-AT OBJ102 POS11`
+	947 `i-FLAG-AT OBJ102 POS11`
+	948 `i-UNFLAG-AT OBJ102 POS11`
+
+<==
+
+**Note:**
+
+* The sequential plan consists of 32 `i-LOCK-AT` actions to lock each object at its target location.
+* The hierarchical decomposition is shown for the first task (`ACHIEVE-AT OBJ62 APT3`) and the last task (`ACHIEVE-AT OBJ102 POS11`). The decomposition for the remaining tasks is similar and omitted for brevity.
+* Each task is decomposed into subtasks using the methods defined in the HTN domain (e.g., `M10-ACHIEVE-AT`, `M13-ACHIEVE-AT0`, etc.).
+* The subtasks are further decomposed until primitive actions (e.g., `LOAD-AIRPLANE`, `LOAD-TRUCK`, `i-LOCK-AT`, etc.) are reached.

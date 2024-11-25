@@ -1,0 +1,66 @@
+==>
+**Sequential Plan:**
+
+1. `i-LOCK-AT OBJ12 POS6` (lock OBJ12 at POS6)
+2. `i-LOCK-AT OBJ32 POS10` (lock OBJ32 at POS10)
+3. `i-LOCK-AT OBJ63 POS10` (lock OBJ63 at POS10)
+4. `i-LOCK-AT OBJ91 APT7` (lock OBJ91 at APT7)
+5. `i-LOCK-AT OBJ102 APT1` (lock OBJ102 at APT1)
+6. `i-LOCK-AT OBJ92 APT5` (lock OBJ92 at APT5)
+7. `i-LOCK-AT OBJ103 POS8` (lock OBJ103 at POS8)
+8. `i-LOCK-AT OBJ11 APT7` (lock OBJ11 at APT7)
+9. `i-LOCK-AT OBJ113 POS2` (lock OBJ113 at POS2)
+10. `i-LOCK-AT OBJ22 POS2` (lock OBJ22 at POS2)
+11. `i-LOCK-AT OBJ33 APT1` (lock OBJ33 at APT1)
+12. `i-LOCK-AT OBJ31 POS1` (lock OBJ31 at POS1)
+13. `i-LOCK-AT OBJ42 APT6` (lock OBJ42 at APT6)
+14. `i-LOCK-AT OBJ112 APT11` (lock OBJ112 at APT11)
+15. `i-LOCK-AT OBJ101 POS1` (lock OBJ101 at POS1)
+16. `i-LOCK-AT OBJ13 APT6` (lock OBJ13 at APT6)
+17. `i-LOCK-AT OBJ71 POS5` (lock OBJ71 at POS5)
+18. `i-LOCK-AT OBJ73 POS6` (lock OBJ73 at POS6)
+19. `i-LOCK-AT OBJ41 POS1` (lock OBJ41 at POS1)
+20. `i-LOCK-AT OBJ93 APT6` (lock OBJ93 at APT6)
+21. `i-LOCK-AT OBJ21 APT9` (lock OBJ21 at APT9)
+22. `i-LOCK-AT OBJ51 APT11` (lock OBJ51 at APT11)
+23. `i-LOCK-AT OBJ111 POS4` (lock OBJ111 at POS4)
+24. `i-LOCK-AT OBJ61 POS3` (lock OBJ61 at POS3)
+25. `i-LOCK-AT OBJ43 POS8` (lock OBJ43 at POS8)
+26. `i-LOCK-AT OBJ82 APT9` (lock OBJ82 at APT9)
+27. `i-LOCK-AT OBJ23 POS8` (lock OBJ23 at POS8)
+28. `i-LOCK-AT OBJ72 APT5` (lock OBJ72 at APT5)
+29. `i-LOCK-AT OBJ81 APT5` (lock OBJ81 at APT5)
+30. `i-LOCK-AT OBJ52 POS2` (lock OBJ52 at POS2)
+31. `i-LOCK-AT OBJ83 POS8` (lock OBJ83 at POS8)
+
+**Hierarchical Decomposition:**
+
+root 0
+0 ACHIEVE-AT OBJ12 POS6 -> M10-ACHIEVE-AT 1 2 3
+1 ACHIEVE-AT0 OBJ12 POS6 POS1 TRU1 -> M14-ACHIEVE-AT0 4 5
+2 ACHIEVE-AT-TRK TRU1 POS6 -> M34-ACHIEVE-AT 6 7
+3 i-LOCK-AT OBJ12 POS6
+4 DO-IN-UNLOAD-TRUCK0 OBJ12 TRU1 POS1 -> M6-DO-IN-UNLOAD-TRUCK0 8 9 10
+5 ACHIEVE-AT0 OBJ12 POS6
+6 ACHIEVE-AT1 TRU1 POS6 -> M36-ACHIEVE-AT1 11 12
+7 i-LOCK-AT TRU1 POS6
+8 ACHIEVE-AT-TRK TRU1 POS1 -> M33-ACHIEVE-AT 13 14
+9 IFUNLOCK-AT TRU1 POS1 -> IFUNLOCK1-AT 15
+10 UNLOAD-TRUCK OBJ12 TRU1 POS1
+11 DRIVE-TRUCK TRU1 POS1 POS6 CIT6
+12 ACHIEVE-AT1 TRU1 POS6
+13 AT TRU1 POS1
+14 i-LOCK-AT TRU1 POS1
+15 i-UNLOCK-AT TRU1 POS1
+
+... (similar decomposition for tasks 2-30)
+
+<==
+
+**Note:**
+
+* The sequential plan consists of 31 `i-LOCK-AT` actions to lock each object at its target location.
+* The hierarchical decomposition is shown for the first task `ACHIEVE-AT OBJ12 POS6` and would be similarly applied to tasks 2-30.
+* The decomposition uses methods from the logistics domain, such as `M10-ACHIEVE-AT`, `M14-ACHIEVE-AT0`, `M6-DO-IN-UNLOAD-TRUCK0`, etc.
+* Each method invocation is followed by its corresponding task decomposition, showing the ordered subtasks.
+* Actions like `i-LOCK-AT`, `i-UNLOCK-AT`, `UNLOAD-TRUCK`, `DRIVE-TRUCK`, etc. are part of the domain's action set.

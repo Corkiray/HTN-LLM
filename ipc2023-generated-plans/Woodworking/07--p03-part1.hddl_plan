@@ -1,0 +1,59 @@
+==>
+1 load_highspeed_saw b0 highspeed_saw0
+2 cut_board_large b0 p0 highspeed_saw0 teak rough s6 s7 s8 s9 s10 large green varnished
+3 unload_highspeed_saw b0 highspeed_saw0
+4 do_spray_varnish p0 spray_varnisher0 green rough smooth untreated varnished natural
+5 load_highspeed_saw b2 highspeed_saw0
+6 cut_board_large b2 p1 highspeed_saw0 mahogany rough s7 s8 s9 s10 large black varnished
+7 unload_highspeed_saw b2 highspeed_saw0
+8 do_plane_untreated p1 planer0 rough natural untreated smooth natural black
+9 do_spray_varnish p1 spray_varnisher0 black smooth verysmooth untreated varnished natural
+10 load_highspeed_saw b1 highspeed_saw0
+11 cut_board_medium b1 p2 highspeed_saw0 teak smooth s7 s8 medium mauve varnished
+12 unload_highspeed_saw b1 highspeed_saw0
+13 do_spray_varnish p2 spray_varnisher0 mauve smooth verysmooth untreated varnished natural
+14 load_highspeed_saw b3 highspeed_saw0
+15 cut_board_large b3 p3 highspeed_saw0 mahogany smooth s3 s4 s5 s6 large natural glazed
+16 unload_highspeed_saw b3 highspeed_saw0
+17 do_glaze p3 glazer0 natural smooth glazed natural
+18 load_highspeed_saw b0 highspeed_saw0
+19 cut_board_small b0 p4 highspeed_saw0 teak rough s6 verysmooth small natural varnished
+20 unload_highspeed_saw b0 highspeed_saw0
+21 do_immersion_varnish p4 immersion_varnisher0 natural verysmooth smooth untreated varnished natural
+<==
+
+root 0
+0 process p0 green rough verysmooth -> m14 1 2 3 4
+1 load_highspeed_saw b0 highspeed_saw0
+2 cut_board_large b0 p0 highspeed_saw0 teak rough s6 s7 s8 s9 s10 large green varnished
+3 unload_highspeed_saw b0 highspeed_saw0
+4 do_spray_varnish p0 spray_varnisher0 green rough smooth untreated varnished natural
+
+root 1
+1 process p1 black rough verysmooth -> m16 5 6 7 8 9
+5 load_highspeed_saw b2 highspeed_saw0
+6 cut_board_large b2 p1 highspeed_saw0 mahogany rough s7 s8 s9 s10 large black varnished
+7 unload_highspeed_saw b2 highspeed_saw0
+8 do_plane_untreated p1 planer0 rough natural untreated smooth natural black
+9 do_spray_varnish p1 spray_varnisher0 black smooth verysmooth untreated varnished natural
+
+root 2
+2 process p2 mauve rough smooth -> m11 10 11 12 13
+10 load_highspeed_saw b1 highspeed_saw0
+11 cut_board_medium b1 p2 highspeed_saw0 teak smooth s7 s8 medium mauve varnished
+12 unload_highspeed_saw b1 highspeed_saw0
+13 do_spray_varnish p2 spray_varnisher0 mauve smooth verysmooth untreated varnished natural
+
+root 3
+3 process p3 natural smooth verysmooth -> m14 14 15 16 17
+14 load_highspeed_saw b3 highspeed_saw0
+15 cut_board_large b3 p3 highspeed_saw0 mahogany smooth s3 s4 s5 s6 large natural glazed
+16 unload_highspeed_saw b3 highspeed_saw0
+17 do_glaze p3 glazer0 natural smooth glazed natural
+
+root 4
+4 process p4 natural rough verysmooth -> m14 18 19 20 21
+18 load_highspeed_saw b0 highspeed_saw0
+19 cut_board_small b0 p4 highspeed_saw0 teak rough s6 verysmooth small natural varnished
+20 unload_highspeed_saw b0 highspeed_saw0
+21 do_immersion_varnish p4 immersion_varnisher0 natural verysmooth smooth untreated varnished natural

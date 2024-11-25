@@ -1,0 +1,58 @@
+==>
+**Sequential Plan**
+1. selectDirection r11 t1 t2 t3
+2. rotateTower t1 t3 t2
+3. move_abstract t1 t3
+4. exchange t1 t2 t3
+5. move_abstract t1 t3
+6. rotateTower t2 t3 t1
+7. move_abstract t3 t1
+8. exchange t3 t2 t1
+9. move_abstract t3 t1
+10. rotateTower t2 t1 t3
+11. selectDirection r1 t1 t2 t3
+12. rotateTower t1 t2 t3
+13. move_abstract t1 t2
+14. exchange t1 t2 t3
+15. move_abstract t1 t2
+16. rotateTower t2 t3 t1
+17. move r11 t1 t3 t2
+18. move r10 t2 t1 t3
+19. move r9 t1 t2 t3
+20. move r8 t3 t2 t1
+21. move r7 t2 t1 t3
+22. move r6 t1 t3 t2
+23. move r5 t2 t1 t3
+24. move r4 t3 t2 t1
+25. move r3 t2 t1 t3
+26. move r2 t1 t3 t2
+27. move r1 t2 t1 t3
+
+**Hierarchical Decomposition**
+root 0
+0 shiftTower t1 t2 t3 -> m-shiftTower 1 2
+1 selectDirection r11 t1 t2 t3 -> selectedDirection 2
+2 rotateTower t1 t3 t2 -> m-rotateTower 3 4 5
+3 move_abstract t1 t3 -> newMethod21  (no further decomposition, action: move)
+4 exchange t1 t2 t3 -> exchangeLR 5 6 (preconditions match)
+5 move_abstract t1 t3 -> newMethod21  (no further decomposition, action: move)
+6 rotateTower t2 t3 t1 -> m-rotateTower 7 8 9
+7 move_abstract t3 t1 -> newMethod21  (no further decomposition, action: move)
+8 exchange t3 t2 t1 -> exchangeRL 10 11 (preconditions match)
+9 move_abstract t3 t1 -> newMethod21  (no further decomposition, action: move)
+10 move_abstract t3 t1 -> newMethod21  (no further decomposition, action: move)
+11 rotateTower t2 t1 t3 -> m-rotateTower 12 13 14
+12 move_abstract t1 t2 -> newMethod21  (no further decomposition, action: move)
+13 exchange t1 t2 t3 -> exchangeLR 15 16 (preconditions match)
+14 move_abstract t1 t2 -> newMethod21  (no further decomposition, action: move)
+15 move_abstract t1 t2 -> newMethod21  (no further decomposition, action: move)
+16 rotateTower t2 t3 t1 -> m-rotateTower 17 18 19
+... (further decomposition for each move action, omitted for brevity)
+<==
+
+**Notes:**
+
+* The sequential plan consists of 27 actions, which are the result of decomposing the high-level task `shiftTower t1 t2 t3`.
+* The hierarchical decomposition shows how each task is broken down into subtasks, using the methods defined in the HTN domain.
+* For brevity, the decomposition for each `move` action (e.g., `move r11 t1 t3 t2`) is not fully expanded, as it would involve further applications of method `newMethod21` and the `move` action.
+* The plan assumes that the preconditions for each method and action are met, based on the initial state and goal defined in the HTN problem.

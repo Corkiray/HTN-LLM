@@ -1,0 +1,99 @@
+==>
+**Sequential Plan:**
+
+1. `navigate(rover0, waypoint7, waypoint5)` 
+2. `sample_soil(rover0, rover0store, waypoint9)` 
+3. `drop(rover0, rover0store)` 
+4. `communicate_soil_data2(rover0, general, waypoint9, waypoint3)` 
+5. `navigate(rover0, waypoint5, waypoint15)` 
+6. `navigate(rover0, waypoint15, waypoint20)` 
+7. `sample_rock(rover0, rover0store, waypoint23)` 
+8. `drop(rover0, rover0store)` 
+9. `communicate_rock_data2(rover0, general, waypoint23, waypoint3)` 
+10. `navigate(rover1, waypoint9, waypoint27)` 
+11. `calibrate(rover1, camera1, objective5, waypoint27)` 
+12. `take_image(rover1, waypoint27, objective5, camera1, colour)` 
+13. `communicate_image_data(rover1, general, objective5, colour, waypoint27, waypoint3)` 
+14. `navigate(rover0, waypoint20, waypoint28)` 
+15. `sample_soil(rover0, rover0store, waypoint28)` 
+16. `drop(rover0, rover0store)` 
+17. `communicate_soil_data2(rover0, general, waypoint28, waypoint3)` 
+18. `navigate(rover1, waypoint27, waypoint17)` 
+19. `calibrate(rover1, camera1, objective5, waypoint17)` 
+20. `take_image(rover1, waypoint17, objective5, camera1, low_res)` 
+21. `communicate_image_data(rover1, general, objective5, low_res, waypoint17, waypoint3)` 
+22. `navigate(rover2, waypoint2, waypoint4)` 
+23. `sample_soil(rover2, rover2store, waypoint2)` 
+24. `drop(rover2, rover2store)` 
+25. `communicate_soil_data2(rover2, general, waypoint2, waypoint3)` 
+26. `navigate(rover1, waypoint17, waypoint44)` 
+27. `calibrate(rover1, camera3, objective3, waypoint44)` 
+28. `take_image(rover1, waypoint44, objective3, camera3, high_res)` 
+29. `communicate_image_data(rover1, general, objective3, high_res, waypoint44, waypoint3)` 
+30. `navigate(rover0, waypoint28, waypoint23)` 
+31. `sample_soil(rover0, rover0store, waypoint23)` 
+32. `drop(rover0, rover0store)` 
+33. `communicate_soil_data2(rover0, general, waypoint23, waypoint3)` 
+34. `navigate(rover1, waypoint44, waypoint16)` 
+35. `calibrate(rover1, camera3, objective3, waypoint16)` 
+36. `take_image(rover1, waypoint16, objective3, camera3, colour)` 
+37. `communicate_image_data(rover1, general, objective3, colour, waypoint16, waypoint3)` 
+38. `navigate(rover0, waypoint23, waypoint26)` 
+39. `sample_soil(rover0, rover0store, waypoint26)` 
+40. `drop(rover0, rover0store)` 
+41. `communicate_soil_data2(rover0, general, waypoint26, waypoint3)` 
+42. `navigate(rover4, waypoint28, waypoint35)` 
+43. `calibrate(rover4, camera0, objective1, waypoint35)` 
+44. `take_image(rover4, waypoint35, objective1, camera0, high_res)` 
+45. `communicate_image_data(rover4, general, objective1, high_res, waypoint35, waypoint3)` 
+46. `navigate(rover7, waypoint19, waypoint11)` 
+47. `sample_rock(rover7, rover7store, waypoint11)` 
+48. `drop(rover7, rover7store)` 
+49. `communicate_rock_data2(rover7, general, waypoint11, waypoint3)` 
+50. `navigate(rover5, waypoint18, waypoint36)` 
+51. `sample_rock(rover5, rover5store, waypoint36)` 
+52. `drop(rover5, rover5store)` 
+53. `communicate_rock_data2(rover5, general, waypoint36, waypoint3)` 
+54. `navigate(rover1, waypoint16, waypoint1)` 
+55. `calibrate(rover1, camera4, objective7, waypoint1)` 
+56. `take_image(rover1, waypoint1, objective7, camera4, colour)` 
+57. `communicate_image_data(rover1, general, objective7, colour, waypoint1, waypoint3)`
+
+**Hierarchical Decomposition:**
+
+```
+root 0
+0 solve_problem -> m0_solve_problem 1-57
+
+1-57 are the sequential plan steps above, each corresponding to an action 
+(e.g., navigate, sample_soil, communicate_soil_data2, etc.) 
+with their respective parameters (rover, waypoints, objectives, etc.)
+
+**Method Decompositions (Partial, for brevity):**
+
+* `m0_solve_problem`:
+	+ Parameters: (none)
+	+ Task: solve_problem
+	+ Precondition: (none)
+	+ Ordered Subtasks:
+		- t1 (get_soil_data waypoint9) -> m7_get_soil_data rover0 waypoint9 rover0store
+		- t2 (get_soil_data waypoint14) -> m7_get_soil_data rover0 waypoint14 rover0store
+		-...
+		- t16 (get_image_data objective7 colour) -> m13_get_image_data objective7 colour rover1 camera4 waypoint1
+
+* `m7_get_soil_data` (example):
+	+ Parameters: (?from - waypoint?x - rover?s - store)
+	+ Task: get_soil_data?from
+	+ Precondition: (store_of?s?x) (equipped_for_soil_analysis?x)
+	+ Ordered Subtasks:
+		- t1 (do_navigate1?x?from) -> m1_do_navigate1?x?from (at?x?current_waypoint)
+		- t2 (empty_store?s?x) -> m6_empty_store?s?x (not (empty?s))
+		- t3 (sample_soil?x?s?from)
+		- t4 (send_soil_data?x?from) -> m9_send_soil_data?x?from general?w1?w2 (at_lander general?w2) (visible?w1?w2)
+```
+
+**Note:**
+- This plan assumes the initial state and goal as provided in the HTN problem.
+- The plan's sequential part lists actions in a linear fashion, but in practice, some actions could be executed in parallel if their preconditions are met independently.
+- The hierarchical decomposition is partial for brevity, focusing on illustrating the method structure rather than detailing every single method and subtask.
+- The actual implementation would require a planner that can handle HTN domains and problems, such as SHOP2, Pyshop, or more modern planners like HTN Planner or others, depending on the specific requirements and the programming language of choice.

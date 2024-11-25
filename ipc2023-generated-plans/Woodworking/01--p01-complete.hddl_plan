@@ -1,0 +1,25 @@
+==>
+1 do_plane_untreated p0 planer0 smooth red untreated untreated smooth natural
+2 do_grind_untreated p0 grinder0 smooth red untreated untreated untreated untreated verysmooth natural
+3 do_spray_varnish p0 spray_varnisher0 natural smooth untreated untreated varnished natural
+4 load_highspeed_saw b0 highspeed_saw0
+5 cut_board_small b0 p2 highspeed_saw0 teak smooth small small small
+6 unload_highspeed_saw b0 highspeed_saw0
+7 do_immersion_varnish p2 spray_varnisher0 red smooth untreated untreated varnished natural
+<==
+
+root 0
+0 process p0 natural smooth verysmooth -> method16 1 2 3
+1 process p2 red verysmooth smooth -> method14 4 5 6 7
+  4 cut_and_saw b0 p2 teak smooth -> method6 4 5 6
+    4 load_highspeed_saw b0 highspeed_saw0
+    5 cut_board_small b0 p2 highspeed_saw0 teak smooth small small small
+    6 unload_highspeed_saw b0 highspeed_saw0
+  7 do_colour p2 red spray_varnisher0 untreated -> method1 
+    7 do_spray_varnish p2 spray_varnisher0 red smooth untreated untreated varnished natural
+2 grindNplane p0 smooth red varnished smooth natural untreated -> method13 
+  1 do_plane_untreated p0 planer0 smooth red untreated untreated smooth natural
+  2 do_grind_untreated p0 grinder0 smooth red untreated untreated untreated untreated verysmooth natural
+  3 do_spray_varnish p0 spray_varnisher0 natural smooth untreated untreated varnished natural
+3 grindNplane p2 verysmooth natural varnished smooth natural untreated -> method15 
+  (already executed in task 1, no additional actions needed)

@@ -1,0 +1,53 @@
+==>
+**Sequential Plan:**
+1. `placeblock l-1-0-0 stone`
+2. `placeblock l-1-0-1 stone`
+3. `placeblock l-1-0-2 stone`
+4. `placeblock l-1-0-3 stone`
+5. `placeblock l-1-2-0 stone`
+6. `placeblock l-1-2-1 stone`
+7. `placeblock l-1-2-2 stone`
+8. `placeblock l-1-2-3 stone`
+9. `removeblock l-1-1-0 earth`
+10. `removeblock l-1-1-1 earth`
+11. `placeblock l-4-0-0 stone`
+12. `placeblock l-4-0-1 stone`
+13. `placeblock l-4-0-2 stone`
+14. `placeblock l-4-0-3 stone`
+
+**Hierarchical Decomposition:**
+```
+root 0
+0 buildhouse l-1-0-0 l-1-0-3 l-1-2-3 l-1-2-0 l-1-1-0 l-4-0-0 n4 n3 n3 stone -> m1_build-house-1 1-14
+
+1 buildwall l-1-0-0 n4 n3 e stone -> m2_build-wall-2 1-4
+  1.1 buildrow l-1-0-0 n4 e stone -> m3_build-row-2 1, 2, 3, 4
+    1.1.1 placeblockabstract l-1-0-0 stone -> m4_place-block-abstract-1 1
+    1.1.2 buildrow l-1-0-1 n3 e stone -> m3_build-row-2 2, 3, 4
+      1.1.2.1 placeblockabstract l-1-0-1 stone -> m4_place-block-abstract-1 2
+      1.1.2.2 buildrow l-1-0-2 n2 e stone -> m3_build-row-2 3, 4
+        1.1.2.2.1 placeblockabstract l-1-0-2 stone -> m4_place-block-abstract-1 3
+        1.1.2.2.2 buildrow l-1-0-3 n1 e stone -> m3_build-row-1 4
+          1.1.2.2.2.1 placeblockabstract l-1-0-3 stone -> m4_place-block-abstract-1 4
+
+2 buildwall l-1-2-0 n3 n3 w stone -> m2_build-wall-2 5-8
+ ... (similar decomposition as above)
+
+3 buildwall l-1-0-3 n4 n3 n stone -> m2_build-wall-2  (no actions, already handled by previous walls)
+
+4 buildwall l-1-2-3 n3 n3 s stone -> m2_build-wall-2  (no actions, already handled by previous walls)
+
+5 builddoor l-1-1-0 -> m5_build-door-1 9, 10
+  5.1 removeblockabstract l-1-1-0 -> m6_remove-block-abstract-2 9
+  5.2 removeblockabstract l-1-1-1 -> m6_remove-block-abstract-2 10
+
+6 buildroof l-4-0-0 n4 n3 e n stone -> m7_build-roof-2 11-14
+ ... (similar decomposition as buildwall, with buildrow and placeblockabstract)
+```
+**Note:**
+
+* The sequential plan only shows the final actions to achieve the goal.
+* The hierarchical decomposition shows how each task is broken down into subtasks, using the methods defined in the domain.
+* Some tasks (e.g., `buildwall` for the north and south sides) do not generate additional actions, as they are already handled by the previous walls.
+* The `builddoor` task removes two blocks (assuming the door requires two empty spaces).
+* The `buildroof` task is similar to `buildwall`, with the same decomposition pattern.

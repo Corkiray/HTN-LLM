@@ -1,0 +1,108 @@
+==>
+1 DRIVE-TRUCK TRU2 POS2 POS1 CIT2
+2 DO-AT-LOAD-TRUCK0 OBJ22 TRU2 POS1
+3 DO-IN-UNLOAD-TRUCK0 OBJ22 TRU2 POS1
+4 DRIVE-TRUCK TRU2 POS1 POS2 CIT2
+5 DO-AT-LOAD-TRUCK0 OBJ32 TRU1 POS1
+6 DO-IN-UNLOAD-TRUCK0 OBJ32 TRU1 POS1
+7 i-LOCK-AT OBJ32 POS1
+8 i-LOCK-AT OBJ22 POS1
+9 DRIVE-TRUCK TRU3 POS3 POS1 CIT3
+10 DO-AT-LOAD-TRUCK0 OBJ23 TRU3 POS1
+11 DO-IN-UNLOAD-TRUCK0 OBJ23 TRU3 POS1
+12 i-LOCK-AT OBJ23 POS1
+13 FLY-AIRPLANE APN1 APT2 APT3
+14 DO-AT-LOAD-AIRPLANE0 OBJ31 APN1 APT3
+15 DO-IN-UNLOAD-AIRPLANE0 OBJ31 APN1 APT3
+16 i-LOCK-AT OBJ31 APT3
+17 FLY-AIRPLANE APN1 APT3 APT1
+18 DO-AT-LOAD-AIRPLANE0 OBJ21 APN1 APT1
+19 DO-IN-UNLOAD-AIRPLANE0 OBJ21 APN1 APT1
+20 i-LOCK-AT OBJ21 APT1
+21 DRIVE-TRUCK TRU1 POS1 POS3 CIT1
+22 DO-AT-LOAD-TRUCK0 OBJ11 TRU1 POS3
+23 DO-IN-UNLOAD-TRUCK0 OBJ11 TRU1 POS3
+24 i-LOCK-AT OBJ11 POS3
+25 FLY-AIRPLANE APN1 APT1 APT3
+26 DO-AT-LOAD-AIRPLANE0 OBJ13 APN1 APT3
+27 DO-IN-UNLOAD-AIRPLANE0 OBJ13 APN1 APT3
+28 i-LOCK-AT OBJ13 APT3
+29 DRIVE-TRUCK TRU3 POS3 POS1 CIT3
+30 DO-AT-LOAD-TRUCK0 OBJ33 TRU3 POS1
+31 DO-IN-UNLOAD-TRUCK0 OBJ33 TRU3 POS1
+32 i-LOCK-AT OBJ33 POS3
+<==
+
+root 0
+0 achieve_at OBJ23 POS3 -> m10_achieve_at 1 2 3 4 5 6 7 8 9 10 11 12
+1 achieve_at OBJ32 POS1 -> m10_achieve_at 13 14 15 16 17 18 19 20
+2 achieve_at OBJ22 POS1 -> m9_achieve_at 21 22 23 24
+3 achieve_at OBJ31 APT3 -> m10_achieve_at 25 26 27 28
+4 achieve_at OBJ11 POS1 -> m9_achieve_at 29 30 31 32
+5 achieve_at OBJ33 POS3 -> m9_achieve_at 
+6 achieve_at OBJ13 APT3 -> m9_achieve_at 
+7 achieve_at OBJ12 POS1 -> m9_achieve_at 
+8 achieve_at OBJ21 APT1 -> m9_achieve_at 
+9 achieve_at_trk TRU2 POS1 -> m34_achieve_at_trk 33
+10 achieve_at0 OBJ23 POS3 -> m14_achieve_at0 34 35 36 37
+11 achieve_at0 OBJ32 POS1 -> m11_achieve_at0 
+12 achieve_at0 OBJ22 POS1 -> m11_achieve_at0 
+13 achieve_at0 OBJ31 APT3 -> m15_achieve_at0 38 39 40
+14 achieve_at0 OBJ11 POS1 -> m11_achieve_at0 
+15 achieve_at0 OBJ33 POS3 -> m15_achieve_at0 41 42 43
+16 achieve_at0 OBJ13 APT3 -> m15_achieve_at0 
+17 achieve_at0 OBJ12 POS1 -> m11_achieve_at0 
+18 achieve_at0 OBJ21 APT1 -> m15_achieve_at0 
+19 achieve_at_air APN1 APT3 -> m39_achieve_at_air 44
+20 achieve_at_air APN1 APT1 -> m39_achieve_at_air 45
+21 achieve_at_trk TRU1 POS1 -> m33_achieve_at_trk 46
+22 achieve_at_trk TRU3 POS3 -> m34_achieve_at_trk 47
+23 achieve_at_trk TRU1 POS3 -> m36_achieve_at_trk 48 49 50
+24 ifunlock_at TRU1 POS3 -> m1_ifunlock_at 51
+25 ifunlock_at TRU3 POS3 -> m1_ifunlock_at 52
+26 ifunlock_at APN1 APT3 -> m1_ifunlock_at 53
+27 ifunlock_at APN1 APT1 -> m1_ifunlock_at 54
+28 do_at_load_truck0 OBJ11 TRU1 POS3 -> m4_do_at_load_truck0 55 56 57 58
+29 do_at_load_truck0 OBJ33 TRU3 POS1 -> m4_do_at_load_truck0 59 60 61 62
+30 do_at_load_airplane0 OBJ31 APN1 APT3 -> m5_do_at_load_airplane0 63 64 65 66
+31 do_at_load_airplane0 OBJ21 APN1 APT1 -> m5_do_at_load_airplane0 67 68 69 70
+32 do_in_unload_truck0 OBJ11 TRU1 POS3 -> m6_do_in_unload_truck0 71 72 73 74
+33 do_in_unload_truck0 OBJ22 TRU2 POS1 -> m6_do_in_unload_truck0 75 76 77 78
+34 do_in_unload_truck0 OBJ23 TRU3 POS1 -> m6_do_in_unload_truck0 79 80 81 82
+35 do_in_unload_truck0 OBJ32 TRU1 POS1 -> m6_do_in_unload_truck0 83 84 85 86
+36 do_in_unload_truck0 OBJ33 TRU3 POS3 -> m6_do_in_unload_truck0 87 88 89 90
+37 do_in_unload_airplane0 OBJ31 APN1 APT3 -> m7_do_in_unload_airplane0 91 92 93 94
+38 do_in_unload_airplane0 OBJ13 APN1 APT3 -> m7_do_in_unload_airplane0 95 96 97 98
+39 do_in_unload_airplane0 OBJ21 APN1 APT1 -> m7_do_in_unload_airplane0 99 100 101 102
+40 i_lock_at OBJ23 POS1 -> m_i_lock_at 
+41 i_lock_at OBJ32 POS1 -> m_i_lock_at 
+42 i_lock_at OBJ22 POS1 -> m_i_lock_at 
+43 i_lock_at OBJ31 APT3 -> m_i_lock_at 
+44 i_lock_at APN1 APT3 -> m_i_lock_at 
+45 i_lock_at APN1 APT1 -> m_i_lock_at 
+46 i_lock_at TRU1 POS1 -> m_i_lock_at 
+47 i_lock_at TRU3 POS3 -> m_i_lock_at 
+48 drive_truck TRU1 POS1 POS3 CIT1 -> m_drive_truck 
+49 drive_truck TRU2 POS2 POS1 CIT2 -> m_drive_truck 
+50 drive_truck TRU3 POS3 POS1 CIT3 -> m_drive_truck 
+51 i_unlock_at TRU1 POS3 -> m1_i_unlock_at 
+52 i_unlock_at TRU3 POS3 -> m1_i_unlock_at 
+53 i_unlock_at APN1 APT3 -> m1_i_unlock_at 
+54 i_unlock_at APN1 APT1 -> m1_i_unlock_at 
+55 achieve_at_trk TRU1 POS3 -> m33_achieve_at_trk 105
+56 ifunlock_at TRU1 POS3 -> m1_ifunlock_at 106
+57 load_truck OBJ11 TRU1 POS3 -> m_load_truck 
+58 i_lock_at OBJ11 POS3 -> m_i_lock_at 
+59 achieve_at_trk TRU3 POS1 -> m34_achieve_at_trk 107
+60 ifunlock_at TRU3 POS1 -> m1_ifunlock_at 108
+61 load_truck OBJ33 TRU3 POS1 -> m_load_truck 
+62 i_lock_at OBJ33 POS3 -> m_i_lock_at 
+63 achieve_at_air APN1 APT3 -> m39_achieve_at_air 109
+64 ifunlock_at APN1 APT3 -> m1_ifunlock_at 110
+65 load_airplane OBJ31 APN1 APT3 -> m_load_airplane 
+66 i_lock_at OBJ31 APT3 -> m_i_lock_at 
+67 achieve_at_air APN1 APT1 -> m39_achieve_at_air 111
+68 ifunlock_at APN1 APT1 -> m1_ifunlock_at 112
+69 load_airplane OBJ21 APN1 APT1 -> m_load_airplane 
+70 i_lock_at OBJ21 APT1 -> m_i_lock_at 
+71

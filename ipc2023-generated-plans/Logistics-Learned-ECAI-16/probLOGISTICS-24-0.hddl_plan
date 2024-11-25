@@ -1,0 +1,65 @@
+==>
+**Sequential Plan**
+```
+1. DRIVE-TRUCK TRU6 POS6 POS2 CIT6
+2. LOAD-TRUCK OBJ11 TRU6 POS2
+3. DRIVE-TRUCK TRU6 POS2 POS4 CIT2
+4. UNLOAD-TRUCK OBJ11 TRU6 POS4
+5....
+24. FLY-AIRPLANE APN2 APT5 APT1
+25. LOAD-AIRPLANE OBJ43 APN2 APT1
+26. FLY-AIRPLANE APN2 APT1 APT2
+27. UNLOAD-AIRPLANE OBJ43 APN2 APT2
+28....
+54. DRIVE-TRUCK TRU2 POS2 POS4 CIT2
+55. LOAD-TRUCK OBJ82 TRU2 POS4
+56. DRIVE-TRUCK TRU2 POS4 POS6 CIT4
+57. UNLOAD-TRUCK OBJ82 TRU2 POS6
+58....
+83. UNLOAD-AIRPLANE OBJ83 APN2 APT5
+84. DRIVE-TRUCK TRU5 POS5 POS6 CIT5
+85. LOAD-TRUCK OBJ53 TRU5 POS6
+86. UNLOAD-TRUCK OBJ53 TRU5 POS6
+```
+**Hierarchical Decomposition**
+```
+root 0
+0 achieve_at OBJ11 POS6 -> m10_achieve_at 1 2 3 4
+1 achieve_at_trk TRU6 POS2 -> m34_achieve_at 5 6
+2 ifunlock_at TRU6 POS2 -> m1_ifunlock_at 7
+3 load_truck OBJ11 TRU6 POS2 -> load_truck
+4 unload_truck OBJ11 TRU6 POS4 -> unload_truck
+...
+9 achieve_at OBJ51 POS4 -> m10_achieve_at 10 11 12 13
+...
+23 achieve_at OBJ83 APT5 -> m39_achieve_at 83
+  -> m41_achieve_at2 24 25 26 27
+  -> m29_achieve_in 28 29
+...
+```
+**Method Decomposition ( partial, for brevity)**
+```
+m10_achieve_at (OBJ11 POS6)
+  -> m12_achieve_at0 (OBJ11 POS6 POS1 TRU6) 
+    -> m4_do_at_load_truck0 (OBJ11 TRU6 POS1)
+      -> achieve_at_trk (TRU6 POS1)
+      -> ifunlock_at (TRU6 POS1)
+      -> load_truck (OBJ11 TRU6 POS1)
+    -> achieve_at0 (OBJ11 POS6)
+
+m34_achieve_at (TRU6 POS2)
+  -> m36_achieve_at1 (TRU6 POS2 POS6 CIT6) 
+    -> drive_truck (TRU6 POS6 POS2 CIT6)
+    -> achieve_at1 (TRU6 POS2)
+
+m1_ifunlock_at (TRU6 POS2)
+  -> i_unlock_at (TRU6 POS2)
+
+...
+```
+**Note:**
+
+* The sequential plan consists of 86 actions, but for brevity, only a few are shown.
+* The hierarchical decomposition shows the top-level tasks and their corresponding method decompositions.
+* The method decomposition is partial, showing only a few examples of how tasks are further decomposed into subtasks and actions.
+* The plan assumes that the initial state and constraints are satisfied, and the goal is to achieve the specified `achieve_at` tasks in the given order.
