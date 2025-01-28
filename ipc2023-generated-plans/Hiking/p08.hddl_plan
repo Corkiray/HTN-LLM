@@ -1,47 +1,195 @@
 ==>
-**Sequential Plan**
-1. prepare_trip place0
-2. trip_to1 couple0 place2
-3. prepare_trip place0
-4. trip_to1 couple1 place2
-5. prepare_trip place0
-6. trip_to1 couple2 place2
-7. prepare_trip place0
-8. trip_to1 couple3 place2
 
-**Hierarchical Decomposition**
+(:task prepare_trip place0)
+
+1	prepare_trip place0 -> m6_prepare_trip 
+2	bring_tent place0
+3	bring_cars place0
+
+2	bring_tent place0 -> m10_bring_tent 
+4	put_down guy0 place0 tent0
+5	put_down girl1 place0 tent1
+6	put_down guy2 place0 tent2
+
+2	bring_tent place0 -> m9_bring_tent 
+7	nop
+
+3	bring_cars place0 -> m11_bring_cars 
+8	nop
+
+(:task trip_to1 couple3 place2)
+
+9	trip_to1 couple3 place2 -> m0_trip_to1 
+10	trip_to2 couple3 place0 place2 guy3 girl3
+
+(:task trip_to2 couple3 place0 place2)
+
+10	trip_to2 couple3 place0 place2 -> m3_trip_to2 
+11	drive_tent guy3 place0 place1 car0 tent3
+12	drive guy3 place1 place2 car0
+13	put_up guy3 place2 tent3
+14	drive_passenger girl3 place0 place2 car1 guy3
+15	walk_everyone tent3 place2 place0
+16	put_down girl3 place2 tent3
+17	drive_passenger guy3 place2 place0 car0 girl3
+18	drive guy3 place0 place1 car0
+19	drive guy3 place1 place2 car0
+
+(:task walk_everyone tent3 place2 place0)
+
+15	walk_everyone tent3 place2 place0 -> m4_walk_everyone 
+20	nop
+
+(:task trip_to1 couple2 place2)
+
+21	trip_to1 couple2 place2 -> m0_trip_to1 
+22	trip_to2 couple2 place0 place2 guy2 girl2
+
+(:task trip_to2 couple2 place0 place2)
+
+22	trip_to2 couple2 place0 place2 -> m3_trip_to2 
+23	drive_tent guy2 place0 place1 car2 tent2
+24	drive girl2 place0 place1 car3 
+25	put_up guy2 place1 tent2
+26	drive_passenger girl2 place1 place0 car3 guy2
+27	walk_everyone tent2 place1 place0
+28	put_down guy2 place1 tent2
+29	drive_passenger guy2 place1 place2 car2 girl2
+30	drive girl2 place0 place1 car3 
+31	drive girl2 place1 place2 car3 
+32	drive guy2 place2 place1 car2
+33	drive guy2 place1 place0 car2
+34	drive guy2 place0 place1 car2
+35	drive guy2 place1 place2 car2
+
+(:task walk_everyone tent2 place1 place0)
+
+27	walk_everyone tent2 place1 place0 -> m5_walk_everyone 
+36	walk_together tent2 place1 guy2 place0 girl2 couple2
+37	walk_everyone tent2 place1 place0
+
+(:task walk_everyone tent2 place1 place0)
+
+37	walk_everyone tent2 place1 place0 -> m5_walk_everyone 
+38	walk_together tent2 place1 guy2 place0 girl2 couple2
+39	walk_everyone tent2 place1 place0
+
+(:task trip_to1 couple1 place2)
+
+40	trip_to1 couple1 place2 -> m0_trip_to1 
+41	trip_to2 couple1 place0 place2 guy1 girl1
+
+(:task trip_to2 couple1 place0 place2)
+
+41	trip_to2 couple1 place0 place2 -> m3_trip_to2 
+42	drive_tent girl1 place0 place1 car1 tent1
+43	drive guy1 place0 place1 car4 
+44	put_up girl1 place1 tent1
+45	drive_passenger guy1 place1 place0 car4 girl1
+46	walk_everyone tent1 place1 place0
+47	put_down girl1 place1 tent1
+48	drive_passenger girl1 place1 place2 car1 guy1
+49	drive guy1 place0 place1 car4 
+50	drive guy1 place1 place2 car4 
+51	drive girl1 place2 place1 car1
+52	drive girl1 place1 place0 car1
+53	drive girl1 place0 place1 car1
+54	drive girl1 place1 place2 car1
+
+(:task walk_everyone tent1 place1 place0)
+
+46	walk_everyone tent1 place1 place0 -> m4_walk_everyone 
+55	nop
+
+(:task trip_to1 couple0 place2)
+
+56	trip_to1 couple0 place2 -> m0_trip_to1 
+57	trip_to2 couple0 place0 place2 guy0 girl0
+
+(:task trip_to2 couple0 place0 place2)
+
+57	trip_to2 couple0 place0 place2 -> m3_trip_to2 
+58	drive_tent guy0 place0 place1 car3 tent0
+59	drive guy0 place1 place2 car3
+60	put_up guy0 place2 tent0
+61	drive_passenger girl0 place0 place2 car2 guy0
+62	walk_everyone tent0 place2 place0
+63	put_down girl0 place2 tent0
+64	drive_passenger guy0 place2 place0 car3 girl0
+65	drive guy0 place0 place1 car3
+66	drive guy0 place1 place2 car3
+67	drive girl0 place2 place1 car2
+68	drive girl0 place1 place0 car2
+69	drive girl0 place0 place1 car2
+70	drive girl0 place1 place2 car2
+
+(:task walk_everyone tent0 place2 place0)
+
+62	walk_everyone tent0 place2 place0 -> m5_walk_everyone 
+71	walk_together tent0 place2 guy0 place0 girl0 couple0
+72	walk_everyone tent0 place2 place0
+
+(:task walk_everyone tent0 place2 place0)
+
+72	walk_everyone tent0 place2 place0 -> m4_walk_everyone 
+73	nop
+
 root 0
-0 everyone_go_hiking place2 -> m14_everyone_go_hiking 1 2
-  1 prepare_trip place0 -> m6_prepare_trip 3 4
-    3 bring_tent place0 -> m9_bring_tent (tent0) / m10_bring_tent (tent1, tent2) / m7_bring_tent or m8_bring_tent (tent3, other cars and persons)
-      *Example decomposition for tent0 (similar for others)*
-      3.1 nop (tent0 already down and at place0)
-    4 bring_cars place0 -> m11_bring_cars (cars already at place0)
-      4.1 nop
-  2 trip_to1 couple0 place2 -> m0_trip_to1 5 (similar for couple1, couple2, couple3)
-    5 trip_to2 couple0 place0 place2 -> m2_trip_to2 6 7
-      6 trip_to2 couple0 place0 place1 -> m2_trip_to2 8 9
-        8 trip_to2 couple0 place0 place0 -> m1_trip_to2
-          8.1 nop
-        9 trip_to2 couple0 place1 place2 -> m3_trip_to2 10 11 12 13 14 15 16 17 18
-          *Example decomposition (simplified, as the actual plan depends on the specific objects assigned)*
-          10 drive_tent guy0 place0 place1 car0 tent0
-          11 drive guy1 place0 place1 car1
-          12 put_up guy0 place1 tent0
-          13 drive_passenger guy1 place1 place0 car1 guy0
-          14 walk_everyone tent0 place1 place0 -> m5_walk_everyone 15 16
-            15 walk_together tent0 place1 guy0 place0 girl0 couple0
-            16 walk_everyone tent0 place1 place0 -> m4_walk_everyone
-              16.1 nop
-          17 put_down guy1 place1 tent0
-          18 drive_passenger guy0 place1 place0 car0 guy1
-      7 trip_to2 couple0 place1 place2 -> m3_trip_to2 (similar to step 9)
+==> 
+
+This plan can be translated to:
+
+1 prepare trip at place0
+2 bring tent at place0
+   2.1 putdown guy0 at place0 with tent0
+   2.2 putdown girl1 at place0 with tent1
+   2.3 putdown guy2 at place0 with tent2
+   2.4 putdown tent0 at place0
+3 bring cars at place0
+4 trip_to1 couple3 with plac2
+   4.1 drive-tent guy3 place0 place1 in car0
+   4.2 drive guy3 place1 place2 in car0
+   4.3 putup guy3 place2 with tent3
+   4.4 drive-passenger girl3 place0 place2 in car1 with passenger guy3
+   4.5 walk-everyone, tent0 and couple3 from plac2
+   4.6 putdown couple2 at place2 with tent3
+   4.7 drive-passenger guy3 place2 place0 in car0 with couple3
+   4.8 drive guy3 from place0 to place1 in car0
+   4.9 drive guy3 from place1 to place2 with car0
+4 trip_to1 couple2 with plac2
+   4.1 drive-tent guy2 place0 place1 in car2
+   4.2 drive girl2 from place0 to place1 in car3
+   4.3 putup guy2 place1 with tent2
+   4.4 put_down girl2 at place1 with guy2 in car3 
+   4.5 walk-everone with plac1 with tent2 and couple1
+   4.6 putdown guy2 at place1 with tent2
+   4.7 drive-passenger guy2 from place1 to place2 in car2 with passenger girl2
+   4.8 drive guy2 from place2 to place1 in car2
+   4.9 drive guy2 from place1 to place0 in car2
+   5.5 drive guy2 from place0 to place1 in car2
+   5.6 drive guy2 from place1 to place2 in car3
+5 trip_to1 couple1 with plac2
+  5.1 drive-tent girl1 place0 place1 in car1
+  5.2 drive guy1 from place0 to place1 with car4
+  5.3 putup guy1 at place1 with tent2
+  5.4 put_down guy1 at place1 with girl1 in car4 
+  5.5 walk-everyone, tent1,  from plac1 with couple1
+  5.6 putdown girl1 at place1 with tent2
+  5.7 drive-passenger girl1 from place1 to place2 with car1 and passenger guy1
+  5.8 drive guy1 from plac0 to placl in car4
+  5.9 drivet guy1 from place1 to place2 in car4
+  5.10 drive girl1 from place2 to place1 in car1
+  5.11 drive girl1 from place1 to place0 in car1
+  5.12 drive girl1 from place0 to place1 in car1
+6 trip_to1 couple0 with plac2
+  6.1 drive-tent guy0 at place0 to place1 in car3
+  6.2 drive guy0 at place1 to place2 in car3
+  6.3 putup guy0 with tent0 at place2
+  6.4 drive-passenger girl0 place0 plac2 with guy0 in car2
+  6.5 walk-everone with tent0 and couple0 place2
+  6.6 putdown girl0 at place2 with tent0
+  6.7 drive-passenger guy0 from place2 to place0 with car3 and passenger girl0
+  6.8 drive guy0 from place0 to place1 in car3
+  6.9 drive guy0 from place1 to place2 with car3
 
 <==
-
-**Notes:**
-
-* The plan assumes that the `next` predicate defines a linear ordering of places (place0 -> place1 -> place2). If this is not the case, the plan may need to be adjusted.
-* The decomposition for `bring_tent` and `bring_cars` is not fully expanded, as it depends on the specific objects (cars, persons, tents) and their initial states. The provided examples illustrate the possible decompositions.
-* The `walk_everyone` task is decomposed using `m5_walk_everyone` and `m4_walk_everyone`, assuming that the walking process involves the couple walking together and then the process being completed (nop).
-* The actual plan execution will depend on the specific object assignments and the initial state of the world. This plan provides a general outline of the hierarchical decomposition.

@@ -1,82 +1,74 @@
 ==>
-**Sequential Plan:**
-
-1. `i-LOCK-AT` `OBJ21` `APT3`
-2. `FLY-AIRPLANE` `APN2` `APT5` `APT3`
-3. `UNLOAD-AIRPLANE` `OBJ21` `APN2` `APT3`
-4. `i-LOCK-AT` `OBJ62` `APT6`
-5. `LOAD-TRUCK` `OBJ62` `TRU6` `POS6`
-6. `DRIVE-TRUCK` `TRU6` `POS6` `APT6` `CIT6`
-7. `UNLOAD-TRUCK` `OBJ62` `TRU6` `APT6`
-8. `i-LOCK-AT` `OBJ43` `APT4`
-9. `LOAD-AIRPLANE` `OBJ43` `APN1` `APT6`
-10. `FLY-AIRPLANE` `APN1` `APT6` `APT4`
-11. `UNLOAD-AIRPLANE` `OBJ43` `APN1` `APT4`
-12. `i-LOCK-AT` `OBJ42` `POS2`
-13. `LOAD-TRUCK` `OBJ42` `TRU2` `POS2`
-14. `i-LOCK-AT` `OBJ73` `APT7`
-15. `LOAD-TRUCK` `OBJ73` `TRU7` `POS7`
-16. `DRIVE-TRUCK` `TRU7` `POS7` `APT7` `CIT7`
-17. `UNLOAD-TRUCK` `OBJ73` `TRU7` `APT7`
-18. `i-LOCK-AT` `OBJ63` `APT2`
-19. `LOAD-AIRPLANE` `OBJ63` `APN2` `APT5`
-20. `FLY-AIRPLANE` `APN2` `APT5` `APT2`
-21. `UNLOAD-AIRPLANE` `OBJ63` `APN2` `APT2`
-22. `i-LOCK-AT` `OBJ13` `POS7`
-23. `LOAD-TRUCK` `OBJ13` `TRU7` `POS7`
-24. `i-LOCK-AT` `OBJ11` `POS4`
-25. `LOAD-TRUCK` `OBJ11` `TRU4` `POS4`
-26. `i-LOCK-AT` `OBJ61` `APT3`
-27. `LOAD-AIRPLANE` `OBJ61` `APN2` `APT5`
-28. `FLY-AIRPLANE` `APN2` `APT5` `APT3`
-29. `UNLOAD-AIRPLANE` `OBJ61` `APN2` `APT3`
-30. `i-LOCK-AT` `OBJ52` `POS3`
-31. `LOAD-TRUCK` `OBJ52` `TRU3` `POS3`
-32. `i-LOCK-AT` `OBJ41` `POS3`
-33. `LOAD-TRUCK` `OBJ41` `TRU3` `POS3`
-34. `i-LOCK-AT` `OBJ12` `POS5`
-35. `LOAD-TRUCK` `OBJ12` `TRU5` `POS5`
-36. `i-LOCK-AT` `OBJ51` `APT7`
-37. `LOAD-TRUCK` `OBJ51` `TRU7` `POS7`
-38. `DRIVE-TRUCK` `TRU7` `POS7` `APT7` `CIT7`
-39. `UNLOAD-TRUCK` `OBJ51` `TRU7` `APT7`
-40. `i-LOCK-AT` `OBJ72` `POS2`
-41. `LOAD-TRUCK` `OBJ72` `TRU2` `POS2`
-42. `i-LOCK-AT` `OBJ31` `APT4`
-43. `LOAD-AIRPLANE` `OBJ31` `APN1` `APT6`
-44. `FLY-AIRPLANE` `APN1` `APT6` `APT4`
-45. `UNLOAD-AIRPLANE` `OBJ31` `APN1` `APT4`
-46. `i-LOCK-AT` `OBJ32` `POS3`
-47. `LOAD-TRUCK` `OBJ32` `TRU3` `POS3`
-48. `i-LOCK-AT` `OBJ33` `APT4`
-49. `LOAD-AIRPLANE` `OBJ33` `APN1` `APT6`
-50. `FLY-AIRPLANE` `APN1` `APT6` `APT4`
-51. `UNLOAD-AIRPLANE` `OBJ33` `APN1` `APT4`
-52. `i-LOCK-AT` `OBJ22` `POS1`
-53. `LOAD-TRUCK` `OBJ22` `TRU1` `POS1`
-54. `i-LOCK-AT` `OBJ23` `POS2`
-55. `LOAD-TRUCK` `OBJ23` `TRU2` `POS2`
-
-**<==**
-
-**Hierarchical Decomposition:**
-
-**root** 0
-0 **ACHIEVE-AT** `OBJ21` `APT3` -> **M10-ACHIEVE-AT** 1 2
-1 **ACHIEVE-AT0** `OBJ21` `APT3` -> **M13-ACHIEVE-AT0** 3 4 5
-2 **i-LOCK-AT** `OBJ21` `APT3`
-3 **DO-AT-LOAD-AIRPLANE0** `OBJ21` `APN2` `APT5`
-4 **ACHIEVE-AT0** `OBJ21` `APT3`
-5 **i-LOCK-AT** `OBJ21` `APT3`
-
-**root** 1
-1 **ACHIEVE-AT** `OBJ62` `APT6` -> **M10-ACHIEVE-AT** 6 7
-6 **ACHIEVE-AT0** `OBJ62` `APT6` -> **M12-ACHIEVE-AT0** 8 9 10
-7 **i-LOCK-AT** `OBJ62` `APT6`
-8 **DO-AT-LOAD-TRUCK0** `OBJ62` `TRU6` `POS6`
-9 **ACHIEVE-AT0** `OBJ62` `APT6`
-10 **i-LOCK-AT** `OBJ62` `APT6`
-
-... (due to the extensive nature of the output, the rest of the hierarchical decomposition for tasks 2 through 18 is omitted for brevity. Each task's decomposition would follow a similar pattern as shown above, utilizing the appropriate methods from the domain definition based on the task's parameters and the current state of the world.)
-
-**Note:** The plan provided assumes that the initial state and the goal tasks as defined in the problem statement are correctly interpreted. The actions and their order are determined based on the methods and preconditions defined in the logistics domain. However, without executing this plan in a simulator or a real-world environment, its feasibility and correctness cannot be guaranteed due to potential oversights in the domain modeling or the problem definition.
+1 DO-IN-UNLOAD-TRUCK0(obj21 tru2 pos2)
+2 ACHIEVE-AT0(obj21 aPT3)
+3 DO-IN-UNLOAD-AIRPLANE0(obj21 apn2 aPT3)
+4 ACHIEVE-AT2(obj21 aPT3)
+root 0
+0 achieve_at_0 obj21 aPT3 -> m2_ordering_0 1 2 3 4
+5 ACHIEVE-AT0(obj22 pos1)
+6 DO-AT-LOAD-TRUCK0(obj22 tru2 pos1)
+7 ACHIEVE-AT-AIR(apn1 aPT6)
+8 DO-IN-UNLOAD-AIRPLANE0(obj22 apn1 aPT6)
+9 ACHIEVE-AT0(obj22 aPT6)
+10 DO-IN-UNLOAD-TRUCK0(obj63 tru3 pos3)
+11 ACHIEVE-AT0(obj63 aPT2)
+12 DO-IN-UNLOAD-AIRPLANE0(obj63 apn2 aPT2)
+13 ACHIEVE-AT2(obj63 aPT2)
+14 ACHIEVE-AT0(obj31 aPT4)
+15 DO-AT-LOAD-TRUCK0(obj31 tru4 pos4)
+16 ACHIEVE-AT-AIR(apn2 aPT5)
+17 DO-AT-LOAD-AIRPLANE0(obj31 apn2 aPT5)
+18 DO-IN-UNLOAD-AIRPLANE0(obj31 apn2 aPT4)
+19 ACHIEVE-AT2(obj31 aPT4)
+20 DO-IN-UNLOAD-TRUCK0(obj43 tru4 pos4)
+21 ACHIEVE-AT0(obj43 POS2)
+22 DO-IN-UNLOAD-TRUCK0(obj42 tru2 POS2)
+23 ACHIEVE-AT0(obj42 POS2)
+24 ACHIEVE-AT0(obj73 aPT7)
+25 DO-AT-LOAD-TRUCK0(obj73 tru7 pos7)
+26 ACHIEVE-AT-AIR(apn2 aPT5)
+27 DO-AT-LOAD-AIRPLANE0(obj73 apn2 aPT5)
+28 DO-IN-UNLOAD-AIRPLANE0(obj73 apn2 aPT7)
+29 ACHIEVE-AT2(obj73 aPT7)
+30 ACHIEVE-AT0(obj61 aPT3)
+31 DO-AT-LOAD-TRUCK0(obj61 tru2 pos2)
+32 ACHIEVE-AT-AIR(apn2 aPT5)
+33 DO-AT-LOAD-AIRPLANE0(obj61 apn2 aPT5)
+34 DO-IN-UNLOAD-AIRPLANE0(obj61 apn2 aPT3)
+35 ACHIEVE-AT2(obj61 aPT3)
+36 ACHIEVE-AT0(obj42 pos2)
+37 ACHIEVE-AT0(obj13 aPT7)
+38 DO-AT-LOAD-TRUCK0(obj13 tru1 POS1)
+39 ACHIEVE-AT-AIR(apn1 aPT6)
+40 DO-IN-UNLOAD-AIRPLANE0(obj13 apn1 aPT7)
+41 ACHIEVE-AT2(obj13 aPT7)
+42 ACHIEVE-AT0(obj11 pos4)
+43 DO-AT-LOAD-TRUCK0(obj11 tru4 pos4)
+44 ACHIEVE-AT-AIR(apn2 aPT5)
+45 DO-IN-UNLOAD-AIRPLANE0(obj11 apn2 pos4)
+46 ACHIEVE-AT2(obj11 pos4)
+47 ACHIEVE-AT(obj13 POS7)
+48 ACHIEVE-AT(obj42 POS2)
+49 ACHIEVE-AT(obj61 APT3)
+50 ACHIEVE-AT(obj63 APT2)
+51 ACHIEVE-AT(obj21 APT3)
+52 ACHIEVE-AT(obj11 pos7)
+53 ACHIEVE-AT(obj41 pos4)
+54 ACHIEVE-AT(obj52 pos3)
+55 ACHIEVE-AT(obj73 aPT7)
+56 IFUNLOCK-AT(tru7 pos7)
+57 ACHIEVE-AT-TRK(tru7 pos7)
+58 DO-IN-UNLOAD-TRUCK0(obj73 tru7 pos7)
+59 UNFLAG-AT(tru7 pos7)
+60 UNLOCK-AT(tru7 pos7)
+61 LOAD-TRUCK(obj73 tru7 pos7)
+62 IFUNLOCK-AT(apn2 APT5)
+63 IFUNLOCK-AT(tru7 pos7)
+64 ACHIEVE-AT-AIR(apn2 APT5)
+65 ACHIEVE-AT-TRK(tru7 pos7)
+66 UNLOAD-TRUCK(obj73 tru7 pos7)
+67 UNFLAG-AT(apn2 APT5)
+68 UNLOCK-AT(apn2 APT5)
+69 LOAD-AIRPLANE(obj73 apn2 APT5)
+70 UNLOAD-AIRPLANE(obj73 apn2 pos7)
+<==

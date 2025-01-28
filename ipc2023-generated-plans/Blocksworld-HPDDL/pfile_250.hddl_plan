@@ -1,53 +1,98 @@
-Given the complexity and size of the provided HTN Domain and Problem, generating a complete, step-by-step hierarchical plan manually is impractical within this format. The problem involves achieving a specific configuration of 250 blocks, which requires a vast number of actions and hierarchical decompositions. However, I can guide you through how to approach solving it and provide a simplified, high-level example of what the beginning of such a plan might look like, focusing on the initial steps for achieving the goal state for a few blocks.
-
-**Approach to Solve:**
-
-1. **Identify Goal States:** Analyze the `:goal` section to understand the desired final configuration of the blocks.
-2. **Apply HTN Methods:** Match the current state with the preconditions of the HTN methods to select applicable methods for achieving the goal states.
-3. **Decompose Tasks:** Recursively apply HTN methods to decompose tasks into more specific, actionable steps until primitive actions (like `pickup`, `putdown`, `stack`, `unstack`) are reached.
-4. **Sequence Actions:** Ensure the sequence of actions is valid by checking the preconditions and effects of each action.
-
-**Simplified High-Level Plan Example (Focused on Initial Steps for Blocks b1, b2, and b17):**
-
-**Sequential Plan Start**
 ==>
-
-**Initial Actions for Setup and First Block Movements:**
-
-1. `pickup b18` (since `b18` is on-table and clear, to free space and prepare for other movements)
-2. `putdown b18` on a safe, empty table space (not interfering with goal positions)
-
-**Hierarchical Decomposition for Specific Blocks:**
-
-**root 0**
-0 achieve-goals -> m1_setup_0 1
-   - **Setup to enable further movements**
-
-**root 1**
-1 achieve-goals -> m1_go_ordering_0 2 3 4
-   - **Focus on b1, b2, and b17 for this example**
-
-**2 deliver_person b1 b101 b49** (simplified, actual method might vary)
-   - **Method to move b1 to its goal position**
-   - **Subtasks might include:**
-     - `unstack b1 b49` (if `b1` is clear and on `b49`)
-     - `stack b1 b101` (if `b1` is holding and `b101` is clear)
-
-**3 deliver_person b2 b148 b224** (simplified)
-   - **Method to move b2 to its goal position**
-   - **Subtasks might include:**
-     - `unstack b2 b224` (if `b2` is clear and on `b224`)
-     - `stack b2 b148` (if `b2` is holding and `b148` is clear)
-
-**4 achieve-goals b17** (on-table goal)
-   - **Method to ensure b17 is on the table**
-   - **Subtasks might include:**
-     - If `b17` is not on-table, find a method to put it on the table, considering its current position.
-
-**<==**
-**Sequential Plan End**
-
-**Note:**
-- This example is **highly simplified** and focuses on illustrating the structure rather than providing a complete solution.
-- Actual planning would require systematically addressing all blocks' goal states, ensuring each action's preconditions are met, and managing the complexity of 250 blocks.
-- Utilizing an HTN planner or a similar automated planning tool is strongly recommended for problems of this scale.
+1 mark_done b20
+2 mark_done b222
+3 mark_done b204
+4 mark_done b219
+5 mark_done b220
+6 mark_done b220
+7 mark_done b222
+8 mark_done b13
+9 mark_done b15
+10 mark_done b24
+11 mark_done b37
+12 mark_done b42
+13 mark_done b74
+14 mark_done b80
+15 mark_done b81
+16 mark_done b87
+17 mark_done b90
+18 mark_done b97
+19 mark_done b185
+20 mark_done b204
+21 release-stack b250 b247
+release-stack b249 b188
+release-stack b248 b102
+release-stack b247 b56
+release-stack b246 b239
+release-stack b243 b5
+putdown b67 
+release-stack b232 b5 -> m1_go_ordering_0 21 22
+22 putdown_abstract b67 -> m2_ordering_0 23 24
+23 release  -> m1_go_ordering_1 25 26
+24 release  -> m1_abort_ordering_1
+25 release-table-done b223  
+      release  -> m1_go_ordering_2 27 
+26 unstack-block b222 
+release  -> m1_abort_ordering_2
+27 mark_done_on b222 b202 
+achieve-goals  -> mark-done-on 28 1 2
+28 release-stack b250 b249
+release-stack b249 b242
+release-stack b242 b88
+release-stack b239 b15
+release-stack b237 b63
+release-stack b233 b3
+stack b235 b66 
+release-stack b235 b232 -> m1_go_ordering_3 29 30
+29 newMethod11 b235 b66 -> m1_go_ordering_4 30 31
+30 unstack b66 b174 
+newMethod11 b235 b66 -> m1_abort_ordering_4 32 33
+31 unstack b66 b174  
+stack b28 b22 
+newMethod11 b235 b66 -> m1_go_ordering_5 34 35
+32 newMethod12 b66 b174 -> m1_go_ordering_6 35
+33 pickup-ready-block b235 b52
+newMethod11 b235 b66 -> m1_abort_ordering_5 36
+34 pickup b66 
+release-stack b250 b232 -> m1_abort_ordering_3 37 
+35 putdown b70 
+stack b235 b66  
+newMethod12 b66 b174 -> m1_go_ordering_7 38
+36 unstack b235 b201 
+newMethod12 b66 b174 -> m1_abort_ordering_7 39 
+37 release-stack b240 b129
+release-stack b236 b48
+release-stack b235 b52
+release-stack b229 b56
+release-stack b227 b75
+release-stack b224 b47
+release-stack b222 b141
+putdown b29 
+release-stack b222 b5 -> m1_go_ordering_8 40 41
+38 unstack b174 b137 
+newMethod12 b66 b174 -> m1_abort_ordering_8 42 43
+39 mark_done_on b66 b174 
+newMethod12 b66 b174 -> m1_go_ordering_9 44 40
+40 putdown b14 
+release-stack b222 b5 -> m1_abort_ordering_9 45 46
+41 putdown b19 
+acquire_abstract b29 -> m1_go_ordering_10 47 41 
+42 newMethod12 b174 b137 -> m1_abort_ordering_10 48 49
+43 unstack b66 b222 
+newMethod12 b174 b137 -> m1_go_ordering_11 50 51
+44 release  -> unstack-block 52 
+45 pick up_ready block b66 b137 
+acquire_abstract b29 -> m1_abort_ordering_11 53
+46 acquire_abstract b29 -> mark-done-on 6
+47 putdown b68 
+release  -> m1_go_ordering_12 54
+48 newMethod12 b67 b113 -> unstack 55 43 
+49 release  -> unstack-block 52 
+50 newMethod11 b66 b174 ->unstack-block 38 
+51 putdown b2 
+unstack-block b222 ->stack 50 52 
+52 acquire_abstract  b29 -> pickup-ready-block 22 54
+53 acquire_abstract  b29 -> acquire_abstract 24
+54 newMethod10 b19 ->putdown 49 
+55 putdown b3 
+<==

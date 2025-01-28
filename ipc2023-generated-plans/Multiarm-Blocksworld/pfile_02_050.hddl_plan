@@ -1,45 +1,384 @@
-Given the complexity of the provided HTN (Hierarchical Task Network) domain and problem, generating a complete, step-by-step plan here is impractical due to the sheer size of the problem (involving 50 blocks and two arms) and the limitations of this format. However, I can guide you through a high-level, hierarchical plan, focusing on the structure and key steps, and then provide a simplified example of how the sequential plan might look for a very small subset of the goals. Note that solving the entire problem as stated would require a significant computational effort and is typically the domain of AI planning tools.
+The creation of a complete plan based on your HTN domain and HTN problem is an extremely complex task requiring a lot of time, computation power and memory. As such I'll divide the response into the creation of the sequential plan and hierarchical decompositions.
 
-### Hierarchical Plan Structure
 
-**Root**
-- **Task0**: Achieve Goals with `arm1`
-  - **Subtasks** (selected based on goal analysis, this is a high-level selection):
-    - **Mark Done** for blocks that are already in their goal state
-    - **Unstack** blocks to clear blocks that need to be moved
-    - **Pickup** blocks to start constructing goal stacks
-    - **Stack** blocks to achieve goal configurations
-    - **Release** (putdown) blocks in their final positions
-- **Task1**: Achieve Goals with `arm2`
-  - **Subtasks** (similar to Task0, but for `arm2` and its assigned goals)
+Given the problem complexity, the solution would require breaking down the problem into several separate problems, one for each goal.
 
-### Sequential Plan Example (Simplified for a Small Subset of Goals)
 
-Let's consider a simplified example for achieving a small subset of the goals, e.g., `(goal_on b37 b20)`, `(goal_on b20 b13)`, and `(goal_clear b37)` using `arm1`. This example will not cover the entire problem but illustrates the format:
+First, here is a sequential plan:
 
 ==>
-1. `unstack b37 b42 arm1` (Clear b37)
-2. `putdown b37 arm1` (Temporary placement)
-3. `unstack b20 b13 arm1` (Clear b20, assuming b13 is clear or doesn’t need b20 to move)
-4. `stack b20 b13 arm1`
-5. `pickup b37 arm1`
-6. `stack b37 b20 arm1`
-7. `mark_done b37 arm1` (Mark b37 as done since it's clear and in its goal position)
+1 pickup b37 arm1
+2 stack b37 b20 arm1
+3 pickup b26 arm1
+4 stack b26 b13 arm1
+5 pickup b30 arm1
+6 stack b30 b7 arm1
+7 pickup b45 arm1
+8 stack b45 b7 arm1
+9 pickup b22 arm1
+10 stack b22 b19 arm1
+11 pickup b4 arm1
+12 stack b4 b19 arm1
+13 pickup b36 arm1
+14 putdown b36 arm1
+15 pickup b50 arm1
+16 stack b50 b34 arm1
+17 pickup b34 arm1
+18 putdown b34 arm1
+19 pickup b32 arm1
+20 putdown b32 arm1
+21 pickup b32 arm1
+22 stack b32 b5 arm1
+23 pickup b16 arm1
+24 stack b16 b21 arm1
+25 pickup b43 arm1
+26 stack b43 b15 arm1
+27 pickup b15 arm1
+28 stack b15 b14 arm1
+29 pickup b14 arm1
+30 stack b14 b17 arm1
+31 pickup b17 arm1
+32 stack b17 b11 arm1
+33 pickup b11 arm1
+34 stack b11 b3 arm1
+35 pickup b27 arm1
+36 stack b27 b46 arm1
+37 pickup b46 arm1
+38 stack b46 b42 arm1
+39 pickup b42 arm1
+40 stack b42 b24 arm1
+41 pickup b24 arm1
+42 stack b24 b49 arm1
+43 pickup b49 arm1
+44 stack b49 b31 arm1
+45 pickup b23 arm1
+46 putdown b23 arm1
+47 pickup b18 arm1
+48 stack b18 b23 arm1
+49 pickup b1 arm1
+50 stack b1 b44 arm1
+51 pickup b44 arm1
+52 stack b44 b39 arm1
+53 pickup b39 arm1
+54 stack b39 b9 arm1
+55 pickup b9 arm1
+56 stack b9 b35 arm1
+57 pickup b35 arm1
+58 stack b35 b12 arm1
+59 pickup b12 arm1
+60 stack b12 b6 arm1
+61 pickup b6 arm1
+62 stack b6 b25 arm1
+63 pickup b25 arm1
+64 stack b25 b41 arm1
+65 pickup b41 arm1
+66 stack b41 b40 arm1
+67 pickup b40 arm1
+68 stack b40 b10 arm1
+69 pickup b10 arm1
+70 putdown b10 arm1
+71 pickup b28 arm1
+72 putdown b28 arm1
+73 pickup b33 arm1
+74 stack b33 b28 arm1
+75 pickup b48 arm1
+76 stack b48 b33 arm1
+77 pickup b8 arm1
+78 putdown b8 arm1
+79 pickup b29 arm1
+80 stack b29 b33 arm1
+81 pickup b8 arm1
+82 putdown b8 arm1
+83 pickup b2 arm1
+84 stack b2 b31 arm1
+85 pickup b31 arm1
+86 putdown b31 arm1
+87 pickup b16 arm1
+88 putdown b16 arm1
+89 pickup b16 arm1
+90 putdown b16 arm1
+91 pickup b21 arm1
+92 unstack b21 b43 arm1
+93 putdown b21 arm1
+94 pickup b43 arm1
+95 putdown b43 arm1
+95 putdown b45 arm1
+96 pickup b35 arm1
+97 unstack b35 b23 arm1
+98 putdown b35 arm1
+99 pickup b23 arm1
+100 unstack b23 b49 arm1
+101 putdown b23 arm1
+102 pickup b49 arm1
+103 unstack b49 b27 arm1
+104 putdown b49 arm1
+105 pickup b27 arm1
+106 unstack b27 b39 arm1
+107 putdown b27 arm1
+108 pickup b39 arm1
+109 unstack b39 b15 arm1
+110 putdown b39 arm1
+111 pickup b15 arm1
+112 unstack b15 b40 arm1
+113 putdown b15 arm1
+114 pickup b40 arm1
+115 putdown b40 arm1
+116 pickup b25 arm1
+117 unstack b25 b36 arm1
+118 putdown b25 arm1
+119 pickup b36 arm1
+120 putdown b36 arm1
+121 pickup b5 arm1
+122 unstack b5 b32 arm1
+123 putdown b5 arm1
+124 pickup b32 arm1
+125 unstack b32 b41 arm1
+126 putdown b32 arm1
+127 pickup b41 arm1
+128 unstack b41 b12 arm1
+129 putdown b41 arm1
+130 pickup b12 arm1
+131 unstack b12 b30 arm1
+132 putdown b12 arm1
+133 pickup b30 arm1
+134 unstack b30 b9 arm1
+135 putdown b30 arm1
+136 pickup b9 arm1
+137 unstack b9 b1 arm1
+138 putdown b9 arm1
+139 pickup b1 arm1
+140 putdown b1 arm1
+141 pickup b18 arm1
+142 putdown b18 arm1
+143 pickup b10 arm1
+144 unstack b10 b22 arm1
+145 putdown b10 arm1
+146 pickup b22 arm1
+147 unstack b22 b38 arm1
+148 putdown b22 arm1
+149 pickup b38 arm1
+150 putdown b38 arm1
+151 pickup b11 arm1
+152 unstack b11 b17 arm1
+153 putdown b11 arm1
+154 pickup b17 arm1
+155 unstack b17 b37 arm1
+156 putdown b17 arm1
+157 pickup b37 arm1
+158 unstack b37 b35 arm1
+159 putdown b37 arm1
+160 pickup b35 arm1
+161 unstack b35 b20 arm1
+162 putdown b35 arm1
+163 pickup b20 arm1
+164 unstack b20 b33 arm1
+165 putdown b20 arm1
+166 pickup b33 arm1
+167 unstack b33 b4 arm1
+168 putdown b33 arm1
+169 pickup b4 arm1
+170 unstack b4 b42 arm1
+171 putdown b4 arm1
+172 pickup b42 arm1
+173 unstack b42 b48 arm1
+174 putdown b42 arm1
+175 pickup b48 arm1
+176 unstack b48 b29 arm1
+177 putdown b48 arm1
+178 pickup b29 arm1
+179 unstack b29 b28 arm1
+180 putdown b29 arm1
+181 pickup b28 arm1
+182 unstack b28 b8 arm1
+183 putdown b28 arm1
+184 pickup b8 arm1
+185 putdown b8 arm1
+186 pickup b24 arm1
+187 unstack b24 b21 arm1
+188 putdown b24 arm1
+189 pickup b21 arm1
+190 unstack b21 b43 arm1
+191 putdown b21 arm1
+192 pickup b43 arm1
+193 unstack b43 b14 arm1
+194 putdown b43 arm1
+195 pickup b14 arm1
+196 unstack b14 b15 arm1
+197 putdown b14 arm1
+198 pickup b15 arm1
+199 unstack b15 b19 arm1
+200 putdown b15 arm1
+201 pickup b19 arm1
+202 unstack b19 b6 arm1
+203 putdown b19 arm1
+204 pickup b6 arm1
+205 unstack b6 b26 arm1
+206 putdown b6 arm1
+207 pickup b26 arm1
+208 unstack b26 b11 arm1
+209 putdown b26 arm1
+210 pickup b11 arm1
+211 putdown b11 arm1
+212 pickup b44 arm1
+213 unstack b44 b3 arm1
+214 putdown b44 arm1
+215 pickup b3 arm1
+216 unstack b3 b46 arm1
+217 putdown b3 arm1
+218 pickup b46 arm1
+219 unstack b46 b27 arm1
+220 putdown b46 arm1
+221 pickup b27 arm1
+222 unstack b27 b7 arm1
+223 putdown b27 arm1
+224 pickup b7 arm1
+225 unstack b7 b45 arm1
+226 putdown b7 arm1
+227 pickup b31 arm1
+228 unstack b31 b9 arm1
+229 putdown b31 arm1
+230 pickup b16 arm1
+231 putdown b16 arm1
+232 pickup b13 arm1
+233 unstack b13 b12 arm1
+234 putdown b13 arm1
+235 pickup b39 arm1
+236 unstack b39 b12 arm1
+237 putdown b39 arm1
+238 pickup b49 arm1
+239 unstack b49 b31 arm1
+240 putdown b49 arm1
+241 pickup b2 arm1
+242 putdown b2 arm1
+243 pickup b38 arm1
+244 putdown b38 arm1
+245 pickup b18 arm1
+246 putdown b18 arm1
+247 pickup b39 arm1
+248 putdown b39 arm1
+249 pickup b25 arm1
+250 putdown b25 arm1
+251 pickup b39 arm1
+252 putdown b39 arm1
+253 pickup b25 arm1
+254 putdown b25 arm1
+255 pickup b33 arm1
+256 unstack b33 b20 arm1
+257 putdown b33 arm1
+258 pickup b20 arm1
+259 unstack b20 b19 arm1
+260 putdown b20 arm1
+261 pickup b19 arm1
+262 unstack b19 b4 arm1
+263 putdown b19 arm1
+264 pickup b34 arm1
+265 unstack b34 b38 arm1
+266 putdown b34 arm1
+267 pickup b38 arm1
+268 unstack b38 b10 arm1
+269 putdown b38 arm1
+270 pickup b10 arm1
+271 unstack b10 b1 arm1
+272 putdown b10 arm1
+273 pickup b1 arm1
+274 unstack b1 b44 arm1
+275 putdown b1 arm1
+276 pickup b44 arm1
+277 unstack b44 b39 arm1
+278 putdown b44 arm1
+279 pickup b35 arm1
+280 unstack b35 b12 arm1
+281 putdown b35 arm1
+282 pickup b12 arm1
+283 unstack b12 b6 arm1
+284 putdown b12 arm1
+285 pickup b14 arm1
+286 unstack b14 b17 arm1
+287 putdown b14 arm1
+288 pickup b17 arm1
+289 unstack b17 b11 arm1
+290 putdown b17 arm1
+291 pickup b41 arm1
+292 unstack b41 b40 arm1
+293 putdown b41 arm1
+294 pickup b40 arm1
+295 unstack b40 b10 arm1
+296 putdown b40 arm1
+297 pickup b24 arm1
+298 unstack b24 b40 arm1
+299 putdown b24 arm1
+300 pickup b14 arm1
+301 putdown b14 arm1
+302 mark_done b37 arm1
+303 mark_done b47 arm1
+304 mark_done b50 arm1
+305 mark_done b5 arm1
+306 mark_done b2 arm1
+307 mark_done b18 arm1
+308 mark_done b38 arm1
+309 mark_done b29 arm1
+310 mark_done b8 arm1
+
 <==
 
-**Hierarchical Decomposition for the Simplified Example**
 
 root 0
-0 achieve-goals arm1 -> m1_goal_achievement 1 2 3 4 5 6 7
-1 unstack_abstract b37 b42 -> newMethod16 b37 b42 arm1
-2 putdown_abstract b37 -> newMethod14 b37 arm1
-3 unstack_abstract b20 b13 -> newMethod16 b20 b13 arm1
-4 stack_abstract b20 b13 -> newMethod15 b20 b13 arm1
-5 acquire_abstract b37 arm1 -> newMethod13 b37 arm1
-6 stack_abstract b37 b20 -> newMethod15 b37 b20 arm1
-7 mark_done b37 -> mark_done b37
-
-**Note**: 
-- This response simplifies the problem to fit the format and provide a conceptual understanding.
-- Actual planning for the full problem would require executing an HTN planner with the provided domain and problem files, which would generate a detailed, step-by-step plan tailored to all specified goals and initial conditions.
-- The plan's complexity and the number of steps would be significantly higher than what's illustrated here, reflecting the problem's scale.
+0 achieve-goals arm1 -> mark-done-on b37 b20 arm1 302 1 2
+7 achieve-goals arm1 -> mark-done-on b37 b13 arm1 302 3 4 
+14 achieve-goals arm1 -> mark-done-on b37 b9 arm1 302 5 6
+21 achieve-goals arm1 -> mark-done-on b45 b7 arm1 310 7 8  
+28 achieve-goals arm1 -> mark-done-on b47 b22 arm1 309 9 10 
+35 achieve-goals arm1 -> mark-done-on b47 b4 arm1 307 11 12
+42 achieve-goals arm1 -> mark-done-on b4 b36 arm1 304 13 14 
+49 achieve-goals arm1 -> mark-done-on b50 b34 arm1 306 15 16  
+56 achieve-goals arm1 ->  mark-done-on  b50 b41 arm1 306 17 18      
+63 achieve-goals arm1 ->  mark-done-on  b32 b5 arm1 311 19 20    
+70 achieve-goals arm1 ->  mark-done-on  b16 b21 arm1 312 21 22    
+77 achieve-goals arm1 ->  mark-done-on  b16 b43 arm1 313 23 24        
+84 achieve-goals arm1 ->  mark-done-on   b2 b16 arm1 301 25 26  
+91 achieve-goals arm1 -> putdown_ready_block  b16 arm1 26 0 27 
+98 acquire_abstract  b16 arm1 -> newMethod13  b16 arm1 27 0  
+103 putdown_abstract b16 -> newMethod14 b16 arm1 28 0  
+109 stack_abstract  b43 b15-> newMethod15 b43 b15 arm1 29 0  
+115 acquire_abstract b43 arm1 -> newMethod16  b43 b35 arm1 30 0 
+122 putdown_abstract b43 -> newMethod14  b16 arm1 26 0 
+129 putdown_abstract  b21-> newMethod14  b43 arm1 31 0 
+136 release arm1 -> release-stack b43 b35 arm1 27 32 33 
+143 acquire_abstract b21 arm1 -> newMethod13  b21 arm1 34 0 
+150 putdown_abstract b21 -> newMethod14  b21 arm1 35 0 
+157 putdown_abstract b15 -> newMethod14  b15 arm1 36 0 
+164 stack_abstract b17 b11 -> newMethod15 b17 b11 arm1 37 0  
+171 acquire_abstract b17 arm1 -> newMethod16  b17 b7 arm1 38 0  
+178 stack_abstract b14 b17-> newMethod15  b14 b17 arm1 39 0  
+185 acquire_abstract b14 arm1 -> newMethod13  b14 arm1 40 0 
+192 putdown_abstract b14 -> newMethod14  b14 arm1 41 0 
+199 stack_abstract b3 b27 -> newMethod15  b3 b27 arm1 42 0 
+206 release arm1 -> release-table  b27 arm1 43 44 45
+213 acquire_abstract b14 arm1 -> newMethod13  b11 arm1 46 0 
+220 stack_abstract b46 b42 -> newMethod15 b46 b42 arm1 47 0  
+227 acquire_abstract  b44 arm1 -> newMethod13  b44 arm1 48 0 
+234 stack_abstract b1 b44 -> newMethod15  b1 b44 arm1 49 0 
+241 acquire_abstract b42 arm1 -> newMethod16  b42 b39 arm1 50 0 
+248 putdown_abstract b14 -> newMethod14  b14 arm1 51 0 
+255 release arm1 -> release-stack  b42 b39 arm1 50 52 53 
+262 acquire_abstract  b43 arm1 -> newMethod16  b43 b24 arm1 54 0 
+269 stack_abstract b12 b6 -> newMethod15  b12 b6 arm1 55 0 
+276 acquire_abstract  b39 arm1 -> newMethod13  b39 arm1 56 0 
+283 stack_abstract b25 b36 -> newMethod15  b25 b36 arm1 57 0 
+290 acquire_abstract b22 arm1 -> newMethod16  b22 b15 arm1 58 0 
+297 putdown_abstract  b40-> newMethod14  b40 arm1 59 0 
+304 stack_abstract b32 b41 -> newMethod15  b32 b41 arm1 60 0 
+311 acquire_abstract  b41 arm1 -> newMethod13  b41 arm1 61 0  
+318 stack_abstract b10 b1 -> newMethod15  b10 b1 arm1 62 0 
+325 acquire_abstract  b36 arm1 ->  newMethod13  b36 arm1 63 0 
+332 release arm1 -> release-stack b44 b39 arm1 56 64 65 
+339 stack_abstract b7 b11 -> newMethod15  b7 b11 arm1 66 0 
+346 release arm1 -> release-table-done b45 arm1 310 67 68 
+353 acquire_abstract b33 arm1 -> newMethod16  b33 b34 arm1 69 0 
+360 stack_abstract b5 b32 -> newMethod15  b5 b32 arm1  70  0
+367 acquire_abstract b39 arm1 -> newMethod13  b39 arm1 71 0 
+374 stack_abstract b9 b35 -> newMethod15  b9 b35 arm1 72 0 
+381 release arm1 -> release-stack b43 b35 arm1  73 76 77
+388 acquire_abstract b6 arm1 -> newMethod13  b6 arm1 78 0 
+395 release arm1 -> release-stack b13 b6 arm1 79 80 81
+402 achieve-goals arm1 -> set_done arm1 82 0

@@ -1,54 +1,119 @@
 ==>
-**Sequential Plan**
-1. move location_0 location_1
-2. get_resource resource_0 location_1
-3. move location_1 location_2
-4. get_resource resource_f_2_1 location_2
-5. move location_2 location_3
-6. get_resource resource_f_3_2 location_3
-7. move location_3 location_4
-8. get_resource resource_f_4_2 location_4
-9. move location_4 location_5
-10. get_resource resource_f_5_2 location_5
-11. move location_5 location_6
-12. get_resource resource_6 location_6
-13. move location_6 last_location
-14. construct last_factory resource_6 last_location
+1 goto location_1
+2 goto last_location
+3 get_resource resource_0 location_1
+4 get_resource resource_1 location_1
+5 fuse resource_f_1_0 resource_0 resource_0 location_1
+6 get_resource resource_0 location_0
+7 construct factory_1 resource_0 location_1
+8 goto location_2
+9 get_resource resource_2 location_2
+10 get_resource resource_f_1_0 resource_1 location_1
+11 deliver_resource resource_f_1_0 location_1 location_2
+12 fuse resource_f_2_1 resource_f_2_0 resource_1 location_2
+13 deliver_resource resource_f_2_1 location_2 location_2
+14 get_resource resource_0 location_0
+15 construct factory_2 resource_f_2_1 location_2
+16 goto location_3
+17 get_resource resource_3 location_3
+18 get_resource resource_f_3_0 resource_0 location_0
+19 deliver_resource resource_f_3_0 location_0 location_3
+20 get_resource resource_f_3_0 resource_1 location_1
+21 deliver_resource resource_f_3_0 location_1 location_3
+22 fuse resource_f_3_1 resource_f_3_0 resource_1 location_3
+23 get_resource resource_f_3_1 resource_2 location_2
+24 deliver_resource resource_f_3_1 location_2 location_3
+25 fuse resource_f_3_2 resource_f_3_1 resource_2 location_3
+26 deliver_resource resource_f_3_2 location_3 location_3
+27 get_resource resource_0 location_0
+28 construct factory_3 resource_f_3_2 location_3
+29 goto location_4
+30 get_resource resource_4 location_4
+31 get_resource resource_f_4_1 resource_f_4_0 resource_2 location_0
+32 deliver_resource resource_f_4_0 location_0 location_4
+33 get_resource resource_f_4_0 resource_3 location_3
+34 deliver_resource resource_f_4_0 location_3 location_4
+35 fuse resource_f_4_1 resource_f_4_0 resource_2 location_4
+36 get_resource resource_f_4_1 resource_3 location_3
+37 deliver_resource resource_f_4_1 location_3 location_4
+38 fuse resource_f_4_2 resource_f_4_1 resource_3 location_4
+39 deliver_resource resource_f_4_2 location_4 location_4
+40 get_resource resource_0 location_0
+41 construct factory_4 resource_f_4_2 location_4
+42 goto location_5
+43 get_resource resource_5 location_5
+44 get_resource resource_f_5_0 resource_f_5_0 resource_0 resource_3 location_0
+45 deliver_resource resource_f_5_0 location_0 location_5
+46 get_resource resource_f_5_0 resource_0 resource_4 location_4
+47 deliver_resource resource_f_5_0 location_4 location_5
+48 fuse resource_f_5_1 resource_f_5_0 resource_4 location_5
+49 get_resource resource_f_5_1 resource_f_5_0 resource_2 location_2
+50 deliver_resource resource_f_5_1 location_2 location_5
+51 fuse resource_f_5_2 resource_f_5_1 resource_2 location_5
+52 deliver_resource resource_f_5_2 location_5 location_5
+53 get_resource resource_0 location_0
+54 construct factory_5 resource_f_5_2 location_5
+55 goto location_6
+56 get_resource resource_6 location_6
+57 get_resource resource_f_6_0 resource_f_6_0 resource_0 resource_2 location_0
+58 deliver_resource resource_f_6_0 location_0 location_6
+59 get_resource resource_f_6_0 resource_0 resource_3 location_3
+60 deliver_resource resource_f_6_0 location_3 location_6
+61 fuse resource_f_6_1 resource_f_6_0 resource_3 location_6
+62 get_resource resource_f_6_1 resource_f_6_0 resource_5 location_5
+63 deliver_resource resource_f_6_1 location_5 location_6
+64 fuse resource_f_6_2 resource_f_6_1 resource_5 location_6
+65 deliver_resource resource_f_6_2 location_6 location_6
+66 get_resource resource_0 location_0
+67 construct factory_6 resource_f_6_2 location_6
+68 get_resource resource_f_6_2 location_6
+69 deliver_resource resource_6 location_6 last_location
+70 construct last_factory resource_6 last_location
+<==
 
-**Hierarchical Decomposition**
 root 0
-0 construct_factory last_factory last_location -> m_construct_factory 14
-    * 14: 
-        - Precondition: (demands last_factory resource_6) ∧ (location-free last_location) ∧ ¬(factory-constructed last_factory)
-        - Subtasks:
-            1. get_resource resource_6 last_location -> m_get_resource 12 13
-                * 12: 
-                    - Precondition: (produces factory_6 resource_6)
-                    - Subtasks:
-                        2. construct_factory factory_6 location_6 -> m_factory_already_constructed ( **Assuming factory_6 is already constructed at location_6, as per init** )
-                        3. produce_resource resource_6
-                            -> m_get_and_produce_resource 4 5 6 7 8 9 10 11 12
-                                * 4-13: (Recursive decomposition for resource_f_6_2, resource_f_5_2,..., resource_0)
-                                    - Omitted for brevity, but follows similar pattern
-                        4. deliver_resource resource_6 last_location -> m_deliver_resource 13
-                            * 13: 
-                                - Precondition: (resource-at resource_6 location_6)
-                                - Subtasks:
-                                    1. goto location_6
-                                        -> m_already_there ( **Assuming truck is already at location_6, as per init** )
-                                    2. pickup resource_6 location_6
-                                    3. goto last_location -> m_goto 13
-                                        * 13: 
-                                            - Precondition: (truck-at location_6) ∧ (connected location_6 last_location)
-                                            - Subtasks:
-                                                1. move location_6 last_location
-                                    4. drop resource_6 last_location
-            2. construct last_factory resource_6 last_location
-                -> **Already handled in action 14**
-
-**Note:**
-
-* The plan assumes that some factories (e.g., `factory_6`) are already constructed at their respective locations, as implied by the initial state.
-* The decomposition for `get_resource` recursively applies to each `resource_f_X_Y` until it reaches a base `resource_X`. For brevity, only the top-level decomposition is shown.
-* Some method applications (e.g., `m_factory_already_constructed`, `m_already_there`) are assumed to be directly applicable due to the initial state, and their subtasks are not further decomposed.
-* Action parameters (e.g., `?l`, `?r`) are replaced with their corresponding object names (e.g., `location_0`, `resource_0`) for clarity.
+0 solve -> goto_last_location 1 2
+3 get_resource -> get_resource_at_location_1 3 4 5 6 7
+8 goto location_2 -> goto 8
+10 get_resource -> get_resource_at_location_1 10
+11 deliver_resource -> deliver 12 11 
+14 get_resource -> get_resource_at_location_0 14
+12 fuse -> get_resource_and_fuse 13
+15 construct -> construct_factory 15 12 6 14
+17 get_resource -> get_resource_at_location_2 17
+18 get_resource -> get_resource_at_location_0 18
+19 deliver_resource -> deliver 20 19
+20 get_resource -> get_resource_at_location_1 20
+22 fuse -> get_resource_and_fuse 23
+24 deliver_resource -> deliver 24
+26 fuse -> get_resource_and_fuse 25 24
+27 get_resource -> get_resource_at_location_0 27
+28 construct -> construct_factory 28 26 22 27
+29 goto location_3 -> goto 29
+30 get_resource -> get_resource_at_location_3 30
+32 deliver_resource -> deliver 33 32
+34 deliver_resource -> deliver 34
+36 fuse -> get_resource_and_fuse 37 36
+38 fuse -> get_resource_and_fuse 39 38
+40 get_resource -> get_resource_at_location_0 40
+41 construct -> construct_factory 41 39 36 40
+42 goto location_4 -> goto 42
+44 deliver_resource -> deliver 45 44
+47 deliver_resource -> deliver 47 
+48 fuse -> get_resource_and_fuse 49 48
+50 deliver_resource -> deliver 51 50
+52 fuse -> get_resource_and_fuse 52
+53 get_resource -> get_resource_at_location_0 53
+54 construct -> construct_factory 54 52 48 53
+55 goto location_5 -> goto 55
+56 get_resource -> get_resource_at_location_5 56
+57 deliver_resource -> deliver 58 57
+59 deliver_resource -> deliver 60 59
+61 fuse -> get_resource_and_fuse 62 61
+63 deliver_resource -> deliver 63
+64 fuse -> get_resource_and_fuse 64
+65 deliver_resource -> deliver 65 64
+66 get_resource -> get_resource_at_location_0 66
+67 construct -> construct_factory 67 65 61 66
+69 deliver_resource -> deliver 69
+70 construct -> factory_constructed 70

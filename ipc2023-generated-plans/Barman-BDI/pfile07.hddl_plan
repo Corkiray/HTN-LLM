@@ -1,63 +1,34 @@
 ==>
-1 AchieveContainsShotCocktail shot4 cocktail1
-2 AchieveContainsShotCocktail shot5 cocktail2
-root 0
-0 AchieveContainsShotCocktail shot4 cocktail1 -> m1_MakeAndPourCocktail 3 4 5 6 7
-3 AchieveContainsShakerCocktail shaker1 cocktail1 -> m2_MakeCocktail 8 9 10 11 12 13
-8 AchieveCleanShaker shaker1 -> m3_CleanShakerNull (already clean, no-op)
-9 AchieveContainsShakerIngredient shaker1 ingredient3 -> m4_AddIngredientToEmptyShaker 14 15 16
-14 AchieveContainsShotIngredient shot1 ingredient3 -> m5_AddIngredientToShot 17 18 19 20
-17 AchieveCleanShot shot1 -> m6_CleanShotNull (already clean, no-op)
-18 AchieveHolding right shot1 -> m7_PickUp 21 22 23
-21 AchieveHandEmpty right -> m8_HandEmptyNull (already empty, no-op)
-22 AchieveOnTable shot1 -> m9_OnTableNull (already on table, no-op)
-23 grasp right shot1
-...
-(abbreviated for brevity, see below for full plan)
-
-**Full Plan:**
-
-==>
-1 AchieveContainsShotCocktail shot4 cocktail1
-2 AchieveContainsShotCocktail shot5 cocktail2
-root 0
-0 AchieveContainsShotCocktail shot4 cocktail1 -> m1_MakeAndPourCocktail 3 4 5 6 7
-3 AchieveContainsShakerCocktail shaker1 cocktail1 -> m2_MakeCocktail 8 9 10 11 12 13
-8 AchieveCleanShaker shaker1 -> m3_CleanShakerNull 
-9 AchieveContainsShakerIngredient shaker1 ingredient3 -> m4_AddIngredientToEmptyShaker 14 15 16
-14 AchieveContainsShotIngredient shot1 ingredient3 -> m5_AddIngredientToShot 17 18 19 20
-17 AchieveCleanShot shot1 -> m6_CleanShotNull 
-18 AchieveHolding right shot1 -> m7_PickUp 21 22 23
-21 AchieveHandEmpty right -> m8_HandEmptyNull 
-22 AchieveOnTable shot1 -> m9_OnTableNull 
-23 grasp right shot1
-24 fill-shot shot1 ingredient3 right left dispenser1
-25 AchieveHolding left shaker1 -> m7_PickUp 26 27 28
-26 AchieveHandEmpty left -> m8_HandEmptyNull 
-27 AchieveOnTable shaker1 -> m9_OnTableNull 
-28 grasp left shaker1
-29 pour-shot-to-clean-shaker shot1 ingredient3 shaker1 right level1 level2
-30 AchieveContainsShakerIngredient shaker1 ingredient4 -> m4_AddIngredientToUsedShaker 31 32 33
-31 AchieveContainsShotIngredient shot2 ingredient4 -> m5_AddIngredientToShot 34 35 36 37
-...
-38 shake cocktail1 ingredient3 ingredient4 shaker1 right left
-39 AchieveHolding right shaker1 -> m7_PickUp 40 41 42 (already holding, no-op)
-40 AchieveHandEmpty right -> m8_HandEmptyNull 
-41 AchieveOnTable shaker1 -> m9_OnTableNull 
-42 pour-shaker-to-shot cocktail1 shot4 right shaker1 level2 level3
-43 AchieveCleanShot shot4 -> m6_CleanShotNull (already clean, no-op)
-44 AchieveContainsShotCocktail shot5 cocktail2 -> m1_MakeAndPourCocktail 45 46 47 48 49
-... (similar steps for shot5 and cocktail2)
+1 achieve_clean_shot shot4 
+2 achieve_holding right shot4 
+3 fill-shot shot4 ingredient4 left right dispenser4 
+4 achieve_holding left shaker1 
+5 add_ingredient_to_empty_shaker shaker1 ingredient3 level1 level1 shot1 left 
+6 pour-shot-to-clean-shaker shot1 ingredient3 shaker1 left level1 level1 
+7 add_ingredient_to_used_shaker shaker1 ingredient4 level1 level2 shot2 left 
+8 pour-shot-to-used-shaker shot2 ingredient4 shaker1 left level1 level2 
+9 shake cocktail1 ingredient3 ingredient4 shaker1 left right 
+10 achieve_holding right shaker1 
+11 make_and_pour_cocktail shot4 cocktail1 shaker1 left right 
+12 achieve_clean_shot shot5 
+13 achieve_holding right shot5 
+14 fill-shot shot5 ingredient5 left right dispenser5 
+15 achieve_holding left shaker1 
+16 add_ingredient_to_empty_shaker shaker1 ingredient5 level2 level2 shot3 left 
+17 pour-shot-to-clean-shaker shot3 ingredient5 shaker1 left level2 level2 
+18 add_ingredient_to_used_shaker shaker1 ingredient2 level2 level3 shot6 left 
+19 pour-shot-to-used-shaker shot6 ingredient2 shaker1 left level2 level3 
+20 empty_shaker right shaker1 cocktail2 level1 level1 
+21 clean_shaker shaker1 right left 
+22 add_ingredient_to_empty_shaker shaker1 ingredient2 level1 level1 shot6 right 
+23 pour-shot-to-clean-shaker shot6 ingredient2 shaker1 right level1 level1 
+24 add_ingredient_to_used_shaker shaker1 ingredient5 level1 level2 shot3 right 
+25 pour-shot-to-used-shaker shot3 ingredient5 shaker1 right level1 level2 
+26 shake cocktail2 ingredient2 ingredient5 shaker1 right left 
+27 achieve_holding left shaker1 
+28 make_and_pour_cocktail shot5 cocktail2 shaker1 right left 
 <==
 
-**Action Sequence (abbreviated):**
-
-1. `grasp right shot1`
-2. `fill-shot shot1 ingredient3 right left dispenser1`
-3. `grasp left shaker1`
-4. `pour-shot-to-clean-shaker shot1 ingredient3 shaker1 right level1 level2`
-5. `fill-shot shot2 ingredient4 right left dispenser4`
-6. `pour-shot-to-used-shaker shot2 ingredient4 shaker1 right level2 level3`
-7. `shake cocktail1 ingredient3 ingredient4 shaker1 right left`
-8. `pour-shaker-to-shot cocktail1 shot4 right shaker1 level2 level3`
-9.... (similar steps for shot5 and cocktail2)
+root 0 
+0 make_and_pour_cocktail shot4 cocktail1 shaker1 left right  1 2 11 
+make_and_pour_cocktail shot5 cocktail2 shaker1 right left  12 13 28

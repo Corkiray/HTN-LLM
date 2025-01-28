@@ -1,0 +1,48 @@
+==>
+**Sequential Plan**
+1. drive truck_0 city_loc_1 city_loc_0
+2. pick_up truck_0 city_loc_0 package_0 capacity_2 capacity_3
+3. drive truck_0 city_loc_0 city_loc_2
+4. pick_up truck_0 city_loc_2 package_1 capacity_1 capacity_2
+5. drive truck_0 city_loc_2 city_loc_3
+6. drop truck_0 city_loc_3 package_1 capacity_2 capacity_1
+7. drive truck_0 city_loc_3 city_loc_1
+8. pick_up truck_0 city_loc_1 package_4 capacity_2 capacity_3
+9. drive truck_0 city_loc_1 city_loc_2
+10. drop truck_0 city_loc_2 package_4 capacity_2 capacity_3
+11. drive truck_0 city_loc_2 city_loc_0
+12. pick_up truck_0 city_loc_0 package_2 capacity_1 capacity_2
+13. pick_up truck_0 city_loc_0 package_3 capacity_0 capacity_1
+14. drive truck_0 city_loc_0 city_loc_1
+15. drop truck_0 city_loc_1 package_0 capacity_1 capacity_2
+16. drop truck_0 city_loc_1 package_2 capacity_1 capacity_2
+17. drop truck_0 city_loc_1 package_3 capacity_0 capacity_1
+
+**Hierarchical Decomposition**
+root 0
+0 solve_htn -> m_deliver_ordering_0 1 2 3 4
+1 deliver package_0 city_loc_1 -> m_deliver_ordering_0 5 6 7 8
+	* 5 get_to truck_0 city_loc_0 -> m_drive_to_ordering_0
+		+ 5.1 drive truck_0 city_loc_1 city_loc_0 (action: drive)
+	* 6 load truck_0 city_loc_0 package_0 -> m_load_ordering_0
+		+ 6.1 pick_up truck_0 city_loc_0 package_0 capacity_2 capacity_3 (action: pick_up)
+	* 7 get_to truck_0 city_loc_1 -> m_i_am_there_ordering_0 (noop, already at destination)
+		+ 7.1 noop truck_0 city_loc_1 (action: noop)
+	* 8 unload truck_0 city_loc_1 package_0 -> m_unload_ordering_0
+		+ 8.1 drop truck_0 city_loc_1 package_0 capacity_1 capacity_2 (action: drop)
+2 deliver package_1 city_loc_3 -> m_deliver_ordering_0 9 10 11 12
+	* 9 get_to truck_0 city_loc_2 -> m_drive_to_ordering_0
+		+ 9.1 drive truck_0 city_loc_1 city_loc_2 (action: drive)
+	* 10 load truck_0 city_loc_2 package_1 -> m_load_ordering_0
+		+ 10.1 pick_up truck_0 city_loc_2 package_1 capacity_1 capacity_2 (action: pick_up)
+	* 11 get_to truck_0 city_loc_3 -> m_drive_to_via_ordering_0
+		+ 11.1 get_to truck_0 city_loc_1 -> m_i_am_there_ordering_0 (noop, already at destination)
+			- 11.1.1 noop truck_0 city_loc_1 (action: noop)
+		+ 11.2 drive truck_0 city_loc_1 city_loc_3 (action: drive)
+	* 12 unload truck_0 city_loc_3 package_1 -> m_unload_ordering_0
+		+ 12.1 drop truck_0 city_loc_3 package_1 capacity_2 capacity_1 (action: drop)
+3 deliver package_2 city_loc_1 -> m_deliver_ordering_0 13 14 15 16
+	*... (similar decomposition as above, omitted for brevity)
+4 deliver package_4 city_loc_2 -> m_deliver_ordering_0 17 18 19 20
+	*... (similar decomposition as above, omitted for brevity)
+<==

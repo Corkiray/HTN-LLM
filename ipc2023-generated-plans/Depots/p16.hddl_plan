@@ -1,52 +1,44 @@
 ==>
-**Sequential Plan**
-1. Drive truck3 distributor1 depot1
-2. do_get_truck truck3 depot1
-3. do_clear crate0 depot1
-4. Lift hoist1 crate0 pallet4 depot1
-5. Load hoist1 crate0 truck3 depot1
-6. Drive truck3 depot1 distributor1
-7. do_unload_truck crate0 pallet3 distributor1 truck3
-8. Drop hoist3 crate0 pallet3 distributor1
-9. Drive truck2 depot0 depot1
-10. do_get_truck truck2 depot1
-11. do_clear crate2 depot1
-12. Lift hoist5 crate2 pallet0 depot1
-13. Load hoist5 crate2 truck2 depot1
-14. Drive truck2 depot1 depot0
-15. do_unload_truck crate2 pallet1 depot0 truck2
-16. Drop hoist0 crate2 pallet1 depot0
-17. do_clear crate3 depot1
-18. Lift hoist6 crate3 crate1 depot1
-19. Load hoist6 crate3 truck1 depot1
-20. Drive truck1 depot1 depot0
-21. do_unload_truck crate3 pallet0 depot0 truck1
-22. Drop hoist0 crate3 pallet0 depot0
-23. do_clear crate4 distributor0
-24. Lift hoist2 crate4 pallet2 distributor0
-25. Load hoist2 crate4 truck0 distributor0
-26. Drive truck0 distributor0 depot1
-27. do_unload_truck crate4 crate3 depot1 truck0
-28. Drop hoist1 crate4 crate3 depot1
-29. do_clear crate5 depot0
-30. Lift hoist0 crate5 crate2 depot0
-31. Load hoist0 crate5 truck2 depot0
-32. Drive truck2 depot0 distributor0
-33. do_unload_truck crate5 pallet2 distributor0 truck2
-34. Drop hoist2 crate5 pallet2 distributor0
-
-**Hierarchical Decomposition**
-root 0
-0 solve_depotprob4398 -> m3_do_put_on 1 2 3 4 5
-1 do_put_on crate3 pallet0 -> m1_do_put_on 3 17 20 21 22
-	* 3 do_load_truck crate3 pallet4 depot1 truck3 -> m10_do_load_truck 1 4 5 6
-	* 17 do_clear crate3 depot1 -> m4_do_clear 18
-2 do_put_on crate4 crate3 -> m2_do_put_on 24 27 28 29 30
-	* 24 do_clear crate4 distributor0 -> m5_do_clear 25 26
-3 do_put_on crate2 pallet1 -> m1_do_put_on 9 12 13 14 16
-	* 9 do_get_truck truck2 depot1 -> m7_do_get_truck 10
-4 do_put_on crate0 pallet3 -> m2_do_put_on 2 5 6 7 8
-	* 2 do_get_truck truck3 distributor1 -> m6_do_get_truck
-5 do_put_on crate5 pallet2 -> m2_do_put_on 31 32 33 34
-	* 31 do_clear crate5 depot0 -> m4_do_clear 30
+1 load pallet1 f1 truck0 hoist0 Depot1
+2 unload hoist0 crate1 truck0 f1 Depot1
+3 drop hoist0 crate1 pallet6 f1 Depot1
+4 clear crate1 Depot1
+5 load hoist5 crate0 pallet1 truck0 f1 Depot1
+6 unload hoist5 crate0 truck0 pallet3 Depot1
+7 drop hoist5 crate0 pallet3 pallet6 Depot1
+8 clear crate0 Depot1
+9 lift crate2 pallet0 f1 hoist0 Depot1
+10 drive truck1 f1 f0 Depot1
+11 unload hoist0 crate2 truck1 f0 Depot0
+12 drop hoist0 crate2 pallet0 pallet3 Depot0
+13 load hoist0 crate5 crate2 truck1 f0 Depot0
+14 unload hoist0 crate5 truck1 f0 Depot0
+15 drop hoist0 crate5 pallet3 pallet0 Depot0
+16 drive truck2 f0 f1 Depot0
+17 load pallet2 f1 truck2 hoist0 Depot1
+18 unload hoist0 crate4 truck2 f1 Depot1
+19 drop hoist0 crate4 pallet3 f1 Depot1
+20 clear crate4 Depot1
+21 get hoist0 crate3 f1 Depot1
+22 load hoist0 crate3 crate4 truck2 f1 Depot1
+23 unload hoist0 crate3 truck2 f1 Depot1
+24 drop hoist0 crate3 pallet3 crate4 Depot1
+25 get hoist1 crate5 f1 Depot1
+26 clear pallet2 f1 Depot1
+27 load hoist1 crate5 pallet2 truck2 f1 Depot1
+28 unload hoist1 crate5 truck2 f1 Depot1
+29 drop hoist1 crate5 pallet0 pallet2 Depot1
+30 clear crate5 Depot1
 <==
+
+root 0
+0 solve_htn -> m0_do_get_truck 1 2
+1 do_load_truck -> m10_do_load_truck 3 4 5 6 7 8 9
+2 do_put_on -> m1_do_put_on 10 11 12 13 14 15
+3 do_get_truck -> m7_do_get_truck 16
+4 do_clear -> m5_do_clear 17 18 19 20 21
+5 do_lift_crate -> m8_do_lift_crate 22 23
+6 load -> Load 24
+7 do_get_truck -> m6_do_get_truck 25
+8 do_clear -> m5_do_clear 26 27 28 29 30
+9 do_lift_crate -> m8_do_lift_crate 31 32

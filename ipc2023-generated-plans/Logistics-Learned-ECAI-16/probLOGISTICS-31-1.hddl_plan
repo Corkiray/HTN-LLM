@@ -1,66 +1,181 @@
+The following is an hierarchical plan to solve the domain logistics problem:
+
+
 ==>
-**Sequential Plan:**
-
-1. `i-LOCK-AT OBJ12 POS6` (lock OBJ12 at POS6)
-2. `i-LOCK-AT OBJ32 POS10` (lock OBJ32 at POS10)
-3. `i-LOCK-AT OBJ63 POS10` (lock OBJ63 at POS10)
-4. `i-LOCK-AT OBJ91 APT7` (lock OBJ91 at APT7)
-5. `i-LOCK-AT OBJ102 APT1` (lock OBJ102 at APT1)
-6. `i-LOCK-AT OBJ92 APT5` (lock OBJ92 at APT5)
-7. `i-LOCK-AT OBJ103 POS8` (lock OBJ103 at POS8)
-8. `i-LOCK-AT OBJ11 APT7` (lock OBJ11 at APT7)
-9. `i-LOCK-AT OBJ113 POS2` (lock OBJ113 at POS2)
-10. `i-LOCK-AT OBJ22 POS2` (lock OBJ22 at POS2)
-11. `i-LOCK-AT OBJ33 APT1` (lock OBJ33 at APT1)
-12. `i-LOCK-AT OBJ31 POS1` (lock OBJ31 at POS1)
-13. `i-LOCK-AT OBJ42 APT6` (lock OBJ42 at APT6)
-14. `i-LOCK-AT OBJ112 APT11` (lock OBJ112 at APT11)
-15. `i-LOCK-AT OBJ101 POS1` (lock OBJ101 at POS1)
-16. `i-LOCK-AT OBJ13 APT6` (lock OBJ13 at APT6)
-17. `i-LOCK-AT OBJ71 POS5` (lock OBJ71 at POS5)
-18. `i-LOCK-AT OBJ73 POS6` (lock OBJ73 at POS6)
-19. `i-LOCK-AT OBJ41 POS1` (lock OBJ41 at POS1)
-20. `i-LOCK-AT OBJ93 APT6` (lock OBJ93 at APT6)
-21. `i-LOCK-AT OBJ21 APT9` (lock OBJ21 at APT9)
-22. `i-LOCK-AT OBJ51 APT11` (lock OBJ51 at APT11)
-23. `i-LOCK-AT OBJ111 POS4` (lock OBJ111 at POS4)
-24. `i-LOCK-AT OBJ61 POS3` (lock OBJ61 at POS3)
-25. `i-LOCK-AT OBJ43 POS8` (lock OBJ43 at POS8)
-26. `i-LOCK-AT OBJ82 APT9` (lock OBJ82 at APT9)
-27. `i-LOCK-AT OBJ23 POS8` (lock OBJ23 at POS8)
-28. `i-LOCK-AT OBJ72 APT5` (lock OBJ72 at APT5)
-29. `i-LOCK-AT OBJ81 APT5` (lock OBJ81 at APT5)
-30. `i-LOCK-AT OBJ52 POS2` (lock OBJ52 at POS2)
-31. `i-LOCK-AT OBJ83 POS8` (lock OBJ83 at POS8)
-
-**Hierarchical Decomposition:**
-
-root 0
-0 ACHIEVE-AT OBJ12 POS6 -> M10-ACHIEVE-AT 1 2 3
-1 ACHIEVE-AT0 OBJ12 POS6 POS1 TRU1 -> M14-ACHIEVE-AT0 4 5
-2 ACHIEVE-AT-TRK TRU1 POS6 -> M34-ACHIEVE-AT 6 7
-3 i-LOCK-AT OBJ12 POS6
-4 DO-IN-UNLOAD-TRUCK0 OBJ12 TRU1 POS1 -> M6-DO-IN-UNLOAD-TRUCK0 8 9 10
-5 ACHIEVE-AT0 OBJ12 POS6
-6 ACHIEVE-AT1 TRU1 POS6 -> M36-ACHIEVE-AT1 11 12
-7 i-LOCK-AT TRU1 POS6
-8 ACHIEVE-AT-TRK TRU1 POS1 -> M33-ACHIEVE-AT 13 14
-9 IFUNLOCK-AT TRU1 POS1 -> IFUNLOCK1-AT 15
-10 UNLOAD-TRUCK OBJ12 TRU1 POS1
-11 DRIVE-TRUCK TRU1 POS1 POS6 CIT6
-12 ACHIEVE-AT1 TRU1 POS6
-13 AT TRU1 POS1
-14 i-LOCK-AT TRU1 POS1
-15 i-UNLOCK-AT TRU1 POS1
-
-... (similar decomposition for tasks 2-30)
-
-<==
-
-**Note:**
-
-* The sequential plan consists of 31 `i-LOCK-AT` actions to lock each object at its target location.
-* The hierarchical decomposition is shown for the first task `ACHIEVE-AT OBJ12 POS6` and would be similarly applied to tasks 2-30.
-* The decomposition uses methods from the logistics domain, such as `M10-ACHIEVE-AT`, `M14-ACHIEVE-AT0`, `M6-DO-IN-UNLOAD-TRUCK0`, etc.
-* Each method invocation is followed by its corresponding task decomposition, showing the ordered subtasks.
-* Actions like `i-LOCK-AT`, `i-UNLOCK-AT`, `UNLOAD-TRUCK`, `DRIVE-TRUCK`, etc. are part of the domain's action set.
+1 deliver_package OBJ12 POS6 -> m0_ordering_0 2 
+2 arrive_at_truck POS6 -> m0_ordering_0 3 4 
+3 move_to_package POS6 -> m0_ordering_0 5
+4 if_unlock_at TRU6 POS6 -> m1_ordering_0 6 
+5 load_truck OBJ12 TRU6 POS6 -> m0_ordering_0 7 8 
+6 if_unlock_at OBJ12 POS6 -> m1_ordering_0 9 
+7 i.unlock_at TRU6 POS6 -> m1_ordering_0 10 
+8 load_position OBJ12 TRU6 POS6 -> m0_ordering_0 11 
+9 if_unlock_at OBJ12 POS6 -> m1_ordering_0 12 
+10 i.unlock_at OBJ12 POS6 -> m1_ordering_0 13 
+11 set_position load_truck OBJ12 POS6 TRU6 -> m0_ordering_0 14 
+12 if_unlock_at OBJ12 POS6 -> m1_ordering_0 15 
+13 set_flag_truck OBJ12 POS6 TRU6 -> m0_ordering_0 16 
+14 is_flagged OBJ12 POS6 TRU6 -> m0_ordering_0 17 
+15 move_to_package OBJ32 POS10 -> m0_ordering_0 18 
+16 move_to_package OBJ63 POS10 -> m0_ordering_0 19 
+17 move_to_package OBJ102 APT1 -> m0_ordering_0 20 
+18 move_to_package OBJ92 APT5 -> m0_ordering_0 21 
+19 move_to_package OBJ103 POS8 -> m0_ordering_0 22 
+20 set_flag_at OBJ11 APT7 -> m0_ordering_0 23 
+21 set_flag_at OBJ113 POS2 -> m0_ordering_0 24 
+22 set_flag_at OBJ22 POS2 -> m0_ordering_0 25 
+23 is_flagged OBJ93 APT6 -> m0_ordering_0 26 
+24 set_flag_at OBJ31 POS1 -> m0_ordering_0 27 
+25 set_flag_at OBJ42 APT6 -> m0_ordering_0 28 
+26 set_flag_at OBJ101 POS1 -> m0_ordering_0 29 
+27 set_flag_at OBJ112 APT11 -> m0_ordering_0 30 
+28 is_flagged OBJ111 POS4 -> m0_ordering_0 31 
+29 is_flagged OBJ41 POS1 -> m0_ordering_0 32 
+30 move_to_package OBJ71 POS5 -> m0_ordering_0 33 
+31 set_flag_at OBJ73 POS6 -> m0_ordering_0 34 
+32 set_flag_at OBJ72 APT5 -> m0_ordering_0 35 
+33 set_flag_at OBJ81 APT5 -> m0_ordering_0 36 
+34 is_flagged OBJ61 POS3 -> m0_ordering_0 37 
+35 move_to_package OBJ52 POS2 -> m0_ordering_0 38 
+36 set_flag_at OBJ21 APT9 -> m0_ordering_0 39 
+37 is_flagged OBJ23 POS8 -> m0_ordering_0 40 
+38 set_flag_at OBJ111 POS4 -> m0_ordering_0 41 
+39 is_flagged OBJ83 POS8 -> m0_ordering_0 42 
+40 set_flag_at OBJ13 APT6 -> m0_ordering_0 43 
+41 move_to_package OBJ51 APT11 -> m0_ordering_0 44 
+42 is_flagged OBJ43 POS8 -> m0_ordering_0 45 
+43 move_to_package OBJ92 APT9 -> m0_ordering_0 46 
+44 is_flagged OBJ101 POS1 -> m0_ordering_0 47 
+45 is_flagged OBJ32 POS10 -> m0_ordering_0 48 
+46 is_flagged OBJ31 POS3 -> m0_ordering_0 49 
+47 is_flagged OBJ91 POS9 -> m0_ordering_0 50 
+48 set_flag_at OBJ31 POS10 -> m0_ordering_0 51 
+49 is_flagged OBJ83 POS10 -> m0_ordering_0 52 
+50 move_to_package OBJ91 POS9 -> m0_ordering_0 53 
+51 set_flag_at OBJ111 POS11 -> m0_ordering_0 54 
+52 set_flag_at OBJ61 POS10 -> m0_ordering_0 55 
+53 set_flag_at OBJ101 POS11 -> m0_ordering_0 56 
+54 move_to_package OBJ102 APT7 -> m0_ordering_0 57 
+55 move_to_package OBJ101 POS10 -> m0_ordering_0 58 
+56 set_flag_at OBJ32 POS11 -> m0_ordering_0 59 
+57 is_flagged OBJ31 POS9 -> m0_ordering_0 60 
+58 move_to_package OBJ51 APT9 -> m0_ordering_0 61 
+59 move_to_package OBJ101 POS9 -> m0_ordering_0 62 
+60 move_to_package OBJ22 POS9 -> m0_ordering_0 63 
+61 is_flagged OBJ101 APT9 -> m0_ordering_0 64 
+62 is_flagged OBJ83 POS9 -> m0_ordering_0 65 
+63 is_flagged OBJ92 POS9 -> m0_ordering_0 66 
+64 move_to_package OBJ81 APT7 -> m0_ordering_0 67 
+65 move_to_package OBJ52 APT9 -> m0_ordering_0 68 
+66 is_flagged OBJ81 POS9 -> m0_ordering_0 69 
+67 move_to_package OBJ72 APT5 -> m0_ordering_0 70 
+68 move_to_package OBJ21 APT8 -> m0_ordering_0 71 
+69 is_flagged OBJ111 POS10 -> m0_ordering_0 72 
+70 set_flag_at OBJ21 POS9 -> m0_ordering_0 73 
+71 move_to_package OBJ82 APT7 -> m0_ordering_0 74 
+72 set_flag_at OBJ63 POS10 -> m0_ordering_0 75 
+73 set_flag_at OBJ122 APT5 -> m0_ordering_0 76 
+74 move_to_package OBJ101 POS7 -> m0_ordering_0 77 
+75 is_flagged OBJ111 POS6 -> m0_ordering_0 78 
+76 set_flag_at OBJ41 APT7 -> m0_ordering_0 79 
+77 is_flagged OBJ52 POS8 -> m0_ordering_0 80 
+78 move_to_package OBJ81 APT9 -> m0_ordering_0 81 
+79 move_to_package OBJ21 APT7 -> m0_ordering_0 82 
+80 set_flag_at OBJ101 POS11 -> m0_ordering_0 83 
+81 set_flag_at OBJ113 POS6 -> m0_ordering_0 84 
+82 set_flag_at OBJ101 APT7 -> m0_ordering_0 85 
+83 move_to_package OBJ102 APT11 -> m0_ordering_0 86 
+84 move_to_package OBJ113 POS9 -> m0_ordering_0 87 
+85 set_flag_at OBJ41 POS9 -> m0_ordering_0 88 
+86 move_to_package OBJ91 APT11 -> m0_ordering_0 89 
+87 is_flagged OBJ102 POS8 -> m0_ordering_0 90 
+88 set_flag_at OBJ112 APT7 -> m0_ordering_0 91 
+89 set_flag_at OBJ103 APT7 -> m0_ordering_0 92 
+90 set_flag_at OBJ103 POS11 -> m0_ordering_0 93 
+91 move_to_package OBJ93 APT7 -> m0_ordering_0 94 
+92 is_flagged OBJ93 APT11 -> m0_ordering_0 95 
+93 move_to_package OBJ61 POS10 -> m0_ordering_0 96 
+94 set_flag_at OBJ102 POS5 -> m0_ordering_0 97 
+95 set_flag_at OBJ73 POS11 -> m0_ordering_0 98 
+96 set_flag_at OBJ51 POS9 -> m0_ordering_0 99 
+97 move_to_package OBJ73 POS9 -> m0_ordering_0 100 
+98 set_flag_at OBJ51 APT8 -> m0_ordering_0 101 
+99 move_to_package OBJ111 APT11 -> m0_ordering_0 102 
+100 move_to_package OBJ83 APT9 -> m0_ordering_0 103 
+101 move_to_package OBJ71 POS9 -> m0_ordering_0 104 
+102 is_flagged OBJ83 POS9 -> m0_ordering_0 105 
+103 set_flag_at OBJ61 POS9 -> m0_ordering_0 106 
+104 is_flagged OBJ43 POS11 -> m0_ordering_0 107 
+105 set_flag_at OBJ63 POS9 -> m0_ordering_0 108 
+106 set_flag_at OBJ22 APT10 -> m0_ordering_0 109 
+107 move_to_package OBJ52 POS10 -> m0_ordering_0 110 
+108 move_to_package OBJ83 APT5 -> m0_ordering_0 111 
+109 move_to_package OBJ61 APT10 -> m0_ordering_0 112 
+110 move_to_package OBJ102 POS11 -> m0_ordering_0 113 
+111 is_flagged OBJ101 APT5 -> m0_ordering_0 114 
+112 set_flag_at OBJ91 POS10 -> m0_ordering_0 115 
+113 move_to_package OBJ23 APT5 -> m0_ordering_0 116 
+114 set_flag_at OBJ81 APT7 -> m0_ordering_0 117 
+115 is_flagged OBJ101 APT7 -> m0_ordering_0 118 
+116 set_flag_at OBJ103 APT5 -> m0_ordering_0 119 
+117 move_to_package OBJ33 POS6 -> m0_ordering_0 120 
+118 set_flag_at OBJ81 POS10 -> m0_ordering_0 121 
+119 move_to_package OBJ92 POS8 -> m0_ordering_0 122 
+120 is_flagged OBJ112 POS8 -> m0_ordering_0 123 
+121 move_to_package OBJ101 POS7 -> m0_ordering_0 124 
+122 set_flag_at OBJ112 APT4 -> m0_ordering_0 125 
+123 move_to_package OBJ113 APT1 -> m0_ordering_0 126 
+124 set_flag_at OBJ111 POS11 -> m0_ordering_0 127 
+125 set_flag_at OBJ111 APT4 -> m0_ordering_0 128 
+126 move_to_package OBJ63 APT4 -> m0_ordering_0 129 
+127 set_flag_at OBJ61 APT5 -> m0_ordering_0 130 
+128 set_flag_at OBJ73 POS11 -> m0_ordering_0 131 
+129 set_flag_at OBJ31 POS4 -> m0_ordering_0 132 
+130 move_to_package OBJ31 POS8 -> m0_ordering_0 133 
+131 move_to_package OBJ93 POS10 -> m0_ordering_0 134 
+132 move_to_package OBJ13 POS10 -> m0_ordering_0 135 
+133 move_to_package OBJ71 POS10 -> m0_ordering_0 136 
+134 is_flagged OBJ82 APT6 -> m0_ordering_0 137 
+135 is_flagged OBJ102 POS4 -> m0_ordering_0 138 
+136 is_flagged OBJ102 APT7 -> m0_ordering_0 139 
+137 is_flagged OBJ102 APT6 -> m0_ordering_0 140 
+138 is_flagged OBJ102 APT5 -> m0_ordering_0 141 
+139 set_flag_at OBJ32 APT7 -> m0_ordering_0 142 
+140 is_flagged OBJ22 APT11 -> m0_ordering_0 143 
+141 move_to_package OBJ42 APT7 -> m0_ordering_0 144 
+142 set_flag_at OBJ61 POS10 -> m0_ordering_0 145 
+143 move_to_package OBJ92 APT3 -> m0_ordering_0 146 
+144 move_to_package OBJ42 POS9 -> m0_ordering_0 147 
+145 move_to_package OBJ21 POS8 -> m0_ordering_0 148 
+146 is_flagged OBJ92 APT4 -> m0_ordering_0 149 
+147 is_flagged OBJ112 APT4 -> m0_ordering_0 150 
+148 is_flagged OBJ112 POS5 -> m0_ordering_0 151 
+149 move_to_package OBJ52 POS5 -> m0_ordering_0 152 
+150 is_flagged OBJ52 POS10 -> m0_ordering_0 153 
+151 move_to_package OBJ63 POS9 -> m0_ordering_0 154 
+152 move_to_package OBJ101 APT8 -> m0_ordering_0 155 
+153 move_to_package OBJ102 APT4 -> m0_ordering_0 156 
+154 set_flag_at OBJ102 POS11 -> m0_ordering_0 157 
+155 is_flagged OBJ102 POS10 -> m0_ordering_0 158 
+156 set_flag_at OBJ61 APT9 -> m0_ordering_0 159 
+157 is_flagged OBJ61 APT6 -> m0_ordering_0 160 
+158 move_to_package OBJ92 APT6 -> m0_ordering_0 161 
+159 set_flag_at OBJ51 POS6 -> m0_ordering_0 162 
+160 move_to_package OBJ81 POS7 -> m0_ordering_0 163 
+161 is_flagged OBJ112 POS8 -> m0_ordering_0 164 
+162 move_to_package OBJ81 APT6 -> m0_ordering_0 165 
+163 set_flag_at OBJ92 POS11 -> m0_ordering_0 166 
+164 set_flag_at OBJ92 APT5 -> m0_ordering_0 167 
+165 move_to_package OBJ31 APT7 -> m0_ordering_0 168 
+166 is_flagged OBJ32 POS5 -> m0_ordering_0 169 
+167 move_to_package OBJ72 APT10 -> m0_ordering_0 170 
+168 move_to_package OBJ113 APT3 -> m0_ordering_0 171 
+169 set_flag_at OBJ51 APT11 -> m0_ordering_0 172 
+170 move_to_package OBJ101 POS10 -> m0_ordering_0 173 
+171 move_to_package OBJ31 POS11 -> m0_ordering_0 174 
+172 move_to_package OBJ51 POS11 -> m0_ordering_0 175 
+173 move_to_package OBJ32 APT8 -> m0_ordering_0 176 
+174 move_to_package OBJ101 APT11 -> m0_ordering_0 177 
+175 is_flagged OBJ113 POS8 -> m0_ordering_0 178 
+176 is_flagged OBJ112 POS11 -> m0_ordering_0 179 
+177 is_flagged

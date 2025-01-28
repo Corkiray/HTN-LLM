@@ -1,0 +1,126 @@
+==>
+1 move C8 C6
+2 board C6 f0
+3 move C6 C5
+4 move C5 C4
+5 move C4 C3
+6 move C3 D8
+7 move D8 C7
+8 debark C7 f0
+9 move D5 H7
+10 move H7 D4
+11 move D4 DA
+12 move DA S3
+13 move S3 H5
+14 move H5 S6
+15 move S6 H6
+16 move H6 CA
+17 move CA HA
+18 move HA C2
+19 move C2 S4
+20 move S4 C5
+21 move S5 H3
+22 move H3 S2
+23 move S2 D6
+24 move D6 S8
+25 move S8 H8
+26 move H8 D7
+27 move D7 H4
+28 move H4 C6
+29 move C6 C8
+30 board C8 home
+<==
+
+root 0
+0 solve_freecell -> m1_solve_freecell_0 1 30
+1 task0 (ACHIEVE-HOME C8) -> m1_achieve_home_0 1 2
+2 task1 (ACHIEVE-HOME D8) -> m1_achieve_home_1 3 9
+3 task2 (ACHIEVE-HOME H8) -> m1_achieve_home_2 10 18
+4 task3 (ACHIEVE-HOME S8) -> m1_achieve_home_3 19 29
+5 m1_solve_freecell_0 -> m2_solve_freecell_0 1 4
+6 m1_achieve_home_0 -> m3_achieve_home_0 1 2
+7 m1_achieve_home_1 -> m4_achieve_home_1 3 9
+8 m1_achieve_home_2 -> m5_achieve_home_2 10 18
+9 m1_achieve_home_3 -> m6_achieve_home_3 19 29
+10 m2_solve_freecell_0 -> m7_solve_freecell_0 1 3
+11 m3_achieve_home_0 -> m8_achieve_home_0 1 2
+12 m4_achieve_home_1 -> m9_achieve_home_1 3 9
+13 m5_achieve_home_2 -> m10_achieve_home_2 10 18
+14 m6_achieve_home_3 -> m11_achieve_home_3 19 29
+15 m7_solve_freecell_0 -> m12_solve_freecell_0 1 2
+16 m8_achieve_home_0 -> m13_achieve_home_0 1 2
+17 m9_achieve_home_1 -> m14_achieve_home_1 3 9
+18 m10_achieve_home_2 -> m15_achieve_home_2 10 18
+19 m11_achieve_home_3 -> m16_achieve_home_3 19 29
+20 m12_solve_freecell_0 -> m17_solve_freecell_0 1 
+21 m13_achieve_home_0 -> m18_achieve_home_0 1 
+22 m14_achieve_home_1 -> m19_achieve_home_1 3 
+23 m15_achieve_home_2 -> m20_achieve_home_2 10 
+24 m16_achieve_home_3 -> m21_achieve_home_3 19 
+25 m17_solve_freecell_0 -> m22_solve_freecell_0  
+26 m18_achieve_home_0 -> m23_achieve_home_0  
+27 m19_achieve_home_1 -> m24_achieve_home_1  
+28 m20_achieve_home_2 -> m25_achieve_home_2  
+29 m21_achieve_home_3 -> m26_achieve_home_3  
+30 m22_solve_freecell_0 -> m27_solve_freecell_0  
+31 m23_achieve_home_0 -> m28_achieve_home_0  
+32 m24_achieve_home_1 -> m29_achieve_home_1  
+33 m25_achieve_home_2 -> m30_achieve_home_2  
+34 m26_achieve_home_3 -> m31_achieve_home_3  
+35 m27_solve_freecell_0 -> m32_solve_freecell_0  
+36 m28_achieve_home_0 -> m33_achieve_home_0  
+37 m29_achieve_home_1 -> m34_achieve_home_1  
+38 m30_achieve_home_2 -> m35_achieve_home_2  
+39 m31_achieve_home_3 -> m36_achieve_home_3  
+40 m32_solve_freecell_0 -> m37_solve_freecell_0  
+41 m33_achieve_home_0 -> m38_achieve_home_0  
+42 m34_achieve_home_1 -> m39_achieve_home_1  
+43 m35_achieve_home_2 -> m40_achieve_home_2  
+44 m36_achieve_home_3 -> m41_achieve_home_3  
+45 m37_solve_freecell_0 -> m42_solve_freecell_0  
+46 m38_achieve_home_0 -> m43_achieve_home_0  
+47 m39_achieve_home_1 -> m44_achieve_home_1  
+48 m40_achieve_home_2 -> m45_achieve_home_2  
+49 m41_achieve_home_3 -> m46_achieve_home_3  
+50 m42_solve_freecell_0 -> m47_solve_freecell_0  
+51 m43_achieve_home_0 -> m48_achieve_home_0  
+52 m44_achieve_home_1 -> m49_achieve_home_1  
+53 m45_achieve_home_2 -> m50_achieve_home_2  
+54 m46_achieve_home_3 -> m51_achieve_home_3  
+55 m47_solve_freecell_0 -> m52_solve_freecell_0  
+56 m48_achieve_home_0 -> m53_achieve_home_0  
+57 m49_achieve_home_1 -> m54_achieve_home_1  
+58 m50_achieve_home_2 -> m55_achieve_home_2  
+59 m51_achieve_home_3 -> m56_achieve_home_3  
+60 m52_solve_freecell_0 -> m57_solve_freecell_0  
+61 m53_achieve_home_0 -> m58_achieve_home_0  
+62 m54_achieve_home_1 -> m59_achieve_home_1  
+63 m55_achieve_home_2 -> m60_achieve_home_2  
+64 m56_achieve_home_3 -> m61_achieve_home_3  
+65 m57_solve_freecell_0 -> m62_solve_freecell_0  
+66 m58_achieve_home_0 -> m63_achieve_home_0  
+67 m59_achieve_home_1 -> m64_achieve_home_1  
+68 m60_achieve_home_2 -> m65_achieve_home_2  
+69 m61_achieve_home_3 -> m66_achieve_home_3  
+70 m62_solve_freecell_0 -> m67_solve_freecell_0  
+71 m63_achieve_home_0 -> m68_achieve_home_0  
+72 m64_achieve_home_1 -> m69_achieve_home_1  
+73 m65_achieve_home_2 -> m70_achieve_home_2  
+74 m66_achieve_home_3 -> m71_achieve_home_3  
+75 m67_solve_freecell_0 -> m72_solve_freecell_0  
+76 m68_achieve_home_0 -> m73_achieve_home_0  
+77 m69_achieve_home_1 -> m74_achieve_home_1  
+78 m70_achieve_home_2 -> m75_achieve_home_2  
+79 m71_achieve_home_3 -> m76_achieve_home_3  
+80 m72_solve_freecell_0 -> m77_solve_freecell_0  
+81 m73_achieve_home_0 -> m78_achieve_home_0  
+82 m74_achieve_home_1 -> m79_achieve_home_1  
+83 m75_achieve_home_2 -> m80_achieve_home_2  
+84 m76_achieve_home_3 -> m81_achieve_home_3  
+85 m77_solve_freecell_0 -> m82_solve_freecell_0  
+86 m78_achieve_home_0 -> m83_achieve_home_0  
+87 m79_achieve_home_1 -> m84_achieve_home_1  
+88 m80_achieve_home_2 -> m85_achieve_home_2  
+89 m81_achieve_home_3 -> m86_achieve_home_3  
+90 m82_solve_freecell_0 -> m87_solve_freecell_0  
+91 m83_achieve_home_

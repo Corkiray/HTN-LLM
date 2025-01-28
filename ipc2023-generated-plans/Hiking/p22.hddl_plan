@@ -1,57 +1,332 @@
 ==>
-**Sequential Plan**
-1. prepare_trip place0
-2. trip_to1 couple0 place7
-3. prepare_trip place0
-4. trip_to1 couple1 place7
-5. prepare_trip place0
-6. trip_to1 couple2 place7
-7. prepare_trip place0
-8. trip_to1 couple3 place7
-9. prepare_trip place0
-10. trip_to1 couple4 place7
-11. prepare_trip place0
-12. trip_to1 couple5 place7
-13. prepare_trip place0
-14. trip_to1 couple6 place7
-15. walk_everyone tent0 place7 place0
-16. walk_everyone tent1 place7 place0
-17. walk_everyone tent2 place7 place0
-18. walk_everyone tent3 place7 place0
-19. walk_everyone tent4 place7 place0
-20. walk_everyone tent5 place7 place0
-21. walk_everyone tent6 place7 place0
-
-**Hierarchical Decomposition**
+1 prepare_trip place0
+2 trip_to1 couple0 place7
+3 prepare_trip place0
+4 trip_to1 couple1 place7
+5 prepare_trip place0
+6 trip_to1 couple2 place7
+7 prepare_trip place0
+8 trip_to1 couple3 place7
+9 prepare_trip place0
+10 trip_to1 couple4 place7
+11 prepare_trip place0
+12 trip_to1 couple5 place7
+13 prepare_trip place0
+14 trip_to1 couple6 place7
+15 put_down guy4 place0 tent4
+16 bring_tent place0
+17 bring_cars place0
+18 put_down girl5 place0 tent5
+19 drive_tent guy4 place0 place1 car4 tent4
+20 bring_tent place0
+21 bring_cars place0
+22 put_down girl6 place0 tent6
+23 drive_tent girl5 place0 place1 car5 tent5
+24 bring_tent place0
+25 bring_cars place0
+26 drive_tent guy4 place1 place2 car4 tent4
+27 put_up guy4 place2 tent4
+28 drive_passenger guy4 place2 place1 car4 girl4
+29 walk_together tent4 place2 guy4 place1 girl4 couple4
+30 put_down guy4 place2 tent4
+31 drive_passenger girl4 place2 place1 car4 guy4
+32 drive guy4 place1 place2 car4
+33 drive girl5 place1 place2 car5
+34 drive_tent girl6 place0 place1 car6 tent6
+35 bring_tent place0
+36 bring_cars place0
+37 drive_tent girl5 place2 place3 car5 tent5
+38 put_up girl5 place3 tent5
+39 drive_passenger girl5 place3 place2 car5 girl4
+40 walk_together tent5 place3 guy4 place2 girl5 couple5
+41 put_down girl5 place3 tent5
+42 drive_passenger girl4 place3 place2 car5 girl5
+43 drive girl4 place2 place3 car4
+44 drive girl5 place2 place3 car5
+45 drive guy4 place2 place3 car4
+46 drive_passenger guy4 place3 place2 car4 girl4
+47 walk_together tent4 place3 girl4 place2 guy4 couple4
+48 put_down guy4 place3 tent4
+49 drive_passenger girl4 place3 place2 car4 guy4
+50 drive girl4 place2 place3 car4
+51 drive guy6 place0 place1 car6
+52 drive_passenger guy6 place1 place0 car6 girl6
+53 drive guy6 place0 place1 car6
+54 drive girl6 place0 place1 car6
+55 drive_passenger guy6 place1 place0 car6 girl6
+56 walk_together tent6 place1 guy6 place0 girl6 couple6
+57 drive_tent girl6 place1 place2 car6 tent6
+58 put_up girl6 place2 tent6
+59 drive_passenger girl6 place2 place1 car6 guy6
+60 walk_together tent6 place2 guy6 place1 girl6 couple6
+61 put_down girl6 place2 tent6
+62 drive_passenger guy6 place2 place1 car6 girl6
+63 drive guy6 place1 place2 car6
+64 drive girl6 place1 place2 car6
+65 bring_tent place0
+66 bring_cars place0
+67 drive_tent girl6 place2 place3 car6 tent6
+68 put_up girl6 place3 tent6
+69 drive_passenger girl6 place3 place2 car6 guy6
+70 walk_together tent6 place3 guy6 place2 girl6 couple6
+71 put_down girl6 place3 tent6
+72 drive_passenger guy6 place3 place2 car6 girl6
+73 drive guy6 place2 place3 car6
+74 drive girl6 place2 place3 car6
+75 drive_tent guy4 place3 place4 car4 tent4
+76 put_up guy4 place4 tent4
+77 drive_passenger guy4 place4 place3 car4 girl4
+78 walk_together tent4 place4 girl4 place3 guy4 couple4
+79 put_down guy4 place4 tent4
+80 drive_passenger girl4 place4 place3 car4 guy4
+81 drive girl4 place3 place4 car4
+82 drive guy4 place3 place4 car4
+83 drive_tent girl5 place3 place4 car5 tent5
+84 put_up girl5 place4 tent5
+85 drive_passenger girl5 place4 place3 car5 girl4
+86 walk_together tent5 place4 guy4 place3 girl5 couple5
+87 put_down girl5 place4 tent5
+88 drive_passenger girl4 place4 place3 car5 girl5
+89 drive girl4 place3 place4 car4
+90 drive girl5 place3 place4 car5
+91 drive guy4 place3 place4 car4
+92 drive_passenger guy4 place4 place3 car4 girl4
+93 walk_together tent4 place4 girl4 place3 guy4 couple4
+94 put_down guy4 place4 tent4
+95 drive_passenger girl4 place4 place3 car4 guy4
+96 drive girl4 place3 place4 car4
+97 drive guy4 place3 place4 car4
+98 drive_tent girl6 place3 place4 car6 tent6
+99 put_up girl6 place4 tent6
+100 drive_passenger girl6 place4 place3 car6 guy6
+101 walk_together tent6 place4 guy6 place3 girl6 couple6
+102 put_down girl6 place4 tent6
+103 drive_passenger guy6 place4 place3 car6 girl6
+104 drive guy6 place3 place4 car6
+105 drive girl6 place3 place4 car6
+106 bring_tent place0
+107 bring_cars place0
+108 drive_tent guy4 place4 place5 car4 tent4
+109 put_up guy4 place5 tent4
+110 drive_passenger guy4 place5 place4 car4 girl4
+111 walk_together tent4 place5 girl4 place4 guy4 couple4
+112 put_down guy4 place5 tent4
+113 drive_passenger girl4 place5 place4 car4 guy4
+114 drive girl4 place4 place5 car4
+115 drive guy4 place4 place5 car4
+116 drive_tent girl5 place4 place5 car5 tent5
+117 put_up girl5 place5 tent5
+118 drive_passenger girl5 place5 place4 car5 girl4
+119 walk_together tent5 place5 guy4 place4 girl5 couple5
+120 put_down girl5 place5 tent5
+121 drive_passenger girl4 place5 place4 car5 girl5
+122 drive girl4 place4 place5 car4
+123 drive girl5 place4 place5 car5
+124 drive guy4 place4 place5 car4
+125 drive_passenger guy4 place5 place4 car4 girl4
+126 walk_together tent4 place5 girl4 place4 guy4 couple4
+127 put_down guy4 place5 tent4
+128 drive_passenger girl4 place5 place4 car4 guy4
+129 drive girl4 place4 place5 car4
+130 drive guy4 place4 place5 car4
+131 drive_tent girl6 place4 place5 car6 tent6
+132 put_up girl6 place5 tent6
+133 drive_passenger girl6 place5 place4 car6 guy6
+134 walk_together tent6 place5 guy6 place4 girl6 couple6
+135 put_down girl6 place5 tent6
+136 drive_passenger guy6 place5 place4 car6 girl6
+137 drive guy6 place4 place5 car6
+138 drive girl6 place4 place5 car6
+139 bring_tent place0
+140 bring_cars place0
+141 put_down guy0 place0 tent0
+142 drive_tent guy0 place0 place1 car0 tent0
+143 drive car1 place0 place1
+144 put_up guy0 place1 tent0
+145 drive_passenger car1 place1 place0 car1 guy1
+146 walk_together tent0 place1 guy0 place0 girl0 couple0
+147 put_down guy0 place1 tent0
+148 drive_passenger girl0 place1 place0 car1 guy1
+149 drive guy1 place0 place1
+150 drive girl0 place0 place1
+151 drive car1 place1 place2
+152 put_down guy2 place0 tent2
+153 drive_tent guy2 place0 place1 car2 tent2
+154 drive car3 place0 place1
+155 put_up guy2 place1 tent2
+156 drive_passenger car3 place1 place0 car3 guy3
+157 walk_together tent2 place1 guy2 place0 girl2 couple2
+158 put_down guy2 place1 tent2
+159 drive_passenger girl2 place1 place0 car3 guy3
+160 drive guy3 place0 place1
+161 drive girl2 place0 place1
+162 drive car3 place1 place2
+163 drive_tent guy0 place2 place3 car0 tent0
+164 put_up guy0 place3 tent0
+165 drive_passenger guy0 place3 place2 car0 girl0
+166 walk_together tent0 place3 guy0 place2 girl0 couple0
+167 put_down guy0 place3 tent0
+168 drive_passenger girl0 place3 place2 car0 guy0
+169 drive guy0 place2 place3 car0
+170 drive girl0 place2 place3 car0
+171 drive_tent guy2 place2 place3 car2 tent2
+172 put_up guy2 place3 tent2
+173 drive_passenger guy2 place3 place2 car2 girl2
+174 walk_together tent2 place3 guy2 place2 girl2 couple2
+175 put_down guy2 place3 tent2
+176 drive_passenger girl2 place3 place2 car2 guy2
+177 drive guy2 place2 place3 car2
+178 drive girl2 place2 place3 car2
+179 drive_tent guy4 place5 place6 car4 tent4
+180 put_up guy4 place6 tent4
+181 drive_passenger guy4 place6 place5 car4 girl4
+182 walk_together tent4 place6 girl4 place5 guy4 couple4
+183 put_down guy4 place6 tent4
+184 drive_passenger girl4 place6 place5 car4 guy4
+185 drive girl4 place5 place6 car4
+186 drive guy4 place5 place6 car4
+187 drive_tent girl5 place5 place6 car5 tent5
+188 put_up girl5 place6 tent5
+189 drive_passenger girl5 place6 place5 car5 girl4
+190 walk_together tent5 place6 guy4 place5 girl5 couple5
+191 put_down girl5 place6 tent5
+192 drive_passenger girl4 place6 place5 car5 girl5
+193 drive girl4 place5 place6 car4
+194 drive girl5 place5 place6 car5
+195 drive guy4 place5 place6 car4
+196 drive_passenger guy4 place6 place5 car4 girl4
+197 walk_together tent4 place6 girl4 place5 guy4 couple4
+198 put_down guy4 place6 tent4
+199 drive_passenger girl4 place6 place5 car4 guy4
+200 drive girl4 place5 place6 car4
+201 drive guy4 place5 place6 car4
+202 drive_tent girl6 place5 place6 car6 tent6
+203 put_up girl6 place6 tent6
+204 drive_passenger girl6 place6 place5 car6 guy6
+205 walk_together tent6 place6 guy6 place5 girl6 couple6
+206 put_down girl6 place6 tent6
+207 drive_passenger guy6 place6 place5 car6 girl6
+208 drive guy6 place5 place6 car6
+209 drive girl6 place5 place6 car6
+210 drive_tent guy4 place6 place7 car4 tent4
+211 put_up guy4 place7 tent4
+212 drive_passenger guy4 place7 place6 car4 girl4
+213 walk_together tent4 place7 guy4 place6 girl4 couple4
+214 put_down guy4 place7 tent4
+215 drive_passenger girl4 place7 place6 car4 guy4
+216 drive girl4 place6 place7 car4
+217 drive guy4 place6 place7 car4
+218 drive_tent girl5 place6 place7 car5 tent5
+219 put_up girl5 place7 tent5
+220 drive_passenger girl5 place7 place6 car5 girl4
+221 walk_together tent5 place7 guy4 place6 girl5 couple5
+222 put_down girl5 place7 tent5
+223 drive_passenger girl4 place7 place6 car5 girl5
+224 drive girl4 place6 place7 car4
+225 drive girl5 place6 place7 car5
+226 drive guy4 place6 place7 car4
+227 drive_passenger guy4 place7 place6 car4 girl4
+228 walk_together tent4 place7 girl4 place6 guy4 couple4
+229 put_down guy4 place7 tent4
+230 drive_passenger girl4 place7 place6 car4 guy4
+231 drive girl4 place6 place7 car4
+232 drive guy4 place6 place7 car4
+233 drive_tent girl6 place6 place7 car6 tent6
+234 put_up girl6 place7 tent6
+235 drive_passenger girl6 place7 place6 car6 guy6
+236 walk_together tent6 place7 guy6 place6 girl6 couple6
+237 put_down girl6 place7 tent6
+238 drive_passenger guy6 place7 place6 car6 girl6
+239 drive guy6 place6 place7 car6
+240 drive girl6 place6 place7 car6
+241 drive_tent guy0 place5 place6 car0 tent0
+242 drive guy1 place5 place6 car1
+243 drive_passenger guy0 place6 place5 car0 girl0
+244 drive_tent guy2 place5 place6 car2 tent2
+245 drive guy3 place5 place6 car3
+246 drive_passenger guy2 place6 place5 car2 girl2
+247 drive_tent guy0 place6 place7 car0 tent0
+248 put_up guy0 place7 tent0
+249 drive_passenger guy0 place7 place6 car0 girl0
+250 walk_together tent0 place7 guy0 place6 girl0 couple0
+251 put_down guy0 place7 tent0
+252 drive_passenger girl0 place7 place6 car0 guy0
+253 drive guy0 place6 place7 car0
+254 drive girl0 place6 place7 car0
+255 drive_tent guy2 place6 place7 car2 tent2
+256 put_up guy2 place7 tent2
+257 drive_passenger guy2 place7 place6 car2 girl2
+258 walk_together tent2 place7 guy2 place6 girl2 couple2
+259 put_down guy2 place7 tent2
+260 drive_passenger girl2 place7 place6 car2 guy2
+261 drive guy2 place6 place7 car2
+262 drive girl2 place6 place7 car2
+263 drive_tent guy4 place7 place7 car4 tent4
+264 put_up guy4 place7 tent4
+265 drive_passenger guy4 place7 place7 car4 girl4
+266 walk_together tent4 place7 guy4 place7 girl4 couple4
+267 put_down guy4 place7 tent4
+268 drive_passenger girl4 place7 place7 car4 guy4
+269 drive girl4 place7 place7 car4
+270 drive guy4 place7 place7 car4
+271 drive_tent girl5 place7 place7 car5 tent5
+272 put_up girl5 place7 tent5
+273 drive_passenger girl5 place7 place7 car5 girl4
+274 walk_together tent5 place7 guy4 place7 girl5 couple5
+275 put_down girl5 place7 tent5
+276 drive_passenger girl4 place7 place7 car5 girl5
+277 drive girl4 place7 place7 car4
+278 drive girl5 place7 place7 car5
+279 drive guy4 place7 place7 car4
+280 drive_passenger guy4 place7 place7 car4 girl4
+281 walk_together tent4 place7 girl4 place7 guy4 couple4
+282 put_down guy4 place7 tent4
+283 drive_passenger girl4 place7 place7 car4 guy4
+284 drive girl4 place7 place7 car4
+285 drive guy4 place7 place7 car4
+286 drive_tent girl6 place7 place7 car6 tent6
+287 put_up girl6 place7 tent6
+288 drive_passenger girl6 place7 place7 car6 guy6
+289 walk_together tent6 place7 guy6 place7 girl6 couple6
+290 put_down girl6 place7 tent6
+291 drive_passenger guy6 place7 place7 car6 girl6
+292 drive guy6 place7 place7 car6
+293 drive girl6 place7 place7 car6
+294 bring_tent place0
+295 bring_cars place0
+296 bring_tent place0
+297 bring_cars place0
+298 bring_tent place0
+299 bring_cars place0
+300 bring_tent place0
+301 bring_cars place0
+302 bring_tent place0
+303 bring_cars place0
+304 bring_tent place0
+305 bring_cars place0
+306 bring_tent place0
+307 bring_cars place0
 root 0
-0 everyone_go_hiking place7 -> m14_everyone_go_hiking 1 2
-  1 prepare_trip place0 -> m6_prepare_trip 3 4
-    3 bring_tent place0 -> m9_bring_tent (tent0) | m10_bring_tent (tent4, tent5, tent6) 
-      * m9_bring_tent (tent0, tent1, tent2, tent3)
-      * m10_bring_tent (tent4, tent5, tent6)
-        + 10.1 put_down (guy4, place0, tent4)
-        + 10.2 put_down (guy5, place0, tent5)
-        + 10.3 put_down (guy6, place0, tent6)
-    4 bring_cars place0 -> m11_bring_cars
-  2 trip_to1 coupleX place7 -> m0_trip_to1 5 (X = 0 to 6)
-    5 trip_to2 coupleX place0 place7 -> m2_trip_to2 6 7 (X = 0 to 6, mid = place1 to place6)
-      6 trip_to2 coupleX place0 placeX -> m2_trip_to2... (recursive decomposition, omitted for brevity)
-      7 trip_to2 coupleX placeX place7 -> m3_trip_to2 8-14 (X = 1 to 6)
-        8 drive_tent (guyX, placeX, place7, carX, tentX)
-        9 drive (girlX, placeX, place7, carY)
-        10 put_up (guyX, place7, tentX)
-        11 drive_passenger (girlX, place7, placeX, carY, guyX)
-        12 walk_everyone tentX place7 placeX -> m5_walk_everyone 15 (X = 0 to 6)
-          15 walk_together (tentX, place7, guyX, placeX, girlX, coupleX)
-        13 put_down (girlX, place7, tentX)
-        14 drive_passenger (guyX, place7, placeX, carX, girlX)
-15-21 walk_everyone -> m4_walk_everyone (no further decomposition, as preconditions are met)
-
-<==
-
-**Notes:**
-
-* `coupleX`, `guyX`, `girlX`, `carX`, `carY`, and `tentX` are placeholders for the respective objects (e.g., `couple0`, `guy0`, `girl0`, `car0`, `car1`, and `tent0`).
-* The decomposition for `trip_to2` (steps 6 and 7) is recursive, but for brevity, only one level of decomposition is shown.
-* The `walk_everyone` tasks (steps 15-21) are not further decomposed, as the preconditions are met, and method `m4_walk_everyone` applies.
-* The plan assumes that the `next` predicate defines a linear ordering of places (i.e., `place0` to `place7`). If this is not the case, the plan may need to be adjusted accordingly.
+0 everyone_go_hiking -> m14_everyone_go_hiking 1 7
+308 prepare_trip place0 -> m6_prepare_trip 306 307
+309 bring_cars place0 -> m11_bring_cars 300
+310 bring_cars place0 -> m11_bring_cars 302
+311 bring_cars place0 -> m12_bring_cars 297 308
+312 bring_cars place0 -> m12_bring_cars 295 308
+313 bring_cars place0 -> m11_bring_cars 294
+314 bring_cars place0 -> m11_bring_cars 296
+315 bring_cars place0 -> m11_bring_cars 298
+316 bring_cars place0 -> m11_bring_cars 299
+317 bring_tent place0 -> m9_bring_tent 297
+318 bring_tent place0 -> m9_bring_tent 302
+319 bring_tent place0 -> m10_bring_tent 6 299
+320 bring_tent place0 -> m10_bring_tent 4 295
+321 bring_tent place0 -> m8_bring_tent 22 301
+322 bring_tent place0 -> m10_bring_tent 15 299
+323 bring_tent place0 -> m10_bring_tent 2 293
+324 bring_tent place0 -> m10_bring_tent 18 302
+325 bring_tent place0 -> m8_bring_tent 5 299
+326 bring_tent place0 -> m7_bring_tent 24 297
+327 bring_tent place0 -> m8_bring_tent 20 298
+328 prepare_trip place0 -> m6_prepare_trip 294 296
+329

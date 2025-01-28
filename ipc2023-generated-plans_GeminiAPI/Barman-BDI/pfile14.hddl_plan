@@ -1,0 +1,63 @@
+==>
+1 grasp right shot11
+2 grasp left shot4
+3 fill-shot shot4 ingredient4 right left dispenser4
+4 pour-shot-to-clean-shaker shot4 ingredient4 shaker1 left level1 level1
+5 grasp right shot6
+6 fill-shot shot6 ingredient6 right left dispenser6
+7 pour-shot-to-used-shaker shot6 ingredient6 shaker1 left level1 level1
+8 shake cocktail1 ingredient4 ingredient6 shaker1 left right
+9 pour-shaker-to-shot cocktail1 shot11 right shaker1 level1 level1
+10 grasp right shot15
+11 grasp left shot2
+12 fill-shot shot2 ingredient2 right left dispenser2
+13 pour-shot-to-clean-shaker shot2 ingredient2 shaker1 left level1 level1
+14 grasp right shot4
+15 fill-shot shot4 ingredient4 right left dispenser4
+16 pour-shot-to-used-shaker shot4 ingredient4 shaker1 left level1 level1
+17 shake cocktail2 ingredient2 ingredient4 shaker1 left right
+18 pour-shaker-to-shot cocktail2 shot15 right shaker1 level1 level1
+19 grasp right shot8
+20 grasp left shot9
+21 fill-shot shot9 ingredient9 right left dispenser9
+22 pour-shot-to-clean-shaker shot9 ingredient9 shaker1 left level1 level1
+23 grasp right shot5
+24 fill-shot shot5 ingredient5 right left dispenser5
+25 pour-shot-to-used-shaker shot5 ingredient5 shaker1 left level1 level1
+26 shake cocktail3 ingredient9 ingredient5 shaker1 left right
+27 pour-shaker-to-shot cocktail3 shot8 right shaker1 level1 level1
+28 grasp right shot13
+29 grasp left shot5
+30 fill-shot shot5 ingredient5 right left dispenser5
+31 pour-shot-to-clean-shaker shot5 ingredient5 shaker1 left level1 level1
+32 grasp right shot1
+33 fill-shot shot1 ingredient1 right left dispenser1
+34 pour-shot-to-used-shaker shot1 ingredient1 shaker1 left level1 level1
+35 shake cocktail4 ingredient5 ingredient1 shaker1 left right
+36 pour-shaker-to-shot cocktail4 shot13 right shaker1 level1 level1
+37 grasp right shot6
+38 grasp left shot8
+39 fill-shot shot8 ingredient8 right left dispenser8
+40 pour-shot-to-clean-shaker shot8 ingredient8 shaker1 left level1 level1
+41 grasp right shot5
+42 fill-shot shot5 ingredient5 right left dispenser5
+43 pour-shot-to-used-shaker shot5 ingredient5 shaker1 left level1 level1
+44 shake cocktail5 ingredient8 ingredient5 shaker1 left right
+45 pour-shaker-to-shot cocktail5 shot6 right shaker1 level1 level1
+root 0
+0 0 -> MakeAndPourCocktail shot11 cocktail1 shaker1 right 1 2 3 4 5 6 7 8 9
+1 1 -> MakeCocktail shaker1 cocktail1 ingredient6 right left ingredient4 10 11 12 13 14 15 16 17
+2 2 -> AchieveHolding right shaker1 18 19 20
+3 3 -> AchieveCleanShot shot11 21
+4 4 -> pour_shaker_to_shot_action shaker1 shot11 cocktail1 level1 right level1 22
+5 5 -> MakeAndPourCocktail shot15 cocktail2 shaker1 right 23 24 25 26 27 28 29
+6 6 -> MakeCocktail shaker1 cocktail2 ingredient4 right left ingredient2 30 31 32 33 34 35 36 37
+7 7 -> AchieveHolding right shaker1 38 39 40
+8 8 -> AchieveCleanShot shot15 41
+9 9 -> pour_shaker_to_shot_action shaker1 shot15 cocktail2 level1 right level1 42
+10 10 -> AchieveCleanShaker shaker1 43
+11 11 -> AchieveContainsShakerIngredient shaker1 ingredient4 44 45 46 47
+12 12 -> AchieveContainsShakerIngredient shaker1 ingredient6 48 49 50 51
+13 13 -> AchieveHandEmpty left 52
+14 14 -> AchieveContainsShotCocktail shot8 cocktail3 shaker1 right 53 54 55 56 57 58 59
+<==

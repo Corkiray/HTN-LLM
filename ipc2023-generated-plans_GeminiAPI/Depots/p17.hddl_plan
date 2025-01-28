@@ -1,0 +1,50 @@
+==>
+1 nop
+2 nop
+3 nop
+4 nop
+5 Lift hoist3 crate7 crate5 distributor1
+6 Drop hoist3 crate7 pallet3 distributor1
+7 Lift hoist3 crate1 pallet5 distributor1
+8 Drop hoist3 crate1 pallet7 distributor1
+9 nop
+10 Lift hoist0 crate3 pallet6 depot0
+11 Load hoist0 crate3 truck3 depot0
+12 Drive truck3 depot0 distributor1
+13 Unload hoist3 crate3 truck3 distributor1
+14 Drop hoist3 crate3 crate6 distributor1
+15 nop
+root 0
+0 do_put_on crate4 pallet0 -> m0_do_put_on 1
+1 do_put_on crate6 pallet1 -> m0_do_put_on 2
+2 do_put_on crate2 pallet4 -> m0_do_put_on 3
+3 do_put_on crate8 pallet6 -> m1_do_put_on 4
+4 do_clear crate8 distributor1 -> m5_do_clear 5 6
+5 do_clear crate7 distributor1 -> m1_do_put_on 7 8 
+6 do_get_truck truck3 distributor1 -> m7_do_get_truck 9
+7 do_clear crate7 distributor1 -> m4_do_clear
+8 do_lift_crate crate7 distributor1 hoist3 -> m9_do_lift_crate
+9 Drive truck3 depot0 distributor1
+10 do_clear pallet3 distributor1 -> m4_do_clear
+11 do_lift_crate crate8 distributor1 hoist3 -> m9_do_lift_crate
+12 Drop hoist3 crate8 pallet3 distributor1
+13 do_put_on crate3 crate8 -> m3_do_put_on 10 11 12
+14 do_load_truck crate3 pallet6 depot0 truck3 -> m10_do_load_truck 13 14 15 16
+15 do_get_truck truck3 depot0 -> m6_do_get_truck
+16 do_clear crate3 depot0 -> m4_do_clear
+17 Lift hoist0 crate3 pallet6 depot0
+18 Load hoist0 crate3 truck3 depot0
+19 Drive truck3 depot0 distributor1
+20 do_unload_truck crate3 pallet3 distributor1 truck3 -> m11_do_unload_truck 21 22 23
+21 do_clear pallet3 distributor1 -> m4_do_clear
+22 Unload hoist3 crate3 truck3 distributor1
+23 Drop hoist3 crate3 pallet3 distributor1
+24 do_put_on crate7 crate3 -> m1_do_put_on 24 25 26
+25 do_clear crate7 distributor1 -> m4_do_clear
+26 do_lift_crate crate7 distributor1 hoist3 -> m9_do_lift_crate
+27 Drop hoist3 crate7 crate3 distributor1
+28 do_put_on crate1 pallet7 -> m1_do_put_on 27 28 29
+29 do_clear crate1 distributor1 -> m5_do_clear 30 31
+30 do_clear crate5 distributor1 -> m1_do_put_on
+31 do_lift_crate crate5 distributor1 hoist3 -> m9_do_lift_crate
+<==

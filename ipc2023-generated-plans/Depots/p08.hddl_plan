@@ -1,66 +1,29 @@
-Here is a hierarchical plan to solve the given HTN problem:
-```
 ==>
-**Sequential Plan**
-1. Drive truck1 distributor0 distributor1
-2. do_get_truck truck1 distributor1 (m7_do_get_truck)
-3. do_load_truck crate9 pallet2 distributor1 truck1 hoist2 (m10_do_load_truck)
-4. Drive truck1 distributor1 distributor0
-5. do_unload_truck crate9 pallet0 distributor0 truck1 hoist0 (m11_do_unload_truck)
-6. do_put_on crate9 pallet0 (m1_do_put_on)
-7. do_put_on crate7 pallet1 (m1_do_put_on)
-8. do_put_on crate6 pallet2 (m1_do_put_on)
-9. do_put_on crate0 pallet3 (m1_do_put_on)
-10. do_put_on crate8 pallet4 (m1_do_put_on)
-11. do_put_on crate3 crate8 (m2_do_put_on)
-12. do_put_on crate1 crate0 (m2_do_put_on)
-**Hierarchical Decomposition**
+1 move crate9 pallet0 hoist0 depot0
+2 move crate7 pallet1 hoist1 distributor1
+3 move crate6 pallet2 hoist2 distributor1
+4 move crate0 pallet3 hoist1 distributor0
+5 deliver_person crate8 pallet4 hoist1 distributor1
+6 deliver_person crate8 pallet4 hoist1 distributor1
+7 move crate3 crate8 hoist1 distributor1
+8 move crate1 crate0 hoist1 distributor0
 root 0
-0 solve_depotprob4321 -> m3_do_put_on 1 2 3 4 5 6 7 8 9 10 11 12
-1 do_load_truck crate9 pallet2 distributor1 truck1 hoist2 -> m10_do_load_truck 3
-  3 do_get_truck truck1 distributor1 -> m7_do_get_truck 1
-2 do_unload_truck crate9 pallet0 distributor0 truck1 hoist0 -> m11_do_unload_truck 4 5
-  4 do_clear pallet0 distributor0 -> m4_do_clear 
-  5 Unload hoist0 crate9 truck1 distributor0
-3 do_put_on crate9 pallet0 -> m1_do_put_on 6 7 8
-  6 do_clear crate9 distributor1 -> m4_do_clear 
-  7 do_clear pallet0 distributor0 -> m4_do_clear 
-  8 Drop hoist0 crate9 pallet0 distributor0
-4 do_put_on crate7 pallet1 -> m1_do_put_on 9 10 11
-  9 do_clear crate7 distributor1 -> m4_do_clear 
-  10 do_clear pallet1 distributor0 -> m4_do_clear 
-  11 Drop hoist1 crate7 pallet1 distributor0
-5 do_put_on crate6 pallet2 -> m1_do_put_on 12 13 14
-  12 do_clear crate6 distributor0 -> m4_do_clear 
-  13 do_clear pallet2 distributor1 -> m4_do_clear 
-  14 Drop hoist2 crate6 pallet2 distributor1
-6 do_put_on crate0 pallet3 -> m1_do_put_on 15 16 17
-  15 do_clear crate0 distributor0 -> m4_do_clear 
-  16 do_clear pallet3 distributor1 -> m4_do_clear 
-  17 Drop hoist2 crate0 pallet3 distributor1
-7 do_put_on crate8 pallet4 -> m1_do_put_on 18 19 20
-  18 do_clear crate8 distributor0 -> m4_do_clear 
-  19 do_clear pallet4 distributor0 -> m4_do_clear 
-  20 Drop hoist1 crate8 pallet4 distributor0
-8 do_put_on crate3 crate8 -> m2_do_put_on 21 22 23 24
-  21 do_get_truck truck0 distributor0 -> m6_do_get_truck 
-  22 do_clear crate3 distributor0 -> m4_do_clear 
-  23 Unload hoist1 crate3 truck0 distributor0
-  24 Drop hoist1 crate3 crate8 distributor0
-9 do_put_on crate1 crate0 -> m2_do_put_on 25 26 27 28
-  25 do_get_truck truck0 distributor0 -> m6_do_get_truck 
-  26 do_clear crate1 distributor0 -> m4_do_clear 
-  27 Unload hoist1 crate1 truck0 distributor0
-  28 Drop hoist1 crate1 crate0 distributor0
+0 solve_htn -> m3_do_put_on_0 1 5 8
+1 m3_do_put_on_0 -> m10_do_load_truck_0 1 2 3
+3 m3_do_put_on_0 -> m10_do_load_truck_1 4 9 10
+5 deliver_person crate8 pallet4 hoist1 distributor1 -> m11_do_unload_truck_0 6 7 11
+6 load hoist1 crate8 truck1 distributor1
+7 unload hoist1 crate8 truck1 distributor1
+8 load hoist1 crate0 truck1 distributor0
+9 unload hoist1 crate0 truck1 distributor0
+10 drop hoist1 crate0 pallet3 distributor1
+11 drop hoist1 crate8 pallet4 distributor1
+12 deliver_person crate3 crate8 hoist1 distributor1 -> m9_do_lift_crate_0 13 14 15
+13 lift hoist1 crate3 pallet5 distributor0
+14 move crate3 crate8 hoist1 distributor1
+15 drop hoist1 crate3 crate8 distributor1
+16 deliver_person crate1 crate0 hoist1 distributor0 -> m9_do_lift_crate_1 17 18 19
+17 lift hoist1 crate1 pallet1 distributor0
+18 move crate1 crate0 hoist1 distributor0
+19 drop hoist1 crate1 crate0 distributor0
 <==
-```
-**Note:**
-
-* The plan assumes that the `nop` action has no effect and is only used as a placeholder.
-* The `Drive` actions are used to move trucks between locations.
-* The `do_get_truck` methods are used to ensure the truck is at the correct location.
-* The `do_clear` methods are used to ensure the surface or crate is clear.
-* The `do_load_truck` and `do_unload_truck` methods are used to load and unload crates from trucks.
-* The `do_put_on` methods are used to place crates on surfaces or other crates.
-* The `Lift`, `Drop`, `Load`, and `Unload` actions are used to manipulate crates with hoists.
-* The hierarchical decomposition shows the task decomposition using the provided HTN methods.

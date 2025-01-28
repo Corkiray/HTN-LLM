@@ -1,0 +1,101 @@
+==>
+1 AchieveContainsShotCocktail shot6 cocktail1
+2 AchieveContainsShotCocktail shot8 cocktail2
+3 AchieveContainsShotCocktail shot3 cocktail3
+root 0
+0 AchieveContainsShotCocktail shot6 cocktail1 -> MakeAndPourCocktail shot6 cocktail1 shaker1 left
+4 AchieveContainsShakerCocktail shaker1 cocktail1
+5 AchieveCleanShot shot6
+6 AchieveHolding left shaker1
+7 DoPourShakerToShot shaker1 shot6 cocktail1
+root 1
+1 AchieveContainsShakerCocktail shaker1 cocktail1 -> MakeCocktail shaker1 cocktail1 ingredient1 left right ingredient9
+8 AchieveCleanShaker shaker1
+9 AchieveContainsShakerIngredient shaker1 ingredient9
+10 AchieveContainsShakerIngredient shaker1 ingredient1
+11 AchieveHolding right shaker1
+12 AchieveHandEmpty left
+13 shake cocktail1 ingredient9 ingredient1 shaker1 right left
+root 2
+2 AchieveCleanShaker shaker1 -> CleanShakerNull shaker1
+root 3
+3 AchieveContainsShakerIngredient shaker1 ingredient9 -> AddIngredientToEmptyShaker shaker1 ingredient9 level1 level1 shot1 left
+14 AchieveContainsShotIngredient shot1 ingredient9
+15 AchieveHolding left shot1
+16 pour-shot-to-clean-shaker shot1 ingredient9 shaker1 left level1 level1
+root 4
+4 AchieveContainsShotIngredient shot1 ingredient9 -> AddIngredientToShot shot1 ingredient9 dispenser9 left right
+17 AchieveCleanShot shot1
+18 AchieveHolding right shot1
+19 AchieveHandEmpty left
+20 fill-shot shot1 ingredient9 right left dispenser9
+root 5
+5 AchieveCleanShot shot1 -> CleanShotNull shot1
+root 6
+6 AchieveHandEmpty left -> HandEmptyNull left left
+root 7
+7 AchieveHolding right shot1 -> PickUp right shot1
+21 AchieveHandEmpty right
+22 AchieveOnTable shot1
+23 grasp right shot1
+root 8
+8 AchieveHandEmpty right -> HandEmptyNull right right
+root 9
+9 AchieveOnTable shot1 -> OnTableNull shot1
+root 10
+10 AchieveContainsShakerIngredient shaker1 ingredient1 -> AddIngredientToUsedShaker shaker1 ingredient1 level1 level1 shot1 left
+24 AchieveContainsShotIngredient shot1 ingredient1
+25 AchieveHolding left shot1
+26 pour-shot-to-used-shaker shot1 ingredient1 shaker1 left level1 level1
+root 11
+11 AchieveContainsShotIngredient shot1 ingredient1 -> AddIngredientToShot shot1 ingredient1 dispenser1 left right
+27 AchieveCleanShot shot1
+28 AchieveHolding right shot1
+29 AchieveHandEmpty left
+30 fill-shot shot1 ingredient1 right left dispenser1
+root 12
+12 AchieveCleanShot shot1 -> CleanEmptyShot shot1 left ingredient9 right
+31 AchieveHolding right shot1
+32 AchieveHandEmpty left
+33 clean-shot shot1 ingredient9 right left
+root 13
+13 AchieveHandEmpty left -> HandEmptyNull left left
+root 14
+14 AchieveHolding right shot1 -> PickUp right shot1
+34 AchieveHandEmpty right
+35 AchieveOnTable shot1
+36 grasp right shot1
+root 15
+15 AchieveHandEmpty right -> drop right shot1
+37 ontable shot1
+38 handEmpty right
+root 16
+16 AchieveOnTable shot1 -> OnTableNull shot1
+root 17
+17 AchieveHandEmpty left -> HandEmptyNull left left
+root 18
+18 AchieveHolding right shaker1 -> PickUp right shaker1
+39 AchieveHandEmpty right
+40 AchieveOnTable shaker1
+41 grasp right shaker1
+root 19
+19 AchieveHandEmpty right -> HandEmptyNull right right
+root 20
+20 AchieveOnTable shaker1 -> OnTableNull shaker1
+root 21
+21 AchieveCleanShot shot6 -> CleanShotNull shot6
+root 22
+22 AchieveHolding left shaker1 -> PickUp left shaker1
+42 AchieveHandEmpty left
+43 AchieveOnTable shaker1
+44 grasp left shaker1
+root 23
+23 AchieveHandEmpty left -> drop left shot1
+45 ontable shot1
+46 handEmpty left
+root 24
+24 AchieveOnTable shaker1 -> OnTableNull shaker1
+root 25
+25 DoPourShakerToShot shaker1 shot6 cocktail1 -> pour_shaker_to_shot_action shaker1 shot6 cocktail1 level1 left level1
+47 pour-shaker-to-shot cocktail1 shot6 left shaker1 level1 level1
+<==

@@ -1,58 +1,68 @@
 ==>
-**Sequential Plan:**
-
-1. `i-LOCK-AT` `OBJ71` `POS7`
-2. `ACHIEVE-AT0` `OBJ71` `APT6` `POS7` `TRU7`
-3. `DO-AT-LOAD-TRUCK0` `OBJ71` `TRU7` `POS7`
-4. `ACHIEVE-AT-TRK` `TRU7` `POS7`
-5. `IFUNLOCK-AT` `TRU7` `POS7`
-6. `LOAD-TRUCK` `OBJ71` `TRU7` `POS7`
-7. `DO-IN-UNLOAD-TRUCK0` `OBJ71` `TRU7` `APT6`
-8. `ACHIEVE-AT-TRK` `TRU7` `APT6`
-9. `IFUNLOCK-AT` `TRU7` `APT6`
-10. `UNLOAD-TRUCK` `OBJ71` `TRU7` `APT6`
-11. `i-LOCK-AT` `OBJ71` `APT6`
-
-**... (plan for remaining tasks, due to response length limitations, only the first task's decomposition is fully shown)**
-
-**... (tasks 2-19, with only the top-level method calls shown)**
-
-12. `M10-ACHIEVE-AT` `OBJ53` `POS6`
-13. `M10-ACHIEVE-AT` `OBJ72` `POS6`
-14. `M10-ACHIEVE-AT` `OBJ12` `POS2`
-15. `M10-ACHIEVE-AT` `OBJ11` `APT1`
-16. `M10-ACHIEVE-AT` `OBJ52` `POS4`
-17. `M10-ACHIEVE-AT` `OBJ41` `APT5`
-18. `M10-ACHIEVE-AT` `OBJ31` `APT6`
-19. `M10-ACHIEVE-AT` `OBJ62` `APT1`
-20. `M10-ACHIEVE-AT` `OBJ42` `APT2`
-21. `M10-ACHIEVE-AT` `OBJ13` `POS1`
-22. `M10-ACHIEVE-AT` `OBJ22` `POS1`
-23. `M10-ACHIEVE-AT` `OBJ43` `APT7`
-24. `M10-ACHIEVE-AT` `OBJ73` `APT1`
-25. `M10-ACHIEVE-AT` `OBJ33` `POS2`
-26. `M10-ACHIEVE-AT` `OBJ61` `POS6`
-27. `M10-ACHIEVE-AT` `OBJ21` `POS1`
-28. `M10-ACHIEVE-AT` `OBJ23` `APT4`
-29. `M10-ACHIEVE-AT` `OBJ32` `APT3`
-30. `M10-ACHIEVE-AT` `OBJ63` `APT3`
-
-**Hierarchical Decomposition:**
-
-**root** `0`
-0 `ACHIEVE-AT` `OBJ71` `APT6` -> `M10-ACHIEVE-AT` `1` `2` `3` `4` `5` `6` `7` `8` `9` `10` `11`
-1 `ACHIEVE-AT0` `OBJ71` `APT6` `POS7` `TRU7` -> `M12-ACHIEVE-AT0` `2` `3`
-2 `DO-AT-LOAD-TRUCK0` `OBJ71` `TRU7` `POS7` -> `M4-DO-AT-LOAD-TRUCK0` `4` `5` `6`
-3 `ACHIEVE-AT0` `OBJ71` `APT6` ( recursive, omitted for brevity )
-4 `ACHIEVE-AT-TRK` `TRU7` `POS7` -> `M32-ACHIEVE-AT` `i-LOCK-AT` (or other applicable methods based on initial conditions)
-5 `IFUNLOCK-AT` `TRU7` `POS7` -> `IFUNLOCK1-AT` `i-UNLOCK-AT` (assuming not flagged)
-6 `LOAD-TRUCK` `OBJ71` `TRU7` `POS7` (action, no further decomposition)
-7 `DO-IN-UNLOAD-TRUCK0` `OBJ71` `TRU7` `APT6` -> `M6-DO-IN-UNLOAD-TRUCK0` `8` `9` `10`
-8 `ACHIEVE-AT-TRK` `TRU7` `APT6` (similar to step 4)
-9 `IFUNLOCK-AT` `TRU7` `APT6` (similar to step 5)
-10 `UNLOAD-TRUCK` `OBJ71` `TRU7` `APT6` (action, no further decomposition)
-11 `i-LOCK-AT` `OBJ71` `APT6` (action, no further decomposition)
-
-**... (decomposition for tasks 2-19, not fully shown due to response length limitations)**
-
+1 move TRU6 POS6 APT6
+2 load-truck OBJ71 TRU6 APT6
+3 move TRU6 APT6 APT1
+4 unload-truck OBJ71 TRU6 APT1
+5 load-truck OBJ62 TRU6 APT1
+6 unload-truck OBJ62 TRU6 APT6
+7 move APN2 APT3 APT6
+8 load-airplane OBJ72 APN2 APT6
+9 move APN2 APT6 POS6
+10 unload-airplane OBJ72 APN2 POS6
+11 load-airplane OBJ53 APN2 POS6
+12 unload-airplane OBJ53 APN2 APT6
+13 move TRU4 POS4 POS2
+14 load-truck OBJ12 TRU4 POS2
+15 unload-truck OBJ12 TRU4 POS4
+16 load-truck OBJ13 TRU4 POS4
+17 unload-truck OBJ13 TRU4 POS2
+18 load-truck OBJ33 TRU4 POS2
+19 unload-truck OBJ33 TRU4 APT1
+20 load-truck OBJ11 TRU4 APT1
+21 unload-truck OBJ11 TRU4 POS2
+22 move TRU4 POS2 APT2
+23 load-truck OBJ42 TRU4 APT2
+24 move TRU4 APT2 POS4
+25 load-truck OBJ52 TRU4 POS4
+26 unload-truck OBJ52 TRU4 APT2
+27 move APN1 APT3 APT5
+28 load-airplane OBJ41 APN1 APT5
+29 move APN1 APT5 POS4
+30 unload-airplane OBJ41 APN1 POS4
+31 load-airplane OBJ73 APN1 POS4
+32 unload-airplane OBJ73 APN1 APT5
+33 move APN1 APT5 APT3
+34 load-airplane OBJ63 APN1 APT3
+35 unload-airplane OBJ63 APN1 APT5
+36 load-airplane OBJ31 APN1 APT5
+37 unload-airplane OBJ31 APN1 APT3
+38 move TRU2 POS2 APT7
+39 load-truck OBJ43 TRU2 APT7
+40 move APN2 APT6 APT4
+41 load-airplane OBJ23 APN2 APT4
+42 move APN2 APT4 POS1
+43 unload-airplane OBJ23 APN2 POS1
+44 load-airplane OBJ21 APN2 POS1
+45 move APN2 POS1 POS4
+46 unload-airplane OBJ21 APN2 POS4
+47 load-airplane OBJ43 APN2 POS4
+48 move APN2 POS4 APT3
+49 load-airplane OBJ32 APN2 APT3
+50 unload-airplane OBJ32 APN2 POS4
+51 unload-airplane OBJ22 APN2 POS4
+52 move TRU1 POS1 APT7
+53 load-truck OBJ33 TRU1 APT7
+54 unload-truck OBJ33 TRU1 POS1
+55 move TRU7 POS7 APT1
+56 load-truck OBJ43 TRU7 APT1
+57 move TRU7 APT1 POS7
+root 0 
+0 solve_logistics ->Achieve_at_0 1 2 3
+2 load_truck_at -> m4_do_at_load_truck_0 4 5 6 7
+4 load_airplane_at -> m5_do_at_load_airplane_0 8 9 10 
+5 truck_in_cities -> m6_do_in_unload_truck_0 11 12 13
+7 load_truck_in ->Achieve_at_0 14 15 16 17 
+...  
+79 get_obj81 -> m6_do_in_unload_airplane_0 80  
+80 move_obj_last -> move_obj_to_pos_41 79  
 <==

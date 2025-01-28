@@ -1,70 +1,455 @@
-Here is a hierarchical plan to solve the given HTN problem:
-```
 ==>
-1 AchieveContainsShotCocktail shot11 cocktail1
-2 AchieveContainsShotCocktail shot15 cocktail2
-3 AchieveContainsShotCocktail shot8 cocktail3
-4 AchieveContainsShotCocktail shot13 cocktail4
-5 AchieveContainsShotCocktail shot6 cocktail5
-<==
-
-root 0
-0 htn_problem -> m0_cocktail_ordering 1 2 3 4 5
-1 AchieveContainsShotCocktail shot11 cocktail1 -> MakeAndPourCocktail 6 7 8 9 10
-	* Parameters: shot11, cocktail1, shaker1, left
-2 AchieveContainsShotCocktail shot15 cocktail2 -> MakeAndPourCocktail 11 12 13 14 15
-	* Parameters: shot15, cocktail2, shaker1, right
-3 AchieveContainsShotCocktail shot8 cocktail3 -> MakeAndPourCocktail 16 17 18 19 20
-	* Parameters: shot8, cocktail3, shaker1, left
-4 AchieveContainsShotCocktail shot13 cocktail4 -> MakeAndPourCocktail 21 22 23 24 25
-	* Parameters: shot13, cocktail4, shaker1, right
-5 AchieveContainsShotCocktail shot6 cocktail5 -> MakeAndPourCocktail 26 27 28 29 30
-	* Parameters: shot6, cocktail5, shaker1, left
-
-**MakeAndPourCocktail expansions**
-
-1.1 AchieveContainsShakerCocktail shaker1 cocktail1 -> MakeCocktail 31 32 33 34 35
-	* Parameters: shaker1, cocktail1, ingredient6, left, right, ingredient4
-1.2 AchieveCleanShot shot11 -> CleanEmptyShot 36
-	* Parameters: shot11, left, cocktail1, right
-1.3 AchieveHolding left shaker1 -> PickUp 37
-	* Parameters: left, shaker1
-1.4 DoPourShakerToShot shaker1 shot11 cocktail1 -> pour_shaker_to_shot_action 38
-	* Parameters: shaker1, shot11, cocktail1, level1, left, level1
-
-**MakeCocktail expansion (example for 1.1, others similar)**
-
-1.1.1 AchieveCleanShaker shaker1 -> CleanShakerNull (already clean)
-1.1.2 AchieveContainsShakerIngredient shaker1 ingredient4 -> AddIngredientToEmptyShaker 39 40 41
-	* Parameters: shaker1, ingredient4, level1, level1, shot4, left
-1.1.3 AchieveContainsShakerIngredient shaker1 ingredient6 -> AddIngredientToUsedShaker 42 43 44
-	* Parameters: shaker1, ingredient6, level1, level1, shot9, right
-1.1.4 AchieveHolding right shaker1 -> HoldingNull (already holding)
-1.1.5 shake cocktail1 ingredient4 ingredient6 shaker1 right left -> shake 45
-	* Parameters: cocktail1, ingredient4, ingredient6, shaker1, right, left
-
-**Action sequence (partial, for brevity)**
-
-6 AchieveCleanShaker shaker1 -> CleanShakerNull (noop)
-7 AchieveContainsShakerIngredient shaker1 ingredient4 -> 
-	39 AchieveContainsShotIngredient shot4 ingredient4 -> AddIngredientToShot 46 47 48
-	40 AchieveHolding left shot4 -> PickUp 49
-	41 pour-shot-to-clean-shaker shot4 ingredient4 shaker1 left level1 level1 50
-8 AchieveContainsShakerIngredient shaker1 ingredient6 -> 
-	42 AchieveContainsShotIngredient shot9 ingredient6 -> AddIngredientToShot 51 52 53
-	43 AchieveHolding right shot9 -> PickUp 54
-	44 pour-shot-to-used-shaker shot9 ingredient6 shaker1 right level1 level1 55
-9 AchieveHolding left shaker1 -> PickUp 37
-10 pour-shaker-to-shot cocktail1 shot11 left shaker1 level1 level1 38
-
-**Similar expansions for other MakeAndPourCocktail and MakeCocktail instances**
-
-<== (end of plan)
-```
-Note that:
-
-* The plan is partial, showing only the first few levels of expansion for brevity.
-* Action numbers (e.g., `6`, `39`, `46`) are arbitrary and for illustration purposes only.
-* Some tasks, like `CleanShakerNull`, are no-ops (noop) since the preconditions are already met.
-* The `MakeCocktail` expansion is shown only for the first instance (1.1); similar expansions apply to other instances.
-* The action sequence is partial, showing only a few actions for each task.
+1 pick-up left shaker1
+2 pick-up right shot15
+3 empty-hand left shaker1
+4 pick-up left shot15
+5 empty-hand right shot15
+6 put-down shaker1 left
+7 pick-up right shot13
+8 add-ingredient-to-shot shot15 dispenser8 ingredient8 left right
+9 pick-up left shot9
+10 add-ingredient-to-shot shot13 dispenser5 ingredient5 right left
+11 empty-hand left shot9
+12 pick-up left shaker1
+13 pick-up right shot1
+14 empty-hand left shaker1
+15 pick-up left shot1
+16 empty-hand right shot1
+17 pick-up right shot11
+18 add-ingredient-to-shot shot15 dispenser5 ingredient5 left right
+19 empty-hand left shot1
+20 pick-up left shot6
+21 add-ingredient-to-shot shot15 dispenser5 ingredient5 right left
+22 empty-hand left shot6
+23 put-down shaker1 left
+24 pick-up right shot5
+25 add-ingredient-to-shot shot11 dispenser4 ingredient4 left right
+26 empty-hand left shot5
+27 pick-up left shot10
+28 empty-hand right shot5
+29 pick-up right shot10
+30 empty-hand left shot10
+31 pick-up left shot4
+32 add-ingredient-to-shot shot11 dispenser6 ingredient6 right left
+33 empty-hand left shot4
+34 pick-up left shot3
+35 empty-hand right shot4
+36 pick-up right shot3
+37 empty-hand left shot3
+38 pick-up left shot2
+39 empty-hand right shot3
+40 pick-up right shot2
+41 add-ingredient-to-shot shot13 dispenser9 ingredient9 left right
+42 empty-hand left shot2
+43 empty-hand right shot2
+44 pick-up left shot13
+45 empty-hand right shot2
+46 add-ingredient-to-shot shot13 dispenser1 ingredient1 right left
+47 empty-hand left shot13
+48 empty-hand right shot2
+49 pick-up left shot13
+50 empty-hand right shot5
+51 put-down shot13 left
+52 pick-up right shaker1
+53 empty-hand left shot13
+54 pick-up left shaker1
+55 empty-hand right shaker1
+56 put-down shot13 right
+57 add-ingredient-to-shaker shaker1 ingredient4 left right level1 level2
+58 pick-up right shot6
+59 empty-hand left shot12
+60 add-ingredient-to-shot shot6 dispenser5 ingredient5 left right
+61 empty-hand left shot7
+62 empty-hand left shot9
+63 empty-hand right shot6
+64 pick-up left shot14
+65 pick-up right shot6
+66 add-ingredient-to-shot shot13 dispenser5 ingredient5 right left
+67 empty-hand left shot14
+68 empty-hand right shot6
+69 pick-up right shaker1
+70 add-ingredient-to-shaker shaker1 ingredient6 left right level2 level3
+71 shake cocktail1 ingredient4 ingredient6 shaker1 left right
+72 pick-up left shot15
+73 empty-hand right shaker1
+74 put-down shaker1 left
+75 add-ingredient-to-shaker shaker1 ingredient2 left right level3 level1
+76 pick-up right shot3
+77 add-ingredient-to-shot shot5 dispenser5 ingredient5 left right
+78 pick-up left shot12
+79 empty-hand right shot3
+80 pick-up right shot12
+81 empty-hand left shot12
+82 pick-up left shot4
+83 empty-hand right shot12
+84 pick-up right shot4
+85 add-ingredient-to-shot shot11 dispenser4 ingredient4 right left
+86 empty-hand left shot4
+87 empty-hand right shot4
+88 pick-up right shot15
+89 empty-hand left shot1
+90 add-ingredient-to-shaker shaker1 ingredient4 left right level1 level2
+91 empty-hand right shot10
+92 add-ingredient-to-shot shot15 dispenser6 ingredient6 left right
+93 empty-hand right shot10
+94 pick-up left shot13
+95 empty-hand right shot10
+96 put-down shaker1 left
+97 add-ingredient-to-shaker shaker1 ingredient9 left right level2 level3
+98 empty-hand right shaker1
+99 empty-hand right shot10
+100 pick-up left shaker1
+101 pick-up right shot14
+102 empty-hand left shaker1
+103 pick-up left shot14
+104 shake cocktail1 ingredient4 ingredient6 shaker1 right left
+105 empty-hand right shot14
+106 empty-hand right shot14
+107 pick-up left shaker1
+108 empty-hand left shaker1
+109 pick-up left shaker1
+110 add-ingredient-to-shaker shaker1 ingredient5 left right level1 level2
+111 put-down shaker1 left
+112 pick-up right shaker1
+113 add-ingredient-to-shaker shaker1 ingredient5 left right level2 level3
+114 shake cocktail5 ingredient8 ingredient5 shaker1 left right
+115 empty-hand right shaker1
+116 pick-up left shaker1
+117 pour-shaker-to-shot-action shaker1 shot15 cocktail5 level2 level2 left level1
+118 empty-hand left shot1
+119 pick-up left shot13
+120 empty-hand right shot1
+121 pick-up right shot13
+122 add-ingredient-to-shot shot13 dispenser1 ingredient1 left right
+123 empty-hand left shot13
+124 empty-hand right shaker1
+125 empty-hand right shot1
+126 pick-up left shot3
+127 empty-hand right shot1
+128 empty-hand right shot1
+129 pick-up right shaker1
+130 empty-hand right shaker1
+131 add-ingredient-to-shaker shaker1 ingredient8 left right level1 level2
+132 put-down shaker1 left
+133 pick-up right shaker1
+134 empty-hand left shot2
+135 add-ingredient-to-shaker shaker1 ingredient5 left right level2 level3
+136 shake cocktail5 ingredient8 ingredient5 shaker1 left right
+137 empty-hand right shaker1
+138 pick-up left shaker1
+139 pour-shaker-to-shot-action shaker1 shot6 cocktail5 level2 level2 left level1
+140 empty-hand left shaker1
+141 add-ingredient-to-shot shot8 dispenser9 ingredient9 right left
+142 empty-hand right shaker1
+143 pick-up left shot13
+144 add-ingredient-to-shot shot6 dispenser5 ingredient5 left right
+145 pick-up right shot9
+146 empty-hand left shot13
+147 add-ingredient-to-shot shot10 dispenser9 ingredient9 left right
+148 pick-up left shot9
+149 empty-hand right shaker1
+150 pick-up right shaker1
+151 pick-up left shot9
+152 empty-hand right shaker1
+153 pick-up left shot1
+154 empty-hand right shaker1
+155 pick-up left shot9
+156 empty-hand right shot9
+157 pick-up right shaker1
+158 empty-hand right shot9
+159 pick-up left shaker1
+160 put-down shaker1 left
+161 pick-up left shaker1
+162 empty-hand right shot10
+163 pick-up left shaker1
+164 pick-up left shaker1
+165 empty-hand right shaker1
+166 pick-up left shaker1
+167 add-ingredient-to-shaker shaker1 ingredient5 left right level3 level1
+168 add-ingredient-to-shaker shaker1 ingredient9 left right level1 level2
+169 shake cocktail3 ingredient5 ingredient9 shaker1 left right
+170 pour-shaker-to-shot-action shaker1 shot8 cocktail3 level2 level2 left level1
+171 add-ingredient-to-shot shot11 dispenser4 ingredient4 left right
+172 pick-up left shot10
+173 empty-hand right shaker1
+174 add-ingredient-to-shot shot8 dispenser5 ingredient5 left right
+175 pick-up right shot1
+176 empty-hand right shaker1
+177 add-ingredient-to-shot shot6 dispenser8 ingredient8 left right
+178 empty-hand right shot1
+179 pick-up left shot1
+180 empty-hand right shot1
+181 pick-up right shot1
+182 empty-hand right shot1
+183 pick-up left shot1
+184 empty-hand right shaker1
+185 put-down shaker1 left
+186 pick-up left shot1
+187 empty-hand right shot6
+188 add-ingredient-to-shot shot13 dispenser1 ingredient1 right left
+189 empty-hand right shot10
+190 empty-hand right shaker1
+191 pick-up right shaker1
+192 empty-hand right shot6
+193 clean-full-shaker shaker1 left right cocktail3 level3 level1
+194 empty-hand right shot10
+195 pick-up left shot10
+196 empty-hand right shaker1
+197 pick-up right shot1
+198 empty-hand right shot1
+199 add-ingredient-to-shot shot13 dispenser5 ingredient5 right left
+200 add-ingredient-to-shot shot13 dispenser9 ingredient9 left right
+201 add-ingredient-to-shot shot8 dispenser5 ingredient5 left right
+202 pick-up right shot8
+203 empty-hand right shot8
+204 put-down shot15 left
+205 put-down shaker1 right
+206 put-down shot13 right
+207 empty-hand left shaker1
+208 empty-hand right shot6
+209 empty-hand right shaker1
+210 empty-hand right shaker1
+211 put-down shot11 right
+212 put-down shot6 left
+213 put-down shot1 right
+214 put-down shaker1 left
+215 pick-up left shot1
+216 drop left shaker1
+217 pick-up right shot11
+218 drop right shot4
+219 empty-hand right shot6
+220 drop left shot1
+221 empty-hand right shot8
+222 drop right shot7
+223 empty-hand left shot1
+224 drop left shot11
+225 drop left shot15
+226 pick-up right shaker1
+227 hand-empty left left
+228 hand-empty right left
+229 drop right shot1
+230 pick-up left shot8
+231 put-down shot13 left
+232 drop left shot8
+233 drop right shot13
+234 drop right shot15
+235 pick-up left shaker1
+236 drop left shot11
+237 drop left shot6
+238 drop left shaker1
+239 pick-up right shot13
+240 empty-hand left shot6
+241 pick-up left shot11
+242 drop right shot8
+243 drop left shot13
+244 put-down shot11 right
+245 put-down shaker1 right
+246 empty-hand left shot6
+247 drop left shot10
+248 drop right shot10
+249 drop left shaker1
+250 drop right shot11
+251 put-down shot15 left
+252 drop left shot15
+253 drop left shot8
+254 drop left shot7
+255 hand-empty right left
+256 drop left shot8
+257 drop left shot9
+258 drop right shot6
+259 pick-up left shot6
+260 hand-empty left left
+261 drop right shot5
+262 drop right shot3
+263 drop left shot6
+264 drop right shot5
+265 drop left shot3
+266 empty-hand left shot13
+267 drop left shot10
+268 drop left shot13
+269 put-down shaker1 left
+270 drop left shot3
+271 pick-up right shot6
+272 empty-hand left shaker1
+273 pick-up left shaker1
+274 drop right shot11
+275 put-down shaker1 left
+276 hand-empty left left
+277 hand-empty right left
+278 drop left shot1
+279 drop right shot2
+280 empty-hand left shot9
+281 hand-empty left right
+282 drop left shaker1
+283 pick-up left shaker1
+284 put-down shaker1 right
+285 hand-empty left right
+286 drop left shaker1
+287 drop right shaker1
+288 drop left shaker1
+289 pick-up right shot6
+290 drop right shot3
+291 drop left shot4
+292 drop right shot9
+293 drop left shot6
+294 drop right shot11
+295 drop right shaker1
+296 empty-hand left shot6
+297 drop left shot10
+298 drop right shaker1
+299 empty-hand left shot3
+300 drop right shot11
+301 drop right shaker1
+302 hand-empty right left
+303 pick-up right shot6
+304 drop left shaker1
+305 drop right shot8
+306 drop right shot6
+307 drop left shot10
+308 drop right shot9
+309 drop right shaker1
+310 drop left shot3
+311 hand-empty left right
+312 drop left shaker1
+313 drop right shot4
+314 drop right shot15
+315 empty-hand right shot15
+316 drop left shot14
+317 drop left shot9
+318 drop right shaker1
+319 drop right shot10
+320 drop right shot13
+321 drop right shaker1
+322 drop right shot15
+323 empty-hand left shaker1
+324 drop right shot10
+325 drop left shaker1
+326 empty-hand right shot9
+327 drop left shot10
+328 drop right shot5
+329 drop left shot5
+330 drop right shot5
+331 drop left shot6
+332 drop right shot15
+333 drop right shot11
+334 empty-hand left shot11
+335 drop left shot7
+336 hand-empty left left
+337 drop left shaker1
+338 drop right shot9
+339 drop left shaker1
+340 drop right shot12
+341 drop right shaker1
+342 drop right shot14
+343 drop right shaker1
+344 drop right shot12
+345 drop right shot3
+346 drop right shot11
+347 drop right shaker1
+348 pick-up left shaker1
+349 drop left shaker1
+350 drop left shaker1
+351 empty-hand left shaker1
+352 drop left shot10
+353 drop left shot15
+354 drop right shot9
+355 hand-empty left right
+356 drop left shot11
+357 drop left shot15
+358 drop left shot8
+359 drop left shot14
+360 pick-up left shot1
+361 drop right shot10
+362 empty-hand right shot3
+363 drop left shot8
+364 drop left shot12
+365 drop left shot9
+366 drop left shot1
+367 empty-hand right shot14
+368 drop left shaker1
+369 drop left shot9
+370 drop right shot1
+371 drop left shaker1
+372 drop left shot3
+373 drop left shot5
+374 drop left shot9
+375 drop right shot9
+376 drop right shot10
+377 drop right shot5
+378 pick-up right shot15
+379 drop left shot3
+380 drop right shaker1
+381 drop left shot7
+382 drop right shaker1
+383 drop right shot1
+384 drop right shot15
+385 drop left shot1
+386 drop right shot10
+387 empty-hand right shot10
+388 drop right shot14
+389 drop right shaker1
+390 drop left shot3
+391 drop right shaker1
+392 drop right shaker1
+393 drop right shot6
+394 drop right shaker1
+395 drop left shot1
+396 drop left shot3
+397 drop left shot2
+398 drop right shot2
+399 drop left shot2
+400 drop right shaker1
+401 hand-empty right left
+402 drop left shaker1
+403 hand-empty left right
+404 empty-hand left shaker1
+405 drop left shaker1
+406 drop left shot3
+407 drop left shot3
+408 drop left shot8
+409 drop left shot14
+410 drop left shot1
+411 drop left shot9
+412 drop left shot5
+413 drop left shot6
+414 drop left shot8
+415 drop left shot10
+416 drop right shot10
+417 drop right shaker1
+418 hand-empty right right
+419 drop right shot11
+420 drop right shot5
+421 drop left shaker1
+422 drop right shot4
+423 drop left shot3
+424 drop left shaker1
+425 drop right shot9
+426 drop left shot3
+427 drop right shot8
+428 drop right shot4
+429 drop right shot4
+430 drop right shaker1
+431 drop left shot1
+432 hand-empty right right
+433 drop left shaker1
+434 hand-empty left right
+435 drop left shaker1
+436 drop left shot4
+437 drop left shot8
+438 drop right shot8
+439 drop left shot9
+440 hand-empty right right
+441 drop left shot8
+442 drop left shaker1
+443 drop left shaker1
+444 drop left shot5
+445 empty-hand left shot8
+446 drop left shot2
+447 drop left shot6
+448 drop right shot2
+449 hand-empty right right
+450 hand-empty right right
+451 drop left shot4
+452 drop left shot10
+453 drop left shot11
+454 drop left shot11

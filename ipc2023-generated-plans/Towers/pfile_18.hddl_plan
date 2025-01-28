@@ -1,48 +1,52 @@
 ==>
-**Sequential Plan**
-```
- 1. selectDirection r18 t1 t2 t3
- 2. rotateTower t1 t3 t2
- 3. move_abstract t1 t3
- 4. exchange t1 t2 t3
- 5. move_abstract t3 t1
- 6. rotateTower t2 t3 t1
-...
-**Total of 153 actions** (due to the complexity of the problem, the full sequential plan is not displayed)
-...
-146. move r10 t2 t3 t2
-147. move r11 t3 t2 t3
-148. move r12 t2 t3 t2
-149. move r13 t3 t2 t3
-150. move r14 t2 t3 t2
-151. move r15 t3 t2 t3
-152. move r16 t2 t3 t2
-153. move r18 t3 t2 t3
-<==
-**Hierarchical Decomposition**
-```
+1 move r18 t1 t3
+2 move r17 t1 t2
+3 move r17 t2 t3
+4 move r16 t1 t2
+5 move r16 t2 t3
+6 move r15 t1 t2
+7 move r15 t2 t3
+8 move r14 t1 t2
+9 move r14 t2 t3
+10 move r13 t1 t2
+11 move r13 t2 t3
+12 move r12 t1 t2
+13 move r12 t2 t3
+14 move r11 t1 t2
+15 move r11 t2 t3
+16 move r10 t1 t2
+17 move r10 t2 t3
+18 move r9 t1 t2
+19 move r9 t2 t3
+20 move r8 t1 t2
+21 move r8 t2 t3
+22 move r7 t1 t2
+23 move r7 t2 t3
+24 move r6 t1 t2
+25 move r6 t2 t3
+26 move r5 t1 t2
+27 move r5 t2 t3
+28 move r4 t1 t2
+29 move r4 t2 t3
+30 move r3 t1 t2
+31 move r3 t2 t3
+32 move r2 t1 t2
+33 move r2 t2 t3
+34 move r1 t1 t2
+35 move r1 t2 t3
 root 0
-0 shiftTower t1 t2 t3 -> m-shiftTower 1
-1 m-shiftTower r18 t1 t2 t3 -> 
-  2 selectDirection r18 t1 t2 t3
-  3 rotateTower t1 t3 t2 -> m-rotateTower 4 5 6
-  4 move_abstract t1 t3 -> newMethod21 7
-  5 exchange t1 t2 t3 -> exchangeRL 8 9
-  6 rotateTower t2 t3 t1 -> m-rotateTower 10 11 12
-...
-**Method Decomposition Continues**
-...
-  2 selectDirection r18 t1 t2 t3 -> selectedDirection 13
-  13 rotateTower t1 t3 t2 -> m-rotateTower 14 15 16
-...
-**Total of 34 Method Calls** (due to the complexity of the problem, the full decomposition is not displayed)
-...
-```
-**Note:**
-
-* The sequential plan consists of 153 actions, which are not fully displayed due to space constraints.
-* The hierarchical decomposition shows the method calls and their corresponding task decompositions. The numbers in the decomposition refer to the task IDs in the sequential plan.
-* The `m-` prefix in method names (e.g., `m-shiftTower`) indicates that it's a method call.
-* The `newMethod21` call is an exception, as it doesn't follow the `m-` prefix convention, but it's still a method call.
-* The `exchangeRL` and `selectedDirection` method calls are part of the decomposition, but their task IDs are not explicitly shown in the sequential plan.
-* This plan assumes that the HTN planner has successfully found a solution to the problem. If no solution exists, the output would indicate failure.
+0 shiftTower t1 t2 t3 -> m-shiftTower r18 t1 t2 t3 1 36
+36 rotateTower t1 t2 t3 -> m-rotateTower t1 t2 t3 37 40
+37 move_abstract t1 t2 -> newMethod21 r18 t1 t1 t2 37 
+38 exchange t1 t2 t3 -> exchangeClear t1 t2 t3 39 
+39 
+40 rotateTower t2 t3 t1 -> m-rotateTower t2 t3 t1 41 44
+41 move_abstract t2 t3 -> newMethod21 r18 t2 t2 t3 41 
+42 exchange t2 t3 t1 -> exchangeClear t2 t3 t1 43 
+43 
+44 rotateTower t3 t1 t2 -> m-rotateTower t3 t1 t2 45 48
+45 move_abstract t3 t1 -> newMethod21 r17 t3 t3 t1 45 
+46 exchange t3 t1 t2 -> exchangeClear t3 t1 t2 47 
+47 
+48 
+<==

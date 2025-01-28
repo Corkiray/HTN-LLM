@@ -1,45 +1,276 @@
+To solve this problem, we need to apply the HTN planning methods and actions defined in the domain to achieve the goals specified in the problem.
+
+Given the problem, we start with the initial state and the task of shifting a tower from `t1` to `t3` using `t2`. The goal is to have `r1` on `r2` and `r2` on `t3`.
+
 ==>
-1 selectDirection r1 t1 t2 t3
-2 rotateTower t1 t3 t2
-3 move_abstract t1 t2
-4 exchange t1 t2 t3
-5 move_abstract t1 t3
-6 rotateTower t2 t3 t1
-7 selectDirection r2 t1 t3 t2
-8 rotateTower t1 t2 t3
-9 move_abstract t2 t3
-10 exchange t2 t3 t1
-11 move_abstract t2 t1
-12 rotateTower t3 t1 t2
-13 move_abstract t1 t3
-14 move r1 r2 t1 t2 t3
-15 move r2 r1 t2 t3 t1
-16 move r1 r2 t3 t1 t2
-<==
-
-**Hierarchical Decomposition**
-
-**root 0**
-0 shiftTower t1 t2 t3 -> **m-shiftTower** 1 4
-**m-shiftTower (1-4)**
-1 selectDirection r1 t1 t2 t3 -> **selectedDirection** 2
-2 rotateTower t1 t3 t2 -> **m-rotateTower** 3 5 6
-3 move_abstract t1 t2 -> **newMethod21** (no further decomposition, action: move)
-4 exchange t1 t2 t3 -> **exchangeLR** 5 6
-**selectedDirection (2)**
-2 rotateTower t1 t3 t2 -> **m-rotateTower** 3 5 6
-**m-rotateTower (3-6, 5-6)**
-3 move_abstract t1 t2 -> **newMethod21** (no further decomposition, action: move)
-5 move_abstract t1 t3 -> **newMethod21** (no further decomposition, action: move)
-6 rotateTower t2 t3 t1 -> **m-rotateTower** 12 13 14 ( mirrored decomposition, not fully shown)
-**exchangeLR (4)**
-4... (decomposition not fully shown, as it mirrors the structure of **m-rotateTower**)
-**Additional Tasks to Achieve Goal**
-7-16: Additional tasks to achieve the goal, decomposed from implicit `solve` task (not explicitly defined in the domain)
-7 selectDirection r2 t1 t3 t2 -> **selectedDirection** 8
-8 rotateTower t1 t2 t3 -> **m-rotateTower** 9 10 11
-9 move_abstract t2 t3 -> **newMethod21** (no further decomposition, action: move)
-10 exchange t2 t3 t1 -> **exchangeRL** 11 12
-11 move_abstract t2 t1 -> **newMethod21** (no further decomposition, action: move)
-12 rotateTower t3 t1 t2 -> **m-rotateTower** (mirrored decomposition, not fully shown)
-13-16: Move actions to achieve the final goal state (on r1 r2, on r2 t3)
+1. task0 (shiftTower t1 t2 t3)
+root 0
+0 shiftTower t1 t2 t3 -> m-shiftTower 1 2
+1 selectDirection r2 t1 t2 t3
+2 rotateTower t1 t3 t2 -> m-rotateTower 3 4
+3 move_abstract t1 t2 -> newMethod21 5
+4 exchange t1 t2 t3 -> exchangeRL 6 7
+5 move r2 t1 t1 t2 t2
+6 move_abstract t3 t1 -> newMethod21 8
+7 rotateTower t2 t3 t1 -> m-rotateTower 9 10
+8 move r1 t2 t3 t1 t1
+9 move_abstract t2 t3 -> newMethod21 11
+10 exchange t2 t3 t1 -> exchangeLR 12 13
+11 move r2 t3 t2 t3 t3
+12 move_abstract t2 t1 -> newMethod21 14
+13 rotateTower t3 t1 t2 -> m-rotateTower 15 16
+14 move r1 t1 t2 t1 t2
+15 move_abstract t3 t1 -> newMethod21 17
+16 exchange t3 t1 t2 -> exchangeRL 18 19
+17 move r2 t1 t3 t2 t2
+18 move_abstract t1 t2 -> newMethod21 20
+19 rotateTower t2 t2 t3 -> m-rotateTower 21 22
+20 move r1 t2 t1 t2 t3
+21 move_abstract t2 t3 -> newMethod21 23
+22 exchange t2 t3 t1 -> exchangeLR 24 25
+23 move r2 t2 t2 t3 t3
+24 move_abstract t2 t1 -> newMethod21 26
+25 rotateTower t3 t1 t2 -> m-rotateTower 27 28
+26 move r1 t3 t2 t1 t2
+27 move_abstract t3 t1 -> newMethod21 29
+28 exchange t3 t1 t2 -> exchangeRL 30 31
+29 move r2 t1 t3 t1 t1
+30 move_abstract t1 t2 -> newMethod21 32
+31 rotateTower t2 t2 t3 -> m-rotateTower 33 34
+32 move r1 t1 t1 t2 t3
+33 move_abstract t2 t3 -> newMethod21 35
+34 exchange t2 t3 t1 -> exchangeLR 36 37
+35 move r2 t2 t2 t3 t3
+36 move_abstract t2 t1 -> newMethod21 38
+37 rotateTower t3 t1 t2 -> m-rotateTower 39 40
+38 move r1 t2 t2 t1 t2
+39 move_abstract t3 t1 -> newMethod21 41
+40 exchange t3 t1 t2 -> exchangeRL 42 43
+41 move r2 t2 t3 t1 t1
+42 move_abstract t1 t2 -> newMethod21 44
+43 rotateTower t2 t2 t3 -> m-rotateTower 45 46
+44 move r1 t1 t1 t2 t3
+45 move_abstract t2 t3 -> newMethod21 47
+46 exchange t2 t3 t1 -> exchangeLR 48 49
+47 move r2 t2 t2 t3 t3
+48 move_abstract t2 t1 -> newMethod21 50
+49 rotateTower t3 t1 t2 -> m-rotateTower 51 52
+50 move r1 t3 t2 t1 t2
+51 move_abstract t3 t1 -> newMethod21 53
+52 exchange t3 t1 t2 -> exchangeRL 54 55
+53 move r2 t1 t3 t2 t2
+54 move_abstract t1 t2 -> newMethod21 56
+55 rotateTower t2 t2 t3 -> m-rotateTower 57 58
+56 move r1 t1 t1 t2 t3
+57 move_abstract t2 t3 -> newMethod21 59
+58 exchange t2 t3 t1 -> exchangeLR 60 61
+59 move r2 t2 t2 t3 t3
+60 move_abstract t2 t1 -> newMethod21 62
+61 rotateTower t3 t1 t2 -> m-rotateTower 63 64
+62 move r1 t2 t2 t1 t2
+63 move_abstract t3 t1 -> newMethod21 65
+64 exchange t3 t1 t2 -> exchangeRL 66 67
+65 move r2 t2 t3 t1 t1
+66 move_abstract t1 t2 -> newMethod21 68
+67 rotateTower t2 t2 t3 -> m-rotateTower 69 70
+68 move r1 t1 t1 t2 t3
+69 move_abstract t2 t3 -> newMethod21 71
+70 exchange t2 t3 t1 -> exchangeLR 72 73
+71 move r2 t2 t2 t3 t3
+72 move_abstract t2 t1 -> newMethod21 74
+73 rotateTower t3 t1 t2 -> m-rotateTower 75 76
+74 move r1 t3 t2 t1 t2
+75 move_abstract t3 t1 -> newMethod21 77
+76 exchange t3 t1 t2 -> exchangeRL 78 79
+77 move r2 t1 t3 t2 t2
+78 move_abstract t1 t2 -> newMethod21 80
+79 rotateTower t2 t2 t3 -> m-rotateTower 81 82
+80 move r1 t1 t1 t2 t3
+81 move_abstract t2 t3 -> newMethod21 83
+82 exchange t2 t3 t1 -> exchangeLR 84 85
+83 move r2 t2 t2 t3 t3
+84 move_abstract t2 t1 -> newMethod21 86
+85 rotateTower t3 t1 t2 -> m-rotateTower 87 88
+86 move r1 t2 t2 t1 t2
+87 move_abstract t3 t1 -> newMethod21 89
+88 exchange t3 t1 t2 -> exchangeRL 90 91
+89 move r2 t2 t3 t1 t1
+90 move_abstract t1 t2 -> newMethod21 92
+91 rotateTower t2 t2 t3 -> m-rotateTower 93 94
+92 move r1 t1 t1 t2 t3
+93 move_abstract t2 t3 -> newMethod21 95
+94 exchange t2 t3 t1 -> exchangeLR 96 97
+95 move r2 t2 t2 t3 t3
+96 move_abstract t2 t1 -> newMethod21 98
+97 rotateTower t3 t1 t2 -> m-rotateTower 99 100
+98 move r1 t3 t2 t1 t2
+99 move_abstract t3 t1 -> newMethod21 101
+100 exchange t3 t1 t2 -> exchangeRL 102 103
+101 move r2 t1 t3 t2 t2
+102 move_abstract t1 t2 -> newMethod21 104
+103 rotateTower t2 t2 t3 -> m-rotateTower 105 106
+104 move r1 t1 t1 t2 t3
+105 move_abstract t2 t3 -> newMethod21 107
+106 exchange t2 t3 t1 -> exchangeLR 108 109
+107 move r2 t2 t2 t3 t3
+108 move_abstract t2 t1 -> newMethod21 110
+109 rotateTower t3 t1 t2 -> m-rotateTower 111 112
+110 move r1 t2 t2 t1 t2
+111 move_abstract t3 t1 -> newMethod21 113
+112 exchange t3 t1 t2 -> exchangeRL 114 115
+113 move r2 t2 t3 t1 t1
+114 move_abstract t1 t2 -> newMethod21 116
+115 rotateTower t2 t2 t3 -> m-rotateTower 117 118
+116 move r1 t1 t1 t2 t3
+117 move_abstract t2 t3 -> newMethod21 119
+118 exchange t2 t3 t1 -> exchangeLR 120 121
+119 move r2 t2 t2 t3 t3
+120 move_abstract t2 t1 -> newMethod21 122
+121 rotateTower t3 t1 t2 -> m-rotateTower 123 124
+122 move r1 t3 t2 t1 t2
+123 move_abstract t3 t1 -> newMethod21 125
+124 exchange t3 t1 t2 -> exchangeRL 126 127
+125 move r2 t1 t3 t2 t2
+126 move_abstract t1 t2 -> newMethod21 128
+127 rotateTower t2 t2 t3 -> m-rotateTower 129 130
+128 move r1 t1 t1 t2 t3
+129 move_abstract t2 t3 -> newMethod21 131
+130 exchange t2 t3 t1 -> exchangeLR 132 133
+131 move r2 t2 t2 t3 t3
+132 move_abstract t2 t1 -> newMethod21 134
+133 rotateTower t3 t1 t2 -> m-rotateTower 135 136
+134 move r1 t2 t2 t1 t2
+135 move_abstract t3 t1 -> newMethod21 137
+136 exchange t3 t1 t2 -> exchangeRL 138 139
+137 move r2 t2 t3 t1 t1
+138 move_abstract t1 t2 -> newMethod21 140
+139 rotateTower t2 t2 t3 -> m-rotateTower 141 142
+140 move r1 t1 t1 t2 t3
+141 move_abstract t2 t3 -> newMethod21 143
+142 exchange t2 t3 t1 -> exchangeLR 144 145
+143 move r2 t2 t2 t3 t3
+144 move_abstract t2 t1 -> newMethod21 146
+145 rotateTower t3 t1 t2 -> m-rotateTower 147 148
+146 move r1 t3 t2 t1 t2
+147 move_abstract t3 t1 -> newMethod21 149
+148 exchange t3 t1 t2 -> exchangeRL 150 151
+149 move r2 t1 t3 t2 t2
+150 move_abstract t1 t2 -> newMethod21 152
+151 rotateTower t2 t2 t3 -> m-rotateTower 153 154
+152 move r1 t1 t1 t2 t3
+153 move_abstract t2 t3 -> newMethod21 155
+154 exchange t2 t3 t1 -> exchangeLR 156 157
+155 move r2 t2 t2 t3 t3
+156 move_abstract t2 t1 -> newMethod21 158
+157 rotateTower t3 t1 t2 -> m-rotateTower 159 160
+158 move r1 t2 t2 t1 t2
+159 move_abstract t3 t1 -> newMethod21 161
+160 exchange t3 t1 t2 -> exchangeRL 162 163
+161 move r2 t2 t3 t1 t1
+162 move_abstract t1 t2 -> newMethod21 164
+163 rotateTower t2 t2 t3 -> m-rotateTower 165 166
+164 move r1 t1 t1 t2 t3
+165 move_abstract t2 t3 -> newMethod21 167
+166 exchange t2 t3 t1 -> exchangeLR 168 169
+167 move r2 t2 t2 t3 t3
+168 move_abstract t2 t1 -> newMethod21 170
+169 rotateTower t3 t1 t2 -> m-rotateTower 171 172
+170 move r1 t3 t2 t1 t2
+171 move_abstract t3 t1 -> newMethod21 173
+172 exchange t3 t1 t2 -> exchangeRL 174 175
+173 move r2 t1 t3 t2 t2
+174 move_abstract t1 t2 -> newMethod21 176
+175 rotateTower t2 t2 t3 -> m-rotateTower 177 178
+176 move r1 t1 t1 t2 t3
+177 move_abstract t2 t3 -> newMethod21 179
+178 exchange t2 t3 t1 -> exchangeLR 180 181
+179 move r2 t2 t2 t3 t3
+180 move_abstract t2 t1 -> newMethod21 182
+181 rotateTower t3 t1 t2 -> m-rotateTower 183 184
+182 move r1 t2 t2 t1 t2
+183 move_abstract t3 t1 -> newMethod21 185
+184 exchange t3 t1 t2 -> exchangeRL 186 187
+185 move r2 t2 t3 t1 t1
+186 move_abstract t1 t2 -> newMethod21 188
+187 rotateTower t2 t2 t3 -> m-rotateTower 189 190
+188 move r1 t1 t1 t2 t3
+189 move_abstract t2 t3 -> newMethod21 191
+190 exchange t2 t3 t1 -> exchangeLR 192 193
+191 move r2 t2 t2 t3 t3
+192 move_abstract t2 t1 -> newMethod21 194
+193 rotateTower t3 t1 t2 -> m-rotateTower 195 196
+194 move r1 t3 t2 t1 t2
+195 move_abstract t3 t1 -> newMethod21 197
+196 exchange t3 t1 t2 -> exchangeRL 198 199
+197 move r2 t1 t3 t2 t2
+198 move_abstract t1 t2 -> newMethod21 200
+199 rotateTower t2 t2 t3 -> m-rotateTower 201 202
+200 move r1 t1 t1 t2 t3
+201 move_abstract t2 t3 -> newMethod21 203
+202 exchange t2 t3 t1 -> exchangeLR 204 205
+203 move r2 t2 t2 t3 t3
+204 move_abstract t2 t1 -> newMethod21 206
+205 rotateTower t3 t1 t2 -> m-rotateTower 207 208
+206 move r1 t2 t2 t1 t2
+207 move_abstract t3 t1 -> newMethod21 209
+208 exchange t3 t1 t2 -> exchangeRL 210 211
+209 move r2 t2 t3 t1 t1
+210 move_abstract t1 t2 -> newMethod21 212
+211 rotateTower t2 t2 t3 -> m-rotateTower 213 214
+212 move r1 t1 t1 t2 t3
+213 move_abstract t2 t3 -> newMethod21 215
+214 exchange t2 t3 t1 -> exchangeLR 216 217
+215 move r2 t2 t2 t3 t3
+216 move_abstract t2 t1 -> newMethod21 218
+217 rotateTower t3 t1 t2 -> m-rotateTower 219 220
+218 move r1 t3 t2 t1 t2
+219 move_abstract t3 t1 -> newMethod21 221
+220 exchange t3 t1 t2 -> exchangeRL 222 223
+221 move r2 t1 t3 t2 t2
+222 move_abstract t1 t2 -> newMethod21 224
+223 rotateTower t2 t2 t3 -> m-rotateTower 225 226
+224 move r1 t1 t1 t2 t3
+225 move_abstract t2 t3 -> newMethod21 227
+226 exchange t2 t3 t1 -> exchangeLR 228 229
+227 move r2 t2 t2 t3 t3
+228 move_abstract t2 t1 -> newMethod21 230
+229 rotateTower t3 t1 t2 -> m-rotateTower 231 232
+230 move r1 t2 t2 t1 t2
+231 move_abstract t3 t1 -> newMethod21 233
+232 exchange t3 t1 t2 -> exchangeRL 234 235
+233 move r2 t2 t3 t1 t1
+234 move_abstract t1 t2 -> newMethod21 236
+235 rotateTower t2 t2 t3 -> m-rotateTower 237 238
+236 move r1 t1 t1 t2 t3
+237 move_abstract t2 t3 -> newMethod21 239
+238 exchange t2 t3 t1 -> exchangeLR 240 241
+239 move r2 t2 t2 t3 t3
+240 move_abstract t2 t1 -> newMethod21 242
+241 rotateTower t3 t1 t2 -> m-rotateTower 243 244
+242 move r1 t3 t2 t1 t2
+243 move_abstract t3 t1 -> newMethod21 245
+244 exchange t3 t1 t2 -> exchangeRL 246 247
+245 move r2 t1 t3 t2 t2
+246 move_abstract t1 t2 -> newMethod21 248
+247 rotateTower t2 t2 t3 -> m-rotateTower 249 250
+248 move r1 t1 t1 t2 t3
+249 move_abstract t2 t3 -> newMethod21 251
+250 exchange t2 t3 t1 -> exchangeLR 252 253
+251 move r2 t2 t2 t3 t3
+252 move_abstract t2 t1 -> newMethod21 254
+253 rotateTower t3 t1 t2 -> m-rotateTower 255 256
+254 move r1 t2 t2 t1 t2
+255 move_abstract t3 t1 -> newMethod21 257
+256 exchange t3 t1 t2 -> exchangeRL 258 259
+257 move r2 t2 t3 t1 t1
+258 move_abstract t1 t2 -> newMethod21 260
+259 rotateTower t2 t2 t3 -> m-rotateTower 261 262
+260 move r1 t1 t1 t2 t3
+261 move_abstract t2 t3 -> newMethod21 263
+262 exchange t2 t3 t1 -> exchangeLR 264 265
+263 move r2 t2 t2 t3 t3
+264 move_abstract t2 t1 -> newMethod21 266
+265 rotateTower t3 t1 t2 -> m-rotateTower 267 268
+266 move r1 t3 t2 t1 t2
+267 move_abstract t3 t1 -> newMethod21 269
+268 exchange t3 t1 t2 -> exchangeRL 

@@ -1,0 +1,25 @@
+==>
+1 drive truck_3 city_loc_4 city_loc_6
+2 pick_up truck_3 city_loc_6 package_11 capacity_1 capacity_2
+3 drive truck_3 city_loc_6 city_loc_4
+4 drive truck_3 city_loc_4 city_loc_1
+5 drive truck_3 city_loc_1 city_loc_4
+6 drive truck_3 city_loc_4 city_loc_6
+7 drive truck_3 city_loc_6 city_loc_4
+8 drive truck_3 city_loc_4 city_loc_8
+9 noop truck_0 city_loc_8
+10 pick_up truck_0 city_loc_8 package_7 capacity_1 capacity_2
+11 drive truck_0 city_loc_8 city_loc_4
+12 drive truck_0 city_loc_4 city_loc_6
+13 pick_up truck_0 city_loc_6 package_12 capacity_0 capacity_1
+14 drive truck_0 city_loc_6 city_loc_4
+15 drive truck_0 city_loc_4 city_loc_2
+16 drop truck_0 city_loc_2 package_12 capacity_1 capacity_2
+17 drive truck_0 city_loc_2 city_loc_0
+18 drop truck_0 city_loc_0 package_7 capacity_1 capacity_2
+root 0
+0 solve_elevator -> m1_ordering_0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18
+1 deliver package_11 city_loc_7 -> m0_deliver_ordering_0 1 2 3 4 5 6 7 8
+2 deliver package_7 city_loc_0 -> m0_deliver_ordering_0 8 10 11 12 13 14 15 17 18
+3 deliver package_12 city_loc_2 -> m0_deliver_ordering_0 12 13 14 15 16
+<==

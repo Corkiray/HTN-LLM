@@ -1,56 +1,30 @@
-Here is a hierarchical plan to solve the given HTN problem:
-```
 ==>
-**Sequential Plan**
-1. Drive truck1 distributor1 depot0 (to move truck1 to distributor1 for future use)
-2. Drive truck0 depot0 distributor0 (to move truck0 to distributor0 for future use)
-3. do_put_on crate3 pallet1 (Task 1)
-4. do_put_on crate0 pallet3 (Task 2)
-5. do_put_on crate4 pallet5 (Task 3)
-6. do_put_on crate1 crate4 (Task 4)
-7. do_put_on crate5 crate1 (Task 5)
-
-**Hierarchical Decomposition**
-root 0
-0 solve_depotprob1234 -> m3_do_put_on 1 2 3 4 5
-1 do_put_on crate3 pallet1 -> m1_do_put_on 6 7 8 9
-  6 do_clear crate3 distributor1 -> m5_do_clear 10 11 12 13
-  7 do_clear pallet1 distributor0 -> m4_do_clear
-  8 do_lift_crate crate3 distributor1 hoist2 -> m9_do_lift_crate
-  9 Drop hoist2 crate3 pallet1 distributor1
-2 do_put_on crate0 pallet3 -> m2_do_put_on 14 15 16 17
-  14 do_get_truck truck0 distributor0 -> m7_do_get_truck
-  15 do_clear pallet3 distributor0 -> m4_do_clear
-  16 Unload hoist1 crate0 truck0 distributor0 -> (precondition met by previous actions)
-  17 Drop hoist1 crate0 pallet3 distributor0
-3 do_put_on crate4 pallet5 -> m2_do_put_on 18 19 20 21
-  18 do_get_truck truck1 distributor1 -> m6_do_get_truck
-  19 do_clear pallet5 distributor1 -> m4_do_clear
-  20 Unload hoist2 crate4 truck1 distributor1 -> (precondition met by previous actions)
-  21 Drop hoist2 crate4 pallet5 distributor1
-4 do_put_on crate1 crate4 -> m1_do_put_on 22 23 24 25
-  22 do_clear crate1 distributor1 -> m5_do_clear 26 27 28 29
-  23 do_clear crate4 distributor0 -> m5_do_clear 30 31 32 33
-  24 do_lift_crate crate1 distributor1 hoist2 -> m9_do_lift_crate
-  25 Drop hoist2 crate1 crate4 distributor0
-5 do_put_on crate5 crate1 -> m1_do_put_on 34 35 36 37
-  34 do_clear crate5 depot0 -> m5_do_clear 38 39 40 41
-  35 do_clear crate1 distributor1 -> m5_do_clear 42 43 44 45
-  36 do_lift_crate crate5 depot0 hoist0 -> m9_do_lift_crate
-  37 Drop hoist0 crate5 crate1 distributor1
-
+1 nop
+2 do_clear crate2 distributor1 hoist2 truck1
+3 Lift hoist2 crate3 crate2 distributor1
+4 do_get_truck truck1 distributor1
+5 Load hoist2 crate3 truck1 distributor1
+6 Drive truck1 distributor1 distributor0
+7 do_clear crate0 distributor0 hoist1 truck0
+8 Unload hoist1 crate3 truck1 distributor0
+9 Drop hoist1 crate3 crate0 distributor0
+10 do_clear crate5 distributor0 hoist1 truck0
+11 Lift hoist1 crate5 crate0 distributor0
+12 Load hoist1 crate5 truck0 distributor0
+13 do_clear pallet5 distributor0 hoist1 truck0
+14 Unload hoist1 crate5 truck0 distributor0
+15 Drop hoist1 crate5 pallet5 distributor0
+16 do_clear crate4 distributor0 hoist1 truck0
+17 Lift hoist1 crate4 crate3 distributor0
+18 Drop hoist1 crate4 crate5 distributor0
+19 do_clear crate1 distributor0 hoist1 truck0
+20 Lift hoist1 crate1 crate4 distributor0
+21 Drop hoist1 crate1 crate4 distributor0
+22 do_clear pallet1 distributor0 hoist1 truck0
+23 Lift hoist2 crate3 crate2 distributor1
+24 do_clear crate2 distributor1 hoist2 truck1
+25 Load hoist2 crate3 truck1 distributor1
+26 Drive truck1 distributor1 distributor0
+27 Unload hoist1 crate3 truck1 distributor0
+28 Drop hoist1 crate3 pallet1 distributor0
 <==
-```
-**Explanation**
-
-1. The sequential plan lists the high-level tasks to be executed.
-2. The hierarchical decomposition breaks down each task into smaller subtasks using the methods defined in the HTN domain.
-	* `m3_do_put_on` is used for Task 1-5, as it involves loading/unloading crates between trucks and surfaces.
-	* `m1_do_put_on` is used for Tasks 1, 4, and 5, as it involves lifting crates from one surface to another.
-	* `m2_do_put_on` is used for Tasks 2 and 3, as it involves unloading crates from trucks to surfaces.
-	* `m5_do_clear` is used to clear surfaces and crates when necessary.
-	* `m4_do_clear` is used when a surface is already clear.
-	* `m6_do_get_truck` and `m7_do_get_truck` are used to move trucks to the required locations.
-	* `m9_do_lift_crate` is used to lift crates from surfaces to hoists.
-	* `Drop` actions are used to drop crates from hoists to surfaces.
-	* `Unload` and `Load` actions are used to unload/load crates from/to trucks.

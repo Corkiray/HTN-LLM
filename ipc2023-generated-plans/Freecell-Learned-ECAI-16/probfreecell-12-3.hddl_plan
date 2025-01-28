@@ -1,48 +1,82 @@
 ==>
-1 move C5 C4
-2 move C6 H4
-3 move C7 C9
-4 move C8 S9
-5 move C9 H10
-6 move CA H6
-7 move CJ S7
-8 move D10 SA
-9 move D3 C7
-10 move D5 SJ
-11 move D6 S8
-12 move D8 D5
-13 move D9 CQ
-14 move DA DQ
+1 move C5 CQ
+2 move CQ D7
+3 move C6 D3
+4 move C6 H4
+5 move C7 C9
+6 move C8 S9
+7 move CA H6
+8 move D3 C7
+9 move D5 SJ
+10 move D6 S8
+11 move D8 D5
+12 move DA DQ
+13 move DQ D4
+14 debark DQ 
 15 move DJ S10
-16 move DQ D4
-17 move H2 D6
-18 move H3 S2
-19 move H4 C10
-20 move H5 S3
-21 move H6 SQ
-22 move H9 CA
-23 move HA H9
-24 move HJ D2
-25 move HQ HJ
-26 move S10 D9
-27 move S2 DJ
-28 move S3 DA
-29 move S4 C2
-30 move S5 H3
-31 move S7 D3
-32 move S8 H8
-33 move S9 C6
-34 move SA HQ
-35 move SJ H7
-36 move SQ S6
-37 board CQ N4
-38 board DQ N4
-39 board HQ N4
-40 board SQ N4
+16 move H2 D6
+17 move H3 S2
+18 move H5 S3
+19 move H6 SQ
+20 move S3 DA
+21 move S5 H3
+22 move S7 D3
+23 debark S7
+24 move SQ S6
+25 move S10 D9
+26 board DA DQ
+27 move SA HQ
+28 move SJ H7
+29 move S8 H8
+30 move H9 CA
+31 move HA H9
+32 debark HJ
+33 board DQ D4
+34 move HJ D2
+35 debark CJ
+36 board SA HQ
+37 debark CQ
+38 board D4 D2
+39 move D2 C3
+40 move C3 D8
+41 move C4 C3
+42 debark D9
+43 move D10 SA
+44 move D9 CQ
+45 debark S10
+46 board SA C10
+47 move S2 DJ
+48 move C10 D7
+49 move C9 H10
+50 move C7 C9
+51 move C2 D10
+52 move S9 C6
+53 debark D10
+54 board D10 S10
+55 move S6 SQ
+56 move S8 H8
+57 debark D5
+58 board S10 SJ
+59 debark S8
+60 board C10 CA
+61 debark D7
+62 board D7 S7
+63 debark D6
+64 board S6 S8
+65 debark D4
+66 board S2 S7
+67 debark D3
+68 board S3 S2
+69 debark C7
+70 board SA C6
 <==
 
 root 0
-0 solve_freecell -> m1_solve_freecell_0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36
-1 solve_freecell_0 -> m2_solve_freecell_0 37 38 39 40
-2 solve_freecell -> m3_solve_freecell_0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36
-3 solve_freecell_0 -> m4_solve_freecell_0 37 38 39 40
+0 solve_free_cells 1 71
+1 send_to_new_col 2 72
+2 move_col 3 73
+3 send_to_free 4 74
+4 clear 5 75
+5 send_to_home 6 76
+...
+35 solve_free_cells 36 75

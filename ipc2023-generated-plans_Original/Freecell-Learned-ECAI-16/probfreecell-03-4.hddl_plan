@@ -1,0 +1,113 @@
+==>
+1 DO-ON-MOVE0 C3 S3 D3
+2 ACHIEVE-HOME0 D3
+3 DO-ON-MOVE0 D2 H3 D3
+4 ACHIEVE-HOME0 H3
+5 DO-ON-MOVE0 H2 S2 H3
+6 ACHIEVE-HOME0 S3
+7 ACHIEVE-HOME0 S3
+8 ACHIEVE-HOME S3
+9 ACHIEVE-HOME D3
+10 ACHIEVE-HOME H3
+11 ACHIEVE-HOME C3
+<==
+
+root 0
+0 solve_freecell -> m1_solve_freecell_0 1 2 3 4 5 6 7 8 9 10 11
+1 task0 (ACHIEVE-HOME C3) -> m1_achieve_home_0 11
+2 task1 (ACHIEVE-HOME D3) -> m1_achieve_home_0 9
+3 task2 (ACHIEVE-HOME H3) -> m1_achieve_home_0 10
+4 task3 (ACHIEVE-HOME S3) -> m1_achieve_home_0 8
+5 m1_solve_freecell_0 -> m2_solve_freecell_1 1 2 3
+6 m2_solve_freecell_1 -> m3_solve_freecell_2 4
+7 m3_solve_freecell_2 -> m4_solve_freecell_3
+8 m4_solve_freecell_3 -> m5_solve_freecell_4
+9 m5_solve_freecell_4 -> m6_solve_freecell_5
+10 m6_solve_freecell_5 -> m7_solve_freecell_6
+11 m7_solve_freecell_6 -> m8_solve_freecell_7 1
+12 m8_solve_freecell_7 -> m9_solve_freecell_8 2
+13 m9_solve_freecell_8 -> m10_solve_freecell_9 3
+14 m10_solve_freecell_9 -> m11_solve_freecell_10 4
+15 m11_solve_freecell_10 -> m12_solve_freecell_11
+16 m12_solve_freecell_11 -> m13_solve_freecell_12
+17 m13_solve_freecell_12 -> m14_solve_freecell_13
+18 m14_solve_freecell_13 -> m15_solve_freecell_14
+19 m15_solve_freecell_14 -> m16_solve_freecell_15
+20 m16_solve_freecell_15 -> m17_solve_freecell_16
+21 m17_solve_freecell_16 -> m18_solve_freecell_17
+22 m18_solve_freecell_17 -> m19_solve_freecell_18
+23 m19_solve_freecell_18 -> m20_solve_freecell_19
+24 m20_solve_freecell_19 -> m21_solve_freecell_20
+25 m21_solve_freecell_20 -> m22_solve_freecell_21
+26 m22_solve_freecell_21 -> m23_solve_freecell_22
+27 m23_solve_freecell_22 -> m24_solve_freecell_23
+28 m24_solve_freecell_23 -> m25_solve_freecell_24
+29 m25_solve_freecell_24 -> m26_solve_freecell_25
+30 m26_solve_freecell_25 -> m27_solve_freecell_26
+31 m27_solve_freecell_26 -> m28_solve_freecell_27
+32 m28_solve_freecell_27 -> m29_solve_freecell_28
+33 m29_solve_freecell_28 -> m30_solve_freecell_29
+34 m30_solve_freecell_29 -> m31_solve_freecell_30
+35 m31_solve_freecell_30 -> m32_solve_freecell_31
+36 m32_solve_freecell_31 -> m33_solve_freecell_32
+37 m33_solve_freecell_32 -> m34_solve_freecell_33
+38 m34_solve_freecell_33 -> m35_solve_freecell_34
+39 m35_solve_freecell_34 -> m36_solve_freecell_35
+40 m36_solve_freecell_35 -> m37_solve_freecell_36
+41 m37_solve_freecell_36 -> m38_solve_freecell_37
+42 m38_solve_freecell_37 -> m39_solve_freecell_38
+43 m39_solve_freecell_38 -> m40_solve_freecell_39
+44 m40_solve_freecell_39 -> m41_solve_freecell_40
+45 m41_solve_freecell_40 -> m42_solve_freecell_41
+46 m42_solve_freecell_41 -> m43_solve_freecell_42
+47 m43_solve_freecell_42 -> m44_solve_freecell_43
+48 m44_solve_freecell_43 -> m45_solve_freecell_44
+49 m45_solve_freecell_44 -> m46_solve_freecell_45
+50 m46_solve_freecell_45 -> m47_solve_freecell_46
+51 m47_solve_freecell_46 -> m48_solve_freecell_47
+52 m48_solve_freecell_47 -> m49_solve_freecell_48
+53 m49_solve_freecell_48 -> m50_solve_freecell_49
+54 m50_solve_freecell_49 -> m51_solve_freecell_50
+55 m51_solve_freecell_50 -> m52_solve_freecell_51
+56 m52_solve_freecell_51 -> m53_solve_freecell_52
+57 m53_solve_freecell_52 -> m54_solve_freecell_53
+58 m54_solve_freecell_53 -> m55_solve_freecell_54
+59 m55_solve_freecell_54 -> m56_solve_freecell_55
+60 m56_solve_freecell_55 -> m57_solve_freecell_56
+61 m57_solve_freecell_56 -> m58_solve_freecell_57
+62 m58_solve_freecell_57 -> m59_solve_freecell_58
+63 m59_solve_freecell_58 -> m60_solve_freecell_59
+64 m60_solve_freecell_59 -> m61_solve_freecell_60
+65 m61_solve_freecell_60 -> m62_solve_freecell_61
+66 m62_solve_freecell_61 -> m63_solve_freecell_62
+67 m63_solve_freecell_62 -> m64_solve_freecell_63
+68 m64_solve_freecell_63 -> m65_solve_freecell_64
+69 m65_solve_freecell_64 -> m66_solve_freecell_65
+70 m66_solve_freecell_65 -> m67_solve_freecell_66
+71 m67_solve_freecell_66 -> m68_solve_freecell_67
+72 m68_solve_freecell_67 -> m69_solve_freecell_68
+73 m69_solve_freecell_68 -> m70_solve_freecell_69
+74 m70_solve_freecell_69 -> m71_solve_freecell_70
+75 m71_solve_freecell_70 -> m72_solve_freecell_71
+76 m72_solve_freecell_71 -> m73_solve_freecell_72
+77 m73_solve_freecell_72 -> m74_solve_freecell_73
+78 m74_solve_freecell_73 -> m75_solve_freecell_74
+79 m75_solve_freecell_74 -> m76_solve_freecell_75
+80 m76_solve_freecell_75 -> m77_solve_freecell_76
+81 m77_solve_freecell_76 -> m78_solve_freecell_77
+82 m78_solve_freecell_77 -> m79_solve_freecell_78
+83 m79_solve_freecell_78 -> m80_solve_freecell_79
+84 m80_solve_freecell_79 -> m81_solve_freecell_80
+85 m81_solve_freecell_80 -> m82_solve_freecell_81
+86 m82_solve_freecell_81 -> m83_solve_freecell_82
+87 m83_solve_freecell_82 -> m84_solve_freecell_83
+88 m84_solve_freecell_83 -> m85_solve_freecell_84
+89 m85_solve_freecell_84 -> m86_solve_freecell_85
+90 m86_solve_freecell_85 -> m87_solve_freecell_86
+91 m87_solve_freecell_86 -> m88_solve_freecell_87
+92 m88_solve_freecell_87 -> m89_solve_freecell_88
+93 m89_solve_freecell_88 -> m90_solve_freecell_89
+94 m90_solve_freecell_89 -> m91_solve_freecell_90
+95 m91_solve_freecell_90 -> m92_solve_freecell_91
+96 m92_solve_freecell_91 -> m93_solve_freecell_92
+97 m93_solve_freecell_92 -> m94_solve_freecell

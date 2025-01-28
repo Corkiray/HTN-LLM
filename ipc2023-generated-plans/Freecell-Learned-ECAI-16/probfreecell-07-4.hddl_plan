@@ -1,152 +1,44 @@
 ==>
-1 move C7 S7 C5
-2 board S7 C5
-3 move S7 C5 S3
-4 board S3 C5
-5 move S3 C5 C7
-6 debark C7 C5
-7 move C4 S2 C2
-8 board S2 C2
-9 move S2 C2 H3
-10 board H3 C2
-11 move H3 C2 D4
-12 board D4 C2
-13 move D4 C2 C4
-14 debark C4 C2
-15 move C6 S6 C2
-16 board S6 C2
-17 move S6 C2 D7
-18 board D7 C2
-19 move D7 C2 C6
-20 debark C6 C2
-21 move D3 SA C7
-22 board SA C7
-23 move SA C7 S5
-24 board S5 C7
-25 move S5 C7 D3
-26 debark D3 C7
-27 move H7 H4 H6
-28 board H4 H6
-29 move H4 H6 H2
-30 board H2 H6
-31 move H2 H6 H7
-32 debark H7 H6
-33 move D5 HA H5
-34 board HA H5
-35 move HA H5 D2
-36 board D2 H5
-37 move D2 H5 D5
-38 debark D5 H5
-39 move S2 D2 S3
-40 board D2 S3
-41 move D2 S3 S4
-42 board S4 S3
-43 move S4 S3 S2
-44 debark S2 S3
-45 move C2 D4 C4
-46 board D4 C4
-47 move D4 C4 C2
-48 debark C2 C4
-49 move H6 H2 H7
-50 board H2 H7
-51 move H2 H7 H6
-52 debark H6 H7
-53 move D7 S5 D6
-54 board S5 D6
-55 move S5 D6 D7
-56 debark D7 D6
-57 move C5 S3 C7
-58 board S3 C7
-59 move S3 C7 C5
-60 debark C5 C7
-61 move H5 C6 H7
-62 board C6 H7
-63 move C6 H7 H5
-64 debark H5 H7
-65 move S6 D7 S5
-66 board D7 S5
-67 move D7 S5 S6
-68 debark S6 S5
-69 move D6 C2 D7
-70 board C2 D7
-71 move C2 D7 D6
-72 debark D6 D7
-73 move H4 H7 H6
-74 board H7 H6
-75 move H7 H6 H4
-76 debark H4 H6
-77 move S5 C7 S4
-78 board C7 S4
-79 move C7 S4 S5
-80 debark S5 S4
-81 move S4 S7 S3
-82 board S7 S3
-83 move S7 S3 S4
-84 debark S4 S3
-85 move S3 C5 S7
-86 board C5 S7
-87 move C5 S7 S3
-88 debark S3 S7
-89 move C7 SA C0
-90 board SA C0
-91 move SA C0 C7
-92 debark C7 C0
-93 move D7 S5 D0
-94 board S5 D0
-95 move S5 D0 D7
-96 debark D7 D0
-97 move H7 H6 H0
-98 board H6 H0
-99 move H6 H0 H7
-100 debark H7 H0
-101 move S7 C5 S0
-102 board C5 S0
-103 move C5 S0 S7
-104 debark S7 S0
+1 move D5 F0
+2 move D7 F1
+3 move D6 F2
+4 move SA F3
+5 move C7 F3
+6 move S5 F1
+7 move CA F1
+8 move H5 C6
+9 move H6 H2
+10 move H4 HA
+11 move H3 D4
+12 move D2 H3
+13 move H2 C4
+14 move C5 S6
+15 move S7 C5
+16 move C6 S7
+17 move S4 C2
+18 move D3 C3
+19 move C3 S4
+20 move D4 H6
+21 deliver D7 H7
+22 deliver D5 S5
+23 deliver D6 S3
+24 deliver D4 H6
+25 deliver D2 C4
+26 deliver C4 H4
+27 deliver C2 S2
+28 deliver C7 S7
+29 deliver CA S3
+30 deliver C6 S6
 <==
 
 root 0
-0 solve -> m1_solve_0 1 2 3
-1 task0 (ACHIEVE-HOME C7) -> m1_achieve_home_0 4 5 6
-2 task1 (ACHIEVE-HOME D7) -> m1_achieve_home_1 7 8 9
-3 task2 (ACHIEVE-HOME H7) -> m1_achieve_home_2 10 11 12
-4 task0 (ACHIEVE-HOME C7) -> m2_achieve_home_0 13 14 15
-5 task0 (ACHIEVE-HOME C7) -> m3_achieve_home_0 16 17 18
-6 task0 (ACHIEVE-HOME C7) -> m4_achieve_home_0 19 20 21
-7 task1 (ACHIEVE-HOME D7) -> m5_achieve_home_1 22 23 24
-8 task1 (ACHIEVE-HOME D7) -> m6_achieve_home_1 25 26 27
-9 task1 (ACHIEVE-HOME D7) -> m7_achieve_home_1 28 29 30
-10 task2 (ACHIEVE-HOME H7) -> m8_achieve_home_2 31 32 33
-11 task2 (ACHIEVE-HOME H7) -> m9_achieve_home_2 34 35 36
-12 task2 (ACHIEVE-HOME H7) -> m10_achieve_home_2 37 38 39
-13 task0 (ACHIEVE-HOME C7) -> m11_achieve_home_0 40 41 42
-14 task0 (ACHIEVE-HOME C7) -> m12_achieve_home_0 43 44 45
-15 task0 (ACHIEVE-HOME C7) -> m13_achieve_home_0 46 47 48
-16 task0 (ACHIEVE-HOME C7) -> m14_achieve_home_0 49 50 51
-17 task0 (ACHIEVE-HOME C7) -> m15_achieve_home_0 52 53 54
-18 task0 (ACHIEVE-HOME C7) -> m16_achieve_home_0 55 56 57
-19 task0 (ACHIEVE-HOME C7) -> m17_achieve_home_0 58 59 60
-20 task0 (ACHIEVE-HOME C7) -> m18_achieve_home_0 61 62 63
-21 task0 (ACHIEVE-HOME C7) -> m19_achieve_home_0 64 65 66
-22 task1 (ACHIEVE-HOME D7) -> m20_achieve_home_1 67 68 69
-23 task1 (ACHIEVE-HOME D7) -> m21_achieve_home_1 70 71 72
-24 task1 (ACHIEVE-HOME D7) -> m22_achieve_home_1 73 74 75
-25 task1 (ACHIEVE-HOME D7) -> m23_achieve_home_1 76 77 78
-26 task1 (ACHIEVE-HOME D7) -> m24_achieve_home_1 79 80 81
-27 task1 (ACHIEVE-HOME D7) -> m25_achieve_home_1 82 83 84
-28 task2 (ACHIEVE-HOME H7) -> m26_achieve_home_2 85 86 87
-29 task2 (ACHIEVE-HOME H7) -> m27_achieve_home_2 88 89 90
-30 task2 (ACHIEVE-HOME H7) -> m28_achieve_home_2 91 92 93
-31 task2 (ACHIEVE-HOME H7) -> m29_achieve_home_2 94 95 96
-32 task2 (ACHIEVE-HOME H7) -> m30_achieve_home_2 97 98 99
-33 task2 (ACHIEVE-HOME H7) -> m31_achieve_home_2 100 101 102
-34 task2 (ACHIEVE-HOME H7) -> m32_achieve_home_2 103 104 105
-35 task2 (ACHIEVE-HOME H7) -> m33_achieve_home_2 106 107 108
-36 task2 (ACHIEVE-HOME H7) -> m34_achieve_home_2 109 110 111
-37 task2 (ACHIEVE-HOME H7) -> m35_achieve_home_2 112 113 114
-38 task2 (ACHIEVE-HOME H7) -> m36_achieve_home_2 115 116 117
-39 task2 (ACHIEVE-HOME H7) -> m37_achieve_home_2 118 119 120
-40 task0 (ACHIEVE-HOME C7) -> m38_achieve_home_0 121 122 123
-41 task0 (ACHIEVE-HOME C7) -> m39_achieve_home_0 124 125 126
-42 task0 (ACHIEVE-HOME C7) -> m40_achieve_home_0 127 128 129
-43 task0
+0 ACHIEVE-HOME S7 -> m16_ordering_0 26
+0 ACHIEVE-HOME C7 -> m3_ordering_0 20 21
+0 ACHIEVE-HOME D7 -> m4_ordering_0 25 22
+0 ACHIEVE-HOME CA -> m5_ordering_0 23
+0 ACHIEVE-HOME C6 -> m14_ordering_0
+0 ACHIEVE-HOME D6 -> m7_ordering_0 28
+0 ACHIEVE-HOME S5 -> m10_ordering_0
+0 ACHIEVE-HOME S3 -> m1_ordering_0
+0 ACHIEVE-HOME S2 -> m2_ordering_0
+<==

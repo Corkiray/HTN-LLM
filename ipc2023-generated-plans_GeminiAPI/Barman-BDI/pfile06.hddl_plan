@@ -1,0 +1,54 @@
+==>
+1 grasp right shot3
+2 grasp left shot5
+3 fill-shot shot5 ingredient5 right left dispenser5
+4 pour-shot-to-clean-shaker shot5 ingredient5 shaker1 left level1 level1
+5 grasp right shot1
+6 fill-shot shot1 ingredient1 right left dispenser1
+7 pour-shot-to-used-shaker shot1 ingredient1 shaker1 right level1 level1
+8 shake cocktail1 ingredient5 ingredient1 shaker1 right left
+9 pour-shaker-to-shot cocktail1 shot3 right shaker1 level1 level1
+10 grasp right shot2
+11 grasp left shot5
+12 fill-shot shot5 ingredient5 right left dispenser5
+13 pour-shot-to-clean-shaker shot5 ingredient5 shaker1 left level1 level1
+14 grasp right shot3
+15 fill-shot shot3 ingredient3 right left dispenser3
+16 pour-shot-to-used-shaker shot3 ingredient3 shaker1 right level1 level1
+17 shake cocktail2 ingredient5 ingredient3 shaker1 right left
+18 pour-shaker-to-shot cocktail2 shot2 right shaker1 level1 level1
+19 grasp right shot4
+20 grasp left shot4
+21 fill-shot shot4 ingredient4 right left dispenser4
+22 pour-shot-to-clean-shaker shot4 ingredient4 shaker1 left level1 level1
+23 grasp right shot5
+24 fill-shot shot5 ingredient5 right left dispenser5
+25 pour-shot-to-used-shaker shot5 ingredient5 shaker1 right level1 level1
+26 shake cocktail3 ingredient4 ingredient5 shaker1 right left
+27 pour-shaker-to-shot cocktail3 shot4 right shaker1 level1 level1
+28 grasp right shot1
+29 grasp left shot2
+30 fill-shot shot2 ingredient2 right left dispenser2
+31 pour-shot-to-clean-shaker shot2 ingredient2 shaker1 left level1 level1
+32 grasp right shot4
+33 fill-shot shot4 ingredient4 right left dispenser4
+34 pour-shot-to-used-shaker shot4 ingredient4 shaker1 right level1 level1
+35 shake cocktail4 ingredient2 ingredient4 shaker1 right left
+36 pour-shaker-to-shot cocktail4 shot1 right shaker1 level1 level1
+root 0
+0 0 -> MakeAndPourCocktail shot3 cocktail1 shaker1 right 1 2 3 4 5 6 7 8 9
+root 1
+1 1 -> MakeCocktail shaker1 cocktail1 ingredient1 right left ingredient5 10 11 12 13 14 15 16 17
+root 2
+2 2 -> MakeAndPourCocktail shot2 cocktail2 shaker1 right 18 19 20 21 22 23 24 25 26
+root 3
+3 3 -> MakeCocktail shaker1 cocktail2 ingredient3 right left ingredient5 27 28 29 30 31 32 33 34
+root 4
+4 4 -> MakeAndPourCocktail shot4 cocktail3 shaker1 right 35 36 37 38 39 40 41 42 43
+root 5
+5 5 -> MakeCocktail shaker1 cocktail3 ingredient5 right left ingredient4 44 45 46 47 48 49 50 51
+root 6
+6 6 -> MakeAndPourCocktail shot1 cocktail4 shaker1 right 52 53 54 55 56 57 58 59 60
+root 7
+7 7 -> MakeCocktail shaker1 cocktail4 ingredient4 right left ingredient2 61 62 63 64 65 66 67 68
+<==

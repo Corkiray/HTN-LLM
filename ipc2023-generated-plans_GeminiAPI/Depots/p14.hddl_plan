@@ -1,0 +1,17 @@
+==>
+1 nop
+2 nop
+3 nop
+4 nop
+5 nop
+6 nop
+7 nop
+root 0
+0 task1 -> m0_do_put_on crate6 pallet1 1
+1 task2 -> m0_do_put_on crate7 crate6 2
+2 task3 -> m0_do_put_on crate9 crate7 3
+3 task4 -> m0_do_put_on crate5 pallet5 4
+4 task5 -> m0_do_put_on crate4 pallet0 5
+5 task6 -> m0_do_put_on crate2 pallet3 6
+6 task7 -> m0_do_put_on crate1 pallet8 7
+<==

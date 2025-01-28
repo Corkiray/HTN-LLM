@@ -1,41 +1,119 @@
 ==>
-**Sequential Plan**
-```
-1. flip l0 l0 N Y
-2. flip l0 l3 N Y
-3. flip l0 l6 N Y
-4. flip l0 l7 N Y
-5. flip l0 l8 N Y
-6. turn l0 l0 Y N
-7. propagate_up l0 l0 Y
-8. propagate_down l0 l0 Y
-9. propagate_left l0 l0 Y
-10. propagate_right l0 l0 Y
-11. play
-```
-**Hierarchical Decomposition**
-```
+1 flip l0 l0 N Y
+2 propagate_up l0 l0 Y
+3 flip l1 l0 Y N
+4 propagate_up l1 l0 N
+5 flip l2 l0 N Y
+6 propagate_up l2 l0 Y
+7 flip l3 l0 Y N
+8 propagate_up l3 l0 N
+9 flip l4 l0 N Y
+10 propagate_up l4 l0 Y
+11 flip l5 l0 Y N
+12 propagate_up l5 l0 N
+13 flip l6 l0 N Y
+14 propagate_up l6 l0 Y
+15 flip l7 l0 Y N
+16 propagate_up l7 l0 N
+17 flip l8 l0 N Y
+18 propagate_up l8 l0 Y
+19 flip l9 l0 Y N
+20 propagate_up l9 l0 N
+21 propagate_right l0 l0 Y
+22 flip l0 l1 Y N
+23 propagate_right l0 l1 N
+24 flip l0 l2 N Y
+25 propagate_right l0 l2 Y
+26 flip l0 l3 Y N
+27 propagate_right l0 l3 N
+28 flip l0 l4 N Y
+29 propagate_right l0 l4 Y
+30 flip l0 l5 N Y
+31 propagate_right l0 l5 Y
+32 flip l0 l6 Y N
+33 propagate_right l0 l6 N
+34 flip l0 l7 N Y
+35 propagate_right l0 l7 Y
+36 flip l0 l8 N Y
+37 propagate_right l0 l8 Y
+38 flip l0 l9 N Y
+39 propagate_right l0 l9 Y
+40 propagate_down l0 l0 Y
+41 flip l1 l0 N Y
+42 propagate_down l1 l0 Y
+43 flip l2 l0 Y N
+44 propagate_down l2 l0 N
+45 flip l3 l0 N Y
+46 propagate_down l3 l0 Y
+47 flip l4 l0 Y N
+48 propagate_down l4 l0 N
+49 flip l5 l0 N Y
+50 propagate_down l5 l0 Y
+51 flip l6 l0 Y N
+52 propagate_down l6 l0 N
+53 flip l7 l0 N Y
+54 propagate_down l7 l0 Y
+55 flip l8 l0 Y N
+56 propagate_down l8 l0 N
+57 flip l9 l0 N Y
+58 propagate_down l9 l0 Y
+59 propagate_left l0 l0 Y
+60 flip l1 l0 Y N
+61 propagate_left l1 l0 N
+62 flip l2 l0 N Y
+63 propagate_left l2 l0 Y
+64 flip l3 l0 Y N
+65 propagate_left l3 l0 N
+66 flip l4 l0 N Y
+67 propagate_left l4 l0 Y
+68 flip l5 l0 Y N
+69 propagate_left l5 l0 N
+70 flip l6 l0 N Y
+71 propagate_left l6 l0 Y
+72 flip l7 l0 Y N
+73 propagate_left l7 l0 N
+74 flip l8 l0 N Y
+75 propagate_left l8 l0 Y
+76 flip l9 l0 Y N
+77 propagate_left l9 l0 N
 root 0
-0 play -> do_play 1 11
-1 turn -> do_turn l0 l0 N Y 2-10
-2 flip -> (no decomposition, primitive action)
-3 flip -> (no decomposition, primitive action)
-4 flip -> (no decomposition, primitive action)
-5 flip -> (no decomposition, primitive action)
-6 flip -> (no decomposition, primitive action)
-7 propagate_up -> propagate_up_do l0 l0 l1 Y N 12
-  12 propagate_up -> propagate_up_do l1 l0 l2 Y N 13
-    13 propagate_up -> propagate_up_end_field l2 l0 Y (max reached)
-8 propagate_down -> propagate_down_do l0 l0 l1 Y N 14
-  14 propagate_down -> propagate_down_end_field l1 l0 Y (min reached)
-9 propagate_left -> propagate_left_end_field l0 l0 Y (max reached)
-10 propagate_right -> propagate_right_end_field l0 l9 Y (min reached)
-11 play -> do_play 1 11 (recursive, but assumed to terminate)
-```
-**Notes:**
-
-* The sequential plan only shows the first set of actions required to start solving the problem. The `play` task is recursive, and the plan will continue to expand until the goal is reached.
-* The hierarchical decomposition shows how each task is broken down into subtasks. Some tasks, like `flip`, are primitive actions and do not require further decomposition.
-* The `propagate_*` tasks are decomposed recursively until they reach the boundary conditions (max or min coordinates).
-* The `do_turn` method is applied to the initial coordinate `l0 l0` with the initial status `N` and the target status `Y`. This leads to a series of `flip` actions to change the status of adjacent coordinates.
-* The `do_play` method is recursive, and the plan will continue to expand until the goal is reached. For brevity, only the first iteration is shown.
+0 play -> do_play 1 2
+78 turn -> do_turn 78 79 80 81 82 83
+79 propagate_up l0 l0 Y -> propagate_up_do 79 80 l1
+80 propagate_up l1 l0 Y -> propagate_up_do 80 81 l2
+81 propagate_up l2 l0 N -> propagate_up_end_different 82
+82 propagate_up l2 l0 Y -> propagate_up_do 82 83 l3
+83 propagate_up l3 l0 N -> propagate_up_end_field
+84 propagate_right l0 l0 Y -> propagate_right_do 84 85 l1
+85 propagate_right l0 l1 Y -> propagate_right_do 85 86 l2
+86 propagate_right l0 l2 N -> propagate_right_end_different 87
+87 propagate_right l0 l2 Y -> propagate_right_do 87 88 l3
+88 propagate_right l0 l3 N -> propagate_right_end_field
+89 propagate_down l0 l0 Y -> propagate_down_do 89 90 l1
+90 propagate_down l1 l0 N -> propagate_down_end_different 91
+91 propagate_down l1 l0 Y -> propagate_down_do 91 92 l2
+92 propagate_down l2 l0 N -> propagate_down_end_field
+93 propagate_left l0 l0 Y -> propagate_left_do 93 94 l1
+94 propagate_left l0 l1 N -> propagate_left_end_different 95
+95 propagate_left l0 l1 Y -> propagate_left_do 95 96 l2
+96 propagate_left l0 l2 N -> propagate_left_end_field
+97 propagate_up l4 l0 N -> propagate_up_do 97 98 l3
+98 propagate_up l3 l0 Y -> propagate_up_do 98 99 l2
+99 propagate_up l2 l0 N -> propagate_up_do 99 100 l1
+100 propagate_up l1 l0 Y -> propagate_up_do 100 101 l0
+101 propagate_up l0 l0 Y -> propagate_up_end_field
+102 propagate_right l0 l4 Y -> propagate_right_do 102 103 l1
+103 propagate_right l0 l5 Y -> propagate_right_do 103 104 l2
+104 propagate_right l0 l6 N -> propagate_right_end_different 105
+105 propagate_right l0 l6 Y -> propagate_right_do 105 106 l3
+106 propagate_right l0 l7 N -> propagate_right_end_field
+107 propagate_down l4 l0 N -> propagate_down_do 107 108 l1
+108 propagate_down l1 l0 Y -> propagate_down_do 108 109 l2
+109 propagate_down l2 l0 N -> propagate_down_do 109 110 l3
+110 propagate_down l3 l0 Y -> propagate_down_end_field
+111 propagate_left l0 l4 Y -> propagate_left_do 111 112 l1
+112 propagate_left l0 l5 Y -> propagate_left_do 112 113 l2
+113 propagate_left l0 l6 N -> propagate_left_end_different 114
+114 propagate_left l0 l6 Y -> propagate_left_do 114 115 l3
+115 propagate_left l0 l7 N -> propagate_left_end_field
+<==

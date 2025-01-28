@@ -1,39 +1,36 @@
 ==>
-1 load_highspeed_saw b0 highspeed_saw0
-2 cut_board b0 p1 highspeed_saw0 pine rough s3 s2 s1 small natural untreated
-3 unload_highspeed_saw b0 highspeed_saw0
-4 do_spray_varnish p1 spray_varnisher0 red smooth untreated untreated varnished natural
-5 load_highspeed_saw b0 highspeed_saw0
-6 cut_board b0 p2 highspeed_saw0 pine rough s3 s2 large natural untreated
-7 unload_highspeed_saw b0 highspeed_saw0
-8 do_glaze p2 glazer0 red verysmooth untreated untreated glazed natural
+1 process p1 red rough smooth
+2 process p2 red verysmooth smooth
+3 process p0 red smooth rough
+4 load_highspeed_saw b0 highspeed_saw0
+5 unload_highspeed_saw b0 highspeed_saw0
+root 0
+0 process p0 red smooth rough -> m1_ordering_0 1 2 3 4 5
+1 do_colour p1 red spray_varnisher0 untreated -> m2_ordering_0 6 7 8
+2 do_colour p2 red spray_varnisher0 untreated -> m2_ordering_0 9 10 11
+3 do_colour p0 red spray_varnisher0 untreated -> m2_ordering_0 12 13 14
+6 load_highspeed_saw b0 highspeed_saw0
+7 do_saw b0 p1 pine rough
+8 unload_highspeed_saw b0 highspeed_saw0
+9 load_highspeed_saw b0 highspeed_saw0
+10 do_saw b0 p2 teak rough
+11 unload_highspeed_saw b0 highspeed_saw0
+12 load_highspeed_saw b0 highspeed_saw0
+13 do_saw b0 p0 pine rough
+14 unload_highspeed_saw b0 highspeed_saw0
 <==
 
-root 0
-0 process p1 red smooth smooth -> method11 1 2 3 4
-1 cut_and_saw b0 p1 pine smooth -> method6 1 2 3
-1 load_highspeed_saw b0 highspeed_saw0
-2 cut_board b0 p1 highspeed_saw0 pine rough s3 s2 s1 small natural untreated -> method4c 1 2 3 4 5 6 7
-  1 cut_board_small b0 p1 highspeed_saw0 pine rough s3 s1 small natural untreated
-  2 boardsize_successor s1 s2
-  3 boardsize_successor s2 s3
-  4 boardsize b0 s3
-  5 wood b0 pine
-  6 surface_condition b0 rough
-  7 available b0
-3 unload_highspeed_saw b0 highspeed_saw0
-4 do_colour p1 red spray_varnisher0 untreated -> method1 4
-  4 do_spray_varnish p1 spray_varnisher0 red smooth untreated untreated varnished natural
+This plan solves the problem by first processing each part to achieve the desired color and surface condition, and then loading and unloading the high-speed saw to cut the board into the required parts.
 
-root 1
-1 process p2 red verysmooth verysmooth -> method12 5 6 7 8
-5 grindNplane p2 verysmooth natural varnished smooth natural untreated -> method7 5
-  5 do_plane p2 verysmooth natural varnished smooth untreated natural
-6 do_colour p2 red glazer0 untreated -> method2 8
-  8 do_glaze p2 glazer0 red verysmooth untreated untreated glazed natural
-7 (no-op, already achieved)
-8 (no-op, already achieved)
+Here is a brief explanation of the plan:
 
-root 2
-2 process p0 red smooth smooth -> (no-op, already achieved)
-  (all preconditions already met in initial state)
+1. Process p1 to achieve the color red and surface condition smooth.
+2. Process p2 to achieve the color red and surface condition smooth.
+3. Process p0 to achieve the color red and surface condition rough.
+4. Load the high-speed saw with board b0.
+5. Unload the high-speed saw from board b0.
+6-8: Load the high-speed saw, cut board b0 to create part p1, and unload the high-speed saw.
+9-11: Load the high-speed saw, cut board b0 to create part p2, and unload the high-speed saw.
+12-14: Load the high-speed saw, cut board b0 to create part p0, and unload the high-speed saw.
+
+Note that this plan assumes that the high-speed saw is initially empty and that the board b0 is available. Additionally, the plan does not account for any potential errors or exceptions that may occur during the execution of the tasks.

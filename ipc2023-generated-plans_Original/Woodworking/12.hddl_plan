@@ -1,0 +1,38 @@
+==>
+1 load_highspeed_saw b0 highspeed_saw0
+2 cut_board_large b0 p1 highspeed_saw0 walnut rough s4 s3 s2 s1 large medium natural untreated
+3 unload_highspeed_saw b0 highspeed_saw0
+4 load_highspeed_saw b1 highspeed_saw1
+5 cut_board_medium b1 p2 highspeed_saw1 cherry rough s2 s1 s0 medium medium natural untreated
+6 unload_highspeed_saw b1 highspeed_saw1
+7 load_highspeed_saw b0 highspeed_saw0
+8 cut_board_small b0 p3 highspeed_saw0 walnut rough s1 s0 small small natural untreated
+9 unload_highspeed_saw b0 highspeed_saw0
+10 do_plane_untreated p3 planer0 rough green untreated untreated smooth natural white
+11 do_grind_untreated p3 grinder0 smooth white untreated untreated untreated untreated verysmooth natural
+12 do_spray_varnish p3 spray_varnisher0 verysmooth natural untreated untreated blue
+13 do_glaze p2 glazer0 smooth mauve untreated untreated glazed natural
+14 do_immersion_varnish p1 immersion_varnisher0 smooth natural untreated untreated blue
+15 do_plane p4 planer1 rough green varnished varnished smooth natural white
+16 do_spray_varnish p4 spray_varnisher1 smooth natural varnished varnished blue
+17 do_glaze p0 glazer1 verysmooth green varnished varnished glazed natural
+<==
+
+root 0
+0 process_all -> m14_process_all_0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17
+1 process_all -> m14_process_all_1 1 2 3 4 5 6 7 8 9
+2 process_all -> m14_process_all_2 10 11 12
+3 process_all -> m14_process_all_3 13
+4 process_all -> m14_process_all_4 14
+5 process_all -> m14_process_all_5 15 16
+6 process_all -> m14_process_all_6 17
+7 cut_and_saw -> m6_cut_and_saw_0 1 2 3
+8 cut_and_saw -> m6_cut_and_saw_1 4 5 6
+9 cut_and_saw -> m6_cut_and_saw_2 7 8 9
+10 grindNplane -> m13_grindNplane_0 10 11
+11 do_colour -> m0_do_colour_0 12
+12 do_colour -> m2_do_colour_1 13
+13 do_colour -> m1_do_colour_2 14
+14 do_colour -> m2_do_colour_3 17
+15 grindNplane -> m15_grindNplane_0 15
+16 do_colour -> m1_do_colour_4 16

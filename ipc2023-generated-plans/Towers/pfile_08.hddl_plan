@@ -1,51 +1,225 @@
 ==>
-**Sequential Plan**
-```
-1. selectDirection r1 t1 t2 t3
-2. rotateTower t1 t3 t2
-3. move_abstract t1 t3
-4. exchange t1 t2 t3
-5. move_abstract t3 t1
-6. rotateTower t2 t3 t1
-7. selectDirection r2 t1 t3 t2
-8. rotateTower t1 t2 t3
-9. move_abstract t1 t2
-10. exchange t1 t3 t2
-11. move_abstract t2 t1
-12. rotateTower t3 t2 t1
-...
-**Total 44 actions** (due to space constraints, the full sequential plan is not shown)
-44. move r8 t1 t3 t2 t3
-<==
-
-**Hierarchical Decomposition**
-```
+1 move r8 t1 r7 t3
+2 move r7 t3 r6 t1
+3 move r6 t1 r5 t2
+4 move r5 t2 r4 t3
+5 move r4 t3 r3 t2
+6 move r3 t2 r2 t3
+7 move r2 t3 r1 t2
+8 move r1 t2 r8 t3
 root 0
-0 shiftTower t1 t2 t3 -> m-shiftTower 1
-1 m-shiftTower r1 t1 t2 t3 -> 
-  2 selectDirection r1 t1 t2 t3 -> selectedDirection 3 4
-  3 selectedDirection r1 t1 t2 t3 -> 
-    5 rotateTower t1 t3 t2 -> m-rotateTower 6 7
-   ...
-  4 m-selectDirection r2 r1 t1 t2 t3 -> 
-    8 selectDirection r2 t1 t3 t2 -> selectedDirection 9 10
-   ...
-2 solve_elevator ( implicit, no further decomposition shown)
-...
-**Method Decomposition for exchange (multiple instances)**
-exchange t1 t2 t3 -> exchangeLR r4 t2 t1 t2 t3 13 14
-  13 move_abstract t1 t3 -> newMethod21 r4 t2 t1 t3 15
-  14 rotateTower t2 t3 t1 -> m-rotateTower 16 17
-...
-exchange t1 t3 t2 -> exchangeRL t2 r5 t1 t3 t2 23 24
-  23 move_abstract t3 t1 -> newMethod21 r5 t2 t3 t1 25
-  24 rotateTower t2 t3 t1 -> m-rotateTower 26 27
-...
-```
-**Note:**
-
-* The sequential plan consists of 44 actions, but due to space constraints, only the first and last actions are shown.
-* The hierarchical decomposition is partial, focusing on the initial `shiftTower` task and a few instances of `exchange`. The `solve_elevator` task is mentioned but not further decomposed, as its decomposition is not provided in the given HTN domain.
-* Method names (e.g., `m-shiftTower`, `selectedDirection`) are used to indicate the application of a specific method for task decomposition.
-* Task and method parameters are omitted for brevity, but they can be inferred from the HTN domain definition.
-* The plan assumes that the HTN planner successfully resolves the tasks and methods according to the provided domain and problem definitions.
+0 shiftTower t1 t2 t3 -> m-shiftTower 0 1
+1 selectDirection r8 t1 t2 t3 -> selectedDirection 2 3
+2 rotateTower t1 t3 t2 -> m-rotateTower 4 5
+3 selectDirection r7 t3 t1 t2 -> m-selectDirection 6 7
+4 move_abstract t1 t2 -> newMethod21 8 9
+5 exchange t1 t2 t3 -> exchangeLR 10 11
+6 selectDirection r6 t1 t3 t2 -> selectedDirection 12 13
+7 rotateTower t3 t2 t1 -> m-rotateTower 14 15
+8 move r8 r7 t1 r6 t2 -> move 16 17
+9 move r7 r6 t2 r5 t3 -> move 18 19
+10 move r6 r5 t3 r4 t2 -> move 20 21
+11 move r5 r4 t2 r3 t3 -> move 22 23
+12 selectDirection r5 t2 t3 t1 -> selectedDirection 24 25
+13 rotateTower t2 t1 t3 -> m-rotateTower 26 27
+14 move_abstract t3 t1 -> newMethod21 28 29
+15 exchange t3 t2 t1 -> exchangeRL 30 31
+16 move r7 r6 t2 r8 t3 -> move 32 33
+17 move r6 r5 t3 r7 t2 -> move 34 35
+18 move r5 r4 t2 r6 t3 -> move 36 37
+19 move r4 r3 t3 r5 t2 -> move 38 39
+20 move r3 r2 t2 r4 t3 -> move 40 41
+21 move r2 r1 t3 r3 t2 -> move 42 43
+22 move r1 r8 t2 r2 t3 -> move 44 45
+23 move r8 t3 r1 t2 -> move 46 47
+24 selectDirection r4 t3 t2 t1 -> selectedDirection 48 49
+25 rotateTower t3 t1 t2 -> m-rotateTower 50 51
+26 move_abstract t2 t1 -> newMethod21 52 53
+27 exchange t2 t3 t1 -> exchangeLR 54 55
+28 move r8 r7 t1 r6 t2 -> move 56 57
+29 move r7 r6 t2 r5 t3 -> move 58 59
+30 move r6 r5 t3 r4 t2 -> move 60 61
+31 move r5 r4 t2 r3 t3 -> move 62 63
+32 move r7 r6 t2 r8 t3 -> move 64 65
+33 move r6 r5 t3 r7 t2 -> move 66 67
+34 move r5 r4 t2 r6 t3 -> move 68 69
+35 move r4 r3 t3 r5 t2 -> move 70 71
+36 move r6 r5 t3 r4 t2 -> move 72 73
+37 move r5 r4 t2 r6 t3 -> move 74 75
+38 move r4 r3 t3 r5 t2 -> move 76 77
+39 move r3 r2 t2 r4 t3 -> move 78 79
+40 move r4 r3 t3 r2 t2 -> move 80 81
+41 move r3 r2 t2 r4 t3 -> move 82 83
+42 move r3 r2 t2 r1 t3 -> move 84 85
+43 move r2 r1 t3 r3 t2 -> move 86 87
+44 move r2 r1 t3 r8 t2 -> move 88 89
+45 move r1 r8 t2 r2 t3 -> move 90 91
+46 move r8 t3 r1 t2 -> move 92 93
+47 move r1 t2 r8 t3 -> move 94 95
+48 selectDirection r3 t2 t3 t1 -> selectedDirection 96 97
+49 rotateTower t2 t1 t3 -> m-rotateTower 98 99
+50 move_abstract t3 t1 -> newMethod21 100 101
+51 exchange t3 t2 t1 -> exchangeRL 102 103
+52 move r8 r7 t1 r6 t2 -> move 104 105
+53 move r7 r6 t2 r5 t3 -> move 106 107
+54 move r6 r5 t3 r4 t2 -> move 108 109
+55 move r5 r4 t2 r3 t3 -> move 110 111
+56 move r8 r7 t1 r6 t2 -> move 112 113
+57 move r7 r6 t2 r5 t3 -> move 114 115
+58 move r6 r5 t3 r4 t2 -> move 116 117
+59 move r5 r4 t2 r3 t3 -> move 118 119
+60 move r6 r5 t3 r4 t2 -> move 120 121
+61 move r5 r4 t2 r6 t3 -> move 122 123
+62 move r4 r3 t3 r5 t2 -> move 124 125
+63 move r3 r2 t2 r4 t3 -> move 126 127
+64 move r7 r6 t2 r8 t3 -> move 128 129
+65 move r6 r5 t3 r7 t2 -> move 130 131
+66 move r5 r4 t2 r6 t3 -> move 132 133
+67 move r4 r3 t3 r5 t2 -> move 134 135
+68 move r6 r5 t3 r4 t2 -> move 136 137
+69 move r5 r4 t2 r6 t3 -> move 138 139
+70 move r4 r3 t3 r5 t2 -> move 140 141
+71 move r3 r2 t2 r4 t3 -> move 142 143
+72 move r6 r5 t3 r4 t2 -> move 144 145
+73 move r5 r4 t2 r6 t3 -> move 146 147
+74 move r4 r3 t3 r5 t2 -> move 148 149
+75 move r3 r2 t2 r4 t3 -> move 150 151
+76 move r4 r3 t3 r5 t2 -> move 152 153
+77 move r3 r2 t2 r4 t3 -> move 154 155
+78 move r4 r3 t3 r2 t2 -> move 156 157
+79 move r3 r2 t2 r4 t3 -> move 158 159
+80 move r4 r3 t3 r2 t2 -> move 160 161
+81 move r3 r2 t2 r4 t3 -> move 162 163
+82 move r3 r2 t2 r1 t3 -> move 164 165
+83 move r2 r1 t3 r3 t2 -> move 166 167
+84 move r3 r2 t2 r1 t3 -> move 168 169
+85 move r2 r1 t3 r3 t2 -> move 170 171
+86 move r2 r1 t3 r8 t2 -> move 172 173
+87 move r1 r8 t2 r2 t3 -> move 174 175
+88 move r2 r1 t3 r8 t2 -> move 176 177
+89 move r1 r8 t2 r2 t3 -> move 178 179
+90 move r2 r1 t3 r8 t2 -> move 180 181
+91 move r1 r8 t2 r2 t3 -> move 182 183
+92 move r8 t3 r1 t2 -> move 184 185
+93 move r1 t2 r8 t3 -> move 186 187
+94 move r8 t3 r1 t2 -> move 188 189
+95 move r1 t2 r8 t3 -> move 190 191
+96 selectDirection r2 t3 t1 t2 -> selectedDirection 192 193
+97 rotateTower t3 t1 t2 -> m-rotateTower 194 195
+98 move_abstract t2 t1 -> newMethod21 196 197
+99 exchange t2 t3 t1 -> exchangeLR 198 199
+100 move r8 r7 t1 r6 t2 -> move 200 201
+101 move r7 r6 t2 r5 t3 -> move 202 203
+102 move r6 r5 t3 r4 t2 -> move 204 205
+103 move r5 r4 t2 r3 t3 -> move 206 207
+104 move r8 r7 t1 r6 t2 -> move 208 209
+105 move r7 r6 t2 r5 t3 -> move 210 211
+106 move r6 r5 t3 r4 t2 -> move 212 213
+107 move r5 r4 t2 r3 t3 -> move 214 215
+108 move r6 r5 t3 r4 t2 -> move 216 217
+109 move r5 r4 t2 r6 t3 -> move 218 219
+110 move r4 r3 t3 r5 t2 -> move 220 221
+111 move r3 r2 t2 r4 t3 -> move 222 223
+112 move r8 r7 t1 r6 t2 -> move 224 225
+113 move r7 r6 t2 r5 t3 -> move 226 227
+114 move r6 r5 t3 r4 t2 -> move 228 229
+115 move r5 r4 t2 r3 t3 -> move 230 231
+116 move r6 r5 t3 r4 t2 -> move 232 233
+117 move r5 r4 t2 r6 t3 -> move 234 235
+118 move r4 r3 t3 r5 t2 -> move 236 237
+119 move r3 r2 t2 r4 t3 -> move 238 239
+120 move r6 r5 t3 r4 t2 -> move 240 241
+121 move r5 r4 t2 r6 t3 -> move 242 243
+122 move r4 r3 t3 r5 t2 -> move 244 245
+123 move r3 r2 t2 r4 t3 -> move 246 247
+124 move r4 r3 t3 r5 t2 -> move 248 249
+125 move r3 r2 t2 r4 t3 -> move 250 251
+126 move r4 r3 t3 r2 t2 -> move 252 253
+127 move r3 r2 t2 r4 t3 -> move 254 255
+128 move r7 r6 t2 r8 t3 -> move 256 257
+129 move r6 r5 t3 r7 t2 -> move 258 259
+130 move r5 r4 t2 r6 t3 -> move 260 261
+131 move r4 r3 t3 r5 t2 -> move 262 263
+132 move r6 r5 t3 r4 t2 -> move 264 265
+133 move r5 r4 t2 r6 t3 -> move 266 267
+134 move r4 r3 t3 r5 t2 -> move 268 269
+135 move r3 r2 t2 r4 t3 -> move 270 271
+136 move r6 r5 t3 r4 t2 -> move 272 273
+137 move r5 r4 t2 r6 t3 -> move 274 275
+138 move r4 r3 t3 r5 t2 -> move 276 277
+139 move r3 r2 t2 r4 t3 -> move 278 279
+140 move r4 r3 t3 r5 t2 -> move 280 281
+141 move r3 r2 t2 r4 t3 -> move 282 283
+142 move r4 r3 t3 r2 t2 -> move 284 285
+143 move r3 r2 t2 r4 t3 -> move 286 287
+144 move r6 r5 t3 r4 t2 -> move 288 289
+145 move r5 r4 t2 r6 t3 -> move 290 291
+146 move r4 r3 t3 r5 t2 -> move 292 293
+147 move r3 r2 t2 r4 t3 -> move 294 295
+148 move r4 r3 t3 r5 t2 -> move 296 297
+149 move r3 r2 t2 r4 t3 -> move 298 299
+150 move r4 r3 t3 r2 t2 -> move 300 301
+151 move r3 r2 t2 r4 t3 -> move 302 303
+152 move r4 r3 t3 r5 t2 -> move 304 305
+153 move r3 r2 t2 r4 t3 -> move 306 307
+154 move r4 r3 t3 r2 t2 -> move 308 309
+155 move r3 r2 t2 r4 t3 -> move 310 311
+156 move r4 r3 t3 r2 t2 -> move 312 313
+157 move r3 r2 t2 r4 t3 -> move 314 315
+158 move r4 r3 t3 r2 t2 -> move 316 317
+159 move r3 r2 t2 r4 t3 -> move 318 319
+160 move r4 r3 t3 r2 t2 -> move 320 321
+161 move r3 r2 t2 r4 t3 -> move 322 323
+162 move r3 r2 t2 r1 t3 -> move 324 325
+163 move r2 r1 t3 r3 t2 -> move 326 327
+164 move r3 r2 t2 r1 t3 -> move 328 329
+165 move r2 r1 t3 r3 t2 -> move 330 331
+166 move r2 r1 t3 r8 t2 -> move 332 333
+167 move r1 r8 t2 r2 t3 -> move 334 335
+168 move r3 r2 t2 r1 t3 -> move 336 337
+169 move r2 r1 t3 r3 t2 -> move 338 339
+170 move r2 r1 t3 r8 t2 -> move 340 341
+171 move r1 r8 t2 r2 t3 -> move 342 343
+172 move r2 r1 t3 r8 t2 -> move 344 345
+173 move r1 r8 t2 r2 t3 -> move 346 347
+174 move r2 r1 t3 r8 t2 -> move 348 349
+175 move r1 r8 t2 r2 t3 -> move 350 351
+176 move r2 r1 t3 r8 t2 -> move 352 353
+177 move r1 r8 t2 r2 t3 -> move 354 355
+178 move r2 r1 t3 r8 t2 -> move 356 357
+179 move r1 r8 t2 r2 t3 -> move 358 359
+180 move r2 r1 t3 r8 t2 -> move 360 361
+181 move r1 r8 t2 r2 t3 -> move 362 363
+182 move r2 r1 t3 r8 t2 -> move 364 365
+183 move r1 r8 t2 r2 t3 -> move 366 367
+184 move r8 t3 r1 t2 -> move 368 369
+185 move r1 t2 r8 t3 -> move 370 371
+186 move r8 t3 r1 t2 -> move 372 373
+187 move r1 t2 r8 t3 -> move 374 375
+188 move r8 t3 r1 t2 -> move 376 377
+189 move r1 t2 r8 t3 -> move 378 379
+190 move r8 t3 r1 t2 -> move 380 381
+191 move r1 t2 r8 t3 -> move 382 383
+192 selectDirection r1 t2 t1 t2 -> selectedDirection 384 385
+193 rotateTower t2 t1 t2 -> m-rotateTower 386 387
+194 move_abstract t2 t1 -> newMethod21 388 389
+195 exchange t2 t3 t1 -> exchangeLR 390 391
+196 move r8 r7 t1 r6 t2 -> move 392 393
+197 move r7 r6 t2 r5 t3 -> move 394 395
+198 move r6 r5 t3 r4 t2 -> move 396 397
+199 move r5 r4 t2 r3 t3 -> move 398 399
+200 move r8 r7 t1 r6 t2 -> move 400 401
+201 move r7 r6 t2 r5 t3 -> move 402 403
+202 move r6 r5 t3 r4 t2 -> move 404 405
+203 move r5 r4 t2 r3 t3 -> move 406 407
+204 move r6 r5 t3 r4 t2 -> move 408 409
+205 move r5 r4 t2 r6 t3 -> move 410 411
+206 move r4 r3 t3 r5 t2 -> move 412 413
+207 move r3 r2 t2 r4 t3 -> move 414 415
+208 move r8 r7 t1 r6 t2 -> move 416 417
+209 move r7 r6 t2 r5 t3 -> move 418 419
+210 move r6 r5 t3 r4 t2 -> move 420 421
+211 move r5 r4 t2 r3 t3 -> move 422 423
+212 move r6 r5 t3 r4 t2 -> move 424 425
+213 move r5 r4 t2 r6 t3 -> move 426 427
+214 move

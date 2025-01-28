@@ -1,50 +1,200 @@
-Here is a hierarchical plan to solve the given HTN problem, following the specified output format:
-```
 ==>
-**Sequential Plan**
-1. Drive truck0 distributor0 depot1
-2. do_get_truck truck0 depot1
-3. do_clear crate10 depot1
-4. do_lift_crate crate10 depot1 hoist1
-5. Drop hoist1 crate10 pallet4 depot1
-6....
-**Total Sequential Plan Length: 43 actions** (abbreviated for brevity)
-43. Drop hoist0 crate1 pallet0 depot0
-
-**Hierarchical Decomposition**
-root 0
-0 solve_depot_problem -> m3_do_put_on 1 2... 12
-  **Task Breakdown:**
-  1. do_put_on crate1 pallet0 -> m1_do_put_on 1.1... 1.4
-    1.1 do_clear crate12 depot0 -> m4_do_clear 
-    1.2 do_clear pallet0 depot0 -> m4_do_clear 
-    1.3 do_lift_crate crate1 distributor0 hoist4 -> m9_do_lift_crate 
-    1.4 Drop hoist4 crate1 pallet0 distributor0 -> **Action 43 (in sequential plan)**
-  
-  2. do_put_on crate2 pallet2 -> m1_do_put_on 2.1... 2.4
-   ...
-  
- ...
-  
-  12. do_put_on crate5 crate6 -> m2_do_put_on 12.1... 12.4
-    12.1 do_get_truck truck2 distributor2 -> m6_do_get_truck 
-    12.2 do_clear crate6 depot1 -> m5_do_clear 
-    12.3 Unload hoist6 crate5 truck2 distributor2 -> **Action 38 (in sequential plan)**
-    12.4 Drop hoist6 crate5 crate6 distributor2 -> **Action 39 (in sequential plan)**
-
+1 lift hoist0 crate0 pallet8 depot0
+2 drop hoist0 crate0 crate12 depot0
+3 drive truck0 distributor0 depot0
+4 load hoist4 crate0 truck0 depot0
+5 unload hoist4 crate0 truck0 distributor0
+6 clear crate10 pallet4 distributor0
+7 lift hoist4 crate10 pallet4 distributor0
+8 drop hoist4 crate10 crate1 distributor0
+9 drive truck1 depot1 depot2
+10 lift hoist2 crate9 pallet2 depot2
+11 drop hoist2 crate9 pallet6 depot2
+12 lift hoist5 crate5 pallet6 distributor2
+13 load hoist6 crate5 truck2 distributor2
+14 unload hoist6 crate5 truck2 depot1
+15 drop hoist1 crate5 crate6 depot1
+16 lift hoist1 crate6 crate4 depot1
+17 drop hoist1 crate6 crate11 depot1
+18 drive truck3 depot3 distributor3
+19 drive truck2 distributor2 depot2
+20 drive truck1 depot2 depot1
+21 lift hoist1 crate4 pallet9 depot1
+22 drop hoist1 crate4 pallet1 depot1
+23 lift hoist0 crate12 pallet0 depot0
+24 drop hoist0 crate12 crate14 distributor0
+25 lift hoist4 crate14 crate12 distributor0
+26 load hoist7 crate14 truck3 distributor3
+27 unload hoist7 crate14 truck3 depot1
+28 lift hoist0 crate10 crate1 depot0
+29 load hoist4 crate10 truck0 distributor0
+30 unload hoist4 crate10 truck0 depot0
+31 lift hoist0 crate1 crate10 depot0
+32 drop hoist0 crate1 pallet0 depot0
+33 lift hoist5 crate7 pallet5 distributor1
+34 load hoist5 crate7 truck1 distributor1
+35 unload hoist5 crate7 truck1 depot1
+36 lift hoist1 crate7 crate0 depot1
+37 drop hoist1 crate7 crate0 depot1
+38 lift hoist0 crate12 crate14 depot0
+39 drop hoist0 crate12 crate0 depot0
+40 lift hoist6 crate13 pallet7 distributor3
+41 load hoist6 crate13 truck2 distributor2
+42 unload hoist6 crate13 truck2 depot1
+43 lift hoist1 crate13 pallet9 depot1
+44 drop hoist1 crate13 crate12 depot1
 <==
-```
-**Detailed Explanation of the Hierarchical Decomposition for one task:**
 
-* `0 solve_depot_problem`: The top-level task, which decomposes into 12 `do_put_on` tasks (task0 to task11).
-* `1. do_put_on crate1 pallet0`: Decomposes into:
-	1. `1.1 do_clear crate12 depot0`: Uses method `m4_do_clear` (no further decomposition, as it's a simple clear operation).
-	2. `1.2 do_clear pallet0 depot0`: Similarly uses `m4_do_clear`.
-	3. `1.3 do_lift_crate crate1 distributor0 hoist4`: Uses method `m9_do_lift_crate`, which involves lifting crate1 from its current surface to be held by hoist4.
-	4. `1.4 Drop hoist4 crate1 pallet0 distributor0`: This corresponds to **Action 43** in the sequential plan, dropping crate1 onto pallet0.
-
-**Note:**
-
-* The sequential plan is abbreviated due to its length (43 actions). Each action in the sequential plan corresponds to a specific step in the hierarchical decomposition.
-* The hierarchical decomposition focuses on one example task (`do_put_on crate1 pallet0`) for brevity. Similar decompositions apply to the other 11 tasks.
-* Method selections (e.g., `m1_do_put_on`, `m4_do_clear`) are based on the preconditions and parameters of the tasks and methods defined in the HTN domain.
+root 0
+0 do_load_truck crate0 pallet8 distributor0 truck0 hoist0 -> m5_do_clear 1 2 3 44
+1 do_put_on crate10 pallet4 distributor0 -> m2_do_put_on 4 5 6 7
+2 do_clear crate1 pallet4 distributor0 -> m4_do_clear 8
+3 do_lift_crate crate0 distributor0 hoist0 -> m9_do_lift_crate 9 10 11
+4 do_clear pallet4 distributor0 -> m5_do_clear 12 13 14 15
+5 do_get_truck truck0 distributor0 -> m7_do_get_truck 16
+6 do_unload_truck crate10 pallet4 depot1 truck1 hoist1 -> m11_do_unload_truck 17 18 19
+7 do_put_on crate0 crate12 depot0 -> m0_do_put_on 20
+8 do_put_on crate14 crate10 distributor0 -> m0_do_put_on 21
+9 do_load_truck crate1 pallet4 depot0 truck0 hoist4 -> m10_do_load_truck 22 23 24 30
+10 do_drive truck1 depot2 depot1 -> m7_do_get_truck 25
+11 do_drive truck1 depot1 depot2 -> m7_do_get_truck 26
+12 lift hoist4 crate6 pallet6 distributor0 -> m9_do_lift_crate 27 28 29
+13 lift hoist0 crate14 crate12 depot0 -> m9_do_lift_crate 32 33 34
+14 do_load_truck crate10 crate1 depot1 truck1 hoist1 -> m10_do_load_truck 35 36 37 43
+15 do_put_on crate5 crate6 depot1 -> m1_do_put_on 38 39 40 41
+16 do_get_truck truck3 distributor0 -> m6_do_get_truck 42
+17 do_unload_truck crate9 pallet6 depot1 truck2 hoist2 -> m11_do_unload_truck 45
+18 do_clear pallet6 depot1 -> m4_do_clear 46
+19 lift hoist2 crate9 pallet2 depot2 -> m9_do_lift_crate 47 48 49
+20 unload hoist7 crate14 truck3 depot1 -> m11_do_unload_truck 50 51 52
+21 do_put_on crate0 crate14 distributor0 -> m2_do_put_on 53 54 55 56
+22 lift hoist1 crate6 crate4 depot1 -> m9_do_lift_crate 57 58 59
+23 drive truck1 depot1 depot0 -> m7_do_get_truck 60
+24 lift hoist0 crate1 crate10 depot0 -> m9_do_lift_crate 61 62 63
+25 do_load_truck crate14 crate12 depot1 truck3 hoist7 -> m10_do_load_truck 64 65 66 36
+26 do_get_truck truck2 distributor2 -> m6_do_get_truck 67
+27 do_lift_crate crate6 pallet6 distributor2 hoist6 -> m9_do_lift_crate 68 69 70
+28 lift hoist0 crate12 crate14 depot0 -> m9_do_lift_crate 71 72 73
+29 do_drive truck0 distributor0 depot0 -> m7_do_get_truck 74
+30 lift hoist4 crate1 pallet4 distributor0 -> m9_do_lift_crate 75 76 77
+31 lift hoist0 crate1 crate10 depot0 -> m9_do_lift_crate 78 79 80
+32 lift hoist0 crate12 crate14 depot0 -> m9_do_lift_crate 81 82 83
+33 lift hoist1 crate7 pallet5 distributor1 -> m9_do_lift_crate 84 85 86
+34 do_load_truck crate7 crate5 depot1 truck1 hoist5 -> m10_do_load_truck 87 88 89 40
+35 do_put_on crate7 crate0 depot1 -> m1_do_put_on 90 91 92 93
+36 unload hoist5 crate0 truck0 distributor0 -> m11_do_unload_truck 94 95 96
+37 lift hoist0 crate7 crate0 depot1 -> m9_do_lift_crate 97 98 99
+38 drive truck3 depot1 distributor3 -> m7_do_get_truck 100
+39 lift hoist1 crate13 pallet9 depot1 -> m9_do_lift_crate 101 102 103
+40 do_clear crate10 pallet4 depot0 -> m4_do_clear 104
+41 lift hoist1 crate13 crate12 depot1 -> m9_do_lift_crate 105 106 107
+42 do_clear crate9 pallet6 depot2 -> m4_do_clear 108
+43 drive truck2 distributor2 depot1 -> m7_do_get_truck 109
+44 do_put_on crate13 crate12 distributor3 -> m1_do_put_on 110 111 112 113
+45 do_get_truck truck2 depot1 -> m6_do_get_truck 114
+46 do_clear crate13 pallet7 distributor3 -> m4_do_clear 115
+47 do_load_truck crate10 crate4 depot1 truck2 hoist2 -> m10_do_load_truck 116 117 118 19
+48 unload hoist4 crate7 truck3 distributor3 -> m11_do_unload_truck 119 120 121
+49 lift hoist2 crate4 crate9 depot2 -> m9_do_lift_crate 122 123 124
+50 lift hoist1 crate10 crate4 depot1 -> m9_do_lift_crate 125 126 127
+51 lift hoist1 crate7 crate0 depot1 -> m9_do_lift_crate 128 129 130
+52 lift hoist1 crate0 crate12 depot1 -> m9_do_lift_crate 131 132 133
+53 unload hoist0 crate1 truck0 distributor0 -> m11_do_unload_truck 134 135 136
+54 lift hoist4 crate0 crate1 distributor0 -> m9_do_lift_crate 137 138 139
+55 do_put_on crate1 pallet0 depot0 -> m0_do_put_on 140
+56 do_get_truck truck0 distributor0 -> m6_do_get_truck 141
+57 do_clear crate14 crate12 depot0 -> m4_do_clear 142
+58 lift hoist0 crate10 crate14 depot0 -> m9_do_lift_crate 143 144 145
+59 lift hoist0 crate12 crate14 depot0 -> m9_do_lift_crate 146 147 148
+60 do_drive truck1 depot0 depot1 -> m7_do_get_truck 149
+61 do_put_on crate0 crate10 depot0 -> m2_do_put_on 150 151 152 153
+62 lift hoist1 crate10 pallet4 depot1 -> m9_do_lift_crate 154 155 156
+63 do_clear crate6 crate11 depot1 -> m4_do_clear 157
+64 do_put_on crate6 crate11 depot1 -> m0_do_put_on 158
+65 do_get_truck truck3 depot1 -> m6_do_get_truck 159
+66 unload hoist0 crate12 truck0 depot0 -> m11_do_unload_truck 160 161 162
+67 do_clear crate12 crate0 depot0 -> m4_do_clear 163
+68 do_clear crate3 crate0 distributor0 -> m4_do_clear 164
+69 do_clear crate12 pallet0 depot0 -> m4_do_clear 165
+70 lift hoist0 crate12 pallet0 depot0 -> m9_do_lift_crate 166 167 168
+71 lift hoist0 crate14 crate12 depot0 -> m9_do_lift_crate 169 170 171
+72 do_clear crate0 crate14 distributor0 -> m4_do_clear 172
+73 lift hoist4 crate14 pallet4 distributor0 -> m9_do_lift_crate 173 174 175
+74 do_drive truck2 distributor2 depot2 -> m7_do_get_truck 176
+75 lift hoist4 crate10 crate1 distributor0 -> m9_do_lift_crate 177 178 179
+76 lift hoist4 crate0 crate1 distributor0 -> m9_do_lift_crate 180 181 182
+77 unload hoist1 crate7 truck1 distributor1 -> m11_do_unload_truck 183 184 185
+78 do_load_truck crate7 crate5 depot1 truck2 hoist6 -> m10_do_load_truck 186 187 188 35
+79 lift hoist0 crate12 crate14 depot0 -> m9_do_lift_crate 189 190 191
+80 do_load_truck crate3 crate0 depot0 truck0 hoist0 -> m10_do_load_truck 192 193 194 53
+81 do_load_truck crate1 crate10 depot0 truck0 hoist4 -> m10_do_load_truck 195 196 197 55
+82 lift hoist0 crate6 crate11 depot1 -> m9_do_lift_crate 198 199 200
+83 lift hoist1 crate10 crate11 depot1 -> m9_do_lift_crate 201 202 203
+84 do_clear crate7 crate0 depot1 -> m4_do_clear 204
+85 unload hoist0 crate1 truck0 distributor0 -> m11_do_unload_truck 205 206 207
+86 lift hoist0 crate12 crate14 depot0 -> m9_do_lift_crate 208 209 210
+87 lift hoist6 crate7 crate5 distributor2 -> m9_do_lift_crate 211 212 213
+88 lift hoist1 crate5 crate6 depot1 -> m9_do_lift_crate 214 215 216
+89 lift hoist1 crate6 crate11 depot1 -> m9_do_lift_crate 217 218 219
+90 lift hoist5 crate8 pallet5 distributor1 -> m9_do_lift_crate 220 221 222
+91 do_get_truck truck1 distributor1 -> m6_do_get_truck 223
+92 unload hoist7 crate8 truck1 distributor1 -> m11_do_unload_truck 224 225 226
+93 drive truck2 depot1 depot2 -> m7_do_get_truck 227
+94 load hoist4 crate0 truck0 distributor0 -> m11_do_unload_truck 228 229 230
+95 lift hoist4 crate10 crate1 distributor0 -> m9_do_lift_crate 231 232 233
+96 lift hoist4 crate14 crate12 distributor0 -> m9_do_lift_crate 234 235 236
+97 do_clear crate5 crate6 depot1 -> m4_do_clear 237
+98 lift hoist6 crate5 pallet6 distributor2 -> m9_do_lift_crate 238 239 240
+99 lift hoist6 crate6 crate11 depot1 -> m9_do_lift_crate 241 242 243
+100 drive truck3 distributor3 depot1 -> m7_do_get_truck 244
+101 do_clear pallet6 distributor2 -> m4_do_clear 245
+102 drive truck2 distributor2 depot2 -> m7_do_get_truck 246
+103 do_load_truck crate4 crate9 depot1 truck1 hoist1 -> m10_do_load_truck 247 248 249 16
+104 drive truck1 depot0 depot1 -> m7_do_get_truck 250
+105 drive truck3 depot1 depot3 -> m7_do_get_truck 251
+106 do_lift_crate crate0 depot1 hoist1 -> m9_do_lift_crate 252 253 254
+107 lift hoist4 crate13 crate12 distributor0 -> m9_do_lift_crate 255 256 257
+108 do_clear crate0 crate12 depot0 -> m4_do_clear 258
+109 drive truck0 depot0 distributor0 -> m7_do_get_truck 259
+110 lift hoist1 crate8 crate9 depot1 -> m9_do_lift_crate 260 261 262
+111 lift hoist4 crate11 crate8 distributor0 -> m9_do_lift_crate 263 264 265
+112 lift hoist4 crate13 crate12 distributor0 -> m9_do_lift_crate 266 267 268
+113 lift hoist4 crate12 crate14 distributor0 -> m9_do_lift_crate 269 270 271
+114 lift hoist1 crate0 crate12 depot1 -> m9_do_lift_crate 272 273 274
+115 do_clear crate13 crate12 depot0 -> m4_do_clear 275
+116 lift hoist2 crate10 crate4 depot2 -> m9_do_lift_crate 276 277 278
+117 unload hoist7 crate14 truck3 distributor3 -> m11_do_unload_truck 279 280 281
+118 lift hoist4 crate10 crate4 distributor0 -> m9_do_lift_crate 282 283 284
+119 unload hoist4 crate8 truck1 distributor1 -> m11_do_unload_truck 285 286 287
+120 do_load_truck crate0 crate14 depot0 truck3 hoist7 -> m10_do_load_truck 288 289 290 26
+121 lift hoist7 crate10 crate4 distributor3 -> m9_do_lift_crate 291 292 293
+122 unload hoist2 crate4 truck2 depot2 -> m11_do_unload_truck 294 295 296
+123 unload hoist4 crate7 truck3 distributor3 -> m11_do_unload_truck 297 298 299
+124 lift hoist4 crate11 crate12 distributor0 -> m9_do_lift_crate 300 301 302
+125 unload hoist1 crate5 truck1 depot1 -> m11_do_unload_truck 303 304 305
+126 unload hoist6 crate6 truck2 depot2 -> m11_do_unload_truck 306 307 308
+127 lift hoist4 crate14 crate12 distributor0 -> m9_do_lift_crate 309 310 311
+128 lift hoist6 crate6 crate5 depot1 -> m9_do_lift_crate 312 313 314
+129 lift hoist4 crate6 crate5 distributor0 -> m9_do_lift_crate 315 316 317
+130 drive truck3 distributor3 depot3 -> m7_do_get_truck 318
+131 do_get_truck truck1 depot1 -> m6_do_get_truck 319
+132 lift hoist4 crate9 crate4 distributor0 -> m9_do_lift_crate 320 321 322
+133 lift hoist2 crate7 crate4 depot2 -> m9_do_lift_crate 323 324 325
+134 unload hoist4 crate13 truck3 distributor3 -> m11_do_unload_truck 326 327 328
+135 do_drive truck0 distributor0 depot0 -> m7_do_get_truck 329
+136 lift hoist0 crate12 crate14 depot0 -> m9_do_lift_crate 330 331 332
+137 lift hoist4 crate3 crate0 distributor0 -> m9_do_lift_crate 333 334 335
+138 lift hoist0 crate3 crate0 depot0 -> m9_do_lift_crate 336 337 338
+139 do_put_on crate14 crate12 depot0 -> m1_do_put_on 339 340 341 342
+140 drive truck2 depot1 depot2 -> m7_do_get_truck 343
+141 do_put_on crate3 crate0 depot0 -> m2_do_put_on 344 345 346 347
+142 unload hoist1 crate10 truck2 depot2 -> m11_do_unload_truck 348 349 350
+143 lift hoist2 crate5 crate6 depot2 -> m9_do_lift_crate 351 352 353
+144 do_clear crate5 crate6 depot2 -> m4_do_clear 354
+145 unload hoist2 crate10 truck2 depot2 -> m11_do_unload_truck 355 356 357
+146 lift hoist4 crate8 crate9 depot1 -> m9_do_lift_crate 358 359 360
+147 lift hoist7 crate7 crate5 distributor3 -> m9_do_lift_crate 361 362 363
+148 lift hoist1 crate4 crate9 depot1 -> m9_do_lift_crate 364 365 366
+149 lift hoist0 crate4 crate9 depot0 -> m9_do_lift_crate 367 368 369
+150 do_load_truck crate10 crate14 depot1 truck2 hoist2 -> m10_do_load_truck 370 371 372 149
+151 lift hoist1 crate5 crate6 depot1 -> m9_do_lift

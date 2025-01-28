@@ -1,57 +1,239 @@
-Here is a hierarchical plan to solve the given HTN problem. Please note that, due to the complexity and size of the problem, I'll provide a condensed version of the plan, focusing on the first few deliveries to illustrate the structure. The full plan would be excessively long for this format.
-
-**Sequential Plan (Partial, focusing on first 5 deliveries)**
-```
 ==>
-1. drive truck-0 city-loc-39 city-loc-17
-2. pick_up truck-0 city-loc-17 package-0 capacity-2 capacity-3
-3. drive truck-0 city-loc-17 city-loc-16
-4. drop truck-0 city-loc-16 package-0 capacity-2 capacity-3
-
-5. drive truck-1 city-loc-41 city-loc-2
-6. pick_up truck-1 city-loc-2 package-1 capacity-2 capacity-3
-7. drive truck-1 city-loc-2 city-loc-13
-8. drop truck-1 city-loc-13 package-1 capacity-2 capacity-3
-
-9. drive truck-2 city-loc-29 city-loc-9
-10. pick_up truck-2 city-loc-9 package-2 capacity-2 capacity-3
-11. drive truck-2 city-loc-9 city-loc-7
-12. drop truck-2 city-loc-7 package-2 capacity-2 capacity-3
-
-13. drive truck-0 city-loc-16 city-loc-36
-14. pick_up truck-0 city-loc-36 package-3 capacity-2 capacity-3
-15. drive truck-0 city-loc-36 city-loc-41
-16. drop truck-0 city-loc-41 package-3 capacity-2 capacity-3
-
-17. drive truck-1 city-loc-13 city-loc-22
-18. pick_up truck-1 city-loc-22 package-4 capacity-2 capacity-3
-19. drive truck-1 city-loc-22 city-loc-21
-20. drop truck-1 city-loc-21 package-4 capacity-2 capacity-3
-<==
-```
-
-**Hierarchical Decomposition (Partial, focusing on first delivery)**
-```
+1 get_to truck-0 city-loc-17
+2 load truck-0 city-loc-17 package-0
+3 get_to truck-0 city-loc-16
+4 unload truck-0 city-loc-16 package-0
+5 get_to truck-1 city-loc-2
+6 load truck-1 city-loc-2 package-1
+7 get_to truck-1 city-loc-13
+8 unload truck-1 city-loc-13 package-1
+9 get_to truck-2 city-loc-9
+10 load truck-2 city-loc-9 package-2
+11 get_to truck-2 city-loc-7
+12 unload truck-2 city-loc-7 package-2
+13 get_to truck-3 city-loc-36
+14 load truck-3 city-loc-36 package-3
+15 get_to truck-3 city-loc-41
+16 unload truck-3 city-loc-41 package-3
+17 get_to truck-4 city-loc-22
+18 load truck-4 city-loc-22 package-4
+19 get_to truck-4 city-loc-21
+20 unload truck-4 city-loc-21 package-4
+21 get_to truck-5 city-loc-23
+22 load truck-5 city-loc-23 package-5
+23 get_to truck-5 city-loc-33
+24 unload truck-5 city-loc-33 package-5
+25 get_to truck-6 city-loc-16
+26 load truck-6 city-loc-16 package-6
+27 get_to truck-6 city-loc-19
+28 unload truck-6 city-loc-19 package-6
+29 get_to truck-0 city-loc-30
+30 load truck-0 city-loc-30 package-7
+31 get_to truck-0 city-loc-30
+32 unload truck-0 city-loc-30 package-7
+33 get_to truck-1 city-loc-9
+34 load truck-1 city-loc-9 package-8
+35 get_to truck-1 city-loc-9
+36 unload truck-1 city-loc-9 package-8
+37 get_to truck-2 city-loc-34
+38 load truck-2 city-loc-34 package-9
+39 get_to truck-2 city-loc-34
+40 unload truck-2 city-loc-34 package-9
+41 get_to truck-3 city-loc-6
+42 load truck-3 city-loc-6 package-10
+43 get_to truck-3 city-loc-6
+44 unload truck-3 city-loc-6 package-10
+45 get_to truck-4 city-loc-35
+46 load truck-4 city-loc-35 package-11
+47 get_to truck-4 city-loc-35
+48 unload truck-4 city-loc-35 package-11
+49 get_to truck-5 city-loc-22
+50 load truck-5 city-loc-22 package-12
+51 get_to truck-5 city-loc-22
+52 unload truck-5 city-loc-22 package-12
+53 get_to truck-6 city-loc-13
+54 load truck-6 city-loc-13 package-13
+55 get_to truck-6 city-loc-13
+56 unload truck-6 city-loc-13 package-13
+57 get_to truck-0 city-loc-1
+58 load truck-0 city-loc-1 package-14
+59 get_to truck-0 city-loc-1
+60 unload truck-0 city-loc-1 package-14
+61 get_to truck-1 city-loc-35
+62 load truck-1 city-loc-35 package-15
+63 get_to truck-1 city-loc-35
+64 unload truck-1 city-loc-35 package-15
+65 get_to truck-2 city-loc-1
+66 load truck-2 city-loc-1 package-16
+67 get_to truck-2 city-loc-1
+68 unload truck-2 city-loc-1 package-16
+69 get_to truck-3 city-loc-16
+70 load truck-3 city-loc-16 package-17
+71 get_to truck-3 city-loc-16
+72 unload truck-3 city-loc-16 package-17
+73 get_to truck-4 city-loc-29
+74 load truck-4 city-loc-29 package-18
+75 get_to truck-4 city-loc-10
+76 unload truck-4 city-loc-10 package-18
+77 get_to truck-5 city-loc-10
+78 load truck-5 city-loc-10 package-19
+79 get_to truck-5 city-loc-10
+80 unload truck-5 city-loc-10 package-19
+81 get_to truck-6 city-loc-32
+82 load truck-6 city-loc-32 package-20
+83 get_to truck-6 city-loc-32
+84 unload truck-6 city-loc-32 package-20
+85 get_to truck-0 city-loc-18
+86 load truck-0 city-loc-18 package-21
+87 get_to truck-0 city-loc-18
+88 unload truck-0 city-loc-18 package-21
+89 get_to truck-1 city-loc-6
+90 load truck-1 city-loc-6 package-22
+91 get_to truck-1 city-loc-6
+92 unload truck-1 city-loc-6 package-22
+93 get_to truck-2 city-loc-18
+94 load truck-2 city-loc-18 package-23
+95 get_to truck-2 city-loc-18
+96 unload truck-2 city-loc-18 package-23
+97 get_to truck-3 city-loc-44
+98 load truck-3 city-loc-44 package-24
+99 get_to truck-3 city-loc-44
+100 unload truck-3 city-loc-44 package-24
+101 get_to truck-4 city-loc-41
+102 load truck-4 city-loc-41 package-25
+103 get_to truck-4 city-loc-41
+104 unload truck-4 city-loc-41 package-25
+105 get_to truck-5 city-loc-7
+106 load truck-5 city-loc-7 package-26
+107 get_to truck-5 city-loc-7
+108 unload truck-5 city-loc-7 package-26
+109 get_to truck-6 city-loc-4
+110 load truck-6 city-loc-4 package-27
+111 get_to truck-6 city-loc-4
+112 unload truck-6 city-loc-4 package-27
+113 get_to truck-0 city-loc-9
+114 load truck-0 city-loc-9 package-28
+115 get_to truck-0 city-loc-9
+116 unload truck-0 city-loc-9 package-28
+117 get_to truck-1 city-loc-24
+118 load truck-1 city-loc-24 package-29
+119 get_to truck-1 city-loc-24
+120 unload truck-1 city-loc-24 package-29
+121 get_to truck-2 city-loc-44
+122 load truck-2 city-loc-44 package-30
+123 get_to truck-2 city-loc-44
+124 unload truck-2 city-loc-44 package-30
+125 get_to truck-3 city-loc-11
+126 load truck-3 city-loc-11 package-31
+127 get_to truck-3 city-loc-11
+128 unload truck-3 city-loc-11 package-31
+129 get_to truck-4 city-loc-4
+130 load truck-4 city-loc-4 package-32
+131 get_to truck-4 city-loc-4
+132 unload truck-4 city-loc-4 package-32
+133 get_to truck-5 city-loc-18
+134 load truck-5 city-loc-18 package-33
+135 get_to truck-5 city-loc-18
+136 unload truck-5 city-loc-18 package-33
+137 get_to truck-6 city-loc-35
+138 load truck-6 city-loc-35 package-34
+139 get_to truck-6 city-loc-35
+140 unload truck-6 city-loc-35 package-34
+141 get_to truck-0 city-loc-13
+142 load truck-0 city-loc-13 package-35
+143 get_to truck-0 city-loc-13
+144 unload truck-0 city-loc-13 package-35
+145 get_to truck-1 city-loc-15
+146 load truck-1 city-loc-15 package-36
+147 get_to truck-1 city-loc-15
+148 unload truck-1 city-loc-15 package-36
+149 get_to truck-2 city-loc-15
+150 load truck-2 city-loc-15 package-37
+151 get_to truck-2 city-loc-15
+152 unload truck-2 city-loc-15 package-37
+153 get_to truck-3 city-loc-9
+154 load truck-3 city-loc-9 package-38
+155 get_to truck-3 city-loc-9
+156 unload truck-3 city-loc-9 package-38
+157 get_to truck-4 city-loc-30
+158 load truck-4 city-loc-30 package-39
+159 get_to truck-4 city-loc-30
+160 unload truck-4 city-loc-30 package-39
+161 get_to truck-5 city-loc-14
+162 load truck-5 city-loc-14 package-40
+163 get_to truck-5 city-loc-14
+164 unload truck-5 city-loc-14 package-40
+165 get_to truck-6 city-loc-3
+166 load truck-6 city-loc-3 package-41
+167 get_to truck-6 city-loc-3
+168 unload truck-6 city-loc-3 package-41
+169 get_to truck-0 city-loc-26
+170 load truck-0 city-loc-26 package-42
+171 get_to truck-0 city-loc-26
+172 unload truck-0 city-loc-26 package-42
+173 get_to truck-1 city-loc-35
+174 load truck-1 city-loc-35 package-43
+175 get_to truck-1 city-loc-35
+176 unload truck-1 city-loc-35 package-43
+177 get_to truck-2 city-loc-34
+178 load truck-2 city-loc-34 package-44
+179 get_to truck-2 city-loc-34
+180 unload truck-2 city-loc-34 package-44
+181 get_to truck-3 city-loc-16
+182 load truck-3 city-loc-16 package-45
+183 get_to truck-3 city-loc-16
+184 unload truck-3 city-loc-16 package-45
+185 get_to truck-4 city-loc-5
+186 load truck-4 city-loc-5 package-46
+187 get_to truck-4 city-loc-5
+188 unload truck-4 city-loc-5 package-46
+189 get_to truck-5 city-loc-0
+190 load truck-5 city-loc-0 package-47
+191 get_to truck-5 city-loc-0
+192 unload truck-5 city-loc-0 package-47
+193 get_to truck-6 city-loc-30
+194 load truck-6 city-loc-30 package-48
+195 get_to truck-6 city-loc-30
+196 unload truck-6 city-loc-30 package-48
+197 get_to truck-0 city-loc-28
+198 load truck-0 city-loc-28 package-49
+199 get_to truck-0 city-loc-28
+200 unload truck-0 city-loc-28 package-49
 root 0
 0 deliver package-0 city-loc-16 -> m_deliver_ordering_0 1 2 3 4
-  1 get_to truck-0 city-loc-17 -> m_drive_to_ordering_0
-    - drive truck-0 city-loc-39 city-loc-17 (Action 1 in Sequential Plan)
-  
-  2 load truck-0 city-loc-17 package-0 -> m_load_ordering_0
-    - pick_up truck-0 city-loc-17 package-0 capacity-2 capacity-3 (Action 2 in Sequential Plan)
-  
-  3 get_to truck-0 city-loc-16 -> m_drive_to_ordering_0
-    - drive truck-0 city-loc-17 city-loc-16 (Action 3 in Sequential Plan)
-  
-  4 unload truck-0 city-loc-16 package-0 -> m_unload_ordering_0
-    - drop truck-0 city-loc-16 package-0 capacity-2 capacity-3 (Action 4 in Sequential Plan)
-```
-
-**Notes:**
-
-- **Actions** (e.g., `drive`, `pick_up`, `drop`) are directly executable and appear in the sequential plan.
-- **Tasks** (e.g., `deliver`, `get_to`, `load`, `unload`) are abstract and decomposed into subtasks or actions through **methods** (e.g., `m_deliver_ordering_0`, `m_drive_to_ordering_0`).
-- The **hierarchical decomposition** illustrates how tasks are broken down, focusing on the first delivery (`package-0` to `city-loc-16`) for brevity.
-- **Vehicle Selection**: For simplicity, the plan assumes a vehicle is chosen based on proximity or availability. In a more complex scenario, additional logic would determine the best vehicle for each task based on capacity, location, and other factors.
-- **Capacity Management**: The plan assumes capacity adjustments (`capacity-2` to `capacity-3` and vice versa) are correctly managed with each `pick_up` and `drop` action, reflecting the vehicle's capacity changes.
-- **Full Plan**: Due to the problem's size (50 packages, multiple locations, and vehicles), generating the full hierarchical plan and sequential actions for all deliveries would be excessively lengthy and complex for this format. The provided example should serve as a clear illustration of how the plan is structured.
+1 deliver package-1 city-loc-13 -> m_deliver_ordering_0 5 6 7 8
+2 deliver package-2 city-loc-7 -> m_deliver_ordering_0 9 10 11 12
+3 deliver package-3 city-loc-41 -> m_deliver_ordering_0 13 14 15 16
+4 deliver package-4 city-loc-21 -> m_deliver_ordering_0 17 18 19 20
+5 deliver package-5 city-loc-33 -> m_deliver_ordering_0 21 22 23 24
+6 deliver package-6 city-loc-19 -> m_deliver_ordering_0 25 26 27 28
+7 deliver package-7 city-loc-30 -> m_deliver_ordering_0 29 30 31 32
+8 deliver package-8 city-loc-9 -> m_deliver_ordering_0 33 34 35 36
+9 deliver package-9 city-loc-34 -> m_deliver_ordering_0 37 38 39 40
+10 deliver package-10 city-loc-6 -> m_deliver_ordering_0 41 42 43 44
+11 deliver package-11 city-loc-35 -> m_deliver_ordering_0 45 46 47 48
+12 deliver package-12 city-loc-22 -> m_deliver_ordering_0 49 50 51 52
+13 deliver package-13 city-loc-13 -> m_deliver_ordering_0 53 54 55 56
+14 deliver package-14 city-loc-1 -> m_deliver_ordering_0 57 58 59 60
+15 deliver package-15 city-loc-35 -> m_deliver_ordering_0 61 62 63 64
+16 deliver package-16 city-loc-1 -> m_deliver_ordering_0 65 66 67 68
+17 deliver package-17 city-loc-16 -> m_deliver_ordering_0 69 70 71 72
+18 deliver package-18 city-loc-29 -> m_deliver_ordering_0 73 74 75 76
+19 deliver package-19 city-loc-10 -> m_deliver_ordering_0 77 78 79 80
+20 deliver package-20 city-loc-32 -> m_deliver_ordering_0 81 82 83 84
+21 deliver package-21 city-loc-18 -> m_deliver_ordering_0 85 86 87 88
+22 deliver package-22 city-loc-6 -> m_deliver_ordering_0 89 90 91 92
+23 deliver package-23 city-loc-18 -> m_deliver_ordering_0 93 94 95 96
+24 deliver package-24 city-loc-44 -> m_deliver_ordering_0 97 98 99 100
+25 deliver package-25 city-loc-41 -> m_deliver_ordering_0 101 102 103 104
+26 deliver package-26 city-loc-7 -> m_deliver_ordering_0 105 106 107 108
+27 deliver package-27 city-loc-4 -> m_deliver_ordering_0 109 110 111 112
+28 deliver package-28 city-loc-9 -> m_deliver_ordering_0 113 114 115 116
+29 deliver package-29 city-loc-24 -> m_deliver_ordering_0 117 118 119 120
+30 deliver package-30 city-loc-44 -> m_deliver_ordering_0 121 122 123 124
+31 deliver package-31 city-loc-11 -> m_deliver_ordering_0 125 126 127 128
+32 deliver package-32 city-loc-4 -> m_deliver_ordering_0 129 130 131 132
+33 deliver package-33 city-loc-18 -> m_deliver_ordering_0 133 134 135 136
+34 deliver package-34 city-loc-35 -> m_deliver_ordering_0 137 138 139 140
+35 deliver package-35 city-loc-13 -> m_deliver_ordering_0 141 142 143 144
+36 deliver package-36 city-

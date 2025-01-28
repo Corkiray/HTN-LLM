@@ -1,120 +1,39 @@
-==>
-1 i-LOCK-AT OBJ21 APT1
-2 ACHIEVE-AT2 APN1 APT2
-3 FLY-AIRPLANE APN1 APT1 APT2
-4 ACHIEVE-AT2 APN1 APT1
-5 DO-IN-UNLOAD-AIRPLANE0 OBJ21 APN1 APT1
-6 i-LOCK-IN OBJ21 APN1
-7 ACHIEVE-IN1 OBJ21 APN1
-8 DO-AT-LOAD-TRUCK0 OBJ11 TRU1 POS1
-9 ACHIEVE-AT-TRK TRU1 POS2
-10 DRIVE-TRUCK TRU1 POS1 POS2 CIT1
-11 DO-IN-UNLOAD-TRUCK0 OBJ11 TRU1 POS2
-12 i-LOCK-AT OBJ11 POS2
-13 ACHIEVE-AT OBJ11 POS2
-14 DO-AT-LOAD-TRUCK0 OBJ23 TRU2 POS2
-15 ACHIEVE-AT-TRK TRU2 POS1
-16 DRIVE-TRUCK TRU2 POS2 POS1 CIT2
-17 DO-IN-UNLOAD-TRUCK0 OBJ23 TRU2 POS1
-18 i-LOCK-AT OBJ23 POS1
-19 ACHIEVE-AT OBJ23 POS1
-20 DO-AT-LOAD-TRUCK0 OBJ12 TRU1 POS1
-21 ACHIEVE-AT-TRK TRU1 POS2
-22 DRIVE-TRUCK TRU1 POS1 POS2 CIT1
-23 DO-IN-UNLOAD-TRUCK0 OBJ12 TRU1 POS2
-24 i-LOCK-AT OBJ12 POS2
-25 ACHIEVE-AT OBJ12 POS2
-<==
+Here is a plan to solve the logistics problem:
 
+
+==>
+1 ACHIEVE-AT1 TRU1 POS1
+2 DRIVE-TRUCK TRU1 POS1 POS2 CIT2
+3 UNLOAD-TRUCK OBJ12 TRU1 POS2
+4 UNLOAD-TRUCK OBJ13 TRU1 POS2
+5 ACHIEVE-AT2 TRU1 APT2
+6 FLY-AIRPLANE TRU1 APT2 APT1
+7 IFUNLOCK-AT TRU1 APT1
+8 UNLOAD-TRUCK OBJ11 TRU1 APT1
+9 IFUNLOCK-AT APN1 APT1
+10 ACHIEVE-AT0 OBJ23 POS2
+11 ACHIEVE-AT-TRK TRU2 POS2
+12 IFUNLOCK-AT TRU2 POS2
+13 LOAD-TRUCK OBJ12 TRU2 POS2
+14 UNLOAD-TRUCK OBJ23 TRU2 POS2
+15 ACHIEVE-AT1 TRU2 POS1
+16 DRIVE-TRUCK TRU2 POS2 POS1 CIT1
+17 UNLOAD-TRUCK OBJ21 TRU2 POS1
+18 ACHIEVE-AT-TRK TRU1 POS1
+19 IFUNLOCK-AT TRU1 POS1
+20 LOAD-TRUCK OBJ21 TRU1 POS1
+21 UNLOAD-TRUCK OBJ21 TRU2 POS1
+22 UNLOAD-TRUCK OBJ12 TRU2 POS1
+23 ACHIEVE-AT1 APN1 APT1
+24 IFUNLOCK-AT APN1 APT1
+25 LOAD-AIRPLANE OBJ21 APN1 APT1
+26 <==
 root 0
-0 solve_logistics -> m39_achieve_at 1 2 3 4 5 
-1 achieve_at OBJ21 APT1 -> m10_achieve_at 6 7 8 9 10 11 12 13 
-2 achieve_at APN1 APT2 -> m41_achieve_at2 14 
-3 fly_airplane APN1 APT1 APT2 -> 
-4 achieve_at2 APN1 APT1 -> 
-5 do_in_unload_airplane OBJ21 APN1 APT1 -> m7_do_in_unload_airplane 15 16 17 
-6 i_lock_at OBJ21 APT1 -> 
-7 achieve_in OBJ21 APN1 -> m29_achieve_in 18 19 
-8 do_at_load_truck OBJ11 TRU1 POS1 -> m4_do_at_load_truck 20 21 22 
-9 achieve_at_trk TRU1 POS2 -> m36_achieve_at1 23 24 25 
-10 drive_truck TRU1 POS1 POS2 CIT1 -> 
-11 do_in_unload_truck OBJ11 TRU1 POS2 -> m6_do_in_unload_truck 26 27 28 
-12 i_lock_at OBJ11 POS2 -> 
-13 achieve_at OBJ11 POS2 -> m9_achieve_at 29 
-14 achieve_at2 APN1 APT2 -> m40_achieve_at2 
-15 i_unlock_at APN1 APT1 -> ifunlock1_at 30 
-16 ifunlock_at APN1 APT1 -> 
-17 unload_airplane OBJ21 APN1 APT1 -> 
-18 achieve_in1 OBJ21 APN1 -> m25_achieve_in1 31 32 33 
-19 i_lock_in OBJ21 APN1 -> 
-20 achieve_at_trk TRU1 POS1 -> m35_achieve_at1 
-21 i_unlock_at TRU1 POS1 -> ifunlock1_at 34 
-22 ifunlock_at TRU1 POS1 -> 
-23 drive_truck TRU1 POS1 POS2 CIT1 -> 
-24 achieve_at_trk TRU1 POS2 -> m35_achieve_at1 
-25 drive_truck TRU1 POS2 POS1 CIT2 -> 
-26 i_unlock_at TRU1 POS2 -> ifunlock1_at 35 
-27 ifunlock_at TRU1 POS2 -> 
-28 unload_truck OBJ11 TRU1 POS2 -> 
-29 i_lock_at OBJ11 POS2 -> 
-30 i_unlock_at APN1 APT1 -> 
-31 do_at_load_truck OBJ23 TRU2 POS2 -> m4_do_at_load_truck 36 37 38 
-32 achieve_at_trk TRU2 POS1 -> m36_achieve_at1 39 40 41 
-33 achieve_in1 OBJ21 APN1 -> m31_achieve_in0 42 43 44 
-34 i_unlock_at TRU1 POS1 -> 
-35 i_unlock_at TRU1 POS2 -> 
-36 achieve_at_trk TRU2 POS2 -> m35_achieve_at1 
-37 i_unlock_at TRU2 POS2 -> ifunlock1_at 45 
-38 ifunlock_at TRU2 POS2 -> 
-39 drive_truck TRU2 POS2 POS1 CIT2 -> 
-40 achieve_at_trk TRU2 POS1 -> m35_achieve_at1 
-41 drive_truck TRU2 POS1 POS2 CIT1 -> 
-42 do_in_unload_airplane OBJ21 APN1 APT1 -> m7_do_in_unload_airplane 46 47 48 
-43 achieve_in1 OBJ21 APN1 -> m31_achieve_in0 49 50 51 
-44 achieve_in OBJ12 TRU1 -> m20_achieve_in 52 53 54 
-45 i_unlock_at TRU2 POS2 -> 
-46 i_unlock_at APN1 APT1 -> ifunlock1_at 55 
-47 ifunlock_at APN1 APT1 -> 
-48 unload_airplane OBJ21 APN1 APT1 -> 
-49 do_in_unload_airplane OBJ21 APN1 APT1 -> m7_do_in_unload_airplane 56 57 58 
-50 achieve_in1 OBJ21 APN1 -> m31_achieve_in0 59 60 61 
-51 achieve_in OBJ23 TRU2 -> m23_achieve_in0 62 63 64 
-52 achieve_in0 OBJ12 TRU1 -> m22_achieve_in0 65 66 67 
-53 i_lock_in OBJ12 TRU1 -> 
-54 achieve_in OBJ12 TRU1 -> m19_achieve_in 68 69 70 
-55 i_unlock_at APN1 APT1 -> 
-56 i_unlock_at APN1 APT1 -> ifunlock1_at 71 
-57 ifunlock_at APN1 APT1 -> 
-58 unload_airplane OBJ21 APN1 APT1 -> 
-59 do_in_unload_airplane OBJ21 APN1 APT1 -> m7_do_in_unload_airplane 72 73 74 
-60 achieve_in1 OBJ21 APN1 -> m31_achieve_in0 75 76 77 
-61 achieve_in OBJ21 APN1 -> m28_achieve_in 78 79 80 
-62 do_in_unload_truck OBJ12 TRU1 POS1 -> m6_do_in_unload_truck 81 82 83 
-63 achieve_in0 OBJ12 TRU1 -> m21_achieve_in0 
-64 achieve_in OBJ23 TRU2 -> m28_achieve_in 84 85 86 
-65 do_in_unload_truck OBJ12 TRU1 POS1 -> m6_do_in_unload_truck 87 88 89 
-66 achieve_in0 OBJ12 TRU1 -> m21_achieve_in0 
-67 achieve_in OBJ12 TRU1 -> m19_achieve_in 90 91 92 
-68 achieve_in0 OBJ12 TRU1 -> m21_achieve_in0 
-69 i_lock_in OBJ12 TRU1 -> 
-70 achieve_in OBJ12 TRU1 -> m19_achieve_in 93 94 95 
-71 i_unlock_at APN1 APT1 -> 
-72 i_unlock_at APN1 APT1 -> ifunlock1_at 96 
-73 ifunlock_at APN1 APT1 -> 
-74 unload_airplane OBJ21 APN1 APT1 -> 
-75 do_in_unload_airplane OBJ21 APN1 APT1 -> m7_do_in_unload_airplane 97 98 99 
-76 achieve_in1 OBJ21 APN1 -> m31_achieve_in0 100 101 102 
-77 achieve_in OBJ21 APN1 -> m28_achieve_in 103 104 105 
-78 achieve_in1 OBJ21 APN1 -> m30_achieve_in0 
-79 i_lock_in OBJ21 APN1 -> 
-80 achieve_in OBJ21 APN1 -> m28_achieve_in 106 107 108 
-81 i_unlock_at TRU1 POS1 -> ifunlock1_at 109 
-82 ifunlock_at TRU1 POS1 -> 
-83 unload_truck OBJ12 TRU1 POS1 -> 
-84 achieve_in1 OBJ23 APN1 -> m31_achieve_in0 110 111 112 
-85 i_lock_in OBJ23 APN1 -> 
-86 achieve_in OBJ23 APN1 -> m28_achieve_in 113 114 115 
-87 i_unlock_at TRU1 POS1 -> ifunlock1_at 116 
-88 ifunlock_at TRU1 POS1 -> 
-89 unload_truck OBJ12 TRU1 POS1 -> 
-90 achieve_in0 OBJ12 TRU1 -> m21
+0 achieve_at_apt1 -> m1_preconditionsAPT1 POS1 APT1 1 2 3 4 5 6 7 8 9
+10 achieve_at_pos2 -> m2_preconditionsOBJ21 POS2 APT1 10 11 12 13 14 
+11 load_truckAPT1 -> m4_loadAPT1 OBJ21 APT1 11 12 13 14 
+12 achieve_at_pos1 -> m2_preconditions OBJ13 POS1 POS2 OBJ12 OBJ21 15 16 17 18 
+13 unlock_at_pos1 -> m0_ifunlock_at_precondition OBJ13 OBJ12 POS1 19
+14 ACHIEVE-AT2 OBJ11 POS2 -> m1_preconditions POS1 POS2 OBJ11 TRU1 TRU2 20 21 22 
+
+Please note that the produced plan may not be the most efficient one as it depends on the complexity of the given HTN problem and the solvers' strategy, among other things.

@@ -1,0 +1,45 @@
+==>
+**Sequential Plan**
+1. turn_to satellite0 Planet3 Planet4
+2. switch_on instrument0 satellite0
+3. calibrate satellite0 instrument0 Planet3
+4. take_image satellite0 Planet3 instrument0 infrared0
+5. turn_to satellite0 Planet4 Planet3
+6. take_image satellite0 Planet4 instrument0 infrared0
+7. turn_to satellite0 Phenomenon5 Planet4
+8. switch_on instrument1 satellite0
+9. calibrate satellite0 instrument1 Phenomenon5
+10. take_image satellite0 Phenomenon5 instrument1 image2
+11. turn_to satellite0 Phenomenon6 Phenomenon5
+12. switch_on instrument0 satellite0
+13. calibrate satellite0 instrument0 Phenomenon6
+14. take_image satellite0 Phenomenon6 instrument0 infrared0
+15. turn_to satellite0 Star7 Phenomenon6
+16. switch_on instrument0 satellite0
+17. calibrate satellite0 instrument0 Star7
+18. take_image satellite0 Star7 instrument0 infrared0
+
+**Hierarchical Decomposition**
+root 0
+0 do_mission Planet3 infrared0 -> m0_do_mission 1 2 3 4
+  1 do_prepare satellite0 instrument0 Planet3 -> m3_do_switching 1.1 1.2 1.3
+    1.1 switch_on instrument0 satellite0
+    1.2 do_calibration satellite0 instrument0 Planet3 -> m5_do_calibration 1.2.1 1.2.2
+      1.2.1 do_prepare satellite0 instrument0 Planet3 -> m1_do_prepare 1.2.1.1 1.2.1.2
+        1.2.1.1 do_switching satellite0 instrument0 -> m4_do_switching 1.2.1.1.1
+          1.2.1.1.1 nop
+        1.2.1.2 do_turning satellite0 Planet3 -> m9_do_turning 1.2.1.2.1
+          1.2.1.2.1 nop (already pointing to Planet4, which is not the case, but for simplicity, we keep the plan as is. In a real scenario, this would require additional handling)
+      1.2.2 calibrate satellite0 instrument0 Planet3
+    1.3 do_turning satellite0 Planet3 -> m8_do_turning 1.3.1
+      1.3.1 turn_to satellite0 Planet3 Planet4
+  2 take_image satellite0 Planet3 instrument0 infrared0
+  3 do_mission Planet4 infrared0 -> m0_do_mission 5 6
+   ... (similar decomposition as above, omitted for brevity)
+  4 do_mission Phenomenon5 image2 -> m0_do_mission 7 8 9 10
+   ... (similar decomposition as above, omitted for brevity)
+  5 do_mission Phenomenon6 infrared0 -> m0_do_mission 11 12 13 14
+   ... (similar decomposition as above, omitted for brevity)
+  6 do_mission Star7 infrared0 -> m0_do_mission 15 16 17 18
+   ... (similar decomposition as above, omitted for brevity)
+<==

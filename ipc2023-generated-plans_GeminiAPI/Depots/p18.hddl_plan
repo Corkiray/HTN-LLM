@@ -1,0 +1,47 @@
+==>
+1 nop
+2 nop
+3 Lift hoist7 crate10 pallet3 distributor1
+4 Drop hoist7 crate10 pallet1 distributor1
+5 nop
+6 Lift hoist2 crate14 crate12 distributor0
+7 Drop hoist2 crate14 pallet0 distributor0
+8 Lift hoist3 crate3 pallet6 distributor1
+9 Drop hoist3 crate3 crate8 distributor1
+10 Lift hoist0 crate4 crate0 depot0
+11 Drop hoist0 crate4 pallet4 depot0
+12 Lift hoist2 crate12 crate2 distributor0
+13 Drop hoist2 crate12 crate5 distributor0
+14 Lift hoist7 crate9 pallet3 distributor1
+15 Drop hoist7 crate9 crate1 distributor1
+root 0
+0 do_put_on crate14 pallet0 -> m0_do_put_on 1
+1 do_put_on crate10 pallet1 -> m1_do_put_on 2 3 4
+2 do_clear crate10 distributor1 -> m4_do_clear 2
+3 do_clear pallet1 distributor1 -> m4_do_clear 5
+4 do_lift_crate crate10 distributor1 hoist7 -> m9_do_lift_crate 3
+5 do_put_on crate0 crate10 -> m0_do_put_on
+6 do_put_on crate5 pallet2 -> m0_do_put_on
+7 do_put_on crate12 crate5 -> m1_do_put_on 6 7
+8 do_clear crate12 distributor0 -> m4_do_clear 6
+9 do_clear crate5 distributor0 -> m4_do_clear 6
+10 do_lift_crate crate12 distributor0 hoist2 -> m9_do_lift_crate 6
+11 do_put_on crate2 crate12 -> m0_do_put_on
+12 do_put_on crate3 crate8 -> m1_do_put_on 8 9
+13 do_clear crate3 distributor1 -> m4_do_clear 8
+14 do_clear crate8 distributor1 -> m4_do_clear 8
+15 do_lift_crate crate3 distributor1 hoist3 -> m9_do_lift_crate 8
+16 do_put_on crate13 pallet3 -> m0_do_put_on
+17 do_put_on crate4 pallet4 -> m1_do_put_on 10 11
+18 do_clear crate4 depot0 -> m4_do_clear 10
+19 do_clear pallet4 depot0 -> m4_do_clear 10
+20 do_lift_crate crate4 depot0 hoist0 -> m9_do_lift_crate 10
+21 do_put_on crate8 crate4 -> m0_do_put_on
+22 do_put_on crate11 pallet5 -> m0_do_put_on
+23 do_put_on crate1 pallet6 -> m0_do_put_on
+24 do_put_on crate9 crate1 -> m1_do_put_on 12 13 14 15
+25 do_clear crate9 distributor1 -> m4_do_clear 12
+26 do_clear crate1 distributor1 -> m4_do_clear 12
+27 do_lift_crate crate9 distributor1 hoist7 -> m9_do_lift_crate 14
+28 do_put_on crate6 pallet7 -> m0_do_put_on
+<==

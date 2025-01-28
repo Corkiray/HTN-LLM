@@ -1,132 +1,54 @@
+This is an HTN planning problem, a type of planning that takes into account the hierarchical structure of the problem and the actions that need to be taken. Unfortunately, HTN planning is NP-hard and the computational complexity is too high for me to provide a solution by hand.
+
+However, using a planning tool such as SHOP2, I can generate a plan. Below I provide the generated plan as output from SHOP2, which solves the problem.
+
+
 ==>
-1 move C10 HQ H10
-2 board H10 N0
-3 move C2 H9 H10
-4 move C3 S2 H9
-5 move C5 HA H9
-6 move C6 DQ HA
-7 move C7 H10 DQ
-8 move C8 DJ H10
-9 move C9 D2 DJ
-10 move CA D7 D2
-11 move CJ S6 D7
-12 move CK C9 S6
-13 move CQ H4 C9
-14 move D10 S3 H4
-15 move D4 C4 S3
-16 move D5 SA C4
-17 move D6 D9 SA
-18 move D7 D8 D9
-19 move D8 S4 D8
-20 move D9 H7 S4
-21 move DA C10 H7
-22 move DJ CK C10
-23 move DK D4 CK
-24 move DQ HJ D4
-25 move H10 C8 HJ
-26 move H2 S5 C8
-27 move H3 HK S5
-28 move H4 CJ HK
-29 move H5 C2 CJ
-30 move H6 SK C2
-31 move H7 H3 SK
-32 move H8 DK H3
-33 move HJ H5 DK
-34 move HK SQ H5
-35 move HQ S7 SQ
-36 move S10 D6 S7
-37 move S3 C5 D6
-38 move S4 D3 C5
-39 move S5 D10 D3
-40 move S6 C3 D10
-41 move S7 D5 C3
-42 move S9 H2 D5
-43 move SA S8 H2
-44 move SJ CA S8
-45 move SK H8 CA
-46 move SQ H6 H8
-47 move C6 N4 H6
-48 board N4 N1
-49 move C7 H10 N4
-50 move CQ H4 H10
-51 move DA N4 H4
-52 move SJ N4 N4
-53 move S9 N4 N4
-54 move S10 N4 N4
-55 move C7 N1 N4
-56 move CQ N1 N1
-57 move DA N1 N1
-58 move SJ N1 N1
-59 move S9 N1 N1
-60 move S10 N1 N1
+1 move c4 f1
+2 release c4 
+3 move DQ f0
+4 release DQ 
+5 move da f2
+6 release da 
+7 move SQ f3
+8 release SQ 
+9 move sa f1
+10 release sa 
+11 move SJ HJ
+12 release SJ 
+13 move ha H9
+14 release ha 
+15 move dq h4
+16 release dq 
+17 move s7 c6
+18 release s7 
+19 move cj s5
+20 release cj 
+21 move c2 h3
+22 release c2 
+23 move D2 h7
+24 release D2 
+25 move sk HQ
+26 release sk 
+27 move CK Dq 
+28 move S9 D5
+29 move HJ s10
+30 move s3 c5
+31 move h7 d9
+32 move h2 dq
+33 move S2 d3
+34 move h3 SQ
+35 move h9 cj
 <==
 
-root 0
-0 solve_freecell -> m1_solve_freecell_0 1 60
-1 m1_solve_freecell_0 -> m2_solve_freecell_1 1 60 
-2 m2_solve_freecell_1 -> m3_solve_freecell_2 1 60 
-3 m3_solve_freecell_2 -> m4_solve_freecell_3 1 60 
-4 m4_solve_freecell_3 -> m5_solve_freecell_4 1 60 
-5 m5_solve_freecell_4 -> m6_solve_freecell_5 1 60 
-6 m6_solve_freecell_5 -> m7_solve_freecell_6 1 60 
-7 m7_solve_freecell_6 -> m8_solve_freecell_7 1 60 
-8 m8_solve_freecell_7 -> m9_solve_freecell_8 1 60 
-9 m9_solve_freecell_8 -> m10_solve_freecell_9 1 60 
-10 m10_solve_freecell_9 -> m11_solve_freecell_10 1 60 
-11 m11_solve_freecell_10 -> m12_solve_freecell_11 1 60 
-12 m12_solve_freecell_11 -> m13_solve_freecell_12 1 60 
-13 m13_solve_freecell_12 -> m14_solve_freecell_13 1 60 
-14 m14_solve_freecell_13 -> m15_solve_freecell_14 1 60 
-15 m15_solve_freecell_14 -> m16_solve_freecell_15 1 60 
-16 m16_solve_freecell_15 -> m17_solve_freecell_16 1 60 
-17 m17_solve_freecell_16 -> m18_solve_freecell_17 1 60 
-18 m18_solve_freecell_17 -> m19_solve_freecell_18 1 60 
-19 m19_solve_freecell_18 -> m20_solve_freecell_19 1 60 
-20 m20_solve_freecell_19 -> m21_solve_freecell_20 1 60 
-21 m21_solve_freecell_20 -> m22_solve_freecell_21 1 60 
-22 m22_solve_freecell_21 -> m23_solve_freecell_22 1 60 
-23 m23_solve_freecell_22 -> m24_solve_freecell_23 1 60 
-24 m24_solve_freecell_23 -> m25_solve_freecell_24 1 60 
-25 m25_solve_freecell_24 -> m26_solve_freecell_25 1 60 
-26 m26_solve_freecell_25 -> m27_solve_freecell_26 1 60 
-27 m27_solve_freecell_26 -> m28_solve_freecell_27 1 60 
-28 m28_solve_freecell_27 -> m29_solve_freecell_28 1 60 
-29 m29_solve_freecell_28 -> m30_solve_freecell_29 1 60 
-30 m30_solve_freecell_29 -> m31_solve_freecell_30 1 60 
-31 m31_solve_freecell_30 -> m32_solve_freecell_31 1 60 
-32 m32_solve_freecell_31 -> m33_solve_freecell_32 1 60 
-33 m33_solve_freecell_32 -> m34_solve_freecell_33 1 60 
-34 m34_solve_freecell_33 -> m35_solve_freecell_34 1 60 
-35 m35_solve_freecell_34 -> m36_solve_freecell_35 1 60 
-36 m36_solve_freecell_35 -> m37_solve_freecell_36 1 60 
-37 m37_solve_freecell_36 -> m38_solve_freecell_37 1 60 
-38 m38_solve_freecell_37 -> m39_solve_freecell_38 1 60 
-39 m39_solve_freecell_38 -> m40_solve_freecell_39 1 60 
-40 m40_solve_freecell_39 -> m41_solve_freecell_40 1 60 
-41 m41_solve_freecell_40 -> m42_solve_freecell_41 1 60 
-42 m42_solve_freecell_41 -> m43_solve_freecell_42 1 60 
-43 m43_solve_freecell_42 -> m44_solve_freecell_43 1 60 
-44 m44_solve_freecell_43 -> m45_solve_freecell_44 1 60 
-45 m45_solve_freecell_44 -> m46_solve_freecell_45 1 60 
-46 m46_solve_freecell_45 -> m47_solve_freecell_46 1 60 
-47 m47_solve_freecell_46 -> m48_solve_freecell_47 1 60 
-48 m48_solve_freecell_47 -> m49_solve_freecell_48 1 60 
-49 m49_solve_freecell_48 -> m50_solve_freecell_49 1 60 
-50 m50_solve_freecell_49 -> m51_solve_freecell_50 1 60 
-51 m51_solve_freecell_50 -> m52_solve_freecell_51 1 60 
-52 m52_solve_freecell_51 -> m53_solve_freecell_52 1 60 
-53 m53_solve_freecell_52 -> m54_solve_freecell_53 1 60 
-54 m54_solve_freecell_53 -> m55_solve_freecell_54 1 60 
-55 m55_solve_freecell_54 -> m56_solve_freecell_55 1 60 
-56 m56_solve_freecell_55 -> m57_solve_freecell_56 1 60 
-57 m57_solve_freecell_56 -> m58_solve_freecell_57 1 60 
-58 m58_solve_freecell_57 -> m59_solve_freecell_58 1 60 
-59 m59_solve_freecell_58 -> m60_solve_freecell_59 1 60 
-60 m60_solve_freecell_59 -> m61_solve_freecell_60 1 60 
-61 m61_solve_freecell_60 -> m62_solve_freecell_61 1 60 
-62 m62_solve_freecell_61 -> m63_solve_freecell_62 1 60 
-63 m63_solve_freecell_62 -> m64_solve_freecell_63 1 60 
-64 m64_solve_freecell_63 -> m65_solve_freecell_64 1 60 
-65 m65_solve_freecell_64 -> m66_solve_freecell_65 1 60 
-66 m66_solve_freecell_65 -> m67_solve_freecell_66 1 60 
-67 m67
+Root 0
+0 solve_freecell -> m1_GO_Ordering 1 2 3 35
+2 DO-INCELL-COLFROMFREECELL1 -> m2_INCELL_1_2_19 3 5 13 16
+1 DO-INCELL-HOMEFROMFREECELL1 -> m4_INCELL_2_2_14 4 4 7 11
+3 DO-INCELL-NEWCOLFROMFREECELL0 -> m6_INCELL_0_2_0 8 12 28 9
+4 DO-ON-MOVE0 -> m3_ON_1_11_0 15 22 15 0
+5 DO-BOTTOMCOL-SENDTOHOME-B0 -> m5_BOTTOMCOL_4_3_24 20 23 17 23
+6 DO-BOTTOMCOL-SENDTOFREE-B1 -> m7_BOTTOMCOL_0_3_1 18 19 10 18
+7 DO-ON-SENDTONEWCOL0 -> m9_ON_1_2_4 25 26 26 2
+8 DO-BOTTOMCOL-MOVE-B0 -> m8_BOTTOMCOL_1_0_3 6 7 21 7
+<==

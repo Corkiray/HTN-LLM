@@ -1,0 +1,13 @@
+==>
+1 drive truck-4 city-loc-34 city-loc-13
+2 pick_up truck-4 city-loc-13 package-0 capacity-2 capacity-3
+3 drive truck-4 city-loc-13 city-loc-34
+4 drop truck-4 city-loc-34 package-0 capacity-2 capacity-3
+5 drive truck-5 city-loc-11 city-loc-41
+6 pick_up truck-5 city-loc-41 package-1 capacity-2 capacity-3
+7 drive truck-5 city-loc-41 city-loc-28
+8 drop truck-5 city-loc-28 package-1 capacity-2 capacity-3
+root 0
+0 deliver package-0 city-loc-34 -> m_deliver_ordering_0 city-loc-13 city-loc-34 package-0 truck-4 1 2 3 4
+1 deliver package-1 city-loc-28 -> m_deliver_ordering_0 city-loc-41 city-loc-28 package-1 truck-5 5 6 7 8
+<==

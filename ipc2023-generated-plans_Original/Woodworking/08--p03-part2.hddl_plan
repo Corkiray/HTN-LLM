@@ -1,0 +1,43 @@
+==>
+1 load_highspeed_saw b0 highspeed_saw0
+2 cut_board_large b0 p8 highspeed_saw0 mahogany rough s6 s7 s8 s9 s10 large natural untreated
+3 unload_highspeed_saw b0 highspeed_saw0
+4 load_highspeed_saw b2 highspeed_saw0
+5 cut_board_large b2 p1 highspeed_saw0 mahogany rough s7 s8 s9 s10 s6 large natural untreated
+6 unload_highspeed_saw b2 highspeed_saw0
+7 load_highspeed_saw b2 highspeed_saw0
+8 cut_board_medium b2 p7 highspeed_saw0 mahogany rough s7 s8 s6 medium natural untreated
+9 unload_highspeed_saw b2 highspeed_saw0
+10 load_highspeed_saw b0 highspeed_saw0
+11 cut_board_small b0 p6 highspeed_saw0 teak rough s6 s7 small natural untreated
+12 unload_highspeed_saw b0 highspeed_saw0
+13 do_plane_untreated p5 planer0 rough blue natural untreated smooth natural
+14 do_spray_varnish p5 spray_varnisher0 mauve smooth natural untreated varnished natural
+15 do_grind_untreated p6 grinder0 verysmooth natural untreated untreated untreated untreated verysmooth natural
+16 do_spray_varnish p6 spray_varnisher0 mauve verysmooth natural untreated varnished natural
+17 do_plane_untreated p7 planer0 rough mauve natural untreated verysmooth natural
+18 do_spray_varnish p7 spray_varnisher0 mauve verysmooth natural untreated varnished natural
+19 do_glaze p8 glazer0 mauve smooth natural untreated glazed natural
+<==
+
+root 0
+0 process p7 mauve rough verysmooth -> method13 17 18
+1 process p8 mauve smooth smooth -> method2 19
+2 process p6 mauve rough verysmooth -> method16 15 16
+3 process p5 blue rough smooth -> method15 13 14
+4 cut_and_saw p6 teak rough -> method10 11 12
+5 cut_and_saw p7 mahogany rough -> method4b 7 8 9
+6 cut_and_saw p8 mahogany rough -> method4c 1 2 3 
+7 load_highspeed_saw b0 highspeed_saw0 -> 
+8 load_highspeed_saw b2 highspeed_saw0 -> 
+9 unload_highspeed_saw b0 highspeed_saw0 -> 
+10 unload_highspeed_saw b2 highspeed_saw0 -> 
+11 cut_board_small b0 p6 highspeed_saw0 teak rough s6 s7 small natural untreated -> 
+12 cut_board_medium b2 p7 highspeed_saw0 mahogany rough s7 s8 s6 medium natural untreated -> 
+13 do_plane_untreated p5 planer0 rough blue natural untreated smooth natural -> 
+14 do_spray_varnish p5 spray_varnisher0 mauve smooth natural untreated varnished natural -> 
+15 do_grind_untreated p6 grinder0 verysmooth natural untreated untreated untreated untreated verysmooth natural -> 
+16 do_spray_varnish p6 spray_varnisher0 mauve verysmooth natural untreated varnished natural -> 
+17 do_plane_untreated p7 planer0 rough mauve natural untreated verysmooth natural -> 
+18 do_spray_varnish p7 spray_varnisher0 mauve verysmooth natural untreated varnished natural -> 
+19 do_glaze p8 glazer0 mauve smooth natural untreated glazed natural ->

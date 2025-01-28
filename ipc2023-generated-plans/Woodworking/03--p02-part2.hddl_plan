@@ -1,25 +1,11 @@
 ==>
 1 load_highspeed_saw b0 highspeed_saw0
-2 cut_board_medium b0 p1 highspeed_saw0 walnut smooth s6 s5 small medium natural untreated
+2 do_saw b0 p0 walnut verysmooth
 3 unload_highspeed_saw b0 highspeed_saw0
-4 do_spray_varnish p1 spray_varnisher0 natural smooth untreated untreated varnished natural
-5 do_spray_varnish p0 spray_varnisher0 natural verysmooth glazed untreated varnished natural
-<==
-
+4 do_colour p0 natural spray_varnisher0 untreated
+5 do_spray_varnish p1 spray_varnisher0 natural smooth untreated varnished natural
 root 0
-0 process p1 natural?planstep_3_argument_2_b_process_oldsurface smooth -> method14 b0 walnut spray_varnisher0?planstep_3_argument_2_b_process_oldsurface natural smooth verysmooth p1 natural
-  1 cut_and_saw b0 p1 walnut?planstep_3_argument_2_b_process_oldsurface -> method6 b0 p1 walnut highspeed_saw0?planstep_3_argument_2_b_process_oldsurface
-    1.1 load_highspeed_saw b0 highspeed_saw0
-    1.2 cut_board_medium b0 p1 highspeed_saw0 walnut smooth s6 s5 small medium natural untreated
-    1.3 unload_highspeed_saw b0 highspeed_saw0
-  2 grindNplane p1?planstep_3_argument_2_b_process_oldsurface natural untreated smooth natural untreated
-    **No applicable method found for this subtask (smooth -> smooth transition)**
-  3 do_colour p1 natural spray_varnisher0 untreated
-    3.1 do_spray_varnish p1 spray_varnisher0 natural smooth untreated untreated varnished natural
-
-root 1
-1 process p0?planstep_2_argument_1_a_process_color verysmooth verysmooth -> method12?planstep_2_argument_1_a_process_color spray_varnisher0 p0 verysmooth natural glazed natural
-  1 grindNplane p0 verysmooth natural glazed verysmooth natural untreated
-    **No applicable method found for this subtask (glazed -> untreated transition)**
-  2 do_colour p0?planstep_2_argument_1_a_process_color spray_varnisher0 untreated
-    2.1 do_spray_varnish p0 spray_varnisher0 natural verysmooth glazed untreated varnished natural
+0 process p0 natural verysmooth verysmooth -> m0_process_0 1 2 3 4
+1 do_colour p0 natural spray_varnisher0 untreated -> method0 4
+2 process p1 natural smooth smooth -> m1_process_1 5
+<==

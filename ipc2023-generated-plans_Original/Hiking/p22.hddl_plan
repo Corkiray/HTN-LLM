@@ -1,0 +1,57 @@
+==>
+**Sequential Plan**
+1. prepare_trip place0
+2. trip_to1 couple0 place7
+3. prepare_trip place0
+4. trip_to1 couple1 place7
+5. prepare_trip place0
+6. trip_to1 couple2 place7
+7. prepare_trip place0
+8. trip_to1 couple3 place7
+9. prepare_trip place0
+10. trip_to1 couple4 place7
+11. prepare_trip place0
+12. trip_to1 couple5 place7
+13. prepare_trip place0
+14. trip_to1 couple6 place7
+15. walk_everyone tent0 place7 place0
+16. walk_everyone tent1 place7 place0
+17. walk_everyone tent2 place7 place0
+18. walk_everyone tent3 place7 place0
+19. walk_everyone tent4 place7 place0
+20. walk_everyone tent5 place7 place0
+21. walk_everyone tent6 place7 place0
+
+**Hierarchical Decomposition**
+root 0
+0 everyone_go_hiking place7 -> m14_everyone_go_hiking 1 2
+  1 prepare_trip place0 -> m6_prepare_trip 3 4
+    3 bring_tent place0 -> m9_bring_tent (tent0) | m10_bring_tent (tent4, tent5, tent6) 
+      * m9_bring_tent (tent0, tent1, tent2, tent3)
+      * m10_bring_tent (tent4, tent5, tent6)
+        + 10.1 put_down (guy4, place0, tent4)
+        + 10.2 put_down (guy5, place0, tent5)
+        + 10.3 put_down (guy6, place0, tent6)
+    4 bring_cars place0 -> m11_bring_cars
+  2 trip_to1 coupleX place7 -> m0_trip_to1 5 (X = 0 to 6)
+    5 trip_to2 coupleX place0 place7 -> m2_trip_to2 6 7 (X = 0 to 6, mid = place1 to place6)
+      6 trip_to2 coupleX place0 placeX -> m2_trip_to2... (recursive decomposition, omitted for brevity)
+      7 trip_to2 coupleX placeX place7 -> m3_trip_to2 8-14 (X = 1 to 6)
+        8 drive_tent (guyX, placeX, place7, carX, tentX)
+        9 drive (girlX, placeX, place7, carY)
+        10 put_up (guyX, place7, tentX)
+        11 drive_passenger (girlX, place7, placeX, carY, guyX)
+        12 walk_everyone tentX place7 placeX -> m5_walk_everyone 15 (X = 0 to 6)
+          15 walk_together (tentX, place7, guyX, placeX, girlX, coupleX)
+        13 put_down (girlX, place7, tentX)
+        14 drive_passenger (guyX, place7, placeX, carX, girlX)
+15-21 walk_everyone -> m4_walk_everyone (no further decomposition, as preconditions are met)
+
+<==
+
+**Notes:**
+
+* `coupleX`, `guyX`, `girlX`, `carX`, `carY`, and `tentX` are placeholders for the respective objects (e.g., `couple0`, `guy0`, `girl0`, `car0`, `car1`, and `tent0`).
+* The decomposition for `trip_to2` (steps 6 and 7) is recursive, but for brevity, only one level of decomposition is shown.
+* The `walk_everyone` tasks (steps 15-21) are not further decomposed, as the preconditions are met, and method `m4_walk_everyone` applies.
+* The plan assumes that the `next` predicate defines a linear ordering of places (i.e., `place0` to `place7`). If this is not the case, the plan may need to be adjusted accordingly.

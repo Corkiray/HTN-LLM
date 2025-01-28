@@ -1,62 +1,13 @@
-Here is a hierarchical plan to solve the given HTN problem. Due to the complexity and size of the problem, I'll provide a condensed version of the plan, focusing on the top-level tasks and their immediate decompositions. Actions (primitive tasks) are numbered sequentially for clarity.
-
-**Sequential Plan (Top-Level Tasks)**
-```
 ==>
-1 AchieveContainsShotCocktail shot20 cocktail1
-2 AchieveContainsShotCocktail shot24 cocktail2
-3 AchieveContainsShotCocktail shot21 cocktail3
-...
-20 AchieveContainsShotCocktail shot6 cocktail20
+1 AchieveCleanShot shot1
+2 AchieveHolding right shaker1
+3 AchieveContainsShakerIngredient shaker1 ingredient6
+4 AchieveContainsShakerIngredient shaker1 ingredient27
+5 AchieveHandEmpty left
+6 shake cocktail1 ingredient6 ingredient27 shaker1 right left
+7 DoPourShakerToShot shaker1 shot1 cocktail1
+8 AchieveContainsShotCocktail shot1 cocktail1
 <==
-```
 
-**Hierarchical Decomposition (Selected Tasks for Brevity)**
-```
 root 0
-0 AchieveContainsShotCocktail shot20 cocktail1 -> m1_MakeAndPourCocktail 1 2 3 4
-  1 MakeAndPourCocktail shot20 cocktail1 shaker1 right
-    -> m2_MakeCocktail 1.1 1.2 1.3 1.4 1.5 1.6
-    1.1 AchieveCleanShaker shaker1 -> m3_CleanEmptyShaker 1.1.1 1.1.2
-    1.2 AchieveContainsShakerCocktail shaker1 cocktail1
-      -> m4_AddIngredientToEmptyShaker (for ingredient6 and ingredient27)
-    1.3 AchieveCleanShot shot20 -> m5_CleanEmptyShot 1.3.1 1.3.2
-    1.4 AchieveHolding right shaker1 -> m6_PickUp 1.4.1 1.4.2 1.4.3
-    1.5 DoPourShakerToShot shaker1 shot20 cocktail1 -> m7_pour_shaker_to_shot_action 1.5.1
-    1.6 (Implicit) AchieveHandEmpty left (already satisfied in initial state)
-
-1.1.1 AchieveHolding right shaker1 -> m6_PickUp 1.1.1.1 1.1.1.2 1.1.1.3
-1.1.2 AchieveHandEmpty left -> m8_HandEmptyNull (already satisfied)
-
-1.2 (Expanded for one ingredient, similar process for the second)
-  -> m4_AddIngredientToEmptyShaker
-    1.2.1 AchieveContainsShotIngredient shotX ingredient6
-      -> m9_AddIngredientToShot 1.2.1.1 1.2.1.2 1.2.1.3 1.2.1.4
-    1.2.2 AchieveHolding right shotX -> m6_PickUp
-    1.2.3 pour-shot-to-clean-shaker shotX ingredient6 shaker1 right level1 level2
-
-1.2.1.1 AchieveCleanShot shotX -> m5_CleanEmptyShot
-1.2.1.2 AchieveHolding left shotX -> m6_PickUp
-1.2.1.3 AchieveHandEmpty right -> m8_HandEmptyNull
-1.2.1.4 fill-shot shotX ingredient6 left right dispenserX
-
-...
-```
-
-**Selected Action Sequences (for brevity, focusing on `shot20` and `cocktail1`)**
-```
-==>
-1.4.3 grasp right shaker1
-1.3.2 clean-shot shot20 (empty, so directly cleaned)
-1.2.1.4 fill-shot shotX ingredient6 left right dispenser6 (for ingredient6)
-1.2.3 pour-shot-to-clean-shaker shotX ingredient6 shaker1 right level1 level2
-1.2 (Repeat for ingredient27)
-1.5.1 pour-shaker-to-shot cocktail1 shot20 right shaker1 level2 level1
-...
-<==
-```
-
-**Note:**
-- This plan is a condensed representation. Each `AchieveContainsShotCocktail` task for shots 21 through 6 would have similar decompositions, adjusted for their specific cocktails and ingredients.
-- The plan assumes the planner successfully resolves any conflicts (e.g., hand usage, resource allocation) not explicitly addressed here due to the problem's complexity.
-- Actions (e.g., `grasp`, `clean-shot`, `fill-shot`, `pour-shot-to-clean-shaker`, `pour-shaker-to-shot`) are executed as part of the lower-level tasks, ensuring the preconditions for each action are met by the preceding tasks in the plan.
+0 AchieveContainsShotCocktail shot1 cocktail1 -> m1_MakeAndPourCocktail_0 1 2 3 4 5 6 7

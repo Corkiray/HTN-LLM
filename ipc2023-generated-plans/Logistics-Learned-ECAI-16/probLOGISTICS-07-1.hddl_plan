@@ -1,53 +1,159 @@
 ==>
-1 DRIVE-TRUCK TRU3 POS3 POS1 CIT3
-2 DO-AT-LOAD-TRUCK0 OBJ33 TRU3 POS1
-3 DRIVE-TRUCK TRU3 POS1 APT1 CIT1
-4 DO-IN-UNLOAD-TRUCK0 OBJ33 TRU3 APT1
-5 DRIVE-TRUCK TRU2 POS2 POS1 CIT2
-6 DO-AT-LOAD-TRUCK0 OBJ23 TRU2 POS1
-7 DRIVE-TRUCK TRU2 POS1 APT1 CIT1
-8 DO-IN-UNLOAD-TRUCK0 OBJ23 TRU2 APT1
-9 DRIVE-TRUCK TRU3 POS3 POS2 CIT3
-10 DO-AT-LOAD-TRUCK0 OBJ11 TRU3 POS2
-11 DRIVE-TRUCK TRU3 POS2 POS3 CIT2
-12 DO-IN-UNLOAD-TRUCK0 OBJ11 TRU3 POS3
-13 DRIVE-TRUCK TRU1 POS1 POS2 CIT1
-14 DO-AT-LOAD-TRUCK0 OBJ32 TRU1 POS2
-15 DRIVE-TRUCK TRU1 POS2 POS1 CIT2
-16 DO-IN-UNLOAD-TRUCK0 OBJ32 TRU1 POS1
-17 DRIVE-TRUCK TRU2 POS2 POS1 CIT2
-18 DO-AT-LOAD-TRUCK0 OBJ13 TRU2 POS1
-19 DRIVE-TRUCK TRU2 POS1 POS2 CIT1
-20 DO-IN-UNLOAD-TRUCK0 OBJ13 TRU2 POS2
-21 FLY-AIRPLANE APN1 APT3 APT1
-22 DO-AT-LOAD-AIRPLANE0 OBJ21 APN1 APT1
-23 FLY-AIRPLANE APN1 APT1 APT3
-24 DO-IN-UNLOAD-AIRPLANE0 OBJ21 APN1 APT3
-25 FLY-AIRPLANE APN1 APT3 APT1
-26 DO-AT-LOAD-AIRPLANE0 OBJ12 APN1 APT1
-27 FLY-AIRPLANE APN1 APT1 APT3
-28 DO-IN-UNLOAD-AIRPLANE0 OBJ12 APN1 APT3
-<==
+1 achieve-at1 TRU1 POS1 POS1
+2 i-lock-at TRU1 POS1
+3 i-flag-at TRU1 POS1
+4 ifunlock-at TRU1 POS1
+5 load-truck OBJ33 TRU1 POS1
+6 achieve-at1 TRU1 POS1 POS2
+7 drive-truck TRU1 POS1 POS2 CIT1
+8 drive-truck TRU1 POS2 POS2 CIT1
+9 achieve-at1 TRU1 POS2 POS3
+10 drive-truck TRU1 POS2 POS3 CIT1
+11 achieve-at1 TRU1 POS3 POS1
+12 drive-truck TRU1 POS3 POS1 CIT1
+13 drive-truck TRU1 POS1 POS1 CIT1
+14 i-lock-at TRU1 POS1
+15 achieve-at1 TRU2 POS2 POS2
+16 i-lock-at TRU2 POS2
+17 i-flag-at TRU2 POS2
+18 ifunlock-at TRU2 POS2
+19 load-truck OBJ23 TRU2 POS2
+20 achieve-at1 TRU2 POS2 APT1
+21 drive-truck TRU2 POS2 APT1 CIT1
+22 achieve-at1 TRU2 APT1 APT2
+23 drive-truck TRU2 APT1 APT2 CIT1
+24 achieve-at1 TRU2 APT2 APT3
+25 drive-truck TRU2 APT2 APT3 CIT1
+26 achieve-at1 TRU2 APT3 APT2
+27 drive-truck TRU2 APT3 APT2 CIT1
+28 achieve-at1 TRU2 APT2 APT1
+29 drive-truck TRU2 APT2 APT1 CIT1
+30 unloading TRU2 OBJ23 APT1
+31 achieve-at TRU2 APT1
+32 i-lock-at TRU2 APT1
+33 i-flag-at TRU2 APT1
+34 ifunlock-at TRU2 APT1
+35 load-truck OBJ23 TRU2 APT1
+36 achieve-at1 TRU3 POS3 POS3
+37 i-lock-at TRU3 POS3
+38 i-flag-at TRU3 POS3
+39 ifunlock-at TRU3 POS3
+40 load-truck OBJ11 TRU3 POS3
+41 achieve-at1 TRU3 POS3 POS1
+42 drive-truck TRU3 POS3 POS1 CIT2
+43 achieve-at1 TRU3 POS1 POS2
+44 drive-truck TRU3 POS1 POS2 CIT1
+45 achieve-at1 TRU3 POS2 POS3
+46 drive-truck TRU3 POS2 POS3 CIT1
+47 achieve-at1 TRU3 POS3 POS1
+48 drive-truck TRU3 POS3 POS1 CIT1
+49 drive-truck TRU3 POS1 POS1 CIT1
+50 i-lock-at TRU3 POS1
+51 achieve-at1 APN1 APT3 APT3
+52 i-lock-at APN1 APT3
+53 i-flag-at APN1 APT3
+54 ifunlock-at APN1 APT3
+55 load-airplane OBJ21 APN1 APT3
+56 achieve-at-air APN1 APT3 APT1
+57 fly-airplane APN1 APT3 APT1
+58 achieve-at-air APN1 APT1 APT2
+59 fly-airplane APN1 APT1 APT2
+60 achieve-at-air APN1 APT2 APT3
+61 fly-airplane APN1 APT2 APT3
+62 achieve-at-air APN1 APT3 APT1
+63 fly-airplane APN1 APT3 APT1
+64 unloading APN1 OBJ21 APT1
+65 achieve-at APN1 APT1
+66 i-lock-at APN1 APT1
+67 i-flag-at APN1 APT1
+68 ifunlock-at APN1 APT1
+69 load-airplane OBJ21 APN1 APT1
+70 achieve-at1 TRU2 APT1 APT1
+71 i-lock-at TRU2 APT1
+72 i-flag-at TRU2 APT1
+73 ifunlock-at TRU2 APT1
+74 load-truck OBJ13 TRU2 APT1
+75 achieve-at1 TRU2 APT1 APT2
+76 drive-truck TRU2 APT1 APT2 CIT1
+77 achieve-at1 TRU2 APT2 APT1
+78 drive-truck TRU2 APT2 APT1 CIT1
+79 achieve-at1 TRU2 APT1 POS2
+80 drive-truck TRU2 APT1 POS2 CIT1
+81 unloading TRU2 OBJ13 POS2
+82 achieve-at TRU2 POS2
+83 i-lock-at TRU2 POS2
+84 i-flag-at TRU2 POS2
+85 ifunlock-at TRU2 POS2
+86 load-truck OBJ13 TRU2 POS2
+87 achieve-at1 TRU2 POS2 POS2
+88 i-lock-at TRU2 POS2
+89 i-flag-at TRU2 POS2
+90 ifunlock-at TRU2 POS2
+91 load-truck OBJ12 APN1 POS2
+92 achieve-at1 APN1 POS2 POS2
+93 i-lock-at APN1 POS2
+94 i-flag-at APN1 POS2
+95 ifunlock-at APN1 POS2
+96 load-airplane OBJ12 APN1 POS2
+97 achieve-at-air APN1 POS2 APT3
+98 fly-airplane APN1 POS2 APT3
+99 achieve-at-air APN1 APT3 APT2
+100 fly-airplane APN1 APT3 APT2
+101 achieve-at-air APN1 APT2 APT3
+102 fly-airplane APN1 APT2 APT3
+103 achieve-at-air APN1 APT3 POS1
+104 fly-airplane APN1 APT3 POS1
+105 unloading APN1 OBJ12 POS1
+106 achieve-at APN1 POS1
+107 i-lock-at APN1 POS1
+108 i-flag-at APN1 POS1
+109 ifunlock-at APN1 POS1
+110 load-airplane OBJ12 APN1 POS1
+111 achieve-at1 TRU1 POS1 POS1
+112 i-lock-at TRU1 POS1
+113 i-flag-at TRU1 POS1
+114 ifunlock-at TRU1 POS1
+115 load-truck OBJ32 TRU1 POS1
+116 achieve-at1 TRU1 POS1 POS3
+117 drive-truck TRU1 POS1 POS3 CIT1
+118 unloading TRU1 OBJ32 POS3
+119 achieve-at TRU1 POS3
+120 i-lock-at TRU1 POS3
+121 i-flag-at TRU1 POS3
+122 ifunlock-at TRU1 POS3
+123 load-truck OBJ32 TRU1 POS3
+124 achieve-at1 TRU1 POS3 APT1
+125 drive-truck TRU1 POS3 APT1 CIT2
+126 unloading TRU1 OBJ32 APT1
+127 achieve-at TRU1 APT1
+128 i-lock-at TRU1 APT1
+129 i-flag-at TRU1 APT1
+130 ifunlock-at TRU1 APT1
+131 load-truck OBJ32 TRU1 APT1
+132 achieve-at1 TRU1 APT1 APT2
+133 drive-truck TRU1 APT1 APT2 CIT2
+134 achieve-at1 TRU1 APT2 APT3
+135 drive-truck TRU1 APT2 APT3 CIT1
+136 achieve-at1 TRU1 APT3 APT1
+137 drive-truck TRU1 APT3 APT1 CIT1
+138 unloading TRU1 OBJ32 APT1
+139 achieve-at TRU1 APT1
+140 i-lock-at TRU1 APT1
+141 i-flag-at TRU1 APT1
+142 ifunlock-at TRU1 APT1
+143 load-truck OBJ32 TRU1 APT1
+144 achieve-at1 TRU1 APT1 POS2
+145 drive-truck TRU1 APT1 POS2 CIT1
+146 unloading TRU1 OBJ32 POS2
 
 root 0
-0 achieve_at OBJ33 APT1 -> M10-ACHIEVE-AT 1 2 3 4
-1 achieve_at0 OBJ33 APT1 -> M13-ACHIEVE-AT0 5 6 7 8 
-  (alternative: M12-ACHIEVE-AT0 with TRU3, not shown)
-2 achieve_at OBJ23 APT1 -> M10-ACHIEVE-AT 9 10 11 12
-3 achieve_at0 OBJ23 APT1 -> M12-ACHIEVE-AT0 13 14 15 16 
-  (alternative: M13-ACHIEVE-AT0 with APN1, not shown)
-4 achieve_at OBJ11 POS3 -> M9-ACHIEVE-AT (already at POS3, no actions)
-5 achieve_at OBJ32 POS1 -> M10-ACHIEVE-AT 17 18 19 20
-6 achieve_at0 OBJ32 POS1 -> M12-ACHIEVE-AT0 (already at POS1, no actions)
-7 achieve_at OBJ13 POS2 -> M10-ACHIEVE-AT 21 22 23 24 
-  (alternative: M12-ACHIEVE-AT0 with TRU2, not shown)
-8 achieve_at0 OBJ13 POS2 -> M15-ACHIEVE-AT0 25 26 27 28 
-  (alternative: M14-ACHIEVE-AT0 with TRU3, not shown)
-9 achieve_at OBJ21 APT3 -> M9-ACHIEVE-AT (already at APT3, no actions)
-10 achieve_at OBJ12 APT3 -> M9-ACHIEVE-AT (already at APT3, no actions)
-
-**Note:**
-
-* The plan assumes that the `i-LOCK-AT`, `i-UNLOCK-AT`, `i-FLAG-AT`, `i-UNFLAG-AT`, `i-LOCK-IN`, `i-UNLOCK-IN`, `i-FLAG-IN`, and `i-UNFLAG-IN` actions are not explicitly shown as they are implied by the methods (e.g., `M10-ACHIEVE-AT` includes an `i-LOCK-AT` action).
-* Some alternative method decompositions are not shown (e.g., using `M12-ACHIEVE-AT0` with `TRU3` for `OBJ33`).
-* The plan might not be optimal, as the HTN planner's output depends on the specific algorithm and heuristics used. This plan is one possible solution.
+ 0  achieve-at -> m0_achieve_at_0  1 2
+ 3 achieve-at0 -> m1_achieve_at0_0 4 16
+ 17 achieve-at0 -> m1_achieve_at0_1 18 54
+24 achieve-at1 -> m2_achieve_at1_0  5 19
+ 30 achieve-at1 -> m3_achieve_at1_0 6 32
+39 achieve-at1 -> m2_achieve_at1_1  7 41
+ 51 achieve-at2 -> m4_achieve_at2_0 50 66
+ 74 achieve-at-air -> m5_achieve_at_air_0 63 88
+78 achieve-at-trk -> m6_achieve_at_trk_0 9 69
+<==

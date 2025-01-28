@@ -1,56 +1,77 @@
-Here is a hierarchical plan to solve the given HTN problem in the specified format. Please note that, due to the complexity and size of the problem, this plan focuses on achieving the goals through the available methods and actions, but might not be the most optimal solution.
-
-**Sequential Plan**
-```
 ==>
-1. unstack b31 b16 arm1
-2. putdown b31 arm1
-3. pickup b20 arm1
-4. stack b31 b20 arm1
-5. release-table b31 arm1
-6.... (actions for other goals, truncated for brevity)
-43. mark_done b45
-44. achieve-goals arm1
-45. achieve-goals arm2
-46. achieve-goals arm3
-47. achieve-goals arm4
+1 mark_done b18 
+2 unstack b18 b40 arm1
+3 putdown b40 arm1
+4 unstack b31 b20 arm2
+5 unstack b41 b37 arm2
+6 putdown b37 arm2
+7 stack b20 b41 arm2
+8 stack b31 b20 arm2
+9 unstack b9 b24 arm2
+10 unstack b24 b44 arm1
+11 unstack b7 b16 arm3
+12 putdown b16 arm3
+13 stack b7 b16 arm3
+14 stack b44 b7 arm1
+15 stack b24 b44 arm1
+16 stack b9 b24 arm2
+17 putdown b33 arm2
+18 unstack b19 b4 arm2
+19 unstack b4 b38 arm1
+20 putdown b38 arm1
+21 stack b4 b38 arm1
+22 stack b19 b4 arm2
+23 putdown b23 arm2
+24 unstack b14 b15 arm1
+25 putdown b15 arm1
+26 stack b14 b15 arm1
+27 unstack b28 b25 arm2
+28 unstack b25 b13 arm1
+29 putdown b13 arm1
+30 stack b25 b13 arm2
+31 stack b28 b25 arm2
+32 putdown b1 arm3
+33 unstack b43 b26 arm2
+34 unstack b26 b36 arm2
+35 putdown b36 arm2
+36 stack b26 b36 arm2
+37 stack b43 b26 arm2
+38 stack b1 b43 arm3
+39 putdown b12 arm3
+40 unstack b11 b10 arm1
+41 putdown b10 arm1
+42 stack b11 b10 arm1
+43 unstack b45 b21 arm1
+44 unstack b21 b30 arm3
+45 putdown b30 arm3
+46 stack b21 b30 arm3
+47 stack b45 b21 arm1
+48 putdown b3 arm3
 <==
-```
-
-**Hierarchical Decomposition**
-```
 root 0
-0 achieve-goals arm1 -> m1_goal_decomposition 1 2 3 4 5
-  1 achieve-goals arm1 -> m1_subgoal_1 1.1 1.2 1.3
-    1.1 unstack-block b31 b16 arm1 -> newMethod16 1
-    1.2 putdown_abstract b31 -> newMethod14 2
-    1.3 stack_abstract b31 b20 -> newMethod15 3 4
-  2 achieve-goals arm1 -> m1_subgoal_2... (truncated for brevity)
- ...
-5 release-table b31 arm1 -> release-table 5
-...
-43 mark_done b45 -> mark_done 43
-44 achieve-goals arm1 -> set_done 44
-45 achieve-goals arm2 -> set_done 45
-46 achieve-goals arm3 -> set_done 46
-47 achieve-goals arm4 -> set_done 47
-```
-
-**Method and Action Mapping**
-```
-m1_goal_decomposition: mark-done-on (for each block with goal_on)
-m1_subgoal_1: unstack-block (for b31)
-newMethod16: unstack (for b31 b16 arm1)
-newMethod14: putdown (for b31 arm1)
-newMethod15: stack (for b31 b20 arm1)
-release-table: release-table (for b31 arm1)
-set_done: mark_done (for each block with done goal)
-```
-
-**Notes:**
-
-1. The sequential plan is truncated due to its length, focusing on the initial actions for achieving the first few goals.
-2. The hierarchical decomposition only shows the initial decomposition for `achieve-goals arm1` and omits the similar decompositions for `arm2`, `arm3`, and `arm4` due to space constraints.
-3. The `...` in the sequential plan and hierarchical decomposition indicate omitted actions and subgoals, respectively, which would follow a similar pattern to achieve the remaining goals.
-4. This plan assumes that the `achieve-goals` task for each arm can be decomposed similarly, with the main difference being the specific blocks and goals each arm is working towards.
-5. The plan's optimality is not guaranteed due to the problem's complexity and the simplified decomposition provided here.
+0 achieve-goals arm1 -> m1_abort_ordering_0 1 2
+1 achieve-goals arm2 -> m1_go_ordering_0 3 7
+2 achieve-goals arm3 -> m1_go_ordering_0 4 14
+4 acquire_abstract b41 arm2 -> newMethod13 5 6
+1 acquire_abstract b24 arm2 -> newMethod16 2 8
+3 putdown_abstract b40 -> newMethod14 9 10 
+7 acquire_abstract b44 arm1 -> newMethod13 11 12
+9 acquire_abstract b9 arm2 -> newMethod16 8 13
+1 stack_abstract b7 b16 -> newMethod15 6 9
+11 putdown_abstract b16 -> newMethod14 13 14 
+13 acquire_abstract b9 arm2 -> newMethod16 8 12
+1 release arm2 -> release-stack 12 13 
+5 putdown_abstract b33 -> newMethod14 15 16 
+17 acquire_abstract b38 arm1 -> newMethod16 11 18
+2 release arm1 -> release-stack 14 15
+15 stack_abstract b4 b38 -> newMethod15 17 18 
+4 acquire_abstract b19 arm2 -> newMethod13 19 20
+6 acquire_abstract b28 arm2 -> newMethod16 8 9 
+10 acquire_abstract b25 arm1 -> newMethod16 10 13
+3 stack_abstract b25 b13 -> newMethod15 13 14 
+2 acquire_abstract b1 arm3 -> newMethod16 9 10
+2 acquire_abstract b30 arm3 -> newMethod16 8 11
+3 acquire_abstract b36 arm2 -> newMethod16 7 12 
+5 acquire_abstract b43 arm2 -> newMethod16 8 10 
+4 stack_abstract b14 b15 -> newMethod15 14 15
+17 stack_abstract b45 b21 -> newMethod15 19 20

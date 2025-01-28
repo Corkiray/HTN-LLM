@@ -1,61 +1,196 @@
 ==>
-**Sequential Plan**
-```
-1. turn_to satellite1 Planet46 Star7
-2. switch_on instrument1 satellite1
-3. calibrate satellite1 instrument1 Planet46
-4. take_image satellite1 Planet46 instrument1 infrared0
-5. turn_to satellite2 Phenomenon48 Planet8
-6. switch_on instrument3 satellite2
-7. calibrate satellite2 instrument3 Phenomenon48
-8. take_image satellite2 Phenomenon48 instrument3 infrared1
-... (plan continues for each mission task)
-43. take_image satellite4 Planet51 instrument8 image2
-44. turn_to satellite1 Planet46 Planet46 (noop, already pointing)
-45. turn_to satellite2 Phenomenon48 Phenomenon48 (noop, already pointing)
-```
-**Hierarchical Decomposition**
-```
+1 do_mission Planet3 infrared0
+2 do_prepare satellite1 instrument2 Planet3
+3 do_switching satellite1 instrument2
+4 do_turning satellite1 Planet3
+5 take_image satellite1 Planet3 instrument2 infrared0
+6 do_mission Planet4 infrared0
+7 do_prepare satellite1 instrument2 Planet4
+8 do_turning satellite1 Planet4
+9 take_image satellite1 Planet4 instrument2 infrared0
+10 do_mission Phenomenon5 image2
+11 do_prepare satellite1 instrument1 Phenomenon5
+12 do_switching satellite1 instrument1
+13 do_turning satellite1 Phenomenon5
+14 take_image satellite1 Phenomenon5 instrument1 image2
+15 do_mission Phenomenon6 infrared0
+16 do_prepare satellite1 instrument1 Phenomenon6
+17 do_turning satellite1 Phenomenon6
+18 take_image satellite1 Phenomenon6 instrument1 infrared0
+19 do_mission Star7 infrared0
+20 do_prepare satellite1 instrument1 Star7
+21 do_turning satellite1 Star7
+22 take_image satellite1 Star7 instrument1 infrared0
+23 do_mission Planet9 infrared0
+24 do_prepare satellite1 instrument1 Planet9
+25 do_turning satellite1 Planet9
+26 take_image satellite1 Planet9 instrument1 infrared0
+27 do_mission Star10 infrared0
+28 do_prepare satellite1 instrument1 Star10
+29 do_turning satellite1 Star10
+30 take_image satellite1 Star10 instrument1 infrared0
+31 do_mission Star11 infrared1
+32 do_prepare satellite1 instrument2 Star11
+33 do_turning satellite1 Star11
+34 take_image satellite1 Star11 instrument2 infrared1
+35 do_mission Planet13 infrared1
+36 do_prepare satellite1 instrument2 Planet13
+37 do_turning satellite1 Planet13
+38 take_image satellite1 Planet13 instrument2 infrared1
+39 do_mission Star18 infrared1
+40 do_prepare satellite1 instrument2 Star18
+41 do_turning satellite1 Star18
+42 take_image satellite1 Star18 instrument2 infrared1
+43 do_mission Phenomenon19 infrared0
+44 do_prepare satellite1 instrument1 Phenomenon19
+45 do_turning satellite1 Phenomenon19
+46 take_image satellite1 Phenomenon19 instrument1 infrared0
+47 do_mission Planet21 image2
+48 do_prepare satellite1 instrument1 Planet21
+49 do_turning satellite1 Planet21
+50 take_image satellite1 Planet21 instrument1 image2
+51 do_mission Planet22 image2
+52 do_prepare satellite1 instrument1 Planet22
+53 do_turning satellite1 Planet22
+54 take_image satellite1 Planet22 instrument1 image2
+55 do_mission Phenomenon23 infrared1
+56 do_prepare satellite1 instrument2 Phenomenon23
+57 do_turning satellite1 Phenomenon23
+58 take_image satellite1 Phenomenon23 instrument2 infrared1
+59 do_mission Phenomenon24 infrared1
+60 do_prepare satellite1 instrument2 Phenomenon24
+61 do_turning satellite1 Phenomenon24
+62 take_image satellite1 Phenomenon24 instrument2 infrared1
+63 do_mission Star25 image2
+64 do_prepare satellite1 instrument1 Star25
+65 do_turning satellite1 Star25
+66 take_image satellite1 Star25 instrument1 image2
+67 do_mission Phenomenon26 infrared1
+68 do_prepare satellite1 instrument2 Phenomenon26
+69 do_turning satellite1 Phenomenon26
+70 take_image satellite1 Phenomenon26 instrument2 infrared1
+71 do_mission Phenomenon27 infrared0
+72 do_prepare satellite1 instrument1 Phenomenon27
+73 do_turning satellite1 Phenomenon27
+74 take_image satellite1 Phenomenon27 instrument1 infrared0
+75 do_mission Star28 infrared1
+76 do_prepare satellite1 instrument2 Star28
+77 do_turning satellite1 Star28
+78 take_image satellite1 Star28 instrument2 infrared1
+79 do_mission Planet29 image2
+80 do_prepare satellite1 instrument1 Planet29
+81 do_turning satellite1 Planet29
+82 take_image satellite1 Planet29 instrument1 image2
+83 do_mission Phenomenon30 image2
+84 do_prepare satellite1 instrument1 Phenomenon30
+85 do_turning satellite1 Phenomenon30
+86 take_image satellite1 Phenomenon30 instrument1 image2
+87 do_mission Phenomenon31 image2
+88 do_prepare satellite1 instrument1 Phenomenon31
+89 do_turning satellite1 Phenomenon31
+90 take_image satellite1 Phenomenon31 instrument1 image2
+91 do_mission Phenomenon32 image2
+92 do_prepare satellite1 instrument1 Phenomenon32
+93 do_turning satellite1 Phenomenon32
+94 take_image satellite1 Phenomenon32 instrument1 image2
+95 do_mission Planet33 infrared0
+96 do_prepare satellite1 instrument1 Planet33
+97 do_turning satellite1 Planet33
+98 take_image satellite1 Planet33 instrument1 infrared0
+99 do_mission Planet34 infrared1
+100 do_prepare satellite1 instrument2 Planet34
+101 do_turning satellite1 Planet34
+102 take_image satellite1 Planet34 instrument2 infrared1
+103 do_mission Planet35 image2
+104 do_prepare satellite1 instrument1 Planet35
+105 do_turning satellite1 Planet35
+106 take_image satellite1 Planet35 instrument1 image2
+107 do_mission Star36 infrared1
+108 do_prepare satellite1 instrument2 Star36
+109 do_turning satellite1 Star36
+110 take_image satellite1 Star36 instrument2 infrared1
+111 do_mission Star37 infrared1
+112 do_prepare satellite1 instrument2 Star37
+113 do_turning satellite1 Star37
+114 take_image satellite1 Star37 instrument2 infrared1
+115 do_mission Phenomenon38 infrared0
+116 do_prepare satellite1 instrument1 Phenomenon38
+117 do_turning satellite1 Phenomenon38
+118 take_image satellite1 Phenomenon38 instrument1 infrared0
+119 do_mission Planet39 infrared0
+120 do_prepare satellite1 instrument1 Planet39
+121 do_turning satellite1 Planet39
+122 take_image satellite1 Planet39 instrument1 infrared0
+123 do_mission Star40 image2
+124 do_prepare satellite1 instrument1 Star40
+125 do_turning satellite1 Star40
+126 take_image satellite1 Star40 instrument1 image2
+127 do_mission Star41 image2
+128 do_prepare satellite1 instrument1 Star41
+129 do_turning satellite1 Star41
+130 take_image satellite1 Star41 instrument1 image2
+131 do_mission Star42 infrared0
+132 do_prepare satellite1 instrument1 Star42
+133 do_turning satellite1 Star42
+134 take_image satellite1 Star42 instrument1 infrared0
+135 do_mission Phenomenon43 infrared0
+136 do_prepare satellite1 instrument1 Phenomenon43
+137 do_turning satellite1 Phenomenon43
+138 take_image satellite1 Phenomenon43 instrument1 infrared0
+139 do_mission Star44 image2
+140 do_prepare satellite1 instrument1 Star44
+141 do_turning satellite1 Star44
+142 take_image satellite1 Star44 instrument1 image2
+143 do_mission Planet45 image2
+144 do_prepare satellite1 instrument1 Planet45
+145 do_turning satellite1 Planet45
+146 take_image satellite1 Planet45 instrument1 image2
+147 do_mission Planet46 image2
+148 do_prepare satellite1 instrument1 Planet46
+149 do_turning satellite1 Planet46
+150 take_image satellite1 Planet46 instrument1 image2
+151 do_mission Phenomenon47 infrared0
+152 do_prepare satellite1 instrument1 Phenomenon47
+153 do_turning satellite1 Phenomenon47
+154 take_image satellite1 Phenomenon47 instrument1 infrared0
+155 do_mission Phenomenon48 infrared1
+156 do_prepare satellite2 instrument5 Phenomenon48
+157 do_switching satellite2 instrument5
+158 do_turning satellite2 Phenomenon48
+159 take_image satellite2 Phenomenon48 instrument5 infrared1
+160 do_mission Planet49 infrared1
+161 do_prepare satellite2 instrument5 Planet49
+162 do_turning satellite2 Planet49
+163 take_image satellite2 Planet49 instrument5 infrared1
+164 do_mission Planet50 infrared0
+165 do_prepare satellite1 instrument1 Planet50
+166 do_turning satellite1 Planet50
+167 take_image satellite1 Planet50 instrument1 infrared0
+168 do_mission Planet51 image2
+169 do_prepare satellite2 instrument5 Planet51
+170 do_turning satellite2 Planet51
+171 take_image satellite2 Planet51 instrument5 image2
+172 do_mission Phenomenon52 infrared1
+173 do_prepare satellite2 instrument5 Phenomenon52
+174 do_turning satellite2 Phenomenon52
+175 take_image satellite2 Phenomenon52 instrument5 infrared1
+176 do_turning satellite2 Phenomenon48
+177 do_turning satellite1 Planet46
 root 0
-0 do_mission_all -> m0_do_mission_all 1-43
-  1-43 (individual do_mission tasks, e.g.,)
-  1 do_mission Planet3 infrared0 -> m0_do_mission 1 2 3
-    1. turn_to satellite0 Planet3 Planet50
-    2. switch_on instrument0 satellite0
-    3. take_image satellite0 Planet3 instrument0 infrared0
- ...
-  5 do_mission Star11 infrared1 -> m0_do_mission 4 5 6
-    4. turn_to satellite1 Star11 Star7
-    5. switch_on instrument2 satellite1
-    6. take_image satellite1 Star11 instrument2 infrared1
- ...
-  44 do_turning satellite1 Planet46 -> m9_do_turning (noop)
-  45 do_turning satellite2 Phenomenon48 -> m9_do_turning (noop)
-
-  **Method Decompositions**
-  m0_do_mission_all:
-    :parameters (?d_list - direction?m_list - mode?s_list - satellite?i_list - instrument)
-    :task (do_mission_all?d_list?m_list)
-    :precondition ()
-    :ordered-subtasks (and (t1 (do_mission?d1?m1?s1?i1))... (t43 (do_mission?d43?m43?s43?i43)))
-
-  m0_do_mission:
-    :parameters (?d - direction?m - mode?s - satellite?i - instrument)
-    :task (do_mission?d?m)
-    :precondition ()
-    :ordered-subtasks (and (t1 (do_prepare?s?i?d)) (t2 (take_image?s?d?i?m)))
-
-  m9_do_turning:
-    :parameters (?s - satellite?d - direction)
-    :task (do_turning?s?d)
-    :precondition (and (pointing?s?d))
-    :ordered-subtasks (and (n (nop)))
-```
+0 do_mission Planet3 infrared0 -> m0_do_mission 1 3 5
+1 do_prepare satellite1 instrument2 Planet3 -> m1_do_prepare 2 4
+2 do_switching satellite1 instrument2 -> m3_do_switching 3
+3 do_turning satellite1 Planet3 -> m8_do_turning 4
+4 take_image satellite1 Planet3 instrument2 infrared0 -> take_image
+5 do_mission Planet4 infrared0 -> m0_do_mission 6 8 10
+6 do_prepare satellite1 instrument2 Planet4 -> m1_do_prepare 7 9
+7 do_turning satellite1 Planet4 -> m9_do_turning
+8 take_image satellite1 Planet4 instrument2 infrared0 -> take_image
+9 do_turning satellite1 Planet4 -> m8_do_turning
+10 do_mission Phenomenon5 image2 -> m0_do_mission 11 13 15
+...
+174 do_turning satellite2 Phenomenon52 -> m8_do_turning 175
+175 take_image satellite2 Phenomenon52 instrument5 infrared1 -> take_image
+176 do_turning satellite2 Phenomenon48 -> m9_do_turning
+177 do_turning satellite1 Planet46 -> m9_do_turning
 <==
-
-**Notes:**
-
-1. The sequential plan only shows the first 8 actions and the last 3 actions, as the plan is quite long (43 actions). The `...` indicates the continuation of the plan for each mission task.
-2. The hierarchical decomposition shows the top-level decomposition into `do_mission_all`, which is further decomposed into individual `do_mission` tasks. Each `do_mission` task is then decomposed using method `m0_do_mission`.
-3. The `do_turning` tasks (44 and 45) are no-ops since the satellites are already pointing to the desired directions.
-4. The method decompositions only show the relevant methods used in the plan. Other methods defined in the domain (e.g., `m1_do_prepare`, `m2_do_switching`) are not used in this particular plan.

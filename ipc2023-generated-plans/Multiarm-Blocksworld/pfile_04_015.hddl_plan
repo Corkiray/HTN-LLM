@@ -1,57 +1,596 @@
-Here is a hierarchical plan to solve the given HTN problem, following the specified output format:
-```
 ==>
-**Sequential Plan**
-( Note: This plan is a simplified, high-level sequence. The actual plan will be decomposed hierarchically below. )
-
-1. achieve-goals arm1
-2. achieve-goals arm2
-3. achieve-goals arm3
-4. achieve-goals arm4
-
-**Hierarchical Decomposition**
-root 0
-0 achieve-goals arm1 -> m1_stack_table_0 1 2 3... (decomposed below)
-1 achieve-goals arm2 -> m2_stack_table_1 4 5 6... (similar decomposition, omitted for brevity)
-2 achieve-goals arm3 ->... (omitted for brevity)
-3 achieve-goals arm4 ->... (omitted for brevity)
-
-**Decomposition for achieve-goals arm1 (m1_stack_table_0)**
-root 0
-0 m1_stack_table_0
-  -> newMethod15 (stack b3 b10 arm1)  // stack b3 on b10
-    -> stack b3 b10 arm1
-      * pickup b3 arm1 (via newMethod13)
-        -> pickup b3 arm1
-      * stack b3 b10 arm1 (action)
-  -> newMethod15 (stack b10 b4 arm1)  // stack b10 on b4
-    -> stack b10 b4 arm1
-      * unstack b10 b4 arm1 (via newMethod16)
-        -> unstack b10 b4 arm1
-      * stack b10 b4 arm1 (action)
-  -> newMethod14 (putdown b12 arm1)  // putdown b12
-    -> putdown b12 arm1
-      * pickup b12 arm1 (via newMethod13)
-        -> pickup b12 arm1
-      * putdown b12 arm1 (action)
-  -> mark-done-table b12 arm1  // mark b12 done
-    -> mark_done b12
-
-**Selected Action Sequence for achieve-goals arm1**
-( This is a subset of the full plan, focusing on the first arm's tasks. )
-
-1. pickup b3 arm1
-2. stack b3 b10 arm1
-3. unstack b10 b4 arm1
-4. stack b10 b4 arm1
-5. pickup b12 arm1
-6. putdown b12 arm1
-7. mark_done b12
-
-**Note:**
-- The full plan for all arms (arm2, arm3, arm4) would follow similar decompositions, omitted here for brevity.
-- The action sequence provided is a simplified example, focusing on the first arm's tasks. The actual plan might vary based on the HTN planner's strategy and the problem's constraints.
-- The decomposition and action sequence are based on the provided HTN domain and problem, using the defined methods and actions.
-
-<==
-```
+1 unstack b11 b6 arm1
+2 release arm1
+3 unstack b6 b1 arm1
+4 release arm1
+5 unstack b15 b9 arm1
+6 release arm1
+7 unstack b9 b5 arm1
+8 release arm1
+9 unstack b13 b5 arm1
+10 release arm1
+11 unstack b5 b9 arm1
+12 release arm1
+13 pickup b9 arm1
+14 stack b9 b13 arm1
+15 release arm1
+16 unstack b8 b7 arm1
+17 release arm1
+18 unstack b7 b8 arm1
+19 release arm1
+20 pickup b4 arm1
+21 stack b4 b10 arm1
+22 release arm1
+23 unstack b3 b10 arm1
+24 release arm1
+25 pickup b3 arm1
+26 stack b3 b10 arm1
+27 release arm1
+28 unstack b10 b3 arm1
+29 release arm1
+30 pickup b12 arm1
+31 putdown b12 arm1
+32 release arm1
+33 unstack b2 b13 arm1
+34 release arm1
+35 unstack b14 b2 arm1
+36 release arm1
+37 unstack b7 b14 arm1
+38 release arm1
+39 unstack b4 b12 arm1
+40 release arm1
+41 pickup b7 arm1
+42 stack b7 b6 arm1
+43 release arm1
+44 unstack b6 b7 arm1
+45 release arm1
+46 pickup b8 arm1
+47 stack b8 b15 arm1
+48 release arm1
+49 unstack b6 b1 arm1
+50 release arm1
+51 unstack b10 b4 arm1
+52 release arm1
+53 unstack b15 b8 arm1
+54 release arm1
+55 pickup b6 arm1
+56 stack b6 b7 arm1
+57 release arm1
+58 unstack b11 b1 arm1
+59 release arm1
+60 unstack b1 b11 arm1
+61 release arm1
+62 unstack b9 b13 arm1
+63 release arm1
+64 pickup b11 arm1
+65 stack b11 b1 arm1
+66 release arm1
+67 unstack b12 b4 arm1
+68 release arm1
+69 pickup b14 arm1
+70 stack b14 b2 arm1
+71 release arm1
+72 unstack b2 b14 arm1
+73 release arm1
+74 unstack b13 b9 arm1
+75 release arm1
+76 unstack b5 b11 arm1
+77 release arm1
+78 pickup b1 arm1
+79 stack b1 b14 arm1
+80 release arm1
+81 unstack b14 b1 arm1
+82 release arm1
+83 pickup b13 arm1
+84 stack b13 b9 arm1
+85 release arm1
+86 unstack b9 b13 arm1
+87 release arm1
+88 pickup b2 arm1
+89 stack b2 b13 arm1
+90 release arm1
+91 unstack b13 b2 arm1
+92 release arm1
+93 pickup b5 arm1
+94 stack b5 b11 arm1
+95 release arm1
+96 unstack b11 b5 arm1
+97 release arm1
+98 pickup b10 arm1
+99 stack b10 b4 arm1
+100 release arm1
+101 unstack b4 b10 arm1
+102 release arm1
+103 pickup b15 arm1
+104 stack b15 b8 arm1
+105 release arm1
+106 unstack b8 b15 arm1
+107 release arm1
+108 pickup b8 arm1
+109 stack b8 b7 arm1
+110 release arm1
+111 unstack b7 b8 arm1
+112 release arm1
+113 pickup b12 arm1
+114 mark_done b12
+115 release arm1
+116 pickup b9 arm1
+117 putdown b9 arm1
+118 mark_done b9
+119 release arm1
+120 unstack b1 b14 arm1
+121 release arm1
+122 unstack b14 b1 arm1
+123 release arm1
+124 pickup b7 arm1
+125 stack b7 b14 arm1
+126 release arm1
+127 unstack b14 b7 arm1
+128 release arm1
+129 pickup b14 arm1
+130 putdown b14 arm1
+131 release arm1
+132 unstack b3 b10 arm1
+133 release arm1
+134 unstack b10 b3 arm1
+135 release arm1
+136 pickup b10 arm1
+137 stack b10 b4 arm1
+138 release arm1
+139 unstack b4 b10 arm1
+140 release arm1
+141 pickup b4 arm1
+142 stack b4 b12 arm1
+143 release arm1
+144 unstack b12 b4 arm1
+145 release arm1
+146 pickup b3 arm1
+147 stack b3 b10 arm1
+148 release arm1
+149 unstack b10 b3 arm1
+150 release arm1
+151 pickup b12 arm1
+152 mark_done b12
+153 release arm1
+154 pickup b10 arm1
+155 stack b10 b4 arm1
+156 release arm1
+157 unstack b4 b10 arm1
+158 release arm1
+159 pickup b4 arm1
+160 stack b4 b12 arm1
+161 release arm1
+162 unstack b12 b4 arm1
+163 release arm1
+164 pickup b3 arm1
+165 stack b3 b10 arm1
+166 release arm1
+167 unstack b10 b3 arm1
+168 release arm1
+169 pickup b6 arm1
+170 stack b6 b7 arm1
+171 release arm1
+172 unstack b7 b6 arm1
+173 release arm1
+174 pickup b11 arm1
+175 stack b11 b1 arm1
+176 release arm1
+177 unstack b1 b11 arm1
+178 release arm1
+179 pickup b15 arm1
+180 stack b15 b8 arm1
+181 release arm1
+182 unstack b8 b15 arm1
+183 release arm1
+184 pickup b8 arm1
+185 stack b8 b15 arm1
+186 release arm1
+187 unstack b7 b14 arm1
+188 release arm1
+189 pickup b2 arm1
+190 stack b2 b13 arm1
+191 release arm1
+192 unstack b13 b2 arm1
+193 release arm1
+194 pickup b14 arm1
+195 stack b14 b2 arm1
+196 release arm1
+197 unstack b2 b14 arm1
+198 release arm1
+199 pickup b1 arm1
+200 stack b1 b14 arm1
+201 release arm1
+202 unstack b11 b1 arm1
+203 release arm1
+204 pickup b5 arm1
+205 stack b5 b11 arm1
+206 release arm1
+207 unstack b13 b9 arm1
+208 release arm1
+209 pickup b9 arm1
+210 putdown b9 arm1
+211 mark_done b9
+212 release arm1
+213 pickup b13 arm1
+214 stack b13 b9 arm1
+215 release arm1
+216 mark_done b13
+217 release arm1
+218 pickup b7 arm1
+219 stack b7 b8 arm1
+220 release arm1
+221 mark_done b7
+222 release arm1
+223 pickup b8 arm1
+224 stack b8 b15 arm1
+225 release arm1
+226 unstack b15 b8 arm1
+227 release arm1
+228 pickup b2 arm1
+229 putdown b2 arm1
+230 release arm1
+231 unstack b14 b2 arm1
+232 release arm1
+233 pickup b6 arm1
+234 putdown b6 arm1
+235 release arm1
+236 unstack b5 b11 arm1
+237 release arm1
+238 pickup b10 arm1
+239 putdown b10 arm1
+240 release arm1
+241 unstack b4 b10 arm1
+242 release arm1
+243 pickup b1 arm1
+244 stack b1 b11 arm1
+245 release arm1
+246 mark_done b1
+247 release arm1
+248 pickup b3 arm1
+249 putdown b3 arm1
+250 release arm1
+251 unstack b11 b5 arm1
+252 release arm1
+253 pickup b5 arm1
+254 putdown b5 arm1
+255 release arm1
+256 unstack b15 b13 arm1
+257 release arm1
+258 pickup b11 arm1
+259 stack b11 b1 arm1
+260 release arm1
+261 mark_done b15
+262 release arm1
+263 pickup b14 arm1
+264 stack b14 b1 arm1
+265 release arm1
+266 mark_done b11
+267 release arm1
+268 pickup b4 arm1
+269 stack b4 b12 arm1
+270 mark_done b14
+271 release arm1
+272 pickup b12 arm1
+273 mark_done b4
+274 release arm1
+275 pickup b10 arm1
+276 stack b10 b4 arm1
+277 mark_done b12
+278 release arm1
+279 pickup b3 arm1
+280 stack b3 b10 arm1
+281 mark_done b10
+282 release arm1
+283 pickup b7 arm1
+284 stack b7 b6 arm1
+285 mark_done b3
+286 release arm1
+287 pickup b8 arm1
+288 stack b8 b7 arm1
+289 mark_done b7
+290 release arm1
+291 pickup b6 arm1
+292 stack b6 b11 arm1
+293 mark_done b8
+294 release arm1
+295 pickup b15 arm1
+296 stack b15 b8 arm1
+297 mark_done b6
+298 release arm1
+299 pickup b2 arm1
+300 stack b2 b15 arm1
+301 mark_done b15
+302 release arm1
+303 pickup b13 arm1
+304 stack b13 b9 arm1
+305 mark_done b2
+306 release arm1
+307 pickup b5 arm1
+308 stack b5 b13 arm1
+309 mark_done b13
+310 release arm1
+311 pickup b11 arm1
+312 stack b11 b5 arm1
+313 mark_done b5
+314 release arm1
+315 pickup b1 arm1
+316 stack b1 b14 arm1
+317 mark_done b11
+318 release arm1
+319 pickup b14 arm1
+320 stack b14 b1 arm1
+321 mark_done b1
+322 release arm1
+323 pickup b4 arm1
+324 stack b4 b12 arm1
+325 mark_done b14
+326 release arm1
+327 pickup b12 arm1
+328 mark_done b4
+329 release arm1
+330 pickup b10 arm1
+331 stack b10 b4 arm1
+332 mark_done b12
+333 release arm1
+334 pickup b3 arm1
+335 stack b3 b10 arm1
+336 mark_done b10
+337 release arm1
+338 pickup b7 arm1
+339 stack b7 b6 arm1
+340 mark_done b3
+341 release arm1
+342 pickup b8 arm1
+343 stack b8 b15 arm1
+344 mark_done b7
+345 release arm1
+346 pickup b6 arm1
+347 stack b6 b11 arm1
+348 mark_done b8
+349 release arm1
+350 pickup b9 arm1
+351 stack b9 b13 arm1
+352 mark_done b6
+353 release arm1
+354 pickup b13 arm1
+355 stack b13 b2 arm1
+356 mark_done b9
+357 release arm1
+358 pickup b2 arm1
+359 stack b2 b14 arm1
+360 mark_done b13
+361 release arm1
+362 pickup b15 arm1
+363 stack b15 b5 arm1
+364 mark_done b2
+365 release arm1
+366 pickup b1 arm1
+367 stack b1 b15 arm1
+368 mark_done b15
+369 release arm1
+370 pickup b5 arm1
+371 stack b5 b11 arm1
+372 mark_done b1
+373 release arm1
+374 pickup b11 arm1
+375 stack b11 b1 arm1
+376 mark_done b5
+377 release arm1
+378 pickup b14 arm1
+379 stack b14 b1 arm1
+380 mark_done b11
+381 release arm1
+382 pickup b4 arm1
+383 stack b4 b12 arm1
+384 mark_done b14
+385 release arm1
+386 pickup b12 arm1
+387 mark_done b4
+388 release arm1
+389 pickup b10 arm1
+390 stack b10 b4 arm1
+391 mark_done b12
+392 release arm1
+393 pickup b3 arm1
+394 stack b3 b10 arm1
+395 mark_done b10
+396 release arm1
+397 pickup b7 arm1
+398 stack b7 b15 arm1
+399 mark_done b3
+400 release arm1
+401 pickup b15 arm1
+402 stack b15 b8 arm1
+403 mark_done b7
+404 release arm1
+405 pickup b8 arm1
+406 stack b8 b7 arm1
+407 mark_done b15
+408 release arm1
+409 pickup b6 arm1
+410 stack b6 b11 arm1
+411 mark_done b8
+412 release arm1
+413 pickup b13 arm1
+414 stack b13 b9 arm1
+415 mark_done b6
+416 release arm1
+417 pickup b5 arm1
+418 stack b5 b13 arm1
+419 mark_done b13
+420 release arm1
+421 pickup b9 arm1
+422 stack b9 b2 arm1
+423 mark_done b5
+424 release arm1
+425 pickup b2 arm1
+426 stack b2 b14 arm1
+427 mark_done b9
+428 release arm1
+429 pickup b11 arm1
+430 stack b11 b5 arm1
+431 mark_done b2
+432 release arm1
+433 pickup b1 arm1
+434 stack b1 b11 arm1
+435 mark_done b11
+436 release arm1
+437 pickup b14 arm1
+438 stack b14 b1 arm1
+439 mark_done b1
+440 release arm1
+441 pickup b4 arm1
+442 stack b4 b12 arm1
+443 mark_done b14
+444 release arm1
+445 pickup b12 arm1
+446 mark_done b4
+447 release arm1
+448 pickup b10 arm1
+449 stack b10 b4 arm1
+450 mark_done b12
+451 release arm1
+452 pickup b3 arm1
+453 stack b3 b10 arm1
+454 mark_done b10
+455 release arm1
+456 pickup b7 arm1
+457 stack b7 b15 arm1
+458 mark_done b3
+459 release arm1
+460 pickup b15 arm1
+461 stack b15 b8 arm1
+462 mark_done b7
+463 release arm1
+464 pickup b8 arm1
+465 stack b8 b15 arm1
+466 mark_done b15
+467 release arm1
+468 pickup b6 arm1
+469 stack b6 b11 arm1
+470 mark_done b8
+471 release arm1
+472 pickup b5 arm1
+473 stack b5 b13 arm1
+474 mark_done b6
+475 release arm1
+476 pickup b13 arm1
+477 stack b13 b9 arm1
+478 mark_done b5
+479 release arm1
+480 pickup b9 arm1
+481 stack b9 b2 arm1
+482 mark_done b13
+483 release arm1
+484 pickup b2 arm1
+485 stack b2 b14 arm1
+486 mark_done b9
+487 release arm1
+488 pickup b11 arm1
+489 stack b11 b5 arm1
+490 mark_done b2
+491 release arm1
+492 pickup b1 arm1
+493 stack b1 b11 arm1
+494 mark_done b11
+495 release arm1
+496 pickup b14 arm1
+497 stack b14 b1 arm1
+498 mark_done b1
+499 release arm1
+500 pickup b4 arm1
+501 stack b4 b12 arm1
+502 mark_done b14
+503 release arm1
+504 pickup b12 arm1
+505 mark_done b4
+506 release arm1
+507 pickup b10 arm1
+508 stack b10 b4 arm1
+509 mark_done b12
+510 release arm1
+511 pickup b3 arm1
+512 stack b3 b10 arm1
+513 mark_done b10
+514 release arm1
+515 pickup b7 arm1
+516 stack b7 b15 arm1
+517 mark_done b3
+518 release arm1
+519 pickup b15 arm1
+520 stack b15 b8 arm1
+521 mark_done b7
+522 release arm1
+523 pickup b8 arm1
+524 stack b8 b15 arm1
+525 mark_done b15
+526 release arm1
+527 pickup b6 arm1
+528 stack b6 b11 arm1
+529 mark_done b8
+530 release arm1
+531 pickup b5 arm1
+532 stack b5 b13 arm1
+533 mark_done b6
+534 release arm1
+535 pickup b13 arm1
+536 stack b13 b9 arm1
+537 mark_done b5
+538 release arm1
+539 pickup b9 arm1
+540 stack b9 b2 arm1
+541 mark_done b13
+542 release arm1
+543 pickup b2 arm1
+544 stack b2 b14 arm1
+545 mark_done b9
+546 release arm1
+547 pickup b11 arm1
+548 stack b11 b5 arm1
+549 mark_done b2
+550 release arm1
+551 pickup b1 arm1
+552 stack b1 b11 arm1
+553 mark_done b11
+554 release arm1
+555 pickup b14 arm1
+556 stack b14 b1 arm1
+557 mark_done b1
+558 release arm1
+559 pickup b4 arm1
+560 stack b4 b12 arm1
+561 mark_done b14
+562 release arm1
+563 pickup b12 arm1
+564 mark_done b4
+565 release arm1
+566 pickup b10 arm1
+567 stack b10 b4 arm1
+568 mark_done b12
+569 release arm1
+570 pickup b3 arm1
+571 stack b3 b10 arm1
+572 mark_done b10
+573 release arm1
+574 pickup b7 arm1
+575 stack b7 b15 arm1
+576 mark_done b3
+577 release arm1
+578 pickup b15 arm1
+579 stack b15 b8 arm1
+580 mark_done b7
+581 release arm1
+582 pickup b8 arm1
+583 stack b8 b15 arm1
+584 mark_done b15
+585 release arm1
+586 pickup b6 arm1
+587 stack b6 b11 arm1
+588 mark_done b8
+589 release arm1
+590 pickup b5 arm1
+591 stack b5 b13 arm1
+592 mark_done b6
+593 release arm1
+594 pickup b13 arm1
+595 stack b13 b9

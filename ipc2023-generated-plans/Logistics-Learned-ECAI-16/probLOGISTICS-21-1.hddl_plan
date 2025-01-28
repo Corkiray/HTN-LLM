@@ -1,43 +1,160 @@
 ==>
-**Sequential Plan**
-```
-1. DRIVE-TRUCK TRU6 POS6 POS5 CIT6
-2. LOAD-TRUCK OBJ61 TRU6 POS6
-3. DRIVE-TRUCK TRU6 POS5 APT5 CIT5
-4. UNLOAD-TRUCK OBJ61 TRU6 APT5
-5. LOAD-AIRPLANE OBJ61 APN2 APT5
-6. FLY-AIRPLANE APN2 APT5 APT5
-7. UNLOAD-AIRPLANE OBJ61 APN2 APT5
-8. DRIVE-TRUCK TRU2 POS2 POS5 CIT2
-9. LOAD-TRUCK OBJ52 TRU2 POS2
-10. DRIVE-TRUCK TRU2 POS5 POS2 CIT5
-11. UNLOAD-TRUCK OBJ52 TRU2 POS2
-12....
-**... (plan for remaining tasks, following the same structure)...**
-21. i-LOCK-AT OBJ73 APT4
-```
-**Hierarchical Decomposition**
-```
+1 achieve-at-trk TRU5 POS5
+2 ifunlock-at TRU5 POS5
+3 load-truck OBJ51 TRU5 POS5
+4 achieve-at-trk TRU5 POS2
+5 ifunlock-at TRU5 POS2
+6 unload-truck OBJ51 TRU5 POS2
+7 achieve-at-trk TRU2 POS5
+8 ifunlock-at TRU2 POS5
+9 load-truck OBJ52 TRU2 POS5
+10 achieve-at-trk TRU2 APT2
+11 ifunlock-at TRU2 APT2
+12 unload-truck OBJ52 TRU2 APT2
+13 achieve-at-air APN2 APT5
+14 ifunlock-at APN2 APT5
+15 load-airplane OBJ61 APN2 APT5
+16 achieve-at-air APN2 APT5
+17 ifunlock-at APN2 APT5
+18 unload-airplane OBJ61 APN2 APT5
+19 achieve-at-air APN2 APT5
+20 ifunlock-at APN2 APT5
+21 load-airplane OBJ21 APN2 APT5
+22 achieve-at-air APN2 APT2
+23 ifunlock-at APN2 APT2
+24 unload-airplane OBJ21 APN2 APT2
+25 achieve-at-trk TRU6 POS2
+26 ifunlock-at TRU6 POS2
+27 load-truck OBJ63 TRU6 POS2
+28 achieve-at-trk TRU6 POS5
+29 ifunlock-at TRU6 POS5
+30 unload-truck OBJ63 TRU6 POS5
+31 achieve-at-trk TRU5 POS5
+32 ifunlock-at TRU5 POS5
+33 load-truck OBJ53 TRU5 POS5
+34 achieve-at-trk TRU5 POS5
+35 ifunlock-at TRU5 POS5
+36 unload-truck OBJ53 TRU5 POS5
+37 achieve-at-trk TRU1 POS5
+38 ifunlock-at TRU1 POS5
+39 load-truck OBJ42 TRU1 POS5
+40 achieve-at-trk TRU1 POS1
+41 ifunlock-at TRU1 POS1
+42 unload-truck OBJ42 TRU1 POS1
+43 achieve-at-air APN1 APT3
+44 ifunlock-at APN1 APT3
+45 load-airplane OBJ11 APN1 APT3
+46 achieve-at-air APN1 APT4
+47 ifunlock-at APN1 APT4
+48 unload-airplane OBJ11 APN1 APT4
+49 achieve-at-trk TRU4 APT7
+50 ifunlock-at TRU4 APT7
+51 unload-truck OBJ13 TRU4 APT7
+52 achieve-at-air APN2 APT4
+53 ifunlock-at APN2 APT4
+54 load-airplane OBJ22 APN2 APT4
+55 achieve-at-air APN2 APT2
+56 ifunlock-at APN2 APT2
+57 unload-airplane OBJ22 APN2 APT2
+58 achieve-at-air APN2 APT7
+59 ifunlock-at APN2 APT7
+60 load-airplane OBJ31 APN2 APT7
+61 achieve-at-air APN2 APT4
+62 ifunlock-at APN2 APT4
+63 unload-airplane OBJ31 APN2 APT4
+64 achieve-at-trk TRU3 POS7
+65 ifunlock-at TRU3 POS7
+66 load-truck OBJ72 TRU3 POS7
+67 achieve-at-trk TRU3 POS5
+68 ifunlock-at TRU3 POS5
+69 unload-truck OBJ72 TRU3 POS5
+70 achieve-at-air APN2 APT6
+71 ifunlock-at APN2 APT6
+72 load-airplane OBJ71 APN2 APT6
+73 achieve-at-air APN2 APT6
+74 ifunlock-at APN2 APT6
+75 unload-airplane OBJ71 APN2 APT6
+76 achieve-at-air APN1 APT3
+77 ifunlock-at APN1 APT3
+78 load-airplane OBJ41 APN1 APT3
+79 achieve-at-air APN1 APT6
+80 ifunlock-at APN1 APT6
+81 unload-airplane OBJ41 APN1 APT6
+82 achieve-at-air APN1 APT3
+83 ifunlock-at APN1 APT3
+84 load-airplane OBJ32 APN1 APT3
+85 achieve-at-air APN1 APT5
+86 ifunlock-at APN1 APT5
+87 unload-airplane OBJ32 APN1 APT5
+88 achieve-at-trk TRU4 APT4
+89 ifunlock-at TRU4 APT4
+90 load-truck OBJ43 TRU4 APT4
+91 achieve-at-trk TRU4 POS4
+92 ifunlock-at TRU4 POS4
+93 unload-truck OBJ43 TRU4 POS4
+94 achieve-at-trk TRU1 POS2
+95 ifunlock-at TRU1 POS2
+96 load-truck OBJ62 TRU1 POS2
+97 achieve-at-trk TRU1 APT2
+98 ifunlock-at TRU1 APT2
+99 unload-truck OBJ62 TRU1 APT2
+100 achieve-at-trk TRU5 POS5
+101 ifunlock-at TRU5 POS5
+102 load-truck OBJ73 TRU5 POS5
+103 achieve-at-trk TRU5 APT4
+104 ifunlock-at TRU5 APT4
+105 unload-truck OBJ73 TRU5 APT4
+106 achieve-at-trk TRU7 POS7
+107 ifunlock-at TRU7 POS7
+108 load-truck OBJ12 TRU7 POS7
+109 achieve-at-trk TRU7 APT2
+110 ifunlock-at TRU7 APT2
+111 unload-truck OBJ12 TRU7 APT2
+112 achieve-at-air APN1 APT4
+113 ifunlock-at APN1 APT4
+114 load-airplane OBJ33 APN1 APT4
+115 achieve-at-air APN1 APT4
+116 ifunlock-at APN1 APT4
+117 unload-airplane OBJ33 APN1 APT4
+118 achieve-at-air APN1 APT3
+119 ifunlock-at APN1 APT3
+120 load-airplane OBJ51 TRU5 POS5
+121 achieve-at-trk TRU5 POS5
+122 ifunlock-at TRU5 POS5
+123 load-truck OBJ51 TRU5 POS5
+124 achieve-at-trk TRU2 POS5
+125 ifunlock-at TRU2 POS5
+126 unload-truck OBJ51 TRU2 POS5
+127 achieve-at-trk TRU1 POS5
+128 ifunlock-at TRU1 POS5
+129 load-truck OBJ42 TRU1 POS5
+130 achieve-at-trk TRU1 POS5
+131 ifunlock-at TRU1 POS5
+132 unload-truck OBJ42 TRU1 POS5
+133 achieve-at-air APN1 APT3
+134 ifunlock-at APN1 APT3
+135 load-airplane OBJ41 APN1 APT3
+136 achieve-at-air APN1 APT6
+137 ifunlock-at APN1 APT6
+138 unload-airplane OBJ41 APN1 APT6
+139 achieve-at-air APN1 APT3
+140 ifunlock-at APN1 APT3
+141 load-airplane OBJ32 APN1 APT3
+142 achieve-at-air APN1 APT5
+143 ifunlock-at APN1 APT5
+144 unload-airplane OBJ32 APN1 APT5
+145 achieve-at-trk TRU6 POS2
+146 ifunlock-at TRU6 POS2
+147 load-truck OBJ63 TRU6 POS2
+148 achieve-at-trk TRU6 POS5
+149 ifunlock-at TRU6 POS5
+150 unload-truck OBJ63 TRU6 POS5
+151 achieve-at-trk TRU2 POS2
+152 ifunlock-at TRU2 POS2
+153 load-truck OBJ22 TRU2 POS2
+154 achieve-at-trk TRU2 APT4
+155 ifunlock-at TRU2 APT4
+156 unload-truck OBJ22 TRU2 APT4
 root 0
-0 achieve_at OBJ61 APT5 -> M10-ACHIEVE-AT 1 2 3 4 5 6 7
-  1 achieve_at0 OBJ61 APT5 -> M13-ACHIEVE-AT0 1.1 1.2 1.3
-    1.1 do_at_load_airplane0 OBJ61 APN2 POS6 -> M5-DO-AT-LOAD-AIRPLANE0 1.1.1 1.1.2 1.1.3
-      1.1.1 achieve_at_air APN2 APT5 -> M38-ACHIEVE-AT 1.1.1.1
-      1.1.2 ifunlock_at APN2 APT5 -> IFUNLOCK1-AT 1.1.2.1
-      1.1.3 load_airplane OBJ61 APN2 APT5
-    1.2 achieve_at0 OBJ61 APT5 -> M11-ACHIEVE-AT0 
-    1.3 i_lock_at OBJ61 APT5
-  2 achieve_at OBJ52 POS2 -> M10-ACHIEVE-AT 8 9 10 11
- ...
-**... (decomposition for remaining tasks, following the same structure)...**
-20 achieve_at OBJ73 APT4 -> M10-ACHIEVE-AT... 
- ...
-  21 i_lock_at OBJ73 APT4
-```
-**Note:**
-
-* The sequential plan only shows the first 21 actions, as the full plan would be too lengthy. The actions are numbered for clarity.
-* The hierarchical decomposition shows the task decomposition for the first two tasks (`achieve_at OBJ61 APT5` and `achieve_at OBJ52 POS2`). The remaining tasks are indicated with `...`.
-* Method names (e.g., `M10-ACHIEVE-AT`) refer to the corresponding methods in the HTN domain.
-* Task names (e.g., `achieve_at OBJ61 APT5`) are shortened for brevity.
-* Action names (e.g., `DRIVE-TRUCK`) are in all caps, as per the original domain definition.
+0 achieve_at -> m6_do_in_unload_truck0 15 16 17
+<==

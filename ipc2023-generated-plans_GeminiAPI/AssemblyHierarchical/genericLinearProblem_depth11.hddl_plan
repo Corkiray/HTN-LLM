@@ -1,0 +1,34 @@
+==>
+1 guard
+2 connect_1 pc-bPlugType1 cableWithPlugType1-a plugType1
+3 connect_1 adapterFromPlugType1ToPlugType2-aPlugType1 cableWithPlugType1-b plugType1
+4 connect_2 adapterFromPlugType1ToPlugType2-bPlugType2 cableWithPlugType2-a plugType2
+5 connect_2 adapterFromPlugType2ToPlugType3-aPlugType2 cableWithPlugType2-b plugType2
+6 connect_2 adapterFromPlugType2ToPlugType3-bPlugType3 cableWithPlugType3-a plugType3
+7 connect_2 adapterFromPlugType3ToPlugType4-aPlugType3 cableWithPlugType3-b plugType3
+8 connect_2 adapterFromPlugType3ToPlugType4-bPlugType4 cableWithPlugType4-a plugType4
+9 connect_2 adapterFromPlugType4ToPlugType5-aPlugType4 cableWithPlugType4-b plugType4
+10 connect_2 adapterFromPlugType4ToPlugType5-bPlugType5 cableWithPlugType5-a plugType5
+11 connect_2 adapterFromPlugType5ToPlugType6-aPlugType5 cableWithPlugType5-b plugType5
+12 connect_2 adapterFromPlugType5ToPlugType6-bPlugType6 cableWithPlugType6-a plugType6
+13 connect_2 adapterFromPlugType6ToPlugType7-aPlugType6 cableWithPlugType6-b plugType6
+14 connect_2 adapterFromPlugType6ToPlugType7-bPlugType7 cableWithPlugType7-a plugType7
+15 connect_2 adapterFromPlugType7ToPlugType8-aPlugType7 cableWithPlugType7-b plugType7
+16 connect_2 adapterFromPlugType7ToPlugType8-bPlugType8 cableWithPlugType8-a plugType8
+17 connect_2 adapterFromPlugType8ToPlugType9-aPlugType8 cableWithPlugType8-b plugType8
+18 connect_2 adapterFromPlugType8ToPlugType9-bPlugType9 cableWithPlugType9-a plugType9
+19 connect_2 adapterFromPlugType9ToPlugType10-aPlugType9 cableWithPlugType9-b plugType9
+20 connect_2 adapterFromPlugType9ToPlugType10-bPlugType10 cableWithPlugType10-a plugType10
+21 connect_2 adapterFromPlugType10ToPlugType11-aPlugType10 cableWithPlugType10-b plugType10
+22 connect_2 adapterFromPlugType10ToPlugType11-bPlugType11 cableWithPlugType11-a plugType11
+23 connect_1 printer-aPlugType11 cableWithPlugType11-b plugType11
+24 ok
+root 0
+0 ConnectDevices pc printer data -> m3 pc printer data 1 25
+25 ValidateDeviceConnection pc printer data -> vDC_to_vPC_1 pc printer data pc-bPlugType1 printer-aPlugType11 26
+26 ValidatePortConnection pc-bPlugType1 printer-aPlugType11 data -> vPC_to_vPC data pc-bPlugType1 printer-aPlugType11 cableWithPlugType1-a adapterFromPlugType1ToPlugType2-aPlugType1 27
+27 ValidatePortConnection adapterFromPlugType1ToPlugType2-bPlugType2 printer-aPlugType11 data -> vPC_to_vPC data adapterFromPlugType1ToPlugType2-bPlugType2 printer-aPlugType11 cableWithPlugType2-a adapterFromPlugType2ToPlugType3-aPlugType2 28
+28 ValidatePortConnection adapterFromPlugType2ToPlugType3-bPlugType3 printer-aPlugType11 data -> vPC_to_vPC data adapterFromPlugType2ToPlugType3-bPlugType3 printer-aPlugType11 cableWithPlugType3-a adapterFromPlugType3ToPlugType4-aPlugType3 29
+...
+43 ValidatePortConnection adapterFromPlugType10ToPlugType11-bPlugType11 printer-aPlugType11 data -> finish data adapterFromPlugType10ToPlugType11-bPlugType11 printer-aPlugType11 24
+<==

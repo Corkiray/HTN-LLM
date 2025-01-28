@@ -1,0 +1,23 @@
+==>
+1 guard
+2 connect_1 pc-bPlugType1 cableWithPlugType1-a plugType1
+3 connect_4 cableWithPlugType1-b adapterFromPlugType1ToPlugType2-aPlugType1 plugType1
+4 connect_4 adapterFromPlugType1ToPlugType2-bPlugType2 cableWithPlugType2-a plugType2
+5 connect_4 cableWithPlugType2-b adapterFromPlugType2ToPlugType3-aPlugType2 plugType2
+6 connect_4 adapterFromPlugType2ToPlugType3-bPlugType3 cableWithPlugType3-a plugType3
+7 connect_4 cableWithPlugType3-b adapterFromPlugType3ToPlugType4-aPlugType3 plugType3
+8 connect_4 adapterFromPlugType3ToPlugType4-bPlugType4 cableWithPlugType4-a plugType4
+9 connect_4 cableWithPlugType4-b adapterFromPlugType4ToPlugType5-aPlugType4 plugType4
+10 connect_4 adapterFromPlugType4ToPlugType5-bPlugType5 cableWithPlugType5-a plugType5
+11 connect_4 cableWithPlugType5-b printer-aPlugType5 plugType5
+12 ok
+root 0
+0 ConnectDevices pc printer data -> m3 pc printer data 1 13
+13 ValidateDeviceConnection pc printer data -> vDC_to_vPC_1 pc printer data pc-bPlugType1 printer-aPlugType5 14
+14 ValidatePortConnection pc-bPlugType1 printer-aPlugType5 data -> vPC_to_vPC data pc-bPlugType1 printer-aPlugType5 cableWithPlugType1-a adapterFromPlugType1ToPlugType2-aPlugType1 2 15
+15 ValidatePortConnection adapterFromPlugType1ToPlugType2-bPlugType2 printer-aPlugType5 data -> vPC_to_vPC data adapterFromPlugType1ToPlugType2-bPlugType2 printer-aPlugType5 cableWithPlugType2-a adapterFromPlugType2ToPlugType3-aPlugType2 3 16
+16 ValidatePortConnection adapterFromPlugType2ToPlugType3-bPlugType3 printer-aPlugType5 data -> vPC_to_vPC data adapterFromPlugType2ToPlugType3-bPlugType3 printer-aPlugType5 cableWithPlugType3-a adapterFromPlugType3ToPlugType4-aPlugType3 4 17
+17 ValidatePortConnection adapterFromPlugType3ToPlugType4-bPlugType4 printer-aPlugType5 data -> vPC_to_vPC data adapterFromPlugType3ToPlugType4-bPlugType4 printer-aPlugType5 cableWithPlugType4-a adapterFromPlugType4ToPlugType5-aPlugType4 5 18
+18 ValidatePortConnection adapterFromPlugType4ToPlugType5-bPlugType5 printer-aPlugType5 data -> vPC_to_vPC data adapterFromPlugType4ToPlugType5-bPlugType5 printer-aPlugType5 cableWithPlugType5-a printer-aPlugType5 6 19
+19 ValidatePortConnection printer-aPlugType5 printer-aPlugType5 data -> finish data printer-aPlugType5 printer-aPlugType5 12
+<==

@@ -1,53 +1,329 @@
 ==>
-**Sequential Plan:**
-
-1. `i-LOCK-AT` `OBJ11` `POS1`
-2. `ACHIEVE-AT0` `OBJ11` `APT6` `POS1` `TRU1`
-	* (sub-plan for `ACHIEVE-AT0`)
-		1. `DO-AT-LOAD-TRUCK0` `OBJ11` `TRU1` `POS1`
-			* (sub-plan for `DO-AT-LOAD-TRUCK0`)
-				1. `ACHIEVE-AT-TRK` `TRU1` `POS1`
-				2. `IFUNLOCK-AT` `TRU1` `POS1`
-				3. `LOAD-TRUCK` `OBJ11` `TRU1` `POS1`
-		2. `ACHIEVE-AT0` `OBJ11` `APT6`
-			* (sub-plan for `ACHIEVE-AT0`)
-				1. `DO-IN-UNLOAD-TRUCK0` `OBJ11` `TRU1` `APT6`
-					* (sub-plan for `DO-IN-UNLOAD-TRUCK0`)
-						1. `ACHIEVE-AT-TRK` `TRU1` `APT6`
-						2. `IFUNLOCK-AT` `TRU1` `APT6`
-						3. `UNLOAD-TRUCK` `OBJ11` `TRU1` `APT6`
-3. `i-LOCK-AT` `OBJ93` `POS9`
-4. `ACHIEVE-AT0` `OBJ93` `POS7` `POS9` `TRU9`
-	* (similar sub-plan as step 2, adapted for `OBJ93`, `POS7`, and `TRU9`)
-...
-**... (due to the extensive nature of the problem, only the first two tasks' plans are fully expanded here. The pattern continues for each task in the `:tasks` section of the problem definition, following the ordering constraints.)**
-...
-26. `i-LOCK-AT` `OBJ12` `APT3`
-27. `ACHIEVE-AT0` `OBJ12` `APT3` `POS1` `TRU1`
-	* (similar sub-plan as step 2, adapted for `OBJ12`, `APT3`, and `TRU1`)
-
-**<==**
-
-**Hierarchical Decomposition (partial, focusing on the first task for brevity):**
-
-```
-root 0
-0 ACHIEVE-AT OBJ11 APT6 -> M10-ACHIEVE-AT 1 2
-  1 ACHIEVE-AT0 OBJ11 APT6 -> M12-ACHIEVE-AT0 3 4
-    3 DO-AT-LOAD-TRUCK0 OBJ11 TRU1 POS1 -> M4-DO-AT-LOAD-TRUCK0 5 6 7
-      5 ACHIEVE-AT-TRK TRU1 POS1 -> M33-ACHIEVE-AT 8
-      6 IFUNLOCK-AT TRU1 POS1 -> IFUNLOCK1-AT 9
-      7 LOAD-TRUCK OBJ11 TRU1 POS1
-    4 ACHIEVE-AT0 OBJ11 APT6 -> M14-ACHIEVE-AT0 10 11
-      10 DO-IN-UNLOAD-TRUCK0 OBJ11 TRU1 APT6 -> M6-DO-IN-UNLOAD-TRUCK0 12 13 14
-      11 ACHIEVE-AT0 OBJ11 APT6
-      12 ACHIEVE-AT-TRK TRU1 APT6 -> M33-ACHIEVE-AT 15
-      13 IFUNLOCK-AT TRU1 APT6 -> IFUNLOCK1-AT 16
-      14 UNLOAD-TRUCK OBJ11 TRU1 APT6
-  2 i-LOCK-AT OBJ11 APT6
-```
-
-**Note:**
-- The sequential plan lists the actions in the order they should be executed, following the hierarchical decomposition.
-- The hierarchical decomposition shows how each task is broken down into subtasks, using the methods defined in the domain. The numbers in the decomposition refer to the step numbers in the sequential plan.
-- Due to the complexity and length of the full plan, only the first task's decomposition is fully detailed here. The process is repeated for each task, adhering to the ordering constraints specified in the problem definition.
+1 achieve-at-air APN2 APT6
+2 move-from-to APN2 APT4 APT6
+3 load-airplane OBJ11 APN2 APT6
+4 flag-in OBJ11 APN2
+5 i-unflag-at OBJ11 APT6
+6 flag-in APN2 APT6
+7 do-at-load-airplane OBJ11 APN2 APT6
+8 unflag-in OBJ11 APN2
+9 in-city APT6 CIT6
+10 i-unflag-at APN2 APT6
+11 unflag-at APN2 APT6
+12 move-from-to OBJ11 APT6 POS7
+13 flag-in OBJ11 POS7
+14 deliver-person OBJ11 APT6 POS7
+15 achieve-at-air APN3 APT3
+16 move-from-to APN3 APT9 APT3
+17 load-airplane OBJ32 APN3 APT3
+18 flag-in OBJ32 APN3
+19 achieve-at2 OBJ11 POS7
+20 flag-in POS7 CIT7
+21 flag-in OBJ11 POS7
+22 load-airplane OBJ21 APN2 APT3
+23 i-unflag-at OBJ21 APT3
+24 load-truck OBJ22 TRU2 POS2
+25 flag-in POS2 CIT2
+26 flag-in OBJ22 POS2
+27 deliver-person OBJ32 APT3 POS8
+28 i-unflag-at OBJ22 POS2
+29 i-unflag-at OBJ21 APT3
+30 do-in-unload-airplane OBJ92 APN2 POS1
+31 flag-in OBJ92 APN2
+32 deliver-person OBJ22 POS2 POS9
+33 flag-in POS9 CIT9
+34 unload-airplane OBJ92 APN2 POS1
+35 move-from-to OBJ53 POS7 POS8
+36 flag-in OBJ53 POS8
+37 deliver-person OBJ52 APT9 POS9
+38 flag-in OBJ33 POS8
+39 flag-in OBJ32 POS8
+40 flag-in OBJ22 POS1
+41 deliver-person OBJ92 POS1 POS3
+42 flag-in POS3 CIT3
+43 move-from-to OBJ53 POS8 POS1
+44 flag-in OBJ53 POS1
+45 unload-airplane OBJ81 APN3 POS8
+46 i-unflag-in OBJ42 TRU4
+47 unload-airplane OBJ72 APN2 POS2
+48 i-unflag-in OBJ51 TRU5
+49 unload-airplane OBJ82 APN3 POS1
+50 move-from-to OBJ72 POS2 POS8
+51 flag-in OBJ72 POS8
+52 unload-airplane OBJ41 APN2 APT6
+53 unload-airplane OBJ91 APN3 POS9
+54 unload-truck OBJ71 TRU6 POS6
+55 flag-in POS6 CIT6
+56 move-from-to OBJ62 POS3 POS2
+57 i-unflag-in OBJ82 TRU8
+58 unflag-in OBJ41 APN2
+59 i-unflag-in OBJ51 TRU5
+60 move-from-to OBJ51 POS5 POS3
+61 flag-in OBJ51 POS3
+62 move-from-to OBJ82 POS1 POS2
+63 flag-in OBJ82 POS2
+64 unload-airplane OBJ61 APN3 APT4
+65 move-from-to OBJ52 POS9 POS7
+66 flag-in OBJ52 POS7
+67 unload-airplane OBJ81 APN3 APT6
+68 unload-airplane OBJ43 APN2 POS4
+69 move-from-to OBJ63 POS6 POS3
+70 flag-in OBJ63 POS3
+71 move-from-to OBJ21 POS2 POS9
+72 flag-in OBJ21 POS9
+73 move-from-to OBJ51 POS3 POS4
+74 flag-in OBJ51 POS4
+75 unload-airplane OBJ42 APN2 APT1
+76 move-from-to OBJ61 POS6 POS9
+77 flag-in OBJ61 POS9
+78 move-from-to OBJ31 POS3 POS4
+79 move-from-to OBJ22 POS9 POS7
+80 i-unflag-in OBJ91 TRU9
+81 unflag-in OBJ81 APN3
+82 flag-in OBJ22 POS7
+83 move-from-to OBJ42 POS4 POS6
+84 unflag-in OBJ42 APN2
+85 flag-in OBJ42 POS6
+86 move-from-to OBJ72 POS8 POS4
+87 flag-in OBJ72 POS4
+88 flag-in OBJ71 POS6
+89 move-from-to OBJ33 POS8 POS7
+90 flag-in OBJ33 POS7
+91 move-from-to OBJ83 POS8 POS9
+92 unflag-in OBJ81 APN3
+93 flag-in OBJ83 POS9
+94 flag-in OBJ41 POS4
+95 flag-in OBJ72 POS8
+96 unload-airplane OBJ62 APN2 POS3
+97 flag-in OBJ12 POS8
+98 flag-in OBJ41 APN2
+99 flag-in OBJ43 POS4
+100 move-from-to OBJ41 POS4 POS1
+101 move-from-to OBJ41 POS4 POS7
+102 flag-in OBJ41 POS7
+103 flag-in OBJ73 POS9
+104 unload-airplane OBJ91 APN3 POS4
+105 move-from-to OBJ12 POS8 POS1
+106 unload-truck OBJ43 TRU4 POS9
+107 flag-in OBJ43 POS9
+108 unload-airplane OBJ22 APN2 POS9
+109 flag-in OBJ73 POS2
+110 unflag-in OBJ82 TRU8
+111 flag-in OBJ81 POS9
+112 unflag-at OBJ21 POS9
+113 flag-in OBJ41 POS1
+114 flag-in OBJ73 POS4
+115 move-from-to OBJ52 POS7 POS1
+116 flag-in OBJ52 POS1
+117 flag-in OBJ13 POS2
+118 unload-airplane OBJ11 APN2 POS9
+119 unload-airplane OBJ42 APN2 APT4
+120 move-from-to OBJ71 POS6 POS8
+121 i-unflag-in OBJ73 TRU7
+122 flag-in OBJ61 POS7
+123 flag-in OBJ33 POS8
+124 flag-in OBJ82 POS6
+125 unload-airplane OBJ62 APN3 POS1
+126 flag-in OBJ41 POS9
+127 flag-in OBJ12 POS8
+128 move-from-to OBJ61 POS9 POS1
+129 flag-in OBJ61 POS1
+130 move-from-to OBJ71 POS8 POS5
+131 flag-in OBJ71 POS5
+132 flag-in OBJ92 POS8
+133 unflag-at OBJ12 POS8
+134 i-unflag-in OBJ81 TRU8
+135 flag-in OBJ22 POS8
+136 flag-in OBJ43 APT1
+137 flag-in OBJ73 APT4
+138 unflag-in OBJ61 APN3
+139 unload-airplane OBJ53 APN2 APT7
+140 move-from-to OBJ21 POS9 POS8
+141 flag-in OBJ21 POS8
+142 i-unflag-in OBJ31 TRU4
+143 flag-in OBJ41 APN2
+144 move-from-to OBJ42 POS6 POS4
+145 unflag-in OBJ43 TRU4
+146 flag-in OBJ33 POS3
+147 move-from-to OBJ11 POS9 POS8
+148 flag-in OBJ11 POS8
+149 unload-airplane OBJ13 APN2 POS2
+150 unload-airplane OBJ32 APN3 POS9
+151 flag-in OBJ81 APT6
+152 i-unflag-in OBJ92 APN2
+153 unload-airplane OBJ71 APN2 POS1
+154 flag-in OBJ91 POS8
+155 flag-in OBJ11 POS4
+156 move-from-to OBJ61 POS1 POS6
+157 flag-in OBJ61 POS6
+158 unflag-in OBJ61 APN3
+159 flag-in OBJ63 POS8
+160 unload-truck OBJ91 TRU9 POS6
+161 flag-in OBJ22 APT4
+162 flag-in OBJ72 APT9
+163 flag-in OBJ42 APN2
+164 flag-in OBJ43 APT7
+165 flag-in OBJ52 POS1
+166 unflag-in OBJ61 APN3
+167 unflag-in OBJ71 APN2
+168 flag-in OBJ42 POS8
+169 i-unflag-in OBJ41 APN2
+170 unload-truck OBJ61 TRU6 POS5
+171 flag-in OBJ61 POS5
+172 flag-in OBJ73 APT9
+173 flag-in OBJ81 POS4
+174 unflag-in OBJ63 APN2
+175 unload-airplane OBJ83 APN3 APT2
+176 flag-in OBJ21 POS5
+177 flag-in OBJ83 APT3
+178 unload-airplane OBJ51 APN2 APT1
+179 move-from-to OBJ73 POS4 POS9
+180 i-unflag-in OBJ63 TRU6
+181 flag-in OBJ91 POS5
+182 flag-in OBJ71 APT2
+183 flag-in OBJ61 APN3
+184 flag-in OBJ63 APT4
+185 unload-airplane OBJ41 APN2 APT7
+186 flag-in OBJ12 POS3
+187 move-from-to OBJ81 POS4 POS8
+188 flag-in OBJ81 POS8
+189 flag-in OBJ73 POS3
+190 flag-in OBJ41 POS3
+191 move-from-to OBJ32 POS9 POS6
+192 flag-in OBJ32 POS6
+193 unload-truck OBJ43 TRU8 POS3
+194 flag-in OBJ82 APT2
+195 unload-airplane OBJ42 APN2 APT7
+196 flag-in OBJ41 APT1
+197 flag-in OBJ81 APT5
+198 flag-in OBJ71 POS3
+199 unload-truck OBJ81 TRU9 APT1
+200 move-from-to OBJ81 POS9 APT5
+201 flag-in OBJ81 APT5
+202 flag-in OBJ52 APT4
+203 unload-airplane OBJ73 APN2 APT2
+204 move-from-to OBJ63 POS8 POS2
+205 flag-in OBJ63 POS2
+206 flag-in OBJ21 POS7
+207 flag-in OBJ63 POS5
+208 unload-airplane OBJ42 APN2 POS6
+209 flag-in OBJ41 POS2
+210 flag-in OBJ73 POS9
+211 unflag-in OBJ61 TRU6
+212 unload-airplane OBJ42 APN2 APT9
+213 flag-in OBJ43 POS7
+214 unload-airplane OBJ71 APN3 POS8
+215 unload-airplane OBJ21 APN2 APT4
+216 unflag-in OBJ82 TRU8
+217 flag-in OBJ43 POS3
+218 flag-in OBJ83 POS5
+219 flag-in OBJ72 APT3
+220 flag-in OBJ42 POS5
+221 flag-in OBJ62 APT7
+222 flag-in OBJ81 APT9
+223 flag-in OBJ33 POS9
+224 flag-in OBJ61 POS8
+225 i-unflag-in OBJ71 TRU7
+226 unflag-in OBJ83 APN3
+227 flag-in OBJ63 APT3
+228 flag-in OBJ42 POS7
+229 unload-truck OBJ83 TRU8 APT6
+230 unflag-in OBJ73 TRU7
+231 flag-in OBJ62 POS9
+232 flag-in OBJ52 APT1
+233 flag-in OBJ41 POS9
+234 unload-airplane OBJ81 APN2 POS9
+235 flag-in OBJ52 APT7
+236 unflag-in OBJ91 TRU9
+237 unload-truck OBJ91 TRU7 POS5
+238 flag-in OBJ92 APT8
+239 flag-in OBJ33 POS1
+240 i-unflag-in OBJ83 TRU8
+241 flag-in OBJ71 APT4
+242 unload-airplane OBJ83 APN3 POS8
+243 unload-airplane OBJ22 APN2 APT8
+244 flag-in OBJ33 APT8
+245 flag-in OBJ62 APT6
+246 unload-airplane OBJ51 APN2 POS2
+247 flag-in OBJ72 APT1
+248 flag-in OBJ52 POS2
+249 unload-truck OBJ72 TRU2 APT8
+250 move-from-to OBJ81 POS8 APT9
+251 flag-in OBJ81 APT9
+252 flag-in OBJ32 POS3
+253 flag-in OBJ91 POS7
+254 i-unflag-in OBJ32 APN3
+255 flag-in OBJ51 POS9
+256 flag-in OBJ21 APT9
+257 flag-in OBJ12 APT9
+258 unload-truck OBJ91 TRU8 APT8
+259 flag-in OBJ91 APT8
+260 flag-in OBJ12 APT6
+261 flag-in OBJ61 POS3
+262 unflag-in OBJ52 APN2
+263 unflag-in OBJ71 APN2
+264 flag-in OBJ91 POS5
+265 flag-in OBJ92 POS7
+266 unload-truck OBJ82 TRU9 APT3
+267 flag-in OBJ82 APT3
+268 flag-in OBJ53 POS4
+269 flag-in OBJ62 POS9
+270 flag-in OBJ13 APT8
+271 unload-truck OBJ42 TRU6 POS9
+272 flag-in OBJ42 POS9
+273 unload-truck OBJ53 TRU5 POS8
+274 unload-airplane OBJ63 APN2 APT5
+275 unload-truck OBJ63 TRU1 POS1
+276 unload-airplane OBJ82 APN3 POS6
+277 flag-in OBJ33 APT3
+278 flag-in OBJ73 POS6
+279 flag-in OBJ31 POS2
+280 unload-truck OBJ71 TRU6 POS2
+281 flag-in OBJ71 POS2
+282 unflag-in OBJ33 APN3
+283 unload-airplane OBJ73 APN3 APT4
+284 unload-airplane OBJ71 APN2 POS4
+285 unload-truck OBJ52 TRU6 POS5
+286 unload-airplane OBJ82 APN3 APT9
+287 unload-truck OBJ42 TRU9 POS2
+288 unload-airplane OBJ53 APN3 POS2
+289 flag-in OBJ21 APT7
+290 flag-in OBJ53 POS7
+291 unflag-in OBJ63 TRU3
+292 unflag-in OBJ32 APN3
+293 unflag-in OBJ41 TRU6
+294 unload-airplane OBJ41 APN2 POS1
+295 unload-truck OBJ42 TRU7 POS4
+296 unflag-in OBJ81 TRU7
+297 flag-in OBJ72 POS7
+298 unflag-in OBJ61 TRU7
+299 unload-airplane OBJ53 APN2 APT9
+300 flag-in OBJ61 APT3
+301 i-unflag-in OBJ71 TRU3
+302 unload-truck OBJ51 TRU3 POS6
+303 unflag-in OBJ61 TRU3
+304 unload-truck OBJ52 TRU6 POS7
+305 flag-in OBJ61 POS7
+306 unflag-in OBJ53 TRU4
+307 unflag-in OBJ53 APN3
+308 unload-truck OBJ11 TRU9 POS1
+309 unload-airplane OBJ42 APN3 POS1
+310 flag-in OBJ81 APT8
+311 flag-in OBJ63 APT6
+312 unload-airplane OBJ71 APN2 POS3
+313 flag-in OBJ11 POS5
+314 flag-in OBJ22 POS3
+315 unload-truck OBJ43 TRU4 POS1
+316 move-from-to OBJ33 POS9 OBJ63
+317 unload-truck OBJ72 TRU9 POS6
+318 flag-in OBJ53 APT1
+319 flag-in OBJ82 APT6
+320 unload-airplane OBJ21 APN2 APT9
+321 unload-airplane OBJ53 APN3 APT1
+322 flag-in OBJ73 APT7
+323 flag-in OBJ42 APT2
+324 move-from-to OBJ22 POS2 OBJ32
+325 flag-in OBJ81 POS6
+326 flag-in OBJ13 POS3
+327 unload-truck OBJ53 TRU9 POS9
+328 unload-truck OBJ

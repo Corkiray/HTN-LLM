@@ -1,50 +1,55 @@
 ==>
-1 load_highspeed_saw b0 highspeed_saw0
-2 cut_board_large b0 p0 highspeed_saw0 cherry rough s8 s7 s6 s5 large green untreated
-3 unload_highspeed_saw b0 highspeed_saw0
-4 load_highspeed_saw b0 highspeed_saw1
-5 cut_board_large b0 p1 highspeed_saw1 cherry rough s5 s4 s3 s2 large mauve untreated
-6 unload_highspeed_saw b0 highspeed_saw1
-7 do_grind_untreated p2 grinder0 rough white untreated untreated untreated untreated untreated verysmooth natural
-8 do_glaze p2 glazer0 white untreated untreated glazed natural
-9 do_plane_untreated p2 planer0 rough white untreated untreated untreated smooth natural
-10 load_highspeed_saw b1 highspeed_saw2
-11 cut_board_medium b1 p3 highspeed_saw2 cherry smooth s4 s3 s2 medium natural untreated
-12 unload_highspeed_saw b1 highspeed_saw2
-13 do_glaze p3 glazer1 natural untreated untreated glazed natural
-14 do_spray_varnish p4 spray_varnisher0 black colourfragments smooth untreated untreated varnished blue
-15 load_highspeed_saw b1 highspeed_saw3
-16 cut_board_large b1 p5 highspeed_saw3 cherry smooth s2 s1 s0 s8 large blue untreated
-17 unload_highspeed_saw b1 highspeed_saw3
-18 load_highspeed_saw b0 highspeed_saw4
-19 cut_board_small b0 p6 highspeed_saw4 cherry rough s6 s5 small natural untreated
-20 unload_highspeed_saw b0 highspeed_saw4
-21 do_immersion_varnish p6 immersion_varnisher4 natural smooth untreated untreated varnished blue
-<==
-
+1 move b0 highspeed_saw0
+2 cut_board b0 p0 highspeed_saw0 cherry rough
+3 move p0 immersion_varnisher3
+4 do_colour p0 green immersion_varnisher3 glazed
+5 move p0 glazer2
+6 do_colour p0 green glazer2 glazed
+7 move b0 highspeed_saw1
+8 cut_board b0 p1 highspeed_saw1 cherry rough
+9 move p1 immersion_varnisher2
+10 do_colour p1 mauve immersion_varnisher2 varnished
+11 move p1 glazer0
+12 do_colour p1 mauve glazer0 glazed
+13 move b1 planer0
+14 grindNplane p2 verysmooth natural glazed verysmooth natural glazed
+15 move p2 immersion_varnisher0
+16 do_colour p2 green immersion_varnisher0 glazed
+17 move p2 glazer1
+18 do_colour p2 green glazer1 glazed
+19 move b0 highspeed_saw2
+20 cut_board b0 p3 highspeed_saw2 cherry rough
+21 move p3 immersion_varnisher4
+22 do_colour p3 natural immersion_varnisher4 varnished
+23 move p3 glazer2
+24 do_colour p3 natural glazer2 glazed
+25 move b1 highspeed_saw3
+26 cut_board b1 p4 highspeed_saw3 cherry smooth
+27 move p4 immersion_varnisher2
+28 do_colour p4 blue immersion_varnisher2 colourfragments
+29 move b0 highspeed_saw0
+30 cut_board b0 p5 highspeed_saw0 cherry rough
+31 move p5 immersion_varnisher3
+32 do_colour p5 blue immersion_varnisher3 glazed
+33 move p5 glazer0
+34 do_colour p5 blue glazer0 glazed
+35 move b0 planer3
+36 grindNplane p6 verysmooth natural varnished verysmooth natural varnished
+37 move p6 spray_varnisher4
+38 do_colour p6 blue spray_varnisher4 varnished
 root 0
-0 process p0 green rough smooth -> m14 1 2 3
-1 process p1 mauve rough smooth -> m14 4 5 6
-2 process p2 natural rough smooth -> m16 7 8 9
-3 process p3 natural rough verysmooth -> m14 10 11 12 13
-4 process p4 blue rough verysmooth -> m11 14
-5 process p5 blue smooth smooth -> m10 15 16 17
-6 process p6 natural rough verysmooth -> m10 18 19 20 21
-
-root 1
-1 cut_and_saw b0 p0 cherry rough -> m6 1 2 3
-2 cut_and_saw b0 p1 cherry rough -> m6 4 5 6
-3 cut_and_saw b1 p3 cherry smooth -> m6 10 11 12
-4 do_colour p4 blue spray_varnisher0 untreated -> m1 14
-5 cut_and_saw b1 p5 cherry smooth -> m6 15 16 17
-6 cut_and_saw b0 p6 cherry rough -> m6 18 19 20
-7 process p2 natural rough smooth -> m12 7 8 9
-8 do_colour p0 green glazer0 untreated -> m2 2
-9 do_colour p1 mauve glazer2 untreated -> m2 5
-10 do_colour p3 natural glazer1 untreated -> m2 12
-11 process p4 blue rough verysmooth -> m11 14
-12 process p5 blue smooth smooth -> m12 15 16 17
-13 do_colour p6 natural immersion_varnisher4 untreated -> m1 21
-14 grindNplane p3 rough natural untreated smooth natural untreated -> m7 11
-15 grindNplane p5 smooth natural untreated verysmooth natural untreated -> m3 17 
-16 grindNplane p6 rough natural untreated verysmooth natural untreated -> m13 20
+0 process p0 green rough smooth 
+0 -> m1_process_0 1 2 3 4 5 6
+1 process p1 mauve rough smooth 
+1 -> m1_process_1 7 8 9 10 11 12
+2 process p2 green rough smooth 
+2 -> m1_process_2 13 14 15 16 17 18
+3 process p3 natural rough verysmooth 
+3 -> m1_process_3 19 20 21 22 23 24
+4 process p4 natural rough smooth 
+4 -> m1_process_4 25 26 27 28
+5 process p5 natural rough smooth 
+5 -> m1_process_5 29 30 31 32 33 34
+6 process p6 varnished rough verysmooth 
+6 -> m1_process_6 35 36 37 38
+<==

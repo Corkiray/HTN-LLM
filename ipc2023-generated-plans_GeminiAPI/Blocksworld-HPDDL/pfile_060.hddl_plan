@@ -1,0 +1,181 @@
+==>
+1 mark_done b51
+2 mark_done b41
+3 unstack b25 b58
+4 putdown b25
+5 pickup b5
+6 putdown b5
+7 pickup b2
+8 putdown b2
+9 pickup b54
+10 putdown b54
+11 pickup b12
+12 putdown b12
+13 pickup b24
+14 putdown b24
+15 pickup b15
+16 putdown b15
+17 pickup b3
+18 putdown b3
+19 pickup b1
+20 stack b1 b3
+21 mark_done b1
+22 pickup b28
+23 stack b28 b1
+24 mark_done b28
+25 unstack b18 b51
+26 stack b18 b28
+27 mark_done b18
+28 pickup b55
+29 stack b55 b41
+30 mark_done b55
+31 pickup b4
+32 stack b4 b55
+33 mark_done b4
+34 pickup b20
+35 stack b20 b4
+36 mark_done b20
+37 stack b5 b20
+38 mark_done b5
+39 stack b2 b5
+40 mark_done b2
+41 stack b54 b2
+42 mark_done b54
+43 stack b12 b54
+44 mark_done b12
+45 stack b24 b12
+46 mark_done b24
+47 stack b15 b24
+48 mark_done b15
+49 stack b3 b15
+50 mark_done b3
+51 mark_done b33
+52 unstack b37 b38
+53 putdown b37
+54 pickup b13
+55 putdown b13
+56 stack b37 b13
+57 mark_done b37
+58 unstack b40 b23
+59 stack b40 b37
+60 mark_done b40
+61 unstack b38 b26
+62 stack b38 b16
+63 mark_done b38
+64 pickup b16
+65 stack b16 b27
+66 mark_done b16
+67 unstack b27 b11
+68 stack b27 b33
+69 mark_done b27
+70 mark_done b30
+71 mark_done b21
+72 unstack b29 b32
+73 putdown b29
+74 unstack b35 b20
+75 putdown b35
+76 pickup b53
+77 putdown b53
+78 pickup b23
+79 stack b23 b53
+80 mark_done b23
+81 pickup b8
+82 stack b8 b23
+83 mark_done b8
+84 pickup b34
+85 stack b34 b8
+86 mark_done b34
+87 unstack b26 b59
+88 stack b26 b34
+89 mark_done b26
+90 pickup b19
+91 stack b19 b26
+92 mark_done b19
+93 stack b35 b19
+94 mark_done b35
+95 pickup b17
+96 stack b17 b36
+97 mark_done b17
+98 pickup b36
+99 stack b36 b49
+100 mark_done b36
+101 pickup b49
+102 stack b49 b50
+103 mark_done b49
+104 pickup b50
+105 stack b50 b48
+106 mark_done b50
+107 pickup b48
+108 stack b48 b22
+109 mark_done b48
+110 pickup b22
+111 stack b22 b46
+112 mark_done b22
+113 pickup b46
+114 stack b46 b52
+115 mark_done b46
+116 pickup b52
+117 stack b52 b31
+118 mark_done b52
+119 pickup b31
+120 stack b31 b25
+121 mark_done b31
+122 pickup b25
+123 stack b25 b29
+124 mark_done b25
+125 pickup b29
+126 stack b29 b59
+127 mark_done b29
+128 unstack b59 b14
+129 stack b59 b58
+130 mark_done b59
+131 pickup b58
+132 stack b58 b44
+133 mark_done b58
+134 pickup b44
+135 stack b44 b10
+136 mark_done b44
+137 pickup b10
+138 stack b10 b47
+139 mark_done b10
+140 unstack b47 b55
+141 stack b47 b32
+142 mark_done b47
+143 unstack b32 b35
+144 stack b32 b21
+145 mark_done b32
+146 mark_done b13
+147 mark_done b11
+148 mark_done b9
+149 pickup b56
+150 putdown b56
+151 unstack b43 b1
+152 putdown b43
+153 pickup b42
+154 stack b42 b9
+155 mark_done b42
+156 pickup b56
+157 stack b56 b42
+158 mark_done b56
+159 unstack b57 b27
+160 stack b57 b43
+161 mark_done b57
+162 mark_done b6
+163 pickup b60
+164 putdown b60
+165 unstack b7 b10
+166 stack b7 b60
+167 mark_done b7
+168 stack b60 b6
+169 mark_done b60
+170 mark_done b14
+171 mark_done b39
+root 0
+0 achieve-goals -> mark-done-table b51 1
+1 achieve-goals -> mark-done-table b41 2
+2 achieve-goals -> unstack-block b25 3 4
+3 putdown_abstract b25 -> newMethod10 b25 4
+4 achieve-goals -> unstack-block b5 5 6
+5 putdown_abstract b5 -> newMethod10 b5 6
+6 achieve-goals -> unstack-block b2 7 8
+<==

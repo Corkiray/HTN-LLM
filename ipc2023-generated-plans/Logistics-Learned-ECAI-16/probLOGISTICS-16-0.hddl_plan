@@ -1,60 +1,154 @@
 ==>
-**Sequential Plan:**
-
-1. `i-UNLOCK-AT` `OBJ53` `POS5` (precondition for `M10-ACHIEVE-AT`)
-2. `ACHIEVE-AT0` `OBJ53` `APT5` (using `M13-ACHIEVE-AT0` with `APN2` and `POS5`)
-	* `DO-AT-LOAD-AIRPLANE0` `OBJ53` `APN2` `POS5`
-		+ `ACHIEVE-AT-AIR` `APN2` `POS5` (using `M38-ACHIEVE-AT`)
-			- `i-LOCK-AT` `APN2` `POS5`
-		+ `LOAD-AIRPLANE` `OBJ53` `APN2` `POS5`
-	* `FLY-AIRPLANE` `APN2` `APT2` `APT5`
-	* `ACHIEVE-AT2` `APN2` `APT5` (using `M40-ACHIEVE-AT2`)
-3. `i-LOCK-AT` `OBJ53` `APT5` (final lock)
-
-4. `i-UNLOCK-AT` `OBJ12` `POS1` (precondition for `M10-ACHIEVE-AT`)
-5. `ACHIEVE-AT0` `OBJ12` `APT5` (using `M13-ACHIEVE-AT0` with `APN1` and `POS1`)
-	* `DO-AT-LOAD-AIRPLANE0` `OBJ12` `APN1` `POS1`
-		+ `ACHIEVE-AT-AIR` `APN1` `POS1` (using `M38-ACHIEVE-AT`)
-			- `i-LOCK-AT` `APN1` `POS1`
-		+ `LOAD-AIRPLANE` `OBJ12` `APN1` `POS1`
-	* `FLY-AIRPLANE` `APN1` `APT4` `APT5`
-	* `ACHIEVE-AT2` `APN1` `APT5` (using `M40-ACHIEVE-AT2`)
-6. `i-LOCK-AT` `OBJ12` `APT5` (final lock)
-
-... (similar steps for each remaining task, adapting to their specific locations and vehicles)
-
-**Last few tasks for brevity:**
-
-50. `i-UNLOCK-AT` `OBJ21` `POS2` (precondition for `M10-ACHIEVE-AT`)
-51. `ACHIEVE-AT0` `OBJ21` `APT3` (using `M12-ACHIEVE-AT0` with `TRU2` and `POS2`)
-	* `DO-AT-LOAD-TRUCK0` `OBJ21` `TRU2` `POS2`
-		+ `ACHIEVE-AT-TRK` `TRU2` `POS2` (using `M33-ACHIEVE-AT`)
-			- `i-LOCK-AT` `TRU2` `POS2`
-		+ `LOAD-TRUCK` `OBJ21` `TRU2` `POS2`
-	* `DRIVE-TRUCK` `TRU2` `POS2` `APT3` `CIT3`
-	* `ACHIEVE-AT1` `TRU2` `APT3` (using `M35-ACHIEVE-AT1`)
-52. `i-LOCK-AT` `OBJ21` `APT3` (final lock)
-
-53. `i-UNLOCK-AT` `OBJ42` `POS3` (precondition for `M10-ACHIEVE-AT`)
-54. `ACHIEVE-AT0` `OBJ42` `POS3` (already at destination, just lock)
-55. `i-LOCK-AT` `OBJ42` `POS3` (final lock)
-
-**Hierarchical Decomposition:**
+1 achieve_at TRU1 POS5
+2 move TRU1 POS1 POS5
+3 achieve_at OBJ53 POS5
+4 if_unlock_at OBJ53 POS5
+5 if_unlock_at TRU5 POS5
+6 load_truck OBJ53 TRU5 POS5
+7 achieve_at TRU5 POS5
+8 move TRU5 POS5 APT5
+9 unload_truck OBJ53 TRU5 APT5
+10 achieve_at OBJ12 POS5
+11 move OBJ12 POS1 POS5
+12 if_unlock_at OBJ12 POS5
+13 if_unlock_at TRU5 POS5
+14 load_truck OBJ12 TRU5 POS5
+15 achieve_at TRU5 POS5
+16 move TRU5 POS5 APT5
+17 unload_truck OBJ12 TRU5 APT5
+18 achieve_at OBJ63 POS6
+19 move OBJ63 POS6 APT4
+20 if_unlock_at TRU4 POS4
+21 if_unlock_at OBJ63 POS6
+22 load_truck OBJ63 TRU4 POS4
+23 achieve_at TRU4 POS4
+24 move TRU4 POS4 APT4
+25 unload_truck OBJ63 TRU4 APT4
+26 achieve_at OBJ13 POS2
+27 move OBJ13 POS1 POS2
+28 if_unlock_at OBJ13 POS2
+29 if_unlock_at TRU2 POS2
+30 load_truck OBJ13 TRU2 POS2
+31 achieve_at TRU2 POS2
+32 move TRU2 POS2 POS2
+33 unload_truck OBJ13 TRU2 POS2
+34 achieve_at OBJ23 POS4
+35 move OBJ23 POS2 POS4
+36 if_unlock_at OBJ23 POS4
+37 if_unlock_at TRU4 POS4
+38 load_truck OBJ23 TRU4 POS4
+39 achieve_at TRU4 POS4
+40 move TRU4 POS4 APT4
+41 unload_truck OBJ23 TRU4 APT4
+42 achieve_at OBJ33 POS4
+43 move OBJ33 POS3 POS4
+44 if_unlock_at OBJ33 POS4
+45 if_unlock_at TRU4 POS4
+46 load_truck OBJ33 TRU4 POS4
+47 achieve_at TRU4 POS4
+48 move TRU4 POS4 POS4
+49 unload_truck OBJ33 TRU4 POS4
+50 achieve_at OBJ41 APT5
+51 move OBJ41 POS4 POS5
+52 move TRU5 POS5 POS5
+53 move OBJ41 POS5 APT3
+54 if_unlock_at TRU3 POS3
+55 if_unlock_at OBJ41 POS5
+56 load_truck OBJ41 TRU3 POS3
+57 achieve_at TRU3 POS3
+58 move TRU3 POS3 APT3
+59 unload_truck OBJ41 TRU3 APT3
+60 achieve_at OBJ61 POS6
+61 move OBJ61 POS6 APT4
+62 if_unlock_at OBJ61 POS6
+63 if_unlock_at TRU4 POS4
+64 load_truck OBJ61 TRU4 POS4
+65 achieve_at TRU4 POS4
+66 move TRU4 POS4 APT4
+67 unload_truck OBJ61 TRU4 APT4
+68 achieve_at OBJ32 APT5
+69 move OBJ32 POS3 POS5
+70 if_unlock_at OBJ32 POS5
+71 if_unlock_at TRU5 POS5
+72 load_truck OBJ32 TRU5 POS5
+73 achieve_at TRU5 POS5
+74 move TRU5 POS5 APT5
+75 unload_truck OBJ32 TRU5 APT5
+76 achieve_at OBJ43 APT1
+77 move OBJ43 POS4 POS1
+78 move TRU1 POS1 POS1
+79 move OBJ43 POS1 APT3
+80 if_unlock_at TRU3 POS3
+81 if_unlock_at OBJ43 POS1
+82 load_truck OBJ43 TRU3 POS3
+83 achieve_at TRU3 POS3
+84 move TRU3 POS3 APT3
+85 unload_truck OBJ43 TRU3 APT3
+86 achieve_at OBJ51 APT3
+87 move OBJ51 POS5 POS4
+88 move TRU4 POS4 POS3
+89 move OBJ51 POS4 APT1
+90 if_unlock_at TRU3 POS3
+91 if_unlock_at OBJ51 POS4
+92 load_truck OBJ51 TRU3 POS3
+93 achieve_at TRU3 POS3
+94 move TRU3 POS3 APT3
+95 unload_truck OBJ51 TRU3 APT3
+96 achieve_at OBJ31 POS5
+97 move OBJ31 POS3 POS5
+98 if_unlock_at OBJ31 POS5
+99 if_unlock_at TRU5 POS5
+100 load_truck OBJ31 TRU5 POS5
+101 achieve_at TRU5 POS5
+102 move TRU5 POS5 POS5
+103 unload_truck OBJ31 TRU5 POS5
+104 achieve_at OBJ22 POS6
+105 move OBJ22 POS2 POS6
+106 if_unlock_at OBJ22 POS6
+107 if_unlock_at TRU4 POS4
+108 load_truck OBJ22 TRU4 POS4
+109 achieve_at TRU4 POS4
+110 move TRU4 POS4 APT6
+111 unload_truck OBJ22 TRU4 APT6
+112 achieve_at OBJ42 POS6
+113 move OBJ42 POS4 POS6
+114 if_unlock_at OBJ42 POS6
+115 if_unlock_at TRU4 POS4
+116 load_truck OBJ42 TRU4 POS4
+117 achieve_at TRU4 POS4
+118 move TRU4 POS4 APT6
+119 unload_truck OBJ42 TRU4 APT6
+120 achieve_at OBJ11 APT1
+121 move OBJ11 POS1 POS1
+122 if_unlock_at OBJ11 POS1
+123 if_unlock_at TRU1 POS1
+124 load_truck OBJ11 TRU1 POS1
+125 achieve_at TRU1 POS1
+126 move TRU1 POS1 APT1
+127 unload_truck OBJ11 TRU1 APT1
+128 achieve_at OBJ21 POS4
+129 move OBJ21 POS2 POS4
+130 if_unlock_at TRU4 POS4
+131 if_unlock_at OBJ21 POS4
+132 load_truck OBJ21 TRU4 POS4
+133 achieve_at TRU4 POS4
+134 move TRU4 POS4 APT3
+135 unload_truck OBJ21 TRU4 APT3
+<==
 
 root 0
-0 achieve_all -> m_all_0 1 2... 53 54
-1 achieve_OBJ53_APT5 -> m10_achieve_at_0 1 2 3
-	* 1 i_unlock_at_OBJ53_POS5
-	* 2 achieve_at0_OBJ53_APT5 -> m13_achieve_at0_0 2.1 2.2 2.3
-		+ 2.1 do_at_load_airplane0_OBJ53_APN2_POS5 -> m5_do_at_load_airplane0_0 2.1.1 2.1.2 2.1.3
-		+ 2.2 fly_airplane_APN2_APT2_APT5
-		+ 2.3 achieve_at2_APN2_APT5 -> m40_achieve_at2_0
-	* 3 i_lock_at_OBJ53_APT5
-... (similar decomposition for each task)
-
-**Note:**
-
-* The sequential plan is highly condensed for brevity, focusing on key actions and method invocations. Actual plans would include more detailed steps, especially for actions like `ACHIEVE-AT0` which involve multiple method calls.
-* The hierarchical decomposition is also condensed, showing only the top-level task decomposition and a few examples of deeper decomposition for clarity.
-* This plan assumes the planner successfully resolves all preconditions and constraints without additional actions beyond what's shown here.
-* Task and method numbers (e.g., `task0`, `m10_achieve_at_0`) are arbitrary for demonstration purposes. Actual planners would generate these based on the problem and domain definitions.
+0 solve_tasks -> m4_solve_tasks_0 1 18 26 34 42 50 60 68 76 86 96 104 112 120 128
+18 achieve_at OBJ53 APT5 -> m8_achieve_at_package_0 2 3 4 5 6 7 8 9
+26 achieve_at OBJ63 APT4 -> m8_achieve_at_package_1 19 20 21 22 23 24 25
+34 achieve_at OBJ13 POS2 -> m8_achieve_at_package_2 27 28 29 30 31 32 33
+42 achieve_at OBJ23 APT4 -> m8_achieve_at_package_3 35 36 37 38 39 40 41
+50 achieve_at OBJ41 APT3 -> m8_achieve_at_package_4 51 52 53 54 55 56 57 58 59
+60 achieve_at OBJ61 APT4 -> m8_achieve_at_package_5 61 62 63 64 65 66 67
+68 achieve_at OBJ32 APT5 -> m8_achieve_at_package_6 69 70 71 72 73 74 75
+76 achieve_at OBJ43 APT3 -> m8_achieve_at_package_7 77 78 79 80 81 82 83 84 85
+86 achieve_at OBJ51 APT1 -> m8_achieve_at_package_8 87 88 89 90 91 92 93 94 95
+96 achieve_at OBJ31 POS5 -> m8_achieve_at_package_9 97 98 99 100 101 102 103
+104 achieve_at OBJ22 POS3 -> m8_achieve_at_package_10 105 106 107 108 109 110 111
+112 achieve_at OBJ42 POS3 -> m8_achieve_at_package_11 113 114 115 116 117 118 119
+120 achieve_at OBJ11 APT4 -> m8_achieve_at_package_12 121 122 123 124 125 126 127
+128 achieve_at OBJ21 APT3 -> m8_achieve_at_package_13 129 130 131 132 133 134 135

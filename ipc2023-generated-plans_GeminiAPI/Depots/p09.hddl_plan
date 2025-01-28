@@ -1,0 +1,29 @@
+==>
+1 nop
+2 nop
+3 nop
+4 nop
+5 nop
+6 nop
+7 nop
+8 nop
+9 nop
+10 nop
+11 nop
+12 nop
+13 nop
+root 0
+0 do_put_on crate3 pallet0 -> m0_do_put_on crate3 pallet0 1
+1 do_put_on crate13 crate3 -> m0_do_put_on crate13 crate3 2
+2 do_put_on crate11 pallet1 -> m0_do_put_on crate11 pallet1 3
+3 do_put_on crate10 pallet2 -> m0_do_put_on crate10 pallet2 4
+4 do_put_on crate2 crate10 -> m0_do_put_on crate2 crate10 5
+5 do_put_on crate1 crate2 -> m0_do_put_on crate1 crate2 6
+6 do_put_on crate9 crate1 -> m0_do_put_on crate9 crate1 7
+7 do_put_on crate14 pallet3 -> m0_do_put_on crate14 pallet3 8
+8 do_put_on crate12 crate14 -> m0_do_put_on crate12 crate14 9
+9 do_put_on crate6 pallet4 -> m0_do_put_on crate6 pallet4 10
+10 do_put_on crate4 crate6 -> m0_do_put_on crate4 crate6 11
+11 do_put_on crate5 pallet5 -> m0_do_put_on crate5 pallet5 12
+12 do_put_on crate0 crate5 -> m0_do_put_on crate0 crate5 13
+<==

@@ -1,0 +1,44 @@
+==>
+1 nop
+2 nop
+3 Lift hoist0 crate2 pallet0 depot0
+4 Drop hoist0 crate2 pallet4 distributor1
+5 nop
+6 Lift hoist5 crate1 crate0 depot2
+7 Drop hoist5 crate1 pallet5 distributor2
+8 nop
+9 Lift hoist0 crate0 pallet2 depot2
+10 Drop hoist0 crate0 pallet0 depot0
+11 nop
+12 Lift hoist0 crate3 pallet8 depot0
+13 Drop hoist0 crate3 pallet7 depot0
+14 nop
+15 Lift hoist3 crate4 pallet3 distributor0
+16 Drop hoist3 crate4 pallet9 distributor0
+17 nop
+18 Lift hoist2 crate5 crate1 depot2
+19 Drop hoist2 crate5 pallet1 depot1
+root 0
+0 do_put_on crate0 pallet0 -> m0_do_put_on crate0 pallet0 1
+1 do_put_on crate1 pallet5 -> m1_do_put_on crate1 pallet5 distributor2 hoist5 5 6 7
+2 do_put_on crate2 pallet4 -> m1_do_put_on crate2 pallet4 distributor1 hoist0 2 3 4
+3 do_put_on crate3 pallet7 -> m1_do_put_on crate3 pallet7 depot0 hoist0 11 12 13
+4 do_put_on crate4 pallet9 -> m1_do_put_on crate4 pallet9 distributor0 hoist3 14 15 16
+5 do_put_on crate5 pallet1 -> m1_do_put_on crate5 pallet1 depot1 hoist2 17 18 19
+6 do_clear crate0 depot2 -> m4_do_clear crate0 depot2 8
+7 do_clear pallet5 distributor2 -> m4_do_clear pallet5 distributor2 9
+8 do_clear crate1 depot2 -> m4_do_clear crate1 depot2 10
+9 do_clear pallet4 distributor1 -> m4_do_clear pallet4 distributor1 2
+10 do_clear pallet0 depot0 -> m4_do_clear pallet0 depot0 2
+11 do_clear crate3 depot0 -> m4_do_clear crate3 depot0 12
+12 do_clear pallet7 depot0 -> m4_do_clear pallet7 depot0 13
+13 do_clear crate4 distributor0 -> m4_do_clear crate4 distributor0 14
+14 do_clear pallet9 distributor0 -> m4_do_clear pallet9 distributor0 15
+15 do_clear crate5 depot2 -> m4_do_clear crate5 depot2 16
+16 do_clear pallet1 depot1 -> m4_do_clear pallet1 depot1 17
+17 do_lift_crate crate1 distributor2 hoist5 -> m9_do_lift_crate crate1 distributor2 hoist5 crate0 6
+18 do_lift_crate crate2 distributor1 hoist0 -> m9_do_lift_crate crate2 distributor1 hoist0 pallet0 3
+19 do_lift_crate crate3 depot0 hoist0 -> m9_do_lift_crate crate3 depot0 hoist0 pallet8 11
+20 do_lift_crate crate4 distributor0 hoist3 -> m9_do_lift_crate crate4 distributor0 hoist3 pallet3 14
+21 do_lift_crate crate5 depot1 hoist2 -> m9_do_lift_crate crate5 depot1 hoist2 crate1 18
+<==

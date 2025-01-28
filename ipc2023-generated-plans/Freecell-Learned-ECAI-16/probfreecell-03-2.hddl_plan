@@ -1,45 +1,27 @@
 ==>
-1 DO-ON-MOVE3 S3 D3 S2
-2 DO-ON-MOVE3 D3 S2 SA
-3 DO-ON-SENDTONEWCOL3 SA S2 N5 N6
-4 DO-ON-SENDTONEWCOL3 S2 SA N6 N7
-5 DO-ON-MOVE3 C3 S3 S2
-6 DO-ON-MOVE3 S3 S2 D3
-7 DO-ON-SENDTONEWCOL3 D3 S2 N7 N8
-8 DO-ON-SENDTONEWCOL3 S2 D3 N8 N9
-9 DO-ON-MOVE3 H3 S3 C3
-10 DO-ON-MOVE3 S3 C3 D3
-11 DO-ON-SENDTONEWCOL3 D3 C3 N9 N10
-12 DO-ON-SENDTONEWCOL3 C3 D3 N10 N11
-13 DO-ON-MOVE3 CA S3 H3
-14 DO-ON-MOVE3 S3 H3 C3
-15 DO-ON-SENDTONEWCOL3 C3 H3 N11 N12
-16 DO-ON-SENDTONEWCOL3 H3 C3 N12 N13
-17 DO-ON-SENDTOHOME3 C3 H3 C N12 C0 N0
-18 DO-ON-SENDTOHOME3 H3 C3 H N12 H0 N0
-19 DO-ON-SENDTOHOME3 S3 D3 S N8 S0 N0
-20 DO-ON-SENDTOHOME3 D3 S3 D N8 D0 N0
-<==
-
+1 do-inCell-colFromFreeCell0 c3 s3 n3 n1
+2 do-inCell-colFromFreeCell0 s2 c3 n2 n1
+3 do-inCell-colFromFreeCell0 h3 s2 n3 n1
+4 do-inCell-colFromFreeCell0 d3 h3 n3 n1
+5 do-inCell-colFromFreeCell0 sa d3 n1 n1
+6 do-inCell-colFromFreeCell0 ha sa n1 n1
+7 do-on-move2 da ca ca d2
+8 do-inCell-colFromFreeCell0 ca h2 n1 n1
+9 do-inCell-colFromFreeCell0 d2 da n2 n1
+10 do-on-move2 c2 c3 c2 ca
+11 do-inCell-colFromFreeCell0 d3 c3 n3 n3
+12 do-inCell-colFromFreeCell0 s3 d3 n3 n3
+13 do-on-move2 s2 s3 s2 s0
+14 do-inCell-colFromFreeCell0 h3 s3 n3 n3
+15 do-inCell-colFromFreeCell0 da s2 n1 n2
+16 do-inCell-colFromFreeCell0 ca da n1 n1
+17 do-on-move2 h2 ca h2 h0
+18 do-inCell-colFromFreeCell0 ha h2 n1 n2
+19 do-inCell-colFromFreeCell0 sa ha n1 n2
+20 do-on-move2 c3 sa c3 c0
 root 0
-0 solve_freecell -> m1_solve_freecell_0 1 2 3
-1 task0 (ACHIEVE-HOME C3) -> m2_achieve_home_0 C3 4 5 6 7 8 9 10 11 12 13 14 15 16 17
-2 task1 (ACHIEVE-HOME D3) -> m3_achieve_home_0 D3 18 19
-3 task2 (ACHIEVE-HOME H3) -> m4_achieve_home_0 H3 20
-4 ACHIEVE-HOME0 C3 -> m5_achieve_home0_0 C3 5 6 7 8 9 10 11 12 13 14 15 16
-5 DO-ON-MOVE3 S3 D3 S2 -> m6_do_on_move3_0 S3 D3 S2
-6 DO-ON-MOVE3 D3 S2 SA -> m7_do_on_move3_0 D3 S2 SA
-7 DO-ON-SENDTONEWCOL3 SA S2 N5 N6 -> m8_do_on_sendtonewcol3_0 SA S2 N5 N6
-8 DO-ON-SENDTONEWCOL3 S2 SA N6 N7 -> m9_do_on_sendtonewcol3_0 S2 SA N6 N7
-9 DO-ON-MOVE3 C3 S3 S2 -> m10_do_on_move3_0 C3 S3 S2
-10 DO-ON-MOVE3 S3 S2 D3 -> m11_do_on_move3_0 S3 S2 D3
-11 DO-ON-SENDTONEWCOL3 D3 S2 N7 N8 -> m12_do_on_sendtonewcol3_0 D3 S2 N7 N8
-12 DO-ON-SENDTONEWCOL3 S2 D3 N8 N9 -> m13_do_on_sendtonewcol3_0 S2 D3 N8 N9
-13 DO-ON-MOVE3 H3 S3 C3 -> m14_do_on_move3_0 H3 S3 C3
-14 DO-ON-MOVE3 S3 C3 D3 -> m15_do_on_move3_0 S3 C3 D3
-15 DO-ON-SENDTONEWCOL3 D3 C3 N9 N10 -> m16_do_on_sendtonewcol3_0 D3 C3 N9 N10
-16 DO-ON-SENDTONEWCOL3 C3 D3 N10 N11 -> m17_do_on_sendtonewcol3_0 C3 D3 N10 N11
-17 DO-ON-SENDTOHOME3 C3 H3 C N12 C0 N0 -> m18_do_on_sendtohome3_0 C3 H3 C N12 C0 N0
-18 DO-ON-SENDTOHOME3 D3 S3 D N8 D0 N0 -> m19_do_on_sendtohome3_0 D3 S3 D N8 D0 N0
-19 DO-ON-SENDTOHOME3 S3 D3 S N8 S0 N0 -> m20_do_on_sendtohome3_0 S3 D3 S N8 S0 N0
-20 DO-ON-SENDTOHOME3 H3 C3 H N12 H0 N0 -> m21_do_on_sendtohome3_0 H3 C3 H N12 H0 N0
+0 achieve_home C3 -> m1_ordering_0 1 2 3
+1 achieve_home D3 -> m2_ordering_0 4 5 6
+2 achieve_home H3 -> m3_ordering_0 7 8 9
+3 achieve_home S3 -> m4_ordering_0 10 11 12 13 14 15
+<==

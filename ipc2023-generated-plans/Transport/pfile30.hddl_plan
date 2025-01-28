@@ -1,46 +1,100 @@
 ==>
-**Sequential Plan**
-```
-1. drive truck_4 city_loc_11 city_loc_4
-2. pick_up truck_4 city_loc_4 package_0 capacity_3 capacity_2
-3. drive truck_4 city_loc_4 city_loc_4
-4. drop truck_4 city_loc_4 package_0 capacity_2 capacity_3
-5. drive truck_4 city_loc_4 city_loc_20
-6. pick_up truck_4 city_loc_20 package_1 capacity_3 capacity_2
-7. drive truck_4 city_loc_20 city_loc_25
-8. drop truck_4 city_loc_25 package_1 capacity_2 capacity_3
-9. drive truck_4 city_loc_25 city_loc_14
-10. pick_up truck_4 city_loc_14 package_2 capacity_3 capacity_2
-11. drive truck_4 city_loc_14 city_loc_18
-12. drop truck_4 city_loc_18 package_2 capacity_2 capacity_3
-...
-**Plan truncated for brevity, as there are 19 delivery tasks**
-...
-```
-**Hierarchical Decomposition**
-```
+1 drive truck_4 city_loc_11 city_loc_20
+2 pick_up truck_4 city_loc_20 package_1 capacity_2 capacity_3
+3 drive truck_4 city_loc_20 city_loc_25
+4 drop truck_4 city_loc_25 package_1 capacity_1 capacity_2
+5 drive truck_4 city_loc_25 city_loc_4
+6 drive truck_4 city_loc_4 city_loc_11
+7 pick_up truck_4 city_loc_11 package_0 capacity_2 capacity_3
+8 drive truck_4 city_loc_11 city_loc_4
+9 drop truck_4 city_loc_4 package_0 capacity_1 capacity_2
+10 drive truck_4 city_loc_4 city_loc_14
+11 pick_up truck_4 city_loc_14 package_2 capacity_2 capacity_3
+12 drive truck_4 city_loc_14 city_loc_18
+13 drop truck_4 city_loc_18 package_2 capacity_1 capacity_2
+14 drive truck_4 city_loc_18 city_loc_7
+15 pick_up truck_4 city_loc_7 package_4 capacity_2 capacity_3
+16 drive truck_4 city_loc_7 city_loc_0
+17 drop truck_4 city_loc_0 package_4 capacity_1 capacity_2
+18 drive truck_4 city_loc_0 city_loc_7
+19 pick_up truck_4 city_loc_7 package_6 capacity_2 capacity_3
+20 drive truck_4 city_loc_7 city_loc_24
+21 drop truck_4 city_loc_24 package_6 capacity_1 capacity_2
+22 drive truck_4 city_loc_24 city_loc_3
+23 pick_up truck_4 city_loc_3 package_8 capacity_2 capacity_3
+24 drive truck_4 city_loc_3 city_loc_10
+25 drop truck_4 city_loc_10 package_8 capacity_1 capacity_2
+26 drive truck_4 city_loc_10 city_loc_12
+27 pick_up truck_4 city_loc_12 package_10 capacity_2 capacity_3
+28 drive truck_4 city_loc_12 city_loc_10
+29 drop truck_4 city_loc_10 package_10 capacity_1 capacity_2
+30 drive truck_4 city_loc_10 city_loc_24
+31 pick_up truck_4 city_loc_24 package_13 capacity_2 capacity_3
+32 drive truck_4 city_loc_24 city_loc_10
+33 drop truck_4 city_loc_10 package_13 capacity_1 capacity_2
+34 drive truck_4 city_loc_10 city_loc_23
+35 pick_up truck_4 city_loc_23 package_14 capacity_2 capacity_3
+36 drive truck_4 city_loc_23 city_loc_16
+37 drop truck_4 city_loc_16 package_14 capacity_1 capacity_2
+38 drive truck_4 city_loc_16 city_loc_12
+39 pick_up truck_4 city_loc_12 package_15 capacity_2 capacity_3
+40 drive truck_4 city_loc_12 city_loc_20
+41 drop truck_4 city_loc_20 package_15 capacity_1 capacity_2
+42 drive truck_4 city_loc_20 city_loc_18
+43 pick_up truck_4 city_loc_18 package_16 capacity_2 capacity_3
+44 drive truck_4 city_loc_18 city_loc_13
+45 drop truck_4 city_loc_13 package_16 capacity_1 capacity_2
+46 drive truck_4 city_loc_13 city_loc_11
+47 pick_up truck_4 city_loc_11 package_17 capacity_2 capacity_3
+48 drive truck_4 city_loc_11 city_loc_11
+49 drop truck_4 city_loc_11 package_17 capacity_1 capacity_2
+50 drive truck_4 city_loc_11 city_loc_2
+51 pick_up truck_4 city_loc_2 package_18 capacity_2 capacity_3
+52 drive truck_4 city_loc_2 city_loc_11
+53 drop truck_4 city_loc_11 package_18 capacity_1 capacity_2
+54 drive truck_4 city_loc_11 city_loc_4
+55 pick_up truck_4 city_loc_4 package_19 capacity_2 capacity_3
+56 drive truck_4 city_loc_4 city_loc_15
+57 drop truck_4 city_loc_15 package_19 capacity_1 capacity_2
+58 drive truck_4 city_loc_15 city_loc_3
+59 pick_up truck_4 city_loc_3 package_7 capacity_2 capacity_3
+60 drive truck_4 city_loc_3 city_loc_3
+61 drop truck_4 city_loc_3 package_7 capacity_1 capacity_2
+62 drive truck_4 city_loc_3 city_loc_0
+63 pick_up truck_4 city_loc_0 package_11 capacity_2 capacity_3
+64 drive truck_4 city_loc_0 city_loc_22
+65 drop truck_4 city_loc_22 package_11 capacity_1 capacity_2
+66 drive truck_4 city_loc_22 city_loc_16
+67 pick_up truck_4 city_loc_16 package_12 capacity_2 capacity_3
+68 drive truck_4 city_loc_16 city_loc_28
+69 drop truck_4 city_loc_28 package_12 capacity_1 capacity_2
+70 drive truck_4 city_loc_28 city_loc_26
+71 pick_up truck_4 city_loc_26 package_3 capacity_2 capacity_3
+72 drive truck_4 city_loc_26 city_loc_24
+73 drop truck_4 city_loc_24 package_3 capacity_1 capacity_2
+74 drive truck_4 city_loc_24 city_loc_8
+75 pick_up truck_4 city_loc_8 package_5 capacity_2 capacity_3
+76 drive truck_4 city_loc_8 city_loc_4
+77 drop truck_4 city_loc_4 package_5 capacity_1 capacity_2
 root 0
-0 solve_htn -> m_deliver_ordering_0 1 2... 19
-  1 deliver package_0 city_loc_4 -> m_drive_to_ordering_0 1.1
-    1.1 get_to truck_4 city_loc_4 -> m_i_am_there_ordering_0 (already at city_loc_11, drive to city_loc_4)
-      1.1.1 drive truck_4 city_loc_11 city_loc_4
-  1 deliver package_0 city_loc_4 -> m_load_ordering_0 1.2
-    1.2 load truck_4 city_loc_4 package_0 -> m_load_ordering_0 1.2.1
-      1.2.1 pick_up truck_4 city_loc_4 package_0 capacity_3 capacity_2
-  1 deliver package_0 city_loc_4 -> m_drive_to_ordering_0 1.3
-    1.3 get_to truck_4 city_loc_4 -> m_i_am_there_ordering_0 (already at city_loc_4, noop)
-      1.3.1 noop truck_4 city_loc_4
-  1 deliver package_0 city_loc_4 -> m_unload_ordering_0 1.4
-    1.4 unload truck_4 city_loc_4 package_0 -> m_unload_ordering_0 1.4.1
-      1.4.1 drop truck_4 city_loc_4 package_0 capacity_2 capacity_3
-
-  2 deliver package_1 city_loc_25 ->... (similar decomposition as above)
- ...
-  19 deliver package_19 city_loc_15 ->... (similar decomposition as above)
-```
-**Note:**
-
-* The sequential plan only shows the first 12 actions for brevity, as the full plan would be too long.
-* The hierarchical decomposition only shows the decomposition for the first delivery task (`package_0` to `city_loc_4`) in detail. The remaining 18 delivery tasks follow a similar decomposition pattern.
-* The `m_i_am_there_ordering_0` method is used when the truck is already at the required location, in which case a `noop` action is performed.
-* The `capacity` and `capacity_predecessor` predicates are used to manage the truck's capacity, but are not explicitly shown in the plan for brevity.
+0 deliver package_0 city_loc_4 -> m_deliver_ordering_0 city_loc_11 city_loc_4 package_0 truck_4 1 2 3 4
+5 deliver package_1 city_loc_25 -> m_deliver_ordering_0 city_loc_20 city_loc_25 package_1 truck_4 6 7 8 9
+10 deliver package_2 city_loc_18 -> m_deliver_ordering_0 city_loc_14 city_loc_18 package_2 truck_4 11 12 13 14
+15 deliver package_3 city_loc_24 -> m_deliver_ordering_0 city_loc_26 city_loc_24 package_3 truck_4 71 72 73 74
+20 deliver package_4 city_loc_0 -> m_deliver_ordering_0 city_loc_7 city_loc_0 package_4 truck_4 15 16 17 18
+25 deliver package_5 city_loc_4 -> m_deliver_ordering_0 city_loc_8 city_loc_4 package_5 truck_4 75 76 77 78
+30 deliver package_6 city_loc_24 -> m_deliver_ordering_0 city_loc_7 city_loc_24 package_6 truck_4 19 20 21 22
+35 deliver package_7 city_loc_3 -> m_deliver_ordering_0 city_loc_27 city_loc_3 package_7 truck_4 59 60 61 62
+40 deliver package_8 city_loc_10 -> m_deliver_ordering_0 city_loc_3 city_loc_10 package_8 truck_4 23 24 25 26
+45 deliver package_9 city_loc_10 -> m_deliver_ordering_0 city_loc_24 city_loc_10 package_9 truck_4 31 32 33 34
+50 deliver package_10 city_loc_10 -> m_deliver_ordering_0 city_loc_12 city_loc_10 package_10 truck_4 27 28 29 30
+55 deliver package_11 city_loc_22 -> m_deliver_ordering_0 city_loc_0 city_loc_22 package_11 truck_4 63 64 65 66
+60 deliver package_12 city_loc_28 -> m_deliver_ordering_0 city_loc_16 city_loc_28 package_12 truck_4 67 68 69 70
+65 deliver package_13 city_loc_10 -> m_deliver_ordering_0 city_loc_24 city_loc_10 package_13 truck_4 31 32 33 34
+70 deliver package_14 city_loc_16 -> m_deliver_ordering_0 city_loc_23 city_loc_16 package_14 truck_4 35 36 37 38
+75 deliver package_15 city_loc_20 -> m_deliver_ordering_0 city_loc_12 city_loc_20 package_15 truck_4 39 40 41 42
+80 deliver package_16 city_loc_13 -> m_deliver_ordering_0 city_loc_18 city_loc_13 package_16 truck_4 43 44 45 46
+85 deliver package_17 city_loc_11 -> m_deliver_ordering_0 city_loc_29 city_loc_11 package_17 truck_4 47 48 49 50
+90 deliver package_18 city_loc_11 -> m_deliver_ordering_0 city_loc_2 city_loc_11 package_18 truck_4 51 52 53 54
+95 deliver package_19 city_loc_15 -> m_deliver_ordering_0 city_loc_4 city_loc_15 package_19 truck_4 55 56 57 58
+<==

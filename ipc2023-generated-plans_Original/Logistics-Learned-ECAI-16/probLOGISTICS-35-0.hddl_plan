@@ -1,0 +1,48 @@
+==>
+**Sequential Plan**
+```
+1. i-LOCK-AT OBJ81 POS1
+2. DRIVE-TRUCK TRU8 POS8 POS1 CIT8
+3. UNLOAD-TRUCK OBJ81 TRU8 POS1
+4. ACHIEVE-AT OBJ81 POS1
+
+5. i-LOCK-AT OBJ62 POS5
+6. DRIVE-TRUCK TRU5 POS5 POS5 CIT5
+7. ACHIEVE-AT OBJ62 POS5
+
+8.... (similar pattern for each task, omitted for brevity)
+
+35. i-LOCK-AT OBJ101 APT12
+36. FLY-AIRPLANE APN1 APT12 APT12
+37. ACHIEVE-AT OBJ101 APT12
+```
+**Hierarchical Decomposition**
+```
+root 0
+0 achieve_at_all -> m_all 1-34
+
+1 achieve_at_OBJ81_POS1 -> m10-achieve-at 1 2 3 4
+  1.1 achieve_at0_OBJ81_POS1 -> m11-achieve-at0 
+  1.2 i-lock-at OBJ81 POS1
+
+2 achieve_at_OBJ62_POS5 -> m9-achieve-at 5 6
+  2.1 at_OBJ62_POS5 -> (already true in init)
+  2.2 i-lock-at OBJ62 POS5
+
+3... (similar decomposition for each task, omitted for brevity)
+
+34 achieve_at_OBJ101_APT12 -> m39-achieve-at 35 36 37
+  34.1 achieve_at2_OBJ101_APT12 -> m40-achieve-at2 
+  34.2 i-lock-at OBJ101 APT12
+
+m_all: ordered sequence of all achieve_at_* tasks (1-34)
+m10-achieve-at, m9-achieve-at,..., m39-achieve-at: method instances for each task
+m11-achieve-at0, m40-achieve-at2: sub-methods for specific conditions
+```
+**Note:**
+
+* The sequential plan only shows the final actions to achieve each task, without intermediate steps.
+* The hierarchical decomposition shows the method instances and sub-methods used to achieve each task. Some tasks may have similar decompositions, omitted for brevity.
+* The `achieve_at_all` task is a fictional root task that encompasses all individual `achieve_at_*` tasks.
+* The `m_all` method instance represents the ordered sequence of all `achieve_at_*` tasks (1-34).
+* The `m10-achieve-at`, `m9-achieve-at`,..., `m39-achieve-at` method instances are used to achieve each individual task, with possible sub-methods (`m11-achieve-at0`, `m40-achieve-at2`) for specific conditions.

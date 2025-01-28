@@ -1,0 +1,19 @@
+==>
+1 load_highspeed_saw b0 highspeed_saw0
+2 cut_board_small b0 p1 highspeed_saw0 walnut smooth s6 s5
+3 unload_highspeed_saw b0 highspeed_saw0
+4 do_glaze p1 glazer0 blue untreated glazed natural
+5 do_spray_varnish p0 spray_varnisher0 blue verysmooth untreated varnished natural
+6 do_plane_untreated p2 planer0 smooth blue untreated smooth natural
+<==
+
+root 0
+0 process p0 blue verysmooth smooth -> method12 1 5
+1 process p1 blue smooth smooth -> method11 2 3 4
+2 cut_and_saw b0 p1 walnut verysmooth -> method6 1 2 3
+3 do_colour p1 blue glazer0 untreated
+4 do_colour p1 blue spray_varnisher0 untreated
+5 do_colour p0 blue spray_varnisher0 untreated
+6 process p2 blue rough smooth -> method16 7 6 8 
+7 grindNplane p2 rough blue glazed smooth natural untreated -> method15 6
+8 do_colour p2 blue glazer0 untreated

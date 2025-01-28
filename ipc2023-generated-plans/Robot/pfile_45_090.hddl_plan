@@ -1,48 +1,403 @@
-Given the complexity of the provided HTN (Hierarchical Task Network) domain and problem, generating a complete, step-by-step plan that adheres to the specified output format and solves the entire problem is highly challenging without executing the HTN planning process through a dedicated planner tool. However, I can guide you through a simplified, high-level plan for achieving the goals, focusing on the initial steps for a few packages to demonstrate the process. This will not cover all 90 packages due to the sheer volume of actions required.
-
-**Sequential Plan for Initial Steps (Focused on Packages o1, o2, and o3):**
-
-```plaintext
 ==>
-1. move c r25 d036 (Move to r25 where o1 is located, assuming d036 is the door leading from c to r25 or a path to r25)
-2. pickup o1 r25 (Pick up o1 in r25)
-3. move r25 r14?d (Move to r14 with o1;?d represents a door that needs to be determined based on the actual map connectivity between r25 and r14)
-4. putdown o1 r14 (Put down o1 in r14)
-
-5. move r14 r27?d (Move to r27 where o2 is located; again,?d needs to be determined)
-6. pickup o2 r27 (Pick up o2 in r27)
-7. move r27 r44?d (Move to r44 with o2)
-8. putdown o2 r44 (Put down o2 in r44)
-
-9. move r44 r34?d (Move to r34 where o3 is located)
-10. pickup o3 r34 (Pick up o3 in r34)
-11. move r34 r10?d (Move to r10 with o3)
-12. putdown o3 r10 (Put down o3 in r10)
-<==
-```
-
-**Hierarchical Decomposition (Partial, Focusing on Initial Task `achieve-goals`):**
-
-```plaintext
-root 0
-0 achieve-goals -> m_achieve-goals-pickup 1 2 3 (Simplified, focusing on pickup and delivery for a few packages)
-  1 deliver_package o1 r25 r14 -> m_newMethod22 o1 r25, m_newMethod24 r25 r14?d, m_newMethod23 o1 r14
-    1.1 pickup o1 r25 (via newMethod22)
-    1.2 move r25 r14?d (via newMethod24,?d to be determined)
-    1.3 putdown o1 r14 (via newMethod23)
-  
-  2 deliver_package o2 r27 r44 -> m_newMethod22 o2 r27, m_newMethod24 r27 r44?d, m_newMethod23 o2 r44
-    2.1 pickup o2 r27
-    2.2 move r27 r44?d
-    2.3 putdown o2 r44
-  
-  3 deliver_package o3 r34 r10 -> m_newMethod22 o3 r34, m_newMethod24 r34 r10?d, m_newMethod23 o3 r10
-    3.1 pickup o3 r34
-    3.2 move r34 r10?d
-    3.3 putdown o3 r10
-```
-
-**Note:**
-- **?d** in the moves represents doors that need to be opened or are already open, leading from one room to another. The exact door for each move should be determined based on the problem's `door` predicates.
-- This plan is highly simplified and focuses on the initial steps for delivering packages o1, o2, and o3. A complete plan would involve similar steps for all 90 packages, incorporating additional logic for navigating through doors (opening if closed), handling the robot's arm state, and ensuring the robot moves efficiently between rooms.
-- The actual execution and full plan generation would typically be handled by an HTN planner, which can efficiently manage the complexity and constraints of the domain and problem.
+1 pickup o1 r25
+2 move r25 r15 d1525
+3 move r15 r14 d1445
+4 putdown o1 r14
+5 pickup o2 r27
+6 move r27 r20 d2027
+7 move r20 r44 d4045
+8 putdown o2 r44
+9 pickup o3 r34
+10 move r34 r26 d2634
+11 move r26 r35 d2638
+12 move r35 r10 d235
+13 putdown o3 r10
+14 pickup o4 r15
+15 move r15 r14 d1445
+16 move r14 r44 d4045
+17 move r44 r5 d544
+18 putdown o4 r5
+19 pickup o5 r36
+20 move r36 r18 d1719
+21 move r18 r35 d1744
+22 putdown o5 r18
+23 pickup o6 r30
+24 move r30 r18 d1830
+25 move r18 r35 d1744
+26 move r35 r10 d235
+27 move r10 r38 d1038
+28 putdown o6 r35
+29 pickup o7 r12
+30 move r12 r16 d1516
+31 putdown o7 r16
+32 pickup o8 r1
+33 move r1 r5 d15
+34 move r5 r42 d542
+35 move r42 r23 d2123
+36 putdown o8 r23
+37 pickup o9 r33
+38 move r33 r19 d1933
+39 move r19 r4 d1719
+40 putdown o9 r4
+41 pickup o10 r43
+42 move r43 r39 d3943
+43 move r39 r9 d2239
+44 putdown o10 r9
+45 pickup o11 r45
+46 move r45 r14 d1445
+47 move r14 r44 d4045
+48 move r44 r21 d1744
+49 putdown o11 r21
+50 pickup o12 r35
+51 move r35 r23 d2123
+52 putdown o12 r23
+53 pickup o13 r31
+54 move r31 r25 d2531
+55 move r25 r15 d1525
+56 move r15 r17 d1719
+57 putdown o13 r17
+58 pickup o14 r12
+59 move r12 r3 d312
+60 move r3 r43 d343
+61 move r43 r6 d78
+62 putdown o14 r6
+63 pickup o15 r41
+64 move r41 r10 d1041
+65 move r10 r38 d1038
+66 move r38 r26 d2638
+67 move r26 r31 d2634
+68 putdown o15 r31
+69 pickup o16 r44
+70 move r44 r17 d1744
+71 putdown o16 r8
+72 pickup o17 r39
+73 move r39 r15 d1539
+74 move r15 r6 d1719
+75 putdown o17 r6
+76 pickup o18 r31
+77 move r31 r25 d2531
+78 move r25 r15 d1525
+79 move r15 r11 d1516
+80 putdown o18 r11
+81 pickup o19 r4
+82 move r4 r3 d343
+83 move r3 r6 d78
+84 putdown o19 r6
+85 pickup o20 r43
+86 move r43 r39 d3943
+87 move r39 r37 d2239
+88 putdown o20 r37
+89 pickup o21 r8
+90 move r8 r7 d78
+91 putdown o21 r7
+92 pickup o22 r30
+93 move r30 r18 d1830
+94 move r18 r35 d1744
+95 move r35 r23 d2123
+96 putdown o22 r23
+97 pickup o23 r10
+98 move r10 r23 d2123
+99 putdown o23 r22
+100 pickup o24 r1
+101 move r1 r5 d15
+102 move r5 r42 d542
+103 move r42 r23 d2123
+104 move r23 r43 d2224
+105 putdown o24 r43
+106 pickup o25 r12
+107 move r12 r3 d312
+108 move r3 r43 d343
+109 move r43 r6 d78
+110 putdown o25 r7
+111 pickup o26 r26
+112 move r26 r35 d2634
+113 move r35 r21 d235
+114 putdown o26 r21
+115 pickup o27 r43
+116 move r43 r39 d3943
+117 move r39 r2 d2239
+118 putdown o27 r2
+119 pickup o28 r9
+120 move r9 r29 d929
+121 move r29 r13 d1329
+122 move r13 r6 d78
+123 putdown o28 r6
+124 pickup o29 r17
+125 move r17 r19 d1719
+126 move r19 r4 d1719
+127 move r4 r12 d312
+128 putdown o29 r12
+129 pickup o30 r40
+130 move r40 r45 d4045
+131 move r45 r9 d929
+132 putdown o30 r9
+133 pickup o31 r44
+134 move r44 r5 d544
+135 move r5 r31 d526
+136 putdown o31 r16
+137 pickup o32 r3
+138 move r3 r43 d343
+139 move r43 r6 d78
+140 move r6 r29 d78
+141 putdown o32 r29
+142 pickup o33 r12
+143 move r12 r3 d312
+144 move r3 r43 d343
+145 move r43 r6 d78
+146 move r6 r12 d78
+147 putdown o33 r12
+148 pickup o34 r35
+149 move r35 r10 d235
+150 move r10 r38 d1038
+151 move r38 r30 d832
+152 putdown o34 r30
+153 pickup o35 r12
+154 move r12 r3 d312
+155 move r3 r43 d343
+156 move r43 r6 d78
+157 move r6 r12 d78
+158 putdown o35 r12
+159 pickup o36 r8
+160 move r8 r7 d78
+161 move r7 r32 d832
+162 move r32 r38 d1038
+163 putdown o36 r38
+164 pickup o37 r5
+165 move r5 r42 d542
+166 move r42 r23 d2123
+167 move r23 r26 d2634
+168 putdown o37 r5
+169 pickup o38 r14
+170 move r14 r44 d4045
+171 move r44 r5 d544
+172 putdown o38 r14
+173 pickup o39 r5
+174 move r5 r14 d15
+175 putdown o39 r5
+176 pickup o40 r21
+177 move r21 r23 d2123
+178 move r23 r26 d2634
+179 move r26 r35 d2638
+180 move r35 r21 d235
+181 putdown o40 r21
+182 pickup o41 r10
+183 move r10 r23 d2123
+184 move r23 r41 d1041
+185 putdown o41 r10
+186 pickup o42 r40
+187 move r40 r45 d4045
+188 move r45 r27 d4045
+189 putdown o42 r40
+190 pickup o43 r20
+191 move r20 r43 d343
+192 move r43 r39 d3943
+193 putdown o43 r20
+194 pickup o44 r27
+195 move r27 r20 d2027
+196 move r20 r44 d4045
+197 putdown o44 r27
+198 pickup o45 r37
+199 move r37 r4 d437
+200 move r4 r43 d343
+201 move r43 r6 d78
+202 move r6 r45 d78
+203 putdown o45 r37
+204 pickup o46 r14
+205 move r14 r44 d4045
+206 move r44 r5 d544
+207 putdown o46 r14
+208 pickup o47 r27
+209 move r27 r20 d2027
+210 move r20 r44 d4045
+211 putdown o47 r27
+212 pickup o48 r18
+213 move r18 r5 d518
+214 move r5 r14 d15
+215 putdown o48 r18
+216 pickup o49 r28
+217 move r28 r6 d78
+218 move r6 r9 d78
+219 putdown o49 r28
+220 pickup o50 r20
+221 move r20 r27 d2027
+222 move r27 r44 d4045
+223 move r44 r5 d544
+224 putdown o50 r20
+225 pickup o51 r39
+226 move r39 r15 d1539
+227 move r15 r5 d15
+228 move r5 r42 d542
+229 move r42 r23 d2123
+230 move r23 r10 d2123
+231 putdown o51 r39
+232 pickup o52 r18
+233 move r18 r5 d518
+234 move r5 r14 d15
+235 move r14 r9 d929
+236 putdown o52 r18
+237 pickup o53 r9
+238 move r9 r29 d929
+239 move r29 r13 d1329
+240 move r13 r17 d1719
+241 move r17 r44 d1744
+242 move r44 r23 d2123
+243 putdown o53 r9
+244 pickup o54 r23
+245 move r23 r26 d2634
+246 move r26 r31 d2634
+247 move r31 r25 d2531
+248 move r25 r15 d1525
+249 move r15 r14 d1445
+250 putdown o54 r23
+251 pickup o55 r14
+252 move r14 r44 d4045
+253 move r44 r5 d544
+254 putdown o55 r14
+255 pickup o56 r16
+256 move r16 r15 d1516
+257 move r15 r5 d15
+258 putdown o56 r16
+259 pickup o57 r34
+260 move r34 r26 d2634
+261 move r26 r35 d2638
+262 move r35 r21 d235
+263 putdown o57 r34
+264 pickup o58 r12
+265 move r12 r3 d312
+266 move r3 r43 d343
+267 move r43 r6 d78
+268 move r6 r1 d78
+269 putdown o58 r1
+270 pickup o59 r1
+271 move r1 r5 d15
+272 putdown o59 r1
+273 pickup o60 r32
+274 move r32 r8 d832
+275 move r8 r7 d78
+276 move r7 r1 d78
+277 putdown o60 r32
+278 pickup o61 r1
+279 move r1 r5 d15
+280 putdown o61 r1
+281 pickup o62 r44
+282 move r44 r5 d544
+283 putdown o62 r44
+284 pickup o63 r30
+285 move r30 r18 d1830
+286 move r18 r35 d1744
+287 move r35 r10 d235
+288 putdown o63 r30
+289 pickup o64 r2
+290 move r2 r35 d235
+291 move r35 r21 d235
+292 putdown o64 r2
+293 pickup o65 r35
+294 move r35 r21 d235
+295 move r21 r23 d2123
+296 move r23 r42 d2123
+297 move r42 r35 d542
+298 putdown o65 r35
+299 pickup o66 r40
+300 move r40 r45 d4045
+301 move r45 r27 d4045
+302 move r27 r20 d2027
+303 move r20 r36 d020
+304 putdown o66 r40
+305 pickup o67 r5
+306 move r5 r14 d15
+307 move r14 r44 d4045
+308 move r44 r5 d544
+309 putdown o67 r5
+310 pickup o68 r13
+311 move r13 r17 d1719
+312 move r17 r44 d1744
+313 move r44 r5 d544
+314 putdown o68 r13
+315 pickup o69 r28
+316 move r28 r6 d78
+317 move r6 r9 d78
+318 putdown o69 r28
+319 pickup o70 r18
+320 move r18 r5 d518
+321 move r5 r14 d15
+322 putdown o70 r18
+323 pickup o71 r39
+324 move r39 r15 d1539
+325 move r15 r5 d15
+326 move r5 r42 d542
+327 move r42 r23 d2123
+328 move r23 r22 d2224
+329 putdown o71 r39
+330 pickup o72 r3
+331 move r3 r43 d343
+332 move r43 r6 d78
+333 move r6 r12 d78
+334 putdown o72 r3
+335 pickup o73 r2
+336 move r2 r35 d235
+337 move r35 r21 d235
+338 move r21 r23 d2123
+339 move r23 r43 d2224
+340 putdown o73 r2
+341 pickup o74 r29
+342 move r29 r13 d1329
+343 move r13 r17 d1719
+344 move r17 r44 d1744
+345 move r44 r21 d1744
+346 putdown o74 r29
+347 pickup o75 r44
+348 move r44 r17 d1744
+349 move r17 r19 d1719
+350 move r19 r4 d1719
+351 putdown o75 r44
+352 pickup o76 r37
+353 move r37 r4 d437
+354 move r4 r18 d418
+355 move r18 r5 d518
+356 move r5 r42 d542
+357 move r42 r23 d2123
+358 move r23 r21 d2123
+359 putdown o76 r37
+360 pickup o77 r21
+361 move r21 r23 d2123
+362 move r23 r26 d2634
+363 move r26 r35 d2638
+364 move r35 r21 d235
+365 putdown o77 r21
+366 pickup o78 r40
+367 move r40 r45 d4045
+368 move r45 r27 d4045
+369 move r27 r20 d2027
+370 move r20 r36 d020
+371 putdown o78 r40
+372 pickup o79 r21
+373 move r21 r23 d2123
+374 move r23 r41 d1041
+375 putdown o79 r41
+376 pickup o80 r30
+377 move r30 r18 d1830
+378 move r18 r35 d1744
+379 move r35 r10 d235
+380 putdown o80 r30
+381 pickup o81 r12
+382 move r12 r3 d312
+383 move r3 r43 d343
+384 move r43 r6 d78
+385 move r6 r12 d78
+386 putdown o81 r12
+387 pickup o82 r37
+388 move r37 r4 d437
+389 move r4 r43 d343
+390 move r43 r6 d78
+391 move r6 r45 d78
+392 putdown o82 r37
+393 pickup o83 r26
+394 move r26 r35 d2634
+395 move r35 r21 d235
+396 move r21 r23 d2123
+397 move r23 r26 d2634
+398 putdown o83 r26
+399 pickup o84 r11
+400 move r11 r38 d1138
+401 move r38 r26 d2638
+402 move

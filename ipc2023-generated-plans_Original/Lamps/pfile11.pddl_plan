@@ -1,0 +1,36 @@
+==>
+**Sequential Plan**
+1. `flip l1 l1 N Y` (to satisfy `do_turn` precondition)
+2. `turn l1 l1 Y N` (apply `do_turn` method)
+3. `flip l2 l1 N Y` (propagate up from `l1 l1`)
+4. `flip l3 l1 N Y` (propagate up from `l2 l1`)
+5. `flip l3 l2 N Y` (propagate right from `l3 l1`)
+6. `flip l2 l2 Y N` (to satisfy `do_turn` precondition)
+7. `turn l2 l2 N Y` (apply `do_turn` method)
+8. `flip l3 l2 Y N` (propagate down from `l2 l2`)
+9. `flip l3 l3 Y N` (to satisfy `end_game` precondition)
+
+**Hierarchical Decomposition**
+```
+root 0
+0 play -> do_play 1 9
+  1 turn l1 l1 Y N -> do_turn 2 3 4 5
+    2 flip l1 l1 N Y
+    3 propagate_up l1 l1 Y -> propagate_up_do 4
+      4 flip l2 l1 N Y
+      (propagate_up l2 l1 Y is not applicable, ends here)
+    5 propagate_right l1 l1 Y -> propagate_right_do 6
+      6 flip l3 l1 N Y
+      (propagate_right l3 l1 Y is not applicable, ends here)
+  7 turn l2 l2 Y N -> do_turn 8
+    8 propagate_down l2 l2 Y -> propagate_down_do (not applicable, already at min)
+  9 play -> end_game (no subtasks)
+```
+<==
+
+**Note:**
+
+* The plan assumes that the `next` predicate is symmetric (i.e., if `(next l0 l1)` then `(next l1 l0)` is implied, although not explicitly stated). If this is not the case, the plan might need adjustments.
+* The `propagate_*` methods are only applied when their preconditions are met, and they stop recursing when they reach the boundary (max/min) or encounter a different status.
+* The `flip` actions are the only ones that modify the state, and they are only applied when the preconditions (different status and `on` predicate) are met.
+* The plan achieves the goal state by flipping the necessary coordinates to match the desired `on` predicates.

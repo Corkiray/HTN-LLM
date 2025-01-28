@@ -1,50 +1,64 @@
 ==>
-**Sequential Plan**
-1. `turn` (initial turn to start the game)
-2. `flip l3 l3 N Y` (flip cell (3,3) from N to Y to match goal state)
-3. `propagate_up l3 l3 N` (propagate changes upwards from cell (3,3))
-4. `propagate_down l3 l3 N` (propagate changes downwards from cell (3,3))
-5. `propagate_left l3 l3 N` (propagate changes leftwards from cell (3,3))
-6. `propagate_right l3 l3 N` (propagate changes rightwards from cell (3,3))
-7. `turn` (next turn after initial propagations)
-8. `flip l2 l2 Y N` (flip cell (2,2) from Y to N to match goal state)
-9. `propagate_up l2 l2 Y` (propagate changes upwards from cell (2,2))
-10. `propagate_down l2 l2 Y` (propagate changes downwards from cell (2,2))
-11. `propagate_left l2 l2 Y` (propagate changes leftwards from cell (2,2))
-12. `propagate_right l2 l2 Y` (propagate changes rightwards from cell (2,2))
-13. `play` (continue playing after adjustments)
-
-**Hierarchical Decomposition**
-```
-root 0
-0 play -> do_play 1 13
-1 turn -> do_turn l3 l3 N Y 2 3 4 5 6
-2 flip l3 l3 N Y -> (no decomposition, primitive action)
-3 propagate_up l3 l3 N -> propagate_up_do l3 l3 l2 N Y 14
-  14 flip l2 l2 Y N -> (no decomposition, primitive action)
-  14 propagate_up l2 l2 Y -> propagate_up_end_field l2 l2 Y
-4 propagate_down l3 l3 N -> propagate_down_do l3 l3 l4 N Y 15
-  15 flip l4 l4 Y N -> (no decomposition, primitive action)
-  15 propagate_down l4 l4 Y -> propagate_down_end_field l4 l4 Y
-5 propagate_left l3 l3 N -> propagate_left_end_different l3 l3 l2 N
-6 propagate_right l3 l3 N -> propagate_right_do l3 l3 l4 N Y 16
-  16 flip l4 l4 Y N -> (no decomposition, primitive action)
-  16 propagate_right l4 l4 Y -> propagate_right_end_field l4 l4 Y
-7 turn -> do_turn l2 l2 Y N 8 9 10 11 12
-8 flip l2 l2 Y N -> (no decomposition, primitive action)
-9 propagate_up l2 l2 Y -> propagate_up_do l2 l2 l1 Y N 17
-  17 flip l1 l1 N Y -> (no decomposition, primitive action)
-  17 propagate_up l1 l1 N -> propagate_up_end_field l1 l1 N
-10 propagate_down l2 l2 Y -> propagate_down_do l2 l2 l3 Y N 18
-  18 (already handled in initial propagations)
-11 propagate_left l2 l2 Y -> propagate_left_end_different l2 l2 l1 Y
-12 propagate_right l2 l2 Y -> propagate_right_do l2 l2 l3 Y N 19
-  19 (already handled in initial propagations)
-13 play -> end_game
+1 flip l0 l3 N Y
+2 flip l1 l3 N Y
+3 flip l2 l3 N Y
+4 flip l2 l3 Y N
+5 flip l1 l3 Y N
+6 flip l0 l3 Y N
+7 flip l0 l2 Y N
+8 flip l0 l4 Y N
+9 flip l0 l5 Y N
+10 flip l1 l5 Y N
+11 flip l2 l5 Y N
+12 flip l3 l5 Y N
+13 flip l4 l5 Y N
+14 flip l5 l5 Y N
+15 flip l5 l5 N Y
+16 flip l6 l5 N Y
+17 flip l5 l5 Y N
+18 flip l4 l5 Y N
+19 flip l3 l5 Y N
+20 flip l2 l5 Y N
+21 flip l1 l5 Y N
+22 flip l0 l5 Y N
+23 flip l0 l4 Y N
+24 flip l0 l3 Y N
+25 flip l0 l2 Y N
+26 flip l1 l2 Y N
+27 flip l0 l1 Y N
+28 flip l1 l1 Y N
+29 flip l0 l0 N Y
+30 turn
+31 play
 <==
-```
-**Note:**
-- The plan focuses on achieving the goal state by flipping cells and then propagating these changes according to the game's rules.
-- The `propagate_*` actions are decomposed based on the game's state and the `next`, `max`, and `min` predicates.
-- Some `propagate_*` actions may not lead to additional flips or propagations if the adjacent cells already match the goal state or are out of bounds.
-- This plan assumes the game's logic is correctly implemented in the HTN domain, especially regarding the `flip` action's effects and the `propagate_*` methods' preconditions and effects.
+root 0
+0 play -> do_play 30 31
+30 turn -> do_turn 1 2 3 7 8 9 10 27 28 29
+7 propagate_up l0 l2 Y -> propagate_up_do l0 l2 l1 N Y 26
+8 propagate_down l0 l2 Y -> propagate_down_do l0 l2 l1 N Y 26
+9 propagate_left l0 l2 Y -> propagate_left_do l0 l2 l1 N Y 26
+10 propagate_right l0 l2 Y -> propagate_right_do l0 l2 l1 N Y 26
+26 flip l1 l2 Y N -> flip 26
+1 flip l0 l3 N Y -> flip 1
+2 flip l1 l3 N Y -> flip 2
+3 flip l2 l3 N Y -> flip 3
+4 flip l2 l3 Y N -> flip 4
+5 flip l1 l3 Y N -> flip 5
+6 flip l0 l3 Y N -> flip 6
+11 propagate_up l0 l5 Y -> propagate_up_end_field l0 l5 Y
+12 propagate_down l0 l5 Y -> propagate_down_end_field l0 l5 Y
+13 propagate_left l0 l5 Y -> propagate_left_do l0 l5 l4 N Y 24
+14 propagate_right l0 l5 Y -> propagate_right_do l0 l5 l4 N Y 24
+24 propagate_right l0 l4 Y -> propagate_right_do l0 l4 l3 N Y 23
+23 propagate_right l0 l3 Y -> propagate_right_end_different l0 l3 l2 Y
+15 propagate_left l5 l5 Y -> propagate_left_end_field l5 l5 Y
+16 propagate_right l5 l5 Y -> propagate_right_end_field l5 l5 Y
+17 propagate_up l5 l5 Y -> propagate_up_end_field l5 l5 Y
+18 propagate_down l5 l5 Y -> propagate_down_end_field l5 l5 Y
+19 propagate_up l4 l5 Y -> propagate_up_end_field l4 l5 Y
+20 propagate_down l4 l5 Y -> propagate_down_end_field l4 l5 Y
+21 propagate_up l3 l5 Y -> propagate_up_end_field l3 l5 Y
+22 propagate_down l3 l5 Y -> propagate_down_end_field l3 l5 Y
+27 propagate_up l0 l1 Y -> propagate_up_end_field l0 l1 Y
+28 propagate_down l0 l1 Y -> propagate_down_end_field l0 l1 Y
+29 propagate_right l0 l0 Y -> propagate_right_end_field l0 l0 Y

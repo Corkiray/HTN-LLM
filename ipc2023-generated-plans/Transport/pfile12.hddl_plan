@@ -1,49 +1,24 @@
 ==>
-**Sequential Plan**
-1. drive truck_0 city_loc_1 city_loc_3
-2. pick_up truck_0 city_loc_3 package_2 capacity_1 capacity_2
-3. drive truck_0 city_loc_3 city_loc_2
-4. drop truck_0 city_loc_2 package_2 capacity_0 capacity_1
-5. pick_up truck_0 city_loc_1 package_1 capacity_1 capacity_2
-6. drive truck_0 city_loc_1 city_loc_2
-7. drop truck_0 city_loc_2 package_1 capacity_0 capacity_1
-8. drive truck_1 city_loc_1 city_loc_3
-9. pick_up truck_1 city_loc_3 package_0 capacity_1 capacity_2
-10. drive truck_1 city_loc_3 city_loc_0
-11. drop truck_1 city_loc_0 package_0 capacity_0 capacity_1
-12. drive truck_1 city_loc_0 city_loc_1
-13. drive truck_1 city_loc_1 city_loc_3
-14. pick_up truck_1 city_loc_3 package_3 capacity_1 capacity_2
-15. drive truck_1 city_loc_3 city_loc_3
-16. drop truck_1 city_loc_3 package_3 capacity_0 capacity_1
-
-**Hierarchical Decomposition**
+1 drive truck_0 city_loc_1 city_loc_3
+2 pick_up truck_0 city_loc_3 package_0 capacity_1 capacity_2
+3 drive truck_0 city_loc_3 city_loc_0
+4 drop truck_0 city_loc_0 package_0 capacity_0 capacity_1
+5 drive truck_0 city_loc_0 city_loc_1
+6 drive truck_0 city_loc_1 city_loc_3
+7 pick_up truck_0 city_loc_3 package_2 capacity_1 capacity_2
+8 drive truck_0 city_loc_3 city_loc_2
+9 drop truck_0 city_loc_2 package_2 capacity_0 capacity_1
+10 drive truck_1 city_loc_1 city_loc_1
+11 pick_up truck_1 city_loc_1 package_1 capacity_1 capacity_2
+12 drive truck_1 city_loc_1 city_loc_2
+13 drop truck_1 city_loc_2 package_1 capacity_0 capacity_1
+14 drive truck_1 city_loc_2 city_loc_1
+15 pick_up truck_1 city_loc_1 package_3 capacity_1 capacity_2
+16 drive truck_1 city_loc_1 city_loc_3
+17 drop truck_1 city_loc_3 package_3 capacity_0 capacity_1
 root 0
-0 solve_htn -> m_deliver_ordering_0 1 2 3 4
-1 deliver package_1 city_loc_2 -> m_deliver_ordering_0 5 6 7 8 ( **Note:** package_1 is delivered before package_0 due to the given ordering constraint `< task1 task0`)
-	* 5 get_to truck_0 city_loc_1 -> m_i_am_there_ordering_0 (already at location)
-	* 6 load truck_0 city_loc_1 package_1 -> m_load_ordering_0
-		+ 6.1 pick_up truck_0 city_loc_1 package_1 capacity_1 capacity_2
-	* 7 get_to truck_0 city_loc_2 -> m_drive_to_ordering_0
-		+ 7.1 drive truck_0 city_loc_1 city_loc_2
-	* 8 unload truck_0 city_loc_2 package_1 -> m_unload_ordering_0
-		+ 8.1 drop truck_0 city_loc_2 package_1 capacity_0 capacity_1
-2 deliver package_0 city_loc_0 -> m_deliver_ordering_0 9 10 11 12
-	* 9 get_to truck_1 city_loc_3 -> m_drive_to_via_ordering_0
-		+ 9.1 get_to truck_1 city_loc_1 -> m_i_am_there_ordering_0 (already at location)
-		+ 9.2 drive truck_1 city_loc_1 city_loc_3
-	* 10 load truck_1 city_loc_3 package_0 -> m_load_ordering_0
-		+ 10.1 pick_up truck_1 city_loc_3 package_0 capacity_1 capacity_2
-	* 11 get_to truck_1 city_loc_0 -> m_drive_to_ordering_0
-		+ 11.1 drive truck_1 city_loc_3 city_loc_0
-	* 12 unload truck_1 city_loc_0 package_0 -> m_unload_ordering_0
-		+ 12.1 drop truck_1 city_loc_0 package_0 capacity_0 capacity_1
-3 deliver package_2 city_loc_2 -> m_deliver_ordering_0 (already executed as part of task 1's decomposition, steps 1-4)
-4 deliver package_3 city_loc_3 -> m_deliver_ordering_0 13 14 15 16
-	* 13 get_to truck_1 city_loc_3 -> m_drive_to_via_ordering_0 (steps 9.1 and 9.2 from task 2)
-	* 14 load truck_1 city_loc_3 package_3 -> m_load_ordering_0
-		+ 14.1 pick_up truck_1 city_loc_3 package_3 capacity_1 capacity_2
-	* 15 get_to truck_1 city_loc_3 -> m_i_am_there_ordering_0 (already at location)
-	* 16 unload truck_1 city_loc_3 package_3 -> m_unload_ordering_0
-		+ 16.1 drop truck_1 city_loc_3 package_3 capacity_0 capacity_1
+0 deliver package_0 city_loc_0 -> m_deliver_ordering_0 1 2 3 4 5
+1 deliver package_1 city_loc_2 -> m_deliver_ordering_0 6 7 8 9 10
+2 deliver package_2 city_loc_2 -> m_deliver_ordering_0 11 12 13 14 15
+3 deliver package_3 city_loc_3 -> m_deliver_ordering_0 16 17
 <==

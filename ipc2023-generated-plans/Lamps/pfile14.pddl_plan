@@ -1,46 +1,94 @@
 ==>
-**Sequential Plan**
-1. `flip l1 l1 Y N` 
-2. `flip l2 l2 Y N` 
-3. `flip l3 l3 N Y` 
-4. `flip l3 l2 N Y` 
-5. `flip l2 l1 N Y` 
-6. `flip l1 l3 Y N` 
-7. `flip l1 l2 N Y` 
-8. `flip l2 l3 Y N` 
-9. `flip l3 l4 N Y` 
-10. `flip l4 l4 Y N` 
-11. `flip l4 l3 Y N` 
-12. `flip l4 l2 Y N` 
-13. `flip l4 l1 Y N` 
-14. `flip l4 l0 Y N` 
+1 flip l3 l2 Y N
+2 propagate_up l3 l2 Y
+3 flip l3 l1 Y N
+4 propagate_up l3 l1 Y
+5 flip l3 l0 Y N
+6 propagate_up l3 l0 Y
+7 flip l2 l3 N Y
+8 propagate_down l2 l3 N
+9 flip l1 l3 N Y
+10 propagate_down l1 l3 N
+11 flip l0 l3 N Y
+12 propagate_down l0 l3 N
+13 flip l4 l3 N Y
+14 propagate_left l4 l3 N
+15 flip l4 l2 N Y
+16 propagate_left l4 l2 N
+17 flip l4 l1 N Y
+18 propagate_left l4 l1 N
+19 flip l4 l0 Y N
+20 propagate_left l4 l0 Y
+21 flip l3 l3 N Y
+22 propagate_right l3 l3 N
+23 flip l2 l3 Y N
+24 propagate_right l2 l3 Y
+25 flip l1 l3 Y N
+26 propagate_right l1 l3 Y
+27 flip l1 l4 Y N
+28 propagate_right l1 l4 Y
+29 flip l2 l4 N Y
+30 propagate_up l2 l4 N
+31 flip l3 l4 N Y
+32 propagate_up l3 l4 N
+33 flip l3 l4 Y N
+34 turn l3 l4 Y N
+35 propagate_up l3 l4 N
+36 flip l2 l4 Y N
+37 propagate_down l2 l4 N
+38 flip l1 l4 Y N
+39 propagate_down l1 l4 N
+40 flip l0 l4 Y N
+41 propagate_down l0 l4 N
+42 flip l4 l4 Y N
+43 play
+<== 
 
-**Hierarchical Decomposition**
-```
-root 0
-0 play -> do_play 1 15
-1 turn -> do_turn l1 l1 Y N 2 3 4 5
-2 propagate_up l1 l1 Y -> propagate_up_do l1 l1 l2 Y N 6
-3 propagate_down l1 l1 Y -> propagate_down_do l1 l1 l0 Y N (no further decomposition, as it's at the min boundary)
-4 propagate_left l1 l1 Y -> propagate_left_end_different l1 l1 l0 Y (no further decomposition, as the adjacent cell is different)
-5 propagate_right l1 l1 Y -> propagate_right_do l1 l1 l2 Y N 7
-6 propagate_up l2 l1 Y -> propagate_up_do l2 l1 l3 Y N 8
-7 propagate_right l2 l1 Y -> propagate_right_do l2 l1 l3 Y N 9
-8 propagate_up l3 l1 Y -> propagate_up_end_field l3 l1 Y (no further decomposition, as it's at the max boundary)
-9 propagate_right l3 l1 Y -> propagate_right_end_different l3 l1 l4 Y (no further decomposition, as the adjacent cell is different)
-10 turn -> do_turn l3 l2 N Y 11 12 13 14
-11 propagate_up l3 l2 N -> propagate_up_do l3 l2 l4 N Y (no further decomposition, as the next cell is out of bounds for this specific task)
-12 propagate_down l3 l2 N -> propagate_down_do l3 l2 l2 N Y 12.1
-   12.1 propagate_down l2 l2 N -> propagate_down_end_field l2 l2 N (no further decomposition, as it's at the min boundary for this specific task)
-13 propagate_left l3 l2 N -> propagate_left_do l3 l2 l1 N Y 13.1
-   13.1 propagate_left l1 l2 N -> propagate_left_end_different l1 l2 l0 N (no further decomposition, as the adjacent cell is different)
-14 propagate_right l3 l2 N -> propagate_right_end_field l3 l2 N (no further decomposition, as it's at the max boundary)
-15 play -> end_game (empty, as the game is considered ended after the last turn)
-<==
-```
-**Note:**
-
-* The sequential plan consists of 14 `flip` actions, which are the only actions available in the domain.
-* The hierarchical decomposition shows how the `play` task is decomposed into `turn` tasks, and how each `turn` task is further decomposed into `propagate_*` tasks. Some `propagate_*` tasks are decomposed further, while others are not, depending on the preconditions and boundaries.
-* The decomposition assumes that the `next`, `max`, and `min` predicates are used to determine the boundaries and adjacent cells.
-* The plan is not guaranteed to be optimal, as the HTN planning process can produce different plans depending on the search strategy and heuristics used.
+root 43
+43 do_play -> m0_0 1 36 43
+1 do_turn -> m1_0 2 34 42
+2 propagate_up_do -> m11_8 3 5 15
+15 propagate_up_do -> m11_2 16 20 28
+5 propagate_up_do -> m11_3 6 10 22
+3 propagate_up_do -> m11_5 4 8 14
+6 propagate_up_do -> m11_4 7 9 18 
+28 propagate_right_do -> m16_0 29 33 38
+8 propagate_down_do -> m6_1 9 11 17
+16 propagate_right_do -> m16_2 23 25 32
+29 propagate_right_do -> m16_1 30 31 36
+7 propagate_up_end_different -> m12_0 
+9 propagate_down_end_field -> m8_0 
+11 propagate_down_do -> m6_0 12 13 19
+23 propagate_right_do -> m16_3 24 26 34
+30 propagate_right_do -> m16_4 31 33 37
+10 propagate_up_do -> m11_10 11 12 21
+18 propagate_up_do -> m11_7 19 20 27
+22 propagate_right_do -> m16_5 25 26 32
+12 propagate_down_do -> m6_2 13 14 17
+31 propagate_up_do -> m11_9 32 33 40
+13 propagate_down_end_different -> m8_2 
+23 propagate_up_do -> m11_11 24 25 29
+17 propagate_down_end_field -> m8_1 
+38 propagate_up_do -> m11_1 39 40 42
+25 propagate_right_do -> m16_6 29 30 35
+26 flip -> m25_2 
+36 turn -> m2_0 42 
+21 propagate_up_end_different -> m12_1
+31 propagate_up_do -> m11_12 32 33 40
+24 propagate_up_do -> m11_13 25 26 35
+27 propagate_up_do -> m11_14 28 30 38
+9 propagate_up_do -> m11_6 10 11 22
+37 propagate_up_do -> m11_15 38 40 41
+32 flip -> m23_2 
+39 propagate_up_do -> m11_16 40 42 41
+33 flip -> m24_2 
+14 propagate_up_do -> m11_5 15 16 23
+35 flip -> m21_1 
+25 propagate_up_do -> m11_17 26 28 36
+27 propagate_up_do -> m11_18 28 29 38 
+28 flip -> m20_1 
+30 flip -> m22_1
+15 flip -> m15_1
+16 flip -> m14_1 
+14 flip -> m13_1 
+16 flip -> m17_1

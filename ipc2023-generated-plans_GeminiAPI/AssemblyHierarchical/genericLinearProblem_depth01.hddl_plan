@@ -1,0 +1,13 @@
+==>
+1 guard
+2 connect_4 pc-bPlugType1 cableWithPlugType1-b plugType1
+3 connect_3 cableWithPlugType1-a printer-aPlugType1 plugType1
+4 ok
+root 0
+0 ConnectDevices pc printer data -> m3 pc printer data 1 2
+2 ValidateDeviceConnection pc printer data -> vDC_to_vPC_4 pc printer data pc-bPlugType1 printer-aPlugType1 3
+3 ValidatePortConnection pc-bPlugType1 printer-aPlugType1 data -> vPC_to_vPC data pc-bPlugType1 printer-aPlugType1 cableWithPlugType1-b cableWithPlugType1-a 4
+4 ValidatePortConnection cableWithPlugType1-a printer-aPlugType1 data -> finish data cableWithPlugType1-a printer-aPlugType1 5
+5 connect pc-bPlugType1 cableWithPlugType1-b -> c4 pc-bPlugType1 cableWithPlugType1-b plugType1 6
+6 connect cableWithPlugType1-a printer-aPlugType1 -> c3 cableWithPlugType1-a printer-aPlugType1 plugType1 7
+<==

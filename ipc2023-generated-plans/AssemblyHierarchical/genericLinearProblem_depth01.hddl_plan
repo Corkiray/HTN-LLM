@@ -1,43 +1,27 @@
-Here is a hierarchical plan to solve the given HTN problem:
-```
 ==>
 1 guard
-2 ValidateDeviceConnection pc printer data
-3 ValidatePortConnection pc-bPlugType1 printer-aPlugType1 data
-4 connect_7 cableWithPlugType1-a cableWithPlugType1-b plugType1
-5 connect_5 pc-bPlugType1 cableWithPlugType1-a plugType1
-6 connect_5 cableWithPlugType1-b printer-aPlugType1 plugType1
-7 ok
-<==
-
+2 validate_device_connection pc printer data
+3 ValidatePortConnection cableWithPlugType1-a printer-aPlugType1 data
+4 ValidatePortConnection cableWithPlugType1-b pc-bPlugType1 data
+5 ok
+6 connect cableWithPlugType1-a printer-aPlugType1
+7 connect cableWithPlugType1-b pc-bPlugType1
 root 0
-0 ConnectDevices pc printer data -> m3 1 2
-1 guard -> finish (already in init, no further decomposition)
-2 ValidateDeviceConnection pc printer data -> vDC_to_vPC_4 3
-3 ValidatePortConnection pc-bPlugType1 printer-aPlugType1 data -> vPC_to_vPC 4 5 6
-4 ValidatePortConnection cableWithPlugType1-b printer-aPlugType1 data -> finish 7
-5 connect cableWithPlugType1-a cableWithPlugType1-b -> c7 4
-6 connect pc-bPlugType1 cableWithPlugType1-a -> c5 5
-7 connect cableWithPlugType1-b printer-aPlugType1 -> c5 6
-```
-**Sequential Plan Explanation:**
+0 ConnectDevices pc printer data -> m1 2 1 3 4 5 6 7
+<== 
 
-1. `guard`: Ensure the `pGuard` predicate is true (enabling subsequent actions).
-2. `ValidateDeviceConnection pc printer data`: Validate the connection between devices (decomposed further).
-3. `ValidatePortConnection pc-bPlugType1 printer-aPlugType1 data`: Validate the connection between specific ports (decomposed further).
-4. `connect_7 cableWithPlugType1-a cableWithPlugType1-b plugType1`: Connect the cable's ports (using `connect_7` action, as both ports have `both` direction).
-5. `connect_5 pc-bPlugType1 cableWithPlugType1-a plugType1`: Connect PC's port to the cable's port (using `connect_5` action, as PC's port is `out` and cable's port is `both`).
-6. `connect_5 cableWithPlugType1-b printer-aPlugType1 plugType1`: Connect the cable's port to the printer's port (using `connect_5` action, as cable's port is `both` and printer's port is `in`).
-7. `ok`: Achieve the final goal `pAim` (as `pGuard` is true).
+Explanation:
 
-**Hierarchical Decomposition:**
+- `Method m1` is chosen for the initial task `ConnectDevices pc printer data`.
+  - The guard is set (`action guard` is executed).
+  - `ValidateDeviceConnection pc printer data` is performed.
+  - The method `vDC_to_vPC_1` is chosen for this task, since the ports in `pc` and `printer` have opposite directions and compatible signal sources and destinations.
+  - This method calls `ValidatePortConnection cableWithPlugType1-a printer-aPlugType1 data` and `ValidatePortConnection cableWithPlugType1-b pc-bPlugType1 data`.
+  - For the first `ValidatePortConnection`, method `vPC_to_vPC` is chosen, but it isn't directly applicable, since the cable port isn't already connected.
+  - For the second `ValidatePortConnection`, the same applies.
+  - Since there are no more methods for `ValidatePortConnection`, we move on to the final task `ok`. But first, we have to fulfill its precondition `pGuard`, which is already set.
+  - The two ports are connected using methods `c3` and `c8`, respectively, but they aren't directly executed. Their associated actions are `connect_3` and `connect_8`, which will only be executed after the `pAim` has been reached in the plan.
+  - The action `ok` is executed.
+  - Finally, the plan includes the two `connect` actions.
 
-* `ConnectDevices pc printer data` (task) is decomposed into:
-	+ `guard` (action)
-	+ `ValidateDeviceConnection pc printer data` (task, further decomposed)
-* `ValidateDeviceConnection pc printer data` (task) is decomposed into:
-	+ `ValidatePortConnection pc-bPlugType1 printer-aPlugType1 data` (task, further decomposed)
-* `ValidatePortConnection pc-bPlugType1 printer-aPlugType1 data` (task) is decomposed into:
-	+ `ValidatePortConnection cableWithPlugType1-b printer-aPlugType1 data` (task, further decomposed)
-	+ Two `connect` tasks (decomposed into specific `connect_X` actions)
-* `connect` tasks are decomposed into specific `connect_X` actions based on port directions and faces.
+This hierarchical plan describes the solution to the HTN problem.

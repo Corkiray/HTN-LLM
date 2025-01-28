@@ -1,33 +1,52 @@
 ==>
-**Sequential Plan**
-1. turn (initial turn)
-2. flip l1 l1 Y N (flip middle-left to N)
-3. propagate_up l1 l1 Y (start propagating up from middle-left)
-4. flip l0 l1 Y N (flip top-left to N)
-5. propagate_up l0 l1 Y (start propagating up from top-left, but already at top)
-6. propagate_down l1 l1 Y (start propagating down from middle-left)
-7. flip l2 l1 Y N (flip bottom-left to N)
-8. propagate_down l2 l1 Y (start propagating down from bottom-left, but already at bottom)
-9. propagate_right l1 l1 Y (start propagating right from middle-left)
-10. flip l1 l2 N Y (flip middle-right to Y)
-11. propagate_right l1 l2 Y (start propagating right from middle-right, but already at rightmost column for middle row)
-12. play (continue playing, but goal is already achieved)
-13. turn (next turn, but not necessary as goal is achieved)
-
-**Hierarchical Decomposition**
+1 flip l0 l1 N Y
+2 turn l0 l1 N Y
+3 flip l0 l1 Y N
+4 turn l0 l1 Y N
+5 flip l0 l0 N Y
+6 turn l0 l0 N Y
+7 flip l0 l0 Y N
+8 turn l0 l0 Y N
 root 0
-0 play -> do_play 1 12
-1 turn -> do_turn l1 l1 Y N 2 3 6 9
-2 flip l1 l1 Y N -> **(primitive action, no further decomposition)**
-3 propagate_up l1 l1 Y -> propagate_up_end_field l1 l1 Y (since next step would be out of bounds)
-4 flip l0 l1 Y N -> **(primitive action, no further decomposition)**
-5 propagate_up l0 l1 Y -> propagate_up_end_field l0 l1 Y (since already at top)
-6 propagate_down l1 l1 Y -> propagate_down_do l1 l2 l1 Y N 7
-7 flip l2 l1 Y N -> **(primitive action, no further decomposition)**
-8 propagate_down l2 l1 Y -> propagate_down_end_field l2 l1 Y (since already at bottom)
-9 propagate_right l1 l1 Y -> propagate_right_do l1 l1 l2 l1 Y N 10
-10 flip l1 l2 N Y -> **(primitive action, no further decomposition)**
-11 propagate_right l1 l2 Y -> propagate_right_end_field l1 l2 Y (since already at rightmost column for middle row)
-12 play -> end_game (no further tasks, goal achieved or play can end)
-13 turn -> do_turn **(not necessary, omitted for brevity)**
+0 play -> do_play 1 2 3 4 5 6 7 8 9 10 11 12 13 14
+1 turn -> do_turn 1 3 5 7 9 11 13 14
+root 1
+  1 turn 1 -> do_turn 1 15 17 19 21 23 24
+2 flip l0 l1 N Y
+3 turn 15 -> do_turn 19 22 25 27 28 29 30
+4 flip l0 l1 Y N
+5 turn 16 -> do_turn 20 23 26 28 30 31 32
+6 flip l2 l1 Y N
+7 turn 18 -> do_turn 26 27 28 30 31 32 33 34
+8 flip l2 l1 N Y
+9 turn 13 -> do_turn 29 31 32 33 34 35 36
+10 flip l2 l0 Y N
+11 turn 12 -> do_turn 28 31 32 33 34 35 36
+12 flip l2 l0 N Y
+13 turn 14 -> do_turn 31 32 33 34 35 36 37
+14 turn 11 -> do_turn 32 33 34 35 36 37 38
+15 propagate_up l0 l1 N -> propagate_up_do 15
+16 propagate_down l0 l1 N -> propagate_down_do 16
+17 propagate_left l0 l1 N -> propagate_left_do 17
+18 propagate_right l0 l1 N -> propagate_right_do 18
+19 propagate_up l1 l1 N -> propagate_up_end_different
+20 propagate_down l1 l1 N -> propagate_down_end_different
+21 propagate_left l1 l1 N -> propagate_left_end_different
+22 propagate_right l1 l1 N -> propagate_right_end_different
+23 flip l1 l1 N Y
+24 turn 22 -> do_turn 27 30 32 34 35 36 37
+25 flip l0 l0 Y N
+26 propagate_up l1 l1 Y -> propagate_up_end_field
+27 propagate_down l1 l1 Y -> propagate_down_end_field
+28 propagate_left l1 l1 Y -> propagate_left_end_different
+29 propagate_right l1 l1 Y -> propagate_right_end_different
+30 flip l1 l2 Y N
+31 propagate_up l2 l1 Y -> propagate_up_do 31
+32 propagate_down l2 l1 Y -> propagate_down_end_field
+33 propagate_left l2 l1 Y -> propagate_left_do 33
+34 propagate_right l2 l1 Y -> propagate_right_end_different
+35 flip l2 l2 Y N
+36 propagate_up l2 l2 Y -> propagate_up_end_field
+37 propagate_down l2 l2 Y -> propagate_down_end_field
+38 propagate_left l2 l2 Y -> propagate_left_end_field
 <==

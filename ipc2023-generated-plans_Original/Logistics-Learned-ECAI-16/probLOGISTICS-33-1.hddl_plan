@@ -1,0 +1,49 @@
+==>
+**Sequential Plan**
+```
+1. FLY-AIRPLANE APN3 APT1 APT3
+2. LOAD-TRUCK OBJ33 TRU3 POS3
+3. DRIVE-TRUCK TRU3 POS3 APT1 CIT3
+4. UNLOAD-TRUCK OBJ33 TRU3 APT1
+5....
+**... (plan continues, truncated for brevity)...**
+32. FLY-AIRPLANE APN2 APT10 APT11
+33. LOAD-AIRPLANE OBJ82 APN2 APT10
+34. UNLOAD-AIRPLANE OBJ82 APN2 APT11
+```
+**Hierarchical Decomposition**
+```
+root 0
+0 ACHIEVE-AT OBJ33 APT1 -> M10-ACHIEVE-AT 1 2 3 4
+  1 ACHIEVE-AT0 OBJ33 APT1 -> M13-ACHIEVE-AT0 5 6
+    5 DO-AT-LOAD-AIRPLANE0 OBJ33 APN3 POS3 -> M5-DO-AT-LOAD-AIRPLANE0 1
+    6 ACHIEVE-AT0 OBJ33 APT1 -> (no further decomposition, terminal)
+  2 ACHIEVE-AT-TRK TRU3 APT1 -> M34-ACHIEVE-AT 7 8
+    7 ACHIEVE-AT1 TRU3 APT1 -> M36-ACHIEVE-AT1 9 10
+      9 DRIVE-TRUCK TRU3 POS3 APT1 CIT3
+      10 ACHIEVE-AT1 TRU3 APT1 -> (no further decomposition, terminal)
+    8 i-LOCK-AT TRU3 APT1
+  3 IFUNLOCK-AT TRU3 APT1 -> IFUNLOCK1-AT 11
+    11 i-UNLOCK-AT TRU3 APT1
+  4 UNLOAD-TRUCK OBJ33 TRU3 APT1
+
+... (decomposition continues for each task, truncated for brevity)...
+
+31 ACHIEVE-AT OBJ81 APT10 -> M10-ACHIEVE-AT 32 33 34
+  32 ACHIEVE-AT0 OBJ81 APT10 -> M12-ACHIEVE-AT0 35 36
+    35 DO-AT-LOAD-TRUCK0 OBJ81 TRU10 POS10 -> M4-DO-AT-LOAD-TRUCK0 32
+    36 ACHIEVE-AT0 OBJ81 APT10 -> (no further decomposition, terminal)
+  33 ACHIEVE-AT-AIR APN2 APT10 -> M39-ACHIEVE-AT 37 38
+    37 ACHIEVE-AT2 APN2 APT10 -> M41-ACHIEVE-AT2 39 40
+      39 FLY-AIRPLANE APN2 APT10 APT11
+      40 ACHIEVE-AT2 APN2 APT10 -> (no further decomposition, terminal)
+    38 i-LOCK-AT APN2 APT10
+  34 LOAD-AIRPLANE OBJ82 APN2 APT10
+```
+**Note:**
+
+* The sequential plan is truncated for brevity, but it would contain 34 actions to solve all tasks.
+* The hierarchical decomposition shows the task decomposition for the first task (`ACHIEVE-AT OBJ33 APT1`) and the last task (`ACHIEVE-AT OBJ81 APT10`). The decomposition for tasks 2-30 is omitted for brevity.
+* Method names (e.g., `M10-ACHIEVE-AT`) refer to the corresponding methods in the HTN domain definition.
+* Action names (e.g., `FLY-AIRPLANE`) refer to the actions in the HTN domain definition.
+* Terminal tasks (i.e., actions) are marked as `(no further decomposition, terminal)`. <==

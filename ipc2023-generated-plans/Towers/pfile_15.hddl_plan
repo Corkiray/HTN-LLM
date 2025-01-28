@@ -1,57 +1,39 @@
 ==>
-**Sequential Plan**
-```
- 1. selectDirection r15 t1 t2 t3
- 2. rotateTower t1 t3 t2
- 3. move_abstract t1 t3
- 4. exchange t1 t2 t3
- 5. move_abstract t3 t1
- 6. rotateTower t2 t3 t1
-...
-**Total Actions: 153** (due to the complexity of the problem, the full sequential plan is not displayed)
-...
-146. move r10 t2 r11 t3
-147. move r11 t3 r12 t2
-148. move r12 t2 r13 t3
-149. move r13 t3 r14 t2
-150. move r14 t2 r15 t3
-151. move r15 t3 t1 r1
-152. move r1 t1 t2 r2
-153. move r2 t2 t3 r3
-<==
-**Hierarchical Decomposition**
-```
+1 move r1 r2 t1 t2
+2 move r2 r3 t1 t2
+3 move r3 r4 t1 t2
+4 move r4 r5 t1 t2
+5 move r5 r6 t1 t2
+6 move r6 r7 t1 t2
+7 move r7 r8 t1 t2
+8 move r8 r9 t1 t2
+9 move r9 r10 t1 t2
+10 move r10 r11 t1 t2
+11 move r11 r12 t1 t2
+12 move r12 r13 t1 t2
+13 move r13 r14 t1 t2
+14 move r14 r15 t1 t3
+15 move r15 t1 t3
 root 0
-0 shiftTower t1 t2 t3 -> m-shiftTower 1
-1 m-shiftTower r15 t1 t2 t3 -> 
-  2 selectDirection r15 t1 t2 t3
-  -> selectedDirection 3
-  3 selectedDirection r15 t1 t2 t3 -> 
-    4 rotateTower t1 t3 t2
-    -> m-rotateTower 5
-  5 m-rotateTower t1 t2 t3 -> 
-    6 move_abstract t1 t2
-    -> newMethod21 7
-    8 exchange t1 t2 t3
-    -> exchangeLR 9 (preconditions met)
-  9 exchangeLR r15 t1 t2 t3 -> 
-    10 move_abstract t1 t3
-    -> newMethod21 11
-    12 rotateTower t2 t3 t1
-    -> m-rotateTower 13
-...
-**Total Decompositions: 45** (due to the complexity of the problem, the full decomposition is not displayed)
-...
-43. move_abstract t3 t1 -> newMethod21 144
-44. rotateTower t2 t3 t1 -> m-rotateTower 145
-45. move r15 t3 t1 r1 -> (primitive action, no further decomposition)
+0 shiftTower t1 t2 t3 -> m-shiftTower 1 2 
+1 selectDirection r1 t1 t2 t3 -> selectedDirection 1 2 
+2 rotateTower t1 t3 t2 -> m-rotateTower 3 4 
+3 move_abstract t1 t2 -> newMethod21 3 
+4 exchange t1 t2 t3 -> exchangeClear 4 
+5 exchange t1 t2 t3 -> exchangeClear 5 
+6 move_abstract t1 t3 -> newMethod21 6 
+7 move r1 r2 t1 t3 -> move 7 
+8 move r2 r3 t1 t3 -> move 8 
+9 move r3 r4 t1 t3 -> move 9 
+10 move r4 r5 t1 t3 -> move 10 
+11 move r5 r6 t1 t3 -> move 11 
+12 move r6 r7 t1 t3 -> move 12 
+13 move r7 r8 t1 t3 -> move 13 
+14 move r8 r9 t1 t3 -> move 14 
+15 move r9 r10 t1 t3 -> move 15 
+16 move r10 r11 t1 t3 -> move 16 
+17 move r11 r12 t1 t3 -> move 17 
+18 move r12 r13 t1 t3 -> move 18 
+19 move r13 r14 t1 t3 -> move 19 
+20 move r14 r15 t1 t3 -> move 20 
 <==
-```
-**Note:**
-
-* The sequential plan consists of 153 actions, but due to space constraints, only a few actions are shown at the beginning and end.
-* The hierarchical decomposition has 45 nodes, but again, only a few are displayed. Each node represents a task decomposition into subtasks or primitive actions.
-* The `->` symbol indicates the application of a method to a task, resulting in a new set of subtasks or actions.
-* Method names (e.g., `m-shiftTower`, `selectedDirection`) are used to identify the specific decomposition rules applied.
-* Task names (e.g., `shiftTower`, `selectDirection`) are used to identify the tasks being decomposed.
-* Action names (e.g., `move`, `rotateTower`) are used to identify the primitive actions in the plan.

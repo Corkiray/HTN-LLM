@@ -1,0 +1,190 @@
+==>
+1 pickup b1
+2 putdown b1
+3 pickup b6
+4 putdown b6
+5 pickup b9
+6 putdown b9
+7 pickup b14
+8 putdown b14
+9 pickup b19
+10 putdown b19
+11 unstack b1 b12
+12 putdown b1
+13 unstack b12 b15
+14 putdown b12
+15 unstack b15 b30
+16 putdown b15
+17 unstack b30 b28
+18 putdown b30
+19 unstack b6 b27
+20 putdown b6
+21 unstack b27 b25
+22 putdown b27
+23 unstack b9 b17
+24 putdown b9
+25 unstack b17 b22
+26 putdown b17
+27 unstack b22 b7
+28 putdown b22
+29 unstack b7 b5
+30 putdown b7
+31 unstack b5 b29
+32 putdown b5
+33 unstack b29 b10
+34 putdown b29
+35 unstack b10 b3
+36 putdown b10
+37 unstack b3 b26
+38 putdown b3
+39 unstack b26 b24
+40 putdown b26
+41 unstack b14 b11
+42 putdown b14
+43 unstack b11 b23
+44 putdown b11
+45 unstack b23 b21
+46 putdown b23
+47 unstack b21 b4
+48 putdown b21
+49 unstack b4 b18
+50 putdown b4
+51 unstack b18 b20
+52 putdown b18
+53 unstack b20 b8
+54 putdown b20
+55 unstack b8 b13
+56 putdown b8
+57 unstack b19 b2
+58 putdown b19
+59 pickup b2
+60 putdown b2
+61 pickup b5
+62 stack b5 b30
+63 pickup b30
+64 stack b30 b11
+65 pickup b11
+66 stack b11 b24
+67 pickup b24
+68 stack b24 b18
+69 pickup b18
+70 stack b18 b8
+71 pickup b21
+72 stack b21 b17
+73 pickup b17
+74 stack b17 b23
+75 pickup b23
+76 stack b23 b29
+77 pickup b29
+78 stack b29 b19
+79 pickup b8
+80 stack b8 b24
+81 pickup b1
+82 stack b1 b19
+83 pickup b3
+84 stack b3 b1
+85 pickup b13
+86 stack b13 b3
+87 pickup b6
+88 stack b6 b13
+89 pickup b4
+90 stack b4 b6
+91 pickup b10
+92 stack b10 b25
+93 pickup b12
+94 stack b12 b22
+95 pickup b26
+96 stack b26 b9
+97 pickup b9
+98 stack b9 b27
+99 pickup b27
+100 stack b27 b20
+101 pickup b20
+102 stack b20 b16
+103 pickup b16
+104 stack b16 b15
+105 pickup b15
+106 stack b15 b14
+107 pickup b14
+108 stack b14 b28
+109 pickup b7
+110 stack b7 b26
+root 0
+0 achieve-goals -> mark-done-table b2 59 60
+1 achieve-goals -> unstack-block b1 11 111
+2 achieve-goals -> unstack-block b6 19 112
+3 achieve-goals -> unstack-block b9 23 113
+4 achieve-goals -> unstack-block b14 41 114
+5 achieve-goals -> unstack-block b19 57 115
+6 achieve-goals -> pickup-ready-block b1 b19 81 82
+7 achieve-goals -> pickup-ready-block b3 b1 83 84
+8 achieve-goals -> pickup-ready-block b6 b13 87 88
+9 achieve-goals -> pickup-ready-block b4 b6 89 90
+10 achieve-goals -> pickup-ready-block b10 b25 91 92
+11 achieve-goals -> pickup-ready-block b12 b22 93 94
+12 achieve-goals -> pickup-ready-block b26 b9 95 96
+13 achieve-goals -> pickup-ready-block b9 b27 97 98
+14 achieve-goals -> pickup-ready-block b27 b20 99 100
+15 achieve-goals -> pickup-ready-block b20 b16 101 102
+16 achieve-goals -> pickup-ready-block b16 b15 103 104
+17 achieve-goals -> pickup-ready-block b15 b14 105 106
+18 achieve-goals -> pickup-ready-block b14 b28 107 108
+19 achieve-goals -> pickup-ready-block b7 b26 109 110
+20 achieve-goals -> mark-done-on b14 b28 116
+21 achieve-goals -> mark-done-on b15 b14 117
+22 achieve-goals -> mark-done-on b16 b15 118
+23 achieve-goals -> mark-done-on b20 b16 119
+24 achieve-goals -> mark-done-on b27 b20 120
+25 achieve-goals -> mark-done-on b9 b27 121
+26 achieve-goals -> mark-done-on b26 b9 122
+27 achieve-goals -> mark-done-on b7 b26 123
+28 achieve-goals -> mark-done-on b12 b22 124
+29 achieve-goals -> mark-done-on b10 b25 125
+30 achieve-goals -> mark-done-on b4 b6 126
+31 achieve-goals -> mark-done-on b6 b13 127
+32 achieve-goals -> mark-done-on b13 b3 128
+33 achieve-goals -> mark-done-on b3 b1 129
+34 achieve-goals -> mark-done-on b1 b19 130
+35 achieve-goals -> mark-done-on b19 b29 131
+36 achieve-goals -> mark-done-on b29 b23 132
+37 achieve-goals -> mark-done-on b23 b17 133
+38 achieve-goals -> mark-done-on b17 b21 134
+39 achieve-goals -> mark-done-on b21 b4 135
+40 achieve-goals -> mark-done-on b18 b24 136
+41 achieve-goals -> mark-done-on b24 b8 137
+42 achieve-goals -> mark-done-on b8 b13 138
+43 achieve-goals -> mark-done-on b11 b30 139
+44 achieve-goals -> mark-done-on b30 b5 140
+45 achieve-goals -> setdone 141
+111 release -> release-table b1 12 1
+112 release -> release-table b6 20 2
+113 release -> release-table b9 24 3
+114 release -> release-table b14 42 4
+115 release -> release-table b19 58 5
+116 achieve-goals -> mark-done-table b28 20
+117 achieve-goals -> mark-done-on b15 b14 21
+118 achieve-goals -> mark-done-on b16 b15 22
+119 achieve-goals -> mark-done-on b20 b16 23
+120 achieve-goals -> mark-done-on b27 b20 24
+121 achieve-goals -> mark-done-on b9 b27 25
+122 achieve-goals -> mark-done-on b26 b9 26
+123 achieve-goals -> mark-done-on b7 b26 27
+124 achieve-goals -> mark-done-on b12 b22 28
+125 achieve-goals -> mark-done-on b10 b25 29
+126 achieve-goals -> mark-done-on b4 b6 30
+127 achieve-goals -> mark-done-on b6 b13 31
+128 achieve-goals -> mark-done-on b13 b3 32
+129 achieve-goals -> mark-done-on b3 b1 33
+130 achieve-goals -> mark-done-on b1 b19 34
+131 achieve-goals -> mark-done-on b19 b29 35
+132 achieve-goals -> mark-done-on b29 b23 36
+133 achieve-goals -> mark-done-on b23 b17 37
+134 achieve-goals -> mark-done-on b17 b21 38
+135 achieve-goals -> mark-done-on b21 b4 39
+136 achieve-goals -> mark-done-on b18 b24 40
+137 achieve-goals -> mark-done-on b24 b8 41
+138 achieve-goals -> mark-done-on b8 b13 42
+139 achieve-goals -> mark-done-on b11 b30 43
+140 achieve-goals -> mark-done-on b30 b5 44
+141 achieve-goals -> setdone 45
+<==

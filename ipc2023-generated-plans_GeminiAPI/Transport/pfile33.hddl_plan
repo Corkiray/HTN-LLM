@@ -1,0 +1,18 @@
+==>
+1 drive truck-5 city-loc-16 city-loc-41
+2 pick_up truck-5 city-loc-41 package-25 capacity-2 capacity-3
+3 drive truck-5 city-loc-41 city-loc-21
+4 drop truck-5 city-loc-21 package-25 capacity-2 capacity-3
+5 drive truck-5 city-loc-21 city-loc-12
+6 pick_up truck-5 city-loc-12 package-45 capacity-1 capacity-2
+7 drive truck-5 city-loc-12 city-loc-16
+8 drop truck-5 city-loc-16 package-45 capacity-1 capacity-2
+9 pick_up truck-5 city-loc-16 package-6 capacity-0 capacity-1
+10 drive truck-5 city-loc-16 city-loc-14
+11 drive truck-5 city-loc-14 city-loc-19
+12 drop truck-5 city-loc-19 package-6 capacity-0 capacity-1
+root 0
+0 deliver package-25 city-loc-21 -> m_deliver_ordering_0 city-loc-41 city-loc-21 package-25 truck-5 1 2 3 4
+1 deliver package-45 city-loc-16 -> m_deliver_ordering_0 city-loc-14 city-loc-16 package-45 truck-5 5 6 7 8
+2 deliver package-6 city-loc-19 -> m_deliver_ordering_0 city-loc-16 city-loc-19 package-6 truck-5 9 10 11 12
+<==

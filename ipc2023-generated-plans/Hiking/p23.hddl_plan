@@ -1,60 +1,144 @@
 ==>
-**Sequential Plan**
-```
-1. prepare_trip place0
-2. trip_to1 couple0 place7
-3. prepare_trip place0
-4. trip_to1 couple1 place7
-5. prepare_trip place0
-6. trip_to1 couple2 place7
-7. prepare_trip place0
-8. trip_to1 couple3 place7
-9. prepare_trip place0
-10. trip_to1 couple4 place7
-11. prepare_trip place0
-12. trip_to1 couple5 place7
-13. prepare_trip place0
-14. trip_to1 couple6 place7
-15. prepare_trip place0
-16. trip_to1 couple7 place7
-```
-
-**Hierarchical Decomposition**
-```
+1 put_down guy4 place0 tent4
+2 drive_tent guy4 place0 place1 car0 tent4
+3 put_up guy4 place1 tent4
+4 drive_passenger guy4 place0 place1 car1 girl4 guy0
+5 drive_tent guy0 place1 place1 car2 tent0
+6 put_down guy0 place1 tent0
+7 drive_passenger guy0 place1 place1 car2 guy1 girl0
+8 drive_tent girl0 place1 place1 car3 tent1
+9 put_down girl0 place1 tent1
+10 drive_passenger girl0 place1 place1 car3 girl1 guy1
+11 drive_tent guy1 place1 place1 car3 tent1
+12 put_down guy1 place1 tent1
+13 drive_passenger guy1 place1 place1 car3 guy2 girl1
+14 drive_tent girl1 place1 place1 car3 tent1
+15 put_down girl1 place1 tent1
+16 drive_passenger girl1 place1 place1 car3 girl2 guy2
+17 drive_tent guy2 place1 place1 car3 tent2
+18 put_down guy2 place1 tent2
+19 drive_passenger guy2 place1 place1 car3 guy3 girl2
+20 drive_tent girl2 place1 place1 car3 tent3
+21 put_down girl2 place1 tent3
+22 drive_passenger girl2 place1 place1 car3 girl3 guy3
+23 drive_tent guy3 place1 place1 car3 tent3
+24 put_down guy3 place1 tent3
+25 drive_passenger guy3 place1 place1 car3 guy5 girl3
+26 drive_passenger guy5 place0 place1 car5 girl5 guy4
+27 drive_passenger guy4 place1 place2 car4 guy5
+28 walk_together tent4 place2 guy4 place1 guy5 guy5
+29 walk_together tent4 place2 guy5 place1 girl5 girl5
+30 drive_tent guy5 place2 place2 car5 tent5
+31 put_down guy5 place2 tent5
+32 drive_passenger guy5 place2 place2 car5 girl5
+33 drive_tent girl5 place2 place2 car5 tent5
+34 put_down girl5 place2 tent5
+35 drive_passenger girl5 place2 place2 car5 guy5
+36 drive_passenger guy5 place2 place3 car5 guy0
+37 walk_together tent5 place3 guy0 place2 guy4 guy4
+38 walk_together tent5 place3 girl4 place2 girl5 guy4
+39 drive_tent guy4 place3 place3 car0 tent4
+40 put_down guy4 place3 tent4
+41 drive_passenger guy4 place3 place3 car0 guy6
+42 walk_together tent0 place3 guy6 place2 guy0 guy0
+43 walk_together tent0 place3 girl0 place2 girl4 guy0
+44 drive_tent guy0 place3 place3 car2 tent0
+45 put_down guy0 place3 tent0
+46 drive_passenger guy0 place3 place3 car2 guy2
+47 walk_together tent6 place3 guy2 place2 guy6 guy6
+48 walk_together tent6 place3 girl6 place2 guy4 guy6
+49 drive_tent guy6 place3 place3 car7 tent6
+50 put_down guy6 place3 tent6
+51 drive_passenger guy6 place3 place3 car7 guy7
+52 walk_together tent1 place3 guy7 place2 guy2 guy7
+53 walk_together tent1 place3 girl7 place2 guy6 guy7
+54 drive_tent guy7 place3 place3 car8 tent7
+55 put_down guy7 place3 tent7
+56 drive_passenger guy7 place3 place3 car8 girl7
+57 drive_passenger girl7 place3 place4 car4 guy7 guy3
+58 walk_together tent7 place4 guy3 place3 guy7 guy3
+59 walk_together tent7 place4 girl3 place3 girl7 guy3
+60 drive_tent guy3 place4 place4 car3 tent3
+61 put_down guy3 place4 tent3
+62 drive_passenger guy3 place4 place4 car3 guy1
+63 walk_together tent2 place4 guy1 place3 guy3 guy1
+64 walk_together tent2 place4 girl1 place3 girl3 guy1
+65 drive_tent guy1 place4 place4 car3 tent2
+66 put_down guy1 place4 tent2
+67 drive_passenger guy1 place4 place4 car3 guy1
+68 drive_tent guy1 place4 place5 car3 tent3
+69 put_up guy1 place5 tent3
+70 drive_passenger guy1 place4 place5 car3 girl1 guy1
+71 drive_tent girl1 place5 place5 car3 tent2
+72 put_down girl1 place5 tent2
+73 drive_passenger girl1 place5 place5 car3 girl1
+74 drive_tent girl1 place5 place5 car3 tent3
+75 put_down girl1 place5 tent3
+76 drive_passenger girl1 place5 place5 car3 guy1
+77 drive_passenger guy1 place5 place6 car5 guy1 guy5
+78 walk_together tent3 place6 guy5 place5 guy1 guy5
+79 walk_together tent3 place6 girl5 place5 guy1 guy5
+80 drive_tent guy5 place6 place6 car5 tent5
+81 put_down guy5 place6 tent5
+82 drive_passenger guy5 place6 place6 car5 guy6
+83 walk_together tent5 place6 guy6 place5 guy5 guy6
+84 walk_together tent5 place6 girl6 place5 girl5 guy6
+85 drive_tent guy6 place6 place6 car7 tent6
+86 put_down guy6 place6 tent6
+87 drive_passenger guy6 place6 place6 car7 guy7
+88 walk_together tent6 place6 guy7 place5 guy6 guy7
+89 walk_together tent6 place6 girl7 place5 girl6 guy7
+90 drive_tent guy7 place6 place6 car8 tent7
+91 put_down guy7 place6 tent7
+92 drive_passenger guy7 place6 place6 car8 guy4
+93 walk_together tent7 place6 guy4 place5 guy7 guy4
+94 walk_together tent7 place6 girl4 place5 girl7 guy4
+95 put_up guy4 place7 tent4
+96 drive_tent guy4 place6 place7 car0 tent4
+97 drive_passenger guy4 place6 place7 car0 guy5 guy4
+98 walk_together tent4 place7 guy5 place6 guy4 guy5
+99 walk_together tent4 place7 girl5 place6 girl4 guy5
+100 put_up guy0 place7 tent0
+101 drive_passenger guy5 place7 place7 car2 guy0 girl5
+102 drive_tent guy0 place7 place7 car2 tent0
+103 walk_together tent0 place7 guy0 place6 girl5 guy0
+104 walk_together tent0 place7 girl0 place6 guy4 guy0
+105 put_up guy2 place7 tent1
+106 drive_tent girl0 place7 place7 car3 tent1
+107 put_down guy1 place7 tent1
+108 walk_together tent6 place7 guy2 place6 girl7 guy2
+109 walk_together tent6 place7 girl2 place6 guy4 guy2
+110 put_up guy6 place7 tent6
+111 drive_tent guy2 place7 place7 car7 tent6
+112 drive_passenger guy0 place7 place7 car7 guy3 guy6
+113 put_down guy7 place7 tent3
+114 drive_tent guy3 place7 place7 car3 tent3
+115 drive_passenger girl0 place7 place7 car4 guy7 girl2
+116 put_down guy5 place7 tent5
+117 drive_tent girl2 place7 place7 car4 tent5
+118 walk_together tent4 place7 guy3 place7 guy6 guy3
+119 walk_together tent4 place7 girl7 place7 guy5 guy3
+120 put_up guy1 place7 tent2
+121 drive_tent guy4 place7 place7 car1 tent2
+122 put_down guy5 place7 tent5
+123 walk_together tent2 place7 guy0 place7 girl7 guy0
+124 walk_together tent2 place7 girl4 place7 girl0 guy0
+125 put_up guy5 place7 tent7
+126 drive_passenger girl4 place7 place7 car5 guy5 guy0
+127 drive_passenger girl7 place7 place7 car5 guy4 guy5
+128 put_up guy3 place7 tent4
+129 walk_together tent7 place7 guy4 place7 guy5 guy4
+130 walk_together tent7 place7 girl5 place7 girl4 guy4
+131 walk_together tent2 place7 guy5 place7 guy4 guy5
+132 walk_together tent2 place7 girl5 place7 girl5 guy5
 root 0
-0 everyone_go_hiking place7 -> m14_everyone_go_hiking 1 2
-  1 prepare_trip place0 -> m6_prepare_trip 3 4
-    3 bring_tent place0 -> m9_bring_tent (tent0), m10_bring_tent (tent4, tent5, tent6, tent7)
-      *tent0:  (already down, at place0)*
-      *tent4:  17 put_down guy4 place0 tent4
-      *tent5:  18 put_down guy5 place0 tent5
-      *tent6:  19 put_down guy6 place0 tent6
-      *tent7:  20 put_down guy7 place0 tent7
-    4 bring_cars place0 -> m11_bring_cars (all cars, since they are already at place0)
-  2 trip_to1 couple0 place7 -> m0_trip_to1 5 (similarly for couple1-7)
-    5 trip_to2 couple0 place0 place7 -> m2_trip_to2 6 (recursive, until reaching place7)
-      *... (similar recursive decomposition for each couple and place)*
-    *walk_everyone will be decomposed using m4_walk_everyone or m5_walk_everyone, 
-     but since the initial state already has (walked?cpl?from) for all couples at place0, 
-     and the goal is to walk to place7, the decomposition will mainly focus on the trip_to2 and prepare_trip tasks*
-```
-
-**Note:**
-
-* The sequential plan shows the high-level tasks to achieve the goal, but it's not directly executable due to the hierarchical nature of the HTN planning.
-* The hierarchical decomposition starts with the `everyone_go_hiking` task and breaks it down into `prepare_trip` and `trip_to1` for each couple. 
-* `prepare_trip` is further decomposed into `bring_tent` and `bring_cars`. Since all cars are already at `place0`, `bring_cars` doesn't generate additional actions for this problem.
-* `bring_tent` for tents that are already up (tent4, tent5, tent6, tent7) requires putting them down first.
-* `trip_to1` is decomposed using `m0_trip_to1`, leading to `trip_to2`, which recursively applies `m2_trip_to2` until the destination `place7` is reached. This part of the decomposition is not fully expanded here due to its recursive and repetitive nature for each couple.
-* Actions for `walk_everyone` are not explicitly listed in the decomposition because the initial state already satisfies the `walked` predicate for all couples at `place0`, and the focus shifts to moving them to `place7` through `trip_to2` and ensuring preparations are made through `prepare_trip`. 
-
-**Executable Actions (partial, focusing on initial preparations and one couple's trip for brevity):**
-```
-1. prepare_trip place0
-2. put_down guy4 place0 tent4
-3. put_down guy5 place0 tent5
-4. put_down guy6 place0 tent6
-5. put_down guy7 place0 tent7
-6. trip_to2 couple0 place0 place7
-   *... (recursive trip_to2 actions, eventually leading to walking together and driving for each couple)*
-```
+0 everyone_go_hiking -> m14_everyone_go_hiking 1 133
+133 prepare_trip -> m6_prepare_trip 134 135
+134 bring_tent -> m8_bring_tent 1 2 3 4 5 134 134
+134 bring_tent -> m9_bring_tent 6 6 
+135 bring_cars -> m11_bring_cars 135 135
+136 trip_to1 -> m0_trip_to1 137 138
+137 trip_to2 -> m3_trip_to2 138 91 138 4 1 12 94 24 17 121 29 30 31 70 68 39 82 117 65 114 81 34 43 28
+138 trip_to2 -> m0_trip_to1 138 139
+139 trip_to2 -> m2_trip_to2 138 62 97 48
+<==

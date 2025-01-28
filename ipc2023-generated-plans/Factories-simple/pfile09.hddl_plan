@@ -1,46 +1,49 @@
 ==>
-**Sequential Plan**
-1. goto location_8
-2. get_resource resource_f_8_3 location_8
-3. construct_factory last_factory last_location
-
-**Hierarchical Decomposition**
-root 0
-0 construct_factory last_factory last_location -> m_construct_factory 1 2 3
-1 get_resource resource_f_8_3 location_8 -> m_get_resources_and_fuse 4 5 6 7
-4 get_resource resource_f_8_2 location_8 -> m_get_resources_and_fuse 8 9 10 11
-8 get_resource resource_f_8_1 location_8 -> m_get_resources_and_fuse 12 13 14 15
-12 get_resource resource_f_8_0 location_8 -> m_get_resource 16 17 18 19
-16 construct_factory factory_8 location_8 -> m_factory_already_constructed
-17 produce_resource resource_8
-18 deliver_resource resource_8 location_8
-19 goto location_8 -> m_already_there
-15 goto location_8 -> m_already_there
-14 drop resource_f_8_0 location_8
-13 pickup resource_f_8_0 location_8
-11 drop resource_f_8_2 location_8
-10 pickup resource_f_8_2 location_8
-9 goto location_8 -> m_already_there
-7 drop resource_f_8_3 location_8
-6 pickup resource_f_8_3 location_8
-5 goto location_8 -> m_already_there
-3 construct last_factory resource_f_8_3 last_location
-2 goto last_location -> m_goto 20 21
-20 move location_8 last_location
-21 goto last_location -> m_already_there
+1 move location_0 location_1
+2 get_resource resource_0 location_1
+3 move location_1 location_2
+4 get_resource resource_f_2_0 location_2
+5 fuse resource_f_2_1 resource_f_2_0 resource_0 location_2
+6 move location_2 location_3
+7 get_resource resource_f_3_0 location_3
+8 move location_3 location_4
+9 get_resource resource_f_4_0 location_4
+10 fuse resource_f_4_1 resource_f_4_0 resource_0 location_4
+11 get_resource resource_1 location_1
+12 move location_1 location_0
+13 move location_0 location_2
+14 fuse resource_f_2_1 resource_f_2_0 resource_0 location_2
+15 produce resource_2 factory_2 location_2
+16 move location_2 location_3
+17 get_resource resource_f_3_1 location_3
+18 move location_3 location_5
+19 get_resource resource_f_5_0 location_5
+20 fuse resource_f_5_1 resource_f_5_0 resource_3 location_5
+21 get_resource resource_3 location_3
+22 move location_3 location_5
+23 fuse resource_f_5_1 resource_f_5_0 resource_3 location_5
+24 move location_5 location_6
+25 move location_6 location_8
+26 get_resource resource_8 location_8
+27 move location_8 last_location
+28 produce resource_8 factory_8 location_8
+29 move location_8 last_location
+30 construct last_factory resource_8 last_location
 <==
 
-**Explanation of the Plan**
+root 0
+0 construct_factory last_factory last_location -> m_construct_factory 26 27 28 29 30 31 32 33
+1 get_resource resource_0 location_1 -> m_resource_there 2 3
+2 get_resource resource_f_2_1 location_2 -> m_get_resources_and_fuse 4 5 6 7 8 9
+3 get_resource resource_f_4_2 resource_f_4_3 location_4 -> m_get_resource 10 11 13 14 15
+4 get_resource resource_f_3_0 resource_f_3_1 resource_f_3_2 location_3 -> m_get_resource 16 17 19 20 21 22 23 24 25
+5 get_resource resource_f_5_0 resource_f_5_1 resource_f_5_2 resource_f_5_3 location_5 -> m_get_resource 4 5 6 7 8 9 10 11 12 13 14 15 
+6 goto location_2 -> m_goto 11 13
+7 goto last_location -> m_goto 29 30 31
+8 produce_resource resource_2 -> m_get_and_produce_resource 1 14
+9 produce_resource resource_3 -> m_get_and_produce_resource 8 16
+10 produce_resource resource_f_5_2 -> m_produce_resource 2 18
+11 deliver_resource resource_f_5_1 location_5 -> m_deliver_resource 15 16 17 18 19
+12 deliver_resource resource_8 last_location -> m_deliver_resource 28 29 30 31 32 33 
 
-1. **goto location_8**: Move the truck to location_8 to start gathering resources.
-2. **get_resource resource_f_8_3 location_8**: Gather resource_f_8_3, which is demanded by last_factory. This involves:
-	* **m_get_resources_and_fuse**: Since resource_f_8_3 is fused from other resources, recursively gather:
-		+ **resource_f_8_2**
-		+ **resource_f_8_1**
-		+ **resource_f_8_0** (which involves constructing factory_8, producing resource_8, and delivering it to location_8)
-	* Fuse the gathered resources to create resource_f_8_3
-3. **construct_factory last_factory last_location**: Construct last_factory at last_location using the gathered resource_f_8_3. This involves:
-	* **m_construct_factory**: Construct the factory after ensuring all preconditions are met.
-	* **goto last_location**: Move the truck to last_location for construction.
-
-**Note**: The plan assumes that the `produce_resource` and `deliver_resource` tasks are executed as part of the `get_resource` method (m_get_resource) when constructing factory_8. Additionally, some actions (e.g., `pickup`, `drop`) are implied within the `get_resource` and `deliver_resource` tasks but are not explicitly listed in the sequential plan for brevity.
+Note that this plan is a partial order plan, i.e the actions in each subtask can be performed in any order as long as the given partial order is maintained.

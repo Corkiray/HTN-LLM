@@ -1,51 +1,24 @@
 ==>
-**Sequential Plan:**
-(Note: Due to the complexity and size of the problem, the sequential plan is highly condensed and focuses on key actions. Actual implementation might require additional intermediate steps not explicitly listed here.)
-
-1. `flip l0 l0 Y N` (Flip initial position to match goal state)
-2. `flip l0 l1 Y N`
-3. `flip l0 l2 Y N`
-...
-**Condensed for brevity; all initial positions on l0 need flipping to N**
-...
-20. `flip l0 l19 Y N`
-
-**Propagation Steps ( Highly Condensed, Focus on Initial Propagation)**
-
-21. `propagate_up l0 l0 N` (Start propagation from l0 l0 after flip)
-22. `propagate_down l0 l0 N`
-23. `propagate_left l0 l0 N`
-24. `propagate_right l0 l0 N`
-
-**Note:** Each propagation step (21-24) would recursively apply flips and further propagations as per the defined methods (`propagate_up_do`, `propagate_down_do`, etc.), adapting to the changing board state. This process continues until the entire board matches the goal state, but detailing every step here is impractical due to the problem's size.
-
-**Hierarchical Decomposition:**
-
-root 0
-0 play -> do_play 1 2
-1 turn -> do_turn l0 l0 Y N 3-26
-  - **Assumes initial flip and propagation from l0 l0; actual implementation requires iterative application across the board**
-2 play -> end_game (Terminal state, no further actions)
-
-**Method Invocation Details (Condensed for Key Actions):**
-
-1. do_turn l0 l0 Y N
-  - flip l0 l0 Y N
-  - propagate_up l0 l0 N
-  - propagate_down l0 l0 N
-  - propagate_left l0 l0 N
-  - propagate_right l0 l0 N
-
-**Propagation Method Examples (Simplified):**
-
-- propagate_up_do l0 l0 N -> flip l1 l0 N Y, propagate_up l1 l0 Y
-- propagate_down_do l0 l0 N -> (No flip needed, already at min)
-- propagate_left_do l0 l0 N -> (No flip needed, already at min)
-- propagate_right_do l0 l0 N -> flip l0 l1 N Y, propagate_right l0 l1 Y
-
-**Note:** The actual plan execution would involve:
-- Iterative application of `do_turn` across relevant positions.
-- Recursive application of propagation methods until the board state matches the goal or no further changes are possible.
-- Adaptation of flips based on the current state of the board, not just the initial state.
-
+1 flip l9 l13 N Y
+2 propagate_up l9 l13 Y
+3 flip l8 l13 Y N
+4 propagate_up l8 l13 N
+5 propagate_down l9 l13 Y
+6 flip l10 l13 N Y
+7 propagate_down l10 l13 Y
+8 propagate_left l9 l13 Y
+9 flip l9 l12 Y N
+10 propagate_left l9 l12 N
+11 propagate_right l9 l13 Y
+12 flip l9 l14 Y N
+13 propagate_right l9 l14 N
+14 turn l9 l13 N Y
+15 turn l10 l13 N Y
+16 play
 <==
+root 0
+0 do_play -> do_turn 1-15 16 
+4 propagate_up_do -> flip 1 propagate_up 2
+7 propagate_down_do -> flip 6 propagate_down 5
+10 propagate_left_do -> flip 9 propagate_left 8
+12 propagate_right_do -> flip 11 propagate_right 11

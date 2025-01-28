@@ -1,0 +1,92 @@
+==>
+1 move C10 S7 C6
+2 board C6 f0
+3 move C6 C7 C10
+4 move C7 H10 C6
+5 move H10 C7 C8
+6 move C8 C9 C7
+7 move C9 D2 C8
+8 move D2 C9 C4
+9 move C4 D4 C2
+10 move D4 C4 D8
+11 move C2 H5 C3
+12 move H5 C2 H9
+13 move H9 C2 S9
+14 move S9 H9 S5
+15 move H9 S9 H2
+16 move S5 H9 D10
+17 move D10 S5 S3
+18 move S3 D10 C5
+19 move C5 S3 HA
+20 move HA C5 S8
+21 move S8 HA SA
+22 move SA S8 D7
+23 move D7 SA D8
+24 move D8 S8 S4
+25 move S4 D8 D3
+26 move D3 S4 S6
+27 move S6 D3 C3
+28 move C3 S6 S2
+29 move S2 C3 D9
+30 move D9 S2 H7
+31 move H7 D9 H3
+32 move H3 H7 S7
+33 move S7 H7 C10
+34 move C10 S7 f1
+35 board f1 f0
+<==
+
+root 0
+0 solve_freecell -> m1_solve_freecell_0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34
+1 achieve_home_C10 -> m2_achieve_home_0 C10 34
+2 achieve_home_D10 -> m3_achieve_home_0 D10 16
+3 achieve_home_H10 -> m4_achieve_home_0 H10 4
+4 achieve_home_S10 -> m5_achieve_home_0 S10 33
+5 achieve_bottomcol_C4 -> m6_achieve_bottomcol_0 C4 8
+6 achieve_bottomcol_D2 -> m7_achieve_bottomcol_0 D2 9
+7 achieve_bottomcol_D3 -> m8_achieve_bottomcol_0 D3 25
+8 achieve_bottomcol_H3 -> m9_achieve_bottomcol_0 H3 31
+9 achieve_bottomcol_H9 -> m10_achieve_bottomcol_0 H9 12
+10 achieve_bottomcol_HA -> m11_achieve_bottomcol_0 HA 18
+11 achieve_bottomcol_S2 -> m12_achieve_bottomcol_0 S2 27
+12 achieve_bottomcol_S8 -> m13_achieve_bottomcol_0 S8 20
+13 achieve_clear_C6 -> m14_achieve_clear_0 C6 1
+14 achieve_clear_C7 -> m15_achieve_clear_0 C7 3
+15 achieve_clear_CA -> m16_achieve_clear_0 CA 19
+16 achieve_clear_DA -> m17_achieve_clear_0 DA 35
+17 achieve_clear_H4 -> m18_achieve_clear_0 H4 26
+18 achieve_clear_H6 -> m19_achieve_clear_0 H6 5
+19 achieve_clear_S10 -> m20_achieve_clear_0 S10 34
+20 achieve_clear_S9 -> m21_achieve_clear_0 S9 13
+21 achieve_on_C10_S7 -> m22_achieve_on_0 C10 S7 1
+22 achieve_on_C2_H9 -> m23_achieve_on_0 C2 H9 11
+23 achieve_on_C3_S2 -> m24_achieve_on_0 C3 S2 27
+24 achieve_on_C5_HA -> m25_achieve_on_0 C5 HA 19
+25 achieve_on_C6_H5 -> m26_achieve_on_0 C6 H5 5
+26 achieve_on_C7_H10 -> m27_achieve_on_0 C7 H10 4
+27 achieve_on_C8_C9 -> m28_achieve_on_0 C8 C9 7
+28 achieve_on_C9_D2 -> m29_achieve_on_0 C9 D2 8
+29 achieve_on_CA_D7 -> m30_achieve_on_0 CA D7 22
+30 achieve_on_D10_S3 -> m31_achieve_on_0 D10 S3 17
+31 achieve_on_D4_C4 -> m32_achieve_on_0 D4 C4 9
+32 achieve_on_D5_SA -> m33_achieve_on_0 D5 SA 21
+33 achieve_on_D6_D9 -> m34_achieve_on_0 D6 D9 29
+34 achieve_on_D7_D8 -> m35_achieve_on_0 D7 D8 23
+35 achieve_on_D8_S4 -> m36_achieve_on_0 D8 S4 24
+36 achieve_on_D9_H7 -> m37_achieve_on_0 D9 H7 30
+37 achieve_on_DA_C10 -> m38_achieve_on_0 DA C10 34
+38 achieve_on_H10_C8 -> m39_achieve_on_0 H10 C8 4
+39 achieve_on_H2_S5 -> m40_achieve_on_0 H2 S5 14
+40 achieve_on_H4_S6 -> m41_achieve_on_0 H4 S6 26
+41 achieve_on_H5_C2 -> m42_achieve_on_0 H5 C2 11
+42 achieve_on_H6_H8 -> m43_achieve_on_0 H6 H8 5
+43 achieve_on_H7_H3 -> m44_achieve_on_0 H7 H3 31
+44 achieve_on_H8_D4 -> m45_achieve_on_0 H8 D4 9
+45 achieve_on_S10_D6 -> m46_achieve_on_0 S10 D6 16
+46 achieve_on_S3_C5 -> m47_achieve_on_0 S3 C5 18
+47 achieve_on_S4_D3 -> m48_achieve_on_0 S4 D3 25
+48 achieve_on_S5_D10 -> m49_achieve_on_0 S5 D10 17
+49 achieve_on_S6_C3 -> m50_achieve_on_0 S6 C3 27
+50 achieve_on_S7_D5 -> m51_achieve_on_0 S7 D5 21
+51 achieve_on_S9_H2 -> m52_achieve_on_0 S9 H2 15
+52 achieve_on_SA_S8 -> m53_achieve_on_0 SA S8 20

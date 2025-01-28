@@ -1,0 +1,207 @@
+==>
+1 move C7 H3
+2 board C3 f0
+3 move H3 C3
+4 move C3 f0
+5 move D7 S7
+6 board S7 f1
+7 move S7 D7
+8 move D7 f1
+9 move H8 H4
+10 board H4 f2
+11 move H4 H8
+12 move H8 f2
+13 move C8 HJ
+14 board HJ f3
+15 move HJ C8
+16 move C8 f3
+17 move C9 S8
+18 board S8 f4
+19 move S8 C9
+20 move C9 f4
+21 move D9 S9
+22 board S9 f5
+23 move S9 D9
+24 move D9 f5
+25 move S10 D9
+26 board D9 f6
+27 move D9 S10
+28 move S10 f6
+29 move D10 C5
+30 board C5 f7
+31 move C5 D10
+32 move D10 f7
+33 move C5 D2
+34 board D2 f8
+35 move D2 C5
+36 move C5 f8
+37 move D6 S3
+38 board S3 f9
+39 move S3 D6
+40 move D6 f9
+41 move S4 S10
+42 board S10 f10
+43 move S10 S4
+44 move S4 f10
+45 move S5 CJ
+46 board CJ f11
+47 move CJ S5
+48 move S5 f11
+49 move D4 HA
+50 board HA f12
+51 move HA D4
+52 move D4 f12
+53 move H4 SJ
+54 board SJ f13
+55 move SJ H4
+56 move H4 f13
+57 move H6 SQ
+58 board SQ f14
+59 move SQ H6
+60 move H6 f14
+61 move D8 S4
+62 board S4 f15
+63 move S4 D8
+64 move D8 f15
+65 move S7 C3
+66 board C3 f16
+67 move C3 S7
+68 move S7 f16
+69 move C4 S2
+70 board S2 f17
+71 move S2 C4
+72 move C4 f17
+73 move C2 CA
+74 board CA f18
+75 move CA C2
+76 move C2 f18
+77 move D3 C2
+78 board C2 f19
+79 move C2 D3
+80 move D3 f19
+81 move H3 H5
+82 board H5 f20
+83 move H5 H3
+84 move H3 f20
+85 move H2 D8
+86 board D8 f21
+87 move D8 H2
+88 move H2 f21
+89 move D5 DA
+90 board DA f22
+91 move DA D5
+92 move D5 f22
+93 move S3 C4
+94 board C4 f23
+95 move C4 S3
+96 move S3 f23
+97 move S2 DJ
+98 board DJ f24
+99 move DJ S2
+100 move S2 f24
+101 move CQ H7
+102 board H7 f25
+103 move H7 CQ
+104 move CQ f25
+105 move SQ H10
+106 board H10 f26
+107 move H10 SQ
+108 move SQ f26
+109 move HQ DQ
+110 board DQ f27
+111 move DQ HQ
+112 move HQ f27
+113 move HJ D4
+114 board D4 f28
+115 move D4 HJ
+116 move HJ f28
+117 move DJ CQ
+118 board CQ f29
+119 move CQ DJ
+120 move DJ f29
+121 move CJ DQ
+122 board DQ f30
+123 move DQ CJ
+124 move CJ f30
+125 move SA CQ
+126 board CQ f31
+127 move CQ SA
+128 move SA f31
+129 move HA C7
+130 board C7 f32
+131 move C7 HA
+132 move HA f32
+133 move DA D5
+134 board D5 f33
+135 move D5 DA
+136 move DA f33
+137 move S9 H9
+138 board H9 f34
+139 move H9 S9
+140 move S9 f34
+141 move S8 C9
+142 board C9 f35
+143 move C9 S8
+144 move S8 f35
+145 move S6 D6
+146 board D6 f36
+147 move D6 S6
+148 move S6 f36
+149 move S4 D8
+150 board D8 f37
+151 move D8 S4
+152 move S4 f37
+153 move S3 D6
+154 board D6 f38
+155 move D6 S3
+156 move S3 f38
+157 send-to-new-col C7 N1 N2
+158 send-to-new-col CJ N3 N4
+159 send-to-new-col D2 N5 N6
+160 send-to-new-col DJ N7 N8
+161 send-to-new-col H5 N9 N10
+162 send-to-new-col H7 N11 N12
+163 send-to-new-col H9 N13 N0
+164 send-to-home CQ S N1 C0
+165 send-to-home DQ D N3 D0
+166 send-to-home HQ H N9 H0
+167 send-to-home SQ S N11 S0
+<==
+
+root 0
+0 solve -> m1_solve_0 1 2 3
+1 task0 (ACHIEVE-HOME CQ) -> m2_achieve_home_0 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164
+2 task1 (ACHIEVE-HOME DQ) -> m3_achieve_home_1 165
+3 task2 (ACHIEVE-HOME HQ) -> m4_achieve_home_2 166
+4 move C7 H3 -> m5_move_4 1
+5 board C3 f0 -> m6_board_5
+6 move H3 C3 -> m7_move_6 2
+7 move C3 f0 -> m8_move_7 3
+8 move D7 S7 -> m9_move_8 4
+9 board S7 f1 -> m10_board_9
+10 move S7 D7 -> m11_move_10 5
+11 move D7 f1 -> m12_move_11 8
+12 move H8 H4 -> m13_move_12 9
+13 board H4 f2 -> m14_board_13
+14 move H4 H8 -> m15_move_14 10
+15 move H8 f2 -> m16_move_15 12
+16 move C8 HJ -> m17_move_16 13
+17 board HJ f3 -> m18_board_17
+18 move HJ C8 -> m19_move_18 14
+19 move C8 f3 -> m20_move_19 16
+20 move C9 S8 -> m21_move_20 17
+21 board S8 f4 -> m22_board_21
+22 move S8 C9 -> m23_move_22 18
+23 move C9 f4 -> m24_move_23 20
+24 move D9 S9 -> m25_move_24 21
+25 board S9 f5 -> m26_board_25
+26 move S9 D9 -> m27_move_26 22
+27 move D9 f5 -> m28_move_27 24
+28 move S10 D9 -> m29_move_28 25
+29 board D9 f6 -> m30_board_29
+30 move D9 S10 -> m31_move_30 26
+31 move S10 f6 -> m32_move_31 28
+32 move D10 C5 -> m33_move_32 29
+33 board C5 f7 -> m34_board_33
+34 move C5 D10 -> m35_move_34 30
+35 move D10 f7

@@ -1,0 +1,45 @@
+==>
+1 selectDirection r1 t1 t2 t3
+2 rotateTower t1 t3 t2
+3 move_abstract t1 t2
+4 exchange t1 t2 t3
+5 move_abstract t1 t3
+6 rotateTower t2 t3 t1
+7 selectDirection r2 t1 t3 t2
+8 rotateTower t1 t2 t3
+9 move_abstract t2 t3
+10 exchange t2 t3 t1
+11 move_abstract t2 t1
+12 rotateTower t3 t1 t2
+13 move_abstract t1 t3
+14 move r1 r2 t1 t2 t3
+15 move r2 r1 t2 t3 t1
+16 move r1 r2 t3 t1 t2
+<==
+
+**Hierarchical Decomposition**
+
+**root 0**
+0 shiftTower t1 t2 t3 -> **m-shiftTower** 1 4
+**m-shiftTower (1-4)**
+1 selectDirection r1 t1 t2 t3 -> **selectedDirection** 2
+2 rotateTower t1 t3 t2 -> **m-rotateTower** 3 5 6
+3 move_abstract t1 t2 -> **newMethod21** (no further decomposition, action: move)
+4 exchange t1 t2 t3 -> **exchangeLR** 5 6
+**selectedDirection (2)**
+2 rotateTower t1 t3 t2 -> **m-rotateTower** 3 5 6
+**m-rotateTower (3-6, 5-6)**
+3 move_abstract t1 t2 -> **newMethod21** (no further decomposition, action: move)
+5 move_abstract t1 t3 -> **newMethod21** (no further decomposition, action: move)
+6 rotateTower t2 t3 t1 -> **m-rotateTower** 12 13 14 ( mirrored decomposition, not fully shown)
+**exchangeLR (4)**
+4... (decomposition not fully shown, as it mirrors the structure of **m-rotateTower**)
+**Additional Tasks to Achieve Goal**
+7-16: Additional tasks to achieve the goal, decomposed from implicit `solve` task (not explicitly defined in the domain)
+7 selectDirection r2 t1 t3 t2 -> **selectedDirection** 8
+8 rotateTower t1 t2 t3 -> **m-rotateTower** 9 10 11
+9 move_abstract t2 t3 -> **newMethod21** (no further decomposition, action: move)
+10 exchange t2 t3 t1 -> **exchangeRL** 11 12
+11 move_abstract t2 t1 -> **newMethod21** (no further decomposition, action: move)
+12 rotateTower t3 t1 t2 -> **m-rotateTower** (mirrored decomposition, not fully shown)
+13-16: Move actions to achieve the final goal state (on r1 r2, on r2 t3)

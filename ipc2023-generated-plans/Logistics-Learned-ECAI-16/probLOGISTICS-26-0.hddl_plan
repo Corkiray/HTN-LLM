@@ -1,61 +1,113 @@
 ==>
-**Sequential Plan**
-```
-1. ACHIEVE-AT OBJ43 POS4
-2. ACHIEVE-AT OBJ71 POS7
-3. ACHIEVE-AT OBJ52 POS2
-4. ACHIEVE-AT OBJ92 POS2
-5. ACHIEVE-AT OBJ83 POS1
-6. ACHIEVE-AT OBJ62 POS4
-7. ACHIEVE-AT OBJ73 APT3
-8. ACHIEVE-AT OBJ61 APT6
-9. ACHIEVE-AT OBJ22 APT6
-10. ACHIEVE-AT OBJ23 APT7
-11. ACHIEVE-AT OBJ72 POS7
-12. ACHIEVE-AT OBJ31 APT2
-13. ACHIEVE-AT OBJ21 POS3
-14. ACHIEVE-AT OBJ81 APT5
-15. ACHIEVE-AT OBJ32 APT7
-16. ACHIEVE-AT OBJ33 POS5
-17. ACHIEVE-AT OBJ13 POS5
-18. ACHIEVE-AT OBJ11 APT6
-19. ACHIEVE-AT OBJ41 APT8
-20. ACHIEVE-AT OBJ12 POS7
-21. ACHIEVE-AT OBJ42 APT1
-22. ACHIEVE-AT OBJ51 POS1
-23. ACHIEVE-AT OBJ53 APT7
-24. ACHIEVE-AT OBJ63 APT2
-25. ACHIEVE-AT OBJ93 APT2
-26. ACHIEVE-AT OBJ82 POS5
-```
-
-**Hierarchical Decomposition**
-```
+1 move TRU1 POS4
+2 board OBJ43 TRU1
+3 move TRU1 POS1
+4 deliver OBJ43 POS4
+5 move APN2 APT3
+6 board OBJ71 APN2
+7 move APN2 POS7
+8 deliver OBJ71 POS7
+9 move TRU2 POS2
+10 board OBJ52 TRU2
+11 move TRU2 POS2
+12 deliver OBJ52 POS2
+13 move APN1 APT6
+14 board OBJ92 APN1
+15 move APN1 POS2
+16 deliver OBJ92 POS2
+17 move TRU8 POS1
+18 board OBJ83 TRU8
+19 move TRU8 POS1
+20 deliver OBJ83 POS1
+21 move TRU4 POS4
+22 board OBJ62 TRU4
+23 move TRU4 POS4
+24 deliver OBJ62 POS4
+25 move APN3 APT7
+26 board OBJ73 APN3
+27 move APN3 APT3
+28 deliver OBJ73 APT3
+29 move APN2 APT6
+30 board OBJ61 APN2
+31 move APN2 POS6
+32 deliver OBJ61 POS6
+33 move APN1 APT7
+34 board OBJ22 APN1
+35 move APN1 POS6
+36 deliver OBJ22 POS6
+37 move APN3 APT7
+38 board OBJ23 APN3
+39 move APN3 APT7
+40 deliver OBJ23 APT7
+41 move TRU7 POS7
+42 board OBJ72 TRU7
+43 move TRU7 POS7
+44 deliver OBJ72 POS7
+45 move APN1 APT2
+46 board OBJ31 APN1
+47 move APN1 POS3
+48 deliver OBJ31 POS3
+49 move TRU2 POS3
+50 board OBJ21 TRU2
+51 move TRU2 POS2
+52 deliver OBJ21 POS3
+53 move APN5 APT5
+54 board OBJ81 APN5
+55 move APN5 POS8
+56 deliver OBJ81 APT5
+57 move APN3 APT7
+58 board OBJ32 APN3
+59 move APN3 APT7
+60 deliver OBJ32 APT7
+61 move TRU5 POS5
+62 board OBJ33 TRU5
+63 move TRU5 POS5
+64 deliver OBJ33 POS5
+65 move TRU5 POS5
+66 board OBJ13 TRU5
+67 move TRU5 POS5
+68 deliver OBJ13 POS5
+69 move APN2 APT6
+70 board OBJ11 APN2
+71 move APN2 POS6
+72 deliver OBJ11 POS6
+73 move TRU8 APT8
+74 board OBJ41 TRU8
+75 move TRU8 APT8
+76 deliver OBJ41 APT8
+77 move APN1 APT1
+78 board OBJ42 APN1
+79 move APN1 APT1
+80 deliver OBJ42 APT1
+81 move TRU1 POS1
+82 board OBJ51 TRU1
+83 move TRU1 POS1
+84 deliver OBJ51 POS1
+85 move APN3 APT7
+86 board OBJ53 APN3
+87 move APN3 APT7
+88 deliver OBJ53 APT7
+89 move TRU2 APT2
+90 board OBJ63 TRU2
+91 move TRU2 APT2
+92 deliver OBJ63 APT2
+93 move APN1 APT2
+94 board OBJ93 APN1
+95 move APN1 APT2
+96 deliver OBJ93 APT2
+97 move TRU8 POS5
+98 board OBJ82 TRU8
+99 move TRU8 POS5
+100 deliver OBJ82 POS5
 root 0
-0 ACHIEVE-AT OBJ43 POS4 -> M10-ACHIEVE-AT 1 2 3
-  1 ACHIEVE-AT0 OBJ43 POS4 -> M12-ACHIEVE-AT0 4 5 6 (since OBJ43 is not at POS4, but at POS4 initially)
-    4 DO-AT-LOAD-TRUCK0 OBJ43 TRU4 POS4 -> M4-DO-AT-LOAD-TRUCK0 7 8 9 (assuming TRU4 is available)
-      7 ACHIEVE-AT-TRK TRU4 POS4 -> M33-ACHIEVE-AT 10 11 (since TRU4 is at POS4)
-        10 i-LOCK-AT TRU4 POS4
-        11 i-FLAG-AT TRU4 POS4
-      8 IFUNLOCK-AT TRU4 POS4 -> IFUNLOCK1-AT 12
-        12 i-UNLOCK-AT TRU4 POS4
-      9 LOAD-TRUCK OBJ43 TRU4 POS4
-    5 ACHIEVE-AT0 OBJ43 POS4 -> (noop, already achieved)
-    6 i-LOCK-AT OBJ43 POS4
-  2 ACHIEVE-AT OBJ71 POS7 -> M10-ACHIEVE-AT... (similar decomposition)
-  3 ACHIEVE-AT OBJ52 POS2 -> M10-ACHIEVE-AT... (similar decomposition)
+0 ACHIEVE-AT OBJ43 POS4 -> M6-DO-IN-UNLOAD-TRUCK0 1 2 100
+ACHIEVE-AT OBJ71 POS7 -> M5-DO-AT-LOAD-AIRPLANE0 3 4 5 100
+ACHIEVE-AT OBJ52 POS2 -> M4-DO-AT-LOAD-TRUCK0 6 7 8 100
+ACHIEVE-AT OBJ92 POS2 -> M5-DO-AT-LOAD-AIRPLANE0 9 10 11 100
 ...
-25. ACHIEVE-AT OBJ93 APT2 -> M39-ACHIEVE-AT 26 27 28
-  26 ACHIEVE-AT2 APN2 APT2 -> M41-ACHIEVE-AT2 29 30 (assuming APN2 is at APT6, and APT6 is in the same city as APT2)
-    29 FLY-AIRPLANE APN2 APT6 APT2
-    30 ACHIEVE-AT2 APN2 APT2 -> (noop, already achieved)
-  27 i-LOCK-AT OBJ93 APT2
-  28 i-FLAG-AT OBJ93 APT2
-```
-**Note:**
-
-* The decomposition only shows a subset of the tasks (1-3 and 25) to illustrate the hierarchical structure. The remaining tasks (4-24) would follow a similar decomposition pattern.
-* The method selection is based on the preconditions and the initial state. For example, `M10-ACHIEVE-AT` is chosen for `ACHIEVE-AT OBJ43 POS4` because `OBJ43` is not at `POS4`, but the method requires `OBJ43` to be at some location, which is the case (`POS4` initially).
-* The action parameters (e.g., `TRU4` in `DO-AT-LOAD-TRUCK0 OBJ43 TRU4 POS4`) are assumed to be correctly instantiated based on the problem's initial state and the method's preconditions.
-* The `noop` (no operation) indicates that the task is already achieved, and no further actions are required.
+ACHIEVE-AT OBJ63 APT2 -> M5-DO-AT-LOAD-AIRPLANE0 12 13 14 100
+ACHIEVE-AT OBJ93 APT2 -> M5-DO-AT-LOAD-AIRPLANE0 15 16 17 100
+ACHIEVE-AT OBJ82 POS5 -> M4-DO-AT-LOAD-TRUCK0 18 19 20 100
+ACHIEVE-AT OBJ33 POS5 -> M4-DO-AT-LOAD-TRUCK0 21 22 23 100
+...
+<==

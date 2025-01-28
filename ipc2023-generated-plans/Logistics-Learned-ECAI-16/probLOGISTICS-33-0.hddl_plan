@@ -1,54 +1,62 @@
 ==>
-**Sequential Plan**
-```
-1. DRIVE-TRUCK TRU4 POS2 POS4 CIT4
-2. LOAD-TRUCK OBJ23 TRU4 POS4
-3. DRIVE-TRUCK TRU4 POS4 POS7 CIT7
-4. UNLOAD-TRUCK OBJ23 TRU4 POS7
-5. FLY-AIRPLANE APN2 APT2 APT9
-6. LOAD-AIRPLANE OBJ92 APN2 APT9
-7. FLY-AIRPLANE APN2 APT9 APT2
-8. UNLOAD-AIRPLANE OBJ92 APN2 APT2
-...
-**[abbreviated for brevity, 32 tasks in total]**
-...
-29. DRIVE-TRUCK TRU8 POS8 POS1 CIT1
-30. LOAD-TRUCK OBJ13 TRU8 POS1
-31. UNLOAD-TRUCK OBJ13 TRU8 POS1
-32. i-LOCK-AT OBJ13 POS1
-```
-**Hierarchical Decomposition**
-```
+1 move TRU1 POS1 POS2
+2 board OBJ112 TRU1 POS2
+3 move TRU1 POS2 POS2
+4 debark OBJ112 TRU1 POS2
+5 move TRU2 POS2 POS1
+6 board OBJ113 TRU2 POS1
+7 move TRU2 POS1 POS1
+8 debark OBJ113 TRU2 POS1
+9 deliver_package OBJ112 POS2 APT2
+10 move TRU3 POS3 POS6
+11 board OBJ101 TRU3 POS6
+12 move TRU3 POS6 POS6
+13 debark OBJ101 TRU3 POS6
+14 move APN1 APT3 POS7
+15 board OBJ92 APN1 POS7
+16 move APN1 POS7 APT2
+17 debark OBJ92 APN1 APT2
+18 deliver_package OBJ92 APT2 APT2
+19 deliver_package OBJ101 POS6 POS6
+20 move TRU4 POS4 POS3
+21 board OBJ83 TRU4 POS3
+22 move TRU4 POS3 POS3
+23 debark OBJ83 TRU4 POS3
+24 deliver_package OBJ83 POS3 POS3
+25 deliver_package OBJ113 POS1 APT5
+26 move TRU1 POS2 POS9
+27 board OBJ22 TRU1 POS9
+28 move TRU1 POS9 POS9
+29 debark OBJ22 TRU1 POS9
+30 move APN2 APT2 POS10
+31 board OBJ102 APN2 POS10
+32 move APN2 POS10 APT6
+33 debark OBJ102 APN2 APT6
+34 deliver_package OBJ22 POS9 APT9
+35 deliver_package OBJ102 APT6 APT6
+36 move TRU6 POS6 POS8
+37 board OBJ71 TRU6 POS8
+38 move TRU6 POS8 POS8
+39 debark OBJ71 TRU6 POS8
+40 deliver_package OBJ71 POS8 POS1
+41 deliver_package OBJ82 POS8 APT4
+42 move TRU5 POS5 POS11
+43 board OBJ11 TRU5 POS11
+44 move TRU5 POS11 POS11
+45 debark OBJ11 TRU5 POS11
+46 deliver_package OBJ11 POS11 APT6
 root 0
-0 ACHIEVE-AT OBJ23 POS4 -> M10-ACHIEVE-AT 1 2 3 4
-  1 ACHIEVE-AT0 OBJ23 POS4 -> M12-ACHIEVE-AT0 1.1 1.2
-    1.1 DO-AT-LOAD-TRUCK0 OBJ23 TRU4 POS2 -> M4-DO-AT-LOAD-TRUCK0 1.1.1 1.1.2 1.1.3
-      1.1.1 ACHIEVE-AT-TRK TRU4 POS2 -> M34-ACHIEVE-AT 1.1.1.1 1.1.1.2
-      1.1.2 IFUNLOCK-AT TRU4 POS2 -> IFUNLOCK1-AT 1.1.2.1
-      1.1.3 LOAD-TRUCK OBJ23 TRU4 POS2
-    1.2 ACHIEVE-AT0 OBJ23 POS4
-  2 DRIVE-TRUCK TRU4 POS2 POS4 CIT4
-  3 ACHIEVE-AT1 TRU4 POS4 -> M35-ACHIEVE-AT1
-  4 i-LOCK-AT OBJ23 POS4
-
-1 ACHIEVE-AT OBJ92 APT2 -> M10-ACHIEVE-AT 5 6 7 8
-  5 ACHIEVE-AT0 OBJ92 APT2 -> M13-ACHIEVE-AT0 5.1 5.2
-    5.1 DO-AT-LOAD-AIRPLANE0 OBJ92 APN2 APT9 -> M5-DO-AT-LOAD-AIRPLANE0 5.1.1 5.1.2 5.1.3
-      5.1.1 ACHIEVE-AT-AIR APN2 APT9 -> M39-ACHIEVE-AT 5.1.1.1 5.1.1.2
-      5.1.2 IFUNLOCK-AT APN2 APT9 -> IFUNLOCK1-AT 5.1.2.1
-      5.1.3 LOAD-AIRPLANE OBJ92 APN2 APT9
-    5.2 ACHIEVE-AT0 OBJ92 APT2
-  6 FLY-AIRPLANE APN2 APT9 APT2
-  7 ACHIEVE-AT2 APN2 APT2 -> M40-ACHIEVE-AT2
-  8 i-LOCK-AT OBJ92 APT2
-
-...
-**[abbreviated for brevity, 32 tasks in total]**
-...
-```
-**Note:**
-
-* The sequential plan lists the 32 actions required to solve the problem, in the order they should be executed.
-* The hierarchical decomposition shows how each high-level task (e.g., `ACHIEVE-AT OBJ23 POS4`) is broken down into smaller subtasks, using the methods defined in the domain (e.g., `M10-ACHIEVE-AT`, `M4-DO-AT-LOAD-TRUCK0`, etc.).
-* Each subtask may have its own set of preconditions, which are not explicitly listed here for brevity.
-* The `i-LOCK-AT` and `i-UNLOCK-AT` actions are assumed to be instantaneous and have no preconditions, as per the domain definition.
+0 achieve_at -> ordering_0 
+1 achieve_at -> ordering_8 
+2 achieve_at -> ordering_15 
+3 achieve_at -> ordering_26 
+4 achieve_at -> ordering_36 
+5 deliver_package OBJ112 -> m1_go_ordering_0 1 2 3 4 5 6
+6 deliver_package OBJ92 -> m1_abort_ordering_1 7 8 9 10 11 12 13 14 15 16 17 18
+7 deliver_package OBJ101 -> m2_go_ordering_2 19 20
+8 deliver_package OBJ83 -> m2_abort_ordering_2 21 22 23 24 25
+9 deliver_package OBJ113 -> m1_go_ordering_1 5 26 27 28 29 30
+10 deliver_package OBJ22 -> m1_abort_ordering_0 6 31 32 33 34 35
+11 deliver_package OBJ102 -> m2_go_ordering_1 36 37 38 39 40 41
+12 deliver_package OBJ71 -> m2_abort_ordering_2 42 43 44 45 46
+<==

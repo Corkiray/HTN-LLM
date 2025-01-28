@@ -1,0 +1,46 @@
+==>
+**Sequential Plan:**
+
+1. `i-LOCK-AT` `OBJ33` `APT1` (lock OBJ33 at APT1)
+2. `i-LOCK-AT` `OBJ22` `APT2` (lock OBJ22 at APT2)
+3. `i-LOCK-AT` `OBJ43` `POS4` (lock OBJ43 at POS4)
+4. `i-LOCK-AT` `OBJ11` `POS1` (lock OBJ11 at POS1)
+5. `i-LOCK-AT` `OBJ23` `POS1` (lock OBJ23 at POS1)
+6. `i-LOCK-AT` `OBJ31` `POS1` (lock OBJ31 at POS1)
+7. `i-LOCK-AT` `OBJ12` `APT2` (lock OBJ12 at APT2)
+8. `i-LOCK-AT` `OBJ13` `POS4` (lock OBJ13 at POS4)
+9. `i-LOCK-AT` `OBJ42` `APT2` (lock OBJ42 at APT2)
+10. `i-LOCK-AT` `OBJ21` `POS4` (lock OBJ21 at POS4)
+11. `i-LOCK-AT` `OBJ41` `POS4` (lock OBJ41 at POS4)
+12. `ACHIEVE-AT0` `OBJ33` `APT1` (achieve OBJ33 at APT1)
+	* `DO-AT-LOAD-TRUCK0` `OBJ33` `TRU3` `POS3` (load OBJ33 onto TRU3 at POS3)
+		+ `ACHIEVE-AT-TRK` `TRU3` `POS3` (achieve TRU3 at POS3)
+		+ `IFUNLOCK-AT` `TRU3` `POS3` (unlock TRU3 at POS3)
+		+ `LOAD-TRUCK` `OBJ33` `TRU3` `POS3` (load OBJ33 onto TRU3 at POS3)
+	*... (similar steps for other tasks, omitted for brevity)
+
+**Hierarchical Decomposition:**
+
+<==
+**root** 0
+0 **ACHIEVE-AT** `OBJ33` `APT1` -> **M10-ACHIEVE-AT** 12 13
+	* 12 **ACHIEVE-AT0** `OBJ33` `APT1` -> **M12-ACHIEVE-AT0** 14 15 16
+		+ 14 **DO-AT-LOAD-TRUCK0** `OBJ33` `TRU3` `POS3` -> **M4-DO-AT-LOAD-TRUCK0** 17 18 19
+			- 17 **ACHIEVE-AT-TRK** `TRU3` `POS3` -> **M32-ACHIEVE-AT** 20
+			- 18 **IFUNLOCK-AT** `TRU3` `POS3` -> **IFUNLOCK1-AT** 21
+			- 19 **LOAD-TRUCK** `OBJ33` `TRU3` `POS3` (primitive action)
+		+ 15 **ACHIEVE-AT0** `OBJ33` `APT1` ( recursive call, omitted for brevity)
+		+ 16 **i-LOCK-AT** `OBJ33` `APT1` (primitive action)
+	* 13 **i-LOCK-AT** `OBJ33` `APT1` (primitive action)
+
+1 **ACHIEVE-AT** `OBJ22` `APT2` -> **M10-ACHIEVE-AT**... (similar decomposition, omitted for brevity)
+2 **ACHIEVE-AT** `OBJ43` `POS4` -> **M10-ACHIEVE-AT**... (similar decomposition, omitted for brevity)
+...
+10 **ACHIEVE-AT** `OBJ41` `POS4` -> **M10-ACHIEVE-AT**... (similar decomposition, omitted for brevity)
+
+Note:
+
+* The sequential plan only shows the top-level actions, while the hierarchical decomposition breaks down each task into smaller subtasks.
+* The decomposition is not exhaustive, as some branches are omitted for brevity (marked with "...").
+* The method numbers (e.g., **M10-ACHIEVE-AT**) refer to the corresponding method definitions in the HTN domain.
+* Primitive actions (e.g., **LOAD-TRUCK**) are not further decomposed.

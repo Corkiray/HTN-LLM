@@ -1,57 +1,85 @@
-==>
-**Sequential Plan:**
-1. goto location_3
-2. get_resource resource_f_3_1 location_3
-3. construct_factory last_factory last_location
-4. produce_resource resource_3
-5. deliver_resource resource_3 last_location
-6. construct last_factory resource_3 last_location
-
-**Hierarchical Decomposition:**
-root 0
-0 construct_factory last_factory last_location -> m_construct_factory 3 6
-1 m_construct_factory 3 6
-  3 get_resource resource_3 last_location -> m_get_resource 2 4 5
-  2 m_get_resource 2 4 5
-    2.1 construct_factory factory_3 location_3 -> m_factory_already_constructed ( **factory_3 is not constructed, this should fail and backtrack to m_construct_factory for factory_3** )
-    **Backtracking and Re-planning for factory_3 construction**
-    2.1 construct_factory factory_3 location_3 -> m_construct_factory 
-      2.1.1 get_resource resource_f_3_1 location_3 -> m_get_resources_and_fuse 
-        2.1.1.1 get_resource resource_f_3_0 location_3 -> m_get_resources_and_fuse 
-          2.1.1.1.1 get_resource resource_0 location_3 -> m_get_resource 
-            2.1.1.1.1.1 construct_factory factory_0 location_0 -> m_factory_already_constructed 
-            2.1.1.1.1.2 produce_resource resource_0
-            2.1.1.1.1.3 deliver_resource resource_0 location_3
-          2.1.1.1.2 get_resource resource_1 location_3 -> m_get_resource 
-            2.1.1.1.2.1 construct_factory factory_1 location_1 -> m_construct_factory 
-              2.1.1.1.2.1.1 get_resource resource_0 location_1 -> m_resource_there ( **assuming resource_0 is at location_1, this might not be the case** )
-              2.1.1.1.2.1.2 construct factory_1 resource_0 location_1
-            2.1.1.1.2.2 produce_resource resource_1
-            2.1.1.1.2.3 deliver_resource resource_1 location_3
-          2.1.1.1.3 fuse resource_f_3_0 resource_0 resource_1 location_3
-        2.1.1.2 get_resource resource_2 location_3 -> m_get_resource 
-          2.1.1.2.1 construct_factory factory_2 location_2 -> m_construct_factory 
-            2.1.1.2.1.1 get_resource resource_f_2_1 location_2 -> m_get_resources_and_fuse 
-             ... ( **this path becomes too long and complex, it's an indication that the problem might require more efficient methods or additional domain knowledge** )
-    **Due to the complexity and potential errors in the above decomposition, a simplified and corrected version is provided below, focusing on the main task:**
-    
-    **Simplified Decomposition for Main Task:**
-    0 construct_factory last_factory last_location -> m_construct_factory 3 6
-    3 get_resource resource_3 last_location -> m_get_resource 4 5
-    4 produce_resource resource_3
-    5 deliver_resource resource_3 last_location
-    6 construct last_factory resource_3 last_location
-
-    **Goto Actions (Added for Completeness, Assuming Locations are Connected as per Init):**
-    0. goto location_3 -> m_goto 
-      0.1 move location_0 location_1
-      0.2 move location_1 location_2
-      0.3 move location_2 location_3
-
+==> 
+1 move location_0 location_1
+2 get_resource resource_f_1_0 location_1
+3 move location_1 location_0
+4 get_resource resource_0 location_0
+5 move location_0 location_1
+6 deliver_resource resource_f_1_0 location_1
+7 construct last_factory resource_f_3_0 last_location
+8 move location_1 location_2
+9 get_resource resource_f_2_0 location_2
+10 move location_2 location_1
+11 get_resource resource_1 location_1
+12 move location_1 location_2
+13 deliver_resource resource_f_2_0 location_2
+14 get_resource resource_f_2_1 location_2
+15 move location_2 location_3
+16 get_resource resource_f_3_0 location_3
+17 move location_3 location_2
+18 get_resource resource_2 location_2
+19 move location_2 location_3
+20 deliver_resource resource_f_3_0 location_3
+21 get_resource resource_f_3_1 location_3
+22 move location_3 last_location
+23 pickup resource_f_3_1 location_3
+24 goto last_location
+25 drop resource_f_3_1 last_location
+26 construct last_factory resource_3 last_location
 <==
 
-**Note:**
-- The provided decomposition simplifies the complex resource gathering process, focusing on the main task of constructing the last factory.
-- The actual decomposition for gathering resources (especially for `resource_f_3_1`) involves a deeply nested process that may benefit from additional domain methods or optimizations to reduce complexity.
-- The assumption of `resource_0` being at `location_1` in the detailed decomposition is highlighted as it may not always be the case, depending on the initial state not fully specified in the problem statement.
-- The plan assumes connectivity between locations as specified, with `goto` actions simplified for brevity.
+root 1
+1 m_goto -> mAlready_there 1
+1 m_goto -> m_goto 1 2
+1 m_goto -> m_goto 1 3 4 
+root 2
+2 m_get_resource -> m_get_resource 2 3 4 5 6 2 4 8 9 10 
+root 3
+3 mAlready_there  
+root 4
+4 m_resource_there -> m_resource_there  
+root 5
+5 m_deliver_resource 6 7 3 5
+root 6
+6 m_get_resource -> m_get_resources_and_fuse 6 7 2 8
+root 7
+7 m_get_resources_and_fuse -> m_get_resource 7 8 4 7 2 12 
+root 8
+8 m_get_resource -> m_get_resource 8 4 14 9 2 
+root 9
+9 m_get_resources_and_fuse -> m_get_resources_and_fuse 8 9 10 11 12
+root 10
+10 m_resource_there  
+root 11
+11 m_get_resource -> m_get_resource 9 11 12 13 10 
+root 12
+12 m_get_resource -> m_get_resource 12 10 16 11 
+root 13
+13 m_deliver_resource 14 15 12 13 
+root 14
+14 m_get_resource -> m_get_resources_and_fuse 14 15 10 4 
+root 15
+15 m_goto -> m_goto 15 20 
+root 16
+16 m_get_resources_and_fuse 16 5 18 19 
+root 17
+17 mAlready_there
+root 18
+18 m_resource_there
+root 19
+19 m_deliver_resource 20 21 18 19
+root 20
+20 m_goto -> m_goto 24 25
+20 m_goto -> m_goto 23 24 
+20 m_goto -> m_goto 22 26 
+root 21
+21 m_get_resource -> m_get_resource 21 18
+root 22
+22 m_already_there
+root 23
+23 m_goto -> m_goto 22 23 24
+root 24
+24 m_already_there  
+root 25
+25 m_already_there
+root 26
+26 m_factory_already_constructed

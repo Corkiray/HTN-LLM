@@ -1,36 +1,69 @@
-==>
-**Sequential Plan**
-1. prepare_trip place0
-2. trip_to1 couple0 place5
-3. prepare_trip place0
-4. trip_to1 couple1 place5
-5. prepare_trip place0
-6. trip_to1 couple2 place5
+==> 
+1 prepare_trip place0
+2 trip_to1 couple0 place5
+3 trip_to2 couple0 place0 place5
+4 trip_to2 couple0 place0 place4
+5 drive_tent guy0 place0 place1 car0 tent0
+6 put_up guy0 place1 tent0
+7 drive guy1 place0 place1 car1
+8 drive_passenger guy1 place1 place0 car1 guy0
+9 walk_together tent0 place2 guy0 place1 girl0 couple0
+10 walk_everyone tent0 place2 place1
+11 put_down girl0 place2 tent0
+12 drive_passenger girl0 place2 place1 car0 guy0
+13 drive guy0 place1 place2 car0
+14 drive guy1 place1 place2 car1
+15 trip_to1 couple1 place5
+16 trip_to2 couple1 place0 place5
+17 trip_to2 couple1 place0 place4
+18 drive_tent guy1 place2 place3 car1 tent1
+19 put_up guy1 place3 tent1
+20 drive guy2 place0 place3 car2
+21 drive_passenger guy2 place3 place2 car2 guy1
+22 walk_together tent1 place4 guy1 place3 girl1 couple1
+23 walk_everyone tent1 place4 place3
+24 put_down girl1 place4 tent1
+25 drive_passenger girl1 place4 place3 car1 guy1
+26 drive guy1 place3 place4 car1
+27 drive guy2 place3 place4 car2
+28 trip_to1 couple2 place5
+29 trip_to2 couple2 place0 place5
+30 trip_to2 couple2 place4 place5
+31 put_down guy2 place4 tent2
+32 drive_tent guy2 place4 place5 car2 tent2
+33 put_up guy2 place5 tent2
+34 drive_passenger guy0 place4 place5 car0 girl0
+35 drive_passenger girl0 place5 place4 car0 girl2
+36 walk_together tent2 place5 guy2 place4 girl2 couple2
+37 walk_everyone tent2 place5 place4
+38 drive_passenger guy2 place5 place4 car3 guy0
+39 prepare_trip place5
+40 bring_tent place5
+41 put_down guy2 place5 tent2
+42 bring_cars place5
+43 drive car1 place5 place4 car1 guy2
+44 drive car1 place4 place5 car1
+45 bring_cars place5
+46 drive_passenger guy0 place4 place5 car3 guy2
+47 drive car3 place5 place4 car3 guy2
+48 drive car3 place4 place5 car3
+<== 
 
-**Hierarchical Decomposition**
 root 0
-0 everyone_go_hiking place5 -> m14_everyone_go_hiking 1 2
-  1 prepare_trip place0 -> m6_prepare_trip 7 8
-    7 bring_tent place0 -> m9_bring_tent (tent0 is already down and at place0, so nop)
-      * nop *
-    8 bring_cars place0 -> m11_bring_cars (all cars are already at place0, so nop)
-      * nop *
-  2 trip_to1 couple0 place5 -> m0_trip_to1 9
-    9 trip_to2 couple0 place0 place5 -> m2_trip_to2 10 11
-      10 trip_to2 couple0 place0 place4 -> m2_trip_to2 12 13
-        12 trip_to2 couple0 place0 place3 -> m2_trip_to2 14 15
-          14 trip_to2 couple0 place0 place2 -> m2_trip_to2 16 17
-            16 trip_to2 couple0 place0 place1 -> m3_trip_to2 18 19 20 21 22 23 24 25
-              * drive_tent, drive, put_up, drive_passenger, walk_everyone, put_down, drive_passenger, drive (actions for couple0 from place0 to place1) *
-            17 trip_to2 couple0 place1 place2 -> m3_trip_to2... (similar actions for couple0 from place1 to place2)
-          15 trip_to2 couple0 place2 place3 -> m3_trip_to2... (similar actions for couple0 from place2 to place3)
-        13 trip_to2 couple0 place3 place4 -> m3_trip_to2... (similar actions for couple0 from place3 to place4)
-      11 trip_to2 couple0 place4 place5 -> m3_trip_to2... (similar actions for couple0 from place4 to place5)
-  * Repeat similar decomposition for couple1 and couple2 *
-<==
-
-**Note:**
-
-* Due to the complexity and length of the full decomposition, some parts are omitted and represented with `... (similar actions for...)`. These omitted parts follow the same pattern as the explicitly shown actions.
-* The `nop` actions are not explicitly numbered in the sequential plan, as they do not contribute to the overall plan's complexity in this context.
-* This plan assumes that the `walk_everyone` task for each couple is handled similarly, with the specific actions (e.g., `walk_together`) not fully detailed here due to space constraints. The `m5_walk_everyone` method would typically be applied in a recursive manner until all individuals have walked to the destination, but this recursion is not fully expanded here.
+0 everyone_go_hiking -> m14_everyone_go_hiking 1 2
+root 1
+1 trip_to1 -> m0_trip_to1 2 3 4 5 
+2 prepare_trip -> m6_prepare_trip 6 7
+root 2
+3 trip_to2 -> m2_trip_to2 4 5
+5 walk_everyone -> m4_walk_everyone 10
+4 trip_to2 -> m2_trip_to2 8 9 
+9 walk_everyone -> m5_walk_everyone 11 12 
+root 5
+6 drive_tent -> m3_trip_to2 13 14 15 16 17 
+14 walk_everyone -> m4_walk_everyone 23
+16 drive -> m1_trip_to2 27
+root 17
+17 trip_to1 -> m0_trip_to1 28 29 30 31
+18 bring_tent -> m9_bring_tent 32
+19 bring_cars -> m12_bring_cars 33 34

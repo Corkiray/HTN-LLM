@@ -1,49 +1,41 @@
 ==>
-**Sequential Plan:**
-(Note: The plan is quite long due to the complexity of the problem. I'll provide a condensed version, focusing on the key actions and their ordering. Actual step numbers might not be consecutive due to the condensed format.)
-
-1. `flip l3 l3 Y N` (Change l3-l3 from Y to N to start propagating changes)
-2. `flip l3 l4 Y N`
-3. `flip l3 l5 N Y`
-...
-**Propagation sequence for each direction from l3 (due to space, not all are listed):**
-- Up: `flip l2 l3 N Y`, `flip l1 l3 Y N`, `flip l0 l3 N Y`
-- Down: `flip l4 l3 N Y`, `flip l5 l3 Y N`,..., `flip l16 l3 Y N` (if necessary, based on `next` and `on` conditions)
-- Left: `flip l3 l2 Y N`, `flip l3 l1 N Y`,..., `flip l3 l0 N Y` (if necessary)
-- Right: `flip l3 l4 Y N`, `flip l3 l5 N Y`,..., `flip l3 l16 Y N` (if necessary)
-
-**Example of a few more key flips to achieve the goal state:**
-100. `flip l0 l5 N Y`
-101. `flip l0 l11 N Y`
-102. `flip l1 l1 Y N`
-103. `flip l1 l6 Y N`
-...
-**Final flips to ensure all goal state conditions are met:**
-250. `flip l16 l16 Y Y` (No change, just an example of the last step to ensure all conditions are met)
-
-**Total Steps:** Approximately 300 steps (condensed for brevity)
-
-<==
-
-**Hierarchical Decomposition:**
-```
+1 flip l7 l7 Y
+2 turn
+3 play
 root 0
-0 play -> do_play 1 2
-1 turn -> do_turn l3 l3 Y N 3 4 5 6
-2 play -> end_game (empty, as it's the end state)
-
-3 propagate_up l3 l3 Y -> propagate_up_do l3 l3 l2 Y N 7
-4 propagate_down l3 l3 Y -> propagate_down_do l3 l3 l4 Y N 8
-5 propagate_left l3 l3 Y -> propagate_left_do l3 l3 l2 Y N 9
-6 propagate_right l3 l3 Y -> propagate_right_do l3 l3 l4 Y N 10
-
-7 propagate_up l2 l3 Y -> propagate_up_end_field l2 l3 Y (reached end or different state)
-8 propagate_down l4 l3 Y ->... (further decomposition based on `next` and `on` conditions)
-9 propagate_left l2 l3 Y ->... (further decomposition)
-10 propagate_right l4 l3 Y ->... (further decomposition)
-```
-**Note:**
-- The actual plan and decomposition can vary based on the specific HTN planner used and the problem's constraints.
-- The `do_turn` method's parameters (`l3 l3 Y N`) indicate the initial flip at position `l3` on `l3`, changing from `Y` to `N`.
-- The `propagate_*` methods further decompose based on `next` and `on` conditions, not fully expanded here due to complexity.
-- The final `end_game` task is empty, as it represents the achievement of the goal state.
+0 play -> do_play 1 2 3
+3 play -> end_game 
+6 turn -> do_turn l4 l8 l7 Y
+  root 6
+  6 turn -> do_turn l4 l8 l7 Y
+    root 6
+    6 turn -> do_turn l4 l8 l7 Y
+      root 6
+      6 turn -> do_turn l4 l8 l7 Y
+        root 6
+        6 turn -> do_turn l4 l8 l7 Y
+          root 6
+          7 propagate_up l4 l8 Y -> propagate_up_do l4 l5 l4 l8 Y
+          <==
+        7 propagate_up l4 l8 Y -> propagate_up_end_field l5 l8 Y
+        <==
+      7 propagate_up l4 l8 Y -> propagate_up_end_different l4 l8 l5 Y
+      <==
+    8 propagate_down l4 l8 Y -> propagate_down_do l4 l4 l5 l8 Y
+    <==
+  8 propagate_down l4 l8 Y -> propagate_down_end_field l4 l8 Y
+  <==
+9 propagate_down l4 l8 Y -> propagate_down_end_different l5 l8 l4 Y
+<==
+8 propagate_left l4 l8 Y -> propagate_left_do l4 l8 l7 l4 l8 Y
+<==
+9 propagate_left l4 l8 Y -> propagate_left_end_field l4 l16 Y
+<==
+8 propagate_left l4 l8 Y -> propagate_left_end_different l4 l8 l7 Y
+<==
+9 propagate_right l4 l8 Y -> propagate_right_do l4 l7 l8 l4 l8 Y
+<==
+10 propagate_right l4 l8 Y -> propagate_right_end_field l4 l7 Y
+<==
+9 propagate_right l4 l8 Y -> propagate_right_end_different l4 l9 l8 Y
+<==

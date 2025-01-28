@@ -1,50 +1,99 @@
 ==>
-**Sequential Plan**
-```
-1. ACHIEVE-AT OBJ13 POS1 (already at destination, just lock)
-2. i-LOCK-AT OBJ13 POS1
-3. ACHIEVE-AT OBJ53 APT1 (load onto truck, drive to airport, fly to APT1)
-4. DO-AT-LOAD-TRUCK0 OBJ53 TRU5 POS5
-5. DRIVE-TRUCK TRU5 POS5 APT1 CIT1
-6. FLY-AIRPLANE APN1 APT11 APT1
-7. UNLOAD-AIRPLANE OBJ53 APN1 APT1
-8. i-LOCK-AT OBJ53 APT1
-...
-**abbreviated for brevity, tasks 3-33 follow a similar pattern**
-...
-34. ACHIEVE-AT OBJ33 APT10 (load onto airplane, fly to APT10)
-35. DO-AT-LOAD-AIRPLANE0 OBJ33 APN3 POS3
-36. FLY-AIRPLANE APN3 APT7 APT10
-37. UNLOAD-AIRPLANE OBJ33 APN3 APT10
-38. i-LOCK-AT OBJ33 APT10
-```
-**Hierarchical Decomposition**
-```
+1 move f0 f1
+2 board p0 f1
+3 move f1 f0
+4 debark p0 f0
+5 move f0 f2
+6 board p1 f0
+7 move f2 f1
+8 debark p1 f1
+9 move f1 f3
+10 move f3 f2
+11 board p2 f3
+12 move f2 f0
+13 debark p2 f0
+14 move f0 f4
+15 board p3 f0
+16 move f4 f3
+17 move f3 f0
+18 debark p3 f0
+19 move f0 f5
+20 board p4 f0
+21 move f5 f4
+22 move f4 f3
+23 debark p4 f3
+24 move f3 f6
+25 move f6 f5
+26 board p5 f6
+27 move f5 f0
+28 debark p5 f0
+29 move f0 f7
+30 board p6 f0
+31 move f7 f6
+32 move f6 f1
+33 debark p6 f1
+34 move f1 f8
+35 move f8 f7
+36 board p7 f8
+37 move f7 f4
+38 debark p7 f4
+39 move f4 f9
+40 move f9 f8
+41 board p8 f9
+42 move f8 f0
+43 debark p8 f0
+44 move f0 f10
+45 board p9 f0
+46 move f10 f9
+47 move f9 f2
+48 debark p9 f2
+49 move f2 f11
+50 move f11 f10
+51 board p10 f11
+52 move f10 f7
+53 debark p10 f7
+54 move f7 f12
+55 board p11 f7
+56 move f12 f11
+57 move f11 f1
+58 debark p11 f1
+59 move f1 f3
+60 move f3 f12
+61 board p12 f3
+62 move f12 f5
+63 debark p12 f5
+64 deliver_package p0 f1 f3
+65 move f3 f2
+66 deliver_package p1 f0 f12
+67 deliver_package p2 f3 f8
+68 deliver_package p3 f0 f11
+69 deliver_package p4 f3 f12
+70 deliver_package p5 f6 f1
+71 deliver_package p6 f1 f8
+72 deliver_package p7 f8 f5
+73 deliver_package p8 f9 f0
+74 deliver_package p9 f9 f2
+75 deliver_package p10 f11 f7
+76 deliver_package p11 f1 f6
+77 deliver_package p12 f3 f5
 root 0
-0 solve_logistics -> m10-ACHIEVE-AT 1 3 5... 33
-1 ACHIEVE-AT OBJ13 POS1 -> m9-ACHIEVE-AT 2
-2 i-LOCK-AT OBJ13 POS1 (primitive action, no decomposition)
-
-3 ACHIEVE-AT OBJ53 APT1 -> m13-ACHIEVE-AT0 4 6 7 8
-4 DO-AT-LOAD-TRUCK0 OBJ53 TRU5 POS5 -> m4-DO-AT-LOAD-TRUCK0 5
-5 ACHIEVE-AT-TRK TRU5 POS5 -> m34-ACHIEVE-AT 6
-6 DRIVE-TRUCK TRU5 POS5 APT1 CIT1 (primitive action, no decomposition)
-7 UNLOAD-AIRPLANE OBJ53 APN1 APT1 (primitive action, no decomposition)
-8 i-LOCK-AT OBJ53 APT1 (primitive action, no decomposition)
-
-... **decomposition for tasks 4-33 follows a similar pattern**
-
-33 ACHIEVE-AT OBJ33 APT10 -> m39-ACHIEVE-AT 34 36 37 38
-34 DO-AT-LOAD-AIRPLANE0 OBJ33 APN3 POS3 -> m5-DO-AT-LOAD-AIRPLANE0 35
-35 ACHIEVE-AT-AIR APN3 POS3 -> m41-ACHIEVE-AT2 36
-36 FLY-AIRPLANE APN3 APT7 APT10 (primitive action, no decomposition)
-37 UNLOAD-AIRPLANE OBJ33 APN3 APT10 (primitive action, no decomposition)
-38 i-LOCK-AT OBJ33 APT10 (primitive action, no decomposition)
+0 solve_logistics 
+-> m1_ordering_1 
+	1 move f0 f1 -> m2_f0_f1
+	2 board p0 f1 
+	3 move f1 f2 -> m3_f1_f2
+	4 debark p0 f2 
+	5 deliver_package p0 f1 f2
+	6 move f2 f3 -> m4_f2_f3
+	7 board p1 f2 
+	8 move f3 f4 -> m5_f3_f4
+	9 debark p1 f4 
+	10 deliver_package p1 f2 f4
+...
+	125 deliver_package p12 f10 f8
+-> m6_ordering_1 125
 <==
-```
-Note:
 
-* The sequential plan only shows the first and last few actions due to the large number of tasks.
-* The hierarchical decomposition only shows the decomposition for tasks 1, 3, and 33. The decomposition for tasks 4-32 follows a similar pattern.
-* `mX-ACHIEVE-AT` and similar method names refer to the corresponding methods in the HTN domain definition.
-* Primitive actions (e.g., `i-LOCK-AT`, `DRIVE-TRUCK`) do not have further decomposition.
+The plan is complex and consists of 125 steps. 
+
+This plan consist in loading the packages in the start location (f0), unload them in the correct position and repeat it.

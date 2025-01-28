@@ -1,84 +1,90 @@
 ==>
-**Sequential Plan:**
-
-1. `i-LOCK-AT` `OBJ11` `POS1`
-2. `LOAD-TRUCK` `OBJ11` `TRU1` `POS1`
-3. `DRIVE-TRUCK` `TRU1` `POS1` `POS2` `CIT2`
-4. `UNLOAD-TRUCK` `OBJ11` `TRU1` `POS2`
-5. `i-LOCK-AT` `OBJ11` `POS2`
-6. `LOAD-AIRPLANE` `OBJ11` `APN1` `POS2` (assuming APN1 is moved to POS2, not explicitly planned)
-7. `FLY-AIRPLANE` `APN1` `POS2` `APT2`
-8. `UNLOAD-AIRPLANE` `OBJ11` `APN1` `APT2`
-9. `i-LOCK-AT` `OBJ11` `APT2`
-
-10. `i-LOCK-AT` `OBJ31` `POS3`
-11. `LOAD-TRUCK` `OBJ31` `TRU3` `POS3`
-12. `UNLOAD-TRUCK` `OBJ31` `TRU3` `POS3` (already at POS3, but for consistency)
-13. `i-LOCK-AT` `OBJ31` `POS3`
-
-14. `i-LOCK-AT` `OBJ13` `POS3`
-15. `LOAD-TRUCK` `OBJ13` `TRU3` `POS3`
-16. `UNLOAD-TRUCK` `OBJ13` `TRU3` `POS3` (already at POS3, but for consistency)
-17. `i-LOCK-AT` `OBJ13` `POS3`
-
-18. `i-LOCK-AT` `OBJ23` `POS2`
-19. `LOAD-AIRPLANE` `OBJ23` `APN1` `POS2` (assuming APN1 is at POS2, not explicitly planned)
-20. `FLY-AIRPLANE` `APN1` `POS2` `APT3`
-21. `UNLOAD-AIRPLANE` `OBJ23` `APN1` `APT3`
-22. `i-LOCK-AT` `OBJ23` `APT3`
-
-23. `i-LOCK-AT` `OBJ33` `POS3`
-24. `LOAD-AIRPLANE` `OBJ33` `APN1` `POS3` (assuming APN1 is moved to POS3, not explicitly planned)
-25. `FLY-AIRPLANE` `APN1` `POS3` `APT3`
-26. `UNLOAD-AIRPLANE` `OBJ33` `APN1` `APT3`
-27. `i-LOCK-AT` `OBJ33` `APT3`
-
-28. `i-LOCK-AT` `OBJ22` `POS2`
-29. (No action needed, already at POS2)
-30. `i-LOCK-AT` `OBJ22` `POS2`
-
-31. `i-LOCK-AT` `OBJ21` `POS2`
-32. (No action needed, already at POS2)
-33. `i-LOCK-AT` `OBJ21` `POS2`
-
-34. `i-LOCK-AT` `OBJ12` `POS1`
-35. `LOAD-TRUCK` `OBJ12` `TRU1` `POS1`
-36. `DRIVE-TRUCK` `TRU1` `POS1` `POS3` `CIT3`
-37. `UNLOAD-TRUCK` `OBJ12` `TRU1` `POS3`
-38. `i-LOCK-AT` `OBJ12` `POS3`
-
-39. `i-LOCK-AT` `OBJ32` `POS3`
-40. `LOAD-AIRPLANE` `OBJ32` `APN1` `POS3` (assuming APN1 is at POS3, not explicitly planned)
-41. `FLY-AIRPLANE` `APN1` `POS3` `APT3`
-42. `UNLOAD-AIRPLANE` `OBJ32` `APN1` `APT3`
-43. `i-LOCK-AT` `OBJ32` `APT3`
-
-**<==**
-
-**Hierarchical Decomposition:**
-
-**root 0**
-0 ACHIEVE-AT OBJ11 APT2 -> M10-ACHIEVE-AT 1-9
-1 ACHIEVE-AT0 OBJ11 APT2 -> M13-ACHIEVE-AT0 2-8 (assuming truck and airplane movements not explicitly planned)
-2 ACHIEVE-AT-TRK TRU1 POS2 -> M36-ACHIEVE-AT1 (drive from POS1 to POS2)
-3 i-LOCK-AT OBJ11 POS1 -> (primitive action)
-4 LOAD-TRUCK OBJ11 TRU1 POS1 -> (primitive action)
-5 DRIVE-TRUCK TRU1 POS1 POS2 CIT2 -> (primitive action)
-6 UNLOAD-TRUCK OBJ11 TRU1 POS2 -> (primitive action)
-7 i-LOCK-AT OBJ11 POS2 -> (primitive action)
-8 ACHIEVE-AT-AIR APN1 APT2 -> M41-ACHIEVE-AT2 (fly from POS2 to APT2)
-
-**root 1**
-1 ACHIEVE-AT OBJ31 POS3 -> M9-ACHIEVE-AT 10-13
-10 i-LOCK-AT OBJ31 POS3 -> (primitive action)
-11 LOAD-TRUCK OBJ31 TRU3 POS3 -> (primitive action)
-12 UNLOAD-TRUCK OBJ31 TRU3 POS3 -> (primitive action)
-13 i-LOCK-AT OBJ31 POS3 -> (primitive action)
-
-**... (similar decompositions for tasks 2 through 8, omitted for brevity)**
-
-Note:
-- This plan assumes certain movements of trucks and airplanes that are not explicitly planned (e.g., APN1 moving to POS2, POS3, etc.). In a real-world scenario, these would need to be explicitly planned and executed.
-- The plan focuses on achieving the final positions of the packages as per the problem statement, with an emphasis on the hierarchical decomposition of tasks.
-- Actions like `i-LOCK-AT` are considered primitive and are not further decomposed here, though in a more detailed analysis, ensuring the physical locking mechanism might involve additional steps.
-- The plan's complexity and the number of actions can be optimized further based on additional constraints or more detailed domain knowledge.
+1 fly-airplane APN1 APT1 APT2
+2 Achieve-at-TRK TRU2 POS3 
+    root 0
+    0 Achieve-at-TRK -> m0_Achieve-at-TRK_0 2 3
+3 drive-truck TRU2 POS2 POS3 CIT2
+4 achieve-at-TRK TRU3 POS3
+    root 1
+    1 Achieve-at-TRK -> m0_Achieve-at-TRK_1 4 5
+5 i-unlock-at TRU3 POS3
+6 load-truck OBJ32 TRU3 POS3
+    root 2
+    2 load-truck -> m4_do_at_load_truck0_0 6 7 8
+7 i-unlock-at TRU3 POS3
+8 load-truck OBJ33 TRU3 POS3
+    root 3
+    3 load-truck -> m4_do_at_load_truck0_1 8 9 10
+9 i-unlock-at TRU3 POS3
+10 load-truck OBJ31 TRU3 POS3
+    root 4
+    4 load-truck -> m4_do_at_load_truck0_2 10 11 12
+11 drive-truck TRU3 POS3 POS2 CIT3
+12 unload-truck OBJ31 TRU3 POS2
+    root 5
+    5 unload-truck -> m6_do_in_unload_truck0_0 12 13 14
+13 i-unlock-at TRU3 POS2
+14 unload-truck OBJ32 TRU3 POS2
+    root 6
+    6 unload-truck -> m6_do_in_unload_truck0_1 14 15 16
+15 i-unlock-at TRU3 POS2
+16 unload-truck OBJ33 TRU3 POS2
+    root 7
+    7 unload-truck -> m6_do_in_unload_truck0_2 16 17 18
+17 load-airplane OBJ22 APN1 APT2
+    root 8
+    8 load-airplane -> m5_do_at_load_airplane0_0 17 19 20
+18 load-airplane OBJ21 APN1 APT2
+    root 9
+    9 load-airplane -> m5_do_at_load_airplane0_1 18 21 22
+19 achieve-at-air APN1 APT2
+20 ifunlock-at APN1 APT2
+21 ifunlock-at APN1 APT2
+22 i-unflag-at TRU1 POS1
+23 unlock-in OBJ11 TRU1
+    root 10
+    10 load-truck -> m4_do_at_load_truck0_3 22 23 24
+24 ifunlock-in OBJ11 TRU1
+    root 11
+    11 ifunlock-in -> m3_ifunlock_in_0 24 25
+25 i-unflag-in OBJ11 TRU1
+26 load-truck OBJ11 TRU1 POS1
+    root 12
+    12 load-truck -> m4_do_at_load_truck0_4 26 27 28
+27 drive-truck TRU1 POS1 POS2 CIT1
+28 load-airplane OBJ12 TRU1 APT3
+    root 13
+    13 load-airplane -> m5_do_at_load_airplane0_2 28 28 30
+29 load-airplane OBJ13 TRU1 APT3
+    root 14
+    14 load-airplane -> m5_do_at_load_airplane0_3 29 31 32
+30 load-truck OBJ13 TRU1 APT3
+31 load-airplane OBJ23 APN1 APT3
+    root 15
+    15 load-airplane -> m5_do_at_load_airplane0_4 31 32 33
+32 fly-airplane APN1 APT2 APT3
+33 load-airplane OBJ33 APN1 APT3
+    root 16
+    16 load-airplane -> m5_do_at_load_airplane0_5 33 33 35
+34 fly-airplane APN1 APT2 APT3
+35 ifunlock-at TRU1 POS1
+    root 17
+    17 ifunlock-at -> m0_ifunlock_at_0 35 36
+36 i-unlock-at TRU1 POS1
+37 unload-truck OBJ23 TRU1 POS1
+    root 18
+    18 unload-truck -> m6_do_in_unload_truck0_3 37 38 39
+38 i-unlock-at TRU1 POS1
+39 unload-truck OBJ13 TRU1 POS1
+    root 19
+    19 unload-truck -> m6_do_in_unload_truck0_4 39 40 41
+40 i-unlock-at TRU1 POS1
+41 unload-truck OBJ12 TRU1 POS1
+    root 20
+    20 unload-truck -> m6_do_in_unload_truck0_5 41 42 43
+42 drive-truck TRU1 POS2 POS1 CIT2
+43Achieve-at OBJ11 APT2
+    root 21
+    21 Achieve-at -> m2_achieve_at_0 1 43 44
+44 i-unflag-at OBJ11 APT2
+<==

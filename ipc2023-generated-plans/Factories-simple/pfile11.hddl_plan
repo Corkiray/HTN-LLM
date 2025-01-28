@@ -1,65 +1,50 @@
 ==>
-**Sequential Plan:**
-1. goto location_11
-2. get_resource resource_11 location_11
-3. goto last_location
-4. construct last_factory resource_11 last_location
-5. deliver_resource resource_11 last_location
-
-**Hierarchical Decomposition:**
-root 0
-0 construct_factory last_factory last_location -> m_construct_factory 3 4
-1 goto last_location -> m_goto 1 2 3
-  * 1.1 move location_0 location_1
-  * 1.2 goto location_2
-    + 1.2.1 move location_1 location_2
-    + 1.2.2 goto location_3
-      - 1.2.2.1 move location_2 location_3
-      - 1.2.2.2 goto location_4
-        ~ 1.2.2.2.1 move location_3 location_4
-        ~ 1.2.2.2.2 goto location_5
-          ^ 1.2.2.2.2.1 move location_4 location_5
-          ^ 1.2.2.2.2.2 goto location_6
-            & 1.2.2.2.2.2.1 move location_5 location_6
-            & 1.2.2.2.2.2.2 goto location_7
-              % 1.2.2.2.2.2.2.1 move location_6 location_7
-              % 1.2.2.2.2.2.2.2 goto location_8
-                @ 1.2.2.2.2.2.2.2.1 move location_7 location_8
-                @ 1.2.2.2.2.2.2.2.2 goto location_9
-                  # 1.2.2.2.2.2.2.2.2.1 move location_8 location_9
-                  # 1.2.2.2.2.2.2.2.2.2 goto location_10
-                    $ 1.2.2.2.2.2.2.2.2.2.1 move location_9 location_10
-                    $ 1.2.2.2.2.2.2.2.2.2.2 goto location_11
-                      * 1.2.2.2.2.2.2.2.2.2.2.1 move location_10 location_11
-                      * 1.2.2.2.2.2.2.2.2.2.2.2 goto last_location
-                        + 1.2.2.2.2.2.2.2.2.2.2.2.1 move location_11 last_location
-2 get_resource resource_11 location_11 -> m_get_resource 2.1 2.2 2.3
-  * 2.1 construct_factory factory_11 location_11 -> m_factory_already_constructed
-  * 2.2 produce_resource resource_11
-    - 2.2.1 get_resource resource_f_11_3 location_11 -> m_get_resources_and_fuse
-      ~ 2.2.1.1 get_resource resource_f_11_2 location_11
-        ^ 2.2.1.1.1 get_resource resource_f_11_1 location_11
-          & 2.2.1.1.1.1 get_resource resource_f_11_0 location_11
-            % 2.2.1.1.1.1.1 get_resource resource_8 location_11
-              @ 2.2.1.1.1.1.1.1 construct_factory factory_8 location_8
-               ... (similar decomposition for factory_8 to factory_0)
-            % 2.2.1.1.1.2 get_resource resource_5 location_11
-              @ 2.2.1.1.1.2.1 construct_factory factory_5 location_5
-               ... (similar decomposition for factory_5 to factory_0)
-          & 2.2.1.1.2 get_resource resource_0 location_11
-            % 2.2.1.1.2.1 construct_factory factory_0 location_0
-              @ 2.2.1.1.2.1.1 (factory_0 is already constructed)
-      ~ 2.2.1.2 get_resource resource_0 location_11
-        ^ 2.2.1.2.1 (resource_0 is already at location_0, m_resource_there)
-  * 2.3 deliver_resource resource_11 last_location -> m_deliver_resource
-    - 2.3.1 goto location_11
-    - 2.3.2 pickup resource_11 location_11
-    - 2.3.3 goto last_location
-    - 2.3.4 drop resource_11 last_location
+1 move location_0 location_1
+2 move location_1 location_2
+3 get_resource resource_f_2_1 location_2
+4 move location_2 location_3
+5 get_resource resource_f_3_2 location_3
+6 move location_3 location_4
+7 get_resource resource_f_4_3 location_4
+8 move location_4 location_5
+9 get_resource resource_f_5_3 location_5
+10 move location_5 location_6
+11 get_resource resource_f_6_3 location_6
+12 move location_6 location_7
+13 get_resource resource_f_7_3 location_7
+14 move location_7 location_8
+15 get_resource resource_f_8_3 location_8
+16 move location_8 location_9
+17 get_resource resource_f_9_3 location_9
+18 move location_9 location_10
+19 get_resource resource_f_10_3 location_10
+20 move location_10 location_11
+21 get_resource resource_f_11_3 location_11
+22 get_resource resource_11 location_11
+23 construct last_factory resource_11 last_location
 <==
 
-**Note:**
-- The sequential plan provides a high-level overview of the tasks required to solve the problem.
-- The hierarchical decomposition breaks down each task into more specific subtasks, following the methods defined in the HTN domain.
-- Due to the complexity and depth of the decomposition (especially for resource gathering and factory construction), only a partial expansion is shown for `get_resource resource_11 location_11`. The ellipses (`...`) indicate where similar decompositions would occur for each factory (factory_8 to factory_0) and resource gathering, following the defined methods in the HTN domain.
-- This plan assumes that the preconditions for each method and action are met as the plan unfolds, which might require additional setup or actions not explicitly covered by the provided HTN domain or problem definition.
+root 0
+0 construct_factory last_factory last_location -> m_construct_factory 1 22 23
+1 move location_0 location_1 -> m_goto 2
+2 goto location_11 -> m_goto 3 4
+3 goto location_2 -> m_goto 5 6
+4 goto last_location -> m_goto 7
+5 goto location_3 -> m_goto 8 9
+6 move location_1 location_2 -> m_goto 3
+7 goto location_5 -> m_goto 10 11
+8 goto location_4 -> m_goto 12 13
+9 move location_2 location_3 -> m_goto 5
+10 goto location_6 -> m_goto 14 15
+11 move location_3 location_4 -> m_goto 8
+12 goto location_7 -> m_goto 16 17
+13 move location_4 location_5 -> m_goto 10
+14 goto location_8 -> m_goto 18 19
+15 move location_5 location_6 -> m_goto 14
+16 goto location_9 -> m_goto 20 21
+17 move location_6 location_7 -> m_goto 16
+18 goto location_10 -> m_goto 1 22
+19 move location_7 location_8 -> m_goto 18
+20 move location_8 location_9 -> m_goto 6
+21 move location_9 location_10 -> m_goto 13
+22 get_resource resource_11 location_11 -> m_resource_there

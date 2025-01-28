@@ -1,96 +1,170 @@
 ==>
-**Sequential Plan:**
-
-1. `i-LOCK-AT` `OBJ51` `APT5`
-2. `FLY-AIRPLANE` `APN1` `APT1` `APT5`
-3. `UNLOAD-AIRPLANE` `OBJ51` `APN1` `APT5`
-4. `i-LOCK-AT` `OBJ63` `POS5`
-5. `DRIVE-TRUCK` `TRU5` `POS5` `POS5` `CIT5`
-6. `UNLOAD-TRUCK` `OBJ63` `TRU5` `POS5`
-7. `i-LOCK-AT` `OBJ32` `POS2`
-8. `DRIVE-TRUCK` `TRU2` `POS2` `POS2` `CIT2`
-9. `UNLOAD-TRUCK` `OBJ32` `TRU2` `POS2`
-10. `i-LOCK-AT` `OBJ42` `APT2`
-11. `FLY-AIRPLANE` `APN2` `APT6` `APT2`
-12. `UNLOAD-AIRPLANE` `OBJ42` `APN2` `APT2`
-13. `i-LOCK-AT` `OBJ61` `APT5`
-14. `LOAD-TRUCK` `OBJ61` `TRU6` `POS6`
-15. `DRIVE-TRUCK` `TRU6` `POS6` `POS5` `CIT5`
-16. `UNLOAD-TRUCK` `OBJ61` `TRU6` `POS5`
-17. `i-LOCK-AT` `OBJ21` `APT1`
-18. `LOAD-AIRPLANE` `OBJ21` `APN1` `POS2`
-19. `FLY-AIRPLANE` `APN1` `APT5` `APT1`
-20. `UNLOAD-AIRPLANE` `OBJ21` `APN1` `APT1`
-21. `i-LOCK-AT` `OBJ53` `APT2`
-22. `LOAD-TRUCK` `OBJ53` `TRU3` `POS3`
-23. `DRIVE-TRUCK` `TRU3` `POS3` `POS2` `CIT2`
-24. `UNLOAD-TRUCK` `OBJ53` `TRU3` `POS2`
-25. `i-LOCK-AT` `OBJ41` `APT2`
-26. `LOAD-AIRPLANE` `OBJ41` `APN2` `POS4`
-27. `FLY-AIRPLANE` `APN2` `APT6` `APT2`
-28. `UNLOAD-AIRPLANE` `OBJ41` `APN2` `APT2`
-29. `i-LOCK-AT` `OBJ13` `APT4`
-30. `LOAD-TRUCK` `OBJ13` `TRU4` `POS4`
-31. `DRIVE-TRUCK` `TRU4` `POS4` `POS3` `CIT3`
-32. `UNLOAD-TRUCK` `OBJ13` `TRU4` `POS3`
-33. `i-LOCK-AT` `OBJ12` `APT2`
-34. `LOAD-AIRPLANE` `OBJ12` `APN1` `POS1`
-35. `FLY-AIRPLANE` `APN1` `APT1` `APT2`
-36. `UNLOAD-AIRPLANE` `OBJ12` `APN1` `APT2`
-37. `i-LOCK-AT` `OBJ31` `APT4`
-38. `LOAD-TRUCK` `OBJ31` `TRU1` `POS1`
-39. `DRIVE-TRUCK` `TRU1` `POS1` `POS3` `CIT3`
-40. `UNLOAD-TRUCK` `OBJ31` `TRU1` `POS3`
-41. `i-LOCK-AT` `OBJ22` `POS3`
-42. `DRIVE-TRUCK` `TRU3` `POS3` `POS3` `CIT3`
-43. `UNLOAD-TRUCK` `OBJ22` `TRU3` `POS3`
-44. `i-LOCK-AT` `OBJ11` `APT5`
-45. `LOAD-AIRPLANE` `OBJ11` `APN1` `POS1`
-46. `FLY-AIRPLANE` `APN1` `APT1` `APT5`
-47. `UNLOAD-AIRPLANE` `OBJ11` `APN1` `APT5`
-48. `i-LOCK-AT` `OBJ43` `APT4`
-49. `LOAD-TRUCK` `OBJ43` `TRU2` `POS2`
-50. `DRIVE-TRUCK` `TRU2` `POS2` `POS3` `CIT3`
-51. `UNLOAD-TRUCK` `OBJ43` `TRU2` `POS3`
-52. `i-LOCK-AT` `OBJ52` `APT3`
-53. `LOAD-AIRPLANE` `OBJ52` `APN2` `POS5`
-54. `FLY-AIRPLANE` `APN2` `APT6` `APT3`
-55. `UNLOAD-AIRPLANE` `OBJ52` `APN2` `APT3`
-56. `i-LOCK-AT` `OBJ62` `POS4`
-57. `DRIVE-TRUCK` `TRU4` `POS4` `POS4` `CIT4`
-58. `UNLOAD-TRUCK` `OBJ62` `TRU4` `POS4`
-59. `i-LOCK-AT` `OBJ23` `POS6`
-60. `DRIVE-TRUCK` `TRU6` `POS6` `POS6` `CIT6`
-61. `UNLOAD-TRUCK` `OBJ23` `TRU6` `POS6`
-
-**Hierarchical Decomposition:**
-
+1 move APN1 APT2
+2 DO-IN-UNLOAD-AIRPLANE0 OBJ21 APN1 APT2
+3 move TRU2 APT2
+4 DO-AT-LOAD-TRUCK0 OBJ22 TRU2 APT2
+5 move APN1 APT3
+6 DO-AT-LOAD-AIRPLANE0 OBJ52 APN1 APT3
+7 move TRU3 APT3
+8 DO-IN-UNLOAD-TRUCK0 OBJ22 TRU3 APT3
+9 move TRU3 POS3
+10 move APN1 APT5
+11 DO-AT-LOAD-AIRPLANE0 OBJ51 APN1 APT5
+12 move TRU5 APT5
+13 DO-IN-UNLOAD-TRUCK0 OBJ22 TRU5 APT5
+14 move TRU5 POS5
+15 move APN1 APT1
+16 DO-AT-LOAD-AIRPLANE0 OBJ21 APN1 APT1
+17 move TRU1 APT1
+18 DO-IN-UNLOAD-TRUCK0 OBJ53 TRU1 APT1
+19 move TRU1 POS1
+20 move APN1 APT4
+21 DO-AT-LOAD-AIRPLANE0 OBJ11 APN1 APT4
+22 move TRU4 APT4
+23 DO-IN-UNLOAD-TRUCK0 OBJ12 TRU4 APT4
+24 move TRU4 POS4
+25 move APN1 APT6
+26 DO-AT-LOAD-AIRPLANE0 OBJ63 APN1 APT6
+27 move TRU6 APT6
+28 DO-IN-UNLOAD-TRUCK0 OBJ41 TRU6 APT6
+29 move TRU6 POS6
+30 move APN1 APT2
+31 DO-AT-LOAD-AIRPLANE0 OBJ42 APN1 APT2
+32 move TRU2 APT2
+33 DO-IN-UNLOAD-TRUCK0 OBJ32 TRU2 APT2
+34 move TRU2 POS2
+35 move APN1 APT5
+36 DO-AT-LOAD-AIRPLANE0 OBJ12 APN1 APT5
+37 move TRU5 APT5
+38 DO-IN-UNLOAD-TRUCK0 OBJ53 TRU5 APT5
+39 move TRU5 POS5
+40 move APN1 APT4
+41 DO-AT-LOAD-AIRPLANE0 OBJ13 APN1 APT4
+42 move TRU4 APT4
+43 DO-IN-UNLOAD-TRUCK0 OBJ33 TRU4 APT4
+44 move TRU4 POS4
+45 move APN1 APT1
+46 DO-AT-LOAD-AIRPLANE0 OBJ22 APN1 APT1
+47 move TRU1 APT1
+48 DO-IN-UNLOAD-TRUCK0 OBJ51 TRU1 APT1
+49 move TRU1 POS1
+50 move APN1 APT2
+51 DO-AT-LOAD-AIRPLANE0 OBJ32 APN1 APT2
+52 move TRU2 APT2
+53 DO-IN-UNLOAD-TRUCK0 OBJ13 TRU2 APT2
+54 move TRU2 POS2
+55 move APN1 APT4
+56 DO-AT-LOAD-AIRPLANE0 OBJ41 APN1 APT4
+57 move TRU4 APT4
+58 DO-IN-UNLOAD-TRUCK0 OBJ23 TRU4 APT4
+59 move TRU4 POS4
+60 move APN1 APT5
+61 DO-AT-LOAD-AIRPLANE0 OBJ61 APN1 APT5
+62 move TRU5 APT5
+63 DO-IN-UNLOAD-TRUCK0 OBJ11 TRU5 APT5
+64 move TRU5 POS5
 root 0
-0 ACHIEVE-AT OBJ51 APT5 -> M10-ACHIEVE-AT 1 2
-1 ACHIEVE-AT0 OBJ51 APT5 -> M13-ACHIEVE-AT0 3 4 5
-2 i-LOCK-AT OBJ51 APT5
-3 DO-AT-LOAD-AIRPLANE0 OBJ51 APN1 APT1 -> M5-DO-AT-LOAD-AIRPLANE0 6 7 8
-4 ACHIEVE-AT0 OBJ51 APT5
-5 i-LOCK-AT OBJ51 APT5
-6 ACHIEVE-AT-AIR APN1 APT1 -> M39-ACHIEVE-AT 9 10
-7 IFUNLOCK-AT APN1 APT1 -> IFUNLOCK1-AT 11
-8 LOAD-AIRPLANE OBJ51 APN1 APT1
-9 ACHIEVE-AT2 APN1 APT1
-10 i-LOCK-AT APN1 APT1
-11 i-UNLOCK-AT APN1 APT1
-
-... (due to the extensive length of the decomposition, only the first task's decomposition is fully shown. The remaining tasks follow a similar structure)
-
-**Task Index:**
-
-* `task0`: ACHIEVE-AT OBJ51 APT5
-* `task1`: ACHIEVE-AT OBJ63 POS5
-*...
-* `task16`: ACHIEVE-AT OBJ23 POS6
-
-**Method Index:**
-
-* `M10-ACHIEVE-AT`: ACHIEVE-AT with precondition (not (LOCKED-AT?PACKAGE0?PLACE1)) (not (AT?PACKAGE0?PLACE1))
-* `M13-ACHIEVE-AT0`: ACHIEVE-AT0 with precondition (not (AT?PACKAGE0?PLACE1)) (AT?PACKAGE0?PLACE3)
-*...
-* `M41-ACHIEVE-AT2`: ACHIEVE-AT2 with precondition (not (AT?AIRPLANE0?AIRPORT1)) (AT?AIRPLANE0?AIRPORT3)
+65 achieve_at OBJ51 APT5 -> m7_do_in_unlock_truck0 60 65 66
+66 achieve_at OBJ63 POS5 -> m1_do_at_unlock_truck0 64 67 68
+67 achieve_at OBJ32 POS2 -> m6_do_in_unlock_truck0 58 69 70
+68 achieve_at OBJ42 APT2 -> m3_do_at_unlock_airplane0 62 71 72
+69 achieve_at OBJ21 APT1 -> m2_do_in_unlock_airplane0 54 73 74
+70 achieve_at OBJ53 APT2 -> m5_do_at_unlock_airplane0 44 75 76
+71 achieve_at OBJ41 APT2 -> m3_do_at_unlock_airplane0 40 77 78
+72 achieve_at OBJ13 APT4 -> m5_do_at_unlock_airplane0 34 79 80
+73 achieve_at OBJ12 APT2 -> m4_do_at_unlock_truck0 26 81 82
+74 achieve_at OBJ31 APT4 -> m6_do_in_unlock_truck0 20 83 84
+75 achieve_at OBJ22 POS3 -> m7_do_in_unlock_truck0 14 85 86
+76 achieve_at OBJ43 APT4 -> m5_do_at_unlock_airplane0 10 87 88
+77 achieve_at OBJ52 APT3 -> m1_do_at_unlock_airplane0 6 89 90
+78 achieve_at OBJ62 POS4 -> m7_do_in_unlock_truck0 4 91 92
+79 achieve_at OBJ23 POS6 -> m2_do_in_unlock_airplane0 50 93 94
+80 achieve_at OBJ11 APT5 -> m8_do_at_unlock_truck0 48 95 96
+81 achieve_at OBJ61 APT5 -> m8_do_at_unlock_truck0 46 97 98
+82 achieve_at OBJ51 POS5 -> m7_do_in_unlock_truck0 42 99 100
+83 achieve_at OBJ12 POS1 -> m10_do_at_unlock_truck0 36 101 102
+84 achieve_at OBJ13 POS1 -> m6_do_in_unlock_truck0 32 103 104
+85 achieve_at OBJ22 POS2 -> m10_do_at_unlock_truck0 28 105 106
+86 achieve_at OBJ32 APT2 -> m9_do_at_unlock_airplane0 24 107 108
+87 achieve_at OBJ53 POS5 -> m9_do_at_unlock_airplane0 18 109 110
+88 achieve_at OBJ42 POS2 -> m4_do_at_unlock_truck0 16 111 112
+89 achieve_at OBJ63 APT5 -> m3_do_at_unlock_airplane0 12 113 114
+90 achieve_at OBJ41 POS4 -> m6_do_in_unlock_truck0 8 115 116
+91 achieve_at OBJ21 POS2 -> m7_do_in_unlock_truck0 4 117 118
+92 achieve_at OBJ22 APT3 -> m9_do_at_unlock_airplane0 2 119 120
+93 achieve_at OBJ11 POS1 -> m4_do_at_unlock_truck0 118 121 122
+94 achieve_at OBJ13 APT2 -> m5_do_at_unlock_airplane0 106 123 124
+95 achieve_at OBJ12 POS5 -> m10_do_at_unlock_truck0 104 125 126
+96 achieve_at OBJ22 APT4 -> m1_do_at_unlock_truck0 100 127 128
+97 achieve_at OBJ31 APT1 -> m2_do_in_unlock_airplane0 98 129 130
+98 achieve_at OBJ51 POS1 -> m11_do_at_unlock_truck0 94 131 132
+99 achieve_at OBJ22 POS1 -> m2_do_in_unlock_airplane0 90 133 134
+100 achieve_at OBJ13 APT1 -> m9_do_at_unlock_airplane0 84 135 136
+101 achieve_at OBJ31 POS2 -> m4_do_at_unlock_truck0 76 137 138
+102 achieve_at OBJ23 POS1 -> m11_do_at_unlock_truck0 70 139 140
+103 achieve_at OBJ41 POS2 -> m9_do_at_unlock_airplane0 60 141 142
+104 achieve_at OBJ21 APT4 -> m6_do_in_unlock_truck0 44 143 144
+105 achieve_at OBJ53 POS1 -> m2_do_in_unlock_airplane0 36 145 146
+106 achieve_at OBJ32 POS5 -> m10_do_at_unlock_truck0 28 147 148
+107 achieve_at OBJ51 POS3 -> m4_do_at_unlock_truck0 22 149 150
+108 achieve_at OBJ62 POS1 -> m4_do_at_unlock_truck0 16 151 152
+109 achieve_at OBJ52 APT6 -> m3_do_at_unlock_airplane0 10 153 154
+110 achieve_at OBJ11 POS6 -> m3_do_at_unlock_airplane0 4 155 156
+111 achieve_at OBJ42 APT1 -> m2_do_in_unlock_airplane0 154 157 158
+112 achieve_at OBJ13 APT5 -> m9_do_at_unlock_airplane0 152 159 160
+113 achieve_at OBJ22 APT5 -> m4_do_at_unlock_truck0 148 161 162
+114 achieve_at OBJ53 APT1 -> m11_do_at_unlock_truck0 144 163 164
+115 achieve_at OBJ23 POS2 -> m10_do_at_unlock_truck0 138 165 166
+116 achieve_at OBJ52 APT2 -> m6_do_in_unlock_truck0 134 167 168
+117 achieve_at OBJ32 APT4 -> m9_do_at_unlock_airplane0 124 169 170
+118 achieve_at OBJ41 APT6 -> m3_do_at_unlock_airplane0 118 171 172
+119 achieve_at OBJ51 APT3 -> m8_do_at_unlock_truck0 112 173 174
+120 achieve_at OBJ32 POS4 -> m6_do_in_unlock_truck0 106 175 176
+121 achieve_at OBJ43 APT3 -> m4_do_at_unlock_airplane0 98 177 178
+122 achieve_at OBJ21 APT5 -> m8_do_at_unlock_truck0 94 179 180
+123 achieve_at OBJ33 POS1 -> m1_do_in_unlock_truck0 88 181 182
+124 achieve_at OBJ61 POS4 -> m11_do_at_unlock_truck0 82 183 184
+125 achieve_at OBJ52 APT4 -> m6_do_in_unlock_airplane0 76 185 186
+126 achieve_at OBJ12 APT3 -> m4_do_at_unlock_airplane0 68 187 188
+127 achieve_at OBJ32 APT3 -> m4_do_at_unlock_airplane0 62 189 190
+128 achieve_at OBJ23 POS3 -> m11_do_at_unlock_truck0 56 191 192
+129 achieve_at OBJ33 APT2 -> m6_do_in_unlock_airplane0 48 193 194
+130 achieve_at OBJ42 POS1 -> m10_do_at_unlock_airplane0 42 195 196
+131 achieve_at OBJ11 POS4 -> m8_do_at_unlock_truck0 36 197 198
+132 achieve_at OBJ41 POS1 -> m9_do_at_unlock_airplane0 30 199 200
+133 achieve_at OBJ43 APT6 -> m9_do_at_unlock_airplane0 20 201 202
+134 achieve_at OBJ32 APT5 -> m3_do_at_unlock_airplane0 10 203 204
+135 achieve_at OBJ62 POS2 -> m6_do_in_unlock_truck0 2 205 206
+136 achieve_at OBJ63 APT2 -> m9_do_at_unlock_airplane0 206 207 208
+137 achieve_at OBJ21 POS1 -> m4_do_at_unlock_truck0 204 209 210
+138 achieve_at OBJ11 APT1 -> m2_do_in_unlock_airplane0 198 211 212
+139 achieve_at OBJ12 POS2 -> m9_do_at_unlock_truck0 194 213 214
+140 achieve_at OBJ53 APT4 -> m11_do_at_unlock_airplane0 186 215 216
+141 achieve_at OBJ52 APT1 -> m1_do_at_unlock_airplane0 176 217 218
+142 achieve_at OBJ13 APT3 -> m6_do_in_unlock_airplane0 164 219 220
+143 achieve_at OBJ31 POS3 -> m2_do_in_unlock_truck0 156 221 222
+144 achieve_at OBJ61 APT1 -> m6_do_in_unlock_airplane0 150 223 224
+145 achieve_at OBJ42 POS5 -> m3_do_at_unlock_airplane0 142 225 226
+146 achieve_at OBJ51 POS2 -> m4_do_at_unlock_truck0 138 227 228
+147 achieve_at OBJ31 APT5 -> m8_do_at_unlock_truck0 128 229 230
+148 achieve_at OBJ22 APT1 -> m7_do_in_unlock_airplane0 121 231 232
+149 achieve_at OBJ43 POS3 -> m4_do_at_unlock_airplane0 106 233 234
+150 achieve_at OBJ62 APT1 -> m6_do_in_unlock_airplane0 98 235 236
+151 achieve_at OBJ33 POS4 -> m10_do_at_unlock_truck0 92 237 238
+152 achieve_at OBJ32 POS1 -> m5_do_at_unlock_airplane0 88 239 240
+153 achieve_at OBJ41 APT3 -> m6_do_in_unlock_airplane0 78 241 242
+154 achieve_at OBJ53 POS2 -> m7_do_in_unlock_airplane0 70 243 244
+155 achieve_at OBJ13 APT6 -> m9_do_at_unlock_airplane0 60 245 246
+156 achieve_at OBJ23 APT4 -> m3_do_at_unlock_airplane0 50 247 248
+157 achieve_at OBJ42 APT6 -> m5_do_at_unlock_airplane0 42 249 250
+158 achieve_at OBJ52 APT5 -> m8_do_at_unlock_airplane0 36 251 252
+159 achieve_at OBJ42 POS3 -> m5_do_at_unlock_airplane0 29 253 254
+160 achieve_at OBJ23 APT1 -> m1_do_at_unlock_airplane0 18 255 256
+161 achieve_at OBJ21 POS5 -> m4_do_at_unlock_truck0 12 257 258
+162 achieve_at OBJ11 APT6 -> m5_do_at_unlock_airplane0 6 259 260
+163 achieve_at OBJ13 POS6 -> m2_do_in_unlock_truck0 2 261 262
+164 achieve_at OBJ41 POS5 -> m4_do_at_unlock_airplane0 262 263 264
+165 achieve_at OBJ63 POS3 -> m2_do_in_unlock_truck0 258 265 266
+166 achieve_at OBJ51 POS4 -> m10_do_at_unlock_truck0 254 267 268
+167 achieve_at OBJ42 POS6 -> m8_do_at_unlock_airplane0 248 269 270
+168 achieve_at OBJ61 POS2 -> m7_do

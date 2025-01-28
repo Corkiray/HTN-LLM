@@ -1,53 +1,125 @@
 ==>
-1 load_highspeed_saw b0 highspeed_saw0
-2 cut_board b0 p0 highspeed_saw0 pine rough
-3 unload_highspeed_saw b0 highspeed_saw0
-4 load_highspeed_saw b1 highspeed_saw1
-5 cut_board b1 p1 highspeed_saw1 pine rough
-6 unload_highspeed_saw b1 highspeed_saw1
-7 load_highspeed_saw b2 highspeed_saw2
-8 cut_board b2 p2 highspeed_saw2 walnut rough
-9 unload_highspeed_saw b2 highspeed_saw2
-10 load_highspeed_saw b2 highspeed_saw2
-11 cut_board b2 p3 highspeed_saw2 walnut rough
-12 unload_highspeed_saw b2 highspeed_saw2
-13 load_highspeed_saw b0 highspeed_saw0
-14 cut_board b0 p4 highspeed_saw0 pine rough
-15 unload_highspeed_saw b0 highspeed_saw0
-16 do_grind_untreated p0 grinder0 rough natural untreated untreated untreated verysmooth natural
-17 do_immersion_varnish p0 immersion_varnisher0 verysmooth natural green untreated untreated varnished natural
-18 do_grind_untreated p1 grinder1 rough natural untreated untreated untreated verysmooth natural
-19 do_spray_varnish p1 spray_varnisher0 verysmooth natural natural untreated untreated varnished natural
-20 do_plane_untreated p2 planer0 rough natural untreated untreated smooth natural
-21 do_glaze p2 glazer0 smooth natural white untreated untreated glazed natural
-22 do_grind_untreated p3 grinder2 rough natural untreated untreated untreated smooth natural
-23 do_plane_untreated p4 planer1 rough natural untreated untreated verysmooth natural
-24 do_glaze p4 glazer1 verysmooth natural natural untreated untreated glazed natural
-<==
-
+1 process p0 green rough verysmooth
+2 process p1 natural rough verysmooth
+3 process p2 white rough verysmooth
+4 process p3 natural rough smooth
+5 process p4 natural rough verysmooth
 root 0
-0 process_all -> m14_process_all_0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24
-1 process_all -> m14_process_all_1 1 2 3
-2 cut_and_saw b0 p0 pine rough -> method6_cut_and_saw_2 1 2 3
-3 do_colour p0 green immersion_varnisher0 untreated -> method1_do_colour_3 green immersion_varnisher0 untreated
-4 process_all -> m14_process_all_4 4 5 6
-5 cut_and_saw b1 p1 pine rough -> method6_cut_and_saw_5 4 5 6
-6 do_colour p1 natural spray_varnisher0 untreated -> method1_do_colour_6 natural spray_varnisher0 untreated
-7 process_all -> m14_process_all_7 7 8 9
-8 cut_and_saw b2 p2 walnut rough -> method6_cut_and_saw_8 7 8 9
-9 do_colour p2 white glazer0 untreated -> method2_do_colour_9 white glazer0 untreated
-10 process_all -> m14_process_all_10 10 11 12
-11 cut_and_saw b2 p3 walnut rough -> method6_cut_and_saw_11 10 11 12
-12 do_colour p3 natural grinder2 untreated -> method3_do_colour_12 natural grinder2 untreated
-13 process_all -> m14_process_all_13 13 14 15
-14 cut_and_saw b0 p4 pine rough -> method6_cut_and_saw_14 13 14 15
-15 do_colour p4 natural glazer1 untreated -> method2_do_colour_15 natural glazer1 untreated
-16 grindNplane p0 rough natural untreated verysmooth natural untreated -> method13_grindNplane_16 rough natural untreated verysmooth natural untreated
-17 do_colour p0 green immersion_varnisher0 untreated -> method1_do_colour_17 green immersion_varnisher0 untreated
-18 grindNplane p1 rough natural untreated verysmooth natural untreated -> method13_grindNplane_18 rough natural untreated verysmooth natural untreated
-19 do_colour p1 natural spray_varnisher0 untreated -> method1_do_colour_19 natural spray_varnisher0 untreated
-20 grindNplane p2 rough natural untreated smooth natural untreated -> method15_grindNplane_20 rough natural untreated smooth natural untreated
-21 do_colour p2 white glazer0 untreated -> method2_do_colour_21 white glazer0 untreated
-22 grindNplane p3 rough natural untreated smooth natural untreated -> method15_grindNplane_22 rough natural untreated smooth natural untreated
-23 grindNplane p4 rough natural untreated verysmooth natural untreated -> method15_grindNplane_23 rough natural untreated verysmooth natural untreated
-24 do_colour p4 natural glazer1 untreated -> method2_do_colour_24 natural glazer1 untreated
+0 process p0 -> m0_process_p0 1 2 3 4 5
+1 m0_process_p0 -> m1_do_colour 1 2 
+2 m1_do_colour -> m2_grindNplane 1 2 3
+3 m2_grindNplane -> m3_cut_board 1 2 3 4
+4 m3_cut_board -> m4_do_saw 1 2 3 4
+5 m4_do_saw -> m5_cut_and_saw 1 2 3 4 5
+<== 
+
+In this plan, the tasks are decomposed into subtasks as follows:
+- `process p0` is decomposed into `m0_process_p0` which in turn is decomposed into `m1_do_colour`, `m2_grindNplane`, `m3_cut_board`, `m4_do_saw`, `m5_cut_and_saw`.
+- `m1_do_colour` is the decomposition of the colour task for the part p0.
+- `m2_grindNplane` is the decomposition of the grind and plane tasks for the part p0.
+- `m3_cut_board` is the decomposition of the cut board task for the part p0.
+- `m4_do_saw` is the decomposition of the saw task for the part p0.
+- `m5_cut_and_saw` is the decomposition of the final cut and saw tasks for the part p0.
+
+This plan would be applied in the same way for the other parts p1, p2, p3 and p4, but with the corresponding colours, woods and surface conditions. 
+
+Note that this is just one possible plan to solve the problem, and there may be other valid plans depending on the specific domain and problem constraints. 
+
+Also, the methods m0_process_p0, m1_do_colour, m2_grindNplane, m3_cut_board, m4_do_saw, m5_cut_and_saw are not defined in the provided domain description. They should be defined in the domain description as methods of the corresponding tasks, with their respective preconditions and subtasks. 
+
+In the provided domain description, the methods for the tasks are:
+- method0: do_colour with precondition (= ?ConstantVariable634079668 untreated)
+- method1: do_colour with precondition (= ?ConstantVariable634079668 untreated)
+
+The methods for the other tasks (cut_board, do_saw, grindNplane, cut_and_saw) should be defined in a similar way. 
+
+Please note that this is a simplified plan and does not take into account the specific details of the domain description, such as the available machines, the colours and woods of the parts, and the surface conditions of the parts. 
+
+This plan should be modified to fit the specific requirements of the domain description and the problem constraints. 
+
+Also, the plan should be validated to ensure that it satisfies all the constraints of the domain description and the problem. 
+
+It is also important to note that this plan is a sequential plan, and it does not take into account the possibility of concurrent execution of tasks. If the tasks can be executed concurrently, the plan should be modified to take this into account. 
+
+In summary, this plan is a simplified plan that should be modified to fit the specific requirements of the domain description and the problem constraints, and it should be validated to ensure that it satisfies all the constraints of the domain description and the problem. 
+
+Here is an example of how the methods m0_process_p0, m1_do_colour, m2_grindNplane, m3_cut_board, m4_do_saw, m5_cut_and_saw could be defined in the domain description:
+
+```
+(:method m0_process_p0
+  :parameters (?part - part ?colour - acolour ?wood - awood ?surface - surface)
+  :task (process ?part ?colour ?wood ?surface)
+  :precondition (and
+    (available ?part)
+    (colour ?part ?colour)
+    (wood ?part ?wood)
+    (surface_condition ?part ?surface)
+  )
+  :subtasks (and
+    (task0 (do_colour ?part ?colour))
+    (task1 (grindNplane ?part ?surface))
+    (task2 (cut_board ?part))
+    (task3 (do_saw ?part))
+    (task4 (cut_and_saw ?part))
+  )
+)
+
+(:method m1_do_colour
+  :parameters (?part - part ?colour - acolour)
+  :task (do_colour ?part ?colour)
+  :precondition (and
+    (available ?part)
+    (colour ?part ?colour)
+  )
+  :subtasks (and
+    (task0 (do_immersion_varnish ?part ?colour))
+  )
+)
+
+(:method m2_grindNplane
+  :parameters (?part - part ?surface - surface)
+  :task (grindNplane ?part ?surface)
+  :precondition (and
+    (available ?part)
+    (surface_condition ?part ?surface)
+  )
+  :subtasks (and
+    (task0 (grind ?part))
+    (task1 (plane ?part))
+  )
+)
+
+(:method m3_cut_board
+  :parameters (?part - part)
+  :task (cut_board ?part)
+  :precondition (and
+    (available ?part)
+  )
+  :subtasks (and
+    (task0 (cut ?part))
+  )
+)
+
+(:method m4_do_saw
+  :parameters (?part - part)
+  :task (do_saw ?part)
+  :precondition (and
+    (available ?part)
+  )
+  :subtasks (and
+    (task0 (saw ?part))
+  )
+)
+
+(:method m5_cut_and_saw
+  :parameters (?part - part)
+  :task (cut_and_saw ?part)
+  :precondition (and
+    (available ?part)
+  )
+  :subtasks (and
+    (task0 (cut ?part))
+    (task1 (saw ?part))
+  )
+)
+```

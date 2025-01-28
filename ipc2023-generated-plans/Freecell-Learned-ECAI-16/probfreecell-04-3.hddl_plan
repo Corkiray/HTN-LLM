@@ -1,159 +1,58 @@
-==>
-1 move C4 C3
-2 board C3 f0
-3 move S4 C2
-4 board C2 f1
-5 move C2 S4
-6 debark f1 C2
-7 move D4 S3
-8 board S3 f0
-9 move S3 D4
-10 debark f0 S3
-11 move H4 D3
-12 board D3 f1
-13 move D3 H4
-14 debark f1 D3
-15 move C3 C2
-16 board C2 f0
-17 move C2 C3
-18 debark f0 C2
-19 move S3 S2
-20 board S2 f1
-21 move S2 S3
-22 debark f1 S2
-23 move D3 D2
-24 board D2 f0
-25 move D2 D3
-26 debark f0 D2
-27 move H3 H2
-28 board H2 f1
-29 move H2 H3
-30 debark f1 H2
-31 move S2 SA
-32 board SA f0
-33 move SA S2
-34 debark f0 SA
-35 move D2 DA
-36 board DA f1
-37 move DA D2
-38 debark f1 DA
-39 move H2 HA
-40 board HA f0
-41 move HA H2
-42 debark f0 HA
-43 move C2 CA
-44 board CA f1
-45 move CA C2
-46 debark f1 CA
-47 move S4 S3
-48 board S3 f0
-49 move S3 S4
-50 debark f0 S3
-51 move D4 D3
-52 board D3 f1
-53 move D3 D4
-54 debark f1 D3
-55 move H4 H3
-56 board H3 f0
-57 move H3 H4
-58 debark f0 H3
-59 move C4 C3
-60 board C3 f1
-61 move C3 C4
-62 debark f1 C3
-63 move S4 C4
-64 board C4 f0
-65 move C4 S4
-66 debark f0 C4
-67 move D4 S4
-68 board S4 f1
-69 move S4 D4
-70 debark f1 S4
-71 move H4 D4
-72 board D4 f0
-73 move D4 H4
-74 debark f0 D4
-75 move C3 C2
-76 board C2 f1
-77 move C2 C3
-78 debark f1 C2
-79 move S3 S2
-80 board S2 f0
-81 move S2 S3
-82 debark f0 S2
-83 move D3 D2
-84 board D2 f1
-85 move D2 D3
-86 debark f1 D2
-87 move H3 H2
-88 board H2 f0
-89 move H2 H3
-90 debark f0 H2
-91 move S2 SA
-92 board SA f1
-93 move SA S2
-94 debark f1 SA
-95 move D2 DA
-96 board DA f0
-97 move DA D2
-98 debark f0 DA
-99 move H2 HA
-100 board HA f1
-101 move HA H2
-102 debark f1 HA
-103 move C2 CA
-104 board CA f0
-105 move CA C2
-106 debark f0 CA
-107 sendtonecol S4 N0 N1
-108 sendtonecol D4 N0 N1
-109 sendtonecol H4 N0 N1
-110 sendtohome C4 N1 C0 N0
-<==
-
-root 0
-0 solve -> m1_solve_0 1 2 3
-1 task0 (ACHIEVE-HOME C4) -> m1_achieve_home_0 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107
-2 task1 (ACHIEVE-HOME D4) -> m1_achieve_home_1 108
-3 task2 (ACHIEVE-HOME H4) -> m1_achieve_home_2 109
-4 achieve-clear2 C4 -> m1_achieve_clear_0 4 5
-5 achieve-clear2 C3 -> m1_achieve_clear_1 6 7
-6 achieve-on2 C4 C3 -> m1_achieve_on_0 1 8 9 10 11 12 13 14
-7 achieve-on2 C3 C2 -> m1_achieve_on_1 15 16 17 18 19 20 21 22
-8 achieve-clear2 C2 -> m1_achieve_clear_2 23 24
-9 achieve-clear2 S4 -> m1_achieve_clear_3 25 26
-10 achieve-on2 S4 C4 -> m1_achieve_on_2 3 27 28 29 30 31 32 33
-11 achieve-clear2 D3 -> m1_achieve_clear_4 34 35
-12 achieve-on2 D3 S3 -> m1_achieve_on_3 36 37 38 39 40 41 42 43
-13 achieve-clear2 S3 -> m1_achieve_clear_5 44 45
-14 achieve-on2 S3 D4 -> m1_achieve_on_4 2 46 47 48 49 50 51 52
-15 achieve-clear2 D2 -> m1_achieve_clear_6 53 54
-16 achieve-clear2 DA -> m1_achieve_clear_7 55 56
-17 achieve-on2 DA D2 -> m1_achieve_on_5 57 58 59 60 61 62 63
-18 achieve-clear2 H2 -> m1_achieve_clear_8 64 65
-19 achieve-clear2 HA -> m1_achieve_clear_9 66 67
-20 achieve-on2 HA H2 -> m1_achieve_on_6 68 69 70 71 72 73 74
-21 achieve-clear2 S2 -> m1_achieve_clear_10 75 76
-22 achieve-on2 S2 SA -> m1_achieve_on_7 77 78 79 80 81 82
-23 achieve-clear2 CA -> m1_achieve_clear_11 83 84
-24 achieve-on2 CA C2 -> m1_achieve_on_8 85 86 87 88 89 90
-25 achieve-clear2 C2 -> m1_achieve_clear_12 91 92
-26 achieve-on2 C2 S4 -> m1_achieve_on_9 93 94 95 96 97 98
-27 achieve-clear2 S4 -> m1_achieve_clear_13 99 100
-28 achieve-on2 S4 C4 -> m1_achieve_on_10 102 103 104 105 106 107
-29 achieve-clear2 D4 -> m1_achieve_clear_14 108
-30 achieve-on2 D4 S4 -> m1_achieve_on_11 109
-31 achieve-clear2 H4 -> m1_achieve_clear_15 110
-32 achieve-on2 H4 D4 -> m1_achieve_on_12 111
-33 achieve-clear2 C3 -> m1_achieve_clear_16 112 113
-34 achieve-on2 C3 C2 -> m1_achieve_on_13 114 115 116 117 118
-35 achieve-clear2 C2 -> m1_achieve_clear_17 119 120
-36 achieve-on2 C2 S3 -> m1_achieve_on_14 121 122 123 124 125
-37 achieve-clear2 S3 -> m1_achieve_clear_18 126 127
-38 achieve-on2 S3 D4 -> m1_achieve_on_15 128
-39 achieve-clear2 D3 -> m1_achieve_clear_19 129 130
-40 achieve-on2 D3 S3 -> m1_achieve_on_16 131 132 133 134
-41 achieve-clear2 S2 -> m1_achieve_clear_20 135 136
-42 achieve-on2 S2 DA -> m1_achieve_on_17 137 138 139 140
-43 achieve-clear2 DA -> m1_achieve_clear_21 141 142
-44 achieve-on2 DA D2 -> m1_achieve_on_
+ ===> 
+1 move C3 S4 
+2 move D2 S3 
+3 move D3 C3 
+4 move C2 S2 
+5 move CA SA 
+6 move C4 D4 
+7 move DA S0 
+8 move S2 H3 
+9 move C3 N11 
+10 move D3 C0 
+11 move H2 H0 
+12 move S3 D0 
+13 move H3 N13 
+14 move C2 N10 
+15 move D2 N9 
+16 move S4 N12 
+17 move DA N8 
+18 move C4 N7 
+19 move SA N6 
+20 move CA N5 
+21 move S0 N4 
+22 move H4 N3 
+23 move D4 N2 
+24 move H0 N1 
+root 0 
+0 IFUNLOCK-CELLSPACE N8 -> m1_locking_0 17 
+1 IFUNLOCK-COLSPACE N4 -> m2_locking_1 21 
+2 IFUNLOCK-CELLSPACE N12 -> m3_locking_2 16 
+3 IFUNLOCK-COLSPACE N1 -> m4_locking_3 24 
+4 IFUNLOCK-CELLSPACE N9 -> m5_locking_4 15 
+5 IFUNLOCK-COLSPACE N2 -> m6_locking_5 23 
+6 IFUNLOCK-CELLSPACE N10 -> m7_locking_6 14 
+7 IFUNLOCK-COLSPACE N3 -> m8_locking_7 22 
+8 IFUNLOCK-CELLSPACE N11 -> m9_locking_8 9 
+9 IFUNLOCK-HOME DA -> m10_locking_9 17 
+10 achieve D4 -> m11_doing_0 6 20 16 22 
+11 IFUNLOCK-HOME C4 -> m12_locking_10 14 
+12 achieve S4 -> m13_doing_1 1 2 4 14 
+13 IFUNLOCK-CELLSPACE N13 -> m14_locking_11 19 
+14 IFUNLOCK-HOME H4 -> m15_locking_12 22 
+15 IFUNLOCK-HOME S4 -> m16_locking_13 19 
+16 achieve C4 -> m17_doing_2 5 6 8 14 
+17 IFUNLOCK-CELLSPACE N7 -> m18_locking_14 18 
+18 IFUNLOCK-HOME C4 -> m19_locking_15 14 
+19 achieve C4 -> m20_doing_3 5 6 7 18 
+20 IFUNLOCK-HOME S4 -> m21_locking_16 19 
+21 achieve S4 -> m22_doing_4 7 8 10 11 18 
+22 IFUNLOCK-INCELL DA -> m23_locking_17 10 
+23 IFUNLOCK-INCELL S4 -> m24_locking_18 11 
+24 DO-INCELL-COLFROMFREECELL1 C4 DA N3 N0 -> m25_doing_5 10 11 
+25 achieve-home C4 -> m26_doing_6 12 
+26 achieve-home D4 -> m27_doing_7 18 
+27 achieve-home H4 -> m28_doing_8 14 
+28 achieve-home S4 -> m29_doing_9 19 
+29 achieve C4 -> m30_doing_10 15 
+30 achieve S4 -> m31_doing_11 16 
+<===

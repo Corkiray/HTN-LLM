@@ -1,0 +1,15 @@
+==>
+1 move r1 t1 t2
+2 selectDirection r1 t1 t2 t3
+3 rotateTower t1 t3 t2
+4 move_abstract t1 t3
+5 move r1 t1 t3
+6 exchange t1 t3 t2
+7 move r11 t1 t3
+root 0
+0 shiftTower t1 t2 t3 -> m-shiftTower r1 t1 t2 t3 1 2
+2 selectDirection r1 t1 t2 t3 -> selectedDirection r1 t1 t2 t3 3
+3 rotateTower t1 t3 t2 -> m-rotateTower t1 t3 t2 4 6
+4 move_abstract t1 t3 -> newMethod21 r1 t1 t1 t3 t3 5
+6 exchange t1 t3 t2 -> exchangeLR r11 t3 t1 t3 t2 7 3
+<==

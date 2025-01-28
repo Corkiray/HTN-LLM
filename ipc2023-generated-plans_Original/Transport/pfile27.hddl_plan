@@ -1,0 +1,121 @@
+==>
+**Sequential Plan**
+```
+1. drive truck_2 city_loc_7 city_loc_4
+2. pick_up truck_2 city_loc_4 package_10 capacity_1 capacity_2
+3. drive truck_2 city_loc_4 city_loc_8
+4. drop truck_2 city_loc_8 package_10 capacity_0 capacity_1
+5. drive truck_1 city_loc_3 city_loc_1
+6. pick_up truck_1 city_loc_1 package_6 capacity_1 capacity_2
+7. drive truck_1 city_loc_1 city_loc_0
+8. drop truck_1 city_loc_0 package_6 capacity_0 capacity_1
+9. drive truck_0 city_loc_12 city_loc_9
+10. pick_up truck_0 city_loc_9 package_14 capacity_1 capacity_2
+11. noop truck_0 city_loc_9
+12. drive truck_3 city_loc_3 city_loc_8
+13. pick_up truck_3 city_loc_8 package_3 capacity_1 capacity_2
+14. drive truck_3 city_loc_8 city_loc_6
+15. drop truck_3 city_loc_6 package_3 capacity_0 capacity_1
+16. drive truck_4 city_loc_12 city_loc_11
+17. pick_up truck_4 city_loc_11 package_2 capacity_1 capacity_2
+18. drive truck_4 city_loc_11 city_loc_8
+19. drop truck_4 city_loc_8 package_2 capacity_0 capacity_1
+20. drive truck_2 city_loc_8 city_loc_5
+21. pick_up truck_2 city_loc_5 package_0 capacity_1 capacity_2
+22. drive truck_2 city_loc_5 city_loc_9
+23. drop truck_2 city_loc_9 package_0 capacity_0 capacity_1
+24. drive truck_1 city_loc_0 city_loc_2
+25. pick_up truck_1 city_loc_2 package_1 capacity_1 capacity_2
+26. drive truck_1 city_loc_2 city_loc_0
+27. drop truck_1 city_loc_0 package_1 capacity_0 capacity_1
+28. drive truck_3 city_loc_6 city_loc_8
+29. pick_up truck_3 city_loc_8 package_7 capacity_1 capacity_2
+30. drive truck_3 city_loc_8 city_loc_8
+31. drop truck_3 city_loc_8 package_7 capacity_0 capacity_1
+32. drive truck_4 city_loc_8 city_loc_1
+33. pick_up truck_4 city_loc_1 package_11 capacity_1 capacity_2
+34. noop truck_4 city_loc_1
+35. drive truck_0 city_loc_9 city_loc_12
+36. pick_up truck_0 city_loc_12 package_9 capacity_1 capacity_2
+37. drive truck_0 city_loc_12 city_loc_12
+38. drop truck_0 city_loc_12 package_9 capacity_0 capacity_1
+39. drive truck_2 city_loc_9 city_loc_13
+40. pick_up truck_2 city_loc_13 package_6 capacity_1 capacity_2
+41. drive truck_2 city_loc_13 city_loc_6
+42. drop truck_2 city_loc_6 package_6 capacity_0 capacity_1
+43. drive truck_1 city_loc_0 city_loc_5
+44. pick_up truck_1 city_loc_5 package_13 capacity_1 capacity_2
+45. drive truck_1 city_loc_5 city_loc_0
+46. drop truck_1 city_loc_0 package_13 capacity_0 capacity_1
+47. drive truck_3 city_loc_8 city_loc_4
+48. pick_up truck_3 city_loc_4 package_4 capacity_1 capacity_2
+49. drive truck_3 city_loc_4 city_loc_13
+50. drop truck_3 city_loc_13 package_4 capacity_0 capacity_1
+51. drive truck_4 city_loc_1 city_loc_5
+52. pick_up truck_4 city_loc_5 package_8 capacity_1 capacity_2
+53. drive truck_4 city_loc_5 city_loc_11
+54. drop truck_4 city_loc_11 package_8 capacity_0 capacity_1
+55. drive truck_0 city_loc_12 city_loc_0
+56. pick_up truck_0 city_loc_0 package_5 capacity_1 capacity_2
+57. drive truck_0 city_loc_0 city_loc_9
+58. drop truck_0 city_loc_9 package_5 capacity_0 capacity_1
+59. drive truck_2 city_loc_6 city_loc_8
+60. pick_up truck_2 city_loc_8 package_12 capacity_1 capacity_2
+61. drive truck_2 city_loc_8 city_loc_6
+62. drop truck_2 city_loc_6 package_12 capacity_0 capacity_1
+63. drive truck_1 city_loc_0 city_loc_9
+64. pick_up truck_1 city_loc_9 package_14 capacity_1 capacity_2
+65. noop truck_1 city_loc_9
+66. drive truck_3 city_loc_13 city_loc_5
+67. pick_up truck_3 city_loc_5 package_13 capacity_1 capacity_2
+68. drive truck_3 city_loc_5 city_loc_0
+69. drop truck_3 city_loc_0 package_13 capacity_0 capacity_1
+70. drive truck_4 city_loc_11 city_loc_1
+71. pick_up truck_4 city_loc_1 package_11 capacity_1 capacity_2
+72. noop truck_4 city_loc_1
+73. drive truck_0 city_loc_9 city_loc_4
+74. pick_up truck_0 city_loc_4 package_10 capacity_1 capacity_2
+75. drive truck_0 city_loc_4 city_loc_4
+76. drop truck_0 city_loc_4 package_10 capacity_0 capacity_1
+77. drive truck_2 city_loc_6 city_loc_1
+78. pick_up truck_2 city_loc_1 package_11 capacity_1 capacity_2
+79. noop truck_2 city_loc_1
+80. drive truck_1 city_loc_9 city_loc_12
+81. pick_up truck_1 city_loc_12 package_9 capacity_1 capacity_2
+82. drive truck_1 city_loc_12 city_loc_12
+83. drop truck_1 city_loc_12 package_9 capacity_0 capacity_1
+84. drive truck_3 city_loc_0 city_loc_8
+85. pick_up truck_3 city_loc_8 package_7 capacity_1 capacity_2
+86. drive truck_3 city_loc_8 city_loc_8
+87. drop truck_3 city_loc_8 package_7 capacity_0 capacity_1
+88. drive truck_4 city_loc_1 city_loc_6
+89. pick_up truck_4 city_loc_6 package_12 capacity_1 capacity_2
+90. drive truck_4 city_loc_6 city_loc_6
+91. drop truck_4 city_loc_6 package_12 capacity_0 capacity_1
+92. drive truck_0 city_loc_4 city_loc_5
+93. pick_up truck_0 city_loc_5 package_0 capacity_1 capacity_2
+94. drive truck_0 city_loc_5 city_loc_9
+95. drop truck_0 city_loc_9 package_0 capacity_0 capacity_1
+96. drive truck_2 city_loc_1 city_loc_13
+97. pick_up truck_2 city_loc_13 package_6 capacity_1 capacity_2
+98. drive truck_2 city_loc_13 city_loc_6
+99. drop truck_2 city_loc_6 package_6 capacity_0 capacity_1
+100. drive truck_1 city_loc_12 city_loc_0
+101. pick_up truck_1 city_loc_0 package_1 capacity_1 capacity_2
+102. drive truck_1 city_loc_0 city_loc_0
+103. drop truck_1 city_loc_0 package_1 capacity_0 capacity_1
+104. drive truck_3 city_loc_8 city_loc_11
+105. pick_up truck_3 city_loc_11 package_2 capacity_1 capacity_2
+106. drive truck_3 city_loc_11 city_loc_8
+107. drop truck_3 city_loc_8 package_2 capacity_0 capacity_1
+108. drive truck_4 city_loc_6 city_loc_5
+109. pick_up truck_4 city_loc_5 package_5 capacity_1 capacity_2
+110. drive truck_4 city_loc_5 city_loc_9
+111. drop truck_4 city_loc_9 package_5 capacity_0 capacity_1
+112. drive truck_0 city_loc_9 city_loc_1
+113. pick_up truck_0 city_loc_1 package_11 capacity_1 capacity_2
+114. noop truck_0 city_loc_1
+115. drive truck_2 city_loc_6 city_loc_8
+116. pick_up truck_2 city_loc_8 package_7 capacity_1 capacity_2
+117. drive truck_2 city_loc_8 city_loc_8
+118. drop

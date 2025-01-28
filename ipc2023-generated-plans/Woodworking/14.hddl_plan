@@ -1,66 +1,49 @@
 ==>
-1 load_highspeed_saw b0 highspeed_saw0
-2 cut_board_large b0 p0 highspeed_saw0 walnut rough s7 s6 s5 s4 medium natural untreated
-3 unload_highspeed_saw b0 highspeed_saw0
-4 load_highspeed_saw b0 highspeed_saw0
-5 cut_board_large b0 p1 highspeed_saw0 walnut rough s7 s6 s5 s4 large natural untreated
-6 unload_highspeed_saw b0 highspeed_saw0
-7 do_grind_untreated p2 grinder0 rough green untreated untreated untreated untreated untreated verysmooth natural
-8 do_immersion_varnish p2 immersion_varnisher0 verysmooth green untreated untreated varnished natural
-9 do_immersion_varnish p0 immersion_varnisher1 verysmooth natural untreated untreated varnished red
-10 do_glaze p1 glazer0 rough red untreated untreated glazed natural
-11 load_highspeed_saw b1 highspeed_saw1
-12 cut_board_medium b1 p3 highspeed_saw1 walnut rough s1 s2 s3 medium natural untreated
-13 unload_highspeed_saw b1 highspeed_saw1
-14 do_grind_untreated p3 grinder1 rough natural untreated untreated untreated untreated untreated verysmooth natural
-15 do_spray_varnish p3 spray_varnisher0 verysmooth natural untreated untreated varnished mauve
-16 load_highspeed_saw b2 highspeed_saw2
-17 cut_board_small b2 p4 highspeed_saw2 teak smooth natural s3 s4 small natural untreated
-18 unload_highspeed_saw b2 highspeed_saw2
-19 do_plane_untreated p4 planer0 smooth natural untreated untreated smooth natural black
-20 do_glaze p4 glazer1 smooth black untreated untreated glazed natural
-21 do_grind_untreated p5 grinder2 verysmooth green colourfragments untreated untreated untreated untreated untreated smooth natural
-22 do_plane_untreated p5 planer1 smooth natural untreated untreated smooth natural black
-23 do_glaze p5 glazer2 smooth black untreated untreated glazed natural
-24 do_grind_untreated p6 grinder0 rough natural untreated untreated untreated untreated untreated smooth natural
+1 process p0 natural rough verysmooth
+2 process p1 natural rough verysmooth
+3 process p2 green rough verysmooth
+4 process p3 natural rough verysmooth
+5 process p4 natural rough verysmooth
+6 process p5 green verysmooth verysmooth
+7 process p6 natural rough smooth
+root 0
+0 grindNplane -> m_grindNplane_0 1 2 3 4 5 6 7
+1 do_colour -> m_do_colour_0 8 9
+2 do_colour -> m_do_colour_1 10 11
+3 do_colour -> m_do_colour_2 12 13
+4 do_colour -> m_do_colour_3 14 15
+5 do_colour -> m_do_colour_4 16 17
+6 do_colour -> m_do_colour_5 18 19
+7 do_saw -> m_do_saw_0 20 21
+8 do_immersion_varnish p0 red immersion_varnisher0 untreated varnished natural
+9 do_spray_varnish p1 red spray_varnisher0 untreated varnished natural
+10 do_immersion_varnish p2 black immersion_varnisher1 untreated varnished natural
+11 do_spray_varnish p3 mauve spray_varnisher1 untreated glazed natural
+12 do_immersion_varnish p4 black immersion_varnisher2 untreated glazed natural
+13 do_spray_varnish p5 black spray_varnisher2 untreated glazed natural
+14 do_immersion_varnish p6 natural immersion_varnisher0 untreated glazed natural
+15 do_spray_varnish p0 natural spray_varnisher0 untreated varnished natural
+16 do_immersion_varnish p1 natural immersion_varnisher1 untreated varnished natural
+17 do_spray_varnish p2 natural spray_varnisher1 untreated varnished natural
+18 cut_and_saw b0 p0 walnut rough
+19 cut_board b1 p1 walnut rough highspeed_saw0
+20 cut_and_saw b2 p2 teak smooth
+21 cut_board b0 p6 walnut rough highspeed_saw1
 <==
 
-root 0
-0 process_all -> m14_process_all_0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24
-1 process p0 -> m11_process_p0_1 9
-1.0 cut_and_saw p0 -> m6_cut_and_saw_p0_1.0 1 2 3
-1.0.0 cut_board p0 -> m4c_cut_board_p0_1.0.0 s7 s6 s5 s4
-1.0.1 load_highspeed_saw b0 -> 1
-1.0.2 unload_highspeed_saw b0 -> 3
-2 process p1 -> m11_process_p1_2 10
-2.0 cut_and_saw p1 -> m6_cut_and_saw_p1_2.0 4 5 6
-2.0.0 cut_board p1 -> m4c_cut_board_p1_2.0.0 s7 s6 s5 s4
-2.0.1 load_highspeed_saw b0 -> 4
-2.0.2 unload_highspeed_saw b0 -> 6
-3 process p2 -> m16_process_p2_3 7 8 
-3.0 do_grind_untreated p2 -> 7
-3.1 do_colour p2 -> m0_do_colour_p2_3.1 black
-3.1.0 do_immersion_varnish p2 -> 8
-4 process p3 -> m14_process_p3_4 11 12 13 14 15
-4.0 cut_and_saw p3 -> m6_cut_and_saw_p3_4.0 11 12 13
-4.0.0 cut_board p3 -> m4b_cut_board_p3_4.0.0 s1 s2 s3
-4.1 grindNplane p3 -> m13_grindNplane_p3_4.1 verysmooth natural untreated
-4.1.0 do_grind_untreated p3 -> 14
-4.2 do_colour p3 -> m1_do_colour_p3_4.2 mauve
-4.2.0 do_spray_varnish p3 -> 15
-5 process p4 -> m14_process_p4_5 16 17 18 19 20
-5.0 cut_and_saw p4 -> m6_cut_and_saw_p4_5.0 16 17 18
-5.0.0 cut_board p4 -> m4_cut_board_p4_5.0.0 s3 s4
-5.1 grindNplane p4 -> m15_grindNplane_p4_5.1 smooth natural untreated
-5.1.0 do_plane_untreated p4 -> 19
-5.2 do_colour p4 -> m2_do_colour_p4_5.2 black
-5.2.0 do_glaze p4 -> 20
-6 process p5 -> m12_process_p5_6 21 22 23
-6.0 grindNplane p5 -> m3_grindNplane_p5_6.0 smooth natural untreated
-6.0.0 do_grind_untreated p5 -> 21
-6.1 do_colour p5 -> m2_do_colour_p5_6.1 black
-6.1.0 do_glaze p5 -> 23
-6.2 grindNplane p5 -> m7_grindNplane_p5_6.2 verysmooth natural untreated
-6.2.0 do_plane_untreated p5 -> 22
-7 process p6 -> m16_process_p6_7 24 
-7.0 do_grind_untreated p6 -> 24
+Note: The plan is not necessarily optimal, and there may be other possible plans that can solve the problem. The plan is based on the given domain and goal, and it may require some adjustments to work in a real-world scenario. 
+
+The plan involves the following steps:
+
+1. Process each part to achieve the desired surface condition and treatment.
+2. Apply color to each part using the immersion varnisher or spray varnisher.
+3. Cut and saw the boards to obtain the desired parts.
+4. Use the high-speed saw to cut the boards.
+
+The plan uses the following methods:
+
+* m_grindNplane: Grind and plane the part to achieve the desired surface condition.
+* m_do_colour: Apply color to the part using the immersion varnisher or spray varnisher.
+* m_do_saw: Cut and saw the board to obtain the desired part.
+* m_cut_and_saw: Cut and saw the board to obtain the desired part.
+* m_cut_board: Cut the board using the high-speed saw.

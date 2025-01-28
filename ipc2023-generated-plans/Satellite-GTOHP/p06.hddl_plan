@@ -1,89 +1,200 @@
 ==>
-**Sequential Plan**
-```
-1. turn_to satellite0 Phenomenon12 Planet21
-2. switch_on instrument0 satellite0
-3. calibrate satellite0 instrument0 Phenomenon12
-4. take_image satellite0 Phenomenon12 instrument0 thermograph0
-5. turn_to satellite0 Phenomenon5 Phenomenon12
-6. take_image satellite0 Phenomenon5 instrument0 image1
-7. turn_to satellite0 Phenomenon7 Phenomenon5
-8. take_image satellite0 Phenomenon7 instrument0 thermograph0
-9. turn_to satellite0 Planet8 Phenomenon7
-10. switch_on instrument1 satellite0
-11. calibrate satellite0 instrument1 Planet8
-12. take_image satellite0 Planet8 instrument1 image2
-13. turn_to satellite0 Star9 Planet8
-14. take_image satellite0 Star9 instrument0 thermograph0
-15. turn_to satellite0 Star10 Star9
-16. switch_on instrument1 satellite0
-17. calibrate satellite0 instrument1 Star10
-18. take_image satellite0 Star10 instrument1 thermograph3
-19. turn_to satellite2 GroundStation2 Star14
-20. switch_on instrument4 satellite2
-21. calibrate satellite2 instrument4 GroundStation2
-22. turn_to satellite2 Phenomenon13 GroundStation2
-23. switch_on instrument2 satellite2
-24. calibrate satellite2 instrument2 Phenomenon13
-25. take_image satellite2 Phenomenon13 instrument2 image1
-26. turn_to satellite2 Star14 Phenomenon13
-27. switch_on instrument4 satellite2
-28. calibrate satellite2 instrument4 Star14
-29. take_image satellite2 Star14 instrument4 thermograph4
-30. turn_to satellite5 Phenomenon11 Planet17
-31. switch_on instrument11 satellite5
-32. calibrate satellite5 instrument11 Phenomenon11
-33. turn_to satellite5 Phenomenon18 Phenomenon11
-34. take_image satellite5 Phenomenon18 instrument11 image1
-35. turn_to satellite5 Planet17 Phenomenon18
-36. switch_on instrument11 satellite5
-37. calibrate satellite5 instrument11 Planet17
-38. take_image satellite5 Planet17 instrument11 image2
-39. turn_to satellite5 Planet15 Planet17
-40. take_image satellite5 Planet15 instrument11 image2
-41. turn_to satellite5 Star19 Planet15
-42. switch_on instrument11 satellite5
-43. calibrate satellite5 instrument11 Star19
-44. take_image satellite5 Star19 instrument11 thermograph4
-45. turn_to satellite5 Star20 Star19
-46. take_image satellite5 Star20 instrument11 thermograph4
-47. turn_to satellite5 Planet21 Star20
-48. take_image satellite5 Planet21 instrument11 thermograph0
-49. turn_to satellite5 Star22 Planet21
-50. switch_on instrument10 satellite5
-51. calibrate satellite5 instrument10 Star22
-52. take_image satellite5 Star22 instrument10 thermograph3
-53. turn_to satellite5 Planet23 Star22
-54. switch_on instrument11 satellite5
-55. calibrate satellite5 instrument11 Planet23
-56. take_image satellite5 Planet23 instrument11 image1
-```
-**Hierarchical Decomposition**
-```
+1 turn_to satellite0 Phenomenon12 Planet21
+2 switch_off instrument0 satellite0
+3 switch_on instrument1 satellite0
+4 calibrate satellite0 instrument1 Phenomenon11
+5 take_image satellite0 Phenomenon5 instrument1 image1
+6 turn_to satellite0 Phenomenon5 Phenomenon11
+7 take_image satellite0 Phenomenon5 instrument1 image1
+8 turn_to satellite0 Phenomenon5 Phenomenon7
+9 take_image satellite0 Phenomenon7 instrument1 thermograph0
+10 turn_to satellite0 Phenomenon7 Planet8
+11 take_image satellite0 Planet8 instrument1 image2
+12 turn_to satellite0 Planet8 Star9
+13 take_image satellite0 Star9 instrument1 thermograph0
+14 turn_to satellite0 Star9 Star10
+15 take_image satellite0 Star10 instrument1 thermograph3
+16 turn_to satellite0 Star10 Phenomenon12
+17 take_image satellite0 Phenomenon12 instrument1 thermograph0
+18 turn_to satellite0 Phenomenon12 Phenomenon13
+19 take_image satellite0 Phenomenon13 instrument1 image1
+20 turn_to satellite1 GroundStation1 GroundStation2
+21 turn_to satellite1 GroundStation2 Star14
+22 switch_off instrument3 satellite1
+23 switch_on instrument4 satellite1
+24 calibrate satellite1 instrument4 GroundStation1
+25 take_image satellite1 Star14 instrument4 thermograph4
+26 turn_to satellite1 Star14 Planet15
+27 take_image satellite1 Planet15 instrument4 image2
+28 turn_to satellite1 Planet15 Planet17
+29 take_image satellite1 Planet17 instrument4 image2
+30 turn_to satellite1 Planet17 Phenomenon18
+31 take_image satellite1 Phenomenon18 instrument4 image1
+32 turn_to satellite1 Phenomenon18 Star19
+33 take_image satellite1 Star19 instrument4 thermograph4
+34 turn_to satellite1 Star19 Star20
+35 take_image satellite1 Star20 instrument4 thermograph4
+36 turn_to satellite1 Star20 Planet21
+37 turn_to satellite2 GroundStation2 Star14
+38 switch_off instrument5 satellite2
+39 switch_on instrument6 satellite2
+40 calibrate satellite2 instrument6 GroundStation0
+41 take_image satellite2 Star14 instrument6 thermograph4
+42 turn_to satellite2 Star14 Star22
+43 take_image satellite2 Star22 instrument6 thermograph3
+44 turn_to satellite2 Star22 Planet23
+45 take_image satellite2 Planet23 instrument6 image1
+46 turn_to satellite3 GroundStation4 GroundStation2
+47 turn_to satellite3 GroundStation2 Phenomenon12
+48 switch_off instrument7 satellite3
+49 switch_on instrument8 satellite3
+50 calibrate satellite3 instrument8 GroundStation2
+51 take_image satellite3 Phenomenon12 instrument8 thermograph0
+52 turn_to satellite4 Planet15 GroundStation2
+53 turn_to satellite4 GroundStation2 Phenomenon12
+54 switch_off instrument9 satellite4
+55 switch_on instrument10 satellite4
+56 calibrate satellite4 instrument10 GroundStation0
+57 take_image satellite4 Phenomenon12 instrument10 thermograph0
+58 turn_to satellite5 Phenomenon11 Planet17
+59 switch_off instrument11 satellite5
+60 switch_on instrument11 satellite5
+61 calibrate satellite5 instrument11 GroundStation1
+62 take_image satellite5 Phenomenon12 instrument11 thermograph0
+63 turn_to satellite5 Phenomenon12 Planet21
+64 turn_to satellite5 Planet21 Planet17
 root 0
-0 do_mission Phenomenon5 image1 -> m0_do_mission 1 2 3 4 5 6
-  1 do_prepare satellite0 instrument0 Phenomenon5 -> m1_do_prepare 7 8
-    7 do_switching satellite0 instrument0 -> m3_do_switching 9 10
-      9 switch_on instrument0 satellite0
-      10 do_calibration satellite0 instrument0 Phenomenon5 -> m5_do_calibration 11 12
-        11 do_prepare satellite0 instrument0 Phenomenon5 -> m1_do_prepare 13 14
-          13 do_switching satellite0 instrument0 -> m3_do_switching 15 16
-            15 switch_on instrument0 satellite0
-            16 do_calibration satellite0 instrument0 Phenomenon5 -> m6_do_calibration
-          14 do_turning satellite0 Phenomenon5 -> m9_do_turning
-        12 calibrate satellite0 instrument0 Phenomenon5
-    8 do_turning satellite0 Phenomenon5 -> m9_do_turning
-  2 take_image satellite0 Phenomenon5 instrument0 image1
-  3 turn_to satellite0 Phenomenon7 Phenomenon5
-  4 take_image satellite0 Phenomenon7 instrument0 thermograph0
-  5 turn_to satellite0 Planet8 Phenomenon7
-  6 take_image satellite0 Planet8 instrument1 image2 ->... (similar decomposition for other tasks)
-
-... (similar decomposition for tasks 2-17)
-```
-**Note:**
-
-* The sequential plan consists of 56 actions to achieve all the goals.
-* The hierarchical decomposition shows the task decomposition for the first `do_mission` task. The same decomposition pattern applies to the other `do_mission` tasks (2-17).
-* Due to the complexity and length of the full decomposition, only the first `do_mission` task's decomposition is shown in detail. The ellipsis (`...`) indicates where similar decompositions for other tasks would be inserted.
-* Action numbers in the sequential plan correspond to the action instances in the hierarchical decomposition.
+0 do_mission Phenomenon5 image1 -> m0_do_mission 1 5
+1 do_prepare satellite0 instrument1 Phenomenon5 -> m1_do_prepare 2 3
+2 do_switching satellite0 instrument1 -> m3_do_switching 4 5
+3 do_turning satellite0 Phenomenon5 -> m9_do_turning 
+4 switch_on satellite0 instrument1 -> switch_on 
+5 calibrate satellite0 instrument1 Phenomenon5 -> m6_do_calibration 
+6 do_mission Phenomenon7 thermograph0 -> m0_do_mission 7 9
+7 do_prepare satellite0 instrument1 Phenomenon7 -> m1_do_prepare 8 9
+8 do_switching satellite0 instrument1 -> m3_do_switching 10 11
+9 do_turning satellite0 Phenomenon7 -> m9_do_turning 
+10 switch_on satellite0 instrument1 -> switch_on 
+11 calibrate satellite0 instrument1 Phenomenon7 -> m6_do_calibration 
+12 take_image satellite0 Phenomenon7 instrument1 thermograph0 -> take_image 
+13 do_mission Planet8 image2 -> m0_do_mission 14 16
+14 do_prepare satellite0 instrument1 Planet8 -> m1_do_prepare 15 16
+15 do_switching satellite0 instrument1 -> m3_do_switching 17 18
+16 do_turning satellite0 Planet8 -> m9_do_turning 
+17 switch_on satellite0 instrument1 -> switch_on 
+18 calibrate satellite0 instrument1 Planet8 -> m6_do_calibration 
+19 take_image satellite0 Planet8 instrument1 image2 -> take_image 
+20 do_mission Star9 thermograph0 -> m0_do_mission 21 23
+21 do_prepare satellite0 instrument1 Star9 -> m1_do_prepare 22 23
+22 do_switching satellite0 instrument1 -> m3_do_switching 24 25
+23 do_turning satellite0 Star9 -> m9_do_turning 
+24 switch_on satellite0 instrument1 -> switch_on 
+25 calibrate satellite0 instrument1 Star9 -> m6_do_calibration 
+26 take_image satellite0 Star9 instrument1 thermograph0 -> take_image 
+27 do_mission Star10 thermograph3 -> m0_do_mission 28 30
+28 do_prepare satellite0 instrument1 Star10 -> m1_do_prepare 29 30
+29 do_switching satellite0 instrument1 -> m3_do_switching 31 32
+30 do_turning satellite0 Star10 -> m9_do_turning 
+31 switch_on satellite0 instrument1 -> switch_on 
+32 calibrate satellite0 instrument1 Star10 -> m6_do_calibration 
+33 take_image satellite0 Star10 instrument1 thermograph3 -> take_image 
+34 do_mission Phenomenon12 thermograph0 -> m0_do_mission 35 37
+35 do_prepare satellite0 instrument1 Phenomenon12 -> m1_do_prepare 36 37
+36 do_switching satellite0 instrument1 -> m3_do_switching 38 39
+37 do_turning satellite0 Phenomenon12 -> m9_do_turning 
+38 switch_on satellite0 instrument1 -> switch_on 
+39 calibrate satellite0 instrument1 Phenomenon12 -> m6_do_calibration 
+40 take_image satellite0 Phenomenon12 instrument1 thermograph0 -> take_image 
+41 do_mission Phenomenon13 image1 -> m0_do_mission 42 44
+42 do_prepare satellite0 instrument1 Phenomenon13 -> m1_do_prepare 43 44
+43 do_switching satellite0 instrument1 -> m3_do_switching 45 46
+44 do_turning satellite0 Phenomenon13 -> m9_do_turning 
+45 switch_on satellite0 instrument1 -> switch_on 
+46 calibrate satellite0 instrument1 Phenomenon13 -> m6_do_calibration 
+47 take_image satellite0 Phenomenon13 instrument1 image1 -> take_image 
+48 do_mission Star14 thermograph4 -> m0_do_mission 49 51
+49 do_prepare satellite1 instrument4 Star14 -> m1_do_prepare 50 51
+50 do_switching satellite1 instrument4 -> m3_do_switching 52 53
+51 do_turning satellite1 Star14 -> m9_do_turning 
+52 switch_on satellite1 instrument4 -> switch_on 
+53 calibrate satellite1 instrument4 Star14 -> m6_do_calibration 
+54 take_image satellite1 Star14 instrument4 thermograph4 -> take_image 
+55 do_mission Planet15 image2 -> m0_do_mission 56 58
+56 do_prepare satellite1 instrument4 Planet15 -> m1_do_prepare 57 58
+57 do_switching satellite1 instrument4 -> m3_do_switching 59 60
+58 do_turning satellite1 Planet15 -> m9_do_turning 
+59 switch_on satellite1 instrument4 -> switch_on 
+60 calibrate satellite1 instrument4 Planet15 -> m6_do_calibration 
+61 take_image satellite1 Planet15 instrument4 image2 -> take_image 
+62 do_mission Planet17 image2 -> m0_do_mission 63 65
+63 do_prepare satellite1 instrument4 Planet17 -> m1_do_prepare 64 65
+64 do_switching satellite1 instrument4 -> m3_do_switching 66 67
+65 do_turning satellite1 Planet17 -> m9_do_turning 
+66 switch_on satellite1 instrument4 -> switch_on 
+67 calibrate satellite1 instrument4 Planet17 -> m6_do_calibration 
+68 take_image satellite1 Planet17 instrument4 image2 -> take_image 
+69 do_mission Phenomenon18 image1 -> m0_do_mission 70 72
+70 do_prepare satellite1 instrument4 Phenomenon18 -> m1_do_prepare 71 72
+71 do_switching satellite1 instrument4 -> m3_do_switching 73 74
+72 do_turning satellite1 Phenomenon18 -> m9_do_turning 
+73 switch_on satellite1 instrument4 -> switch_on 
+74 calibrate satellite1 instrument4 Phenomenon18 -> m6_do_calibration 
+75 take_image satellite1 Phenomenon18 instrument4 image1 -> take_image 
+76 do_mission Star19 thermograph4 -> m0_do_mission 77 79
+77 do_prepare satellite1 instrument4 Star19 -> m1_do_prepare 78 79
+78 do_switching satellite1 instrument4 -> m3_do_switching 80 81
+79 do_turning satellite1 Star19 -> m9_do_turning 
+80 switch_on satellite1 instrument4 -> switch_on 
+81 calibrate satellite1 instrument4 Star19 -> m6_do_calibration 
+82 take_image satellite1 Star19 instrument4 thermograph4 -> take_image 
+83 do_mission Star20 thermograph4 -> m0_do_mission 84 86
+84 do_prepare satellite1 instrument4 Star20 -> m1_do_prepare 85 86
+85 do_switching satellite1 instrument4 -> m3_do_switching 87 88
+86 do_turning satellite1 Star20 -> m9_do_turning 
+87 switch_on satellite1 instrument4 -> switch_on 
+88 calibrate satellite1 instrument4 Star20 -> m6_do_calibration 
+89 take_image satellite1 Star20 instrument4 thermograph4 -> take_image 
+90 do_mission Planet21 thermograph0 -> m0_do_mission 91 93
+91 do_prepare satellite0 instrument1 Planet21 -> m1_do_prepare 92 93
+92 do_switching satellite0 instrument1 -> m3_do_switching 94 95
+93 do_turning satellite0 Planet21 -> m8_do_turning 1 
+94 switch_on satellite0 instrument1 -> switch_on 
+95 calibrate satellite0 instrument1 Planet21 -> m6_do_calibration 
+96 take_image satellite0 Planet21 instrument1 thermograph0 -> take_image 
+97 do_mission Star22 thermograph3 -> m0_do_mission 98 100
+98 do_prepare satellite1 instrument4 Star22 -> m1_do_prepare 99 100
+99 do_switching satellite1 instrument4 -> m3_do_switching 101 102
+100 do_turning satellite1 Star22 -> m9_do_turning 
+101 switch_on satellite1 instrument4 -> switch_on 
+102 calibrate satellite1 instrument4 Star22 -> m6_do_calibration 
+103 take_image satellite1 Star22 instrument4 thermograph3 -> take_image 
+104 do_mission Planet23 image1 -> m0_do_mission 105 107
+105 do_prepare satellite1 instrument4 Planet23 -> m1_do_prepare 106 107
+106 do_switching satellite1 instrument4 -> m3_do_switching 108 109
+107 do_turning satellite1 Planet23 -> m9_do_turning 
+108 switch_on satellite1 instrument4 -> switch_on 
+109 calibrate satellite1 instrument4 Planet23 -> m6_do_calibration 
+110 take_image satellite1 Planet23 instrument4 image1 -> take_image 
+111 do_mission Phenomenon12 thermograph0 -> m0_do_mission 112 114
+112 do_prepare satellite3 instrument8 Phenomenon12 -> m1_do_prepare 113 114
+113 do_switching satellite3 instrument8 -> m3_do_switching 115 116
+114 do_turning satellite3 Phenomenon12 -> m8_do_turning 46 
+115 switch_on satellite3 instrument8 -> switch_on 
+116 calibrate satellite3 instrument8 Phenomenon12 -> m6_do_calibration 
+117 take_image satellite3 Phenomenon12 instrument8 thermograph0 -> take_image 
+118 do_mission Phenomenon12 thermograph0 -> m0_do_mission 119 121
+119 do_prepare satellite4 instrument10 Phenomenon12 -> m1_do_prepare 120 121
+120 do_switching satellite4 instrument10 -> m3_do_switching 122 123
+121 do_turning satellite4 Phenomenon12 -> m9_do_turning 
+122 switch_on satellite4 instrument10 -> switch_on 
+123 calibrate satellite4 instrument10 Phenomenon12 -> m6_do_calibration 
+124 take_image satellite4 Phenomenon12 instrument10 thermograph0 -> take_image 
+125 do_turning satellite5 Phenomenon11 Planet17 -> m8_do_turning 58 
+126 do_mission Phenomenon12 thermograph0 -> m0_do_mission 127 129
+127 do_prepare satellite5 instrument11 Phenomenon12 -> m1_do_prepare 128 129
+128 do_switching satellite5 instrument11 -> m3_do_switching 130 131
+129 do_turning satellite5 Phenomenon12 -> m8_do_turning 63 
+130 switch_on satellite5 instrument11 -> switch_on 
+131 calibrate satellite5 instrument11 Phenomenon12 -> m6_do_calibration 
+132 take_image satellite5 Phenomenon12 instrument11 thermograph0 -> take_image 
+<==

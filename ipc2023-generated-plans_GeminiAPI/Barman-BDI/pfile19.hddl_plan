@@ -1,0 +1,72 @@
+==>
+1 AchieveContainsShotCocktail shot11 cocktail1
+2 AchieveContainsShotCocktail shot29 cocktail2
+3 AchieveContainsShotCocktail shot28 cocktail3
+4 AchieveContainsShotCocktail shot43 cocktail4
+5 AchieveContainsShotCocktail shot26 cocktail5
+6 AchieveContainsShotCocktail shot19 cocktail6
+7 AchieveContainsShotCocktail shot32 cocktail7
+8 AchieveContainsShotCocktail shot17 cocktail8
+9 AchieveContainsShotCocktail shot40 cocktail9
+10 AchieveContainsShotCocktail shot36 cocktail10
+11 AchieveContainsShotCocktail shot15 cocktail11
+12 AchieveContainsShotCocktail shot12 cocktail12
+13 AchieveContainsShotCocktail shot2 cocktail13
+14 AchieveContainsShotCocktail shot44 cocktail14
+15 AchieveContainsShotCocktail shot37 cocktail15
+16 AchieveContainsShotCocktail shot13 cocktail16
+17 AchieveContainsShotCocktail shot35 cocktail17
+18 AchieveContainsShotCocktail shot14 cocktail18
+19 AchieveContainsShotCocktail shot16 cocktail19
+20 AchieveContainsShotCocktail shot27 cocktail20
+21 AchieveContainsShotCocktail shot6 cocktail21
+22 AchieveContainsShotCocktail shot38 cocktail22
+23 AchieveContainsShotCocktail shot8 cocktail23
+24 AchieveContainsShotCocktail shot21 cocktail24
+25 AchieveContainsShotCocktail shot25 cocktail25
+26 AchieveContainsShotCocktail shot3 cocktail26
+27 AchieveContainsShotCocktail shot10 cocktail27
+28 AchieveContainsShotCocktail shot33 cocktail28
+29 AchieveContainsShotCocktail shot39 cocktail29
+30 AchieveContainsShotCocktail shot4 cocktail30
+31 AchieveContainsShotCocktail shot9 cocktail31
+32 AchieveContainsShotCocktail shot30 cocktail32
+33 AchieveContainsShotCocktail shot41 cocktail33
+34 AchieveContainsShotCocktail shot5 cocktail34
+35 AchieveContainsShotCocktail shot42 cocktail35
+36 AchieveContainsShotCocktail shot23 cocktail36
+37 AchieveContainsShotCocktail shot18 cocktail37
+38 AchieveContainsShotCocktail shot1 cocktail38
+39 AchieveContainsShotCocktail shot31 cocktail39
+40 AchieveContainsShotCocktail shot45 cocktail40
+root 0
+0 -> MakeAndPourCocktail shot11 cocktail1 shaker1 left 1 41
+41 AchieveContainsShakerCocktail shaker1 cocktail1 -> MakeCocktail shaker1 cocktail1 ingredient16 left right ingredient13 42 46 50 54 55 56
+42 AchieveCleanShaker shaker1 -> CleanShakerNull shaker1 43
+43  
+44 AchieveContainsShakerIngredient shaker1 ingredient13 -> AddIngredientToEmptyShaker shaker1 ingredient13 level1 level1 shot13 right 45 48 49
+45 AchieveContainsShotIngredient shot13 ingredient13 -> AddIngredientToShot shot13 ingredient13 dispenser13 right left 47 51 52 53
+46 AchieveContainsShakerIngredient shaker1 ingredient16 -> AddIngredientToUsedShaker shaker1 ingredient16 level1 level1 shot16 right 57 59 60
+47 AchieveCleanShot shot13 -> CleanShotNull shot13 48
+48  
+49 pour-shot-to-clean-shaker shot13 ingredient13 shaker1 right level1 level1
+50 AchieveHolding right shot13 -> PickUp right shot13 51 58 61
+51 AchieveHandEmpty right -> HandEmptyNull right right 52
+52  
+53 fill-shot shot13 ingredient13 right left dispenser13
+54 AchieveHolding right shaker1 -> HoldingNull right shaker1 55
+55  
+56 shake cocktail1 ingredient13 ingredient16 shaker1 right left
+57 AchieveContainsShotIngredient shot16 ingredient16 -> AddIngredientToShot shot16 ingredient16 dispenser16 right left 58 62 63 64
+58 AchieveCleanShot shot16 -> CleanShotNull shot16 59
+59  
+60 pour-shot-to-used-shaker shot16 ingredient16 shaker1 right level1 level1
+61 grasp right shot13
+62 AchieveHolding right shot16 -> PickUp right shot16 63 65 66
+63 AchieveHandEmpty right -> HandEmptyNull right right 64
+64  
+65 AchieveOnTable shot16 -> OnTableNull shot16 66
+66 grasp right shot16
+
+
+<==

@@ -1,35 +1,27 @@
 ==>
-1 selectDirection r1 t1 t2 t3
-2 rotateTower t1 t3 t2
-3 move_abstract t1 t2
-4 exchange t1 t2 t3
-5 selectDirection r2 t1 t3 t2
-6 rotateTower t1 t2 t3
-7 move_abstract t1 t3
-8 exchange t1 t3 t2
-9 move_abstract t2 t3
-10 move_abstract t1 t3
+1 move r1 r2 t1 r3 t2
+2 selectDirection r1 t2 t1 t3 
+3 rotateTower t2 t1 t3
+4 move r2 r1 t2 r3 t3
+5 exchange t2 t1 t3
+6 selectDirection r2 t3 t2 t1
+7 rotateTower t3 t2 t1
+8 move r3 r2 t3 r4 t1
+9 exchange t3 t2 t1
+10 selectDirection r3 t1 t3 t2
+11 rotateTower t1 t3 t2
+12 move r4 r3 t1 r1 t2
+13 exchange t1 t3 t2
+14 move r1 r4 t2 r2 t3
+15 move r2 r1 t3 r3 t2
+16 move r3 r2 t2 r4 t3
 <==
-
-**root 0**
-0 shiftTower t1 t2 t3 -> **m-shiftTower** 1 2 3 4
-**root 1**
-1 selectDirection r1 t1 t2 t3 -> **selectedDirection** (no further decomposition, as it directly leads to rotateTower)
-**root 2**
-2 rotateTower t1 t3 t2 -> **m-rotateTower** 3 4
-**root 3**
-3 move_abstract t1 t2 -> **newMethod21** (not directly applicable, as it requires additional parameters; assuming a default or inferred binding:?r=r1,?o1=r4,?o2=t2)
-	* (move r1 r4 t1 r4 t2) (inferred action, not explicitly defined in the output format)
-**root 4**
-4 exchange t1 t2 t3 -> **exchangeLR** 5 6 7 8 (precondition matching: smallerThan r1 r4, towerTop r1 t1, towerTop r4 t3)
-**root 5**
-5 selectDirection r2 t1 t3 t2 -> **m-selectDirection** (cyclic dependency; assuming a termination condition or alternative binding:?r1=r2,?r=r3)
-	* (selectDirection r3 t1 t3 t2) (inferred task, not explicitly defined in the output format)
-**root 6 & 7**
-6 rotateTower t1 t2 t3 -> **m-rotateTower** 9 10
-8 exchange t1 t3 t2 -> **exchangeRL** (precondition matching: smallerThan r3 r1, towerTop r3 t3, towerTop r1 t1)
-	* (move_abstract t3 t1) (already decomposed in **root 6 & 7**)
-9 move_abstract t2 t3 -> **newMethod21** (similar to **root 3**, with inferred bindings)
-	* (move r2 r3 t2 r3 t3) (inferred action, not explicitly defined in the output format)
-10 move_abstract t1 t3 -> **newMethod21** (similar to **root 3**, with inferred bindings)
-	* (move r1 r4 t1 r4 t3) (inferred action, not explicitly defined in the output format)
+root 0
+0 shiftTower t1 t2 t3 -> m-shiftTower 1 2
+2 selectDirection r1 t2 t1 t3 -> selectedDirection 3
+3 rotateTower t2 t1 t3 -> m-rotateTower 4 5
+5 exchange t2 t1 t3 -> exchangeLR 6 7 8
+8 move r2 r1 t2 r3 t3 -> newMethod21 9
+9 exchange t3 t2 t1 -> exchangeRL 10 11 12
+12 move r4 r3 t1 r1 t2 -> newMethod21 13
+13 exchange t1 t3 t2 -> exchangeRL 14 15 16

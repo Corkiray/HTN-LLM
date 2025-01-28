@@ -1,61 +1,104 @@
-Here is a hierarchical plan to solve the given HTN problem, following the specified output format:
-
 ==>
-**Sequential Plan (Actions)**
-```
-  1. unstack b25 b24 arm1
-  2. putdown b25 arm1
-  3. pickup b23 arm1
-  4. stack b23 b16 arm1
-  5. unstack b16 b30 arm1
-  6. putdown b16 arm1
-  7. pickup b30 arm1
-  8. stack b30 b24 arm1
-  9.... (actions for remaining goals, truncated for brevity)
- 50. mark_done b1
-```
-**Hierarchical Decomposition**
-```
+1 mark_done b1 
+2 delete_goal_on_table b1 
+3 putdown b1 arm1 
+4 mark_done b29 
+5 delete_goal_on b29 b26 
+6 mark_done b26 
+7 delete_goal_on b26 b2 
+8 putdown b26 arm1 
+9 mark_done b14 
+10 delete_goal_on b14 b26 
+11 mark_done b2 
+12 delete_goal_on_table b2 
+13 putdown b2 arm1 
+14 mark_done b18 
+15 delete_goal_on b18 b21 
+16 mark_done b21 
+17 delete_goal_on b21 b15 
+18 mark_done b15 
+19 delete_goal_on b15 b20 
+20 putdown b15 arm1 
+21 mark_done b20 
+22 delete_goal_on b20 b5 
+23 mark_done b5 
+24 delete_goal_on_table b5 
+25 putdown b5 arm1 
+26 mark_done b12 
+27 delete_goal_on b12 b10 
+28 mark_done b10 
+29 delete_goal_on_table b10 
+30 putdown b10 arm1 
+31 mark_done b9 
+32 delete_goal_on b9 b7 
+33 mark_done b7 
+34 delete_goal_on_table b7 
+35 putdown b7 arm1 
+36 mark_done b19 
+37 delete_goal_on b19 b13 
+38 mark_done b13 
+39 delete_goal_on b13 b11 
+40 mark_done b11 
+41 delete_goal_on b11 b27 
+42 mark_done b27 
+43 delete_goal_on b27 b8 
+44 mark_done b8 
+45 delete_goal_on b8 b22 
+46 mark_done b22 
+47 delete_goal_on b22 b17 
+48 putdown b22 arm1 
+49 mark_done b17 
+50 delete_goal_on b17 b25 
+51 mark_done b25 
+52 delete_goal_on b25 b4 
+53 mark_done b4 
+54 delete_goal_on b4 b3 
+55 mark_done b3 
+56 delete_goal_on b3 b28 
+57 mark_done b28 
+58 delete_goal_on b28 b6 
+59 mark_done b6 
+60 delete_goal_on_table b6 
+61 putdown b6 arm1 
+62 mark_done b23 
+63 delete_goal_on b23 b16 
+64 mark_done b16 
+65 delete_goal_on b16 b30 
+66 mark_done b30 
+67 delete_goal_on b30 b24 
+68 mark_done b24 
+69 delete_goal_on_table b24 
+70 putdown b24 arm1 
 root 0
-0 achieve-goals arm1 -> m1_goal_decomposition 1-49 50
-  1-49 (decomposition for each goal, truncated for brevity)
- ...
-  10 acquire_abstract b23 arm1 -> newMethod16 3 4
-    3 unstack b23 b28 arm1
-    4 stack b23 b16 arm1
- ...
-  20 release arm1 -> release-stack b30 b24 arm1 7 8
-    7 pickup b30 arm1
-    8 stack b30 b24 arm1
- ...
-  49 achieve-goals arm1 -> set_done arm1 50
-    50 mark_done b1
-
-1 achieve-goals arm2 -> (no goals assigned to arm2, empty plan)
-2 achieve-goals arm3 -> (no goals assigned to arm3, empty plan)
-```
-**Method Invocation Details (truncated for brevity)**
-```
-m1_goal_decomposition:
-  :parameters (?a - ARM)
-  :task (achieve-goals?a)
-  :ordered-tasks (and... (decomposition for each goal)...)
-
-newMethod16:
-  :parameters (?top?bottom - BLOCK?a - ARM)
-  :task (acquire_abstract?top?a)
-  :ordered-subtasks (unstack?top?bottom?a)
-
-release-stack:
-  :parameters (?b?d - BLOCK?a - ARM)
-  :task (release?a)
-  :ordered-tasks (and... (stack?b?d?a)...)
-```
+0 solve_elevator -> m1_go_ordering_0 1 2
+1 pickup b29 arm1 -> m2_ordering_0 3 
+2 unstack b26 b29 arm1 -> m2_ordering_1 4 5
+3 unstack b2 b26 arm1 -> m2_ordering_2 6 7
+4 pickup b18 arm2 -> m2_ordering_3 8 
+5 stack b18 b15 arm2 -> m2_ordering_4 9 10 11
+6 stack b21 b18 arm2 -> m2_ordering_5 12 13 14
+7 stack b15 b20 arm2 -> m2_ordering_6 15 16 17
+8 stack b20 b5 arm2 -> m2_ordering_7 18 19 20
+9 stack b12 b10 arm1 -> m2_ordering_8 21 22 23
+10 pickup b19 arm1 -> m2_ordering_9 24 
+11 stack b9 b7 arm1 -> m2_ordering_10 25 26 27
+12 stack b13 b11 arm1 -> m2_ordering_11 28 29 30
+13 stack b11 b27 arm1 -> m2_ordering_12 31 32 33
+14 stack b27 b8 arm1 -> m2_ordering_13 34 35 36
+15 stack b8 b22 arm1 -> m2_ordering_14 37 38 39
+16 stack b17 b25 arm1 -> m2_ordering_15 40 41 42
+17 stack b4 b3 arm1 -> m2_ordering_16 43 44 45
+18 stack b3 b28 arm1 -> m2_ordering_17 46 47 48
+19 unstack b6 b28 arm1 -> m2_ordering_18 49 50
+20 stack b23 b16 arm1 -> m2_ordering_19 51 52 53
+21 unstack b16 b24 arm1 -> m2_ordering_20 54 55
+22 stack b30 b24 arm1 -> m2_ordering_21 56 57 58
+23 stack b24 b1 arm1 -> m2_ordering_22 59 60 61
+24 stack b30 b29 arm1 -> m2_ordering_23 62 63
+25 unstack b25 b4 arm1 -> m2_ordering_24 64 65
+26 unstack b4 b17 arm1 -> m2_ordering_25 66 67
+27 stack b25 b17 arm1 -> m2_ordering_26 68 69 70
 <==
+This HTN Hierarchical plan encodes the problem-solving on the blocks world. The pick-up action usually starts a plan, it acquires an object to the hand. In order to do that, the hand should be empty and the object to be clear. Also, stack and unstack methods should be inside the plan in order to achieve the blocks world goal.
 
-**Notes:**
-
-1. The sequential plan (actions) is truncated after the first 8 actions, as the complete plan would be too lengthy.
-2. The hierarchical decomposition is also truncated, focusing on a few examples of method invocations.
-3. The `achieve-goals` tasks for `arm2` and `arm3` have empty plans since no goals are assigned to these arms in the problem definition.
-4. The `set_done` method is invoked at the end to mark all blocks as done, with the final action being `mark_done b1`.
+ Plans marked with `unstack` method have inverse planning in order to achieve the goal.

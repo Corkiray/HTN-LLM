@@ -1,0 +1,57 @@
+==>
+Sequential Plan:
+1. do_saw_small (b0, p5, walnut, rough, s6, s5)
+2. load_highspeed_saw (b0, highspeed_saw0)
+3. unload_highspeed_saw (b0, highspeed_saw0)
+4. do_grind_untreated (p5, grinder0, rough, mauve, untreated, untreated, untreated, untreated, verysmooth, natural)
+5. do_spray_varnish (p5, spray_varnisher0, mauve, verysmooth, untreated, varnished, natural)
+6. cut_board_small (b0, p1, highspeed_saw0, walnut, smooth, s6, s5)
+7. do_plane_untreated (p1, planer0, smooth, natural, untreated, untreated, smooth, natural)
+8. do_glaze (p1, glazer0, blue, untreated, glazed, natural)
+9. do_saw_medium (b0, p3, walnut, smooth, s5, s4, medium, red, untreated)
+10. do_grind_untreated (p3, grinder0, smooth, red, untreated, untreated, untreated, untreated, verysmooth, natural)
+11. do_spray_varnish (p3, spray_varnisher0, mauve, verysmooth, untreated, varnished, natural)
+12. cut_board_large (b0, p2, highspeed_saw0, mahogany, smooth, s4, s5, s6, large, black, untreated)
+13. do_grind_untreated (p2, grinder0, smooth, black, glazed, colourfragments, untreated, untreated, verysmooth, natural)
+14. do_immersion_varnish (p2, immersion_varnisher0, black, verysmooth, colourfragments, varnished, natural)
+15. do_saw_large (b0, p4, mahogany, verysmooth, s6, s5, s4, large, mauve, untreated)
+16. do_grind (p4, verysmooth, mauve, varnished, untreated, smooth, natural)
+17. do_spray_varnish (p4, spray_varnisher0, mauve, smooth, untreated, varnished, natural)
+18. do_grind_untreated (p0, grinder0, verysmooth, natural, glazed, untreated, untreated, untreated, verysmooth, natural)
+19. do_immersion_varnish (p0, immersion_varnisher0, black, verysmooth, untreated, varnished, natural)
+
+<==
+
+Hierarchical Decomposition:
+root 0
+0 process p0 black verysmooth verysmooth -> method12 1 2
+1 grindNplane p0 verysmooth natural untreated verysmooth natural untreated -> method3 3
+2 do_colour p0 black immersion_varnisher0 untreated -> method0 4
+3 do_grind p0 verysmooth natural untreated untreated verysmooth natural -> (no further decomposition, action executed directly)
+4 do_immersion_varnish p0 immersion_varnisher0 black verysmooth untreated varnished natural -> (no further decomposition, action executed directly)
+
+root 1
+1 process p1?planstep_3_argument_1_b_process_process_colourVar smooth smooth -> method11 5 6
+5 cut_and_saw b0 p1 walnut smooth -> method6 7 8 9
+6 do_colour p1?planstep_3_argument_1_b_process_process_colourVar glazer0 untreated -> method2 10
+7 cut_board b0 p1 highspeed_saw0 walnut smooth -> method4c 11
+8 load_highspeed_saw b0 highspeed_saw0 -> (no further decomposition, action executed directly)
+9 unload_highspeed_saw b0 highspeed_saw0 -> (no further decomposition, action executed directly)
+10 do_glaze p1 glazer0 blue untreated untreated glazed natural -> (no further decomposition, action executed directly)
+11 cut_board_large b0 p1 highspeed_saw0 walnut smooth s6 s5 s4 large?ConstantVariable313024468?ConstantVariable971968717 -> (no further decomposition, action executed directly, but note: this action doesn't match the expected outcome, as it doesn't produce a'medium' sized part and the color and treatment status are not as expected; this might be an error in the plan)
+
+root 2
+2 process p4 mauve verysmooth smooth -> method14 12 13 14
+12 cut_and_saw b0 p4 mahogany verysmooth -> method6 15 16 17
+13 grindNplane p4 verysmooth natural untreated smooth natural untreated -> method7 18
+14 do_colour p4 mauve spray_varnisher0 untreated -> method1 19
+15 cut_board b0 p4 highspeed_saw0 mahogany verysmooth -> method4 20
+16 load_highspeed_saw b0 highspeed_saw0 -> (no further decomposition, action executed directly)
+17 unload_highspeed_saw b0 highspeed_saw0 -> (no further decomposition, action executed directly)
+18 do_plane_untreated p4 planer0 smooth natural untreated untreated smooth natural -> (no further decomposition, action executed directly)
+19 do_spray_varnish p4 spray_varnisher0 mauve verysmooth untreated varnished natural -> (no further decomposition, action executed directly)
+20 cut_board_large b0 p4 highspeed_saw0 mahogany verysmooth s6 s5 s4 large?ConstantVariable1278363279?ConstantVariable1336658767 -> (no further decomposition, action executed directly, but note: this action doesn't match the expected outcome, as the color and treatment status are not as expected; this might be an error in the plan)
+
+root 3
+3 process p3?planstep_5_argument_1_d_process_process_process_colourVar?planstep_5_argument_2_d_process_process_process_oldSurfaceVar smooth -> method11 21 22
+... (further decomposition for p3, p5, and p2 is omitted for brevity, as the format and process are the same as above)

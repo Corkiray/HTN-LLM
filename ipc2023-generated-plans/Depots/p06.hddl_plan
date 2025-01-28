@@ -1,54 +1,72 @@
-Here is a hierarchical plan to solve the given HTN problem:
-```
 ==>
-**Sequential Plan**
-1. Drive truck1 distributor1 depot0
-2. do_get_truck truck1 depot0
-3. do_clear crate11 depot0
-4. do_lift_crate crate11 depot0 hoist0
-5. Drop hoist0 crate11 pallet0 depot0
-6. do_put_on crate8 pallet0
-7. do_put_on crate0 crate8
-8. do_put_on crate5 crate0
-9. do_put_on crate4 crate11
-10. do_put_on crate10 crate4
-11. do_put_on crate9 pallet1
-12. do_put_on crate1 crate9
-13. do_put_on crate2 crate1
-14. do_put_on crate12 pallet2
-15. do_put_on crate3 crate12
-
-**Hierarchical Decomposition**
+1 Drive truck0 distributor1 depot0
+2 do_get_truck truck0 depot0
+3 do_clear crate11 depot0
+4 do_clear crate9 depot0
+5 Lift hoist0 crate1 crate9 depot0
+6 do_get_truck truck0 depot0
+7 Load hoist0 crate1 truck0 depot0
+8 Drive truck0 depot0 distributor0
+9 Unload hoist1 crate1 truck0 distributor0
+10 Drop hoist1 crate1 crate9 distributor0
+11 do_clear crate6 distributor1
+12 do_clear crate8 distributor0
+13 Lift hoist2 crate10 crate6 distributor1
+14 do_get_truck truck0 distributor0
+15 Load hoist2 crate10 truck0 distributor0
+16 Drive truck0 distributor0 distributor1
+17 Unload hoist0 crate10 truck0 distributor1
+18 Drop hoist0 crate10 crate4 distributor1
+19 do_clear crate3 distributor0
+20 do_clear crate4 distributor0
+21 Lift hoist1 crate12 crate3 distributor0
+22 do_get_truck truck1 depot0
+23 Load hoist1 crate12 truck1 depot0
+24 Drive truck1 depot0 distributor0
+25 Unload hoist2 crate12 truck1 distributor0
+26 Drop hoist2 crate12 crate8 distributor0
+27 do_clear crate4 depot0
+28 do_clear crate7 depot0
+29 Lift hoist0 crate5 crate4 depot0
+30 do_get_truck truck1 depot0
+31 Load hoist0 crate5 truck1 depot0
+32 Drive truck1 depot0 distributor1
+33 Unload hoist2 crate5 truck1 distributor1
+34 Drop hoist2 crate5 crate0 distributor1
+35 Lift hoist0 crate8 pallet0 depot0
+36 do_clear crate0 distributor1
+37 Drop hoist2 crate10 crate5 distributor1
+38 Lift hoist1 crate0 crate8 distributor0
+39 Drop hoist1 crate0 crate5 distributor0
+40 Lift hoist1 crate5 crate0 distributor0
+41 do_clear crate12 distributor0
+42 Drop hoist1 crate5 crate0 distributor0
+43 Drop hoist2 crate4 crate11 distributor1
+44 Drop hoist2 crate11 crate5 distributor1
+45 do_get_truck truck0 depot0
+46 Drop hoist1 crate1 crate9 distributor0
+47 Drop hoist1 crate9 pallet1 distributor0
 root 0
-0 solve_depotprob5656 -> m3_do_put_on_0 1 2 3 4 5
-  1 do_put_on crate8 pallet0 -> m1_do_put_on_1 6
-    6 do_put_on crate8 pallet0 -> 
-      t1 (do_clear crate8 distributor0) -> m5_do_clear_6.1 
-        6.1.1 do_clear crate14 distributor0 -> m4_do_clear_6.1.1
-        6.1.2 Lift hoist1 crate14 crate13 distributor0
-        6.1.3 do_get_truck truck0 distributor0
-        6.1.4 Load hoist1 crate14 truck0 distributor0
-      t2 (do_clear pallet0 depot0) -> m4_do_clear_6.2
-      t3 (do_lift_crate crate8 distributor0 hoist1) -> m9_do_lift_crate_6.3
-      t4 (Drop hoist1 crate8 pallet0 depot0)
-  2 do_put_on crate0 crate8 -> m1_do_put_on_2 7
-    7 do_put_on crate0 crate8 -> 
-      t1 (do_clear crate0 distributor1) -> m4_do_clear_7.1
-      t2 (do_clear crate8 pallet0) -> m4_do_clear_7.2
-      t3 (do_lift_crate crate0 distributor1 hoist2) -> m9_do_lift_crate_7.3
-      t4 (Drop hoist2 crate0 crate8 pallet0)
- ...
-  **(similar decomposition for tasks 3-15)**
- ...
-15 do_put_on crate3 crate12 -> m1_do_put_on_15 
-  **(similar decomposition as above)**
+0 solve_depot -> m3_do_put_on 3 4 8 16 22 28 33 37 45 
+47 deliver_crate -> m2_do_put_on 2 46 
+48 do_put_crate -> m1_do_put_on 5 6 
+49 unload_crate -> m11_do_unload_truck 14 17 25 35 
+50 unload_crate_2 -> m11_do_unload_truck 9 10 
+51 load_crate -> m10_do_load_truck 13 20 21 
+52 lift_crate_2 -> m9_do_lift_crate 5 11 
+53 lift_crate -> m9_do_lift_crate 12 19 
+54 lift_crate_3 -> m9_do_lift_crate 26 29 
+55 lift_truck -> m8_do_lift_crate 15 24 
+56 lift_truck_2 -> m8_do_lift_crate 31 38 
+57 get_truck -> m7_do_get_truck 1 
+58 get_hoist -> m7_do_get_truck 8 
+59 get_hoist_2 -> m7_do_get_truck 32 
+60 get_crate -> m7_do_get_truck 39 
+61 clearsurface_2 -> m5_do_clear 4 43 
+62 clearsurface -> m4_do_clear 3 50 
+63 clearsurface_3 -> m4_do_clear 18 27 
+64 clearsurface_4 -> m4_do_clear 30 44 
+65 clearsurface_5 -> m5_do_clear 19 52 
+66 clearsurface_6 -> m5_do_clear 29 53 
+67 get_place -> m7_do_get_truck 48 
 <==
-```
-**Note:**
-
-* The sequential plan lists the actions in the order they should be executed.
-* The hierarchical decomposition starts with the `root` node, which represents the overall goal of solving the problem.
-* Each node in the decomposition represents a task (e.g., `do_put_on crate8 pallet0`) and is associated with a method (e.g., `m1_do_put_on_1`) that achieves that task.
-* The methods are applied recursively, decomposing each task into subtasks until primitive actions (e.g., `Drive`, `Lift`, `Drop`) are reached.
-* Some tasks (e.g., `do_clear crate8 distributor0`) are further decomposed using other methods (e.g., `m5_do_clear_6.1`), which may involve additional subtasks and actions.
-* Due to the complexity of the problem, the full decomposition for all tasks (3-15) is not shown, but it would follow a similar pattern to the one illustrated for tasks 1 and 2.

@@ -1,41 +1,65 @@
 ==>
-**Sequential Plan**
-```
-1. i-LOCK-AT OBJ103 POS10
-2. ACHIEVE-AT0 OBJ103 POS1 (via M12-ACHIEVE-AT0)
-   * 3. DO-AT-LOAD-TRUCK0 OBJ103 TRU10 POS10
-   * 4. ACHIEVE-AT0 OBJ103 POS1
-5. i-LOCK-AT OBJ92 POS11
-6. ACHIEVE-AT0 OBJ92 POS11 (via M11-ACHIEVE-AT0)
-7. i-LOCK-AT OBJ122 APT12
-8. ACHIEVE-AT2 OBJ122 APT12 (via M40-ACHIEVE-AT2)
-   * 9. FLY-AIRPLANE APN3 APT5 APT12
-   * 10. ACHIEVE-AT2 OBJ122 APT12
-...
-**Abbreviated for brevity, tasks 3-35 will follow a similar pattern**
-...
-35. i-LOCK-AT OBJ113 POS7
-36. ACHIEVE-AT0 OBJ113 POS7 (via M11-ACHIEVE-AT0)
-<==
-**Hierarchical Decomposition**
-```
-root 0
-0 ACHIEVE-AT OBJ103 POS1 -> M10-ACHIEVE-AT 1 2
-1 ACHIEVE-AT0 OBJ103 POS1 -> M12-ACHIEVE-AT0 3 4
-  * 3 DO-AT-LOAD-TRUCK0 OBJ103 TRU10 POS10 -> M4-DO-AT-LOAD-TRUCK0
-    + 3.1 ACHIEVE-AT-TRK TRU10 POS10 -> M34-ACHIEVE-AT 3.1.1 3.1.2
-      - 3.1.1 ACHIEVE-AT1 TRU10 POS10 -> M36-ACHIEVE-AT1 (if not at POS10, drive)
-      - 3.1.2 i-LOCK-AT TRU10 POS10
-    + 3.2 i-UNLOCK-AT TRU10 POS10 -> IFUNLOCK1-AT
-    + 3.3 LOAD-TRUCK OBJ103 TRU10 POS10
-  * 4 ACHIEVE-AT0 OBJ103 POS1 -> M11-ACHIEVE-AT0 (if already at POS1)
-2 i-LOCK-AT OBJ103 POS1 -> i-LOCK-AT
+For a plan to solve the logistics domain, I would provide the following plan based on the domain and tasks description:
 
-0 ACHIEVE-AT OBJ92 POS11 -> M10-ACHIEVE-AT 5 6
-...
-**Abbreviated for brevity, tasks 2-35 will follow a similar decomposition pattern**
-...
-0 ACHIEVE-AT OBJ113 POS7 -> M10-ACHIEVE-AT 35 36
-35 i-LOCK-AT OBJ113 POS7 -> i-LOCK-AT
-36 ACHIEVE-AT0 OBJ113 POS7 -> M11-ACHIEVE-AT0 (if already at POS7)
+1. move TRU1 POS1 POS2
+2. deliver OBJ11 TRU1 POS2 POS1
+3. move TRU1 POS2 POS3
+4. deliver OBJ12 TRU1 POS3 POS2
+5. move TRU1 POS3 POS4
+6. deliver OBJ13 TRU1 POS4 POS3
+7. move TRU2 POS2 POS5
+8. deliver OBJ21 TRU2 POS5 POS2
+9. move TRU2 POS5 POS6
+10. deliver OBJ22 TRU2 POS6 POS5
+11. move TRU2 POS6 POS7
+12. deliver OBJ23 TRU2 POS7 POS6
+13. move TRU3 POS3 POS8
+14. deliver OBJ31 TRU3 POS8 POS3
+15. move TRU3 POS8 POS9
+16. deliver OBJ32 TRU3 POS9 POS8
+17. move TRU3 POS9 POS10
+18. deliver OBJ33 TRU3 POS10 POS9
+19. move APN1 APT11 APT12
+20. deliver OBJ52 APN1 APT12 APT11
+21. move APN1 APT12 APT3
+22. deliver OBJ53 APN1 APT3 APT12
+23. move APN2 APT4 APT5
+24. deliver OBJ62 APN2 APT5 APT4
+25. move APN2 APT5 APT6
+26. deliver OBJ63 APN2 APT6 APT5
+27. move APN3 APT5 APT7
+28. deliver OBJ72 APN3 APT7 APT5
+29. move APN3 APT7 APT8
+30. deliver OBJ73 APN3 APT8 APT7
+31. move APN3 APT8 APT9
+32. deliver OBJ91 APN3 APT9 APT8
+33. move APN3 APT9 APT10
+34. deliver OBJ92 APN3 APT10 APT9
+35. move APN3 APT10 APT1
+36. deliver OBJ103 APN3 APT1 APT10
+37. move TRU4 POS4 POS11
+38. deliver OBJ41 TRU4 POS11 POS4
+39. move TRU4 POS11 POS12
+40. deliver OBJ42 TRU4 POS12 POS11
+41. move TRU5 POS5 POS6
+42. deliver OBJ51 TRU5 POS6 POS5
+43. move TRU5 POS6 POS7
+44. deliver OBJ52 TRU5 POS7 POS6
+45. move TRU5 POS7 POS8
+46. deliver OBJ53 TRU5 POS8 POS7
+root 0
+0 m0-logistics-achieve-at-obj103/apt10 -> m1배송-truck-travel 1 2 3 4 5 6 7 8 9 10 11
+1 m1-airport-travel-obj103/apn3 -> m2-load-airport 3 12 21 30
+20 deliver OBJ102 APN3 APT1 APT10 -> m3-airport-unload 31 32 33
+22 deliver OBJ112 POS3 TRU11 POS11 -> m4 unload-truck 35 36 37
+3 m2-truck-travel-obj21 -> m5 load-truck 5 14 23
+4 m3-truck-travel-obj41 -> m6 unload-truck 39 40 41
+5 m4-airport-travel-obj53 -> m7 load-airport 11 16 25
+6 m5-truck-travel-obj31 -> m8 unload-truck 13 14 15
+7 m6-airport-travel-obj62 -> m9 load-airport 17 18 19
+8 m7-truck-travel-obj81 -> m10 unload-truck 24 25 26
+9 m8-airport-travel-obj72 -> m11 load-airport 28 29 30
+10 m9-truck-travel-obj51 -> m12 unload-truck 43 44 45
+11 m10-airport-travel-obj92 -> m13 load-airport 33 34
+12 m11-truck-travel-obj101 -> m14 unload-truck 46
 <==

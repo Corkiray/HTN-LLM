@@ -1,0 +1,42 @@
+==>
+1 drive truck_1 city_loc_11 city_loc_1
+2 pick_up truck_1 city_loc_1 package_0 capacity_2 capacity_3
+3 drive truck_1 city_loc_1 city_loc_6
+4 drive truck_1 city_loc_6 city_loc_1
+5 drive truck_1 city_loc_1 city_loc_0
+6 drive truck_1 city_loc_0 city_loc_1
+7 drive truck_1 city_loc_1 city_loc_0
+8 pick_up truck_1 city_loc_0 package_2 capacity_2 capacity_3
+9 drive truck_1 city_loc_0 city_loc_1
+10 drive truck_1 city_loc_1 city_loc_11
+11 pick_up truck_1 city_loc_11 package_9 capacity_1 capacity_2
+12 drive truck_1 city_loc_11 city_loc_1
+13 drive truck_1 city_loc_1 city_loc_0
+14 drive truck_1 city_loc_0 city_loc_2
+15 pick_up truck_1 city_loc_2 package_3 capacity_0 capacity_1
+16 drive truck_1 city_loc_2 city_loc_0
+17 drive truck_1 city_loc_0 city_loc_1
+18 drop truck_1 city_loc_1 package_0 capacity_1 capacity_2
+19 drop truck_1 city_loc_1 package_2 capacity_2 capacity_3
+20 drop truck_1 city_loc_1 package_3 capacity_3 capacity_3
+root 0
+0 solve_elevator -> m1_abort_ordering_0
+1 deliver package_7 city_loc_2 -> m_deliver_ordering_0 city_loc_3 city_loc_2 truck_1 package_7 2 3
+2 get_to truck_1 city_loc_3 -> m_i_am_there_ordering_0 city_loc_3 truck_1 4
+3 load truck_1 city_loc_3 package_7 -> m_load_ordering_0 city_loc_3 package_7 capacity_2 capacity_3 truck_1 5
+4 noop truck_1 city_loc_3 -> 
+5 pick_up truck_1 city_loc_3 package_7 capacity_2 capacity_3 -> 
+6 get_to truck_1 city_loc_2 -> m_drive_to_ordering_0 city_loc_3 city_loc_2 truck_1 7
+7 drive truck_1 city_loc_3 city_loc_2 -> 
+8 unload truck_1 city_loc_2 package_7 -> m_unload_ordering_0 city_loc_2 package_7 capacity_3 capacity_3 truck_1 9
+9 drop truck_1 city_loc_2 package_7 capacity_3 capacity_3 -> 
+10 deliver package_0 city_loc_3 -> m_deliver_ordering_0 city_loc_1 city_loc_3 truck_1 package_0 11 18
+11 get_to truck_1 city_loc_1 -> m_drive_to_ordering_0 city_loc_2 city_loc_1 truck_1 12
+12 drive truck_1 city_loc_2 city_loc_0 -> 
+13 drive truck_1 city_loc_0 city_loc_1 -> 
+14 load truck_1 city_loc_1 package_0 -> m_load_ordering_0 city_loc_1 package_0 capacity_2 capacity_3 truck_1 15
+15 pick_up truck_1 city_loc_1 package_0 capacity_2 capacity_3 -> 
+16 get_to truck_1 city_loc_3 -> m_drive_to_via_ordering_0 city_loc_0 city_loc_3 truck_1 17
+17 drive truck_1 city_loc_0 city_loc_1 -> 
+18 unload truck_1 city_loc_1 package_0 -> m_unload_ordering_0 city_loc_1 package_0 capacity_2 capacity_3 truck_1
+<==

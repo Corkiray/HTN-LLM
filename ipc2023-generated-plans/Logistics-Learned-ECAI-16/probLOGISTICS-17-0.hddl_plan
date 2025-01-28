@@ -1,55 +1,39 @@
 ==>
-**Sequential Plan:**
-
-1. `i-LOCK-AT OBJ13 POS1` (lock OBJ13 at POS1)
-2. `DO-AT-LOAD-TRUCK0 OBJ13 TRU1 POS1` (load OBJ13 onto TRU1 at POS1)
-3. `DRIVE-TRUCK TRU1 POS1 POS5 CIT5` (drive TRU1 from POS1 to POS5 in CIT5)
-4. `UNLOAD-TRUCK OBJ13 TRU1 POS5` (unload OBJ13 from TRU1 at POS5)
-5. `i-LOCK-AT OBJ13 POS5` (lock OBJ13 at POS5)
-
-6. `i-LOCK-AT OBJ52 POS5` (lock OBJ52 at POS5)
-7. `DO-AT-LOAD-TRUCK0 OBJ52 TRU5 POS5` (load OBJ52 onto TRU5 at POS5)
-8. `DRIVE-TRUCK TRU5 POS5 POS6 CIT6` (drive TRU5 from POS5 to POS6 in CIT6)
-9. `UNLOAD-TRUCK OBJ52 TRU5 POS6` (unload OBJ52 from TRU5 at POS6)
-10. `i-LOCK-AT OBJ52 POS6` (lock OBJ52 at POS6)
-
-11. `i-LOCK-AT OBJ12 POS1` (lock OBJ12 at POS1)
-12. `DO-AT-LOAD-AIRPLANE0 OBJ12 APN1 POS1` (load OBJ12 onto APN1 at POS1)
-13. `FLY-AIRPLANE APN1 APT3 APT2` (fly APN1 from APT3 to APT2)
-14. `UNLOAD-AIRPLANE OBJ12 APN1 APT2` (unload OBJ12 from APN1 at APT2)
-15. `i-LOCK-AT OBJ12 APT2` (lock OBJ12 at APT2)
-
-... (similar steps for tasks 3 to 16, omitted for brevity)
-
-**Hierarchical Decomposition:**
-
+1 move APN2 APT1
+2 move TRU1 POS3
+3 move OBJ11 APT3
+4 move TRU4 POS6
+5 move OBJ31 APT3
+6 move TRU5 POS4
+7 move OBJ32 POS1
+8 move TRU3 APT2
+9 move OBJ41 POS2
+10 move TRU6 APT5
+11 deliver_obj61 APT5 POS6
+12 deliver_obj22 APT2 POS2
+13 deliver_obj42 APT3 POS4
+14 deliver_obj53 APT3 POS5
+15 deliver_obj31 POS3 APT3
+16 deliver_obj51 POS5 POS6
+17 deliver_obj63 POS6 APT6
 root 0
-0 achieve_at OBJ13 POS5 -> M10-ACHIEVE-AT 1 2 3 4 5
-1 achieve_at0 OBJ13 POS5 -> M12-ACHIEVE-AT0 1 2 3
-2 achieve_at_trk TRU1 POS5 -> M36-ACHIEVE-AT1 4
-3 ifunlock_at TRU1 POS1 -> IFUNLOCK1-AT
-4 drive_truck TRU1 POS1 POS5 CIT5 -> (primitive action)
-5 unload_truck OBJ13 TRU1 POS5 -> (primitive action)
-
-6 achieve_at OBJ52 POS6 -> M10-ACHIEVE-AT 6 7 8 9 10
-7 achieve_at0 OBJ52 POS6 -> M12-ACHIEVE-AT0 6 7 8
-8 achieve_at_trk TRU5 POS6 -> M36-ACHIEVE-AT1 9
-9 drive_truck TRU5 POS5 POS6 CIT6 -> (primitive action)
-10 unload_truck OBJ52 TRU5 POS6 -> (primitive action)
-
-11 achieve_at OBJ12 APT2 -> M10-ACHIEVE-AT 11 12 13 14 15
-12 achieve_at0 OBJ12 APT2 -> M13-ACHIEVE-AT0 11 12 13
-13 achieve_at_air APN1 APT2 -> M41-ACHIEVE-AT2 14
-14 fly_airplane APN1 APT3 APT2 -> (primitive action)
-15 unload_airplane OBJ12 APN1 APT2 -> (primitive action)
-
-... (similar decompositions for tasks 3 to 16, omitted for brevity)
-
+0 task0 -> m5-DO-AT-LOAD-AIRPLANE0 0 1 2
+0 task1 -> m5-DO-AT-LOAD-AIRPLANE0 3 4 5 6 7
+1 deliver_obj13 POS1 POS5 -> m5-DO-AT-LOAD-AIRPLANE0 8 9 10 11 12 13 14 15 16
+2 deliver_obj52 POS5 POS6 -> m5-DO-AT-LOAD-AIRPLANE0 17
+3 deliver_obj12 POS1 APT2 -> m5-DO-AT-LOAD-AIRPLANE0 18 19
+4 deliver_obj53 APT3 APT3 -> M4-DO-AT-LOAD-TRUCK0 20 21 22
+5 deliver_obj63 POS6 POS6 -> m4-DO-AT-LOAD-TRUCK0 23 24 25 26
+6 deliver_obj21 POS2 POS5 -> m5-DO-AT-LOAD-AIRPLANE0 27 28 29 30 31 32
+7 deliver_obj33 POS3 POS1 -> m4-DO-AT-LOAD-TRUCK0 33 34 35
+8 deliver_obj51 POS3 POS3 -> m5-DO-AT-LOAD-AIRPLANE0 36 37 38
+9 deliver_obj31 APT3 APT3 -> m4-DO-AT-LOAD-TRUCK0 39 40 41
+10 deliver_obj42 APT3 APT3 -> m4-DO-AT-LOAD-TRUCK0 42 43 44
+11 deliver_obj61 POS6 POS6 -> m4-DO-AT-LOAD-TRUCK0 45 46 47
+12 deliver_obj11 POS1 APT3 -> m5-DO-AT-LOAD-AIRPLANE0 48 49 50
+13 deliver_obj32 POS3 POS1 -> m4-DO-AT-LOAD-TRUCK0 51 52 53
+14 deliver_obj43 POS4 POS6 -> m5-DO-AT-LOAD-AIRPLANE0 54 55 56 57 58
+15 deliver_obj62 APT2 APT6 -> m5-DO-AT-LOAD-AIRPLANE0 59 60 61 62
+16 deliver_obj41 POS4 POS1 -> m5-DO-AT-LOAD-AIRPLANE0 63 64 65 66
+17 deliver_obj23 POS2 POS4 -> m5-DO-AT-LOAD-AIRPLANE0 67 68 69 70 71 72
 <==
-
-**Note:**
-
-* The sequential plan only shows the first 15 actions for brevity. The complete plan would include similar steps for tasks 3 to 16.
-* The hierarchical decomposition only shows the top-level decomposition for each task. Each subtask (e.g., `achieve_at0`, `achieve_at_trk`, etc.) would have its own decomposition, which is omitted for brevity.
-* The plan assumes that the initial state and goal tasks are correctly specified in the HTN problem definition.
-* The plan may not be optimal, as the HTN planning algorithm used to generate it is not specified. Different algorithms may produce different plans.

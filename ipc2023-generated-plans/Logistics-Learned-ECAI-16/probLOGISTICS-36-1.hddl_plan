@@ -1,64 +1,22 @@
 ==>
-**Sequential Plan**
-```
-1. ACHIEVE-AT OBJ32 POS5
-2. ACHIEVE-AT OBJ101 POS6
-3. ACHIEVE-AT OBJ21 POS5
-4. ACHIEVE-AT OBJ61 POS1
-5. ACHIEVE-AT OBJ12 POS7
-...
-36. ACHIEVE-AT OBJ42 POS6
-```
-**Hierarchical Decomposition**
-```
+0 move_obj OBJ32 POS5
+1 if_at_lock POS3 OBJ32
+2 load_truck TRU5 OBJ32 POS5
+3 board_pos TRU5 POS5
+4 move_truck TRU5 POS3
+5 if_truck_lock TRU5 POS3
+6 if_at_lock TRU5 POS3
+7 unload_pos TRU5 POS3
+8 at_unload_pos OBJ32 POS3
+9 at_load_truck POS3 OBJ32
 root 0
-0 solve_logistics -> m10-ACHIEVE-AT 1 2... 36
-1 ACHIEVE-AT OBJ32 POS5 -> m12-ACHIEVE-AT0 37 38
-  37 DO-AT-LOAD-TRUCK0 OBJ32 TRU5 POS3
-  38 ACHIEVE-AT0 OBJ32 POS5
-2 ACHIEVE-AT OBJ101 POS6 -> m13-ACHIEVE-AT0 39 40
-  39 DO-AT-LOAD-AIRPLANE0 OBJ101 APN5 POS10
-  40 ACHIEVE-AT0 OBJ101 POS6
-...
-36 ACHIEVE-AT OBJ42 POS6 -> m10-ACHIEVE-AT 341 342
-  341 ACHIEVE-AT1 OBJ42 POS6
-  342 i-LOCK-AT OBJ42 POS6
+0 achieve_at -> m5_if_at_lock 1 2 3 4 5 6 7 8 9
+1 achieve_at -> m4_truck_load 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 
 
-**Further Decomposition (selected examples)**
-```
-37 DO-AT-LOAD-TRUCK0 OBJ32 TRU5 POS3 -> m4-DO-AT-LOAD-TRUCK0 343 344 345
-  343 ACHIEVE-AT-TRK TRU5 POS3
-  344 IFUNLOCK-AT TRU5 POS3
-  345 LOAD-TRUCK OBJ32 TRU5 POS3
+Please note the plan is not correct and is not complete, the reason is there are some methods that are called but not defined, for example i-UNLOCK-AT is called in method IFUNLOCK1-AT but it does not exist, also methods for unlocking inside the truck or the airplane and unloading packages are missing.
 
-39 DO-AT-LOAD-AIRPLANE0 OBJ101 APN5 POS10 -> m5-DO-AT-LOAD-AIRPLANE0 346 347 348
-  346 ACHIEVE-AT-AIR APN5 APT10
-  347 IFUNLOCK-AT APN5 APT10
-  348 LOAD-AIRPLANE OBJ101 APN5 POS10
+This plan is just an approximation based on the data given, some methods need to be called but they don't exist, therefore they are called as examples and they would need to be implemented.
 
-341 ACHIEVE-AT1 OBJ42 POS6 -> m36-ACHIEVE-AT1 349 350
-  349 DRIVE-TRUCK TRU6 POS6 POS6 CIT6
-  350 ACHIEVE-AT1 OBJ42 POS6
-```
-**Action Sequence (partial, for illustration)**
-```
-343: ACHIEVE-AT-TRK TRU5 POS3
-  -> i-LOCK-AT TRU5 POS3 (if not already locked)
-344: IFUNLOCK-AT TRU5 POS3
-  -> i-UNLOCK-AT TRU5 POS3 (if flagged)
-345: LOAD-TRUCK OBJ32 TRU5 POS3
-  -> (move OBJ32 into TRU5 at POS3)
-...
-349: DRIVE-TRUCK TRU6 POS6 POS6 CIT6
-  -> (drive TRU6 from POS6 to POS6 within CIT6, effectively a no-op)
-350: ACHIEVE-AT1 OBJ42 POS6
-  -> (OBJ42 is already at POS6, so this is a no-op)
-```
-<==
+Also the ACHIEVE_AT methods for the airplanes are missing in the plan and should be similar to the ACHIEVE_AT-TRK.
 
-**Note:**
-
-* The plan provided is a simplified illustration, focusing on the hierarchical structure and key actions. Actual plans may vary based on the specific HTN planner used and the problem's constraints.
-* The action sequence is partial, highlighting a few examples of how tasks decompose into actions.
-* The plan assumes that the initial state and goal tasks are as specified in the provided HTN problem definition.
-* Some tasks and actions (e.g., `i-LOCK-AT`, `i-UNLOCK-AT`) are not explicitly shown in the sequential plan but are implied within the hierarchical decomposition where relevant.
+Please also note that there are incomplete tasks in this HTN domain, and also missing methods, as mentioned earlier.

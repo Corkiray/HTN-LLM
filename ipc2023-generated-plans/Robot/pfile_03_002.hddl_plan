@@ -1,48 +1,34 @@
-Here is a hierarchical plan to solve the given HTN problem, following the specified output format:
-```
+To solve the given problem, we will decompose the tasks using the methods provided in the domain definition.
+
+First, we will start with the initial task `(achieve-goals)`, which has no preconditions but aims to satisfy the goal conditions.
+
+Since the goal is to have `o1` in `r3` and `o2` in `r2`, and both objects are currently in `r1`, we need to move them to their respective goal locations.
+
+Let's start with `o1`. To move `o1` to `r3`, we first need to pick it up from `r1`, then move to `r3` through the door `d13`, which is currently closed. Thus, we need to open the door first.
+
+For `o2`, we similarly need to pick it up from `r1` and then move to `r2` through the door `d12`, which is also closed. So, we need to open this door as well.
+
+Here is the hierarchical plan:
+
 ==>
 1 pickup o1 r1
 2 open r1 r3 d13
 3 move r1 r3 d13
 4 putdown o1 r3
-5 open r3 r1 d13
-6 move r3 r1 d13
-7 open r1 r2 d12
-8 move r1 r2 d12
-9 putdown o2 r2
-10 achieve-goals
-<==
+5 pickup o2 r1
+6 open r1 r2 d12
+7 move r1 r2 d12
+8 putdown o2 r2
 root 0
-0 achieve-goals -> achieve-goals-pickup 1 2 3 4
-  |         -> achieve-goals-move 5 6
-  |         -> achieve-goals-pickup 7 8 9
-  |         -> finished 10
-1 achieve-goals-pickup o1 r1 -> newMethod22 o1 r1
-2 achieve-goals-open -> newMethod25 r1 r3 d13
-3 achieve-goals-move -> newMethod24 r1 r3 d13
-4 achieve-goals-putdown o1 r3 -> newMethod23 o1 r3
-5 achieve-goals-open -> newMethod25 r3 r1 d13
-6 achieve-goals-move -> newMethod24 r3 r1 d13
-7 achieve-goals-open -> newMethod25 r1 r2 d12
-8 achieve-goals-move -> newMethod24 r1 r2 d12
-9 achieve-goals-putdown o2 r2 -> newMethod23 o2 r2
-```
-**Plan Explanation:**
+0 achieve-goals -> achieve-goals-pickup 1 5
+1 achieve-goals-pickup -> newMethod22 1
+2 achieve-goals-move -> newMethod25 2
+3 achieve-goals-move -> newMethod24 3
+4 achieve-goals-pickup -> newMethod23 4
+5 achieve-goals-pickup -> newMethod22 5
+6 achieve-goals-open -> newMethod25 6
+7 achieve-goals-move -> newMethod24 7
+8 achieve-goals-pickup -> newMethod23 8
+<==
 
-1. **Initial Goal**: Achieve goals (i.e., `in o1 r3` and `in o2 r2`)
-2. **First Decomposition (achieve-goals-pickup o1 r1)**:
-	* Pick up `o1` in `r1` (1)
-	* Open door `d13` to move from `r1` to `r3` (2)
-	* Move from `r1` to `r3` through `d13` (3)
-	* Put down `o1` in `r3` (4)
-3. **Intermediate Movement (achieve-goals-move)**:
-	* Open door `d13` to move back from `r3` to `r1` (5)
-	* Move from `r3` to `r1` through `d13` (6)
-4. **Second Decomposition (achieve-goals-pickup o2 r1)**:
-	* Open door `d12` to move from `r1` to `r2` (7)
-	* Move from `r1` to `r2` through `d12` (8)
-	* Put down `o2` in `r2` (9)
-5. **Final Achievement**:
-	* Achieve goals (both packages are now in their target rooms) (10)
-
-Note that some actions (e.g., `open` and `move`) are repeated with different parameters to facilitate the movement between rooms while achieving the goals. The plan assumes that the robot can perform these actions sequentially without any additional constraints.
+This plan sequence first picks up `o1`, opens the door to `r3`, moves to `r3`, and puts down `o1`. Then, it picks up `o2`, opens the door to `r2`, moves to `r2`, and puts down `o2`, thus achieving the goal state.

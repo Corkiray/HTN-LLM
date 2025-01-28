@@ -1,78 +1,111 @@
 ==>
-1 load_highspeed_saw b0 highspeed_saw0
-2 cut_board_large b0 p0 highspeed_saw0 teak rough s5 s6 s7 s0 large natural untreated
-3 unload_highspeed_saw b0 highspeed_saw0
-4 do_glaze p0 glazer0 white untreated untreated glazed natural
-5 load_highspeed_saw b1 highspeed_saw1
-6 cut_board_large b1 p1 highspeed_saw1 pine rough s7 s6 s5 s0 large natural untreated
-7 unload_highspeed_saw b1 highspeed_saw1
-8 do_glaze p1 glazer1 mauve untreated untreated glazed natural
-9 load_highspeed_saw b2 highspeed_saw2
-10 cut_board_small b2 p2 highspeed_saw2 walnut rough s5 s6 s7 small natural untreated
-11 unload_highspeed_saw b2 highspeed_saw2
-12 do_glaze p2 glazer2 white untreated untreated glazed natural
-13 load_highspeed_saw b3 highspeed_saw3
-14 cut_board_medium b3 p3 highspeed_saw3 oak smooth s3 s4 s5 medium natural untreated
-15 unload_highspeed_saw b3 highspeed_saw3
-16 do_immersion_varnish p3 immersion_varnisher0 natural untreated varnished natural
-17 load_highspeed_saw b0 highspeed_saw4
-18 cut_board_large b0 p4 highspeed_saw4 teak rough s5 s6 s7 s0 large natural untreated
-19 unload_highspeed_saw b0 highspeed_saw4
-20 do_spray_varnish p4 spray_varnisher0 black untreated varnished natural
-21 load_highspeed_saw b1 highspeed_saw5
-22 cut_board_medium b1 p5 highspeed_saw5 pine rough s7 s6 s5 medium natural untreated
-23 unload_highspeed_saw b1 highspeed_saw5
-24 do_plane_untreated p5 planer0 smooth untreated untreated smooth natural
-25 load_highspeed_saw b2 highspeed_saw6
-26 cut_board_medium b2 p6 highspeed_saw6 walnut rough s5 s6 s7 medium natural untreated
-27 unload_highspeed_saw b2 highspeed_saw6
-28 do_glaze p6 glazer3 red untreated untreated glazed natural
-29 load_highspeed_saw b3 highspeed_saw7
-30 cut_board_small b3 p7 highspeed_saw7 oak smooth s3 s4 s5 small natural untreated
-31 unload_highspeed_saw b3 highspeed_saw7
-32 do_grind_untreated p7 grinder0 rough natural untreated untreated untreated untreated verysmooth natural
-33 do_spray_varnish p8 spray_varnisher1 natural varnished varnished natural
-34 do_plane_untreated p9 planer1 smooth colourfragments untreated smooth natural
-35 do_immersion_varnish p10 immersion_varnisher1 natural glazed varnished natural
-36 do_spray_varnish p11 spray_varnisher2 red glazed varnished natural
-37 load_highspeed_saw b0 highspeed_saw8
-38 cut_board_medium b0 p12 highspeed_saw8 teak rough s5 s6 s7 medium natural untreated
-39 unload_highspeed_saw b0 highspeed_saw8
-40 do_plane_untreated p12 planer2 smooth untreated untreated smooth natural
-41 do_grind_untreated p12 grinder1 smooth natural untreated untreated untreated untreated verysmooth natural
-42 do_spray_varnish p12 spray_varnisher3 black untreated varnished natural
-43 load_highspeed_saw b1 highspeed_saw9
-44 cut_board_small b1 p13 highspeed_saw9 pine rough s7 s6 s5 small natural untreated
-45 unload_highspeed_saw b1 highspeed_saw9
-46 do_grind_untreated p13 grinder2 rough natural untreated untreated untreated untreated verysmooth natural
-47 do_immersion_varnish p13 immersion_varnisher2 blue untreated varnished natural
-48 load_highspeed_saw b2 highspeed_saw10
-49 cut_board_medium b2 p14 highspeed_saw10 walnut rough s5 s6 s7 medium natural untreated
-50 unload_highspeed_saw b2 highspeed_saw10
-51 do_plane_untreated p14 planer3 smooth untreated untreated smooth natural
-52 do_immersion_varnish p14 immersion_varnisher3 natural untreated varnished natural
+1 process p0 natural rough smooth
+2 grindNplane p0 rough natural untreated smooth natural varnished
+3 do_colour p0 natural immersion_varnisher1 varnished
+4 cut_and_saw b0 p0 walnut rough
+5 process p1 natural rough smooth
+6 grindNplane p1 rough natural untreated smooth natural varnished
+7 do_colour p1 mauve immersion_varnisher1 glazed
+8 cut_and_saw b1 p1 pine rough
+9 process p2 natural rough smooth
+10 grindNplane p2 rough natural untreated smooth natural varnished
+11 do_colour p2 white immersion_varnisher1 glazed
+12 cut_and_saw b2 p2 walnut rough
+13 process p3 natural rough smooth
+14 grindNplane p3 rough natural untreated smooth natural varnished
+15 do_colour p3 natural immersion_varnisher1 varnished
+16 cut_and_saw b3 p3 oak smooth
+17 process p4 natural rough smooth
+18 grindNplane p4 rough natural untreated smooth natural varnished
+19 do_colour p4 black immersion_varnisher1 varnished
+20 cut_and_saw b0 p4 teak rough
+21 process p5 natural rough smooth
+22 grindNplane p5 rough natural untreated smooth natural varnished
+23 do_colour p5 natural immersion_varnisher1 varnished
+24 cut_and_saw b2 p5 walnut rough
+25 process p6 natural rough smooth
+26 grindNplane p6 rough natural untreated smooth natural varnished
+27 do_colour p6 red immersion_varnisher1 glazed
+28 cut_and_saw b1 p6 pine rough
+29 process p7 natural rough smooth
+30 grindNplane p7 rough natural untreated smooth natural varnished
+31 do_colour p7 natural immersion_varnisher1 varnished
+32 cut_and_saw b3 p7 oak smooth
+root 0
+0 process -> process 1 2 3 4
+1 grindNplane -> grindNplane 5 6 7 8
+2 do_colour -> do_colour 9 10 11 12
+3 cut_and_saw -> cut_and_saw 13 14 15 16
+4 process -> process 17 18 19 20
+5 grindNplane -> grindNplane 21 22 23 24
+6 do_colour -> do_colour 25 26 27 28
+7 cut_and_saw -> cut_and_saw 29 30 31 32
 <==
 
-root 0
-0 process p0 white rough smooth -> m14 1 2 3 4
-1 process p1 mauve rough smooth -> m14 5 6 7 8
-2 process p2 white rough smooth -> m14 9 10 11 12
-3 process p3 natural smooth verysmooth -> m16 13 14 15 16 17 18
-4 process p4 black rough verysmooth -> m14 19 20 21 22
-5 process p5 natural rough verysmooth -> m14 23 24 25 26
-6 process p6 red rough verysmooth -> m14 27 28 29 30
-7 process p7 natural smooth verysmooth -> m14 31 32 33 34
-8 process p8 natural verysmooth verysmooth -> m1 33
-9 process p9 natural verysmooth smooth -> m2 34
-10 process p10 natural verysmooth verysmooth -> m0 35
-11 process p11 red verysmooth smooth -> m12 36
-12 process p12 black rough verysmooth -> m16 37 38 39 40 41 42
-13 process p13 blue rough verysmooth -> m16 43 44 45 46 47
-14 process p14 natural rough smooth -> m16 48 49 50 51 52 
+This plan consists of a sequence of tasks that the woodworking machines need to perform in order to achieve the desired goals. The tasks are grouped into hierarchical decompositions, with the top-level task being "process". The "process" task is decomposed into several subtasks, including "grindNplane", "do_colour", and "cut_and_saw". Each of these subtasks is further decomposed into more specific tasks, such as "grindNplane" being decomposed into "grindNplane" and "do_colour". 
 
-Note: 
-- The plan is a sequence of 52 actions (1-52) that achieve the goal.
-- The hierarchical decomposition (root) shows how each process task (p0-p14) is broken down into smaller tasks using various methods (m0-m16).
-- Each method invocation in the decomposition corresponds to a subset of actions in the sequential plan.
-- The plan assumes that the initial state and goal conditions are as specified in the problem definition.
-- The plan might not be optimal, and there could be other valid plans to achieve the goal.
+This plan assumes that the machines are available and that the necessary materials are present. It also assumes that the machines can perform the tasks in the order specified, without any conflicts or errors. 
+
+Note that this is just one possible plan, and there may be other valid plans that can achieve the same goals. The planning system would need to be run multiple times to generate different plans and evaluate their validity and optimality. 
+
+Here is a python code to generate this plan:
+
+```Python
+def generate_plan():
+    tasks = [
+        "process p0 natural rough smooth",
+        "grindNplane p0 rough natural untreated smooth natural varnished",
+        "do_colour p0 natural immersion_varnisher1 varnished",
+        "cut_and_saw b0 p0 walnut rough",
+        "process p1 natural rough smooth",
+        "grindNplane p1 rough natural untreated smooth natural varnished",
+        "do_colour p1 mauve immersion_varnisher1 glazed",
+        "cut_and_saw b1 p1 pine rough",
+        "process p2 natural rough smooth",
+        "grindNplane p2 rough natural untreated smooth natural varnished",
+        "do_colour p2 white immersion_varnisher1 glazed",
+        "cut_and_saw b2 p2 walnut rough",
+        "process p3 natural rough smooth",
+        "grindNplane p3 rough natural untreated smooth natural varnished",
+        "do_colour p3 natural immersion_varnisher1 varnished",
+        "cut_and_saw b3 p3 oak smooth",
+        "process p4 natural rough smooth",
+        "grindNplane p4 rough natural untreated smooth natural varnished",
+        "do_colour p4 black immersion_varnisher1 varnished",
+        "cut_and_saw b0 p4 teak rough",
+        "process p5 natural rough smooth",
+        "grindNplane p5 rough natural untreated smooth natural varnished",
+        "do_colour p5 natural immersion_varnisher1 varnished",
+        "cut_and_saw b2 p5 walnut rough",
+        "process p6 natural rough smooth",
+        "grindNplane p6 rough natural untreated smooth natural varnished",
+        "do_colour p6 red immersion_varnisher1 glazed",
+        "cut_and_saw b1 p6 pine rough",
+        "process p7 natural rough smooth",
+        "grindNplane p7 rough natural untreated smooth natural varnished",
+        "do_colour p7 natural immersion_varnisher1 varnished",
+        "cut_and_saw b3 p7 oak smooth"
+    ]
+
+    decompositions = {
+        "process": [1, 2, 3, 4],
+        "grindNplane": [5, 6, 7, 8],
+        "do_colour": [9, 10, 11, 12],
+        "cut_and_saw": [13, 14, 15, 16],
+        "process": [17, 18, 19, 20],
+        "grindNplane": [21, 22, 23, 24],
+        "do_colour": [25, 26, 27, 28],
+        "cut_and_saw": [29, 30, 31, 32]
+    }
+
+    plan = "==> \n"
+    for i, task in enumerate(tasks):
+        plan += f"{i+1} {task} \n"
+    plan += "root 0 \n"
+    for task, subtasks in decompositions.items():
+        plan += f"0 {task} -> {task} {subtasks[0]} {subtasks[1]} {subtasks[2]} {subtasks[3]} \n"
+    plan += "<=="
+    return plan
+
+print(generate_plan())
+```

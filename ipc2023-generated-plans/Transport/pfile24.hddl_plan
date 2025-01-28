@@ -1,56 +1,73 @@
 ==>
-**Sequential Plan**
-1. drive truck_3 city_loc_4 city_loc_2
-2. pick_up truck_3 city_loc_2 package_0 capacity_1 capacity_2
-3. drive truck_3 city_loc_2 city_loc_4
-4. drive truck_3 city_loc_4 city_loc_1
-5. drop truck_3 city_loc_1 package_0 capacity_0 capacity_1
-6. drive truck_3 city_loc_1 city_loc_4
-7. drive truck_3 city_loc_4 city_loc_2
-8. pick_up truck_3 city_loc_2 package_1 capacity_1 capacity_2
-9. drive truck_3 city_loc_2 city_loc_0
-10. drive truck_3 city_loc_0 city_loc_5
-11. drop truck_3 city_loc_5 package_1 capacity_0 capacity_1
-12. drive truck_3 city_loc_5 city_loc_0
-...
-**Plan truncated for brevity, focusing on the first two deliveries**
-**(package_0 to city_loc_1 and package_1 to city_loc_5)**
-...
-**Total Actions for all Deliveries: 121**
-
-**Hierarchical Decomposition**
+1 get_to truck_0 city_loc_6
+2 load truck_0 city_loc_6 package_8
+3 get_to truck_0 city_loc_8
+4 unload truck_0 city_loc_8 package_8
+5 get_to truck_3 city_loc_6
+6 load truck_3 city_loc_6 package_12
+7 get_to truck_3 city_loc_2
+8 unload truck_3 city_loc_2 package_12
+9 get_to truck_3 city_loc_7
+10 load truck_3 city_loc_7 package_13
+11 get_to truck_3 city_loc_5
+12 unload truck_3 city_loc_5 package_13
+13 get_to truck_3 city_loc_2
+14 load truck_3 city_loc_2 package_1
+15 get_to truck_3 city_loc_5
+16 unload truck_3 city_loc_5 package_1
+17 get_to truck_1 city_loc_8
+18 load truck_1 city_loc_8 package_7
+19 get_to truck_1 city_loc_0
+20 unload truck_1 city_loc_0 package_7
+21 get_to truck_1 city_loc_3
+22 load truck_1 city_loc_3 package_2
+23 get_to truck_1 city_loc_3
+24 unload truck_1 city_loc_3 package_2
+25 get_to truck_1 city_loc_3
+26 load truck_1 city_loc_3 package_3
+27 get_to truck_1 city_loc_3
+28 unload truck_1 city_loc_3 package_3
+29 get_to truck_1 city_loc_3
+30 load truck_1 city_loc_3 package_4
+31 get_to truck_1 city_loc_3
+32 unload truck_1 city_loc_3 package_4
+33 get_to truck_1 city_loc_3
+34 load truck_1 city_loc_3 package_5
+35 get_to truck_1 city_loc_3
+36 unload truck_1 city_loc_3 package_5
+37 get_to truck_1 city_loc_3
+38 load truck_1 city_loc_3 package_6
+39 get_to truck_1 city_loc_3
+40 unload truck_1 city_loc_3 package_6
+41 get_to truck_1 city_loc_3
+42 load truck_1 city_loc_3 package_9
+43 get_to truck_1 city_loc_3
+44 unload truck_1 city_loc_3 package_9
+45 get_to truck_1 city_loc_3
+46 load truck_1 city_loc_3 package_10
+47 get_to truck_1 city_loc_3
+48 unload truck_1 city_loc_3 package_10
+49 get_to truck_1 city_loc_3
+50 load truck_1 city_loc_3 package_11
+51 get_to truck_1 city_loc_7
+52 unload truck_1 city_loc_7 package_11
+53 get_to truck_0 city_loc_2
+54 load truck_0 city_loc_2 package_0
+55 get_to truck_0 city_loc_1
+56 unload truck_0 city_loc_1 package_0
 root 0
-0 solve_htn -> m_deliver_ordering_0 1 2... 13
-  1 deliver package_0 city_loc_1 -> m_deliver_ordering_0
-    * Decomposed into:
-      1.1 get_to truck_3 city_loc_2 -> m_drive_to_ordering_0
-        - drive truck_3 city_loc_4 city_loc_2
-      1.2 load truck_3 city_loc_2 package_0 -> m_load_ordering_0
-        - pick_up truck_3 city_loc_2 package_0 capacity_1 capacity_2
-      1.3 get_to truck_3 city_loc_1 -> m_drive_to_ordering_0
-        - drive truck_3 city_loc_2 city_loc_4
-        - drive truck_3 city_loc_4 city_loc_1
-      1.4 unload truck_3 city_loc_1 package_0 -> m_unload_ordering_0
-        - drop truck_3 city_loc_1 package_0 capacity_0 capacity_1
-
-  2 deliver package_1 city_loc_5 -> m_deliver_ordering_0
-    * Decomposed into:
-      2.1 get_to truck_3 city_loc_2 -> m_i_am_there_ordering_0 (Already at city_loc_2 in this context)
-        - noop truck_3 city_loc_2
-      2.2 load truck_3 city_loc_2 package_1 -> m_load_ordering_0
-        - pick_up truck_3 city_loc_2 package_1 capacity_1 capacity_2
-      2.3 get_to truck_3 city_loc_5 -> m_drive_to_via_ordering_0
-        - drive truck_3 city_loc_2 city_loc_0
-        - drive truck_3 city_loc_0 city_loc_5
-      2.4 unload truck_3 city_loc_5 package_1 -> m_unload_ordering_0
-        - drop truck_3 city_loc_5 package_1 capacity_0 capacity_1
-
-...
-**Decomposition truncated for brevity, focusing on the first two deliveries**
-...
+0 deliver package_0 city_loc_1 -> m_deliver_ordering_0 city_loc_2 city_loc_1 package_0 truck_0 1 54 53 55 56
+1 deliver package_1 city_loc_5 -> m_deliver_ordering_0 city_loc_2 city_loc_5 package_1 truck_3 14 6 13 10 15 11 12 16
+2 deliver package_2 city_loc_3 -> m_deliver_ordering_0 city_loc_3 city_loc_3 package_2 truck_1 22 24 26 27 28 32 34 36 38 40 42 44 46 48 50 24 33 30 29 23
+3 deliver package_3 city_loc_3 -> m_deliver_ordering_0 city_loc_3 city_loc_3 package_3 truck_1 22 24 26 27 28 32 34 36 38 40 42 44 46 48 50 24 33 30 26 27
+4 deliver package_4 city_loc_3 -> m_deliver_ordering_0 city_loc_3 city_loc_3 package_4 truck_1 22 24 26 27 28 32 34 36 38 40 42 44 46 48 50 24 33 30 29 31
+5 deliver package_5 city_loc_3 -> m_deliver_ordering_0 city_loc_3 city_loc_3 package_5 truck_1 22 24 26 27 28 32 34 36 38 40 42 44 46 48 50 24 33 30 34 35
+6 deliver package_6 city_loc_3 -> m_deliver_ordering_0 city_loc_3 city_loc_3 package_6 truck_1 22 24 26 27 28 32 34 36 38 40 42 44 46 48 50 24 33 30 37 39
+7 deliver package_7 city_loc_0 -> m_deliver_ordering_0 city_loc_8 city_loc_0 package_7 truck_1 17 18 19 20
+8 deliver package_8 city_loc_8 -> m_deliver_ordering_0 city_loc_6 city_loc_8 package_8 truck_0 1 2 3 4
+9 deliver package_9 city_loc_3 -> m_deliver_ordering_0 city_loc_3 city_loc_3 package_9 truck_1 22 24 26 27 28 32 34 36 38 40 42 44 46 48 50 24 33 30 42 43
+10 deliver package_10 city_loc_3 -> m_deliver_ordering_0 city_loc_3 city_loc_3 package_10 truck_1 22 24 26 27 28 32 34 36 38 40 42 44 46 48 50 24 33 30 45 47
+11 deliver package_11 city_loc_7 -> m_deliver_ordering_0 city_loc_6 city_loc_7 package_11 truck_1 6 50 51 52
+12 deliver package_12 city_loc_2 -> m_deliver_ordering_0 city_loc_6 city_loc_2 package_12 truck_3 6 7 8
+13 deliver package_13 city_loc_5 -> m_deliver_ordering_0 city_loc_7 city_loc_5 package_13 truck_3 10 11 12 9 15 16
 <==
-
-**Note:**
-- The sequential plan is truncated to focus on the first two deliveries for brevity. The full plan would include actions for all 14 deliveries, totaling 121 actions.
-- The hierarchical decomposition shows how the top-level `solve_htn` task is decomposed into `deliver` tasks, which are further broken down into `get_to`, `load`, `get_to` (again for the destination), and `unload` tasks. The methods used for decomposition (e.g., `m_deliver_ordering_0`, `m_drive_to_ordering_0`, etc.) are as defined in the provided HTN domain.
-- The actions listed under each decomposition step (e.g., `drive`, `pick_up`, `noop`, etc.) are the primitive actions that achieve the tasks, as per the domain's action definitions.

@@ -1,36 +1,30 @@
 ==>
-1 move C5 S3
-2 move C4 S2
-3 move C3 C5
-4 move D2 H3
-5 move D6 C2
-6 move DA D2
-7 move H2 C4
-8 move H3 D4
-9 move H4 HA
-10 move H5 C6
-11 move H6 H2
-12 move HA D5
-13 move S4 SA
-14 move S5 CA
-15 move SA D3
-16 board S6 C6
-17 move C6 S6
-18 debark S6 C6
-root 0
-0 solve_freecell -> m1_solve_freecell_0 1 2 3
-1 task0 (ACHIEVE-HOME C6) -> m1_achieve_home_0 C6 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18
-2 task1 (ACHIEVE-HOME D6) -> m1_achieve_home_0 D6
-3 task2 (ACHIEVE-HOME H6) -> m1_achieve_home_0 H6
+
+1  DO-ON-SENDTONEWCOL0  C2  D2  N0  N13 
+2  DO-ON-MOVE1  D2  H3  C4 
+3  DO-ON-SENDTONEWCOL1  C4  H4  N2  N13 
+4  DO-ON-MOVE1  H4  DA  H5 
+5  DO-ON-MOVE2  H5  C6  H6 
+6  DO-ON-SENDTONEWCOL2  D6  C2  N3  N12 
+7  DO-ON-SENDTOFREE2  D3  C3  N4  N12 
+8  DO-ON-SENDTOHOME2  C6  D5  D  N8  H6  N1 
+9  DO-ON-MOVE2  D5  S4  S5 
+10  DO-ON-SENDTOHOME2  D4  C5  S  N7  H6  N0 
+11  DO-ON-SENDTONEWCOL2  S3  C5  N5  N11 
+12  DO-ON-SENDTONEWCOL2  S6  C6  N6  N10 
+13  DO-INCELL-HOMEFROMFREECELL1  C6  C  N9  D6  N5  N6  N8 
+14  DO-ON-SENDTONEWCOL0  S2  D4  N1  N9 
+
 <==
 
-Note: The plan is a simplified representation of the solution, and the actual plan may vary based on the specific HTN planner used. 
-
-Here's a brief explanation of the plan:
-
-1.  The first 15 actions (`move` actions) are used to rearrange the cards to free up space and put the cards in the correct order.
-2.  `board S6 C6` is an action that prepares the foundation pile for the suit of Spades (S).
-3.  The final `move C6 S6` action moves the King of Spades (C6) to the foundation pile, achieving the goal of putting the King of Spades in its home position.
-4.  The `debark S6 C6` action is not a standard action in Freecell, but in this context, it likely represents the final state of the King of Spades being in its home position, with no more actions required.
-
-The hierarchical decomposition is represented by the `root` and the methods (`m1_solve_freecell_0`, `m1_achieve_home_0`) that break down the main goal into smaller subtasks. The numbers in the decomposition refer to the actions in the sequential plan.
+root 0 
+0 ->  FREE-COL-MOVE-C2 1 2 
+FREE-COL-MOVE-C2  ->  DO-ON-SENDTONEWCOL0  C2  ?CARD0  N0  ?NUM1 
+3  ->  MOVE-FROM-COLUMN 4 5 
+MOVE-FROM-COLUMN  ->  DO-ON-MOVE2  ?CARD0  ?CARD1  ?CARD2 
+6  ->  DO-ON-SENDTONEWCOL2  D6  ?CARD0  N3  ?NUM1 
+7  ->  FREE-COL-MOVE-D3 8 9 
+FREE-COL-MOVE-D3  ->  DO-ON-SENDTOFREE2  D3  ?CARD0  ?NUM0  ?NUM1 
+10  ->  MOVE-TO-HOME-C5 11 12 
+MOVE-TO-HOME-C5  ->  DO-ON-SENDTOHOME2  D4  C5  ?SUIT0  ?NUM2  H6  ?NUM3 
+13  ->  DELETE-FROM-BOTTOM-TO-HOME 14

@@ -1,45 +1,39 @@
 ==>
 1 pickup o1 r1
-2 move r1 r4 d14
-3 open r1 r4 d14
-4 move r1 r4 d14
-5 pickup o3 r2
-6 move r2 c d02
-7 move c r3 d03
+2 open r1 r4 d14
+3 move r1 r4 d14
+4 putdown o1 r4
+5 open r4 r2 d24
+6 move r4 r2 d24
+7 move r2 c d02
 8 open c r3 d03
 9 move c r3 d03
-10 move r3 c d03
-11 move c r2 d02
-12 putdown o3 r4
+10 pickup o3 r3
+11 move r3 c d03
+12 move c r2 d02
 13 move r2 r4 d24
-14 putdown o1 r4
-<==
-
+14 putdown o3 r4
 root 0
-0 achieve-goals -> achieve-goals-pickup 1 2 3 4 
-    (binding:?loc - r4,?obj - o1)
-1 achieve-goals -> achieve-goals-move 5 6 7 8 9 10 11 
-    (no binding, but leads to...)
-    1.1 achieve-goals -> achieve-goals-pickup 12 13 14 
-        (binding:?loc - r4,?obj - o3)
-2 achieve-goals -> finished ( terminal, no tasks )
-
-**Plan Explanation:**
-
-1. **Pickup o1 in r1**: 
-	* `pickup o1 r1` (1)
-	* Move to r4 (but door d14 is closed)
-		+ `open r1 r4 d14` (3) to open the door
-		+ `move r1 r4 d14` (2, 4) to move through the now open door
-2. **Pickup o3 in r2 (to achieve goal_in o3 r4)**: 
-	* Move to r3 to open door d03 (since d24 is not directly accessible from r2 with o3)
-		+ `move r2 c d02` (6) to move to central room
-		+ `move c r3 d03` (7, 9) with door opening in between: `open c r3 d03` (8)
-		+ `move r3 c d03` (10) and `move c r2 d02` (11) to return to r2
-	* Now, move to r4 with o3
-		+ `putdown o3 r4` (12) (wait, no! first move, then putdown)
-		+ `move r2 r4 d24` (13) and finally `putdown o3 r4` (not 12, but after moving)
-3. **Putdown o1 in r4 (already in r4 from step 1)**: 
-	* `putdown o1 r4` (14)
-
-**Note:** The plan assumes the robot can only hold one package at a time. The original problem statement and domain definition imply this, but it's not explicitly stated in the provided text. Also, the plan might not be the most efficient due to the back-and-forth movement, but it satisfies the given goals and constraints.
+0 achieve-goals -> release-move 
+  -> achieve-goals-open -> newMethod25 c r3 d03 
+  -> newMethod24 c r3 d03 
+  -> newMethod22 o3 r3 
+  -> newMethod24 r3 c d03 
+  -> newMethod24 c r2 d02 
+  -> newMethod24 r2 r4 d24 
+  -> newMethod23 o3 r4
+1 achieve-goals -> achieve-goals-move 
+  -> newMethod24 r1 r4 d14 
+  -> newMethod22 o1 r1 
+  -> newMethod25 r1 r4 d14
+  -> newMethod24 r1 r4 d14 
+  -> newMethod23 o1 r4
+2 achieve-goals -> achieve-goals-move 
+  -> newMethod24 r4 r2 d24 
+  -> newMethod25 r4 r2 d24 
+  -> newMethod24 r2 c d02 
+  -> newMethod24 c r3 d03 
+  -> newMethod24 r3 c d03 
+  -> newMethod24 c r2 d02 
+  -> newMethod24 r2 r4 d24
+<==

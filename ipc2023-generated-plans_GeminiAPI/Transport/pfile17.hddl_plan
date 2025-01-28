@@ -1,0 +1,19 @@
+==>
+1 drive truck_1 city_loc_0 city_loc_4
+2 pick_up truck_1 city_loc_4 package_0 capacity_2 capacity_3
+3 drive truck_1 city_loc_4 city_loc_0
+4 drive truck_1 city_loc_0 city_loc_7
+5 pick_up truck_1 city_loc_7 package_8 capacity_2 capacity_3
+6 drive truck_1 city_loc_7 city_loc_5
+7 drop truck_1 city_loc_5 package_8 capacity_1 capacity_2
+8 drive truck_0 city_loc_7 city_loc_0
+9 drive truck_0 city_loc_0 city_loc_4
+10 pick_up truck_0 city_loc_4 package_0 capacity_2 capacity_3
+11 drive truck_0 city_loc_4 city_loc_0
+12 drive truck_0 city_loc_0 city_loc_7
+13 pick_up truck_0 city_loc_7 package_8 capacity_2 capacity_3
+14 drive truck_0 city_loc_7 city_loc_5
+15 drop truck_0 city_loc_5 package_8 capacity_1 capacity_2
+root 0
+0 solve_elevator ->  9 10 11 12 13 14 15
+<==

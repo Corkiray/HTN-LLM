@@ -1,34 +1,21 @@
-==>
-**Sequential Plan**
-1. `turn` (initial turn to start the game)
-2. `flip l1 l1 Y N` (flip cell (l1,l1) from Y to N)
-3. `flip l2 l2 N Y` (flip cell (l2,l2) from N to Y)
-4. `flip l2 l1 N Y` (flip cell (l2,l1) from N to Y)
-5. `flip l3 l2 Y N` (flip cell (l3,l2) from Y to N)
-6. `flip l4 l4 Y N` (flip cell (l4,l4) from Y to N)
-7. `play` (continue playing after initial turns)
-**Hierarchical Decomposition**
-```
+=>
+1 flip l1 l1 N Y
+2 turn l1 l1 Y N
+3 flip l2 l2 Y N
+4 turn l2 l2 N Y
+5 flip l1 l1 N Y
+6 turn l1 l1 Y N
+7 flip l4 l4 Y N
+8 turn l4 l4 N Y
+9 flip l3 l3 Y N
+10 turn l3 l3 N Y
+11 flip l4 l4 N Y
+12 flip l4 l4 Y N
 root 0
-0 play -> do_play 1 7
-1 turn -> do_turn l1 l1 Y N 2 3 4 5 6
-  2 propagate_up l1 l1 l2 Y N -> propagate_up_do l1 l1 l2 Y N 8
-    8 propagate_up l2 l1 l3 Y N -> propagate_up_end_different l2 l1 l3 Y N
-  3 propagate_down l1 l1 l0 Y N -> propagate_down_do l1 l1 l0 Y N 9
-    9 propagate_down l0 l1 l0 Y N -> propagate_down_end_field l0 l1 Y N
-  4 propagate_left l1 l1 l1 l0 Y N -> propagate_left_end_different l1 l1 l1 l0 Y N
-  5 propagate_right l1 l1 l1 l2 Y N -> propagate_right_do l1 l1 l1 l2 Y N 10
-    10 propagate_right l1 l2 l1 l3 Y N -> propagate_right_end_different l1 l2 l1 l3 Y N
-  6 propagate_right l1 l1 l1 l4 Y N -> propagate_right_end_field l1 l1 l4 Y N
-7 play -> end_game
-```
-**Note:**
-
-* The sequential plan lists the actions to achieve the goal, with `turn` initiating the game, followed by specific `flip` actions to change the cell statuses as needed, and finally `play` to continue the game after these initial changes.
-* The hierarchical decomposition breaks down the tasks:
-	+ `play` is decomposed into `do_play`, which involves an initial `turn` followed by continuing to `play`.
-	+ The first `turn` is decomposed into `do_turn`, which includes flipping a cell and propagating changes in all four directions (up, down, left, right).
-	+ Each propagation direction (e.g., `propagate_up`) is further decomposed based on the conditions (e.g., `propagate_up_do` if the next cell is in the same status, or ending the propagation if reaching the field's end or encountering a different status).
-	+ The second instance of `play` (after the initial turns) is decomposed into `end_game`, indicating no further actions are planned in this solution. 
-
+0 do_play -> do_turn 1 2
+1 do_turn -> propagate_down_do 3 4
+2 propagate_down_do -> propagate_down_do 5 6
+3 propagate_down_do -> propagate_down_end_different 7 8
+4 propagate_down_end_different -> propagate_down_do 9 10
+5 propagate_down_do -> propagate_down_end_different 11 12
 <==

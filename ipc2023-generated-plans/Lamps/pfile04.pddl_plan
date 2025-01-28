@@ -1,26 +1,42 @@
 ==>
-1 turn l1 l1 Y N
-2 flip l1 l1 Y N
-3 propagate_up l1 l1 Y N
-4 flip l0 l1 Y N
-5 propagate_up l0 l1 Y N
-6 propagate_down l1 l1 N Y
-7 flip l1 l2 N Y
-8 propagate_right l1 l2 N Y
-9 propagate_left l1 l2 Y N
-10 propagate_down l2 l2 Y N
-11 play
-<==
-
+1 flip l1 l1 Y N
+2 propagate_up l1 l1 l2 N
+3 flip l2 l1 N Y
+4 propagate_down l1 l1 l0 N
+5 flip l0 l1 N Y
+6 flip l1 l1 N Y
+7 propagate_left l1 l1 l0 N
+8 flip l0 l1 Y N
+9 propagate_right l1 l1 l2 Y
+10 flip l2 l1 Y N
+11 flip l2 l1 N Y
+12 flip l1 l1 Y N
+13 propagate_up l1 l1 l2 N
+14 flip l2 l1 N Y
+15 propagate_down l1 l1 l0 N
+16 flip l0 l1 N Y
 root 0
-0 play -> do_play 1 11
-1 turn -> do_turn l1 l1 Y N 2 3 6 10
-2 flip l1 l1 Y N -> **NO DECOMPOSITION (ACTION)**
-3 propagate_up l1 l1 Y N -> propagate_up_do l1 l1 l0 Y N 4 5
-4 flip l0 l1 Y N -> **NO DECOMPOSITION (ACTION)**
-5 propagate_up l0 l1 Y N -> propagate_up_end_field l0 l1 Y
-6 propagate_down l1 l1 N Y -> propagate_down_do l1 l1 l2 N Y 7 8
-7 flip l1 l2 N Y -> **NO DECOMPOSITION (ACTION)**
-8 propagate_right l1 l2 N Y -> propagate_right_end_different l1 l2 l1 N Y
-9 propagate_left l1 l2 Y N -> propagate_left_end_different l1 l2 l1 Y N
-10 propagate_down l2 l2 Y N -> propagate_down_end_field l2 l2 Y
+0 play -> do_play 1 17
+17 turn -> do_turn l1 l1 N Y 2 3 4
+18 propagate_up l2 l1 N -> propagate_up_end_different l2 l1 l2 N
+19 flip l1 l1 Y N -> 18
+20 propagate_down l0 l1 N -> propagate_down_end_different l0 l1 l1 N
+21 flip l0 l1 N Y -> 20
+22 propagate_left l1 l2 N -> propagate_left_end_field l1 l2 N
+23 flip l1 l1 N Y -> 22
+24 propagate_right l1 l0 Y -> propagate_right_end_field l1 l0 Y
+25 flip l1 l1 Y N -> 24
+26 turn -> do_turn l1 l1 Y N 6 27 28
+27 propagate_up l1 l1 N -> propagate_up_do l1 l1 l2 N Y 28
+28 propagate_up l2 l1 N -> propagate_up_end_field l2 l1 N
+29 flip l1 l1 Y N -> 26
+30 flip l2 l1 N Y -> 29
+31 flip l1 l1 N Y -> 30
+32 propagate_down l2 l2 N -> propagate_down_end_different l2 l2 l1 N
+33 flip l2 l2 N Y -> 32
+34 flip l2 l1 Y N -> 31
+35 propagate_left l2 l0 Y -> propagate_left_end_different l2 l1 l0 Y
+36 flip l2 l1 Y N -> 35
+37 propagate_right l2 l2 Y -> propagate_right_end_different l2 l1 l2 Y
+38 flip l2 l1 N Y -> 37
+<==

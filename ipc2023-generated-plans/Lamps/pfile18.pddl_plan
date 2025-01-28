@@ -1,53 +1,125 @@
 ==>
-**Sequential Plan**
-```
-1. turn (l0, l0, Y, N)
-2. flip (l0, l0, Y, N)
-3. propagate_up (l0, l0, Y)
-4. propagate_down (l0, l0, Y)
-5. propagate_left (l0, l0, Y)
-6. propagate_right (l0, l0, Y)
-...
-**total 536 actions (due to recursive propagations)**
-...
-535. flip (l6, l6, Y, Y) (no change, just to satisfy `turn`)
-536. turn (l6, l6, Y, Y)
-```
-**Hierarchical Decomposition**
-```
-root 0
-0 play -> do_play 1 536
-1 turn -> do_turn (l0, l0, Y, N) 2-6
-  2 flip (l0, l0, Y, N)
-  3 propagate_up (l0, l0, Y) -> propagate_up_do (l0, l0, l1, Y, N) 7-12
-    7 flip (l1, l0, Y, N)
-    8 propagate_up (l1, l0, Y) -> propagate_up_end_field (l1, l0, Y) (max l1 not true, but next iteration will reach max l6)
-   ...
-  4 propagate_down (l0, l0, Y) -> propagate_down_do (l0, l0, l6, Y, N) 13-18
-   ...
-  5 propagate_left (l0, l0, Y) -> propagate_left_end_field (l0, l0, Y) (max l0 not true for y-axis, but no previous coord)
-  6 propagate_right (l0, l0, Y) -> propagate_right_do (l0, l0, l6, Y, N) 19-24
-   ...
-...
-535 flip (l6, l6, Y, Y)
-536 turn -> do_turn (l6, l6, Y, Y) (no changes, just to satisfy `play`)
-```
-**Method Invocation Trace (simplified)**
-```
-play -> do_play
-  turn -> do_turn (l0, l0, Y, N)
-    flip (l0, l0, Y, N)
-    propagate_up -> propagate_up_do (l0, l0, l1, Y, N)
-     ...
-    propagate_down -> propagate_down_do (l0, l0, l6, Y, N)
-     ...
-   ...
- ...
-  turn -> do_turn (l6, l6, Y, Y)
-```
-**Note:**
+1 flip l0 l2 Y N
+2 flip l1 l5 N Y
+3 flip l2 l2 Y N
+4 flip l5 l6 N Y
+5 flip l6 l6 Y N
+6 flip l6 l2 Y N
+7 flip l5 l6 Y N
+8 flip l2 l5 N Y
+9 turn l0 l3 Y N
+10 propagate_up l0 l3 Y
+11 flip l0 l3 Y N
+12 propagate_down l0 l3 Y
+13 flip l1 l3 Y N
+14 propagate_left l1 l3 Y
+15 flip l3 l3 Y N
+16 propagate_right l3 l3 Y
+17 flip l3 l4 Y N
+18 propagate_up l3 l4 Y
+19 flip l2 l4 Y N
+20 propagate_down l3 l4 Y
+21 flip l4 l4 Y N
+22 propagate_left l4 l4 Y
+23 flip l3 l3 N Y
+24 propagate_right l3 l3 N
+25 flip l3 l5 N Y
+26 propagate_up l3 l5 N
+27 flip l2 l5 N Y
+28 propagate_down l3 l5 N
+29 flip l5 l5 N Y
+30 propagate_left l5 l5 N
+31 flip l4 l4 N Y
+32 propagate_right l4 l4 N
+33 flip l4 l6 N Y
+34 propagate_up l4 l6 N
+35 flip l3 l6 N Y
+36 propagate_down l4 l6 N
+37 flip l6 l6 N Y
+38 propagate_left l6 l6 N
+39 flip l5 l5 Y N
+40 propagate_right l5 l5 Y
+41 turn l4 l6 N Y
+42 propagate_up l4 l6 N
+43 flip l4 l6 N Y
+44 propagate_down l4 l6 N
+45 turn l0 l0 Y N
+46 propagate_up l0 l0 Y
+47 flip l0 l0 Y N
+48 propagate_down l0 l0 Y
+49 flip l1 l0 Y N
+50 propagate_left l1 l0 Y
+51 flip l0 l0 N Y
+52 propagate_right l0 l0 N
+53 flip l0 l6 N Y
+54 propagate_up l0 l6 N
+55 flip l0 l3 N Y
+56 propagate_down l0 l6 N
+57 flip l1 l6 N Y
+58 propagate_left l1 l6 N
+59 flip l6 l6 Y N
+60 propagate_right l6 l6 N
+61 turn l0 l1 Y N
+62 propagate_up l0 l1 Y
+63 flip l0 l1 Y N
+64 propagate_down l0 l1 Y
+65 flip l1 l1 Y N
+66 propagate_left l1 l1 Y
+67 flip l0 l0 N Y
+68 propagate_right l0 l0 N
+69 flip l0 l5 N Y
+70 propagate_up l0 l5 N
+71 flip l0 l2 N Y
+72 propagate_down l0 l5 N
+73 flip l1 l5 N Y
+74 propagate_left l1 l5 N
+75 flip l5 l5 Y N
+76 propagate_right l5 l5 N
+77 turn l1 l2 Y N
+78 propagate_up l1 l2 Y
+79 flip l1 l2 Y N
+80 propagate_down l1 l2 Y
+81 flip l2 l2 Y N
+82 propagate_left l2 l2 Y
+83 flip l1 l1 N Y
+84 propagate_right l1 l1 N
+85 flip l1 l6 N Y
+86 propagate_up l1 l6 N
+87 flip l1 l4 N Y
+88 propagate_down l1 l6 N
+89 flip l2 l6 N Y
+90 propagate_left l2 l6 N
+91 flip l6 l6 Y N
+92 propagate_right l6 l6 N
+93 turn l1 l5 Y N
+94 propagate_up l1 l5 Y
+95 flip l1 l5 Y N
+96 propagate_down l1 l5 Y
+97 flip l2 l5 Y N
+98 propagate_left l2 l5 Y
+99 flip l5 l5 N Y
+100 propagate_right l5 l5 N
+101 flip l1 l3 N Y
+102 propagate_up l1 l3 N
+103 flip l1 l2 N Y
+104 propagate_down l1 l3 N
+105 flip l2 l3 N Y
+106 propagate_left l2 l3 N
+107 flip l3 l3 Y N
+108 propagate_right l2 l3 Y
+109 play
+<==
 
-* The sequential plan is truncated due to its length (536 actions). The actions are a result of the recursive propagations.
-* The hierarchical decomposition shows the method invocations, with each method breaking down into more specific tasks or actions.
-* The method invocation trace provides a simplified view of the hierarchical decomposition, focusing on the method calls.
-* This plan assumes the HTN planner successfully finds a solution. The actual plan may vary depending on the planner's implementation and settings.
+root 0
+0 play -> do_play 1 109
+1 turn -> do_turn 2 8
+9 turn -> do_turn 10 25
+41 turn -> do_turn 42 49
+46 turn -> do_turn 47 52
+53 turn -> do_turn 54 60
+61 turn -> do_turn 62 68
+69 turn -> do_turn 70 76
+77 turn -> do_turn 78 84
+85 turn -> do_turn 86 92
+93 turn -> do_turn 94 100
+109 play -> end_game

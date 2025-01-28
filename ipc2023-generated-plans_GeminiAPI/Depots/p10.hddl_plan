@@ -1,0 +1,38 @@
+==>
+1 nop
+2 nop
+3 Lift hoist5 crate3 crate2 distributor2
+4 Drop hoist5 crate3 pallet0 distributor2
+5 Drive truck1 depot2 distributor0
+6 Unload hoist3 crate5 truck1 distributor0
+7 Drop hoist3 crate5 pallet4 distributor0
+8 Unload hoist3 crate2 truck1 distributor0
+9 Drop hoist3 crate2 pallet3 distributor0
+10 Drive truck1 distributor0 distributor2
+11 Unload hoist5 crate4 truck1 distributor2
+12 Drop hoist5 crate4 pallet5 distributor2
+13 Lift hoist1 crate0 pallet1 depot1
+14 Load hoist1 crate0 truck0 depot1
+15 Drive truck0 depot1 distributor2
+16 Unload hoist5 crate0 truck0 distributor2
+17 Drop hoist5 crate0 crate4 distributor2
+root 0
+0 do_put_on crate3 pallet0 -> m0_do_put_on crate3 pallet0 1
+1 do_put_on crate2 pallet3 -> m1_do_put_on crate2 pallet3 distributor2 hoist3 2 3 8 9
+2 do_clear crate3 distributor2 -> m4_do_clear crate3 distributor2 1
+3 do_clear pallet0 distributor2 -> m4_do_clear pallet0 distributor2
+4 do_lift_crate crate3 distributor2 hoist3 -> m9_do_lift_crate crate3 distributor2 hoist3 crate2 5 6
+5 do_clear crate2 distributor2 -> m4_do_clear crate2 distributor2
+6 Lift hoist5 crate3 crate2 distributor2 -> 3
+7 do_put_on crate4 pallet5 -> m1_do_put_on crate4 pallet5 distributor2 hoist5 11 12
+8 do_clear crate4 distributor2 -> m4_do_clear crate4 distributor2
+9 do_clear pallet5 distributor2 -> m4_do_clear pallet5 distributor2
+10 do_lift_crate crate4 distributor2 hoist5 -> m8_do_lift_crate crate4 distributor2 hoist5 truck1 10 11
+11 do_get_truck truck1 distributor2 -> m6_do_get_truck truck1 distributor2
+12 do_put_on crate0 crate4 -> m3_do_put_on crate0 crate4 depot1 truck0 distributor2 13 14 15 16 17
+13 do_load_truck crate0 pallet1 depot1 truck0 -> m10_do_load_truck crate0 pallet1 depot1 truck0 hoist1 13 14
+14 do_clear crate0 depot1 -> m4_do_clear crate0 depot1
+15 do_clear pallet1 depot1 -> m4_do_clear pallet1 depot1
+16 Drive truck0 depot1 distributor2 -> 15
+17 do_unload_truck crate0 crate4 distributor2 truck0 -> m11_do_unload_truck crate0 crate4 distributor2 truck0 hoist5 16 17
+<==

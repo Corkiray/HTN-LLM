@@ -1,40 +1,15 @@
 ==>
-**Sequential Plan**
-1. `turn` (initial turn)
-2. `flip l1 l1 N Y` (flip cell (l1,l1) from N to Y)
-3. `propagate_up l1 l1 Y` (propagate up from (l1,l1) with status Y)
-4. `propagate_down l1 l1 Y` (propagate down from (l1,l1) with status Y)
-5. `propagate_left l1 l1 Y` (propagate left from (l1,l1) with status Y)
-6. `propagate_right l1 l1 Y` (propagate right from (l1,l1) with status Y)
-7. `turn` (next turn)
-8. `flip l0 l1 N Y` (flip cell (l0,l1) from N to Y)
-9. `propagate_up l0 l1 Y` (propagate up from (l0,l1) with status Y)
-10. `propagate_down l0 l1 Y` (propagate down from (l0,l1) with status Y)
-11. `propagate_left l0 l1 Y` (propagate left from (l0,l1) with status Y)
-12. `propagate_right l0 l1 Y` (propagate right from (l0,l1) with status Y)
-13. `play` (continue playing, which will loop back to `turn` if necessary, but in this case, the goal is achieved)
-
-**Hierarchical Decomposition**
-```
-root 0
-0 play -> do_play 1 13
-1 turn -> do_turn l1 l1 N Y 2-6
-2 propagate_up l1 l1 Y -> propagate_up_do l1 l1 l0 Y N 3
-  (precondition: next(l1,l0) and on(l0,l1,Y) is not true, but since the goal doesn't require changing (l0,l1), this step effectively ends here due to the problem's specifics, not explicitly modeled in the decomposition)
-3 (empty, as propagate_up_do's subtasks are not applicable given the initial state and goal)
-4 propagate_down l1 l1 Y -> propagate_down_end_field l1 l1 Y
-  (since l1 is not min, but the goal doesn't require changes below l1, this method is chosen for simplicity)
-5 propagate_left l1 l1 Y -> propagate_left_end_field l1 l1 Y
-  (since l1 is not max in the y-direction, but the goal doesn't require changes to the left, this method is chosen for simplicity)
-6 propagate_right l1 l1 Y -> propagate_right_do l1 l1 l2 Y N 7 (hypothetical next step if needed, not actually executed in this solution)
-  (this step is not actually part of the solution, as the goal is met without altering cells to the right of l1)
-7 (not executed, part of the hypothetical continuation)
-8-12 Similar to 2-6 but for flip l0 l1 N Y, with the same logic applying (not fully decomposed here for brevity, as the key flips and propagations are highlighted)
-13 play -> end_game (since the goal is achieved, no further turns are necessary)
+1 flip l0 l1 Y N
+2 flip l2 l3 Y N
+3 flip l2 l2 Y N
+4 flip l2 l1 N Y
+5 flip l3 l3 Y N
+6 flip l3 l2 N Y
+7 flip l3 l0 N Y
+8 flip l3 l0 Y N
+9 flip l0 l1 N Y
+10 flip l0 l2 Y N
+11 flip l0 l0 Y N
+12 flip l1 l3 N Y
+13 flip l2 l3 N Y
 <==
-```
-**Note:**
-- The plan focuses on the minimum necessary actions to achieve the goal state from the initial state, given the domain and problem definitions.
-- Some method applications (e.g., `propagate_up_do` for cells that don't change in the goal state) are not fully decomposed in the hierarchical view for brevity, as their subtasks do not contribute to achieving the goal in this specific scenario.
-- The `flip` actions and their immediate necessary propagations are highlighted as the crucial steps to achieve the goal state. Further propagations not leading to goal state changes are implied but not exhaustively listed.
-- The domain's structure implies a more extensive search space, but the provided solution directly addresses the given initial and goal states with minimal necessary actions.

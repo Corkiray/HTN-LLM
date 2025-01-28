@@ -1,0 +1,41 @@
+==>
+**Sequential Plan**
+1. move r5 t1 t2
+2. move r4 r5 t2 t3
+3. move r3 r4 t3 t1
+4. move r2 r3 t1 t2
+5. move r1 r2 t2 t3
+6. move r5 t2 t3
+**Hierarchical Decomposition**
+root 0
+0 shiftTower t1 t2 t3 -> m-shiftTower 1
+1 m-shiftTower r5 t1 t2 t3 -> selectedDirection 2
+2 selectedDirection r5 t1 t2 t3 -> m-rotateTower 3 4 5
+3 m-rotateTower t1 t2 t3 -> newMethod21 1
+  *newMethod21* 
+  1 move r5 t1 t2
+4 exchange t1 t2 t3 -> exchangeLR 6 7
+  *exchangeLR* 
+  6 move_abstract t1 t3 -> newMethod21 2
+    *newMethod21* 
+    2 move r4 r5 t2 t3
+  7 rotateTower t2 t3 t1 -> m-rotateTower 8 9 10
+    *m-rotateTower* 
+    8 move_abstract t2 t3 -> newMethod21 3
+      *newMethod21* 
+      3 move r3 r4 t3 t1
+    9 exchange t2 t3 t1 -> exchangeRL 11 12
+      *exchangeRL* 
+      11 move_abstract t3 t1 -> newMethod21 4
+        *newMethod21* 
+        4 move r2 r3 t1 t2
+      12 rotateTower t2 t3 t1 -> m-rotateTower 13 14 15
+        *m-rotateTower* 
+        13 move_abstract t2 t1 -> newMethod21 5
+          *newMethod21* 
+          5 move r1 r2 t2 t3
+        14 exchange t2 t1 t3 -> exchangeClear (no tasks, as precondition is met)
+        15 move_abstract t1 t3 -> newMethod21 6
+          *newMethod21* 
+          6 move r5 t2 t3
+<==

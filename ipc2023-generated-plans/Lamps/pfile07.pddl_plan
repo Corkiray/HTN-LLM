@@ -1,32 +1,37 @@
 ==>
-**Sequential Plan**
-1. `flip l1 l1 N Y`
-2. `flip l1 l2 Y N`
-3. `flip l2 l1 N Y`
-4. `flip l0 l1 N Y`
-5. `flip l1 l1 N Y` (again, due to propagation)
-**Hierarchical Decomposition**
-```
+1 flip l0 l1 N Y
 root 0
-0 play -> do_play 1 6
-1 turn -> do_turn l1 l1 N Y 2 3 4 5
-2 propagate_up l1 l1 N -> propagate_up_do l1 l1 l2 N Y 7
-3 propagate_down l1 l1 N -> propagate_down_end_field l1 l1 N
-4 propagate_left l1 l1 N -> propagate_left_end_field l1 l1 N
-5 propagate_right l1 l1 N -> propagate_right_do l1 l1 l0 N Y 8
-6 play -> end_game
-7 propagate_up l2 l1 N -> propagate_up_end_field l2 l1 N
-8 propagate_right l0 l1 N -> propagate_right_end_different l0 l1 l1 N
-```
-**Explanation**
-
-* The sequential plan consists of 5 `flip` actions to achieve the goal state.
-* The hierarchical decomposition starts with the `play` task, which is decomposed into `turn` and another `play` ( recursive, but ending with `end_game` since no more changes are needed).
-* The `turn` task is decomposed into `flip` (already in the sequential plan) and four propagation tasks.
-* Each propagation task is further decomposed:
-	+ `propagate_up` from `l1` to `l2` (since `l2` is the next coordinate), and then ends since `l2` is the maximum.
-	+ `propagate_down` from `l1` ends immediately since `l1` is not the minimum.
-	+ `propagate_left` from `l1` ends immediately since `l1` is not the maximum in the y-coordinate.
-	+ `propagate_right` from `l1` to `l0` (since `l0` is the previous coordinate), and then ends since the status at `l0 l1` is different (already achieved by the sequential plan).
-
-Note: The plan assumes that the `flip` action's effect is immediate and persistent, and that the propagation methods correctly handle the boundaries and different statuses as specified in the domain and problem definitions.
+0 do_play -> m2_do_play_0 1 2
+2 play -> m2_do_play_0 3
+3 turn -> m2_do_turn_0 4 5 6 7 8 9 10 11
+4 flip l1 l1 N Y
+5 propagate_up l1 l1 Y
+6 propagate_down l1 l1 Y
+7 propagate_left l1 l1 Y
+8 propagate_right l1 l1 Y
+9 flip l1 l2 Y N
+10 flip l0 l0 Y N
+11 turn -> m2_end_game_0
+root 1
+1 propagate_up_do -> m3_do_up_0 12 13
+12 flip l2 l1 Y N
+13 propagate_up_end_different -> m2_end_up_0
+root 2
+2 propagate_down_do -> m3_do_down_1 12 14
+14 propagate_down_end_different -> m2_end_down_1
+root 3
+3 do_turn -> m2_do_turn_1 15 16 17 18 19 20 21 22
+15 flip l2 l2 Y N
+16 flip l2 l1 N Y
+17 propagate_left_do -> m3_do_left_0 22 23
+18 propagate_right_do -> m3_do_right_0 20 21
+19 turn -> m3_do_turn_0 15
+20 flip l2 l1 Y N
+21 propagate_right_end_field -> m1_end_right_0
+22 flip l1 l2 N Y
+23 propagate_left_end_different -> m1_end_left_0
+root 4
+4 propagate_down_do -> m3_do_down_1 24 25
+24 flip l0 l1 N Y
+25 propagate_down_end_different -> m2_end_down_1
+<==

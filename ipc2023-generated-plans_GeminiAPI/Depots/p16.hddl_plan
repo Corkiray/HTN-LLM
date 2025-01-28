@@ -1,0 +1,36 @@
+==>
+1 nop
+2 nop
+3 Lift hoist0 crate2 pallet0 depot0
+4 Drop hoist0 crate2 pallet1 depot0
+5 nop
+6 Lift hoist1 crate3 crate1 depot1
+7 Drop hoist1 crate3 pallet0 depot1
+8 nop
+9 Lift hoist2 crate4 pallet2 distributor0
+10 Drop hoist2 crate4 crate3 distributor0
+11 Lift hoist1 crate0 pallet4 depot1
+12 Drop hoist1 crate0 pallet3 distributor1
+13 nop
+14 Lift hoist0 crate5 crate2 depot0
+15 Drop hoist0 crate5 pallet2 distributor0
+root 0
+0 do_put_on crate3 pallet0 -> m1_do_put_on crate3 pallet0 depot1 hoist1 6 7
+1 do_put_on crate4 crate3 -> m1_do_put_on crate4 crate3 distributor0 hoist2 9 10
+2 do_put_on crate2 pallet1 -> m0_do_put_on crate2 pallet1 4
+3 do_clear crate2 depot0 -> m4_do_clear crate2 depot0 2
+4 Drop hoist0 crate2 pallet1 depot0 -> 3
+5 do_clear pallet1 depot0 -> m4_do_clear pallet1 depot0 1
+6 do_lift_crate crate3 depot1 hoist1 -> m9_do_lift_crate crate3 depot1 hoist1 crate1 5
+7 Drop hoist1 crate3 pallet0 depot1 -> 6
+8 do_clear pallet0 depot0 -> m4_do_clear pallet0 depot0 0
+9 do_lift_crate crate4 distributor0 hoist2 -> m9_do_lift_crate crate4 distributor0 hoist2 pallet2 8
+10 Drop hoist2 crate4 crate3 distributor0 -> 9
+11 do_lift_crate crate0 depot1 hoist1 -> m9_do_lift_crate crate0 depot1 hoist1 pallet4 11
+12 Drop hoist1 crate0 pallet3 distributor1 -> 11
+13 do_put_on crate5 pallet2 -> m0_do_put_on crate5 pallet2 15
+14 do_clear crate5 depot0 -> m4_do_clear crate5 depot0 13
+15 Drop hoist0 crate5 pallet2 distributor0 -> 14
+16 do_clear pallet2 distributor0 -> m4_do_clear pallet2 distributor0 12
+17 do_put_on crate0 pallet3 -> m0_do_put_on crate0 pallet3 12
+<==

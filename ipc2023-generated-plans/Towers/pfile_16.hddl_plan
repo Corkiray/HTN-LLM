@@ -1,42 +1,60 @@
 ==>
-**Sequential Plan**
-```
-1. selectDirection r16 t1 t2 t3
-2. rotateTower t1 t3 t2
-3. move_abstract t1 t3
-4. exchange t1 t2 t3
-5. move_abstract t3 t1
-6. rotateTower t2 t3 t1
-7. selectDirection r15 t1 t3 t2
-8. rotateTower t1 t2 t3
-9. move_abstract t1 t2
-10. exchange t1 t3 t2
-11. move_abstract t2 t1
-12. rotateTower t3 t2 t1
-...
-**[ truncated for brevity, 241 actions in total ]**
-239. move r3 r14 t1 t2
-240. move r2 r13 t2 t3
-241. move r1 r12 t3 t3
-```
-**Hierarchical Decomposition**
-```
+1 move r16 t1 t3 r16 t3
+2 move r15 t1 t2 r15 t2
+3 move r14 t1 t2 r14 t2
+4 move r13 t1 t2 r13 t2
+5 move r12 t1 t2 r12 t2
+6 move r11 t1 t2 r11 t2
+7 move r10 t1 t2 r10 t2
+8 move r9 t1 t2 r9 t2
+9 move r8 t1 t2 r8 t2
+10 move r7 t1 t2 r7 t2
+11 move r6 t1 t2 r6 t2
+12 move r5 t1 t2 r5 t2
+13 move r4 t1 t2 r4 t2
+14 move r3 t1 t2 r3 t2
+15 move r2 t1 t2 r2 t2
+16 move r1 t1 t2 r1 t2
+17 move r16 t2 t3 r16 t3
+18 move r15 t2 t3 r15 t3
+19 move r14 t2 t3 r14 t3
+20 move r13 t2 t3 r13 t3
+21 move r12 t2 t3 r12 t3
+22 move r11 t2 t3 r11 t3
+23 move r10 t2 t3 r10 t3
+24 move r9 t2 t3 r9 t3
+25 move r8 t2 t3 r8 t3
+26 move r7 t2 t3 r7 t3
+27 move r6 t2 t3 r6 t3
+28 move r5 t2 t3 r5 t3
+29 move r4 t2 t3 r4 t3
+30 move r3 t2 t3 r3 t3
+31 move r2 t2 t3 r2 t3
+32 move r1 t2 t3 r1 t3
 root 0
-0 shiftTower t1 t2 t3 -> m-shiftTower 1
-1 m-shiftTower r16 t1 t2 t3 -> 
-  2 selectDirection r16 t1 t2 t3 -> selectedDirection 3 4
-  3 rotateTower t1 t3 t2 -> m-rotateTower 5 6 7
-  4 exchange t1 t2 t3 -> exchangeLR r15 t3 t1 t2 t3 8 9 10
- ...
-  **[ truncated for brevity, 241 actions in total ]**
-  238 move_abstract t3 t1 -> newMethod21 r3 r14 t1 t2 239
-  239 move r3 r14 t1 t2
-  240 move_abstract t2 t3 -> newMethod21 r2 r13 t2 t3 241
-  241 move r2 r13 t2 t3
-```
-**Note:**
-
-* The sequential plan consists of 241 actions, which are the result of decomposing the high-level task `shiftTower t1 t2 t3`.
-* The hierarchical decomposition shows how each task is broken down into subtasks, using the methods defined in the HTN domain.
-* The numbers in the hierarchical decomposition refer to the corresponding actions in the sequential plan.
-* Due to the complexity and size of the plan, only a subset of the decomposition is shown. The full decomposition would recursively expand each task until reaching the primitive actions (e.g., `move`).
+0 shiftTower t1 t2 t3 -> m-shiftTower 1 2 
+1 selectDirection r16 t1 t2 t3 -> m-selectDirection 3 4 
+2 rotateTower t1 t3 t2 -> m-rotateTower 5 6 
+3 exchange t1 t2 t3 -> exchangeLR 7 8 
+4 move_abstract t1 t2 -> newMethod21 9 10 
+5 move_abstract t1 t2 -> newMethod21 11 12 
+6 exchange t1 t2 t3 -> exchangeRL 13 14 
+7 move_abstract t3 t1 -> newMethod21 15 16 
+8 rotateTower t2 t3 t1 -> m-rotateTower 17 18 
+9 move r16 t1 t3 r16 t3 -> 
+10 move r15 t2 t3 r15 t3 -> 
+11 move r14 t1 t2 r14 t2 -> 
+12 move r13 t2 t3 r13 t3 -> 
+13 move r12 t1 t2 r12 t2 -> 
+14 move r11 t2 t3 r11 t3 -> 
+15 move r10 t1 t2 r10 t2 -> 
+16 move r9 t2 t3 r9 t3 -> 
+17 move r8 t1 t2 r8 t2 -> 
+18 move r7 t2 t3 r7 t3 -> 
+19 move r6 t1 t2 r6 t2 -> 
+20 move r5 t2 t3 r5 t3 -> 
+21 move r4 t1 t2 r4 t2 -> 
+22 move r3 t2 t3 r3 t3 -> 
+23 move r2 t1 t2 r2 t2 -> 
+24 move r1 t2 t3 r1 t3 -> 
+<==

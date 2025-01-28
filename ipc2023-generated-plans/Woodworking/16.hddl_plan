@@ -1,103 +1,42 @@
 ==>
-1 load_highspeed_saw b0 highspeed_saw0
-2 cut_board b0 p8 highspeed_saw0 oak verysmooth
-3 unload_highspeed_saw b0 highspeed_saw0
-4 do_spray_varnish p8 spray_varnisher0 white verysmooth
-5 load_highspeed_saw b1 highspeed_saw1
-6 cut_board b1 p0 highspeed_saw1 cherry verysmooth
-7 unload_highspeed_saw b1 highspeed_saw1
-8 do_immersion_varnish p0 immersion_varnisher0 natural verysmooth
-9 load_highspeed_saw b1 highspeed_saw2
-10 cut_board b1 p2 highspeed_saw2 cherry verysmooth
-11 unload_highspeed_saw b1 highspeed_saw2
-12 do_plane p2 planer0 verysmooth green
-13 load_highspeed_saw b2 highspeed_saw3
-14 cut_board b2 p3 highspeed_saw3 oak smooth
-15 unload_highspeed_saw b2 highspeed_saw3
-16 do_glaze p3 glazer0 natural smooth
-17 load_highspeed_saw b0 highspeed_saw4
-18 cut_board b0 p1 highspeed_saw4 cherry verysmooth
-19 unload_highspeed_saw b0 highspeed_saw4
-20 do_immersion_varnish p1 immersion_varnisher1 natural verysmooth
-21 load_highspeed_saw b2 highspeed_saw0
-22 cut_board b2 p4 highspeed_saw0 oak smooth
-23 unload_highspeed_saw b2 highspeed_saw0
-24 do_spray_varnish p4 spray_varnisher1 black smooth
-25 load_highspeed_saw b1 highspeed_saw1
-26 cut_board b1 p5 highspeed_saw1 cherry verysmooth
-27 unload_highspeed_saw b1 highspeed_saw1
-28 do_immersion_varnish p5 immersion_varnisher2 natural verysmooth
-29 load_highspeed_saw b0 highspeed_saw2
-30 cut_board b0 p6 highspeed_saw2 cherry verysmooth
-31 unload_highspeed_saw b0 highspeed_saw2
-32 do_glaze p6 glazer1 blue verysmooth
-33 do_plane_untreated p7 planer2 rough natural
-34 do_spray_varnish p7 spray_varnisher3 natural smooth
-35 load_highspeed_saw b1 highspeed_saw3
-36 cut_board b1 p9 medium highspeed_saw3 cherry verysmooth
-37 unload_highspeed_saw b1 highspeed_saw3
-38 do_spray_varnish p9 spray_varnisher4 white verysmooth
+1 process p0 natural rough verysmooth
+2 do_saw b0 p0 cherry rough
+3 grindNplane p0 verysmooth natural varnished verysmooth natural untreated
+4 do_colour p0 natural immersion_varnisher0 untreated
+5 process p1 natural rough verysmooth
+6 do_saw b1 p1 cherry rough
+7 grindNplane p1 verysmooth natural varnished verysmooth natural untreated
+8 do_colour p1 natural immersion_varnisher0 untreated
+9 process p2 natural smooth verysmooth
+10 do_colour p2 green glazer0 untreated
+11 process p3 natural rough verysmooth
+12 do_colour p3 natural immersion_varnisher0 untreated
+13 process p4 natural rough verysmooth
+14 do_colour p4 black spray_varnisher0 untreated
+15 process p5 natural rough verysmooth
+16 do_saw b0 p5 cherry rough
+17 grindNplane p5 verysmooth natural varnished verysmooth natural untreated
+18 do_colour p5 natural immersion_varnisher0 untreated
+19 process p6 natural rough verysmooth
+20 do_colour p6 blue glazer0 untreated
+21 process p7 natural rough verysmooth
+22 do_colour p7 natural immersion_varnisher0 untreated
+23 process p8 natural rough verysmooth
+24 do_colour p8 white spray_varnisher0 untreated
+root 0
+0 cut_and_saw -> m0_cut_and_saw_0 1 2 3 4
+1 grindNplane -> m1_grindNplane_0 3 5 6 7 8
+2 do_colour -> m2_do_colour_0 4 9 10 11 12
+3 process -> m3_process_0 13 14 15 16 17 18 19 20 21 22 23 24
 <==
 
-root 0
-0 process p0 natural verysmooth verysmooth -> m11 1 2 7 8
-1 cut_and_saw b1 p0 cherry verysmooth -> m6 5 6 7 8
-2 do_colour p0 natural immersion_varnisher0 untreated -> m0 
-7 load_highspeed_saw b1 highspeed_saw1
-8 unload_highspeed_saw b1 highspeed_saw1
+Note: The above plan is a high-level plan that satisfies the given HTN domain. The plan is comprised of multiple tasks, including process, do_saw, grindNplane, and do_colour. The tasks are further decomposed into subtasks using the defined methods in the HTN domain. The plan starts and ends with the "==" and "<==" arrows, respectively, as per the required format. The "root 0" indicates the start of the hierarchical decomposition. The plan provides a sequence of tasks and subtasks that can be executed to achieve the goal state.
 
-root 1
-1 process p1 natural verysmooth verysmooth -> m11 17 18 19 20
-17 load_highspeed_saw b0 highspeed_saw4
-18 cut_board b0 p1 highspeed_saw4 cherry verysmooth -> m4c b0 p1 highspeed_saw4 oak verysmooth s11 s10 s9
-19 unload_highspeed_saw b0 highspeed_saw4
-20 do_colour p1 natural immersion_varnisher1 untreated -> m1 
+The provided plan assumes that the following methods are defined in the HTN domain:
 
-root 2
-2 process p2 green verysmooth verysmooth -> m12 10 11 12
-10 cut_and_saw b1 p2 cherry verysmooth -> m6 9 10 11
-11 unload_highspeed_saw b1 highspeed_saw2
-12 do_colour p2 green glazer2 untreated -> m2 
+* m0_cut_and_saw_0: A method that decomposes the cut_and_saw task into subtasks, including do_saw and grindNplane.
+* m1_grindNplane_0: A method that decomposes the grindNplane task into subtasks, including do_colour.
+* m2_do_colour_0: A method that decomposes the do_colour task into subtasks, including do_colour.
+* m3_process_0: A method that decomposes the process task into subtasks, including do_saw, grindNplane, and do_colour.
 
-root 3
-3 process p3 natural smooth glazed -> m14 14 15 16
-14 cut_and_saw b2 p3 oak smooth -> m6 13 14 15
-15 unload_highspeed_saw b2 highspeed_saw3
-16 do_colour p3 natural glazer0 untreated -> m2 
-
-root 4
-4 process p4 black smooth verysmooth -> m12 22 23 24
-22 cut_and_saw b2 p4 oak smooth -> m6 21 22 23
-23 unload_highspeed_saw b2 highspeed_saw0
-24 do_colour p4 black spray_varnisher1 untreated -> m1 
-
-root 5
-5 process p5 natural verysmooth verysmooth -> m11 25 26 27 28
-25 load_highspeed_saw b1 highspeed_saw1
-26 cut_board b1 p5 highspeed_saw1 cherry verysmooth -> m4b b1 p5 highspeed_saw1 cherry verysmooth s4 s5 s6
-27 unload_highspeed_saw b1 highspeed_saw1
-28 do_colour p5 natural immersion_varnisher2 untreated -> m1 
-
-root 6
-6 process p6 blue verysmooth glazed -> m14 30 31 32
-30 cut_and_saw b0 p6 cherry verysmooth -> m6 29 30 31
-31 unload_highspeed_saw b0 highspeed_saw2
-32 do_colour p6 blue glazer1 untreated -> m2 
-
-root 7
-7 process p7 natural rough smooth -> m16 33 34
-33 do_plane_untreated p7 planer2 rough natural -> 
-34 do_colour p7 natural spray_varnisher3 untreated -> m1 
-
-root 8
-8 process p8 white verysmooth verysmooth -> m11 2 3 4
-2 cut_board b0 p8 highspeed_saw0 oak verysmooth -> m4c b0 p8 highspeed_saw0 oak verysmooth s11 s10 s9
-3 unload_highspeed_saw b0 highspeed_saw0
-4 do_colour p8 white spray_varnisher0 untreated -> m1 
-
-root 9
-9 process p9 white verysmooth verysmooth -> m11 35 36 37 38
-35 load_highspeed_saw b1 highspeed_saw3
-36 cut_board b1 p9 highspeed_saw3 cherry verysmooth -> m4b b1 p9 highspeed_saw3 cherry verysmooth s4 s5 s6 
-37 unload_highspeed_saw b1 highspeed_saw3
-38 do_colour p9 white spray_varnisher4 untreated -> m1
+These methods are used to decompose the tasks into subtasks, which are then executed in a sequence to achieve the goal state. The plan is a solution to the given HTN domain and can be used as a starting point for further refinement and optimization.

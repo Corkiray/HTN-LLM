@@ -1,57 +1,68 @@
 ==>
-**Sequential Plan:**
-
-1. `i-LOCK-AT OBJ33 POS3` (lock OBJ33 at POS3)
-2. `i-LOCK-AT OBJ22 POS3` (lock OBJ22 at POS3)
-3. `DO-AT-LOAD-TRUCK0 OBJ13 TRU1 POS1` (load OBJ13 onto TRU1 at POS1)
-4. `DRIVE-TRUCK TRU1 POS1 APT2 CIT2` (drive TRU1 from POS1 to APT2 in CIT2)
-5. `UNLOAD-TRUCK OBJ13 TRU1 APT2` (unload OBJ13 from TRU1 at APT2)
-6. `i-LOCK-AT OBJ13 APT2` (lock OBJ13 at APT2)
-7. `DO-AT-LOAD-AIRPLANE0 OBJ43 APN2 APT5` (load OBJ43 onto APN2 at APT5)
-8. `FLY-AIRPLANE APN2 APT5 APT1` (fly APN2 from APT5 to APT1)
-9. `UNLOAD-AIRPLANE OBJ43 APN2 APT1` (unload OBJ43 from APN2 at APT1)
-10. `i-LOCK-AT OBJ43 APT1` (lock OBJ43 at APT1)
-11. `i-LOCK-AT OBJ41 APT1` (lock OBJ41 at APT1)
-12. `DO-AT-LOAD-TRUCK0 OBJ51 TRU5 POS5` (load OBJ51 onto TRU5 at POS5)
-13. `DRIVE-TRUCK TRU5 POS5 POS4 CIT4` (drive TRU5 from POS5 to POS4 in CIT4)
-14. `UNLOAD-TRUCK OBJ51 TRU5 POS4` (unload OBJ51 from TRU5 at POS4)
-15. `i-LOCK-AT OBJ51 POS4` (lock OBJ51 at POS4)
-16. `i-LOCK-AT OBJ53 APT5` (lock OBJ53 at APT5)
-17. `i-LOCK-AT OBJ11 POS4` (lock OBJ11 at POS4)
-18. `i-LOCK-AT OBJ31 POS3` (lock OBJ31 at POS3)
-19. `i-LOCK-AT OBJ42 POS1` (lock OBJ42 at POS1)
-20. `i-LOCK-AT OBJ52 POS1` (lock OBJ52 at POS1)
-21. `DO-AT-LOAD-TRUCK0 OBJ12 TRU2 POS2` (load OBJ12 onto TRU2 at POS2)
-22. `DRIVE-TRUCK TRU2 POS2 APT3 CIT3` (drive TRU2 from POS2 to APT3 in CIT3)
-23. `UNLOAD-TRUCK OBJ12 TRU2 APT3` (unload OBJ12 from TRU2 at APT3)
-24. `i-LOCK-AT OBJ12 APT3` (lock OBJ12 at APT3)
-25. `DO-AT-LOAD-AIRPLANE0 OBJ32 APN1 APT1` (load OBJ32 onto APN1 at APT1)
-26. `FLY-AIRPLANE APN1 APT1 APT4` (fly APN1 from APT1 to APT4)
-27. `UNLOAD-AIRPLANE OBJ32 APN1 APT4` (unload OBJ32 from APN1 at APT4)
-28. `i-LOCK-AT OBJ32 APT4` (lock OBJ32 at APT4)
-29. `i-LOCK-AT OBJ21 POS4` (lock OBJ21 at POS4)
-
-**<==**
-
-**Hierarchical Decomposition:**
-
-**root 0**
-0 **ACHIEVE-AT** -> **M10-ACHIEVE-AT** 1 2... 29
-	* **task0 (ACHIEVE-AT OBJ33 POS3)**
-	+ 1 **i-LOCK-AT OBJ33 POS3**
-	+ 2 **ACHIEVE-AT0 OBJ33 POS3** (noop, already at POS3)
-	* **task1 (ACHIEVE-AT OBJ22 POS3)**
-	+ 3 **i-LOCK-AT OBJ22 POS3**
-	+ 4 **ACHIEVE-AT0 OBJ22 POS3** (noop, already at POS3)
-	*...
-	* **task13 (ACHIEVE-AT OBJ21 POS4)**
-	+ 28 **i-LOCK-AT OBJ21 POS4**
-	+ 29 **ACHIEVE-AT0 OBJ21 POS4** (noop, already at POS4)
-
-**M10-ACHIEVE-AT** (and many others) are method instances, where:
-* **M10-ACHIEVE-AT**: Achieve `AT?PACKAGE0?PLACE1` when not locked and not at the place
-	+ Subtasks: **ACHIEVE-AT0** (move to the place) and **i-LOCK-AT** (lock at the place)
-* **ACHIEVE-AT0**: Move `?PACKAGE0` to `?PLACE1` when not already there
-	+ Subtasks vary depending on the method instance (e.g., **DO-AT-LOAD-TRUCK0**, **DO-AT-LOAD-AIRPLANE0**, **DRIVE-TRUCK**, **FLY-AIRPLANE**)
-
-Note: This plan assumes the problem's constraints and initial state are correctly represented. The plan's correctness relies on the HTN domain and problem definitions.
+1 achieve_at OBJ33 POS3
+2 achieve_at OBJ22 POS3
+3 achieve_at OBJ31 POS3
+4 achieve_at OBJ21 POS4
+5 achieve_at OBJ11 POS4
+6 achieve_at OBJ51 POS4
+7 achieve_at OBJ42 POS1
+8 achieve_at OBJ12 APT3
+9 achieve_at OBJ32 APT4
+10 achieve_at OBJ43 APT1
+11 achieve_at OBJ13 APT2
+12 achieve_at OBJ41 APT1
+13 achieve_at OBJ52 POS1
+14 achieve_at OBJ53 APT5
+root 0
+0 achieve_at OBJ33 POS3 -> m1_solve_0 1 2
+5 achieve_at OBJ22 POS3 -> m2_solve_0 3 4
+26 achieve_at OBJ13 APT2 -> m12_solve_0 27 28
+27 move_truck TRU2 POS2 POS3
+28 move_truck TRU2 POS3 POS2
+29 achieve_at OBJ43 APT1 -> m13_solve_0 30 31
+30 do_in_unload_truck OBJ43 TRU4 POS4
+31 load_airplane OBJ43 APN2 POS5
+32 unload_airplane OBJ43 APN2 APT1
+33 achieve_at OBJ41 APT1 -> m14_solve_0 34 35
+34 do_in_unload_truck OBJ41 TRU4 POS4
+35 load_airplane OBJ41 APN2 POS5
+36 unload_airplane OBJ41 APN2 APT1
+37 achieve_at OBJ53 APT5 -> m15_solve_0 38 39
+38 load_airplane OBJ53 APN1 APT1
+39 unload_airplane OBJ53 APN1 APT5
+40 achieve_at OBJ52 POS1 -> m16_solve_0 41 42
+41 load_truck OBJ52 TRU5 POS5
+42 unload_truck OBJ52 TRU5 POS1
+43 achieve_at OBJ51 POS4 -> m17_solve_0 44 45
+44 load_truck OBJ51 TRU3 POS3
+45 unload_truck OBJ51 TRU3 POS4
+46 achieve_at OBJ11 POS4 -> m18_solve_0 47 48
+47 load_truck OBJ11 TRU2 POS2
+48 unload_truck OBJ11 TRU2 POS4
+49 achieve_at OBJ42 POS1 -> m19_solve_0 50 51
+50 load_truck OBJ42 TRU1 POS1
+51 i-UNLOCK-AT TRU1 POS1
+52 load_truck OBJ42 TRU1 POS1
+53 unload_truck OBJ42 TRU1 POS1
+54 achieve_at OBJ32 APT4 -> m20_solve_0 55 56
+55 load_truck OBJ32 TRU5 POS5
+56 unload_truck OBJ32 TRU5 APT4
+57 achieve_at OBJ12 APT3 -> m21_solve_0 58 59
+58 load_truck OBJ12 TRU4 POS4
+59 unload_truck OBJ12 TRU4 APT3
+60 achieve_at OBJ21 POS4 -> m22_solve_0 61 62
+61 if_unlock_at TRU2 POS2
+62 move_truck TRU2 POS2 POS4
+63 if_unlock_at TRU2 POS4
+64 unload_truck OBJ21 TRU2 POS4
+65 i-lock_at TRU2 POS4
+66 achieve_at OBJ31 POS3 -> m23_solve_0 67
+67 i-lock_at TRU3 POS3
+68 load_truck OBJ31 TRU3 POS3
+69 unload_truck OBJ31 TRU3 POS3
+70 achieve_at OBJ22 POS3 -> m24_solve_0 71 72
+71 if_unlock_at TRU2 POS2
+72 move_truck TRU2 POS2 POS3
+73 if_unlock_at TRU2 POS3
+74 unload_truck OBJ22 TRU2 POS3
+<==

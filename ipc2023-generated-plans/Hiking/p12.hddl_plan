@@ -1,40 +1,66 @@
 ==>
-**Sequential Plan**
-1. prepare_trip place0
-2. trip_to1 couple0 place6
-3. prepare_trip place0
-4. trip_to1 couple1 place6
-5. prepare_trip place0
-6. trip_to1 couple2 place6
-7. prepare_trip place0
-8. trip_to1 couple3 place6
-
-**Hierarchical Decomposition**
+1 prepare_trip place0
+2 bring_tent place0
+3 bring_cars place0
+4 trip_to1 couple0 place6
+5 walk_everyone tent0 place6 place0
+6 walk_everyone tent1 place6 place0
+7 walk_everyone tent2 place6 place0
+8 walk_everyone tent3 place6 place0
+9 trip_to1 couple1 place6
+10 trip_to1 couple2 place6
+11 trip_to1 couple3 place6
+12 put_down guy2 place0 tent2
+13 drive_tent guy2 place0 place1 car2 tent2
+14 put_up guy2 place1 tent2
+15 drive_passenger girl2 place0 place1 car2 guy2
+16 walk_together tent2 place1 guy2 place0 girl2 couple2
+17 drive_passenger guy2 place1 place0 car2 girl2
+18 drive guy2 place0 place1 car2
+19 drive girl2 place0 place1 car2
+20 drive_passenger guy0 place0 place1 car0 girl0
+21 drive_tent guy0 place0 place1 car0 tent0
+22 put_up guy0 place1 tent0
+23 walk_together tent0 place1 guy0 place0 girl0 couple0
+24 drive_passenger girl0 place1 place0 car0 guy0
+25 drive guy0 place1 place2 car0
+26 drive girl0 place1 place2 car0
+27 put_down guy1 place0 tent1
+28 drive_tent guy1 place0 place1 car1 tent1
+29 put_up guy1 place1 tent1
+30 walk_together tent1 place1 guy1 place0 girl1 couple1
+31 drive_passenger girl1 place1 place0 car1 guy1
+32 drive guy1 place0 place1 car1
+33 drive girl1 place0 place1 car1
+34 drive_passenger girl3 place0 place1 car3 guy3
+35 drive_tent guy3 place0 place1 car3 tent3
+36 put_up guy3 place1 tent3
+37 walk_together tent3 place1 guy3 place0 girl3 couple3
+38 drive_passenger guy3 place1 place0 car3 girl3
+39 drive guy3 place0 place1 car3
+40 drive girl3 place0 place1 car3
+41 drive guy2 place1 place2 car2
+42 drive girl2 place1 place2 car2
+43 drive guy0 place2 place3 car0
+44 drive girl0 place2 place3 car0
+45 drive guy1 place2 place3 car1
+46 drive girl1 place2 place3 car1
+47 drive guy3 place2 place3 car3
+48 drive girl3 place2 place3 car3
+49 put_down guy2 place2 tent2
+50 put_down girl2 place2 tent2
+51 put_down guy0 place3 tent0
+52 put_down girl0 place3 tent0
+53 put_down guy1 place3 tent1
+54 put_down girl1 place3 tent1
+55 put_down guy3 place3 tent3
+56 put_down girl3 place3 tent3
 root 0
-0 everyone_go_hiking place6 -> m14_everyone_go_hiking 1 2
-  1 prepare_trip place0 -> m6_prepare_trip 3 4
-    3 bring_tent place0 -> m9_bring_tent (tent0) / m10_bring_tent (tent2, tent3)
-      * For tent0 (down): m9_bring_tent (no further decomposition)
-      * For tent2 and tent3 (up): m10_bring_tent 
-        + 3.1 put_down guy2 place0 tent2
-        + 3.2 put_down guy3 place0 tent3
-    4 bring_cars place0 -> m11_bring_cars (multiple cars, but no further decomposition needed due to initial state)
-  2 trip_to1 couple0 place6 -> m0_trip_to1 5 (and similarly for couple1, couple2, couple3)
-    5 trip_to2 couple0 place0 place6 -> m2_trip_to2 (multiple mid places, for simplicity, one path shown)
-      * Assuming mid places: place0 -> place1 ->... -> place6
-      5.1 trip_to2 couple0 place0 place1 -> m3_trip_to2 (and similarly for subsequent places)
-        + 5.1.1 drive_tent guy0 place0 place1 car0 tent0
-        + 5.1.2 drive girl0 place0 place1 car1
-        + 5.1.3 put_up guy0 place1 tent0
-        +... (similar actions for each segment, e.g., drive_passenger, walk_everyone, put_down, etc.)
-        + 5.1.8 walk_everyone tent0 place1 place0 -> m5_walk_everyone (similarly for each segment)
-          - 5.1.8.1 walk_together tent0 place1 guy0 place0 girl0 couple0
-          - 5.1.8.2 walk_everyone tent0 place1 place0 (recursive, but for simplicity, shown as one step)
-
-**Note:**
-- The plan assumes a simplified decomposition for `trip_to2` using `m2_trip_to2` and then `m3_trip_to2` for each segment of the trip, which involves driving, putting up the tent, walking, and then repeating the process for each couple.
-- For `bring_tent`, it differentiates between tents that are initially up or down, applying `m9_bring_tent`, `m10_bring_tent`, and their respective actions.
-- `walk_everyone` is decomposed using `m5_walk_everyone`, focusing on the key action `walk_together`.
-- The actual plan execution would require iterating through each couple and each place segment, applying the relevant actions in order. This response provides a condensed view of the hierarchical plan, highlighting the method applications and key actions involved.
-
+0 everyone_go_hiking -> m14_everyone_go_hiking 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56
+4 trip_to1 -> m0_trip_to1 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 56 57 58 59 60 61 62 63 64 65 66
+57 trip_to2 -> m3_trip_to2 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66
+4 trip_to1 -> m0_trip_to1 67 68 69 70 71 72 73 74 75 76 77 78
+67 trip_to2 -> m3_trip_to2 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106
+4 trip_to1 -> m0_trip_to1 107 108 109 110 111 112 113 114 115 116 117 118
+107 trip_to2 -> m3_trip_to2 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146
 <==

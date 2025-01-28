@@ -1,49 +1,32 @@
 ==>
-**Sequential Plan**
-```
-1. flip l0 l0 Y N
-2. flip l0 l2 N Y
-3. flip l0 l4 N Y
-4. flip l0 l5 N Y
-5. flip l0 l6 N Y
-6. flip l0 l7 N Y
-7. flip l0 l8 N Y
-8. turn l0 l0 Y N
-9. flip l1 l1 N Y
-10. flip l1 l5 N Y
-11. flip l1 l6 N Y
-12. flip l1 l7 N Y
-13. flip l1 l8 N Y
-14. turn l1 l1 Y N
-...
-**truncated for brevity, 54 actions in total**
-...
-53. flip l9 l3 N Y
-54. turn l9 l9 N Y
-```
-**Hierarchical Decomposition**
-```
+1 flip l0 l0 Y N
+2 flip l0 l1 Y N
+3 flip l0 l3 Y N
+4 flip l0 l6 Y N
+5 flip l0 l9 Y N
+6 flip l1 l3 Y N
+7 flip l1 l6 Y N
+8 flip l1 l9 N Y
+9 flip l2 l3 Y N
+10 flip l2 l4 Y N
+11 flip l3 l3 Y N
+12 flip l3 l4 Y N
+13 flip l3 l6 Y N
+14 flip l4 l4 Y N
+15 flip l4 l6 Y N
+16 flip l5 l3 Y N
+17 flip l5 l5 Y N
+18 flip l5 l6 Y N
+19 flip l5 l8 Y N
+20 flip l6 l5 Y N
+21 flip l7 l0 Y N
+22 flip l7 l5 Y N
+23 flip l7 l7 Y N
+24 flip l7 l8 Y N
+25 flip l7 l9 Y N
+26 flip l9 l3 Y N
+27 flip l9 l7 Y N
+28 flip l9 l9 Y N
 root 0
-0 play -> do_play 1 55
-1 turn -> do_turn l0 l0 Y N 2-8
-2 propagate_up l0 l0 Y -> propagate_up_do l0 l0 l1 Y N 3 4
-3 flip l1 l0 Y N
-4 propagate_up l1 l0 Y -> propagate_up_end_field l1 l0 Y
-5 propagate_down l0 l0 Y -> propagate_down_do l0 l0 l1 Y N 6 7
-6 flip l1 l0 Y N
-7 propagate_down l1 l0 Y -> propagate_down_end_field l1 l0 Y
-8... (similar decomposition for other propagate_* tasks)
-...
-55 turn -> end_game
-  -> (no subtasks, as it's an empty method)
-```
-**Method Invocation Explanation**
-
-* `do_play` (method 0) is invoked for the `play` task, which recursively calls `turn` and then `play` again.
-* `do_turn` (method 1) is invoked for each `turn` task, which:
-	1. Flips the initial cell (`flip` action).
-	2. Propagates the change up, down, left, and right (using respective `propagate_*` tasks).
-* `propagate_*` tasks (e.g., `propagate_up_do`) are invoked recursively until the boundary conditions are met (`propagate_*_end_field` or `propagate_*_end_different`).
-* `end_game` (method 55) is an empty method, indicating the end of the plan.
-
-**Note**: The plan is quite long (54 actions), so I've truncated the sequential plan and focused on providing a clear hierarchical decomposition. If you'd like me to elaborate on any specific part, please let me know!
+0 do_play -> do_turn 1,29,30 2-28
+<==

@@ -1,0 +1,34 @@
+==>
+1 drive truck_1 city_loc_13 city_loc_1
+2 drive truck_1 city_loc_1 city_loc_3
+3 pick_up truck_1 city_loc_3 package_1 capacity_2 capacity_3
+4 drive truck_1 city_loc_3 city_loc_1
+5 drive truck_1 city_loc_1 city_loc_13
+6 drop truck_1 city_loc_13 package_1 capacity_2 capacity_3
+7 drive truck_0 city_loc_4 city_loc_5
+8 drive truck_0 city_loc_5 city_loc_13
+9 pick_up truck_0 city_loc_13 package_3 capacity_2 capacity_3
+10 drive truck_0 city_loc_13 city_loc_5
+11 drive truck_0 city_loc_5 city_loc_3
+12 pick_up truck_0 city_loc_3 package_2 capacity_1 capacity_2
+13 drive truck_0 city_loc_3 city_loc_2
+14 drop truck_0 city_loc_2 package_2 capacity_1 capacity_2
+15 drive truck_0 city_loc_2 city_loc_3
+16 drive truck_0 city_loc_3 city_loc_11
+17 pick_up truck_0 city_loc_11 package_0 capacity_0 capacity_1
+18 drive truck_0 city_loc_11 city_loc_2
+19 drop truck_0 city_loc_2 package_0 capacity_0 capacity_1
+root 0
+0 solve_elevator -> m1_ordering_0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19
+1 deliver package_1 city_loc_13 -> m_deliver_ordering_0 city_loc_3 city_loc_13 package_1 truck_1 2 3 5 6
+2 get_to truck_1 city_loc_3 -> m_drive_to_via_ordering_0 city_loc_1 city_loc_3 truck_1 1 2
+3 get_to truck_1 city_loc_1 -> m_drive_to_ordering_0 city_loc_13 city_loc_1 truck_1 1
+4 load truck_1 city_loc_3 package_1 -> m_load_ordering_0 city_loc_3 package_1 capacity_2 capacity_3 truck_1 3
+5 get_to truck_1 city_loc_13 -> m_drive_to_ordering_0 city_loc_1 city_loc_13 truck_1 5
+6 unload truck_1 city_loc_13 package_1 -> m_unload_ordering_0 city_loc_13 package_1 capacity_2 capacity_3 truck_1 6
+7 deliver package_3 city_loc_13 -> m_deliver_ordering_0 city_loc_4 city_loc_13 package_3 truck_0 8 9 10 11
+8 get_to truck_0 city_loc_4 -> m_drive_to_ordering_0 city_loc_5 city_loc_4 truck_0 7
+9 get_to truck_0 city_loc_13 -> m_drive_to_via_ordering_0 city_loc_5 city_loc_13 truck_0 7 8
+10 load truck_0 city_loc_4 package_3 -> m_load_ordering_0 city_loc_4 package_3 capacity_2 capacity_3 truck_0 9
+11 get_to truck_0 city_loc_13 -> m_drive_to_ordering_0 city_loc_5 city_loc_13 truck_0 10
+<==

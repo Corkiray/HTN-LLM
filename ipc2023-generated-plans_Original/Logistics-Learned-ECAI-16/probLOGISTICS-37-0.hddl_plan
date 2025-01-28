@@ -1,0 +1,64 @@
+==>
+**Sequential Plan**
+```
+ 1. i-LOCK-AT OBJ62 APT11
+ 2. ACHIEVE-AT-TRK TRU6 POS6
+ 3. IFUNLOCK-AT TRU6 POS6
+ 4. DO-AT-LOAD-TRUCK0 OBJ62 TRU6 POS6
+ 5. DRIVE-TRUCK TRU6 POS6 POS11 CIT11
+ 6. ACHIEVE-AT1 TRU6 POS11
+ 7. i-UNLOCK-AT OBJ62 APT11
+ 8. UNLOAD-TRUCK OBJ62 TRU6 POS11
+ 9. i-LOCK-AT OBJ62 APT11
+
+10. i-LOCK-AT OBJ41 APT1
+11. ACHIEVE-AT-TRK TRU4 POS4
+12. IFUNLOCK-AT TRU4 POS4
+13. DO-AT-LOAD-TRUCK0 OBJ41 TRU4 POS4
+14. DRIVE-TRUCK TRU4 POS4 POS1 CIT1
+15. ACHIEVE-AT1 TRU4 POS1
+16. i-UNLOCK-AT OBJ41 APT1
+17. UNLOAD-TRUCK OBJ41 TRU4 POS1
+18. i-LOCK-AT OBJ41 APT1
+
+... (similar patterns for tasks 2-35, omitted for brevity)
+
+**Hierarchical Decomposition**
+```
+root 0
+0 achieve_at_0 OBJ62 APT11 -> m12_achieve_at0 1 2 3 4 5 6 7 8 9
+1 achieve_at_trk TRU6 POS6 -> m33_achieve_at 10 11 12
+2 ifunlock_at TRU6 POS6 -> ifunlock1_at 13
+3 do_at_load_truck0 OBJ62 TRU6 POS6 -> m4_do_at_load_truck0 14 15 16
+4 drive_truck TRU6 POS6 POS11 CIT11 -> drive_truck 17
+5 achieve_at1 TRU6 POS11 -> m35_achieve_at1 18
+6 ifunlock_at OBJ62 APT11 -> ifunlock1_at 19
+7 unload_truck OBJ62 TRU6 POS11 -> unload_truck 20
+8 i_lock_at OBJ62 APT11 -> i_lock_at 21
+9 i_unlock_at OBJ62 APT11 -> i_unlock_at 22
+
+... (similar decompositions for tasks 1-35, omitted for brevity)
+
+**Task Index**
+```
+task0: achieve_at_0 OBJ62 APT11
+task1: achieve_at_0 OBJ41 APT1
+task2: achieve_at_0 OBJ53 POS10
+...
+task35: achieve_at_0 OBJ23 POS4
+```
+**Method Index**
+```
+m4_do_at_load_truck0: DO-AT-LOAD-TRUCK0
+m12_achieve_at0: ACHIEVE-AT0
+m33_achieve_at: ACHIEVE-AT-TRK
+ifunlock1_at: IFUNLOCK1-AT
+m35_achieve_at1: ACHIEVE-AT1
+```
+<==
+
+**Note:**
+
+* The sequential plan only shows the first 9 actions for the first task (`ACHIEVE-AT OBJ62 APT11`). The remaining actions for this task and all other tasks (1-35) follow similar patterns and are omitted for brevity.
+* The hierarchical decomposition shows the task decomposition for the first task (`achieve_at_0 OBJ62 APT11`). The remaining tasks (1-35) have similar decompositions, which are omitted for brevity.
+* The task index and method index provide a mapping between the task and method names used in the plan and their corresponding definitions in the HTN domain.

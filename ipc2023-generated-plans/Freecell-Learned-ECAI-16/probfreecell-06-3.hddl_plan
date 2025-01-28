@@ -1,95 +1,38 @@
 ==>
-1 move C4 C3
-2 move C5 C4
-3 move H4 C6
-4 move D4 DA
-5 move D5 C3
-6 move D6 H2
-7 move S3 S2
-8 move S5 H3
-9 move S6 H6
-10 move CA HA
-11 move C3 D5
-12 move C4 C5
-13 move H6 S6
-14 move D5 C4
-15 move D4 C3
-16 move S2 D4
-17 sendtonecol C3 N0 N1
-18 sendtonecol C4 N1 N2
-19 sendtofree C5 N2 N3
-20 sendtofree C6 N3 N4
-21 move H3 S5
-22 move H2 D6
-23 move S4 C2
-24 move S5 H2
-25 move D6 H5
-26 move D4 S4
-27 move D3 S3
-28 move D2 S2
-29 sendtofree D3 N4 N5
-30 sendtofree D4 N5 N6
-31 sendtofree D5 N6 N7
-32 sendtofree D6 N7 N8
-33 move S6 H6
-34 move S3 D3
-35 move S2 D2
-36 sendtohome S3 D N8 S0 N0
-37 sendtohome S2 H N8 H0 N0
-38 sendtohome S6 S N8 S0 N0
-39 sendtohome S5 C N7 C0 N0
-40 sendtohome S4 S N7 S0 N0
-41 move H6 CA
-42 move H5 S5
-43 move H4 C6
-44 move H3 S3
-45 move H2 D5
-46 move HA CA
-47 sendtofree H3 N8 N9
-48 sendtofree H4 N9 N10
-49 sendtofree H5 N10 N11
-50 sendtofree H6 N11 N12
-51 move CA HA
-52 move D5 H5
-53 move D4 H4
-54 move D3 H3
-55 move D2 H2
-56 sendtohome D3 S N12 S0 N0
-57 sendtohome D2 C N12 C0 N0
-58 sendtohome D5 H N11 H0 N0
-59 sendtohome D4 D N11 D0 N0
-60 sendtohome D6 C N10 C0 N0
-61 move C6 H4
-62 move C5 D4
-63 move C4 D3
-64 move C3 D2
-65 move C2 S4
-66 sendtohome C3 H N9 H0 N0
-67 sendtohome C4 D N9 D0 N0
-68 sendtohome C5 S N8 S0 N0
-69 sendtohome C6 C N7 C0 N0
-70 sendtohome C2 C N7 C0 N0
-<==
-
+1 move D2 D3
+2 move S6 H6
+3 move S2 S4
+4 move H4 H5
+5 move D2 S3
+6 move D5 C5
+7 deliver D3 S3 S2 D2 -> m2_ordering_6 1 7 8
+8 deliver S2 S3 S4 H4
+9 move C2 C5
+10 move D4 D6
+11 move D3 D4
+12 deliver D6 D3 D4 C4 -> m2_ordering_3 4 12 13
+13 move D2 D3
+14 move C6 C5
+15 move S4 C4
+16 deliver D3 D2 D4 D5 -> m2_ordering_7 9 16 17
+17 move S4 S5
+18 move S5 S2
+19 move D5 D3
+20 move C6 H5
+21 move D4 D5
+22 move S3 D6
+23 deliver S3 S2 S4 H4 -> m2_ordering_9 10 23 24
+24 move C5 C6
+25 move S6 H5
+26 move H6 S6
+27 move S2 S5
+28 deliver D3 S3 S2 D2 -> m2_ordering_11 11 28 29
+29 move C5 C6
+30 deliver D4 D3 D4 C4 -> m2_ordering_12 15 30 31
+31 deliver H6 S6 C6 C5 -> m2_ordering_14 18 31 32
+32 move H5 H6
 root 0
-0 solve -> m1_solve_0 1 2 3
-1 task0 (ACHIEVE-HOME C6) -> m1_achieve_home_0 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20
-2 task1 (ACHIEVE-HOME D6) -> m1_achieve_home_1 21 22 23 24 25 26 27 28 29 30 31 32
-3 task2 (ACHIEVE-HOME H6) -> m1_achieve_home_2 33 34 35 36 37 38 39 40
-4 task0 (ACHIEVE-HOME C6) -> m2_achieve_home_0 41 42 43 44 45 46 47 48 49 50
-5 task0 (ACHIEVE-HOME C6) -> m3_achieve_home_0 51 52 53 54 55 56 57 58 59 60
-6 task0 (ACHIEVE-HOME C6) -> m4_achieve_home_0 61 62 63 64 65 66 67 68 69 70
-7 task1 (ACHIEVE-HOME D6) -> m5_achieve_home_1 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20
-8 task1 (ACHIEVE-HOME D6) -> m6_achieve_home_1 21 22 23 24 25 26 27 28 29 30 31 32
-9 task2 (ACHIEVE-HOME H6) -> m7_achieve_home_2 33 34 35 36 37 38 39 40
-10 task2 (ACHIEVE-HOME H6) -> m8_achieve_home_2 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20
-11 task3 (ACHIEVE-HOME S6) -> m9_achieve_home_3 21 22 23 24 25 26 27 28 29 30 31 32
-12 task3 (ACHIEVE-HOME S6) -> m10_achieve_home_3 33 34 35 36 37 38 39 40
-13 task0 (ACHIEVE-HOME C6) -> m11_achieve_home_0 41 42 43 44 45 46 47 48 49 50
-14 task0 (ACHIEVE-HOME C6) -> m12_achieve_home_0 51 52 53 54 55 56 57 58 59 60
-15 task1 (ACHIEVE-HOME D6) -> m13_achieve_home_1 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20
-16 task1 (ACHIEVE-HOME D6) -> m14_achieve_home_1 21 22 23 24 25 26 27 28 29 30 31 32
-17 task2 (ACHIEVE-HOME H6) -> m15_achieve_home_2 33 34 35 36 37 38 39 40
-18 task2 (ACHIEVE-HOME H6) -> m16_achieve_home_2 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20
-19 task3 (ACHIEVE-HOME S6) -> m17_achieve_home_3 21 22 23 24 25 26 27 28 29 30 31 32
-20 task3 (ACHIEVE-HOME S6) -> m18_achieve_home_3 33 34 35 36 37 38 39 40
+0 achieve_home_c6 -> m1_ordering_0 2 3 4 5 6 7
+5 deliver_person_d2_d6 C6 -> m2_ordering_1 8 33 34
+6 achieve_home_s6 -> m1_abort_ordering_0
+<==

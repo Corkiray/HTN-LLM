@@ -1,79 +1,30 @@
 ==>
-1 i-LOCK-AT OBJ22 POS2
-2 ACHIEVE-AT1 TRU2 POS2
-3 DO-AT-LOAD-TRUCK0 OBJ22 TRU2 POS2
-4 DRIVE-TRUCK TRU2 POS2 POS3 CIT3
-5 DO-IN-UNLOAD-TRUCK0 OBJ22 TRU2 POS3
-6 i-LOCK-AT OBJ13 POS1
-7 ACHIEVE-AT1 TRU1 POS1
-8 DO-AT-LOAD-TRUCK0 OBJ13 TRU1 POS1
-9 DRIVE-TRUCK TRU1 POS1 POS2 CIT2
-10 DO-IN-UNLOAD-TRUCK0 OBJ13 TRU1 POS2
-11 i-LOCK-AT OBJ32 POS3
-12 ACHIEVE-AT2 APN1 APT3
-13 FLY-AIRPLANE APN1 APT3 APT2
-14 DO-IN-UNLOAD-AIRPLANE0 OBJ32 APN1 APT2
-15 i-LOCK-AT OBJ33 POS3
-16 ACHIEVE-AT2 APN1 APT2
-17 FLY-AIRPLANE APN1 APT2 APT3
-18 DO-IN-UNLOAD-AIRPLANE0 OBJ33 APN1 APT3
-19 i-LOCK-AT OBJ23 POS2
-20 ACHIEVE-AT1 TRU2 POS2
-21 DO-AT-LOAD-TRUCK0 OBJ23 TRU2 POS2
-22 DRIVE-TRUCK TRU2 POS2 APT2 CIT2
-23 DO-IN-UNLOAD-TRUCK0 OBJ23 TRU2 APT2
-24 i-LOCK-AT OBJ31 POS3
-25 ACHIEVE-AT2 APN1 APT3
-26 FLY-AIRPLANE APN1 APT3 APT1
-27 DO-IN-UNLOAD-AIRPLANE0 OBJ31 APN1 APT1
-28 i-LOCK-AT OBJ21 POS2
-29 ACHIEVE-AT1 TRU2 POS2
-30 DO-AT-LOAD-TRUCK0 OBJ21 TRU2 POS2
-31 DRIVE-TRUCK TRU2 POS2 POS3 CIT3
-32 DO-IN-UNLOAD-TRUCK0 OBJ21 TRU2 POS3
-33 i-LOCK-AT OBJ12 POS1
-34 ACHIEVE-AT1 TRU1 POS1
-35 DO-AT-LOAD-TRUCK0 OBJ12 TRU1 POS1
-36 DRIVE-TRUCK TRU1 POS1 POS3 CIT3
-37 DO-IN-UNLOAD-TRUCK0 OBJ12 TRU1 POS3
-<==
-
+1 ACHIEVE-AT-AIR APN1 APT1
+2 FLY-AIRPLANE APN1 APT3 APT1
+3 DO-IN-UNLOAD-AIRPLANE0 OBJ31 APN1 APT1
+4 UNLOAD-AIRPLANE OBJ31 APN1 APT1
+5 ACHIEVE-AT-TRK TRU1 APT1
+6 DRIVE-TRUCK TRU1 POS1 APT1 CIT1
+7 DO-AT-LOAD-TRUCK0 OBJ11 TRU1 APT1
+8 LOAD-TRUCK OBJ11 TRU1 APT1
+9 DRIVE-TRUCK TRU1 APT1 POS1 CIT1
+10 ACHIEVE-AT-AIR APN1 APT2
+11 FLY-AIRPLANE APN1 APT1 APT2
+12 DO-IN-UNLOAD-AIRPLANE0 OBJ12 APN1 APT2
+13 UNLOAD-AIRPLANE OBJ12 APN1 APT2
+14 ACHIEVE-AT-TRK TRU2 POS2
+15 DO-AT-LOAD-TRUCK0 OBJ22 TRU2 POS2
+16 LOAD-TRUCK OBJ22 TRU2 POS2
+17 DRIVE-TRUCK TRU2 POS2 POS3 CIT3
+18 DO-IN-UNLOAD-TRUCK0 OBJ22 TRU2 POS3
+19 UNLOAD-TRUCK OBJ22 TRU2 POS3
+20 ACHIEVE-AT-AIR APN1 APT3
+21 FLY-AIRPLANE APN1 APT2 APT3
+22 DO-IN-UNLOAD-AIRPLANE0 OBJ21 APN1 APT3
+23 UNLOAD-AIRPLANE OBJ21 APN1 APT3
 root 0
-0 achieve_at OBJ22 POS3 -> m10_achieve_at 1 2 3 4 5
-1 achieve_at1 TRU2 POS2 -> m33_achieve_at 2
-2 i_unlock_at TRU2 POS2 -> i_unlock_at 3
-3 load_truck OBJ22 TRU2 POS2 -> load_truck 4
-4 drive_truck TRU2 POS2 POS3 CIT3 -> drive_truck 5
-5 do_in_unload_truck0 OBJ22 TRU2 POS3 -> m6_do_in_unload_truck0 6 7 8
-...
-7 achieve_at1 TRU1 POS1 -> m33_achieve_at 8
-...
-12 achieve_at2 APN1 APT3 -> m38_achieve_at 13
-...
-16 achieve_at2 APN1 APT2 -> m38_achieve_at 17
-...
-20 achieve_at1 TRU2 POS2 -> m33_achieve_at 21
-...
-24 achieve_at2 APN1 APT3 -> m38_achieve_at 25
-...
-28 achieve_at1 TRU2 POS2 -> m33_achieve_at 29
-...
-32 achieve_at1 TRU2 POS2 -> m33_achieve_at 33
-...
-34 achieve_at1 TRU1 POS1 -> m33_achieve_at 35
-...
-**Note:** Due to the complexity and length of the plan, I've truncated the hierarchical decomposition, focusing on showcasing the format and key aspects of the plan. The full decomposition would continue in a similar manner, detailing each subtask's further breakdown.
-
-**Plan Explanation:**
-
-1. **Sequential Plan (Actions 1-37)**:
-	* The plan starts with locking each package at its initial location (e.g., `i-LOCK-AT OBJ22 POS2`).
-	* Then, for each package, the plan involves:
-		+ Achieving the truck's or airplane's presence at the package's location.
-		+ Loading the package onto the vehicle.
-		+ Transporting the vehicle to the destination (if necessary).
-		+ Unloading the package at the destination.
-2. **Hierarchical Decomposition (Starting with `root 0`)**:
-	* Each task (e.g., `achieve_at OBJ22 POS3`) is decomposed into subtasks based on the methods defined in the domain (e.g., `m10_achieve_at`).
-	* These subtasks may further involve actions (e.g., `i_unlock_at`, `load_truck`) or more abstract tasks, which are again decomposed.
-	* The decomposition continues until only primitive actions remain, as seen in the sequential plan.
+0 solve_logistics
+0.1 ACHIEVE-AT OBJ31 APT1 -> m1_ordering_0 1 2 3 4 5 6 7 8 9 10 11 12 13 14
+0.2 ACHIEVE-AT OBJ22 POS3 -> m1_ordering_1 15 16 17 18 19
+24 IFUNLOCK-AT POS3 -> m1_ordering_2 20 21 22 23
+<==

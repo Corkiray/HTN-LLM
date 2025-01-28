@@ -1,62 +1,86 @@
 ==>
-**Sequential Plan:**
-
-1. `prepare_trip` place0 (initial location)
-2. `trip_to1` couple0 place19
-3. `trip_to1` couple1 place19
-...
-20. `trip_to1` couple19 place19
-
-**Hierarchical Decomposition:**
-
+1 prepare_trip place0
+2 trip_to1 couple0 place19
+3 prepare_trip place0
+4 trip_to1 couple1 place19
+5 prepare_trip place0
+6 trip_to1 couple2 place19
+7 prepare_trip place0
+8 trip_to1 couple3 place19
+9 prepare_trip place0
+10 trip_to1 couple4 place19
+11 prepare_trip place0
+12 trip_to1 couple5 place19
+13 prepare_trip place0
+14 trip_to1 couple6 place19
+15 prepare_trip place0
+16 trip_to1 couple7 place19
+17 prepare_trip place0
+18 trip_to1 couple8 place19
+19 prepare_trip place0
+20 trip_to1 couple9 place19
+21 prepare_trip place0
+22 trip_to1 couple10 place19
+23 prepare_trip place0
+24 trip_to1 couple11 place19
+25 prepare_trip place0
+26 trip_to1 couple12 place19
+27 prepare_trip place0
+28 trip_to1 couple13 place19
+29 prepare_trip place0
+30 trip_to1 couple14 place19
+31 prepare_trip place0
+32 trip_to1 couple15 place19
+33 prepare_trip place0
+34 trip_to1 couple16 place19
+35 prepare_trip place0
+36 trip_to1 couple17 place19
+37 prepare_trip place0
+38 trip_to1 couple18 place19
+39 prepare_trip place0
+40 trip_to1 couple19 place19
 root 0
-0 `everyone_go_hiking` place19 -> `m14_everyone_go_hiking` 1
-1 `everyone_go_hiking` place19 -> 
-  * `prepare_trip` place0 -> `m6_prepare_trip` 2 3
-  * `trip_to1` couple0 place19 -> `m0_trip_to1` 4 (similar for couple1 to couple19)
-  *...
-  * `trip_to1` couple19 place19 -> `m0_trip_to1` 40
-
-**Decomposition of `prepare_trip` place0:**
-
-2 `prepare_trip` place0 -> `m6_prepare_trip` 
-  * `bring_tent` place0 -> `m9_bring_tent` (for tent4, tent5,..., tent19) 
-    * (noop, since tents are already at place0 and down/up as required)
-  * `bring_tent` place0 -> `m10_bring_tent` (for tent0, tent1,..., tent3, tent10,..., tent13) 
-    * `put_down`?p?t (for each tent that is up)
-  * `bring_cars` place0 -> `m11_bring_cars` (noop, since all cars are already at place0)
-
-**Decomposition of `trip_to1` coupleX place19 (example for couple0):**
-
-4 `trip_to1` couple0 place19 -> `m0_trip_to1` 
-  * `trip_to2` couple0 place0 place19 -> `m3_trip_to2` 5 (since next(place0, place1) and subsequent places lead to place19)
-
-**Decomposition of `trip_to2` couple0 place0 place19:**
-
-5 `trip_to2` couple0 place0 place19 -> `m3_trip_to2` 
-  * `drive_tent` guy0 place0 place1 car0 tent0
-  * `drive` girl0 place0 place1 car1
-  * `put_up` guy0 place1 tent0
-  * `drive_passenger` girl0 place1 place0 car1 guy0
-  * `walk_everyone` tent0 place1 place0 -> `m5_walk_everyone` 6
-  * `put_down` girl0 place1 tent0
-  * `drive_passenger` guy0 place1 place0 car0 girl0
-  * `drive` guy0 place0 place1 car0
-  * `drive` girl0 place0 place1 car1
-  *... (similar actions for subsequent places until place19)
-
-**Decomposition of `walk_everyone` tent0 place1 place0:**
-
-6 `walk_everyone` tent0 place1 place0 -> `m5_walk_everyone` 
-  * `walk_together` tent0 place1 guy0 place0 girl0 couple0
-  * `walk_everyone` tent0 place1 place0 -> `m4_walk_everyone` (noop, base case for recursion)
-
+0 everyone_go_hiking place19 -> m14_everyone_go_hiking 1 2
+1 prepare_trip place0 -> m6_prepare_trip 3 5
+3 bring_tent place0 -> m10_bring_tent 41 42
+4 bring_cars place0 -> m11_bring_cars
+5 trip_to2 couple0 place0 place19 -> m2_trip_to2 place0 place10 place19
+41 put_down guy0 place0 tent4
+42 drive_tent guy0 place0 place0 car0 tent4
+2 drive_tent guy0 place0 place10 car0 tent4
+6 drive_tent guy0 place10 place11 car0 tent4
+7 walk_everyone tent4 place11 place0 -> m5_walk_everyone guy0 girl0 couple0
+8 drive_passenger guy0 place11 place0 car0 guy0
+9 drive_tent guy0 place0 place0 car0 tent4
+10 drive_passenger guy0 place0 place11 car0 girl0
+11 walk_everyone tent4 place11 place0 -> m5_walk_everyone guy0 girl0 couple0
+12 drive_passenger girl0 place11 place12 car0 girl0
+13 trip_to2 couple0 place11 place19 -> m2_trip_to2 place11 place12 place19
+14 drive_tent guy0 place12 place13 car0 tent4
+15 drive_passenger guy0 place13 place12 car0 guy0
+16 drive_tent girl0 place12 place12 car0 tent4
+17 drive_passenger girl0 place12 place13 car0 guy0
+18 walk_everyone tent4 place13 place11 -> m5_walk_everyone guy0 girl0 couple0
+19 drive_passenger guy0 place13 place14 car0 guy0
+20 drive_passenger girl0 place14 place13 car0 guy0
+21 trip_to2 couple0 place13 place19 -> m2_trip_to2 place13 place14 place19
+22 drive_tent guy0 place14 place15 car0 tent4
+23 drive_passenger guy0 place15 place14 car0 guy0
+24 drive_tent girl0 place14 place14 car0 tent4
+25 drive_passenger girl0 place14 place15 car0 guy0
+26 walk_everyone tent4 place15 place13 -> m5_walk_everyone guy0 girl0 couple0
+27 drive_passenger guy0 place15 place16 car0 guy0
+28 trip_to2 couple0 place15 place19 -> m2_trip_to2 place15 place16 place19
+29 drive_tent guy0 place16 place17 car0 tent4
+30 drive_passenger guy0 place17 place16 car0 guy0
+31 drive_tent girl0 place16 place16 car0 tent4
+32 drive_passenger girl0 place16 place17 car0 guy0
+33 walk_everyone tent4 place17 place15 -> m5_walk_everyone guy0 girl0 couple0
+34 drive_passenger guy0 place17 place18 car0 guy0
+35 trip_to2 couple0 place17 place19 -> m2_trip_to2 place17 place18 place19
+36 drive_tent guy0 place18 place19 car0 tent4
+37 put_up guy0 place19 tent4
+38 drive girl0 place18 place19 car0
+39 put_down girl0 place19 tent4
+40 walk_together tent4 place19 guy0 place18 girl0 couple0
 <==
-
-**Note:**
-
-* The plan assumes that the `next` predicate defines a path from `place0` to `place19`.
-* The decomposition for `trip_to1` coupleX place19 is similar for all couples (couple1 to couple19).
-* The actions for `drive_tent`, `drive`, `put_up`, `drive_passenger`, `walk_together`, and `put_down` are repeated for each couple and each place in the path from `place0` to `place19`.
-* The plan does not include error handling or handling of potential failures in actions.
-* The plan is based on the provided HTN domain and problem, and might not be optimal or the only possible solution.

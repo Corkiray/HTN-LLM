@@ -1,0 +1,45 @@
+==>
+1 pickup b3
+2 putdown b3
+3 unstack b5 b4
+4 putdown b5
+5 unstack b4 b2
+6 putdown b4
+7 pickup b2
+8 stack b2 b5
+9 pickup b1
+10 stack b1 b3
+root 0
+0 task0 -> unstack-block 1 2
+1 acquire_abstract b3 -> newMethod9 1
+2 release -> release-table 2 3
+3 task0 -> unstack-block 4 5
+4 acquire_abstract b5 -> newMethod12 3
+5 release -> release-table 4 6
+6 task0 -> unstack-block 7 8
+7 acquire_abstract b4 -> newMethod12 5
+8 release -> release-table 6 9
+9 task0 -> pickup-ready-block 10 11
+10 acquire_abstract b2 -> newMethod9 7
+11 release -> release-stack 12 13 14 15
+12 delete_goal_on b2 b5
+13 mark_done b2
+14 stack_abstract b2 b5 -> newMethod11 8
+15 task0 -> pickup-ready-block 16 17
+16 acquire_abstract b1 -> newMethod9 9
+17 release -> release-stack 18 19 20 21
+18 delete_goal_on b1 b3
+19 mark_done b1
+20 stack_abstract b1 b3 -> newMethod11 10
+21 task0 -> mark-done-table 22 23
+22 mark_done b4
+23 task0 -> mark-done-table 24 25
+24 mark_done b3
+25 task0 -> mark-done-on 26 27
+26 mark_done b5
+27 task0 -> mark-done-on 28 29
+28 mark_done b2
+29 task0 -> mark-done-on 30 31
+30 mark_done b1
+31 task0 -> setdone 
+<==

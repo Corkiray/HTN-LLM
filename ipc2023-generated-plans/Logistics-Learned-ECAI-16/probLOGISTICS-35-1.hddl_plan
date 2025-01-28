@@ -1,56 +1,46 @@
 ==>
-**Sequential Plan**
-```
-1. ACHIEVE-AT OBJ61 POS4 (M10)
-   -> ACHIEVE-AT0 OBJ61 POS4 (M12)
-      -> DO-AT-LOAD-TRUCK0 OBJ61 TRU4 POS6 (M4)
-         -> ACHIEVE-AT-TRK TRU4 POS6 (M32)
-            -> i-FLAG-AT TRU4 POS6
-         -> IFUNLOCK-AT TRU4 POS6 (IFUNLOCK1-AT)
-            -> i-UNLOCK-AT TRU4 POS6
-         -> LOAD-TRUCK OBJ61 TRU4 POS6
-      -> ACHIEVE-AT0 OBJ61 POS4 (M11)
-
-2. ACHIEVE-AT OBJ23 APT1 (M10)
-   -> ACHIEVE-AT0 OBJ23 APT1 (M13)
-      -> DO-AT-LOAD-AIRPLANE0 OBJ23 APN1 POS2 (M5)
-         -> ACHIEVE-AT-AIR APN1 POS2 (M37)
-            -> i-FLAG-AT APN1 POS2
-         -> IFUNLOCK-AT APN1 POS2 (IFUNLOCK1-AT)
-            -> i-UNLOCK-AT APN1 POS2
-         -> LOAD-AIRPLANE OBJ23 APN1 POS2
-      -> ACHIEVE-AT0 OBJ23 APT1 (M11)
-
-... (tasks 3-34 follow a similar pattern, adapting to the specific object, location, and vehicle)
-
-**Hierarchical Decomposition**
-```
+1 achieve-at obj61 pos4
+2 achieve-at obj23 apt1
+3 achieve-at obj51 apt11
+4 achieve-at obj43 apt9
+5 achieve-at obj123 pos1
+6 achieve-at obj73 apt9
+7 achieve-at obj91 pos11
+8 achieve-at obj53 apt8
+9 achieve-at obj72 pos8
+10 achieve-at obj82 apt11
+11 achieve-at obj22 pos1
+12 achieve-at obj92 pos1
+13 achieve-at obj62 apt10
+14 achieve-at obj32 apt10
+15 achieve-at obj121 pos11
+16 achieve-at obj122 apt8
+17 achieve-at obj71 pos6
+18 achieve-at obj13 apt7
+19 achieve-at obj113 apt6
+20 achieve-at obj41 pos8
+21 achieve-at obj33 apt5
+22 achieve-at obj81 apt11
+23 achieve-at obj21 apt1
+24 achieve-at obj103 apt7
+25 achieve-at obj11 apt11
+26 achieve-at obj63 apt3
+27 achieve-at obj101 apt11
+28 achieve-at obj83 pos1
+29 achieve-at obj42 apt8
+30 achieve-at obj12 apt11
+31 achieve-at obj93 apt2
+32 achieve-at obj112 apt1
+33 achieve-at obj52 apt7
+34 achieve-at obj111 apt4
+35 achieve-at obj102 apt9
 root 0
-0 solve_logistics -> m_task0 1
-1 task0 (ACHIEVE-AT OBJ61 POS4) -> m10_achieve_at 2 3
-   2 ACHIEVE-AT0 OBJ61 POS4 -> m12_achieve_at0 4 5
-      4 DO-AT-LOAD-TRUCK0 OBJ61 TRU4 POS6 -> m4_do_at_load_truck0 6 7 8
-         6 ACHIEVE-AT-TRK TRU4 POS6 -> m32_achieve_at_trk 9
-         7 IFUNLOCK-AT TRU4 POS6 -> ifunlock1_at 10
-         8 LOAD-TRUCK OBJ61 TRU4 POS6
-      5 ACHIEVE-AT0 OBJ61 POS4 -> m11_achieve_at0
-   3 i-LOCK-AT OBJ61 POS4
-
-1 task1 (ACHIEVE-AT OBJ23 APT1) -> m10_achieve_at 11 12
-   11 ACHIEVE-AT0 OBJ23 APT1 -> m13_achieve_at0 13 14
-      13 DO-AT-LOAD-AIRPLANE0 OBJ23 APN1 POS2 -> m5_do_at_load_airplane0 15 16 17
-         15 ACHIEVE-AT-AIR APN1 POS2 -> m37_achieve_at_air 18
-         16 IFUNLOCK-AT APN1 POS2 -> ifunlock1_at 19
-         17 LOAD-AIRPLANE OBJ23 APN1 POS2
-      14 ACHIEVE-AT0 OBJ23 APT1 -> m11_achieve_at0
-   12 i-LOCK-AT OBJ23 APT1
-
-... (tasks 2-34 follow a similar decomposition pattern)
-```
-**Note:**
-
-* The sequential plan only shows the first two tasks due to space constraints. The remaining tasks (3-34) follow a similar pattern, adapting to the specific object, location, and vehicle.
-* The hierarchical decomposition shows the breakdown of the first two tasks. The remaining tasks (3-34) would follow a similar decomposition pattern.
-* Action and method names are abbreviated for brevity (e.g., `m10_achieve_at` represents `M10-ACHIEVE-AT`).
-* The plan assumes that the preconditions for each action and method are met, and the effects of each action are applied to the state.
-* This plan is generated based on the provided HTN domain and problem, but its correctness and optimality depend on the specific implementation and the HTN planner used.
+0 m2_ordering_0 -> m1_go_ordering_1 1 3
+2 board pos4 pos5 -> m3_board_2 4 5 6
+9 move pos5 pos6 -> m4_go_ordering_0 7 8 9 10
+13 move pos7 pos8 -> m4_go_ordering_1 11 14 15
+17 move pos8 pos9 -> m4_go_ordering_2 16 20 21
+21 move pos9 pos10 -> m4_go_ordering_3 22 26 27
+25 move pos10 pos11 -> m4_go_ordering_4 28 32 33 34
+29 move pos11 pos12 -> m4_go_ordering_5 30 35
+<==

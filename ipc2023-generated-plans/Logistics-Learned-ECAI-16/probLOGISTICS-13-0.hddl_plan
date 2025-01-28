@@ -1,47 +1,110 @@
 ==>
-**Sequential Plan:**
-
-1. `i-LOCK-AT` `OBJ31` `APT1`
-2. `FLY-AIRPLANE` `APN2` `APT1` `APT1` (noop, already at destination)
-3. `UNLOAD-AIRPLANE` `OBJ31` `APN2` `APT1` (precondition not met, assuming `OBJ31` is not in `APN2`)
-4. `DO-AT-LOAD-AIRPLANE0` `OBJ31` `APN2` `POS3` (modified to match initial location of `OBJ31`)
-5. `LOAD-AIRPLANE` `OBJ31` `APN2` `POS3`
-6. `FLY-AIRPLANE` `APN2` `POS3` `APT1`
-7. `UNLOAD-AIRPLANE` `OBJ31` `APN2` `APT1`
-8. `i-LOCK-AT` `OBJ12` `POS3`
-9. `DRIVE-TRUCK` `TRU3` `POS3` `POS3` `CIT3` (noop, already at destination)
-10. `UNLOAD-TRUCK` `OBJ12` `TRU3` `POS3` (precondition not met, assuming `OBJ12` is not in `TRU3`)
-11. `DO-IN-UNLOAD-TRUCK0` `OBJ12` `TRU3` `POS1` (modified to match initial location of `OBJ12`)
-12. `UNLOAD-TRUCK` `OBJ12` `TRU1` `POS1`
-13. `DRIVE-TRUCK` `TRU1` `POS1` `POS3` `CIT3`
-14. `UNLOAD-TRUCK` `OBJ12` `TRU3` `POS3`
-15.... (similar steps for each remaining task, due to format constraints, the full plan is not provided here but the process is illustrated)
-
-**Hierarchical Decomposition:**
-
-```
-root 0
-0 achieve_at OBJ31 APT1 -> m10_achieve_at 1 2 3 4 5 6 7
-1 achieve_at0 OBJ31 APT1 -> m13_achieve_at0 4 5 6 7
-  4 do_at_load_airplane0 OBJ31 APN2 POS3 -> m5_do_at_load_airplane0 5 6
-  5 load_airplane OBJ31 APN2 POS3
-  6 fly_airplane APN2 POS3 APT1
-  7 unload_airplane OBJ31 APN2 APT1
-
-2 achieve_at OBJ12 POS3 -> m9_achieve_at 8 9 10 11 12 13 14
-  8 achieve_at0 OBJ12 POS3 -> m11_achieve_at0 (noop, already at POS3)
-  9 drive_truck TRU3 POS3 POS3 CIT3 (noop, already at destination)
-  10 unload_truck OBJ12 TRU3 POS3 (precondition not met, assuming OBJ12 is not in TRU3)
-  11 do_in_unload_truck0 OBJ12 TRU1 POS1 -> m6_do_in_unload_truck0 12 13
-    12 drive_truck TRU1 POS1 POS3 CIT3
-    13 unload_truck OBJ12 TRU3 POS3
-
-... (similar decomposition for each remaining task)
-```
-
-**Note:**
-
-* The provided plan is a simplified illustration due to the complexity and length of the full plan required to solve all tasks in the given HTN problem.
-* The plan assumes certain preconditions are not met (e.g., `OBJ31` not being in `APN2` initially) to demonstrate the process. Actual preconditions should be verified against the problem's initial state.
-* Actions and methods are selected based on the provided domain and problem, but the correctness of the plan in achieving all tasks without conflicts or unmet preconditions is not guaranteed without further verification.
-* The hierarchical decomposition focuses on the first two tasks for brevity, following the specified format. Each task in the problem would undergo similar decomposition.
+1 i-UNLOCK-AT OBJ11 POS1
+2 ACHIEVE-AT-TRK TRU1 POS1
+3 LOAD-TRUCK OBJ11 TRU1 POS1
+4 FLY-TRUCK TRU1 POS1 POS5
+5 UNLOAD-TRUCK OBJ11 TRU1 POS5
+6 i-LOCK-AT TRU1 POS5
+7 i-LOCK-AT OBJ11 POS5
+8 i-UNLOCK-AT OBJ12 POS1
+9 ACHIEVE-AT-TRK TRU1 POS1
+10 LOAD-TRUCK OBJ12 TRU1 POS1
+11 FLY-TRUCK TRU1 POS1 POS3
+12 UNLOAD-TRUCK OBJ12 TRU1 POS3
+13 i-LOCK-AT TRU1 POS3
+14 i-LOCK-AT OBJ12 POS3
+15 i-UNLOCK-AT OBJ23 POS2
+16 ACHIEVE-AT-TRK TRU2 POS2
+17 LOAD-TRUCK OBJ23 TRU2 POS2
+18 FLY-TRUCK TRU2 POS2 POS5
+19 UNLOAD-TRUCK OBJ23 TRU2 POS5
+20 i-LOCK-AT TRU2 POS5
+21 i-LOCK-AT OBJ23 POS5
+22 i-UNLOCK-AT OBJ13 POS1
+23 ACHIEVE-AT-TRK TRU1 POS3
+24 LOAD-TRUCK OBJ13 TRU1 POS3
+25 FLY-TRUCK TRU1 POS3 POS4
+26 UNLOAD-TRUCK OBJ13 TRU1 POS4
+27 i-LOCK-AT TRU1 POS4
+28 i-LOCK-AT OBJ13 POS4
+29 i-UNLOCK-AT OBJ43 POS4
+30 ACHIEVE-AT-TRK TRU3 POS3
+31 LOAD-TRUCK OBJ43 TRU3 POS3
+32 FLY-TRUCK TRU3 POS3 APT2
+33 UNLOAD-TRUCK OBJ43 TRU3 APT2
+34 i-LOCK-AT TRU3 APT2
+35 i-LOCK-AT OBJ43 APT2
+36 i-UNLOCK-AT OBJ52 POS5
+37 ACHIEVE-AT-AIR APN2 APT4
+38 LOAD-AIRPLANE OBJ52 APN2 APT4
+39 FLY-AIRPLANE APN2 APT4 APT4
+40 UNLOAD-AIRPLANE OBJ52 APN2 APT4
+41 i-LOCK-AT APN2 APT4
+42 i-LOCK-AT OBJ52 APT4
+43 i-UNLOCK-AT OBJ53 POS5
+44 ACHIEVE-AT-TRK TRU5 POS5
+45 LOAD-TRUCK OBJ53 TRU5 POS5
+46 FLY-TRUCK TRU5 POS5 POS1
+47 UNLOAD-TRUCK OBJ53 TRU5 POS1
+48 i-LOCK-AT TRU5 POS1
+49 i-LOCK-AT OBJ53 POS1
+50 i-UNLOCK-AT OBJ33 POS3
+51 ACHIEVE-AT-TRK TRU1 POS3
+52 LOAD-TRUCK OBJ33 TRU1 POS3
+53 FLY-TRUCK TRU1 POS3 POS1
+54 UNLOAD-TRUCK OBJ33 TRU1 POS1
+55 i-LOCK-AT TRU1 POS1
+56 i-LOCK-AT OBJ33 POS1
+57 i-UNLOCK-AT OBJ32 POS3
+58 ACHIEVE-AT-AIR APN1 APT2
+59 LOAD-AIRPLANE OBJ32 APN1 APT2
+60 FLY-AIRPLANE APN1 APT2 APT2
+61 UNLOAD-AIRPLANE OBJ32 APN1 APT2
+62 i-LOCK-AT APN1 APT2
+63 i-LOCK-AT OBJ32 APT2
+64 i-UNLOCK-AT OBJ41 POS4
+65 ACHIEVE-AT-AIR APN2 APT3
+66 LOAD-AIRPLANE OBJ41 APN2 APT3
+67 FLY-AIRPLANE APN2 APT3 APT3
+68 UNLOAD-AIRPLANE OBJ41 APN2 APT3
+69 i-LOCK-AT APN2 APT3
+70 i-LOCK-AT OBJ41 APT3
+71 i-UNLOCK-AT OBJ51 POS5
+72 ACHIEVE-AT-AIR APN2 APT5
+73 LOAD-AIRPLANE OBJ51 APN2 APT5
+74 FLY-AIRPLANE APN2 APT5 APT5
+75 UNLOAD-AIRPLANE OBJ51 APN2 APT5
+76 i-LOCK-AT APN2 APT5
+77 i-LOCK-AT OBJ51 APT5
+78 i-UNLOCK-AT OBJ22 POS2
+79 ACHIEVE-AT-TRK TRU1 POS2
+80 LOAD-TRUCK OBJ22 TRU1 POS2
+81 FLY-TRUCK TRU1 POS2 POS2
+82 UNLOAD-TRUCK OBJ22 TRU1 POS2
+83 i-LOCK-AT TRU1 POS2
+84 i-LOCK-AT OBJ22 POS2
+85 i-UNLOCK-AT OBJ31 POS3
+86 ACHIEVE-AT-AIR APN1 APT1
+87 LOAD-AIRPLANE OBJ31 APN1 APT1
+88 FLY-AIRPLANE APN1 APT1 APT1
+89 UNLOAD-AIRPLANE OBJ31 APN1 APT1
+90 i-LOCK-AT APN1 APT1
+91 i-LOCK-AT OBJ31 APT1
+92 ACHIEVE-AT OBJ12 POS3
+93 ACHIEVE-AT OBJ11 POS5
+94 ACHIEVE-AT OBJ53 POS1
+95 ACHIEVE-AT OBJ22 POS2
+root 0 
+0 solve_main_problem -> m10_do-at-load-truck-obj11-tru1-pos1-1 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 
+25 deliver_package_obj12_tru1_pos1_pos3 -> m4_do-at-load-truck-obj12_tru1_pos3 17 18 19 20 21 22 23 24 25 
+29 deliver_package_obj23_tru2_pos2_pos5 -> m7_do-in-unload-truck-obj23_tru2_pos5 26 27 28 29 30 31 32 33 34 
+35 deliver_package_obj13_tru1_pos1_pos4 -> m11_do-at-load-airplane-obj13_tru1_pos4 36 37 38 39 
+41 deliver_package_obj43_tru4_pos4_apt2 -> m8_do-in-unload-truck-obj43_tru4_apt2 42 43 44 45 46 47 48 
+49 deliver_package_obj52_apn2_pos5_apt4 -> m8_do-in-unload-airplane-obj52_apn2_apt4 50 51 52 53 54 55 
+56 deliver_package_obj53_tru5_pos5_pos1 -> m11_do-at-load-airplane-obj53_tru5_pos1 57 58 59 60 61 62 
+63 deliver_package_obj33_tru3_pos3_pos1 -> m9_do-at-load-truck-obj33_tru3_pos1 64 65 66 67 68 69 70 
+71 deliver_package_obj32_apn1_pos3_apt2 -> m5_do-at-load-airplane-obj32_apn1_apt2 72 73 74 75 76 
+77 deliver_package_obj41_apn2_pos4_apt3 -> m8_do-in-unload-airplane-obj41_apn2_apt3 78 79 80 81 82 83 
+84 deliver_package_obj51_apn2_pos5_apt5 -> m12_do-at-load-truck-obj51_apn2_apt5 85 86 87 88 89 
+91 deliver_package_obj22_tru2_pos2_pos2 -> m9_do-in-unload-truck-obj22_tru2_pos2 92 93 94 95 
+<==

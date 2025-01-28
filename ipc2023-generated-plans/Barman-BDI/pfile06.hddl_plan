@@ -1,58 +1,536 @@
 ==>
-**Sequential Plan**
-1. AchieveContainsShakerCocktail shaker1 cocktail1 (via MakeCocktail)
-2. DoPourShakerToShot shaker1 shot3 cocktail1 (via pour_shaker_to_shot_action)
-3. AchieveContainsShakerCocktail shaker1 cocktail2 (via MakeCocktail)
-4. DoPourShakerToShot shaker1 shot2 cocktail2 (via pour_shaker_to_shot_action)
-5. AchieveContainsShakerCocktail shaker1 cocktail3 (via MakeCocktail)
-6. DoPourShakerToShot shaker1 shot4 cocktail3 (via pour_shaker_to_shot_action)
-7. AchieveContainsShakerCocktail shaker1 cocktail4 (via MakeCocktail)
-8. DoPourShakerToShot shaker1 shot1 cocktail4 (via pour_shaker_to_shot_action)
-
-**Hierarchical Decomposition**
-root 0
-0 AchieveContainsShotCocktail shot3 cocktail1 1 2
-1 MakeCocktail shaker1 cocktail1 ingredient1 ingredient5 left right 3 4 5 6 7
-	3 AchieveCleanShaker shaker1 -> CleanShakerNull 9
-	4 AchieveContainsShakerIngredient shaker1 ingredient5 -> AddIngredientToEmptyShaker 10 11 12
-	5 AchieveContainsShakerIngredient shaker1 ingredient1 -> AddIngredientToUsedShaker 13 14 15
-	6 AchieveHolding right shaker1 -> PickUp 16 17 18
-	7 shake cocktail1 ingredient5 ingredient1 shaker1 right left
-2 pour_shaker_to_shot_action shaker1 shot3 cocktail1 level1 level1 right
-
-3 AchieveContainsShotCocktail shot2 cocktail2 19 20
-19 MakeCocktail shaker1 cocktail2 ingredient3 ingredient5 left right 21 22 23 24 25
-	21 AchieveCleanShaker shaker1 -> CleanFullShaker 26 27 28 29 30
-	22 AchieveContainsShakerIngredient shaker1 ingredient5 -> AddIngredientToUsedShaker 31 32 33
-	23 AchieveContainsShakerIngredient shaker1 ingredient3 -> AddIngredientToUsedShaker 34 35 36
-	24 AchieveHolding right shaker1 -> HoldingNull
-	25 shake cocktail2 ingredient5 ingredient3 shaker1 right left
-20 pour_shaker_to_shot_action shaker1 shot2 cocktail2 level1 level1 right
-
-4 AchieveContainsShotCocktail shot4 cocktail3 37 38
-37 MakeCocktail shaker1 cocktail3 ingredient4 ingredient5 left right 39 40 41 42 43
-	39 AchieveCleanShaker shaker1 -> CleanFullShaker 44 45 46 47 48
-	40 AchieveContainsShakerIngredient shaker1 ingredient5 -> AddIngredientToUsedShaker 49 50 51
-	41 AchieveContainsShakerIngredient shaker1 ingredient4 -> AddIngredientToUsedShaker 52 53 54
-	42 AchieveHolding right shaker1 -> HoldingNull
-	43 shake cocktail3 ingredient5 ingredient4 shaker1 right left
-38 pour_shaker_to_shot_action shaker1 shot4 cocktail3 level1 level1 right
-
-5 AchieveContainsShotCocktail shot1 cocktail4 55 56
-55 MakeCocktail shaker1 cocktail4 ingredient2 ingredient4 left right 57 58 59 60 61
-	57 AchieveCleanShaker shaker1 -> CleanFullShaker 62 63 64 65 66
-	58 AchieveContainsShakerIngredient shaker1 ingredient4 -> AddIngredientToUsedShaker 67 68 69
-	59 AchieveContainsShakerIngredient shaker1 ingredient2 -> AddIngredientToUsedShaker 70 71 72
-	60 AchieveHolding right shaker1 -> HoldingNull
-	61 shake cocktail4 ingredient4 ingredient2 shaker1 right left
-56 pour_shaker_to_shot_action shaker1 shot1 cocktail4 level1 level1 right
-
-**Subtask Decomposition (only showing one level for brevity)**
-9 CleanShakerNull shaker1 (no subtasks)
-10 AddIngredientToEmptyShaker shaker1 ingredient5 level1 level1 shot1 left
-	* AchieveContainsShotIngredient shot1 ingredient5 (via AddIngredientToShot)
-	* AchieveHolding left shot1 (via PickUp)
-	* pour-shot-to-clean-shaker shot1 ingredient5 shaker1 left level1 level1
-11-72: Similar decompositions for each subtask (omitted for brevity)
-
-<==
+1 EmptyHand left shaker1
+2 PutDown shaker1 right
+3 PickUp left shot1
+4 PickUp right shot3
+5 EmptyHand left shot1
+6 PutDown shot1 left
+7 PickUp left dispenser5
+8 EmptyHand left dispenser5
+9 EmptyHand right shot3
+10 PutDown shot3 right
+11 PickUp right shot1
+12 EmptyHand right shot1
+13 PutDown shot1 right
+14 PickUp right dispenser1
+15 PickUp left shot1
+16 EmptyHand right dispenser1
+17 EmptyHand left shot1
+18 PutDown shot1 left
+19 PickUp left shot3
+20 EmptyHand left shot3
+21 PutDown shot3 left
+22 PickUp left shot1
+23 EmptyHand right shot1
+24 PutDown shot1 right
+25 PickUp right shaker1
+26 EmptyHand left shot1
+27 EmptyHand right shaker1
+28 PutDown shaker1 right
+29 PickUp right dispenser5
+30 EmptyHand right dispenser5
+31 EmptyHand left shot1
+32 PutDown shot1 left
+33 PickUp left dispenser1
+34 PickUp right shot1
+35 EmptyHand left dispenser1
+36 EmptyHand right shot1
+37 PutDown shot1 right
+38 PickUp right shaker1
+39 PickUp left shot1
+40 EmptyHand left shot1
+41 EmptyHand right shaker1
+42 PutDown shaker1 right
+43 PickUp right shot1
+44 EmptyHand right shot1
+45 EmptyHand left shot1
+46 PutDown shot1 left
+47 PickUp left shaker1
+48 EmptyHand right shaker1
+49 PutDown shaker1 right
+50 PickUp right dispenser5
+51 EmptyHand left shot3
+52 PutDown shot3 left
+53 PickUp left dispenser1
+54 EmptyHand right shot1
+55 PutDown shot1 right
+56 PickUp right shaker1
+57 EmptyHand right dispenser5
+58 EmptyHand left shot1
+59 PutDown shot1 left
+60 PickUp left dispenser1
+61 EmptyHand left dispenser1
+62 PickUp left dispenser5
+63 EmptyHand right dispenser5
+64 EmptyHand left dispenser1
+65 EmptyHand left dispenser5
+66 EmptyHand left shot3
+67 EmptyHand right dispenser5
+68 PutDown shaker1 left
+69 PickUp left dispenser1
+70 EmptyHand left dispenser1
+71 PutDown dispenser1 left
+72 PickUp right shot4
+73 EmptyHand right shot4
+74 PutDown shot4 right
+75 PickUp right dispenser5
+76 EmptyHand right dispenser5
+77 PutDown dispenser5 right
+78 PickUp left shot4
+79 EmptyHand left shot4
+80 PutDown shot4 left
+81 PickUp right dispenser3
+82 EmptyHand right dispenser3
+83 PutDown dispenser3 right
+84 PickUp left shot5
+85 EmptyHand left shot5
+86 PutDown shot5 left
+87 PickUp right dispenser3
+88 EmptyHand right dispenser5
+89 PutDown dispenser5 right
+90 PickUp left shot5
+91 EmptyHand left shot5
+92 PutDown shot5 left
+93 PickUp left dispenser5
+94 EmptyHand left dispenser3
+95 PutDown dispenser3 left
+96 PickUp right dispenser3
+97 EmptyHand right dispenser3
+98 EmptyHand left dispenser5
+99 PutDown dispenser5 left
+100 PickUp right shot2
+101 EmptyHand right shot2
+102 PutDown shot2 right
+103 PickUp right shaker1
+104 EmptyHand right shaker1
+105 EmptyHand right dispenser3
+106 PutDown dispenser5 right
+107 PickUp right dispenser5
+108 EmptyHand left dispenser3
+109 EmptyHand right shaker1
+110 PutDown shaker1 right
+111 PickUp right dispenser5
+112 EmptyHand right dispenser5
+113 EmptyHand right shot2
+114 PutDown shot2 right
+115 PickUp left shot3
+116 EmptyHand left shot3
+117 EmptyHand right dispenser5
+118 PutDown dispenser1 left
+119 PickUp left shot2
+120 EmptyHand left shot2
+121 PickUp left shot3
+122 EmptyHand left shot3
+123 EmptyHand left shot2
+124 PutDown shot3 left
+125 PickUp right dispenser3
+126 EmptyHand left dispenser3
+127 EmptyHand right dispenser5
+128 PutDown dispenser3 left
+129 PickUp right shot3
+130 EmptyHand right shot3
+131 EmptyHand left dispenser3
+132 EmptyHand right dispenser5
+133 PutDown dispenser1 left
+134 PickUp left dispenser5
+135 EmptyHand left dispenser3
+136 EmptyHand right dispenser5
+137 PickUp right shot5
+138 EmptyHand right shot5
+139 EmptyHand left dispenser5
+140 EmptyHand left shot4
+141 PutDown shot4 left
+142 PickUp left dispenser5
+143 EmptyHand left dispenser3
+144 PickUp left dispenser4
+145 EmptyHand right dispenser3
+146 EmptyHand right dispenser5
+147 EmptyHand left dispenser4
+148 PickUp left shot2
+149 EmptyHand right dispenser5
+150 PutDown dispenser3 left
+151 PickUp right shot2
+152 PickUp left dispenser2
+153 EmptyHand left shot2
+154 PickUp right dispenser4
+155 EmptyHand left dispenser2
+156 PickUp left dispenser4
+157 EmptyHand left dispenser4
+158 PickUp right shot3
+159 PickUp right dispenser5
+160 EmptyHand left dispenser4
+161 EmptyHand left dispenser3
+162 EmptyHand right dispenser5
+163 PickUp right shot1
+164 EmptyHand right shot1
+165 PutDown shot3 right
+166 PickUp left shaker1
+167 EmptyHand left shaker1
+168 EmptyHand right dispenser5
+169 EmptyHand right shot2
+170 PutDown shot2 right
+171 PickUp right shot5
+172 EmptyHand right shot5
+173 PickUp left dispenser4
+174 EmptyHand right dispenser4
+175 EmptyHand left shaker1
+176 PutDown shaker1 left
+177 PickUp right dispenser4
+178 EmptyHand right dispenser5
+179 PickUp left dispenser4
+180 EmptyHand left dispenser4
+181 EmptyHand left shot4
+182 PickUp right dispenser5
+183 EmptyHand right dispenser4
+184 EmptyHand left shot4
+185 PickUp left shot4
+186 EmptyHand right dispenser5
+187 PutDown dispenser4 right
+188 PickUp right dispenser4
+189 PickUp right dispenser5
+190 EmptyHand right dispenser4
+191 EmptyHand right dispenser5
+192 EmptyHand left dispenser5
+193 PutDown dispenser4 right
+194 PickUp right dispenser2
+195 EmptyHand right dispenser5
+196 PutDown dispenser4 right
+197 PickUp left dispenser2
+198 EmptyHand right dispenser5
+199 PickUp right shaker1
+200 EmptyHand left dispenser2
+201 EmptyHand right dispenser4
+202 EmptyHand right dispenser2
+203 PutDown shot4 right
+204 EmptyHand right dispenser4
+205 PutDown shot4 left
+206 PickUp right dispenser5
+207 EmptyHand right dispenser4
+208 PickUp left dispenser5
+209 EmptyHand right dispenser2
+210 PutDown dispenser4 right
+211 PickUp left shaker1
+212 EmptyHand right dispenser5
+213 EmptyHand right dispenser4
+214 PutDown dispenser4 right
+215 EmptyHand right dispenser2
+216 EmptyHand left shot2
+217 EmptyHand right shot2
+218 PickUp right shaker1
+219 PickUp right dispenser4
+220 EmptyHand right shot2
+221 EmptyHand right dispenser4
+222 PutDown shot5 right
+223 PickUp right dispenser5
+224 EmptyHand right dispenser2
+225 EmptyHand left dispenser4
+226 EmptyHand left dispenser2
+227 PutDown dispenser5 right
+228 PickUp right dispenser4
+229 PickUp right shot1
+230 EmptyHand right dispenser4
+231 EmptyHand right dispenser2
+232 PickUp left dispenser4
+233 PickUp right dispenser5
+234 EmptyHand right shot4
+235 PutDown dispenser4 left
+236 EmptyHand left dispenser5
+237 EmptyHand left dispenser4
+238 EmptyHand left shot5
+239 EmptyHand right shot5
+240 PutDown dispenser2 right
+241 EmptyHand right dispenser2
+242 EmptyHand right dispenser5
+243 EmptyHand right shot5
+244 EmptyHand right dispenser4
+245 EmptyHand right dispenser5
+246 EmptyHand left dispenser4
+247 PutDown dispenser4 left
+248 EmptyHand right dispenser5
+249 EmptyHand left dispenser4
+250 EmptyHand right dispenser5
+251 EmptyHand left shot3
+252 EmptyHand right shot5
+253 EmptyHand right dispenser2
+254 EmptyHand left dispenser4
+255 EmptyHand left shot5
+256 EmptyHand left dispenser4
+257 EmptyHand right dispenser4
+258 EmptyHand left shot5
+259 EmptyHand left dispenser4
+260 EmptyHand left shot5
+261 EmptyHand left dispenser4
+262 EmptyHand left shot5
+263 EmptyHand right dispenser5
+264 EmptyHand left shot5
+265 EmptyHand left dispenser4
+266 EmptyHand left shot5
+267 EmptyHand left dispenser4
+268 EmptyHand left shot5
+269 PickUp right dispenser2
+270 EmptyHand left dispenser4
+271 EmptyHand left dispenser5
+272 EmptyHand left dispenser4
+273 EmptyHand right dispenser2
+274 PickUp right dispenser3
+275 EmptyHand left dispenser4
+276 EmptyHand right dispenser5
+277 EmptyHand left dispenser3
+278 EmptyHand left shot1
+279 EmptyHand left dispenser4
+280 EmptyHand left shot1
+281 EmptyHand left dispenser5
+282 EmptyHand left shot1
+283 EmptyHand left dispenser4
+284 EmptyHand left shot1
+285 EmptyHand right dispenser2
+286 EmptyHand right dispenser2
+287 EmptyHand right dispenser2
+288 PickUp right shaker1
+289 EmptyHand right dispenser2
+290 EmptyHand right dispenser3
+291 EmptyHand right dispenser5
+292 EmptyHand right dispenser2
+293 EmptyHand right shot5
+294 EmptyHand left shot4
+295 EmptyHand left dispenser3
+296 EmptyHand right shot4
+297 EmptyHand right dispenser2
+298 EmptyHand left dispenser5
+299 EmptyHand left dispenser4
+300 EmptyHand left dispenser2
+301 EmptyHand right dispenser4
+302 EmptyHand left shot4
+303 EmptyHand left dispenser2
+304 EmptyHand left shot4
+305 EmptyHand right dispenser4
+306 EmptyHand right shot5
+307 EmptyHand right dispenser2
+308 EmptyHand right shot5
+309 EmptyHand left shot4
+310 EmptyHand left shaker1
+311 EmptyHand left dispenser2
+312 EmptyHand right dispenser3
+313 EmptyHand right dispenser5
+314 EmptyHand right shot4
+315 EmptyHand right dispenser3
+316 EmptyHand left dispenser4
+317 EmptyHand right dispenser4
+318 EmptyHand right dispenser5
+319 EmptyHand right shot5
+320 EmptyHand right dispenser5
+321 EmptyHand right dispenser5
+322 EmptyHand right dispenser4
+323 EmptyHand right shaker1
+324 EmptyHand left dispenser3
+325 EmptyHand left shot1
+326 EmptyHand right dispenser2
+327 EmptyHand left dispenser4
+328 EmptyHand left shot1
+329 EmptyHand right dispenser4
+330 EmptyHand left dispenser4
+331 EmptyHand right shot5
+332 EmptyHand right dispenser5
+333 EmptyHand left dispenser4
+334 EmptyHand right dispenser5
+335 EmptyHand left shot1
+336 EmptyHand right dispenser4
+337 EmptyHand right shot5
+338 EmptyHand right dispenser5
+339 EmptyHand left dispenser3
+340 EmptyHand left shot1
+341 EmptyHand left shot4
+342 EmptyHand right dispenser4
+343 EmptyHand left dispenser4
+344 EmptyHand right dispenser2
+345 EmptyHand right dispenser2
+346 EmptyHand right dispenser5
+347 EmptyHand right shot1
+348 EmptyHand right dispenser2
+349 EmptyHand left dispenser5
+350 EmptyHand left dispenser4
+351 EmptyHand right dispenser2
+352 EmptyHand right dispenser5
+353 EmptyHand left dispenser4
+354 EmptyHand left dispenser3
+355 EmptyHand right dispenser4
+356 EmptyHand right shot2
+357 EmptyHand right dispenser3
+358 EmptyHand right dispenser2
+359 EmptyHand right dispenser4
+360 EmptyHand left dispenser5
+361 EmptyHand right dispenser5
+362 EmptyHand right dispenser2
+363 EmptyHand left shot2
+364 EmptyHand left dispenser3
+365 EmptyHand left shot2
+366 EmptyHand right shot2
+367 EmptyHand left dispenser3
+368 EmptyHand left dispenser2
+369 EmptyHand left dispenser4
+370 EmptyHand right dispenser5
+371 EmptyHand right shot4
+372 EmptyHand left dispenser4
+373 EmptyHand right dispenser4
+374 EmptyHand right dispenser4
+375 EmptyHand right dispenser5
+376 EmptyHand left dispenser2
+377 EmptyHand left dispenser5
+378 EmptyHand right dispenser5
+379 EmptyHand right shot4
+380 EmptyHand left dispenser5
+381 EmptyHand right dispenser5
+382 EmptyHand right dispenser2
+383 EmptyHand left dispenser5
+384 EmptyHand right dispenser2
+385 EmptyHand right dispenser5
+386 EmptyHand right shot4
+387 EmptyHand left dispenser2
+388 EmptyHand right dispenser4
+389 EmptyHand left dispenser3
+390 EmptyHand left dispenser5
+391 EmptyHand right dispenser5
+392 EmptyHand right dispenser3
+393 EmptyHand left dispenser3
+394 EmptyHand right dispenser4
+395 EmptyHand left dispenser5
+396 EmptyHand left dispenser4
+397 EmptyHand right dispenser3
+398 EmptyHand left dispenser5
+399 EmptyHand right dispenser4
+400 EmptyHand left dispenser4
+401 EmptyHand right dispenser3
+402 EmptyHand left shot2
+403 EmptyHand right shot4
+404 EmptyHand right dispenser4
+405 EmptyHand right dispenser2
+406 EmptyHand left dispenser5
+407 EmptyHand left dispenser3
+408 EmptyHand left dispenser2
+409 EmptyHand left shot2
+410 EmptyHand left dispenser4
+411 EmptyHand left shot4
+412 EmptyHand right dispenser2
+413 EmptyHand left dispenser2
+414 EmptyHand right dispenser5
+415 EmptyHand left dispenser4
+416 EmptyHand right dispenser2
+417 EmptyHand right dispenser3
+418 EmptyHand left dispenser2
+419 EmptyHand left dispenser3
+420 EmptyHand left dispenser4
+421 EmptyHand left dispenser5
+422 EmptyHand left dispenser4
+423 EmptyHand left dispenser3
+424 EmptyHand left dispenser2
+425 EmptyHand right dispenser2
+426 EmptyHand right dispenser3
+427 EmptyHand left shot2
+428 EmptyHand left shot4
+429 EmptyHand left dispenser2
+430 EmptyHand left dispenser4
+431 EmptyHand left dispenser3
+432 EmptyHand left dispenser5
+433 EmptyHand right dispenser5
+434 EmptyHand right dispenser3
+435 EmptyHand right dispenser2
+436 EmptyHand right dispenser4
+437 EmptyHand right dispenser2
+438 EmptyHand right dispenser4
+439 EmptyHand right shot4
+440 EmptyHand left dispenser2
+441 EmptyHand left dispenser3
+442 EmptyHand left shot4
+443 EmptyHand right dispenser2
+444 EmptyHand left dispenser3
+445 EmptyHand left shot4
+446 EmptyHand right dispenser3
+447 EmptyHand left shot4
+448 EmptyHand right dispenser2
+449 EmptyHand right dispenser5
+450 EmptyHand left dispenser3
+451 EmptyHand right dispenser3
+452 EmptyHand right dispenser5
+453 EmptyHand right dispenser2
+454 EmptyHand right dispenser2
+455 EmptyHand left dispenser5
+456 EmptyHand right shot5
+457 EmptyHand left dispenser3
+458 EmptyHand left dispenser4
+459 EmptyHand right dispenser5
+460 EmptyHand right dispenser4
+461 EmptyHand left dispenser5
+462 EmptyHand left dispenser4
+463 EmptyHand left dispenser3
+464 EmptyHand left dispenser2
+465 EmptyHand left shot1
+466 EmptyHand right shot5
+467 EmptyHand left dispenser5
+468 EmptyHand left dispenser3
+469 EmptyHand left dispenser2
+470 EmptyHand left dispenser4
+471 EmptyHand left shot1
+472 EmptyHand left dispenser5
+473 EmptyHand right dispenser2
+474 EmptyHand left dispenser3
+475 EmptyHand left shot1
+476 EmptyHand left dispenser4
+477 EmptyHand right dispenser5
+478 EmptyHand right dispenser4
+479 EmptyHand left dispenser5
+480 EmptyHand left dispenser3
+481 EmptyHand left dispenser4
+482 EmptyHand right shot5
+483 EmptyHand right dispenser5
+484 EmptyHand left shot5
+485 EmptyHand left dispenser4
+486 EmptyHand left dispenser3
+487 EmptyHand left dispenser2
+488 EmptyHand left dispenser5
+489 EmptyHand right dispenser4
+490 EmptyHand right shot5
+491 EmptyHand right dispenser3
+492 EmptyHand right dispenser5
+493 EmptyHand right shot2
+494 EmptyHand right dispenser4
+495 EmptyHand right dispenser5
+496 EmptyHand right dispenser4
+497 EmptyHand right shot2
+498 EmptyHand right dispenser5
+499 EmptyHand left dispenser4
+500 EmptyHand left dispenser5
+501 EmptyHand left dispenser2
+502 EmptyHand left shot4
+503 EmptyHand right dispenser5
+504 EmptyHand right dispenser4
+505 EmptyHand right dispenser3
+506 EmptyHand right shot5
+507 EmptyHand left dispenser4
+508 EmptyHand left dispenser2
+509 EmptyHand right shot2
+510 EmptyHand left dispenser3
+511 EmptyHand left dispenser5
+512 EmptyHand right dispenser3
+513 EmptyHand left dispenser3
+514 EmptyHand left dispenser2
+515 EmptyHand right shot5
+516 EmptyHand left dispenser3
+517 EmptyHand left dispenser4
+518 EmptyHand right dispenser4
+519 EmptyHand right dispenser5
+520 EmptyHand right dispenser2
+521 EmptyHand right dispenser3
+522 EmptyHand left shot4
+523 EmptyHand left shot5
+524 EmptyHand right shot2
+525 EmptyHand right dispenser4
+526 EmptyHand right shot4
+527 EmptyHand left dispenser5
+528 EmptyHand left dispenser3
+529 EmptyHand right dispenser4
+530 EmptyHand right dispenser3
+531 EmptyHand right shot5
+532 EmptyHand left shot5
+533 EmptyHand left dispenser5
+534 EmptyHand left dispenser3
+535 Empty

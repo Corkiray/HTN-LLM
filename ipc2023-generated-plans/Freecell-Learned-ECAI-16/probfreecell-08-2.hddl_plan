@@ -1,299 +1,56 @@
+Here is a hierarchical plan to solve the Freecell problem.
+
+
 ==>
-1 move C7 C6
-2 board H2 f0
-3 move C6 H2
-4 move C7 C5
-5 move H2 C7
-6 move D2 D5
-7 move C5 D2
-8 move H4 S4
-9 move D5 H4
-10 move S4 D5
-11 move H8 C5
-12 move D5 H8
-13 move C5 D8
-14 move H8 C4
-15 move D8 H8
-16 move C4 D3
-17 move H8 C3
-18 move D3 H8
-19 move C3 D7
-20 move H8 C2
-21 move D7 H8
-22 move C2 D6
-23 move H8 C8
-24 move D6 H8
-25 move C8 S8
-26 move H8 D4
-27 move S8 H8
-28 move D4 S7
-29 move H8 D6
-30 move S7 H8
-31 move D6 S6
-32 move H8 S5
-33 move S6 H8
-34 move S5 S4
-35 move H8 S3
-36 move S4 H8
-37 move S3 S2
-38 move H8 S7
-39 move S2 H8
-40 move S7 D7
-41 move H8 S6
-42 move D7 H8
-43 move S6 C6
-44 move H8 S8
-45 move C6 H6
-46 move S8 H8
-47 move H6 C7
-48 move H8 S5
-49 move C7 H7
-50 move S5 H8
-51 move H7 C8
-52 move H8 H5
-53 move C8 H8
-54 move H5 H4
-55 move H8 H3
-56 move H4 H8
-57 move H3 H2
-58 move H8 HA
-59 move H2 H8
-60 move HA S7
-61 move H8 S3
-62 move S7 H8
-63 move S3 S2
-64 move H8 SA
-65 move S2 H8
-66 move SA D2
-67 move H8 D3
-68 move D2 H8
-69 move D3 S2
-70 move H8 D5
-71 move S2 H8
-72 move D5 D2
-73 move H8 D6
-74 move D2 H8
-75 move D6 C2
-76 move H8 D4
-77 move C2 H8
-78 move D4 S4
-79 move H8 D7
-80 move S4 H8
-81 move D7 H2
-82 move H8 D8
-83 move H2 H8
-84 move D8 H4
-85 move H8 C3
-86 move H4 H8
-87 move C3 H3
-88 move H8 C4
-89 move H3 H8
-90 move C4 H5
-91 move H8 C5
-92 move H5 H8
-93 move C5 H6
-94 move H8 C6
-95 move H6 H8
-96 move C6 H7
-97 move H8 C7
-98 move H7 H8
-99 move C7 C8
-100 move H8 S8
-101 move C8 H8
-102 move S8 S7
-103 move H8 S6
-104 move S7 H8
-105 move S6 S5
-106 move H8 S4
-107 move S5 H8
-108 move S4 S3
-109 move H8 S2
-110 move S3 H8
-111 move S2 SA
-112 move H8 S7
-113 move SA H8
-114 move S7 D7
-115 move H8 S6
-116 move D7 H8
-117 move S6 D6
-118 move H8 S5
-119 move D6 H8
-120 move S5 D5
-121 move H8 S4
-122 move D5 H8
-123 move S4 D4
-124 move H8 S3
-125 move D4 H8
-126 move S3 D3
-127 move H8 S2
-128 move D3 H8
-129 move S2 D2
-130 move H8 SA
-131 move D2 H8
-132 move SA DA
-133 move H8 S7
-134 move DA H8
-135 move S7 C7
-136 move H8 S6
-137 move C7 H8
-138 move S6 C6
-139 move H8 S5
-140 move C6 H8
-141 move S5 C5
-142 move H8 S4
-143 move C5 H8
-144 move S4 C4
-145 move H8 S3
-146 move C4 H8
-147 move S3 C3
-148 move H8 S2
-149 move C3 H8
-150 move S2 C2
-151 move H8 SA
-152 move C2 H8
-153 move SA CA
-154 move H8 S7
-155 move CA H8
-156 move S7 D7
-157 move H8 S6
-158 move D7 H8
-159 move S6 D6
-160 move H8 S5
-161 move D6 H8
-162 move S5 D5
-163 move H8 S4
-164 move D5 H8
-165 move S4 D4
-166 move H8 S3
-167 move D4 H8
-168 move S3 D3
-169 move H8 S2
-170 move D3 H8
-171 move S2 D2
-172 move H8 SA
-173 move D2 H8
-174 move SA DA
-175 move H8 S7
-176 move DA H8
-177 move S7 C7
-178 move H8 S6
-179 move C7 H8
-180 move S6 C6
-181 move H8 S5
-182 move C6 H8
-183 move S5 C5
-184 move H8 S4
-185 move C5 H8
-186 move S4 C4
-187 move H8 S3
-188 move C4 H8
-189 move S3 C3
-190 move H8 S2
-191 move C3 H8
-192 move S2 C2
-193 move H8 SA
-194 move C2 H8
-195 move SA CA
-196 move H8 S7
-197 move CA H8
-198 move S7 D7
-199 move H8 S6
-200 move D7 H8
-201 move S6 D6
-202 move H8 S5
-203 move D6 H8
-204 move S5 D5
-205 move H8 S4
-206 move D5 H8
-207 move S4 D4
-208 move H8 S3
-209 move D4 H8
-210 move S3 D3
-211 move H8 S2
-212 move D3 H8
-213 move S2 D2
-214 move H8 SA
-215 move D2 H8
-216 move SA DA
-217 move H8 S7
-218 move DA H8
-219 move S7 C7
-220 move H8 S6
-221 move C7 H8
-222 move S6 C6
-223 move H8 S5
-224 move C6 H8
-225 move S5 C5
-226 move H8 S4
-227 move C5 H8
-228 move S4 C4
-229 move H8 S3
-230 move C4 H8
-231 move S3 C3
-232 move H8 S2
-233 move C3 H8
-234 move S2 C2
-235 move H8 SA
-236 move C2 H8
-237 move SA CA
-238 move H8 S7
-239 move CA H8
-240 move S7 D7
-241 move H8 S6
-242 move D7 H8
-243 move S6 D6
-244 move H8 S5
-245 move D6 H8
-246 move S5 D5
-247 move H8 S4
-248 move D5 H8
-249 move S4 D4
-250 move H8 S3
-251 move D4 H8
-252 move S3 D3
-253 move H8 S2
-254 move D3 H8
-255 move S2 D2
-256 move H8 SA
-257 move D2 H8
-258 move SA DA
-259 move H8 S7
-260 move DA H8
-261 move S7 C7
-262 move H8 S6
-263 move C7 H8
-264 move S6 C6
-265 move H8 S5
-266 move C6 H8
-267 move S5 C5
-268 move H8 S4
-269 move C5 H8
-270 move S4 C4
-271 move H8 S3
-272 move C4 H8
-273 move S3 C3
-274 move H8 S2
-275 move C3 H8
-276 move S2 C2
-277 move H8 SA
-278 move C2 H8
-279 move SA CA
-280 move H8 S7
-281 move CA H8
-282 move S7 D7
-283 move H8 S6
-284 move D7 H8
-285 move S6 D6
-286 move H8 S5
-287 move D6 H8
-288 move S5 D5
-289 move H8 S4
-290 move D5 H8
-291 move S4 D4
-292 move H8 S3
-293 move D4 H8
-294 move S3 D3
-295 move H8 S2
-296 move D3 H8
-297 move S2 D2
-298 move H8 SA
+1 send_to_freecell_0 s7 d4 s8 f1
+2 send_to_freecell_0 s3 s6 s7 f2
+3 send_to_freecell_0 h5 s3 h4 f0
+4 send_to_freecell_1 sa h3 s5 f0
+5 move_1 h7 c8 h6 f3
+6 send_to_freecell_2 ha s7 d4 f1
+7 send_to_freecell_2 da s5 sa f2
+8 send_to_freecell_3 d5 d2 c2 f0
+9 on_move_0 c5 h6 h5 f0
+10 send_to_home_0 c5 h5 c0 f3
+11 on_move_1 d8 h4 c4 f1
+12 on_send_newcol_0 s8 d8 c4 f0
+13 on_move_1 c7 c6 d7 f2
+14 on_send_newcol_0 s7 c7 c4 f1
+15 on_move_2 d7 h2 c3 f2
+16 on_send_newcol_1 s4 d7 h6 f1
+17 on_move_1 c6 d6 c2 f2
+18 on_send_newcol_2 c2 h6 c3 f1
+19 on_move_2 h2 h8 d3 f1
+20 send_to_home_1 h8 h2 h0 f1
+21 on_move_1 d2 s3 d5 f1
+22 on_send_newcol_1 d2 h6 d4 f3
+23 send_to_home_2 s6 d2 s0 f2
+24 send_to_home_3 s4 c3 d3 f1
+25 send_to_home_4 c8 c5 c7 f0
+26 send_to_home_5 d6 h6 d5 f0
+27 on_move_0 c4 s4 h4 f3
+28 on_move_1 c3 s3 h5 f1
+29 send_to_home_6 c3 h5 c4 f3
+30 send_to_home_7 d3 c2 d6 f3
+31 send_to_home_8 da c2 d2 f1
+32 send_to_home_9 s3 h3 s2 f0
+33 send_to_home_10 sa h5 sa f3
+34 send_to_home_11 s5 s4 s3 f3
+35 send_to_home_12 s7 s6 s4 f0
+36 send_to_home_13 h3 h2 h1 f1
+37 send_to_home_14 h4 h8 h3 f2
+38 send_to_home_15 h5 h4 h2 f2
+39 send_to_home_16 h6 h7 h4 f1
+40 send_to_home_17 h7 h5 h6 f3
+<==
+
+root 0
+0 solve_freecell -> ordering_0 1 2
+ordering_1 -> bottomcol_send_to_freecell_0 3 4 5 6 7 8
+ordering_2 -> bottomcol_send_to_freecell_1 9 10 11 12 13 14
+ordering_3 -> bottomcol_send_to_freecell_2 15 16 17 18 19 20
+ordering_4 -> home_from_freecell_0 21 22 23 24 25 26
+ordering_5 -> on_move_and_home_0 27 28 29 30
+ordering_6 -> home_from_freecell_1 31 32 33 34 35 36
+ordering_7 -> home_from_freecell_2 37 38 39 40
+<==

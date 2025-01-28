@@ -1,289 +1,36 @@
 ==>
-1 move C10 C8
-2 board C8 f0
-3 move C8 SJ
-4 move SJ CQ
-5 move CQ C10
-6 debark C10 f0
-7 move D10 D4
-8 move D4 DQ
-9 move DQ D10
-10 debark D10 f0
-11 move H10 H7
-12 move H7 C10
-13 move C10 H10
-14 debark H10 f0
-15 move S10 H4
-16 move H4 S4
-17 move S4 D6
-18 move D6 C2
-19 move C2 D6
-20 debark D6 f0
-21 move S8 SQ
-22 move SQ C4
-23 move C4 SQ
-24 debark SQ f0
-25 move S9 D9
-26 move D9 CJ
-27 move CJ D9
-28 debark D9 f0
-29 move S7 D10
-30 move D10 D7
-31 move D7 S7
-32 debark S7 f0
-33 move S6 S8
-34 move S8 S6
-35 debark S8 f0
-36 move S5 DA
-37 move DA S5
-38 debark S5 f0
-39 move S4 S3
-40 move S3 S4
-41 debark S4 f0
-42 move S3 S5
-43 move S5 S3
-44 debark S3 f0
-45 move S2 C7
-46 move C7 C6
-47 move C6 H6
-48 move H6 C6
-49 debark C6 f0
-50 move H9 CA
-51 move CA D5
-52 move D5 D2
-53 move D2 D5
-54 debark D5 f0
-55 move H8 HQ
-56 move HQ C9
-57 move C9 H8
-58 debark H8 f0
-59 move H7 H10
-60 move H10 H7
-61 debark H7 f0
-62 move H6 C3
-63 move C3 H6
-64 debark H6 f0
-65 move H5 S4
-66 move S4 H5
-67 debark S4 f0
-68 move H4 S10
-69 move S10 H4
-70 debark H4 f0
-71 move H3 HA
-72 move HA S7
-73 move S7 H3
-74 debark S7 f0
-75 move H2 H8
-76 move H8 H2
-77 debark H2 f0
-78 move D9 S9
-79 move S9 D9
-80 debark S9 f0
-81 move D8 S10
-82 move S10 D8
-83 debark D8 f0
-84 move D7 D10
-85 move D10 D7
-86 debark D7 f0
-87 move D6 S4
-88 move S4 D6
-89 debark D6 f0
-90 move D5 S5
-91 move S5 D5
-92 debark D5 f0
-93 move D4 D10
-94 move D10 D4
-95 debark D4 f0
-96 move D3 S2
-97 move S2 D3
-98 debark D3 f0
-99 move D2 D5
-100 move D5 D2
-101 debark D2 f0
-102 move C9 H9
-103 move H9 C9
-104 debark C9 f0
-105 move C8 C10
-106 move C10 C8
-107 debark C8 f0
-108 move C7 S2
-109 move S2 C7
-110 debark C7 f0
-111 move C6 H6
-112 move H6 C6
-113 debark C6 f0
-114 move C5 C9
-115 move C9 C5
-116 debark C5 f0
-117 move C4 SQ
-118 move SQ C4
-119 debark C4 f0
-120 move C3 H6
-121 move H6 C3
-122 debark C3 f0
-123 move C2 D6
-124 move D6 C2
-125 debark C2 f0
-126 move SQ S8
-127 move S8 SQ
-128 move SQ CQ
-129 move CQ SQ
-130 debark SQ f0
-131 move SA H3
-132 move H3 SA
-133 debark SA f0
-134 move S10 S8
-135 move S8 S10
-136 move S10 H4
-137 move H4 S10
-138 debark S10 f0
-139 move S9 S6
-140 move S6 S9
-141 debark S6 f0
-142 move S7 D7
-143 move D7 S7
-144 debark S7 f0
-145 move S6 S5
-146 move S5 S6
-147 debark S5 f0
-148 move S5 S4
-149 move S4 S5
-150 debark S4 f0
-151 move S4 S3
-152 move S3 S4
-153 debark S3 f0
-154 move S3 S2
-155 move S2 S3
-156 debark S2 f0
-157 move S2 C7
-158 move C7 S2
-159 debark C7 f0
-160 move HJ D3
-161 move D3 HJ
-162 debark HJ f0
-163 move HJ HQ
-164 move HQ HJ
-165 debark HQ f0
-166 move DJ CQ
-167 move CQ DJ
-168 debark DJ f0
-169 move DJ DQ
-170 move DQ DJ
-171 debark DQ f0
-172 move CJ C8
-173 move C8 CJ
-174 debark CJ f0
-175 move CJ D9
-176 move D9 CJ
-177 debark D9 f0
-178 move CQ SQ
-179 move SQ CQ
-180 debark CQ f0
-181 move CQ C10
-182 move C10 CQ
-183 debark C10 f0
-184 move DQ SQ
-185 move SQ DQ
-186 debark DQ f0
-187 move DQ DJ
-188 move DJ DQ
-189 debark DJ f0
-190 move SQ S8
-191 move S8 SQ
-192 debark S8 f0
-193 move SQ C4
-194 move C4 SQ
-195 debark C4 f0
-196 move SQ CQ
-197 move CQ SQ
-198 debark CQ f0
-199 move S8 S6
-200 move S6 S8
-201 debark S6 f0
-202 move S8 S5
-203 move S5 S8
-204 debark S5 f0
-205 move S8 S4
-206 move S4 S8
-207 debark S4 f0
-208 move S8 S3
-209 move S3 S8
-210 debark S3 f0
-211 move S8 S2
-212 move S2 S8
-213 debark S2 f0
-214 move S8 C7
-215 move C7 S8
-216 debark C7 f0
-217 move S8 H6
-218 move H6 S8
-219 debark H6 f0
-220 move S8 H5
-221 move H5 S8
-222 debark H5 f0
-223 move S8 H4
-224 move H4 S8
-225 debark H4 f0
-226 move S8 H3
-227 move H3 S8
-228 debark H3 f0
-229 move S8 H2
-230 move H2 S8
-231 debark H2 f0
-232 move S8 D7
-233 move D7 S8
-234 debark D7 f0
-235 move S8 D6
-236 move D6 S8
-237 debark D6 f0
-238 move S8 D5
-239 move D5 S8
-240 debark D5 f0
-241 move S8 D4
-242 move D4 S8
-243 debark D4 f0
-244 move S8 D3
-245 move D3 S8
-246 debark D3 f0
-247 move S8 D2
-248 move D2 S8
-249 debark D2 f0
-250 move S8 C9
-251 move C9 S8
-252 debark C9 f0
-253 move S8 C6
-254 move C6 S8
-255 debark C6 f0
-256 move S8 C5
-257 move C5 S8
-258 debark C5 f0
-259 move S8 C4
-260 move C4 S8
-261 debark C4 f0
-262 move S8 C3
-263 move C3 S8
-264 debark C3 f0
-265 move S8 C2
-266 move C2 S8
-267 debark C2 f0
-268 move S8 C0
-269 move C0 S8
-270 debark S8 f0
-271 move S7 S6
-272 move S6 S7
-273 debark S6 f0
-274 move S7 S5
-275 move S5 S7
-276 debark S5 f0
-277 move S7 S4
-278 move S4 S7
-279 debark S4 f0
-280 move S7 S3
-281 move S3 S7
-282 debark S3 f0
-283 move S7 S2
-284 move S2 S7
-285 debark S2 f0
-286 move S7 C7
-287 move C7 S7
-288
+1 DO-ON-SENDTONEWCOL1 C10  HJ 3 4
+2 DO-ON-SENDTOFREE1 H10  C10 4 3
+3 DO-BOTTOMCOL-MOVE-B0 D3 C8 2 5
+4 DO-ON-SENDTONEWCOL1 D10  D3 4 5
+5 DO-ON-SENDTONEWCOL1 CJ  D10 2 3
+6 DO-INCELL-NEWCOLFROMFREECELL1 S10 4 2 3 4
+7 DO-ON-MOVE1 S9  SA  DA
+8 DO-INCELL-NEWCOLFROMFREECELL1 S8 4 3 5 5
+9 DO-ON-MOVE1 S7  DA  H3
+10 DO-ON-MOVE1 S6  S8  S9
+11 DO-ON-MOVE1 S5  S6  S7
+12 DO-INCELL-COLFROMFREECELL1 S4  H5 3 5
+13 DO-INCELL-NEWCOLFROMFREECELL1 S3 3 4 4 4
+14 DO-INCELL-NEWCOLFROMFREECELL1 S2 2 5 4 4
+15 DO-INCELL-NEWCOLFROMFREECELL1 H9 3 5 5 0
+16 DO-INCELL-HOMEFROMFREECELL0 H8  H9 H 4 S0
+17 DO-ON-MOVE2 C9  S9  D9
+18 DO-INCELL-COLFROMFREECELL0 C8  C9 3 0
+19 DO-INCELL-COLFROMFREECELL0 C7  S2 5 0
+20 DO-INCELL-HOMEFROMFREECELL0 C6  C7 C 2 D0
+21 DO-INCELL-HOMEFROMFREECELL0 C5  D5 D 3 H0
+22 DO-BOTTOMCOL-SENDTOHOME-B0 C4  D4 S 3 H4 S10 3
+23 DO-INCELL-NEWCOLFROMFREECELL0 C3 2 5 3 3
+24 DO-INCELL-COLFROMFREECELL0 C2  S3 5 3
+25 DO-BOTTOMCOL-SENDTOHOME-B0 CA  HQ H 5 S8 S7 5
+26 DO-BOTTOMCOL-SENDTOHOME-B0 H9  S5 D 4 H8 H3 2
+27 DO-ON-SENDTONEWCOL2 HQ  H9 3 2
+28 DO-ON-SENDTOFREE2 CJ  HQ 4 5
+29 DO-ON-MOVE2 DQ  D4  DA
+30 DO-BOTTOMCOL-SENDTOFREE-B0 D9  DQ 4 5 2 4
+31 DO-ON-SENDTOFREE2 DA  D9 3 5
+32 DO-BOTTOMCOL-SENDTOFREE-B0 CQ  S6 5 3 4 3
+<==
+root 0
+0 Solve_game -> m0_move_C8_home 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32

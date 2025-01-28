@@ -1,0 +1,27 @@
+==>
+1 guard
+2 ConnectDevices pc printer data
+3 connect pc-bPlugType1 adapterFromPlugType1ToPlugType2-aPlugType1
+4 connect adapterFromPlugType1ToPlugType2-bPlugType2 printer-aPlugType2
+5 connect_1 pc-bPlugType1 adapterFromPlugType1ToPlugType2-aPlugType1 plugType1
+6 connect_1 adapterFromPlugType1ToPlugType2-bPlugType2 printer-aPlugType2 plugType2
+root 0
+0 m3 pc printer data -> 1 2
+root 2
+2 m1 pc printer data pc-bPlugType1 adapterFromPlugType1ToPlugType2-aPlugType1 -> 3 7
+root 3
+3 c1 pc-bPlugType1 adapterFromPlugType1ToPlugType2-aPlugType1 plugType1 -> 5
+7 m1 pc printer data adapterFromPlugType1ToPlugType2-bPlugType2 printer-aPlugType2 -> 4 8
+root 4
+4 c1 adapterFromPlugType1ToPlugType2-bPlugType2 printer-aPlugType2 plugType2 -> 6
+8 ValidateDeviceConnection pc printer data
+root 8
+8 vDC_to_vPC_2 pc printer data pc-bPlugType1 printer-aPlugType2 -> 9
+9 ValidatePortConnection pc-bPlugType1 printer-aPlugType2 data
+root 9
+9 vPC_to_vPC data pc-bPlugType1 printer-aPlugType2 adapterFromPlugType1ToPlugType2-aPlugType1 adapterFromPlugType1ToPlugType2-bPlugType2 -> 10
+10 ValidatePortConnection adapterFromPlugType1ToPlugType2-bPlugType2 printer-aPlugType2 data
+root 10
+10 finish data adapterFromPlugType1ToPlugType2-bPlugType2 printer-aPlugType2 -> 11
+11 ok
+<==

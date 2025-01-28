@@ -1,56 +1,236 @@
 ==>
-**Sequential Plan**
-1. selectDirection r9 t1 t2 t3
-2. rotateTower t1 t3 t2
-3. move_abstract t1 t3
-4. exchange t1 t2 t3
-5. move_abstract t3 t1
-6. rotateTower t2 t3 t1
-7. selectDirection r8 t3 t2 t1
-8. rotateTower t3 t1 t2
-9. move_abstract t3 t1
-10. exchange t3 t2 t1
-11. move_abstract t1 t3
-12. rotateTower t2 t1 t3
-...
-**[Plan truncated for brevity, as it involves multiple ring movements]**
-... 
-35. move r9 t1 t3 r8 t3
-36. move r8 t3 t2 r9 t2
-37. move r9 t2 t3 r8 t3
-
-**<==**
-
-**Hierarchical Decomposition**
-```
+1 shiftTower t1 t2 t3
 root 0
-0 shiftTower t1 t2 t3 -> m-shiftTower 1
-1 m-shiftTower?r - RING?t1 - TOWER?t2 - TOWER?t3 - TOWER 
-  :parameters (r9 t1 t2 t3)
-  -> (selectDirection r9 t1 t2 t3) 2
-2 selectDirection r9 t1 t2 t3 -> selectedDirection 3
-3 selectedDirection?r - RING?t1 - TOWER?t2 - TOWER?t3 - TOWER 
-  :parameters (r9 t1 t2 t3)
-  -> (rotateTower t1 t3 t2) 4
-4 rotateTower t1 t3 t2 -> m-rotateTower 5 6
-5 move_abstract t1 t3 -> newMethod21 7
-  :parameters (r9 t1 t3)
-  -> (move r9 t1 t3 r8 t3) 35
-6 exchange t1 t3 t2 -> exchangeLR 8 9
-  :parameters (r9 t3 t1 t2 t3)
-  -> (move_abstract t3 t1) 10, (rotateTower t2 t3 t1) 11
-... 
-**[Decomposition truncated for brevity, as it involves multiple ring movements]**
-...
-34 selectDirection r8 t3 t2 t1 -> m-selectDirection 35 36
-35 move_abstract t3 t1 -> newMethod21 37
-  :parameters (r8 t3 t1)
-  -> (move r8 t3 t1 r9 t1) (not shown in sequential plan due to truncation)
-```
-**Note:**
-
-* The sequential plan is truncated due to its length, but it represents the series of actions required to solve the problem.
-* The hierarchical decomposition shows how each task is broken down into subtasks, with the `root` task being `shiftTower t1 t2 t3`.
-* The numbers in the decomposition refer to the task IDs in the sequential plan.
-* Some tasks, like `move_abstract`, are further decomposed using methods like `newMethod21`, which ultimately lead to `move` actions.
-* The `exchange` tasks are decomposed based on the ring sizes, using either `exchangeLR` or `exchangeRL` methods.
+0 solve_tower -> m-shiftTower 1 
+1 selectDirection r9 t1 t2 t3 -> m-selectDirection 2 3 4 
+2 rotateTower t1 t3 t2 -> m-rotateTower 5 6
+3 selectDirection r8 t1 t3 t2 -> m-selectDirection 7 8 9 
+4 selectDirection r7 t1 t3 t2 -> m-selectDirection 10 11 12 
+5 move_abstract t1 t2 -> newMethod21 13
+6 exchange t1 t2 t3 -> exchangeClear
+7 rotateTower t1 t3 t2 -> m-rotateTower 14 15
+8 selectDirection r6 t1 t3 t2 -> m-selectDirection 16 17 18 
+9 selectDirection r5 t1 t3 t2 -> m-selectDirection 19 20 21 
+10 rotateTower t1 t3 t2 -> m-rotateTower 22 23
+11 selectDirection r4 t1 t3 t2 -> m-selectDirection 24 25 26 
+12 selectDirection r3 t1 t3 t2 -> m-selectDirection 27 28 29 
+13 move r9 t1 t1 t2 -> 
+14 move_abstract t1 t3 -> newMethod21 30
+15 exchange t2 t3 t1 -> exchangeClear
+16 rotateTower t1 t3 t2 -> m-rotateTower 31 32
+17 selectDirection r2 t1 t3 t2 -> m-selectDirection 33 34 35 
+18 selectDirection r1 t1 t3 t2 -> m-selectDirection 36 37 38 
+19 rotateTower t1 t3 t2 -> m-rotateTower 39 40
+20 selectDirection r7 t3 t1 t2 -> m-selectDirection 41 42 43 
+21 selectDirection r6 t3 t1 t2 -> m-selectDirection 44 45 46 
+22 move_abstract t1 t3 -> newMethod21 47
+23 exchange t1 t3 t2 -> exchangeClear
+24 rotateTower t1 t3 t2 -> m-rotateTower 48 49
+25 selectDirection r8 t3 t1 t2 -> m-selectDirection 50 51 52 
+26 selectDirection r9 t3 t1 t2 -> m-selectDirection 53 54 55 
+27 move_abstract t1 t3 -> newMethod21 56
+28 exchange t3 t1 t2 -> exchangeClear
+29 exchange t1 t2 t3 -> exchangeClear
+30 move r9 t1 t1 t3 -> 
+31 move_abstract t1 t2 -> newMethod21 57
+32 exchange t1 t2 t3 -> exchangeClear
+33 rotateTower t1 t3 t2 -> m-rotateTower 58 59
+34 selectDirection r3 t1 t3 t2 -> m-selectDirection 60 61 62 
+35 selectDirection r4 t1 t3 t2 -> m-selectDirection 63 64 65 
+36 rotateTower t1 t3 t2 -> m-rotateTower 66 67
+37 selectDirection r5 t1 t3 t2 -> m-selectDirection 68 69 70 
+38 selectDirection r6 t1 t3 t2 -> m-selectDirection 71 72 73 
+39 move_abstract t1 t2 -> newMethod21 74
+40 exchange t3 t2 t1 -> exchangeClear
+41 rotateTower t3 t1 t2 -> m-rotateTower 75 76
+42 selectDirection r1 t3 t1 t2 -> m-selectDirection 77 78 79 
+43 selectDirection r2 t3 t1 t2 -> m-selectDirection 80 81 82 
+44 rotateTower t3 t1 t2 -> m-rotateTower 83 84
+45 selectDirection r8 t3 t1 t2 -> m-selectDirection 85 86 87 
+46 selectDirection r9 t3 t1 t2 -> m-selectDirection 88 89 90 
+47 move r9 t1 t1 t3 -> 
+48 move_abstract t3 t2 -> newMethod21 91
+49 exchange t3 t2 t1 -> exchangeClear
+50 rotateTower t3 t1 t2 -> m-rotateTower 92 93
+51 selectDirection r4 t3 t1 t2 -> m-selectDirection 94 95 96 
+52 selectDirection r5 t3 t1 t2 -> m-selectDirection 97 98 99 
+53 rotateTower t3 t1 t2 -> m-rotateTower 100 101
+54 selectDirection r6 t3 t1 t2 -> m-selectDirection 102 103 104 
+55 selectDirection r7 t3 t1 t2 -> m-selectDirection 105 106 107 
+56 move r9 t1 t1 t3 -> 
+57 move r9 t1 t1 t2 -> 
+58 move_abstract t1 t3 -> newMethod21 108
+59 exchange t2 t3 t1 -> exchangeClear
+60 rotateTower t1 t3 t2 -> m-rotateTower 109 110
+61 selectDirection r8 t1 t3 t2 -> m-selectDirection 111 112 113 
+62 selectDirection r9 t1 t3 t2 -> m-selectDirection 114 115 116 
+63 rotateTower t1 t3 t2 -> m-rotateTower 117 118
+64 selectDirection r7 t1 t3 t2 -> m-selectDirection 119 120 121 
+65 selectDirection r6 t1 t3 t2 -> m-selectDirection 122 123 124 
+66 move_abstract t1 t2 -> newMethod21 125
+67 exchange t1 t2 t3 -> exchangeClear
+68 rotateTower t1 t3 t2 -> m-rotateTower 126 127
+69 selectDirection r9 t1 t3 t2 -> m-selectDirection 128 129 130 
+70 selectDirection r8 t1 t3 t2 -> m-selectDirection 131 132 133 
+71 move_abstract t1 t3 -> newMethod21 134
+72 exchange t3 t1 t2 -> exchangeClear
+73 exchange t1 t2 t3 -> exchangeClear
+74 move r9 t1 t1 t2 -> 
+75 move_abstract t3 t1 -> newMethod21 135
+76 exchange t1 t3 t2 -> exchangeClear
+77 rotateTower t3 t1 t2 -> m-rotateTower 136 137
+78 selectDirection r6 t3 t1 t2 -> m-selectDirection 138 139 140 
+79 selectDirection r5 t3 t1 t2 -> m-selectDirection 141 142 143 
+80 rotateTower t3 t1 t2 -> m-rotateTower 144 145
+81 selectDirection r4 t3 t1 t2 -> m-selectDirection 146 147 148 
+82 selectDirection r3 t3 t1 t2 -> m-selectDirection 149 150 151 
+83 move_abstract t3 t2 -> newMethod21 152
+84 exchange t3 t2 t1 -> exchangeClear
+85 rotateTower t3 t1 t2 -> m-rotateTower 153 154
+86 selectDirection r7 t3 t1 t2 -> m-selectDirection 155 156 157 
+87 selectDirection r6 t3 t1 t2 -> m-selectDirection 158 159 160 
+88 rotateTower t3 t1 t2 -> m-rotateTower 161 162
+89 selectDirection r5 t3 t1 t2 -> m-selectDirection 163 164 165 
+90 selectDirection r4 t3 t1 t2 -> m-selectDirection 166 167 168 
+91 move r9 t1 t1 t3 -> 
+92 move_abstract t3 t1 -> newMethod21 169
+93 exchange t1 t3 t2 -> exchangeClear
+94 rotateTower t3 t1 t2 -> m-rotateTower 170 171
+95 selectDirection r8 t3 t1 t2 -> m-selectDirection 172 173 174 
+96 selectDirection r9 t3 t1 t2 -> m-selectDirection 175 176 177 
+97 rotateTower t3 t1 t2 -> m-rotateTower 178 179
+98 selectDirection r6 t3 t1 t2 -> m-selectDirection 180 181 182 
+99 selectDirection r7 t3 t1 t2 -> m-selectDirection 183 184 185 
+100 move_abstract t3 t2 -> newMethod21 186
+101 exchange t3 t2 t1 -> exchangeClear
+102 rotateTower t3 t1 t2 -> m-rotateTower 187 188
+103 selectDirection r1 t3 t1 t2 -> m-selectDirection 189 190 191 
+104 selectDirection r2 t3 t1 t2 -> m-selectDirection 192 193 194 
+105 move_abstract t3 t1 -> newMethod21 195
+106 exchange t3 t1 t2 -> exchangeClear
+107 exchange t1 t2 t3 -> exchangeClear
+108 move r9 t1 t1 t3 -> 
+109 move_abstract t1 t2 -> newMethod21 196
+110 exchange t2 t3 t1 -> exchangeClear
+111 rotateTower t1 t3 t2 -> m-rotateTower 197 198
+112 selectDirection r2 t1 t3 t2 -> m-selectDirection 199 200 201 
+113 selectDirection r3 t1 t3 t2 -> m-selectDirection 202 203 204 
+114 rotateTower t1 t3 t2 -> m-rotateTower 205 206
+115 selectDirection r9 t1 t3 t2 -> m-selectDirection 207 208 209 
+116 selectDirection r4 t1 t3 t2 -> m-selectDirection 210 211 212 
+117 move_abstract t1 t3 -> newMethod21 213
+118 exchange t1 t3 t2 -> exchangeClear
+119 rotateTower t1 t3 t2 -> m-rotateTower 214 215
+120 selectDirection r5 t1 t3 t2 -> m-selectDirection 216 217 218 
+121 selectDirection r6 t1 t3 t2 -> m-selectDirection 219 220 221 
+122 move_abstract t1 t2 -> newMethod21 222
+123 exchange t3 t2 t1 -> exchangeClear
+124 exchange t1 t2 t3 -> exchangeClear
+125 move r9 t1 t1 t2 -> 
+126 move_abstract t1 t3 -> newMethod21 223
+127 exchange t2 t3 t1 -> exchangeClear
+128 rotateTower t1 t3 t2 -> m-rotateTower 224 225
+129 selectDirection r8 t1 t3 t2 -> m-selectDirection 226 227 228 
+130 selectDirection r7 t1 t3 t2 -> m-selectDirection 229 230 231 
+131 rotateTower t1 t3 t2 -> m-rotateTower 232 233
+132 selectDirection r6 t1 t3 t2 -> m-selectDirection 234 235 236 
+133 selectDirection r5 t1 t3 t2 -> m-selectDirection 237 238 239 
+134 move r9 t1 t1 t3 -> 
+135 move r9 t1 t1 t1 -> 
+136 move_abstract t3 t2 -> newMethod21 240
+137 exchange t1 t3 t2 -> exchangeClear
+138 rotateTower t3 t1 t2 -> m-rotateTower 241 242
+139 selectDirection r4 t3 t1 t2 -> m-selectDirection 243 244 245 
+140 selectDirection r9 t3 t1 t2 -> m-selectDirection 246 247 248 
+141 rotateTower t3 t1 t2 -> m-rotateTower 249 250
+142 selectDirection r8 t3 t1 t2 -> m-selectDirection 251 252 253 
+143 selectDirection r7 t3 t1 t2 -> m-selectDirection 254 255 256 
+144 move_abstract t3 t1 -> newMethod21 257
+145 exchange t3 t1 t2 -> exchangeClear
+146 rotateTower t3 t1 t2 -> m-rotateTower 258 259
+147 selectDirection r1 t3 t1 t2 -> m-selectDirection 260 261 262 
+148 selectDirection r2 t3 t1 t2 -> m-selectDirection 263 264 265 
+149 move_abstract t3 t2 -> newMethod21 266
+150 exchange t3 t2 t1 -> exchangeClear
+151 exchange t1 t2 t3 -> exchangeClear
+152 move r9 t1 t1 t3 -> 
+153 move_abstract t3 t1 -> newMethod21 267
+154 exchange t1 t3 t2 -> exchangeClear
+155 rotateTower t3 t1 t2 -> m-rotateTower 268 269
+156 selectDirection r5 t3 t1 t2 -> m-selectDirection 270 271 272 
+157 selectDirection r6 t3 t1 t2 -> m-selectDirection 273 274 275 
+158 rotateTower t3 t1 t2 -> m-rotateTower 276 277
+159 selectDirection r4 t3 t1 t2 -> m-selectDirection 278 279 280 
+160 selectDirection r7 t3 t1 t2 -> m-selectDirection 281 282 283 
+161 move_abstract t3 t2 -> newMethod21 284
+162 exchange t3 t2 t1 -> exchangeClear
+163 rotateTower t3 t1 t2 -> m-rotateTower 285 286
+164 selectDirection r9 t3 t1 t2 -> m-selectDirection 287 288 289 
+165 selectDirection r8 t3 t1 t2 -> m-selectDirection 290 291 292 
+166 move_abstract t3 t1 -> newMethod21 293
+167 exchange t3 t1 t2 -> exchangeClear
+168 exchange t1 t2 t3 -> exchangeClear
+169 move r9 t1 t1 t1 -> 
+170 move_abstract t3 t2 -> newMethod21 294
+171 exchange t1 t3 t2 -> exchangeClear
+172 rotateTower t3 t1 t2 -> m-rotateTower 295 296
+173 selectDirection r1 t3 t1 t2 -> m-selectDirection 297 298 299 
+174 selectDirection r2 t3 t1 t2 -> m-selectDirection 300 301 302 
+175 rotateTower t3 t1 t2 -> m-rotateTower 303 304
+176 selectDirection r6 t3 t1 t2 -> m-selectDirection 305 306 307 
+177 selectDirection r5 t3 t1 t2 -> m-selectDirection 308 309 310 
+178 move_abstract t3 t2 -> newMethod21 311
+179 exchange t3 t2 t1 -> exchangeClear
+180 rotateTower t3 t1 t2 -> m-rotateTower 312 313
+181 selectDirection r4 t3 t1 t2 -> m-selectDirection 314 315 316 
+182 selectDirection r7 t3 t1 t2 -> m-selectDirection 317 318 319 
+183 move_abstract t3 t1 -> newMethod21 320
+184 exchange t3 t1 t2 -> exchangeClear
+185 exchange t1 t2 t3 -> exchangeClear
+186 move r9 t1 t1 t3 -> 
+187 move_abstract t3 t1 -> newMethod21 321
+188 exchange t1 t3 t2 -> exchangeClear
+189 rotateTower t3 t1 t2 -> m-rotateTower 322 323
+190 selectDirection r7 t3 t1 t2 -> m-selectDirection 324 325 326 
+191 selectDirection r6 t3 t1 t2 -> m-selectDirection 327 328 329 
+192 rotateTower t3 t1 t2 -> m-rotateTower 330 331
+193 selectDirection r5 t3 t1 t2 -> m-selectDirection 332 333 334 
+194 selectDirection r4 t3 t1 t2 -> m-selectDirection 335 336 337 
+195 move r9 t1 t1 t1 -> 
+196 move r9 t1 t1 t2 -> 
+197 move_abstract t1 t2 -> newMethod21 338
+198 exchange t2 t3 t1 -> exchangeClear
+199 rotateTower t1 t3 t2 -> m-rotateTower 339 340
+200 selectDirection r8 t1 t3 t2 -> m-selectDirection 341 342 343 
+201 selectDirection r9 t1 t3 t2 -> m-selectDirection 344 345 346 
+202 rotateTower t1 t3 t2 -> m-rotateTower 347 348
+203 selectDirection r2 t1 t3 t2 -> m-selectDirection 349 350 351 
+204 selectDirection r3 t1 t3 t2 -> m-selectDirection 352 353 354 
+205 move_abstract t1 t3 -> newMethod21 355
+206 exchange t1 t3 t2 -> exchangeClear
+207 rotateTower t1 t3 t2 -> m-rotateTower 356 357
+208 selectDirection r1 t1 t3 t2 -> m-selectDirection 358 359 360 
+209 selectDirection r4 t1 t3 t2 -> m-selectDirection 361 362 363 
+210 rotateTower t1 t3 t2 -> m-rotateTower 364 365
+211 selectDirection r6 t1 t3 t2 -> m-selectDirection 366 367 368 
+212 selectDirection r5 t1 t3 t2 -> m-selectDirection 369 370 371 
+213 move r9 t1 t1 t3 -> 
+214 move_abstract t1 t2 -> newMethod21 372
+215 exchange t2 t3 t1 -> exchangeClear
+216 rotateTower t1 t3 t2 -> m-rotateTower 373 374
+217 selectDirection r9 t1 t3 t2 -> m-selectDirection 375 376 377 
+218 selectDirection r8 t1 t3 t2 -> m-selectDirection 378 379 380 
+219 move_abstract t1 t3 -> newMethod21 381
+220 exchange t3 t1 t2 -> exchangeClear
+221 exchange t1 t2 t3 -> exchangeClear
+222 move r9 t1 t1 t2 -> 
+223 move r9 t1 t1 t3 -> 
+224 move_abstract t1 t3 -> newMethod21 382
+225 exchange t2 t3 t1 -> exchangeClear
+226 rotateTower t1 t3 t2 -> m-rotateTower 383 384
+227 selectDirection r7 t1 t3 t2 -> m-selectDirection 385 386 387 
+228 selectDirection r6 t1 t3 t2 -> m-selectDirection 388 389 390 
+229 rotateTower t1 t3 t2 -> m-rotateTower 391 392
+230 selectDirection r5 t1 t3 t2 -> m-selectDirection 393 394 395 
+231 selectDirection r4 t1 t3 t2 -> m-selectDirection 396 397 398 
+232 move_abstract t

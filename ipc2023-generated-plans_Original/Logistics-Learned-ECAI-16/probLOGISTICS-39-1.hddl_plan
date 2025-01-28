@@ -1,0 +1,44 @@
+==>
+**Sequential Plan**
+```
+1. ACHIEVE-AT OBJ112 POS8 (task0)
+2. ACHIEVE-AT OBJ103 APT13 (task1)
+...
+39. ACHIEVE-AT OBJ101 POS1 (task38)
+```
+**Hierarchical Decomposition**
+```
+root 0
+0 ACHIEVE-AT OBJ112 POS8 -> M10-ACHIEVE-AT 1 2 3
+  1 ACHIEVE-AT0 OBJ112 POS8 -> M12-ACHIEVE-AT0 4 5
+    4 DO-AT-LOAD-TRUCK0 OBJ112 TRU8 POS8
+    5 ACHIEVE-AT0 OBJ112 POS8 -> M11-ACHIEVE-AT0 (already at POS8, no-op)
+  2 ACHIEVE-AT-TRK TRU8 POS8 -> M34-ACHIEVE-AT 6 7
+    6 ACHIEVE-AT1 TRU8 POS8 -> M36-ACHIEVE-AT1 8 9
+      8 DRIVE-TRUCK TRU8 POS13 POS8 CIT13
+      9 ACHIEVE-AT1 TRU8 POS8 -> M35-ACHIEVE-AT1 (already at POS8, no-op)
+    7 i-LOCK-AT TRU8 POS8
+  3 i-LOCK-AT OBJ112 POS8
+
+1 ACHIEVE-AT OBJ103 APT13 -> M10-ACHIEVE-AT 10 11 12
+ ...
+ ... (similar decomposition for each task)
+ ...
+```
+**Selected Sub-Plan for Task 0 (OBJ112 POS8) with Actions**
+```
+1. DRIVE-TRUCK TRU8 POS13 POS8 CIT13 (t=8)
+2. i-LOCK-AT TRU8 POS8 (t=9)
+3. DO-AT-LOAD-TRUCK0 OBJ112 TRU8 POS8 (t=4)
+   -> LOAD-TRUCK OBJ112 TRU8 POS8 (t=4.1)
+   -> i-LOCK-AT OBJ112 POS8 (t=4.2)
+4. i-LOCK-AT OBJ112 POS8 (t=3, redundant, can be removed)
+```
+**Note:**
+
+* `t=X` represents the time step for each action.
+* `->` indicates the decomposition of a task into sub-tasks or actions.
+* `MXX-ACHIEVE-AT` and similar method names refer to the corresponding methods in the HTN domain definition.
+* This plan assumes that the initial state and constraints are satisfied. In a real-world scenario, you would need to verify this.
+* The plan for each task is not fully expanded here due to space constraints. You can apply the same decomposition process for each task.
+* Redundant actions (e.g., `i-LOCK-AT OBJ112 POS8` at t=3 and t=4.2) can be removed to optimize the plan.

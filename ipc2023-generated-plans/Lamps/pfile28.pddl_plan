@@ -1,43 +1,84 @@
 ==>
-**Sequential Plan:**
-1. `flip l0 l0 Y N`
-2. `flip l0 l1 N Y`
-3. `flip l0 l2 N Y`
-4. `flip l0 l5 N Y`
-5. `flip l0 l6 N Y`
-6. `flip l0 l7 N Y`
-7. `flip l0 l8 N Y`
-8. `flip l0 l9 N Y`
-9. `flip l1 l3 N Y`
-10. `flip l1 l5 N Y`
-11. `flip l1 l8 N Y`
-12. `flip l2 l2 N Y`
-13. `flip l2 l5 N Y`
-14. `flip l3 l3 N Y`
-15. `flip l3 l5 N Y`
-... ( **total of 227 `flip` actions** )
-227. `flip l19 l19 N Y`
-
-**Hierarchical Decomposition:**
-```
+1 flip l9 l13 N Y
+2 flip l9 l14 N Y
+3 flip l9 l15 N Y
+4 flip l10 l10 Y N
+5 flip l10 l11 N Y
+6 flip l10 l12 N Y
+7 flip l10 l13 Y N
+8 flip l10 l14 Y N
+9 flip l10 l15 Y N
+10 flip l11 l10 Y N
+11 flip l11 l11 N Y
+12 flip l11 l12 Y N
+13 flip l11 l13 Y N
+14 flip l11 l14 Y N
+15 flip l11 l15 Y N
+16 flip l12 l9 Y N
+17 flip l12 l10 N Y
+18 flip l12 l11 N Y
+19 flip l12 l13 Y N
+20 flip l12 l14 N Y
+21 flip l12 l15 N Y
+22 flip l13 l8 Y N
+23 flip l13 l9 Y N
+24 flip l13 l10 Y N
+25 flip l13 l12 N Y
+26 flip l13 l13 Y N
+27 flip l13 l14 Y N
+28 flip l13 l15 Y N
+29 flip l14 l6 Y N
+30 flip l14 l7 N Y
+31 flip l14 l8 Y N
+32 flip l14 l12 N Y
+33 flip l14 l13 Y N
+34 flip l14 l14 Y N
+35 flip l15 l5 Y N
+36 flip l15 l6 Y N
+37 flip l15 l7 Y N
+38 flip l15 l12 N Y
+39 flip l15 l14 N Y
+40 flip l15 l15 Y N
+41 flip l16 l0 Y N
+42 flip l16 l1 Y N
+43 flip l16 l3 Y N
+44 flip l16 l7 Y N
+45 flip l16 l16 N Y
+46 flip l17 l0 N Y
+47 flip l17 l2 N Y
+48 flip l17 l3 N Y
+49 flip l17 l5 N Y
+50 flip l17 l6 Y N
+51 flip l17 l8 Y N
+52 flip l17 l12 Y N
+53 flip l17 l16 N Y
+54 flip l17 l17 N Y
+55 flip l17 l18 Y N
+56 flip l17 l19 Y N
+57 flip l18 l0 N Y
+58 flip l18 l1 N Y
+59 flip l18 l2 N Y
+60 flip l18 l3 Y N
+61 flip l18 l5 Y N
+62 flip l18 l6 N Y
+63 flip l18 l7 N Y
+64 flip l18 l9 Y N
+65 flip l18 l13 N Y
+66 flip l18 l18 N Y
+67 flip l19 l1 Y N
+68 flip l19 l5 Y N
+69 flip l19 l8 N Y
+70 flip l19 l10 Y N
+71 flip l19 l11 N Y
+72 flip l19 l14 Y N
+73 flip l19 l15 N Y
+74 flip l19 l18 N Y
+75 flip l19 l19 Y N
 root 0
 0 play -> do_play 1 2
-  1 turn -> do_turn l0 l0 Y N
-    2 play -> end_game
-    3 flip l0 l0 Y N (action 1)
-    4 propagate_up l0 l0 Y -> propagate_up_do l0 l1 l0 Y N
-      5 flip l1 l0 Y N (action 2, not in sequential plan, incorrect decomposition)
-      **Incorrect decomposition, ignoring propagate_up and other propagate tasks**
-```
-**Note:**
-
-* The provided HTN domain and problem are complex, with a large state space and many possible actions. The generated plan is likely not optimal.
-* The sequential plan consists of 227 `flip` actions, which is the minimum number of actions required to transform the initial state into the goal state.
-* The hierarchical decomposition is incomplete and incorrect, as the `propagate_up`, `propagate_down`, `propagate_left`, and `propagate_right` tasks are not properly decomposed. These tasks are designed to recursively apply `flip` actions to adjacent coordinates, but the decomposition does not accurately reflect this.
-* To generate a correct hierarchical decomposition, a more sophisticated HTN planning algorithm or a custom implementation would be necessary, taking into account the specific semantics of the `propagate_*` tasks.
-
-**Recommendations:**
-
-1. **Simplify the domain**: If possible, reduce the size of the grid or the number of initial/gold state constraints to make the planning problem more manageable.
-2. **Use a more advanced HTN planner**: Utilize a planner specifically designed for large, complex HTN domains, such as SHOP2, HTN-Plan, or Pyshop2.
-3. **Implement custom decomposition rules**: Write custom code to handle the `propagate_*` tasks, ensuring accurate decomposition and effective planning.
+76 turn -> do_turn l9 l13 Y N
+77 propagate_up l9 l13 Y -> propagate_up_end_field l9 l13 Y
+78 propagate_down l9 l13 Y -> propagate_down_end_field l9 l13 Y
+79 propagate_left l9 l13 Y -> propagate_left_end_field l9 l13 Y
+80 propagate_right l9 l13 Y -> propagate_right_end_field l9 l13 Y
+<==

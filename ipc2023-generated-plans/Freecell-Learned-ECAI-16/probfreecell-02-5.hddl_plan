@@ -1,37 +1,125 @@
 ==>
-1 DO-ON-MOVE3 S2 HA C2
-2 DO-ON-MOVE3 HA S2 SA
-3 DO-ON-SENDTONEWCOL3 SA S2 N2 N1
-4 DO-ON-SENDTOHOME3 S2 SA S N1 C2 N2
-5 DO-ON-MOVE3 D2 DA S2
-6 DO-ON-MOVE3 DA D2 CA
-7 DO-ON-SENDTONEWCOL3 CA D2 N2 N1
-8 DO-ON-SENDTOHOME3 D2 CA D N1 S2 N2
-9 DO-ON-MOVE3 H2 HA D2
-10 DO-ON-MOVE3 HA H2 SA
-11 DO-ON-SENDTONEWCOL3 SA H2 N2 N1
-12 DO-ON-SENDTOHOME3 H2 SA H N1 D2 N2
-13 DO-ON-MOVE3 C2 CA H2
-14 DO-ON-MOVE3 CA C2 SA
-15 DO-ON-SENDTONEWCOL3 SA C2 N2 N1
-16 DO-ON-SENDTOHOME3 C2 SA C N1 H2 N2
-<==
-
+1 move DA SA
+2 move HA H2
+==>
 root 0
-0 solve_freecell -> m1_solve_0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16
-1 task0 (ACHIEVE-HOME C2) -> m2_achieve_home_0 1 4
-2 task1 (ACHIEVE-HOME D2) -> m3_achieve_home_0 5 8
-3 task2 (ACHIEVE-HOME H2) -> m4_achieve_home_0 9 12
-4 task3 (ACHIEVE-HOME S2) -> m5_achieve_home_0 13 16
-5 m2_achieve_home_0 -> m6_achieve_home3_0 1 2 3 4
-6 m3_achieve_home_0 -> m7_achieve_home3_0 5 6 7 8
-7 m4_achieve_home_0 -> m8_achieve_home3_0 9 10 11 12
-8 m5_achieve_home_0 -> m9_achieve_home3_0 13 14 15 16
-9 m6_achieve_home3_0 -> m10_do_on_move3_0 1 2 3
-10 m7_achieve_home3_0 -> m11_do_on_move3_0 5 6 7
-11 m8_achieve_home3_0 -> m12_do_on_move3_0 9 10 11
-12 m9_achieve_home3_0 -> m13_do_on_move3_0 13 14 15
-13 m10_do_on_move3_0 -> m14_do_on_sendtohome3_0 1 2 3 4
-14 m11_do_on_move3_0 -> m15_do_on_sendtohome3_0 5 6 7 8
-15 m12_do_on_move3_0 -> m16_do_on_sendtohome3_0 9 10 11 12
-16 m13_do_on_move3_0 -> m17_do_on_sendtohome3_0 13 14 15 16
+0 achieve_home_0 -> solve_card_0_0 1 2 3 4 5 6
+6 send_to_new_col_0 -> bottomcol_sendtofree_4_0 7 8 9 10
+10 bottomcol_sendtofree_5_0 -> bottomcol_sendtofree_5_b_0 11 12 13 14 15
+15 freecell_colfromfreecell_2_0 -> incell_newcolfromfreecell_2_0 16 17 18 19 20
+20 bottomcol_sendtofree_1_0 -> bottomcol_sendtofree_1_b_0 21 22 23 24 25
+25 freecell_colfromfreecell_5_0 -> incell_newcolfromfreecell_5_0 26 27 28 29 30
+30 achieve_card_on_col_1_1 -> bottomcol_on_move_1_1 31 32
+32 send_to_new_col_2 -> bottomcol_sendtofree_2_0 33 34 35 36
+36 achieve_card_on_col_1_2 -> bottomcol_on_move_1_2 37 38
+38 bottomcol_sendtofree_0_0 -> bottomcol_sendtofree_0_b_0 39 40 41 42 43
+43 achieve_card_on_home_0_3 -> homefromfreecell_0_3 44 45 46 47 48
+48 send_to_new_col_3 -> bottomcol_sendtofree_3_0 49 50 51 52
+52 send_to_new_col_4 -> bottomcol_sendtofree_6_0 53 54 55 56
+56 send_to_new_col_5 -> bottomcol_sendtofree_7_0 57 58 59 60
+60 send_to_new_col_6 -> bottomcol_sendtofree_8_0 61 62 63 64
+64 bottomcol_sendtofree_3_0 -> bottomcol_sendtofree_3_b_0 65 66 67 68 69
+69 freecell_colfromfreecell_1_0 -> incell_newcolfromfreecell_1_0 70 71 72 73 74
+74 achieve_card_on_col_1_4 -> bottomcol_on_move_1_4 75 76
+76 achieve_card_on_col_1_5 -> bottomcol_on_move_1_5 77 78
+78 bottomcol_sendtofree_4_0 -> bottomcol_sendtofree_4_b_0 79 80 81 82 83
+83 achieve_card_on_col_1_6 -> bottomcol_on_move_1_6 84 85
+85 send_to_new_col_7 -> bottomcol_sendtofree_9_0 86 87 88 89
+89 achieve_card_on_col_1_7 -> bottomcol_on_move_1_7 90 91
+91 achieve_card_on_col_1_8 -> bottomcol_on_move_1_8 92 93
+93 send_to_new_col_8 -> bottomcol_sendtofree_5_0 94 95 96 97
+97 achieve_card_on_home_1_4 -> homefromfreecell_1_4 98 99 100 101 102
+102 send_to_new_col_9 -> bottomcol_sendtofree_6_0 103 104 105 106
+106 send_to_new_col_10 -> bottomcol_sendtofree_7_0 107 108 109 110
+110 send_to_new_col_11 -> bottomcol_sendtofree_8_0 111 112 113 114
+114 bottomcol_sendtofree_1_0 -> bottomcol_sendtofree_1_b_0 115 116 117 118 119
+119 freecell_colfromfreecell_3_0 -> incell_newcolfromfreecell_3_0 120 121 122 123 124
+124 achieve_card_on_col_1_9 -> bottomcol_on_move_1_9 125 126
+126 send_to_new_col_12 -> bottomcol_sendtofree_3_0 127 128 129 130
+130 bottomcol_sendtofree_2_0 -> bottomcol_sendtofree_2_b_0 131 132 133 134 135
+135 achieve_card_on_col_1_10 -> bottomcol_on_move_1_10 136 137
+137 send_to_new_col_13 -> bottomcol_sendtofree_4_0 138 139 140 141
+141 send_to_new_col_14 -> bottomcol_sendtofree_5_0 142 143 144 145
+145 send_to_new_col_15 -> bottomcol_sendtofree_6_0 146 147 148 149
+149 send_to_new_col_16 -> bottomcol_sendtofree_7_0 150 151 152 153
+153 bottomcol_sendtofree_6_0 -> bottomcol_sendtofree_6_b_0 154 155 156 157 158
+158 freecell_colfromfreecell_4_0 -> incell_newcolfromfreecell_4_0 159 160 161 162 163
+163 send_to_new_col_17 -> bottomcol_sendtofree_9_0 164 165 166 167
+167 send_to_new_col_18 -> bottomcol_sendtofree_10_0 168 169 170 171
+171 bottomcol_sendtofree_7_0 -> bottomcol_sendtofree_7_b_0 172 173 174 175 176
+176 freecell_colfromfreecell_6_0 -> incell_newcolfromfreecell_6_0 177 178 179 180 181
+181 send_to_new_col_19 -> bottomcol_sendtofree_11_0 182 183 184 185
+185 send_to_new_col_20 -> bottomcol_sendtofree_12_0 186 187 188 189
+189 send_to_new_col_21 -> bottomcol_sendtofree_13_0 190 191 192 193
+193 send_to_new_col_22 -> bottomcol_sendtofree_14_0 194 195 196 197
+197 send_to_new_col_23 -> bottomcol_sendtofree_15_0 198 199 200 201
+201 bottomcol_sendtofree_8_0 -> bottomcol_sendtofree_8_b_0 202 203 204 205 206
+206 send_to_new_col_24 -> bottomcol_sendtofree_16_0 207 208 209 210
+210 send_to_new_col_25 -> bottomcol_sendtofree_17_0 211 212 213 214
+214 send_to_new_col_26 -> bottomcol_sendtofree_18_0 215 216 217 218
+218 send_to_new_col_27 -> bottomcol_sendtofree_19_0 219 220 221 222
+222 send_to_new_col_28 -> bottomcol_sendtofree_20_0 223 224 225 226
+226 send_to_new_col_29 -> bottomcol_sendtofree_21_0 227 228 229 230
+230 send_to_new_col_30 -> bottomcol_sendtofree_22_0 231 232 233 234
+234 send_to_new_col_31 -> bottomcol_sendtofree_23_0 235 236 237 238
+238 send_to_new_col_32 -> bottomcol_sendtofree_24_0 239 240 241 242
+242 send_to_new_col_33 -> bottomcol_sendtofree_25_0 243 244 245 246
+246 send_to_new_col_34 -> bottomcol_sendtofree_26_0 247 248 249 250
+250 send_to_new_col_35 -> bottomcol_sendtofree_27_0 251 252 253 254
+254 send_to_new_col_36 -> bottomcol_sendtofree_28_0 255 256 257 258
+258 send_to_new_col_37 -> bottomcol_sendtofree_29_0 259 260 261 262
+262 achieve_card_on_home_2_3 -> homefromfreecell_2_3 263 264 265 266 267
+267 achieve_card_on_home_0_4 -> homefromfreecell_0_4 268 269 270 271 272
+272 send_to_new_col_38 -> bottomcol_sendtofree_10_0 273 274 275 276
+276 send_to_new_col_39 -> bottomcol_sendtofree_11_0 277 278 279 280
+280 send_to_new_col_40 -> bottomcol_sendtofree_12_0 281 282 283 284
+284 send_to_new_col_41 -> bottomcol_sendtofree_13_0 285 286 287 288
+288 send_to_new_col_42 -> bottomcol_sendtofree_14_0 289 290 291 292
+292 send_to_new_col_43 -> bottomcol_sendtofree_15_0 293 294 295 296
+296 send_to_new_col_44 -> bottomcol_sendtofree_16_0 297 298 299 300
+300 send_to_new_col_45 -> bottomcol_sendtofree_17_0 301 302 303 304
+304 send_to_new_col_46 -> bottomcol_sendtofree_18_0 305 306 307 308
+308 send_to_new_col_47 -> bottomcol_sendtofree_19_0 309 310 311 312
+312 send_to_new_col_48 -> bottomcol_sendtofree_20_0 313 314 315 316
+316 send_to_new_col_49 -> bottomcol_sendtofree_21_0 317 318 319 320
+320 send_to_new_col_50 -> bottomcol_sendtofree_22_0 321 322 323 324
+324 send_to_new_col_51 -> bottomcol_sendtofree_23_0 325 326 327 328
+328 send_to_new_col_52 -> bottomcol_sendtofree_24_0 329 330 331 332
+332 send_to_new_col_53 -> bottomcol_sendtofree_25_0 333 334 335 336
+336 send_to_new_col_54 -> bottomcol_sendtofree_26_0 337 338 339 340
+340 send_to_new_col_55 -> bottomcol_sendtofree_27_0 341 342 343 344
+344 achieve_card_on_home_3_3 -> homefromfreecell_3_3 345 346 347 348 349
+349 send_to_new_col_56 -> bottomcol_sendtofree_0_0 350 351 352 353
+353 send_to_new_col_57 -> bottomcol_sendtofree_0_b_0 354 355 356 357 358
+358 send_to_new_col_58 -> bottomcol_sendtofree_1_0 359 360 361 362
+362 send_to_new_col_59 -> bottomcol_sendtofree_1_b_0 363 364 365 366 367
+367 send_to_new_col_60 -> bottomcol_sendtofree_2_0 368 369 370 371
+371 send_to_new_col_61 -> bottomcol_sendtofree_2_b_0 372 373 374 375 376
+376 send_to_new_col_62 -> bottomcol_sendtofree_3_0 377 378 379 380
+380 send_to_new_col_63 -> bottomcol_sendtofree_3_b_0 381 382 383 384 385
+385 send_to_new_col_64 -> bottomcol_sendtofree_4_0 386 387 388 389
+389 send_to_new_col_65 -> bottomcol_sendtofree_4_b_0 390 391 392 393 394
+394 send_to_new_col_66 -> bottomcol_sendtofree_5_0 395 396 397 398
+398 send_to_new_col_67 -> bottomcol_sendtofree_5_b_0 399 400 401 402 403
+403 achieve_card_on_home_0_5 -> homefromfreecell_0_5 404 405 406 407 408
+408 send_to_new_col_68 -> bottomcol_sendtofree_6_0 409 410 411 412
+412 send_to_new_col_69 -> bottomcol_sendtofree_6_b_0 413 414 415 416 417
+417 send_to_new_col_70 -> bottomcol_sendtofree_7_0 418 419 420 421
+421 send_to_new_col_71 -> bottomcol_sendtofree_7_b_0 422 423 424 425 426
+426 send_to_new_col_72 -> bottomcol_sendtofree_8_0 427 428 429 430
+430 send_to_new_col_73 -> bottomcol_sendtofree_8_b_0 431 432 433 434 435
+435 send_to_new_col_74 -> bottomcol_sendtofree_9_0 436 437 438 439
+439 send_to_new_col_75 -> bottomcol_sendtofree_10_0 440 441 442 443
+443 send_to_new_col_76 -> bottomcol_sendtofree_11_0 444 445 446 447
+447 send_to_new_col_77 -> bottomcol_sendtofree_12_0 448 449 450 451
+451 send_to_new_col_78 -> bottomcol_sendtofree_13_0 452 453 454 455
+455 send_to_new_col_79 -> bottomcol_sendtofree_14_0 456 457 458 459
+459 send_to_new_col_80 -> bottomcol_sendtofree_15_0 460 461 462 463
+463 send_to_new_col_81 -> bottomcol_sendtofree_16_0 464 465 466 467
+467 send_to_new_col_82 -> bottomcol_sendtofree_17_0 468 469 470 471
+471 send_to_new_col_83 -> bottomcol_sendtofree_18_0 472 473 474 475
+475 send_to_new_col_84 -> bottomcol_sendtofree_19_0 476 477 478 479
+479 send_to_new_col_85 -> bottomcol_sendtofree_20_0 480 481 482 483
+483 send_to_new_col_86 -> bottomcol_sendtofree_21_0 484 485 486 487
+487 send_to_new_col_87 -> bottomcol_sendtofree_22_0 488 489 490 491
+491 send_to_new_col_88 -> bottomcol_sendtofree_23_0 492 

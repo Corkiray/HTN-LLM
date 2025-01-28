@@ -1,76 +1,33 @@
 ==>
-**Sequential Plan**
-```
-1. ACHIEVE-AT OBJ82 POS7 (task0)
-  * Precondition: (not (LOCKED-AT OBJ82 POS7)) (not (AT OBJ82 POS7))
-  * Method: M10-ACHIEVE-AT
-  * Subtasks:
-    2. ACHIEVE-AT0 OBJ82 POS7
-    3. i-LOCK-AT OBJ82 POS7
+1 move APN2 POS8 POS9
+2 board OBJ81 APT5 POS9
+3 load-airplane OBJ81 APN2 POS9
+4 deliver OBJ81 APN2 POS8 POS9
+5 deliver-person OBJ81 POS8 POS9
+6 achieve-at-air APN2 APT8
+7 move APN1 POS6 APT7
+8 board OBJ53 APT8 APT7
+9 move OBJ53 POS2 POS9 
+10 move OBJ23 APT3 POS3 
+11 load-airplane OBJ53 APN1 APT7
+12 deliver OBJ53 APN2 POS9 POS5 
+13 achieve-at OBJ53 POS5 
+14 deliver-package OBJ81 POS9 POS8 
+15 load-truck OBJ43 TRU4 POS4 
+16 deliver OBJ43 TRU4 POS4 POS1  
+17 deliver-package OBJ43 POS1 POS1 
+18 load-truck OBJ33 TRU8 POS8 
+19 deliver OBJ33 TRU8 POS8 POS8 
+20 deliver-package OBJ33 POS8 POS8 
+21 deliver OBJ91 TRU9 POS9 POS8   
+22 deliver-package OBJ81 POS9 POS8 
+23 deliver OBJ42 OBJ43 TRU8 POS1 
+24 deliver-package OBJ53 POS9 POS5 
 
-4. ACHIEVE-AT0 OBJ82 POS7 (M12-ACHIEVE-AT0)
-  * Precondition: (not (AT OBJ82 POS7)) (AT OBJ82 POS8)
-  * Subtasks:
-    5. DO-AT-LOAD-TRUCK0 OBJ82 TRU8 POS8
-    6. ACHIEVE-AT0 OBJ82 POS7
-
-7. DO-AT-LOAD-TRUCK0 OBJ82 TRU8 POS8 (M4-DO-AT-LOAD-TRUCK0)
-  * Precondition: (AT OBJ82 POS8)
-  * Subtasks:
-    8. ACHIEVE-AT-TRK TRU8 POS8
-    9. IFUNLOCK-AT TRU8 POS8
-    10. LOAD-TRUCK OBJ82 TRU8 POS8
-
-11. ACHIEVE-AT-TRK TRU8 POS8 (M32-ACHIEVE-AT)
-  * Precondition: (LOCKED-AT TRU8 POS8)
-  * Subtasks:
-    12. i-FLAG-AT TRU8 POS8
-
-13. IFUNLOCK-AT TRU8 POS8 (IFUNLOCK1-AT)
-  * Precondition: (not (FLAGGED-AT TRU8 POS8))
-  * Subtasks:
-    14. i-UNLOCK-AT TRU8 POS8
-
-15. LOAD-TRUCK OBJ82 TRU8 POS8
-  * Action: Load OBJ82 into TRU8 at POS8
-
-... (similar expansion for remaining tasks)
-
-**Hierarchical Decomposition**
-```
 root 0
-0 achieve_at -> m10_achieve_at 1 3
-1 achieve_at0 -> m12_achieve_at0 4 6
-2 do_at_load_truck0 -> m4_do_at_load_truck0 7 10
-3 i_lock_at -> i_lock_at 3
-4 achieve_at_trk -> m32_achieve_at 11 12
-5 ifunlock_at -> ifunlock1_at 13 14
-6 load_truck -> load_truck 15
-...
-```
-**Full Plan ( truncated for brevity )**
-```
-==>
-1. i_FLAG_AT TRU8 POS8
-2. i_UNLOCK_AT TRU8 POS8
-3. i_LOCK_AT OBJ82 POS7
-4. ACHIEVE_AT_TRK TRU8 POS8
-5. IFUNLOCK_AT TRU8 POS8
-6. LOAD_TRUCK OBJ82 TRU8 POS8
-7. ACHIEVE_AT0 OBJ82 POS7
-8. DRIVE_TRUCK TRU8 POS8 POS7 CIT7
-9. ACHIEVE_AT1 TRU8 POS7
-10. UNLOAD_TRUCK OBJ82 TRU8 POS7
-11. ACHIEVE_AT OBJ82 POS7
-...
-24. ACHIEVE_AT OBJ13 APT1
+0 Achieve-at OBJ82 POS7 ->M0-ACHIEVE-AT-0 1 2 22 3
+3 Achieve-at OBJ51 POS5 ->M1-ACHIEVE-AT-1 8 13 
+13 Achieve-at OBJ41 APT1 ->M2-ACHIEVE-AT-2 14 
+18 Achieve-at OBJ91 APT2 ->M3-ACHIEVE-AT-3 6 
+22 Achieve-at OBJ73 POS8 ->M4-ACHIEVE-AT-4 7 
 <==
-```
-**Note:**
-
-* The plan is truncated for brevity, but it includes all 25 tasks in the correct order.
-* Each task is decomposed into its respective subtasks using the provided HTN methods.
-* Actions (e.g., `LOAD_TRUCK`, `DRIVE_TRUCK`) are executed when their preconditions are met.
-* The plan assumes the initial state and constraints provided in the HTN problem definition. 
-
-Please let me know if you'd like me to elaborate on any part of the plan or provide further clarification.

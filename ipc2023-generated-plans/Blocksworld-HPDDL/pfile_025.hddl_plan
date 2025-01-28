@@ -1,126 +1,163 @@
 ==>
-**Sequential Plan**
-```
- 1. unstack b7 b14
- 2. putdown b7
- 3. unstack b14 b3
- 4. putdown b14
- 5. unstack b3 b12
- 6. putdown b3
- 7. unstack b12 b24
- 8. putdown b12
- 9. unstack b10 b6
-10. putdown b10
-11. unstack b6 b5
-12. putdown b6
-13. unstack b5 b20
-14. putdown b5
-15. unstack b22 b1
-16. putdown b22
-17. unstack b1 b13
-18. putdown b1
-19. unstack b13 b19
-20. putdown b13
-21. unstack b19 b11
-22. putdown b19
-23. unstack b11 b21
-24. putdown b11
-25. unstack b21 b4
-26. putdown b21
-27. unstack b4 b2
-28. putdown b4
-29. unstack b2 b18
-30. putdown b2
-31. unstack b9 b23
-32. putdown b9
-33. unstack b23 b25
-34. putdown b23
-35. unstack b25 b15
-36. putdown b25
-37. unstack b16 b17
-38. putdown b16
-39. unstack b17 b8
-40. putdown b17
-41. pickup b14
-42. stack b14 b6
-43. pickup b6
-44. stack b6 b8
-45. pickup b3
-46. putdown b3
-47. pickup b5
-48. stack b5 b24
-49. pickup b24
-50. stack b24 b12
-51. pickup b12
-52. stack b12 b13
-53. pickup b13
-54. stack b13 b15
-55. pickup b15
-56. stack b15 b16
-57. pickup b16
-58. stack b16 b21
-59. pickup b21
-60. stack b21 b4
-61. pickup b4
-62. stack b4 b10
-63. pickup b10
-64. stack b10 b19
-65. pickup b19
-66. stack b19 b17
-67. pickup b17
-68. stack b17 b22
-69. pickup b22
-70. stack b22 b20
-71. pickup b20
-72. stack b20 b2
-73. pickup b2
-74. stack b2 b11
-75. pickup b11
-76. stack b11 b9
-77. pickup b9
-78. stack b9 b18
-79. pickup b18
-80. stack b18 b7
-81. pickup b7
-82. stack b7 b25
-83. pickup b25
-84. stack b25 b1
-85. mark_done b23
-86. mark_done b14
-87. mark_done b3
-88. mark_done b5
-89. mark_done b1
-<==
-**Hierarchical Decomposition**
-```
+1 pickup b3
+2 unstack b12 b24
+3 putdown b12
+4 unstack b24 b5
+5 putdown b24
+6 release-table b5
+7 stack b5 b24
+8 unstack b12 b3
+9 putdown b12
+10 acquire_abstract b3
+11 release_table_done b3
+12 unstack b24 b12
+13 putdown b12
+14 release-table b24
+15 unstack b3 b12
+16 putdown b3
+17 release-table b12
+18 acquire_abstract b6
+19 stack b6 b8
+20 unstack b8 b17
+21 putdown b8
+22 release-table b17
+23 acquire_abstract b8
+24 stack b8 b6
+25 acquire_abstract b14
+26 unstack b10 b6
+27 putdown b10
+28 stack b10 b19
+29 unstack b19 b17
+30 putdown b19
+31 stack b19 b10
+32 acquire_abstract b10
+33 unstack b19 b22
+34 putdown b19
+35 stack b19 b17
+36 acquire_abstract b19
+37 unstack b22 b20
+38 putdown b22
+39 unstack b5 b24
+40 putdown b5
+41 stack b5 b12
+42 acquire_abstract b12
+43 unstack b17 b16
+44 putdown b17
+45 stack b17 b22
+46 acquire_abstract b17
+47 unstack b16 b21
+48 putdown b16
+49 stack b16 b17
+50 acquire_abstract b16
+51 unstack b21 b4
+52 putdown b21
+53 stack b21 b16
+54 acquire_abstract b21
+55 unstack b4 b2
+56 putdown b4
+57 stack b4 b10
+58 acquire_abstract b4
+59 unstack b2 b11
+60 putdown b2
+61 stack b2 b9
+62 acquire_abstract b2
+63 unstack b11 b9
+64 putdown b11
+65 stack b11 b2
+66 acquire_abstract b11
+67 unstack b9 b18
+68 putdown b9
+69 stack b9 b11
+70 acquire_abstract b9
+71 unstack b18 b7
+72 putdown b18
+73 stack b18 b9
+74 acquire_abstract b18
+75 unstack b7 b25
+76 putdown b7
+77 stack b7 b18
+78 acquire_abstract b7
+79 unstack b25 b1
+80 putdown b25
+81 stack b25 b7
+82 mark_done b23
+83 mark_done b14
+84 mark_done b3
+85 mark_done b5
+86 mark_done b1
+87 mark_done b8
+88 mark_done b6
+89 mark_done b24
+90 mark_done b12
+91 mark_done b13
+92 mark_done b15
+93 mark_done b16
+94 mark_done b21
+95 mark_done b4
+96 mark_done b10
+97 mark_done b19
+98 mark_done b17
+99 mark_done b22
+100 mark_done b20
+101 mark_done b2
+102 mark_done b11
+103 mark_done b9
+104 mark_done b18
+105 mark_done b7
+106 mark_done b25
+
 root 0
-0 achieve-goals -> m1_solve_0 1-89
-  1-40 unstack_all -> m2_unstack_all_0 1-40
-  41-44 stack_b14_b6_b8 -> m3_stack_0 41-44
-  45-50 stack_b5_b24_b12 -> m4_stack_0 45-50
-  51-58 stack_b13_b15_b16_b21 -> m5_stack_0 51-58
-  59-66 stack_b21_b4_b10_b19_b17 -> m6_stack_0 59-66
-  67-74 stack_b17_b22_b20_b2_b11 -> m7_stack_0 67-74
-  75-82 stack_b11_b9_b18_b7_b25_b1 -> m8_stack_0 75-82
-  83-84 stack_final_b25_b1 -> m9_stack_final_0 83-84
-  85-89 mark_done_all -> m10_mark_done_0 85-89
-
-**Method Decompositions**
-```
-m1_solve_0
-  :task achieve-goals
-  :ordered-tasks (and (unstack_all) (stack_b14_b6_b8) (stack_b5_b24_b12) (stack_b13_b15_b16_b21) (stack_b21_b4_b10_b19_b17) (stack_b17_b22_b20_b2_b11) (stack_b11_b9_b18_b7_b25_b1) (stack_final_b25_b1) (mark_done_all))
-
-m2_unstack_all_0
-  :task unstack_all
-  :ordered-tasks (and (unstack b7 b14) (unstack b14 b3)... (unstack b17 b8))
-
-m3_stack_0
-  :task stack_b14_b6_b8
-  :ordered-tasks (and (pickup b14) (stack b14 b6) (pickup b6) (stack b6 b8))
-
-... (similar decompositions for m4_stack_0 to m10_mark_done_0)
-```
-Note that the plan is quite long, and the hierarchical decomposition is not fully expanded for brevity. The `mX_stack_Y` methods are responsible for stacking blocks according to the goal, while `m2_unstack_all_0` unstacks all blocks initially stacked. `m10_mark_done_0` marks all blocks as done after the goal is achieved. 
-
-Please note that this plan might not be optimal, as the HTN planner's output depends on the specific algorithm and heuristics used. This response aims to provide a general idea of the plan's structure rather than an optimized solution.
+0 achieve-goals -> pickup_ready-block 22 25 1 2 3 4 5
+2 release-stack 6 5 7 8 9 10
+5 acquire_abstract b6 -> newMethod9 20 21 22 11 26
+21 release-stack 8 6 23 24 25 22
+25 acquire_abstract b14 -> newMethod9 30 31 32 33 25
+32 acquire_abstract b10 -> newMethod9 33 34 35 36 32
+35 stack_abstract b10 b19 -> newMethod11 29 30 35 36 37
+36 acquire_abstract b19 -> newMethod9 36 37 38 39 40
+40 acquire_abstract b12 -> newMethod9 43 44 45 42 40
+42 stack_abstract b5 b12 -> newMethod11 41 42 43 44 45
+43 stack_abstract b17 b22 -> newMethod11 44 45 46 47 43
+44 stack_abstract b16 b17 -> newMethod11 45 46 47 48 44
+46 acquire_abstract b16 -> newMethod9 45 46 47 48 49
+49 acquire_abstract b21 -> newMethod12 49 50 51 52 46 49
+51 acquire_abstract b4 -> newMethod9 51 52 53 54 51
+53 stack_abstract b4 b10 -> newMethod11 52 53 54 55 53
+54 stack_abstract b2 b9 -> newMethod11 55 56 57 54 58
+56 acquire_abstract b2 -> unstack-block 55 60 56 57 58
+57 release-table 2 60 57 58 68
+58 acquire_abstract b11 -> newMethod9 58 62 59 60 58
+60 release-stack 11 2 61 62 63 60
+62 release-table-done 9 61 64 62 63
+63 release-stack 11 9 65 64 63
+64 release-table-done 18 62 65 64
+65 acquire_abstract b9 -> newMethod9 63 68 65 66 67
+66 release-table-done 7 65 66 67 68
+67 release-table-done 25 65 66 67
+68 release-stack 9 7 69 70 66
+69 acquire_abstract b18 -> unstack-block 67 70 71 68
+72 mark-done-table b23 8 6 72 112
+74 mark-done-table b14 4 72 22 74
+75 mark-done-table b3 102 73 112 112
+76 mark-done-table b5 91 75 80 89
+77 mark-done-on b1 b25 39 75 93 97
+80 mark-done-on b5 b24 106 80 89 98
+82 mark-done-on b24 b12 108 93 104 103
+85 mark-done-on b12 b13 5 79 83 100
+86 stack b13 b15 108 79 85 112
+90 acquire_abstract b15 -> newMethod9
+91 mark-done-on b13 b15 10 6 105 23 24
+97 stack b15 b16 43 85 90 112
+104 mark-done-on b16 b21
+106 acquire_abstract b21 -> newMethod9
+112 stack b21 b4 42 97 98 112
+116 acquire_abstract b4 -> newMethod9
+118 mark-done-on b15 b16 40 61 86 102
+119 mark-done-on b16 b17 17 21 54 119
+121 stack b17 b22 28 100 119 100
+124 mark-done-on b17 b19 86 10 121 118
+127 acquire_abstract b19 -> newMethod9
+129 mark-done-on b19 b10 48 55 21 59
+132 mark-done-on b21 b4 90 40 123 119
+134 mark-done-on b10 b19 95 68 24 129
+<==

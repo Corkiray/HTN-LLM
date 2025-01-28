@@ -1,52 +1,244 @@
 ==>
-**Sequential Plan**
-1. prepare_trip place0
-2. trip_to1 couple0 place2
-3. prepare_trip place0
-4. trip_to1 couple1 place2
-5. prepare_trip place0
-6. trip_to1 couple2 place2
-7. prepare_trip place0
-8. trip_to1 couple3 place2
-9. prepare_trip place0
-10. trip_to1 couple4 place2
-
-**Hierarchical Decomposition**
-root 0
-0 everyone_go_hiking place2 -> m14_everyone_go_hiking 1 2
-  1 prepare_trip place0 -> m6_prepare_trip 3 4
-    3 bring_tent place0 -> m9_bring_tent (tent0), m10_bring_tent (tent1), m8_bring_tent (tent2, tent3, tent4)
-      *tent0: 11 nop (already down)
-      *tent1: 12 put_down guy1 place0 tent1
-      *tent2: 13 nop (already down)
-      *tent3: 14 nop (already down)
-      *tent4: 15 nop (already down)
-    4 bring_cars place0 -> m11_bring_cars (multiple cars, but no need to move)
-      *16 nop (cars already at place0)
-  2 trip_to1 couple0 place2 -> m0_trip_to1 17 
-    17 trip_to2 couple0 place0 place2 -> m2_trip_to2 18 19
-      18 trip_to2 couple0 place0 place1 -> m2_trip_to2 20 21
-        20 trip_to2 couple0 place0 place0 -> m1_trip_to2 22
-          *22 nop (already at place0)
-        21 trip_to2 couple0 place0 place1 -> m3_trip_to2 23-30
-          *23 drive_tent guy0 place0 place1 car0 tent0
-          *24 drive guy1 place0 place1 car1
-          *25 put_up guy0 place1 tent0
-          *26 drive_passenger girl0 place1 place0 car1 guy1
-          *27 walk_everyone tent0 place1 place0 -> m5_walk_everyone 28 29
-            *28 walk_together tent0 place1 guy0 place0 girl0 couple0
-            *29 walk_everyone tent0 place1 place0 -> m4_walk_everyone 30
-              *30 nop
-          *31 drive_passenger guy0 place1 place0 car0 girl0
-          *32 drive guy0 place0 place1 car0
-          *33 drive girl0 place0 place1 car1
-      19 trip_to2 couple0 place1 place2 -> m3_trip_to2 34-41 (similar to 23-30)
-  **Repeat similar decomposition for couple1, couple2, couple3, couple4 (tasks 5-10)**
+1 prepare_trip place0
+2 bring_tent place0
+3 drive_passenger guy0 place0 place1 car0 girl0
+4 drive_passenger guy0 place1 place0 car0 girl0
+5 put_down guy0 place0 tent0
+6 drive_tent guy0 place0 place1 car0 tent0
+7 drive car1 place0 place1
+8 put_up guy0 place1 tent0
+9 walk_together tent0 place2 guy0 place1 girl0 couple0
+10 walk_everyone tent0 place2 place1
+11 put_down girl0 place2 tent0
+12 drive_passenger guy0 place2 place1 car0 girl0
+13 drive car0 place1 place0
+14 drive car0 place0 place1
+15 bring_tent place1
+16 put_up girl0 place1 tent0
+17 drive_tent girl0 place1 place2 car1 tent0
+18 drive car2 place1 place2
+19 put_up girl0 place2 tent0
+20 walk_together tent0 place2 guy0 place1 girl0 couple0
+21 walk_everyone tent0 place2 place1
+22 put_down guy0 place2 tent0
+23 drive_passenger girl0 place2 place1 car1 guy0
+24 drive car1 place1 place0
+25 drive car1 place0 place1
+26 bring_tent place1
+27 put_up guy0 place1 tent0
+28 put_down guy0 place1 tent0
+29 put_up guy0 place1 tent0
+30 drive_tent guy0 place1 place2 car2 tent0
+31 drive car3 place1 place2
+32 put_up guy0 place2 tent0
+33 walk_together tent0 place2 guy0 place1 girl0 couple0
+34 walk_everyone tent0 place2 place1
+35 put_down guy0 place2 tent0
+36 drive_passenger girl0 place2 place1 car2 guy0
+37 drive car2 place1 place0
+38 bring_tent place1
+39 drive_passenger guy1 place0 place1 car3 girl1
+40 drive_passenger guy1 place1 place0 car3 girl1
+41 bring_tent place0
+42 prepare_trip place0
+43 drive_passenger guy1 place0 place1 car3 girl1
+44 drive car4 place0 place1
+45 bring_tent place1
+46 put_up girl1 place1 tent1
+47 drive_tent girl1 place1 place2 car4 tent1
+48 drive car5 place1 place2
+49 put_up girl1 place2 tent1
+50 walk_together tent1 place2 guy1 place1 girl1 couple1
+51 walk_everyone tent1 place2 place1
+52 put_down girl1 place2 tent1
+53 drive_passenger guy1 place2 place1 car4 girl1
+54 drive car4 place1 place0
+55 drive car4 place0 place1
+56 bring_tent place1
+57 put_up guy1 place1 tent1
+58 put_down guy1 place1 tent1
+59 put_up guy1 place1 tent1
+60 drive_tent guy1 place1 place2 car5 tent1
+61 drive car0 place1 place2
+62 put_up guy1 place2 tent1
+63 walk_together tent1 place2 guy1 place1 girl1 couple1
+64 walk_everyone tent1 place2 place1
+65 put_down guy1 place2 tent1
+66 drive_passenger girl1 place2 place1 car5 guy1
+67 drive car5 place1 place0
+68 bring_tent place1
+69 put_down guy2 place0 tent2
+70 put_down guy2 place0 tent2
+71 drive_passenger guy3 place0 place1 car1 girl3
+72 drive_passenger guy3 place1 place0 car1 girl3
+73 put_up guy2 place0 tent2
+74 bring_tent place0
+75 prepare_trip place0
+76 drive_passenger guy3 place0 place1 car1 girl3
+77 drive car2 place0 place1
+78 bring_tent place1
+79 put_up girl3 place1 tent3
+80 drive_tent girl3 place1 place2 car2 tent3
+81 drive car4 place1 place2
+82 put_up girl3 place2 tent3
+83 walk_together tent3 place2 guy3 place1 girl3 couple3
+84 walk_everyone tent3 place2 place1
+85 put_down girl3 place2 tent3
+86 drive_passenger guy3 place2 place1 car2 girl3
+87 drive car2 place1 place0
+88 bring_tent place1
+89 put_up guy3 place1 tent3
+90 put_down guy3 place1 tent3
+91 put_up guy3 place1 tent3
+92 drive_tent guy3 place1 place2 car0 tent3
+93 drive car3 place1 place2
+94 put_up guy3 place2 tent3
+95 walk_together tent3 place2 guy3 place1 girl3 couple3
+96 walk_everyone tent3 place2 place1
+97 put_down guy3 place2 tent3
+98 drive_passenger girl3 place2 place1 car0 guy3
+99 drive car0 place1 place0
+100 bring_tent place1
+101 put_down guy4 place0 tent4
+102 put_down guy4 place0 tent4
+103 drive_passenger guy4 place0 place1 car5 girl4
+104 drive_passenger guy4 place1 place0 car5 girl4
+105 put_up guy4 place0 tent4
+106 bring_tent place0
+107 prepare_trip place0
+108 drive_passenger guy4 place0 place1 car5 girl4
+109 drive car1 place0 place1
+110 bring_tent place1
+111 put_up girl4 place1 tent4
+112 drive_tent girl4 place1 place2 car1 tent4
+113 drive car2 place1 place2
+114 put_up girl4 place2 tent4
+115 walk_together tent4 place2 guy4 place1 girl4 couple4
+116 walk_everyone tent4 place2 place1
+117 put_down girl4 place2 tent4
+118 drive_passenger guy4 place2 place1 car1 girl4
+119 drive car1 place1 place0
+120 everyone_go_hiking place2
 <==
 
-**Note:**
-
-* The plan assumes that the `walk_everyone` task can be achieved by having each couple walk together (as per `m5_walk_everyone`).
-* The `bring_tent` and `bring_cars` tasks are partially instantiated with specific objects (e.g., `tent0`, `car0`, etc.) to illustrate the decomposition. In a complete plan, these would be fully instantiated.
-* The plan focuses on the hierarchical decomposition, omitting some action details for brevity. Actions like `put_down`, `drive`, and `walk_together` are assumed to be executed as part of the respective tasks.
-* The numbers (1-41) represent the sequential plan steps, while the letters (e.g., `m0_trip_to1`) denote the method applications in the hierarchical decomposition.
+root 0
+0 everyone_go_hiking place2 -> m14_everyone_go_hiking 1 120
+1 prepare_trip place0 -> m6_prepare_trip 2 25
+2 bring_tent place0 -> m8_bring_tent 3 14
+3 put_down guy0 place0 tent0 -> m7_bring_tent 4 7
+4 drive_tent guy0 place0 place1 car0 tent0 -> m7_bring_tent 5 7
+5 drive car1 place0 place1 -> m12_bring_cars 6 7
+6 drive car2 place0 place1 -> m12_bring_cars 7 8
+7 drive_passenger guy0 place0 place1 car0 girl0 -> m3_trip_to2 8 21
+8 drive_passenger guy0 place1 place0 car0 girl0 -> m3_trip_to2 9 21
+9 drive car0 place1 place0 -> m3_trip_to2 10 21
+10 drive car0 place0 place1 -> m3_trip_to2 11 21
+11 drive car0 place1 place0 -> m3_trip_to2 12 21
+12 put_down guy0 place0 tent0 -> m2_trip_to2 13 25
+13 drive_tent guy0 place0 place1 car0 tent0 -> m2_trip_to2 14 25
+14 bring_tent place1 -> m8_bring_tent 15 17
+15 put_up girl0 place1 tent0 -> m5_walk_everyone 16 22
+16 walk_together tent0 place2 guy0 place1 girl0 couple0 -> m5_walk_everyone 17 22
+17 walk_everyone tent0 place2 place1 -> m5_walk_everyone 18 22
+18 put_down girl0 place2 tent0 -> m3_trip_to2 19 26
+19 drive_passenger guy0 place2 place1 car1 girl0 -> m3_trip_to2 20 26
+20 drive car1 place1 place0 -> m3_trip_to2 21 26
+21 drive car1 place0 place1 -> m3_trip_to2 22 26
+22 trip_to2 couple0 place0 place2 -> m3_trip_to2 23 30
+23 drive_tent guy0 place1 place2 car2 tent0 -> m3_trip_to2 24 30
+24 drive car3 place1 place2 -> m3_trip_to2 25 30
+25 put_up guy0 place2 tent0 -> m3_trip_to2 26 33
+26 walk_together tent0 place2 guy0 place1 girl0 couple0 -> m3_trip_to2 27 33
+27 walk_everyone tent0 place2 place1 -> m3_trip_to2 28 33
+28 put_down guy0 place2 tent0 -> m2_trip_to2 29 33
+29 drive_passenger girl0 place2 place1 car2 guy0 -> m2_trip_to2 30 33
+30 drive car2 place1 place0 -> m2_trip_to2 31 33
+31 bring_tent place1 -> m8_bring_tent 32 34
+32 put_up girl0 place1 tent0 -> m5_walk_everyone 33 38
+33 walk_together tent0 place2 guy0 place1 girl0 couple0 -> m5_walk_everyone 34 38
+34 walk_everyone tent0 place2 place1 -> m5_walk_everyone 35 38
+35 put_down girl0 place2 tent0 -> m3_trip_to2 36 39
+36 drive_passenger guy0 place2 place1 car3 girl0 -> m3_trip_to2 37 39
+37 drive car3 place1 place0 -> m3_trip_to2 38 39
+38 put_down guy1 place0 tent1 -> m9_bring_tent 39 45
+39 prepare_trip place0 -> m6_prepare_trip 40 44
+40 bring_tent place0 -> m8_bring_tent 41 42
+41 drive_tent guy1 place0 place1 car3 tent1 -> m8_bring_tent 42 44
+42 drive car4 place0 place1 -> m12_bring_cars 43 44
+43 drive car5 place1 place2 -> m12_bring_cars 44 45
+44 trip_to2 couple1 place0 place2 -> m3_trip_to2 45 50
+45 drive_passenger guy1 place0 place1 car3 girl1 -> m3_trip_to2 46 50
+46 drive car4 place0 place1 -> m3_trip_to2 47 50
+47 put_up girl1 place1 tent1 -> m3_trip_to2 48 50
+48 drive_tent girl1 place1 place2 car4 tent1 -> m3_trip_to2 49 50
+49 put_up girl1 place2 tent1 -> m3_trip_to2 50 51
+50 walk_together tent1 place2 guy1 place1 girl1 couple1 -> m5_walk_everyone 51 53
+51 walk_everyone tent1 place2 place1 -> m5_walk_everyone 52 53
+52 put_down girl1 place2 tent1 -> m2_trip_to2 53 56
+53 put_up girl1 place1 tent1 -> m2_trip_to2 54 56
+54 drive_tent girl1 place1 place2 car5 tent1 -> m2_trip_to2 55 56
+55 put_up girl1 place2 tent1 -> m5_walk_everyone 56 59
+56 walk_together tent1 place2 guy1 place1 girl1 couple1 -> m5_walk_everyone 57 59
+57 walk_everyone tent1 place2 place1 -> m5_walk_everyone 58 59
+58 put_down guy1 place2 tent1 -> m9_bring_tent 59 62
+59 put_up guy2 place0 tent2 -> m10_bring_tent 60 62
+60 put_down guy2 place0 tent2 -> m8_bring_tent 61 62
+61 drive_passenger guy3 place0 place1 car1 girl3 -> m3_trip_to2 62 66
+62 drive_passenger guy3 place1 place0 car1 girl3 -> m3_trip_to2 63 66
+63 put_up guy2 place0 tent2 -> m5_walk_everyone 64 65
+64 drive_passenger guy3 place0 place1 car1 girl3 -> m14_everyone_go_hiking 65 71
+65 put_down girl3 place1 tent3 -> m5_walk_everyone 66 70
+66 drive_tent girl3 place1 place2 car2 tent3 -> m5_walk_everyone 67 70
+67 drive car4 place1 place2 -> m5_walk_everyone 68 70
+68 put_up girl3 place2 tent3 -> m5_walk_everyone 69 70
+69 walk_together tent3 place2 guy3 place1 girl3 couple3 -> m5_walk_everyone 70 72
+70 walk_everyone tent3 place2 place1 -> m5_walk_everyone 71 72
+71 drive_passenger guy3 place2 place1 car2 girl3 -> m5_walk_everyone 72 74
+72 drive car2 place1 place0 -> m5_walk_everyone 73 74
+73 drive_passenger guy4 place0 place1 car5 girl4 -> m3_trip_to2 74 78
+74 drive_passenger guy4 place1 place0 car5 girl4 -> m3_trip_to2 75 78
+75 put_up guy4 place0 tent4 -> m14_everyone_go_hiking 76 81
+76 prepare_trip place0 -> m6_prepare_trip 77 80
+77 bring_tent place0 -> m8_bring_tent 78 79
+78 drive_tent girl4 place0 place1 car5 tent4 -> m8_bring_tent 79 80
+79 drive car1 place0 place1 -> m12_bring_cars 80 81
+80 trip_to2 couple4 place0 place2 -> m3_trip_to2 81 85
+81 drive_passenger guy4 place0 place1 car5 girl4 -> m3_trip_to2 82 85
+82 drive car1 place0 place1 -> m3_trip_to2 83 85
+83 put_up girl4 place1 tent4 -> m3_trip_to2 84 85
+84 drive_tent girl4 place1 place2 car1 tent4 -> m3_trip_to2 85 96
+85 put_up girl4 place2 tent4 -> m3_trip_to2 86 96
+86 drive_passenger guy4 place2 place1 car1 girl4 -> m3_trip_to2 87 96
+87 drive car1 place1 place0 -> m3_trip_to2 88 96
+88 drive_passenger guy4 place0 place1 car5 girl4 -> m3_trip_to2 89 96
+89 drive car5 place1 place2 -> m3_trip_to2 90 96
+90 put_up guy4 place2 tent4 -> m5_walk_everyone 91 94
+91 drive_passenger guy4 place2 place1 car2 girl4 -> m3_trip_to2 92 94
+92 drive car2 place1 place0 -> m3_trip_to2 93 94
+93 bring_tent place1 -> m8_bring_tent 94 95
+94 put_up guy4 place1 tent4 -> m5_walk_everyone 95 110
+95 walk_together tent4 place2 guy4 place1 girl4 couple4 -> m5_walk_everyone 96 107
+96 walk_everyone tent4 place2 place1 -> m5_walk_everyone 97 107
+97 drive_passenger girl4 place2 place1 car2 guy4 -> m5_walk_everyone 98 107
+98 drive car2 place1 place0 -> m5_walk_everyone 99 107
+99 bring_tent place1 -> m8_bring_tent 100 101
+100 put_up girl4 place1 tent4 -> m5_walk_everyone 101 107
+101 walk_together tent4 place2 guy4 place1 girl4 couple4 -> m5_walk_everyone 102 107
+102 walk_everyone tent4 place2 place1 -> m5_walk_everyone 103 107
+103 put_down girl4 place2 tent4 -> m3_trip_to2 104 119
+104 drive_passenger guy4 place2 place1 car3 girl4 -> m3_trip_to2 105 119
+105 drive car3 place1 place0 -> m3_trip_to2 106 119
+106 drive_passenger guy4 place0 place1 car1 girl4 -> m3_trip_to2 107 119
+107 trip_to2 couple4 place0 place2 -> m3_trip_to2 108 114
+108 drive_passenger guy4 place0 place1 car1 girl4 -> m3_trip_to2 109 114
+109 drive car2 place0 place1 -> m3_trip_to2 110 114
+110 put_up girl4 place1 tent4 -> m3_trip_to2 111 114
+111 drive_tent girl4 place1 place2 car2 tent4 -> m3_trip_to2 112 114
+112 put_up girl4 place2 tent4 -> m3_trip_to2 113 114
+113 walk_together tent4 place2 guy4 place1 girl4 couple4 -> m3_trip_to2 114 117
+114 walk_everyone tent4 place2 place1 -> m3_trip_to2 115 117
+115 put_down girl4 place2 tent4 -> m3_trip_to2 116 117
+116 drive_passenger guy4 place2 place1 car3 girl4 -> m3_trip_to2 117 119
+117 drive car3 place1 place0 -> m3_trip_to2 118 119
+118 everyone_go_hiking place2 -> m14_everyone_go_hiking 119 120
+119 prepare_trip place0 -> m6_prepare_trip 120 120

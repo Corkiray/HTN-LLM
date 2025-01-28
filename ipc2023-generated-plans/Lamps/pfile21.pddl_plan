@@ -1,36 +1,6 @@
 ==>
-**Sequential Plan:**
-1. `turn` (initial turn to start the game)
-2. `flip l3 l7 N Y` (flip the cell at (l3, l7) from N to Y)
-3. `propagate_up l3 l7 N` (propagate the change upwards from (l3, l7))
-4. `propagate_down l3 l7 N` (propagate the change downwards from (l3, l7))
-5. `propagate_left l3 l7 N` (propagate the change to the left from (l3, l7))
-6. `propagate_right l3 l7 N` (propagate the change to the right from (l3, l7))
-7. `play` (continue the game after the initial turn)
-
-**Hierarchical Decomposition:**
-```
+1 turn 
+2 play -> m1_do_play 1 2
 root 0
-0 play -> do_play 1 7
-1 turn -> do_turn l3 l7 N Y 2 3 4 5 6
-2 propagate_up l3 l7 N -> propagate_up_do l3 l7 l2 N Y 2.1 2.2
-  2.1 flip l2 l7 N Y
-  2.2 propagate_up l2 l7 N -> propagate_up_end_field l2 l7 N
-3 propagate_down l3 l7 N -> propagate_down_do l3 l7 l4 N Y 3.1 3.2
-  3.1 flip l4 l7 N Y
-  3.2 propagate_down l4 l7 N -> propagate_down_end_field l4 l7 N
-4 propagate_left l3 l7 N -> propagate_left_do l3 l7 l6 N Y 4.1 4.2
-  4.1 flip l3 l6 N Y
-  4.2 propagate_left l3 l6 N -> propagate_left_end_different l3 l6 N
-5 propagate_right l3 l7 N -> propagate_right_do l3 l7 l8 N Y 5.1 5.2
-  5.1 flip l3 l8 N Y
-  5.2 propagate_right l3 l8 N -> propagate_right_end_different l3 l8 N
-6 play -> end_game
-7 turn -> do_turn... (next turn, not fully specified due to problem complexity)
-```
-**Note:**
-
-* The plan focuses on the initial turn and a specific flip action at (l3, l7) to demonstrate the hierarchical decomposition. The subsequent turns and actions are not fully elaborated due to the complexity of the problem and the vast number of possible next states.
-* The `propagate_*` actions are decomposed based on the provided methods, showing how the effect of the initial `flip` action is propagated in all four directions until a boundary or a different state is reached.
-* The `do_play` and `end_game` methods are used to encapsulate the game's progression, with `end_game` indicating the termination of the game (though in this example, it's not fully achieved due to the open-ended nature of the subsequent turns).
-* The plan assumes that the initial `flip` action at (l3, l7) is a strategic choice to progress towards the goal state. In a real solution, this would be determined through more complex decision-making, potentially involving heuristic search or planning techniques.
+0 play -> m2_end_game
+<==

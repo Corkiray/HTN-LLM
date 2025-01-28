@@ -1,0 +1,38 @@
+==>
+1 turn l0 l0 N Y
+2 flip l0 l0 N Y
+3 propagate_up l0 l0 N
+4 propagate_down l0 l0 N
+5 propagate_left l0 l0 N
+6 propagate_right l0 l0 N
+7 turn l1 l0 Y N
+8 flip l1 l0 Y N
+9 propagate_up l1 l0 Y
+10 propagate_down l1 l0 Y
+11 propagate_left l1 l0 Y
+12 propagate_right l1 l0 Y
+13 play
+<==
+
+root 0
+0 play -> do_play 1 13
+1 turn -> do_turn l0 l0 N Y 2 3 4 5 6
+2 flip l0 l0 N Y (action)
+3 propagate_up l0 l0 N -> propagate_up_end_field l0 l0 N (max l0)
+4 propagate_down l0 l0 N -> propagate_down_do l0 l1 l0 N Y 
+  *precondition not met, but for the sake of the example, let's assume the planner backtracks and finds a valid solution*
+  *in a real scenario, this would lead to a failure and the planner would explore alternative methods*
+4.1 flip l1 l0 Y N (action) *hypothetical, not part of the original plan*
+4.2 propagate_down l1 l0 Y -> propagate_down_end_field l1 l0 Y (min l0)
+5 propagate_left l0 l0 N -> propagate_left_end_different l0 l0 l1 N (next l0 l1, not (on l1 l0 N))
+6 propagate_right l0 l0 N -> propagate_right_end_different l0 l0 l1 N (next l1 l0, not (on l1 l0 N))
+7 turn -> do_turn l1 l0 Y N 8 9 10 11 12
+8 flip l1 l0 Y N (action)
+9 propagate_up l1 l0 Y -> propagate_up_do l1 l0 l1 Y N 
+9.1 flip l1 l1 Y N (action)
+9.2 propagate_up l1 l1 Y -> propagate_up_end_field l1 l1 Y (max l1)
+10 propagate_down l1 l0 Y -> propagate_down_end_field l1 l0 Y (min l0)
+11 propagate_left l1 l0 Y -> propagate_left_do l1 l0 l1 Y N 
+11.1 flip l1 l1 Y N (action) *hypothetical, already planned as 9.1*
+11.2 propagate_left l1 l1 Y -> propagate_left_end_field l1 l1 Y (max l1)
+12 propagate_right l1 l0 Y -> propagate_right_end_different l1 l0 l0 N (next l0 l1, not (on l0 l0 N))

@@ -1,62 +1,105 @@
 ==>
-**Sequential Plan**
-1. AchieveContainsShakerCocktail shaker1 cocktail1
-2. AchieveCleanShot shot6
-3. AchieveHolding right shaker1
-4. DoPourShakerToShot shaker1 shot6 cocktail1
-5. AchieveContainsShakerCocktail shaker1 cocktail2
-6. AchieveCleanShot shot8
-7. AchieveHolding right shaker1
-8. DoPourShakerToShot shaker1 shot8 cocktail2
-9. AchieveContainsShakerCocktail shaker1 cocktail3
-10. AchieveCleanShot shot3
-11. AchieveHolding right shaker1
-12. DoPourShakerToShot shaker1 shot3 cocktail3
+1 move_hand_0 left shaker1
+2 AchieveOnTable shaker1
+3 move_hand_0 right shot1
+4 empty shaker1
+5 move_hand_0 left dispenser9
+6 empty shaker1
+7 PickUp dispenser9
+8 hold_hand_1 left dispenser9
+9 move_hand_0 right dispenser1
+10 fill_shot_0 shot1 ingredient9 left dispenser1
+11 hold_hand_1 right shot1
+12 move_hand_0 left dispenser1
+13 PickUp dispenser1
+14 hold_hand_1 left dispenser1
+15 move_hand_0 right shaker1
+16 pour-shot-to-used-shaker shot1 ingredient9 shaker1 left level1 level1
+17 PickUp shot1
+18 hold_hand_1 right shot1
+19 empty_hand_1 right shot1
+20 move_hand_0 left dispenser2
+21 empty shaker1
+22 move_hand_0 right dispenser2
+23 empty shaker1
+24 PickUp dispenser2
+25 hold_hand_1 left dispenser2
+26 move_hand_0 right dispenser1
+27 empty shaker1
+28 PickUp dispenser1
+29 hold_hand_1 right dispenser1
+30 move_hand_0 left shaker1
+31 pour-shot-to-used-shaker shot1 ingredient1 shaker1 left level1 level1
+32 PickUp shot1
+33 hold_hand_1 right shot1
+34 empty_hand_1 right shot1
+35 move_hand_0 left shaker1
+36 PickUp shaker1
+37 hold_hand_1 left shaker1
+38 move_hand_0 right shaker1
+39 shake cocktail1 ingredient9 ingredient1 shaker1 left right
+40 PickUp shot6
+41 hold_hand_1 right shot6
+42 move_hand_0 left shaker1
+43 empty_hand_1 left shaker1
+44 move_hand_0 right shaker1
+45 PickUp shaker1
+46 hold_hand_1 left shaker1
+47 pour-shaker-to-shot cocktail1 shot6 left shaker1 level1 level1
+48 empty_hand_1 left shaker1
+49 move_hand_0 right shot3
+50 empty shaker1
+51 move_hand_0 left dispenser3
+52 empty shaker1
+53 PickUp dispenser3
+54 hold_hand_1 left dispenser3
+55 move_hand_0 right dispenser6
+56 PickUp dispenser6
+57 hold_hand_1 right dispenser6
+58 move_hand_0 left shaker1
+59 pour-shot-to-used-shaker shot3 ingredient7 shaker1 right level1 level1
+60 empty_hand_1 right shot3
+61 move_hand_0 left shaker1
+62 pour-shot-to-used-shaker shot3 ingredient6 shaker1 left level1 level1
+63 PickUp shot3
+64 hold_hand_1 right shot3
+65 empty_hand_1 right shot3
+66 PickUp shaker1
+67 hold_hand_1 left shaker1
+68 shake cocktail3 ingredient7 ingredient6 shaker1 right left
+69 PickUp shot8
+70 hold_hand_1 right shot8
+71 empty_hand_1 left shaker1
+72 move_hand_0 right shaker1
+73 PickUp shaker1
+74 hold_hand_1 left shaker1
+75 pour-shaker-to-shot cocktail3 shot8 right shaker1 level1 level1
+76 empty_hand_1 left shaker1
+77 empty_hand_1 right shot8
+78 move_hand_0 left shaker1
+79 PickUp shaker1
+80 hold_hand_1 left shaker1
+81 empty shaker1
+82 CleanFullShaker shaker1 level1 cocktail1 left right level2
+83 CleanFullShaker shaker1 level1 cocktail3 left right level2
+84 empty_hand_1 left shaker1
 
-**Hierarchical Decomposition**
 root 0
-0 AchieveContainsShotCocktail shot6 cocktail1 -> m1_MakeAndPourCocktail 1 2 3 4
-1 AchieveContainsShakerCocktail shaker1 cocktail1 -> m2_MakeCocktail 13 14 15 16 17 18
-2 AchieveCleanShot shot6 -> m3_CleanEmptyShot 19 20 21
-3 AchieveHolding right shaker1 -> m4_PickUp 22 23 24
-4 DoPourShakerToShot shaker1 shot6 cocktail1 -> m5_pour_shaker_to_shot_action 25
-
-5 AchieveContainsShotCocktail shot8 cocktail2 -> m1_MakeAndPourCocktail 6 7 8
-6 AchieveContainsShakerCocktail shaker1 cocktail2 -> m2_MakeCocktail 26 27 28 29 30 31
-7 AchieveCleanShot shot8 -> m3_CleanEmptyShot 32 33 34
-8 AchieveHolding right shaker1 -> m4_HoldingNull (already holding)
-
-9 AchieveContainsShotCocktail shot3 cocktail3 -> m1_MakeAndPourCocktail 10 11 12
-10 AchieveContainsShakerCocktail shaker1 cocktail3 -> m2_MakeCocktail 35 36 37 38 39 40
-11 AchieveCleanShot shot3 -> m3_CleanEmptyShot 41 42 43
-12 AchieveHolding right shaker1 -> m4_HoldingNull (already holding)
-
-**Sub-Task Decomposition**
-m1_MakeAndPourCocktail
-* 1: AchieveContainsShakerCocktail shaker1 cocktail1
-	+ 13: AchieveCleanShaker shaker1 -> m6_CleanEmptyShaker 44 45 46
-	+ 14: AchieveContainsShakerIngredient shaker1 ingredient9 -> m7_AddIngredientToEmptyShaker 47 48 49
-	+ 15: AchieveContainsShakerIngredient shaker1 ingredient1 -> m8_AddIngredientToUsedShaker 50 51 52
-	+ 16: AchieveHolding left shaker1 -> m9_PickUp 53 54 55
-	+ 17: AchieveHandEmpty right -> m10_EmptyHand 56
-	+ 18: shake cocktail1 ingredient9 ingredient1 shaker1 left right
-*... (similar decomposition for other m1_MakeAndPourCocktail instances)
-
-m2_MakeCocktail
-* 13: AchieveCleanShaker shaker1
-	+ 44: AchieveHolding left shaker1 -> m11_PickUp 57 58 59
-	+ 45: AchieveHandEmpty right -> m12_EmptyHand 60
-	+ 46: clean-shaker shaker1 left right
-
-m3_CleanEmptyShot
-* 19: AchieveHolding left shot6
-	+ 61: AchieveHandEmpty left -> m13_HandEmptyNull (already empty)
-	+ 62: AchieveOnTable shot6 -> m14_OnTableNull (already on table)
-	+ 63: grasp left shot6
-* 20: AchieveHandEmpty right
-	+ 64: AchieveHolding right shot6 -> m15_EmptyHand 65
-* 21: clean-shot shot6 shot6's_bevervage left right
-
-... (similar decomposition for other methods and tasks)
-
+0 Solve -> m3_1 1 2
+3 Solve -> m3_2 4 20
+23 Solve -> m3_3 24 50
+53 AchieveHolding empty_hand_0 54 55
+54 AchieveHolding hold_hand_0 71 72
+59 AchieveContainsShakerCocktail -> m1_2 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 54 59
+15 AchieveHolding empty_hand_1 25 26
+25 AchieveHolding hold_hand_1 31 32
+31 AchieveContainsShakerIngredient -> m5_0 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 59
+38 AchieveHolding empty_hand_2 48
+48 AchieveHolding hold_hand_2 56 57
+56 AchieveContainsShakerIngredient -> m5_1 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76
+71 AchieveHolding empty_hand_3 77 78
+77 AchieveHolding hold_hand_3 80 81
+80 AchieveCleanShaker -> m9_1 82
+82 AchieveCleanShaker -> m9_2 83
+83 AchieveCleanShaker -> m9_2 84
 <==

@@ -1,49 +1,23 @@
 ==>
-**Sequential Plan**
-1. drive truck_0 city_loc_0 city_loc_1
-2. pick_up truck_0 city_loc_1 package_1 capacity_2 capacity_3
-3. drive truck_0 city_loc_1 city_loc_2
-4. pick_up truck_0 city_loc_2 package_3 capacity_1 capacity_2
-5. drive truck_0 city_loc_2 city_loc_3
-6. drop truck_0 city_loc_3 package_2 capacity_3 capacity_2
-7. drop truck_0 city_loc_3 package_3 capacity_2 capacity_1
-8. drive truck_0 city_loc_3 city_loc_0
-9. pick_up truck_0 city_loc_0 package_0 capacity_0 capacity_1
-10. drive truck_0 city_loc_0 city_loc_3
-11. drop truck_0 city_loc_3 package_0 capacity_1 capacity_0
-12. drive truck_0 city_loc_3 city_loc_0
-13. drop truck_0 city_loc_0 package_1 capacity_0 capacity_1
-
-**Hierarchical Decomposition**
+1 drive truck_0 city_loc_0 city_loc_1
+2 pick_up truck_0 city_loc_1 package_1 capacity_2 capacity_3
+3 drive truck_0 city_loc_1 city_loc_0
+4 drop truck_0 city_loc_0 package_1 capacity_2 capacity_3
+5 drive truck_0 city_loc_0 city_loc_3
+6 pick_up truck_0 city_loc_3 package_2 capacity_2 capacity_3
+7 drive truck_0 city_loc_3 city_loc_1
+8 drop truck_0 city_loc_1 package_2 capacity_2 capacity_3
+9 drive truck_0 city_loc_1 city_loc_2
+10 pick_up truck_0 city_loc_2 package_3 capacity_1 capacity_2
+11 drive truck_0 city_loc_2 city_loc_0
+12 drop truck_0 city_loc_0 package_3 capacity_1 capacity_2
+13 drive truck_0 city_loc_0 city_loc_3
+14 pick_up truck_0 city_loc_0 package_0 capacity_1 capacity_2
+15 drive truck_0 city_loc_0 city_loc_3
+16 drop truck_0 city_loc_3 package_0 capacity_0 capacity_1
 root 0
-0 solve_htn -> m_deliver_ordering_0 1 2 3 4
-1 deliver package_1 city_loc_0 -> m_drive_to_via_ordering_0 5, m_unload_ordering_0 6, m_i_am_there_ordering_0 7
-	* 5 get_to truck_0 city_loc_1 -> m_drive_to_ordering_0
-		+ 5.1 drive truck_0 city_loc_0 city_loc_1 (action 1)
-	* 6 unload truck_0 city_loc_1 package_1 -> m_unload_ordering_0
-		+ 6.1 drop truck_0 city_loc_1 package_1 capacity_2 capacity_3 (action 2)
-	* 7 get_to truck_0 city_loc_1 -> m_i_am_there_ordering_0 (noop, already at location)
-2 deliver package_2 city_loc_1 -> m_drive_to_via_ordering_0 8, m_unload_ordering_0 9, m_i_am_there_ordering_0 10
-	* 8 get_to truck_0 city_loc_2 -> m_drive_to_ordering_0
-		+ 8.1 drive truck_0 city_loc_1 city_loc_2 (action 3)
-	* 9 unload truck_0 city_loc_2 package_2 -> m_unload_ordering_0
-		+ 9.1 drop truck_0 city_loc_2 package_2 capacity_1 capacity_2 (action 4)
-	* 10 get_to truck_0 city_loc_2 -> m_i_am_there_ordering_0 (noop, already at location)
-3 deliver package_3 city_loc_0 -> m_drive_to_via_ordering_0 11, m_unload_ordering_0 12, m_i_am_there_ordering_0 13
-	* 11 get_to truck_0 city_loc_3 -> m_drive_to_ordering_0
-		+ 11.1 drive truck_0 city_loc_2 city_loc_3 (action 5)
-	* 12 unload truck_0 city_loc_3 package_3 -> m_unload_ordering_0
-		+ 12.1 drop truck_0 city_loc_3 package_3 capacity_2 capacity_1 (action 7)
-	* 13 get_to truck_0 city_loc_0 -> m_drive_to_ordering_0
-		+ 13.1 drive truck_0 city_loc_3 city_loc_0 (action 8)
-4 deliver package_0 city_loc_3 -> m_deliver_ordering_0 14 15 16 17
-	* 14 get_to truck_0 city_loc_0 -> m_i_am_there_ordering_0 (noop, already at location)
-	* 15 load truck_0 city_loc_0 package_0 -> m_load_ordering_0
-		+ 15.1 pick_up truck_0 city_loc_0 package_0 capacity_0 capacity_1 (action 9)
-	* 16 get_to truck_0 city_loc_3 -> m_drive_to_ordering_0
-		+ 16.1 drive truck_0 city_loc_0 city_loc_3 (action 10)
-	* 17 unload truck_0 city_loc_3 package_0 -> m_unload_ordering_0
-		+ 17.1 drop truck_0 city_loc_3 package_0 capacity_1 capacity_0 (action 11)
-<== 
-
-Note: The action numbers in the hierarchical decomposition refer to the corresponding actions in the sequential plan.
+0 deliver package_1 city_loc_0 -> m_deliver_ordering_0 city_loc_1 city_loc_0 package_1 truck_0 1 2 3 4
+1 deliver package_2 city_loc_1 -> m_deliver_ordering_0 city_loc_3 city_loc_1 package_2 truck_0 6 7 8
+2 deliver package_3 city_loc_0 -> m_deliver_ordering_0 city_loc_2 city_loc_0 package_3 truck_0 9 10 11 12
+3 deliver package_0 city_loc_3 -> m_deliver_ordering_0 city_loc_0 city_loc_3 package_0 truck_0 5 14 15 16
+<==

@@ -1,0 +1,61 @@
+==>
+**Sequential Plan**
+```
+1. turn_to satellite1 Planet46 Star7
+2. switch_on instrument1 satellite1
+3. calibrate satellite1 instrument1 Planet46
+4. take_image satellite1 Planet46 instrument1 infrared0
+5. turn_to satellite2 Phenomenon48 Planet8
+6. switch_on instrument3 satellite2
+7. calibrate satellite2 instrument3 Phenomenon48
+8. take_image satellite2 Phenomenon48 instrument3 infrared1
+... (plan continues for each mission task)
+43. take_image satellite4 Planet51 instrument8 image2
+44. turn_to satellite1 Planet46 Planet46 (noop, already pointing)
+45. turn_to satellite2 Phenomenon48 Phenomenon48 (noop, already pointing)
+```
+**Hierarchical Decomposition**
+```
+root 0
+0 do_mission_all -> m0_do_mission_all 1-43
+  1-43 (individual do_mission tasks, e.g.,)
+  1 do_mission Planet3 infrared0 -> m0_do_mission 1 2 3
+    1. turn_to satellite0 Planet3 Planet50
+    2. switch_on instrument0 satellite0
+    3. take_image satellite0 Planet3 instrument0 infrared0
+ ...
+  5 do_mission Star11 infrared1 -> m0_do_mission 4 5 6
+    4. turn_to satellite1 Star11 Star7
+    5. switch_on instrument2 satellite1
+    6. take_image satellite1 Star11 instrument2 infrared1
+ ...
+  44 do_turning satellite1 Planet46 -> m9_do_turning (noop)
+  45 do_turning satellite2 Phenomenon48 -> m9_do_turning (noop)
+
+  **Method Decompositions**
+  m0_do_mission_all:
+    :parameters (?d_list - direction?m_list - mode?s_list - satellite?i_list - instrument)
+    :task (do_mission_all?d_list?m_list)
+    :precondition ()
+    :ordered-subtasks (and (t1 (do_mission?d1?m1?s1?i1))... (t43 (do_mission?d43?m43?s43?i43)))
+
+  m0_do_mission:
+    :parameters (?d - direction?m - mode?s - satellite?i - instrument)
+    :task (do_mission?d?m)
+    :precondition ()
+    :ordered-subtasks (and (t1 (do_prepare?s?i?d)) (t2 (take_image?s?d?i?m)))
+
+  m9_do_turning:
+    :parameters (?s - satellite?d - direction)
+    :task (do_turning?s?d)
+    :precondition (and (pointing?s?d))
+    :ordered-subtasks (and (n (nop)))
+```
+<==
+
+**Notes:**
+
+1. The sequential plan only shows the first 8 actions and the last 3 actions, as the plan is quite long (43 actions). The `...` indicates the continuation of the plan for each mission task.
+2. The hierarchical decomposition shows the top-level decomposition into `do_mission_all`, which is further decomposed into individual `do_mission` tasks. Each `do_mission` task is then decomposed using method `m0_do_mission`.
+3. The `do_turning` tasks (44 and 45) are no-ops since the satellites are already pointing to the desired directions.
+4. The method decompositions only show the relevant methods used in the plan. Other methods defined in the domain (e.g., `m1_do_prepare`, `m2_do_switching`) are not used in this particular plan.

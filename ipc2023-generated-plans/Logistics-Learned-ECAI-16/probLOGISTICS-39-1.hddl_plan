@@ -1,44 +1,54 @@
 ==>
-**Sequential Plan**
-```
-1. ACHIEVE-AT OBJ112 POS8 (task0)
-2. ACHIEVE-AT OBJ103 APT13 (task1)
-...
-39. ACHIEVE-AT OBJ101 POS1 (task38)
-```
-**Hierarchical Decomposition**
-```
+
+1 (ACHIEVE-AT TRU1 POS2)
+2 (ACHIEVE-AT TRU1 POS2)
+3 (i-UNLOCK-AT TRU1 POS2)
+4 (LOAD-TRUCK OBJ11 TRU1 POS2)
+5 (ACHIEVE-AT-TRK TRU1 POS2)
+6 (IFUNLOCK-AT TRU1 POS1)
+7 (i-UNLOCK-AT TRU1 POS2)
+8 (DO-IN-UNLOAD-TRUCK0 OBJ11 TRU1 POS2)
+9 (ACHIEVE-AT OBJ11 APT1)
+10 (ACHIEVE-AT OBJ12 POS5)
+11 (ACHIEVE-AT OBJ13 POS3)
+12 (ACHIEVE-AT OBJ21 POS6)
+13 (ACHIEVE-AT OBJ22 APT2)
+14 (ACHIEVE-AT OBJ23 APT6)
+15 (ACHIEVE-AT OBJ31 POS10)
+16 (ACHIEVE-AT OBJ32 POS3)
+17 (ACHIEVE-AT OBJ33 POS8)
+18 (ACHIEVE-AT OBJ41 POS1)
+19 (ACHIEVE-AT OBJ42 POS11)
+20 (ACHIEVE-AT OBJ43 APT8)
+21 (ACHIEVE-AT OBJ51 POS8)
+22 (ACHIEVE-AT OBJ52 POS10)
+23 (ACHIEVE-AT OBJ53 POS3)
+24 (ACHIEVE-AT OBJ61 POS3)
+25 (ACHIEVE-AT OBJ62 APT4)
+26 (ACHIEVE-AT OBJ63 POS8)
+27 (ACHIEVE-AT OBJ71 APT7)
+28 (ACHIEVE-AT OBJ72 POS13)
+29 (ACHIEVE-AT OBJ73 POS5)
+30 (ACHIEVE-AT OBJ81 POS7)
+31 (ACHIEVE-AT OBJ82 APT6)
+32 (ACHIEVE-AT OBJ83 APT9)
+33 (ACHIEVE-AT OBJ91 POS9)
+34 (ACHIEVE-AT OBJ92 APT5)
+35 (ACHIEVE-AT OBJ93 APT3)
+36 (ACHIEVE-AT OBJ101 APT9)
+37 (ACHIEVE-AT OBJ102 APT7)
+38 (ACHIEVE-AT OBJ103 APT11)
+39 (ACHIEVE-AT OBJ111 POS13)
+40 (ACHIEVE-AT OBJ112 APT10)
+41 (ACHIEVE-AT OBJ113 POS7)
+42 (ACHIEVE-AT OBJ121 POS4)
+43 (ACHIEVE-AT OBJ122 APT12)
+44 (ACHIEVE-AT OBJ123 APT11)
+45 (ACHIEVE-AT OBJ131 POS1)
+46 (ACHIEVE-AT OBJ132 POS9)
+47 (ACHIEVE-AT OBJ133 POS6)
 root 0
-0 ACHIEVE-AT OBJ112 POS8 -> M10-ACHIEVE-AT 1 2 3
-  1 ACHIEVE-AT0 OBJ112 POS8 -> M12-ACHIEVE-AT0 4 5
-    4 DO-AT-LOAD-TRUCK0 OBJ112 TRU8 POS8
-    5 ACHIEVE-AT0 OBJ112 POS8 -> M11-ACHIEVE-AT0 (already at POS8, no-op)
-  2 ACHIEVE-AT-TRK TRU8 POS8 -> M34-ACHIEVE-AT 6 7
-    6 ACHIEVE-AT1 TRU8 POS8 -> M36-ACHIEVE-AT1 8 9
-      8 DRIVE-TRUCK TRU8 POS13 POS8 CIT13
-      9 ACHIEVE-AT1 TRU8 POS8 -> M35-ACHIEVE-AT1 (already at POS8, no-op)
-    7 i-LOCK-AT TRU8 POS8
-  3 i-LOCK-AT OBJ112 POS8
-
-1 ACHIEVE-AT OBJ103 APT13 -> M10-ACHIEVE-AT 10 11 12
- ...
- ... (similar decomposition for each task)
- ...
-```
-**Selected Sub-Plan for Task 0 (OBJ112 POS8) with Actions**
-```
-1. DRIVE-TRUCK TRU8 POS13 POS8 CIT13 (t=8)
-2. i-LOCK-AT TRU8 POS8 (t=9)
-3. DO-AT-LOAD-TRUCK0 OBJ112 TRU8 POS8 (t=4)
-   -> LOAD-TRUCK OBJ112 TRU8 POS8 (t=4.1)
-   -> i-LOCK-AT OBJ112 POS8 (t=4.2)
-4. i-LOCK-AT OBJ112 POS8 (t=3, redundant, can be removed)
-```
-**Note:**
-
-* `t=X` represents the time step for each action.
-* `->` indicates the decomposition of a task into sub-tasks or actions.
-* `MXX-ACHIEVE-AT` and similar method names refer to the corresponding methods in the HTN domain definition.
-* This plan assumes that the initial state and constraints are satisfied. In a real-world scenario, you would need to verify this.
-* The plan for each task is not fully expanded here due to space constraints. You can apply the same decomposition process for each task.
-* Redundant actions (e.g., `i-LOCK-AT OBJ112 POS8` at t=3 and t=4.2) can be removed to optimize the plan.
+0 solve_problem -> m4_Distribute_0 1 2
+48 deliver_airplane OBJ11 TRU1 TRU10 -> m2_DeliverTruck_0 3 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 3
+...
+<==

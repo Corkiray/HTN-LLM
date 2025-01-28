@@ -1,0 +1,108 @@
+==>
+1 unstack b17 b14
+2 putdown b17
+3 unstack b13 b9
+4 putdown b13
+5 unstack b11 b5
+6 putdown b11
+7 pickup b17
+8 stack b17 b14
+9 pickup b13
+10 stack b13 b7
+11 unstack b3 b19
+12 putdown b3
+13 unstack b19 b16
+14 putdown b19
+15 pickup b1
+16 stack b1 b19
+17 pickup b11
+18 stack b11 b1
+19 unstack b9 b3
+20 putdown b9
+21 pickup b2
+22 stack b2 b9
+23 pickup b10
+24 stack b10 b17
+25 unstack b5 b4
+26 putdown b5
+27 unstack b4 b18
+28 putdown b4
+29 unstack b18 b15
+30 putdown b18
+31 unstack b15 b20
+32 putdown b15
+33 pickup b8
+34 stack b8 b14
+35 pickup b3
+36 stack b3 b8
+37 pickup b20
+38 stack b20 b18
+39 pickup b7
+40 stack b7 b20
+41 pickup b14
+42 stack b14 b13
+43 pickup b9
+44 stack b9 b5
+45 pickup b5
+46 stack b5 b4
+47 unstack b16 b8
+48 putdown b16
+49 pickup b4
+50 stack b4 b16
+51 pickup b15
+52 stack b15 b6
+53 pickup b12
+54 putdown b12
+root 0
+0 achieve-goals -> mark-done-table b2 53 54
+1 achieve-goals -> unstack-block b17 1 2
+2 achieve-goals -> unstack-block b13 3 4
+3 achieve-goals -> unstack-block b11 5 6
+4 achieve-goals -> pickup-ready-block b17 b14 7 8
+5 achieve-goals -> pickup-ready-block b13 b7 9 10
+6 achieve-goals -> unstack-block b3 11 12
+7 achieve-goals -> unstack-block b19 13 14
+8 achieve-goals -> pickup-ready-block b1 b19 15 16
+9 achieve-goals -> pickup-ready-block b11 b1 17 18
+10 achieve-goals -> unstack-block b9 19 20
+11 achieve-goals -> pickup-ready-block b2 b9 21 22
+12 achieve-goals -> pickup-ready-block b10 b17 23 24
+13 achieve-goals -> unstack-block b5 25 26
+14 achieve-goals -> unstack-block b4 27 28
+15 achieve-goals -> unstack-block b18 29 30
+16 achieve-goals -> unstack-block b15 31 32
+17 achieve-goals -> pickup-ready-block b8 b14 33 34
+18 achieve-goals -> pickup-ready-block b3 b8 35 36
+19 achieve-goals -> pickup-ready-block b20 b18 37 38
+20 achieve-goals -> pickup-ready-block b7 b20 39 40
+21 achieve-goals -> pickup-ready-block b14 b13 41 42
+22 achieve-goals -> pickup-ready-block b9 b5 43 44
+23 achieve-goals -> pickup-ready-block b5 b4 45 46
+24 achieve-goals -> unstack-block b16 47 48
+25 achieve-goals -> pickup-ready-block b4 b16 49 50
+26 achieve-goals -> pickup-ready-block b15 b6 51 52
+27 acquire_abstract b17 -> newMethod12 b17 b14 1
+28 putdown_abstract b17 -> newMethod10 b17 2
+29 acquire_abstract b13 -> newMethod12 b13 b9 3
+30 putdown_abstract b13 -> newMethod10 b13 4
+31 acquire_abstract b11 -> newMethod12 b11 b5 5
+32 putdown_abstract b11 -> newMethod10 b11 6
+33 acquire_abstract b17 -> newMethod9 b17 7
+34 stack_abstract b17 b14 -> newMethod11 b17 b14 8
+35 acquire_abstract b13 -> newMethod9 b13 9
+36 stack_abstract b13 b7 -> newMethod11 b13 b7 10
+37 acquire_abstract b3 -> newMethod12 b3 b19 11
+38 putdown_abstract b3 -> newMethod10 b3 12
+39 acquire_abstract b19 -> newMethod12 b19 b16 13
+40 putdown_abstract b19 -> newMethod10 b19 14
+41 acquire_abstract b1 -> newMethod9 b1 15
+42 stack_abstract b1 b19 -> newMethod11 b1 b19 16
+43 acquire_abstract b11 -> newMethod9 b11 17
+44 stack_abstract b11 b1 -> newMethod11 b11 b1 18
+45 acquire_abstract b9 -> newMethod12 b9 b3 19
+46 putdown_abstract b9 -> newMethod10 b9 20
+47 acquire_abstract b2 -> newMethod9 b2 21
+48 stack_abstract b2 b9 -> newMethod11 b2 b9 22
+49 acquire_abstract b10 -> newMethod9 b10 23
+50 stack_abstract b10 b17 -> newMethod11 b10 b17 24
+<==

@@ -1,71 +1,324 @@
-Here is a hierarchical plan to solve the given HTN problem, following the specified output format:
-```
 ==>
-1 AchieveContainsShotCocktail shot3 cocktail1
-2 AchieveContainsShotCocktail shot14 cocktail2
-3 AchieveContainsShotCocktail shot10 cocktail3
-4 AchieveContainsShotCocktail shot9 cocktail4
-5 AchieveContainsShotCocktail shot7 cocktail5
-6 AchieveContainsShotCocktail shot15 cocktail6
-7 AchieveContainsShotCocktail shot6 cocktail7
-8 AchieveContainsShotCocktail shot11 cocktail8
-9 AchieveContainsShotCocktail shot13 cocktail9
-10 AchieveContainsShotCocktail shot5 cocktail10
-
-root 0
-0 SolveCocktails -> m1_cocktail_1 1
-  1 AchieveContainsShotCocktail shot3 cocktail1 -> m2_make_cocktail_1 11 12 13 14 15 16
-    11 AchieveCleanShaker shaker1 -> m3_clean_shaker_null (already clean)
-    12 AchieveContainsShakerIngredient shaker1 ingredient2 -> m4_add_ingredient_to_empty_shaker_1 17 18 19
-    13 AchieveContainsShakerIngredient shaker1 ingredient6 -> m4_add_ingredient_to_used_shaker_1 20 21 22
-    14 AchieveHolding right shaker1 -> m5_pick_up 23
-    15 AchieveHandEmpty left -> m6_empty_hand 24
-    16 DoPourShakerToShot shaker1 shot3 cocktail1 -> m7_pour_shaker_to_shot_action 25
-     ...
-  2 AchieveContainsShotCocktail shot14 cocktail2 -> m2_make_cocktail_2... (similar decomposition)
-  3 AchieveContainsShotCocktail shot10 cocktail3 -> m2_make_cocktail_3... (similar decomposition)
-  4 AchieveContainsShotCocktail shot9 cocktail4 -> m2_make_cocktail_4... (similar decomposition)
-  5 AchieveContainsShotCocktail shot7 cocktail5 -> m2_make_cocktail_5... (similar decomposition)
-  6 AchieveContainsShotCocktail shot15 cocktail6 -> m2_make_cocktail_6... (similar decomposition)
-  7 AchieveContainsShotCocktail shot6 cocktail7 -> m2_make_cocktail_7... (similar decomposition)
-  8 AchieveContainsShotCocktail shot11 cocktail8 -> m2_make_cocktail_8... (similar decomposition)
-  9 AchieveContainsShotCocktail shot13 cocktail9 -> m2_make_cocktail_9... (similar decomposition)
-  10 AchieveContainsShotCocktail shot5 cocktail10 -> m2_make_cocktail_10... (similar decomposition)
-
-... (further decomposition for each cocktail)
-
-**Detailed decomposition for cocktail1 (shot3)**
-
-17 AchieveContainsShotIngredient shot1 ingredient2 -> m8_add_ingredient_to_shot 26 27 28
-  26 AchieveCleanShot shot1 -> m9_clean_empty_shot 29
-  27 AchieveHolding left shot1 -> m5_pick_up 30
-  28 FillShot shot1 ingredient2 left right dispenser2 -> action_fill-shot 31
-18 AchieveHolding right shot1 -> m5_pick_up 32
-19 PourShotToCleanShaker shot1 ingredient2 shaker1 right level1 level2 -> action_pour-shot-to-clean-shaker 33
-20 AchieveContainsShotIngredient shot2 ingredient6 -> m8_add_ingredient_to_shot... (similar decomposition)
-21 AchieveHolding left shot2 -> m5_pick_up...
-22 PourShotToUsedShaker shot2 ingredient6 shaker1 left level2 level3 -> action_pour-shot-to-used-shaker...
-23 Grasp right shaker1 -> action_grasp 34
-24 Drop left (none) -> action_drop 35
-25 PourShakerToShot cocktail1 shaker1 shot3 right level3 level2 -> action_pour-shaker-to-shot 36
-
-**Action sequence for cocktail1 (shot3)**
-
-26-29: CleanShot shot1 (already clean)
-30: Grasp left shot1
-31: FillShot shot1 ingredient2 left right dispenser2
-32: Grasp right shot1
-33: PourShotToCleanShaker shot1 ingredient2 shaker1 right level1 level2
-... (similar actions for ingredient6)
-34: Grasp right shaker1
-35: Drop left (none)
-36: PourShakerToShot cocktail1 shaker1 shot3 right level3 level2
-
-<==
-```
-**Note:**
-
-* The plan is truncated for brevity, showing only the decomposition for `cocktail1` (shot3). Similar decompositions apply to the other cocktails.
-* Method names (e.g., `m1_cocktail_1`, `m2_make_cocktail_1`) are generated automatically for illustration purposes.
-* Action names (e.g., `action_fill-shot`, `action_pour-shaker-to-shot`) correspond to the actions defined in the HTN domain.
-* The action sequence for `cocktail1` (shot3) is provided at the end, showing the specific actions required to achieve the goal.
+1 empty-shot right shot1 beverage0 
+2 pick-up left shaker1 
+3 empty-hand right shot1 
+4 put-down shot1 right 
+5 pick-up left dispenser1 
+6 fill-shot shot1 ingredient1 left right dispenser1 
+7 put-down dispenser1 right 
+8 pick-up left shot1 
+9 pour-shot-to-clean-shaker shot1 ingredient1 shaker1 left level1 level2 
+10 put-down shot1 right 
+11 pick-up left dispenser6 
+12 empty-hand left shaker1 
+13 fill-shot shot2 ingredient6 left right dispenser6 
+14 put-down dispenser6 right 
+15 pick-up left shot2 
+16 pour-shot-to-used-shaker shot2 ingredient6 shaker1 left level2 level3 
+17 put-down shot2 right 
+18 shake cocktail1 ingredient1 ingredient6 shaker1 left right 
+19 pick-up right shot3 
+20 empty-hand right shot3 
+21 put-down shot3 left 
+22 pour-shaker-to-shot cocktail1 shot3 shaker1 left level3 level2 
+23 pick-up right dispenser1 
+24 empty-hand right dispenser1 
+25 pick-up right shot1 
+26 fill-shot shot1 ingredient1 right left dispenser1 
+27 put-down dispenser1 left 
+28 put-down shot1 right 
+29 pick-up right dispenser6 
+30 empty-hand right dispenser6 
+31 pick-up right shot2 
+32 fill-shot shot2 ingredient6 right left dispenser6 
+33 put-down dispenser6 left 
+34 put-down shot2 right 
+35 pick-up right dispenser10 
+36 empty-hand right dispenser10 
+37 pick-up right shot4 
+38 fill-shot shot4 ingredient10 right left dispenser10 
+39 put-down dispenser10 left 
+40 put-down shot4 right 
+41 pick-up right dispenser6 
+42 empty-hand right dispenser6 
+43 pick-up right shot2 
+44 pour-shot-to-clean-shaker shot2 ingredient6 shaker1 right level2 level2 
+45 put-down shot2 left 
+46 pick-up right dispenser10 
+47 empty-hand right dispenser10 
+48 pick-up right shot5 
+49 fill-shot shot5 ingredient10 right left dispenser10 
+50 put-down dispenser10 left 
+51 put-down shot5 right 
+52 pick-up right dispenser6 
+53 empty-hand right dispenser6 
+54 pick-up right shot2 
+55 pour-shot-to-used-shaker shot2 ingredient6 shaker1 right level2 level3 
+56 put-down shot2 left 
+57 shake cocktail2 ingredient6 ingredient10 shaker1 right left 
+58 empty-hand left shaker1 
+59 pick-up right dispenser7 
+60 empty-hand right dispenser7 
+61 pick-up right shot6 
+62 fill-shot shot6 ingredient7 right left dispenser7 
+63 put-down dispenser7 left 
+64 put-down shot6 right 
+65 pick-up right dispenser6 
+66 empty-hand right dispenser6 
+67 pick-up right shot7 
+68 fill-shot shot7 ingredient6 right left dispenser6 
+69 put-down dispenser6 left 
+70 put-down shot7 right 
+71 pick-up right dispenser3 
+72 empty-hand right dispenser3 
+73 pick-up right shot8 
+74 fill-shot shot8 ingredient3 right left dispenser3 
+75 put-down dispenser3 left 
+76 put-down shot8 right 
+77 pick-up right dispenser7 
+78 empty-hand right dispenser7 
+79 pick-up right shot9 
+80 fill-shot shot9 ingredient7 right left dispenser7 
+81 put-down dispenser7 left 
+82 put-down shot9 right 
+83 pick-up right dispenser6 
+84 empty-hand right dispenser6 
+85 pick-up right shot7 
+86 pour-shot-to-clean-shaker shot7 ingredient6 shaker1 right level3 level3 
+87 put-down shot7 left 
+88 pick-up right dispenser3 
+89 empty-hand right dispenser3 
+90 pick-up right shot8 
+91 pour-shot-to-used-shaker shot8 ingredient3 shaker1 right level3 level3 
+92 put-down shot8 left 
+93 shake cocktail3 ingredient3 ingredient6 shaker1 right left 
+94 pick-up right shot10 
+95 empty-hand right shot10 
+96 put-down shot10 left 
+97 pour-shaker-to-shot cocktail3 shot10 shaker1 right level3 level3 
+98 pick-up right dispenser8 
+99 empty-hand right dispenser8 
+100 pick-up right shot11 
+101 fill-shot shot11 ingredient8 right left dispenser8 
+102 put-down dispenser8 left 
+103 put-down shot11 right 
+104 pick-up right dispenser10 
+105 empty-hand right dispenser10 
+106 pick-up right shot12 
+107 fill-shot shot12 ingredient10 right left dispenser10 
+108 put-down dispenser10 left 
+109 put-down shot12 right 
+110 pick-up right dispenser6 
+111 empty-hand right dispenser6 
+112 pick-up right shot13 
+113 fill-shot shot13 ingredient6 right left dispenser6 
+114 put-down dispenser6 left 
+115 put-down shot13 right 
+116 pick-up right dispenser8 
+117 empty-hand right dispenser8 
+118 pick-up right shot11 
+119 pour-shot-to-clean-shaker shot11 ingredient8 shaker1 right level3 level3 
+120 put-down shot11 left 
+121 pick-up right dispenser10 
+122 empty-hand right dispenser10 
+123 pick-up right shot12 
+124 pour-shot-to-used-shaker shot12 ingredient10 shaker1 right level3 level3 
+125 put-down shot12 left 
+126 shake cocktail4 ingredient8 ingredient10 shaker1 right left 
+127 pick-up right shot14 
+128 empty-hand right shot14 
+129 put-down shot14 left 
+130 pour-shaker-to-shot cocktail4 shot14 shaker1 right level3 level3 
+131 pick-up right dispenser9 
+132 empty-hand right dispenser9 
+133 pick-up right shot13 
+134 fill-shot shot13 ingredient9 right left dispenser9 
+135 put-down dispenser9 left 
+136 put-down shot13 right 
+137 pick-up right dispenser4 
+138 empty-hand right dispenser4 
+139 pick-up right shot15 
+140 fill-shot shot15 ingredient4 right left dispenser4 
+141 put-down dispenser4 left 
+142 put-down shot15 right 
+143 pick-up right dispenser6 
+144 empty-hand right dispenser6 
+145 pick-up right shot13 
+146 pour-shot-to-clean-shaker shot13 ingredient6 shaker1 right level3 level3 
+147 put-down shot13 left 
+148 pick-up right dispenser9 
+149 empty-hand right dispenser9 
+150 pick-up right shot14 
+151 pour-shot-to-used-shaker shot14 ingredient9 shaker1 right level3 level3 
+152 put-down shot14 left 
+153 shake cocktail5 ingredient9 ingredient6 shaker1 right left 
+154 pick-up right shot7 
+155 empty-hand right shot7 
+156 put-down shot7 left 
+157 pour-shaker-to-shot cocktail5 shot7 shaker1 right level3 level3 
+158 pick-up right dispenser9 
+159 empty-hand right dispenser9 
+160 pick-up right shot13 
+161 fill-shot shot13 ingredient9 right left dispenser9 
+162 put-down dispenser9 left 
+163 put-down shot13 right 
+164 pick-up right dispenser2 
+165 empty-hand right dispenser2 
+166 pick-up right shot16 
+167 fill-shot shot16 ingredient2 right left dispenser2 
+168 put-down dispenser2 left 
+169 put-down shot16 right 
+170 pick-up right dispenser1 
+171 empty-hand right dispenser1 
+172 pick-up right shot1 
+173 pour-shot-to-clean-shaker shot1 ingredient1 shaker1 right level3 level3 
+174 put-down shot1 left 
+175 pick-up right dispenser6 
+176 empty-hand right dispenser6 
+177 pick-up right shot18 
+178 fill-shot shot18 ingredient6 right left dispenser6 
+179 put-down dispenser6 left 
+180 put-down shot18 right 
+181 pick-up right dispenser2 
+182 empty-hand right dispenser2 
+183 pick-up right shot16 
+184 pour-shot-to-used-shaker shot16 ingredient2 shaker1 right level3 level3 
+185 put-down shot16 left 
+186 shake cocktail6 ingredient2 ingredient1 shaker1 right left 
+187 pick-up right shot15 
+188 empty-hand right shot15 
+189 put-down shot15 left 
+190 pour-shaker-to-shot cocktail6 shot15 shaker1 right level3 level3 
+191 pick-up right dispenser7 
+192 empty-hand right dispenser7 
+193 pick-up right shot17 
+194 fill-shot shot17 ingredient7 right left dispenser7 
+195 put-down dispenser7 left 
+196 put-down shot17 right 
+197 pick-up right dispenser4 
+198 empty-hand right dispenser4 
+199 pick-up right shot18 
+200 fill-shot shot18 ingredient4 right left dispenser4 
+201 put-down dispenser4 left 
+202 put-down shot18 right 
+203 pick-up right dispenser9 
+204 empty-hand right dispenser9 
+205 pick-up right shot19 
+206 fill-shot shot19 ingredient9 right left dispenser9 
+207 put-down dispenser9 left 
+208 put-down shot19 right 
+209 pick-up right dispenser6 
+210 empty-hand right dispenser6 
+211 pick-up right shot13 
+212 pour-shot-to-clean-shaker shot13 ingredient6 shaker1 right level3 level3 
+213 put-down shot13 left 
+214 pick-up right dispenser7 
+215 empty-hand right dispenser7 
+216 pick-up right shot17 
+217 pour-shot-to-used-shaker shot17 ingredient7 shaker1 right level3 level3 
+218 put-down shot17 left 
+219 shake cocktail7 ingredient9 ingredient7 shaker1 right left 
+220 pick-up right shot12 
+221 empty-hand right shot12 
+222 put-down shot12 left 
+223 pour-shaker-to-shot cocktail7 shot12 shaker1 right level3 level3 
+224 pick-up right dispenser3 
+225 empty-hand right dispenser3 
+226 pick-up right shot18 
+227 fill-shot shot18 ingredient3 right left dispenser3 
+228 put-down dispenser3 left 
+229 put-down shot18 right 
+230 pick-up right dispenser6 
+231 empty-hand right dispenser6 
+232 pick-up right shot19 
+233 fill-shot shot19 ingredient6 right left dispenser6 
+234 put-down dispenser6 left 
+235 put-down shot19 right 
+236 pick-up right dispenser7 
+237 empty-hand right dispenser7 
+238 pick-up right shot17 
+239 pour-shot-to-clean-shaker shot17 ingredient7 shaker1 right level3 level3 
+240 put-down shot17 left 
+241 pick-up right dispenser3 
+242 empty-hand right dispenser3 
+243 pick-up right shot18 
+244 pour-shot-to-used-shaker shot18 ingredient3 shaker1 right level3 level3 
+245 put-down shot18 left 
+246 shake cocktail8 ingredient3 ingredient7 shaker1 right left 
+247 pick-up right shot5 
+248 empty-hand right shot5 
+249 put-down shot5 left 
+250 pour-shaker-to-shot cocktail8 shot5 shaker1 right level3 level3 
+251 pick-up right dispenser9 
+252 empty-hand right dispenser9 
+253 pick-up right shot20 
+254 fill-shot shot20 ingredient9 right left dispenser9 
+255 put-down dispenser9 left 
+256 put-down shot20 right 
+257 pick-up right dispenser7 
+258 empty-hand right dispenser7 
+259 pick-up right shot21 
+260 fill-shot shot21 ingredient7 right left dispenser7 
+261 put-down dispenser7 left 
+262 put-down shot21 right 
+263 pick-up right dispenser9 
+264 empty-hand right dispenser9 
+265 pick-up right shot22 
+266 fill-shot shot22 ingredient9 right left dispenser9 
+267 put-down dispenser9 left 
+268 put-down shot22 right 
+269 pick-up right dispenser7 
+270 empty-hand right dispenser7 
+271 pick-up right shot23 
+272 fill-shot shot23 ingredient7 right left dispenser7 
+273 put-down dispenser7 left 
+274 put-down shot23 right 
+275 pick-up right dispenser6 
+276 empty-hand right dispenser6 
+277 pick-up right shot20 
+278 pour-shot-to-clean-shaker shot20 ingredient9 shaker1 right level3 level3 
+279 put-down shot20 left 
+280 pick-up right dispenser7 
+281 empty-hand right dispenser7 
+282 pick-up right shot21 
+283 pour-shot-to-used-shaker shot21 ingredient7 shaker1 right level3 level3 
+284 put-down shot21 left 
+285 shake cocktail9 ingredient9 ingredient7 shaker1 right left 
+286 pick-up right shot11 
+287 empty-hand right shot11 
+288 put-down shot11 left 
+289 pour-shaker-to-shot cocktail9 shot11 shaker1 right level3 level3 
+290 pick-up right dispenser8 
+291 empty-hand right dispenser8 
+292 pick-up right shot24 
+293 fill-shot shot24 ingredient8 right left dispenser8 
+294 put-down dispenser8 left 
+295 put-down shot24 right 
+296 pick-up right dispenser6 
+297 empty-hand right dispenser6 
+298 pick-up right shot25 
+299 fill-shot shot25 ingredient6 right left dispenser6 
+300 put-down dispenser6 left 
+301 put-down shot25 right 
+302 pick-up right dispenser8 
+303 empty-hand right dispenser8 
+304 pick-up right shot24 
+305 pour-shot-to-clean-shaker shot24 ingredient8 shaker1 right level3 level3 
+306 put-down shot24 left 
+307 pick-up right dispenser6 
+308 empty-hand right dispenser6 
+309 pick-up right shot26 
+310 fill-shot shot26 ingredient6 right left dispenser6 
+311 put-down dispenser6 left 
+312 put-down shot26 right 
+313 pick-up right dispenser8 
+314 empty-hand right dispenser8 
+315 pick-up right shot24 
+316 pour-shot-to-used-shaker shot24 ingredient8 shaker1 right level3 level3 
+317 put-down shot24 left 
+318 shake cocktail10 ingredient8 ingredient6 shaker1 right left 
+319 pick-up right shot9 
+320 empty-hand right shot9 
+321 put-down shot9 left 
+322 pour-shaker-to-shot cocktail10 shot9 shaker1 right level3 level3 
+<==>

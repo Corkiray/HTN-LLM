@@ -1,78 +1,120 @@
-Here is a hierarchical plan to solve the given HTN problem:
-```
 ==>
-**Sequential Plan**
-1. turn_to satellite4 Planet10 Planet9 (to satisfy task12 and future tasks on satellite4)
-2. take_image satellite4 Planet9 infrared0 instrument9 (for task5)
-3. take_image satellite4 Planet10 infrared3 instrument9 (for task6)
-4. turn_to satellite4 Star12 Planet10 (for future tasks)
-5. take_image satellite4 Star12 image4 instrument8 (for task7)
-6. take_image satellite4 Phenomenon13 image4 instrument8 (for task8)
-7. turn_to satellite4 Phenomenon14 Star12 (for future tasks)
-8. take_image satellite4 Phenomenon14 spectrograph1 instrument8 (for task9)
-9. turn_to satellite4 Star15 Phenomenon14 (for future tasks)
-10. take_image satellite4 Star15 spectrograph1 instrument8 (for task10)
-11. turn_to satellite4 Star16 Star15 (for future tasks)
-12. take_image satellite4 Star16 image2 instrument10 (for task11)
-13. turn_to satellite4 Planet5 Star16 (for future tasks)
-14. take_image satellite4 Planet5 image4 instrument10 (for task1)
-15. turn_to satellite4 Star6 Planet5 (for future tasks)
-16. **No instrument on satellite4 supports infrared3 for Star6; assuming task2 cannot be completed with current setup**
-17. turn_to satellite4 Star7 Star6 (for future tasks)
-18. take_image satellite4 Star7 image4 instrument10 (for task3)
-19. turn_to satellite4 Phenomenon8 Star7 (for future tasks)
-20. take_image satellite4 Phenomenon8 image4 instrument10 (for task4)
-
-**Hierarchical Decomposition**
+1 do_mission Planet5 image4
+2 do_turning satellite4 Planet5
+3 do_switching satellite4 instrument10
+4 do_calibration satellite4 instrument10 Planet5
+5 switch_on instrument10 satellite4
+6 turn_to satellite4 Planet5 Planet10
+7 calibrate satellite4 instrument10 Planet5
+8 take_image satellite4 Planet5 instrument10 image4
+9 do_mission Star6 infrared3
+10 do_turning satellite4 Star6
+11 do_switching satellite4 instrument9
+12 do_calibration satellite4 instrument9 Star6
+13 switch_on instrument9 satellite4
+14 turn_to satellite4 Star6 Planet5
+15 calibrate satellite4 instrument9 Star6
+16 take_image satellite4 Star6 instrument9 infrared3
+17 do_mission Star7 image4
+18 do_turning satellite4 Star7
+19 switch_off instrument9 satellite4
+20 do_switching satellite4 instrument10
+21 do_calibration satellite4 instrument10 Star7
+22 switch_on instrument10 satellite4
+23 turn_to satellite4 Star7 Star6
+24 calibrate satellite4 instrument10 Star7
+25 take_image satellite4 Star7 instrument10 image4
+26 do_mission Phenomenon8 image4
+27 do_turning satellite4 Phenomenon8
+28 turn_to satellite4 Phenomenon8 Star7
+29 take_image satellite4 Phenomenon8 instrument10 image4
+30 do_mission Planet9 infrared0
+31 do_turning satellite4 Planet9
+32 switch_off instrument10 satellite4
+33 do_switching satellite4 instrument8
+34 do_calibration satellite4 instrument8 Planet9
+35 switch_on instrument8 satellite4
+36 calibrate satellite4 instrument8 Planet9
+37 take_image satellite4 Planet9 instrument8 infrared0
+38 do_mission Planet10 infrared3
+39 do_turning satellite4 Planet10
+40 switch_off instrument8 satellite4
+41 do_switching satellite4 instrument9
+42 do_calibration satellite4 instrument9 Planet10
+43 switch_on instrument9 satellite4
+44 turn_to satellite4 Planet10 Planet9
+45 calibrate satellite4 instrument9 Planet10
+46 take_image satellite4 Planet10 instrument9 infrared3
+47 do_mission Star12 image4
+48 do_turning satellite4 Star12
+49 switch_off instrument9 satellite4
+50 do_switching satellite4 instrument10
+51 do_calibration satellite4 instrument10 Star12
+52 switch_on instrument10 satellite4
+53 turn_to satellite4 Star12 Planet10
+54 calibrate satellite4 instrument10 Star12
+55 take_image satellite4 Star12 instrument10 image4
+56 do_mission Phenomenon13 image4
+57 do_turning satellite4 Phenomenon13
+58 turn_to satellite4 Phenomenon13 Star12
+59 take_image satellite4 Phenomenon13 instrument10 image4
+60 do_mission Phenomenon14 spectrograph1
+61 do_turning satellite4 Phenomenon14
+62 switch_off instrument10 satellite4
+63 do_switching satellite4 instrument8
+64 do_calibration satellite4 instrument8 Phenomenon14
+65 switch_on instrument8 satellite4
+66 calibrate satellite4 instrument8 Phenomenon14
+67 take_image satellite4 Phenomenon14 instrument8 spectrograph1
+68 do_mission Star15 spectrograph1
+69 do_turning satellite4 Star15
+70 switch_off instrument8 satellite4
+71 do_switching satellite4 instrument8
+72 do_calibration satellite4 instrument8 Star15
+73 switch_on instrument8 satellite4
+74 turn_to satellite4 Star15 Phenomenon14
+75 calibrate satellite4 instrument8 Star15
+76 take_image satellite4 Star15 instrument8 spectrograph1
+77 do_mission Star16 image2
+78 do_turning satellite4 Star16
+79 switch_off instrument8 satellite4
+80 do_switching satellite4 instrument10
+81 do_calibration satellite4 instrument10 Star16
+82 switch_on instrument10 satellite4
+83 turn_to satellite4 Star16 Star15
+84 calibrate satellite4 instrument10 Star16
+85 take_image satellite4 Star16 instrument10 image2
+86 do_turning satellite4 Planet9
 root 0
-0 do_mission Planet5 image4 -> m0_do_mission 13 14
-  13 do_turning satellite4 Planet5 -> m9_do_turning (already pointing to Planet10, then turned to Planet5 in sequential plan)
-  14 take_image satellite4 Planet5 image4 -> **No direct method; assuming take_image action is directly applicable**
-
-1 do_mission Star6 infrared3 -> **No applicable method due to lack of instrument support on satellite4**
-  *Task cannot be completed with current setup*
-
-2 do_mission Star7 image4 -> m0_do_mission 17 18
-  17 do_turning satellite4 Star7 -> m8_do_turning 4 5 (turn_to actions in sequential plan)
-  18 take_image satellite4 Star7 image4 -> **No direct method; assuming take_image action is directly applicable**
-
-3 do_mission Phenomenon8 image4 -> m0_do_mission 19 20
-  19 do_turning satellite4 Phenomenon8 -> m8_do_turning 4 5 (turn_to actions in sequential plan)
-  20 take_image satellite4 Phenomenon8 image4 -> **No direct method; assuming take_image action is directly applicable**
-
-4 do_mission Planet9 infrared0 -> m0_do_mission 1 2
-  1 do_turning satellite4 Planet9 -> m9_do_turning (already pointing to Planet10, then turned to Planet9 in sequential plan)
-  2 take_image satellite4 Planet9 infrared0 -> **No direct method; assuming take_image action is directly applicable**
-
-5 do_mission Planet10 infrared3 -> m0_do_mission (already satisfied in sequential plan)
-  *Task already completed in sequential plan*
-
-6 do_mission Star12 image4 -> m0_do_mission 4 5
-  4 do_turning satellite4 Star12 -> m8_do_turning 4 5 (turn_to actions in sequential plan)
-  5 take_image satellite4 Star12 image4 -> **No direct method; assuming take_image action is directly applicable**
-
-7 do_mission Phenomenon13 image4 -> m0_do_mission 7 8
-  7 do_turning satellite4 Phenomenon13 -> m8_do_turning 4 5 (turn_to actions in sequential plan)
-  8 take_image satellite4 Phenomenon13 image4 -> **No direct method; assuming take_image action is directly applicable**
-
-8 do_mission Phenomenon14 spectrograph1 -> m0_do_mission 9 10
-  9 do_turning satellite4 Phenomenon14 -> m8_do_turning 4 5 (turn_to actions in sequential plan)
-  10 take_image satellite4 Phenomenon14 spectrograph1 -> **No direct method; assuming take_image action is directly applicable**
-
-9 do_mission Star15 spectrograph1 -> m0_do_mission 11 12
-  11 do_turning satellite4 Star15 -> m8_do_turning 4 5 (turn_to actions in sequential plan)
-  12 take_image satellite4 Star15 spectrograph1 -> **No direct method; assuming take_image action is directly applicable**
-
-10 do_mission Star16 image2 -> m0_do_mission 13 14 (modified to use instrument10)
-  13 do_turning satellite4 Star16 -> m8_do_turning 4 5 (turn_to actions in sequential plan)
-  14 take_image satellite4 Star16 image2 -> **No direct method; assuming take_image action is directly applicable**
-
-11 do_turning satellite4 Planet9 -> m9_do_turning (already pointing to Planet10, then turned to Planet9 in sequential plan)
+0 do_mission Planet5 image4 -> m0_do_mission 1 2 8
+3 do_prepare satellite4 instrument10 Planet5 -> m1_do_prepare 4 6
+5 do_switching satellite4 instrument10 -> m4_do_switching 
+7 do_calibration satellite4 instrument10 Planet5 -> m6_do_calibration 
+9 do_mission Star6 infrared3 -> m0_do_mission 10 11 16
+12 do_prepare satellite4 instrument9 Star6 -> m1_do_prepare 13 14
+14 do_calibration satellite4 instrument9 Star6 -> m6_do_calibration 
+17 do_mission Star7 image4 -> m0_do_mission 18 19 25
+20 do_prepare satellite4 instrument10 Star7 -> m1_do_prepare 21 23
+22 do_calibration satellite4 instrument10 Star7 -> m6_do_calibration 
+26 do_mission Phenomenon8 image4 -> m0_do_mission 27 28 29
+30 do_mission Planet9 infrared0 -> m0_do_mission 31 32 37
+33 do_prepare satellite4 instrument8 Planet9 -> m1_do_prepare 34 36
+35 do_calibration satellite4 instrument8 Planet9 -> m6_do_calibration 
+38 do_mission Planet10 infrared3 -> m0_do_mission 39 40 46
+41 do_prepare satellite4 instrument9 Planet10 -> m1_do_prepare 42 44
+43 do_calibration satellite4 instrument9 Planet10 -> m6_do_calibration 
+47 do_mission Star12 image4 -> m0_do_mission 48 49 55
+50 do_prepare satellite4 instrument10 Star12 -> m1_do_prepare 51 53
+52 do_calibration satellite4 instrument10 Star12 -> m6_do_calibration 
+56 do_mission Phenomenon13 image4 -> m0_do_mission 57 58 59
+60 do_mission Phenomenon14 spectrograph1 -> m0_do_mission 61 62 67
+63 do_prepare satellite4 instrument8 Phenomenon14 -> m1_do_prepare 64 66
+65 do_calibration satellite4 instrument8 Phenomenon14 -> m6_do_calibration 
+68 do_mission Star15 spectrograph1 -> m0_do_mission 69 70 76
+71 do_prepare satellite4 instrument8 Star15 -> m1_do_prepare 72 74
+73 do_calibration satellite4 instrument8 Star15 -> m6_do_calibration 
+77 do_mission Star16 image2 -> m0_do_mission 78 79 85
+80 do_prepare satellite4 instrument10 Star16 -> m1_do_prepare 81 83
+82 do_calibration satellite4 instrument10 Star16 -> m6_do_calibration 
+86 do_turning satellite4 Planet9 -> m9_do_turning 
 <==
-```
-**Notes:**
-
-1. **Task2 (do_mission Star6 infrared3)**: There is no instrument on satellite4 that supports infrared3 for Star6. This task cannot be completed with the current setup.
-2. **take_image actions**: There are no direct methods defined for the take_image actions in the provided HTN domain. It is assumed that these actions are directly applicable.
-3. **turn_to actions**: The turn_to actions are used to satisfy the do_turning tasks. The actual turn_to actions are listed in the sequential plan, while the hierarchical decomposition references the do_turning tasks.
-4. **Instrument selection**: The plan assumes that the instruments are selected based on their support for the required modes and the availability on the satellite. In some cases, the instrument selection is not explicitly stated in the hierarchical decomposition, as it is assumed to be part of the take_image action.

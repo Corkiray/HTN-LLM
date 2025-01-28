@@ -1,0 +1,100 @@
+==>
+1 pickup b9
+2 putdown b9
+3 pickup b2
+4 putdown b2
+5 pickup b6
+6 putdown b6
+7 pickup b7
+8 putdown b7
+9 pickup b5
+10 putdown b5
+11 pickup b1
+12 putdown b1
+13 pickup b3
+14 putdown b3
+15 pickup b4
+16 putdown b4
+17 pickup b3
+18 stack b3 b6
+19 pickup b9
+20 stack b9 b1
+21 pickup b10
+22 stack b10 b9
+23 pickup b2
+24 stack b2 b10
+25 pickup b5
+26 stack b5 b2
+27 pickup b7
+28 stack b7 b5
+29 pickup b4
+30 stack b4 b7
+root 0
+0 achieve-goals -> unstack-block b9 b2 1 2 achieve-goals_0
+1 acquire_abstract b9 -> newMethod12 b9 b2 1
+2 putdown_abstract b9 -> newMethod10 b9 2
+3 achieve-goals -> unstack-block b2 b6 3 4 achieve-goals_1
+4 acquire_abstract b2 -> newMethod12 b2 b6 3
+5 putdown_abstract b2 -> newMethod10 b2 4
+6 achieve-goals -> unstack-block b6 b7 5 6 achieve-goals_2
+7 acquire_abstract b6 -> newMethod12 b6 b7 5
+8 putdown_abstract b6 -> newMethod10 b6 6
+9 achieve-goals -> unstack-block b7 b5 7 8 achieve-goals_3
+10 acquire_abstract b7 -> newMethod12 b7 b5 7
+11 putdown_abstract b7 -> newMethod10 b7 8
+12 achieve-goals -> unstack-block b5 b1 9 10 achieve-goals_4
+13 acquire_abstract b5 -> newMethod12 b5 b1 9
+14 putdown_abstract b5 -> newMethod10 b5 10
+15 achieve-goals -> unstack-block b1 b3 11 12 achieve-goals_5
+16 acquire_abstract b1 -> newMethod12 b1 b3 11
+17 putdown_abstract b1 -> newMethod10 b1 12
+18 achieve-goals -> unstack-block b3 b4 13 14 achieve-goals_6
+19 acquire_abstract b3 -> newMethod12 b3 b4 13
+20 putdown_abstract b3 -> newMethod10 b3 14
+21 achieve-goals -> unstack-block b4 b8 15 16 achieve-goals_7
+22 acquire_abstract b4 -> newMethod12 b4 b8 15
+23 putdown_abstract b4 -> newMethod10 b4 16
+24 achieve-goals -> pickup-ready-block b3 b6 17 release_0
+25 acquire_abstract b3 -> newMethod9 b3 17
+26 release -> release-stack b3 b6 delete_goal_on_0 mark_done_0 stack_abstract_0 achieve-goals_8
+27 delete_goal_on b3 b6
+28 mark_done b3
+29 stack_abstract b3 b6 -> newMethod11 b3 b6 18
+30 achieve-goals -> pickup-ready-block b9 b1 19 release_1
+31 acquire_abstract b9 -> newMethod9 b9 19
+32 release -> release-stack b9 b1 delete_goal_on_1 mark_done_1 stack_abstract_1 achieve-goals_9
+33 delete_goal_on b9 b1
+34 mark_done b9
+35 stack_abstract b9 b1 -> newMethod11 b9 b1 20
+36 achieve-goals -> pickup-ready-block b10 b9 21 release_2
+37 acquire_abstract b10 -> newMethod9 b10 21
+38 release -> release-stack b10 b9 delete_goal_on_2 mark_done_2 stack_abstract_2 achieve-goals_10
+39 delete_goal_on b10 b9
+40 mark_done b10
+41 stack_abstract b10 b9 -> newMethod11 b10 b9 22
+42 achieve-goals -> pickup-ready-block b2 b10 23 release_3
+43 acquire_abstract b2 -> newMethod9 b2 23
+44 release -> release-stack b2 b10 delete_goal_on_3 mark_done_3 stack_abstract_3 achieve-goals_11
+45 delete_goal_on b2 b10
+46 mark_done b2
+47 stack_abstract b2 b10 -> newMethod11 b2 b10 24
+48 achieve-goals -> pickup-ready-block b5 b2 25 release_4
+49 acquire_abstract b5 -> newMethod9 b5 25
+50 release -> release-stack b5 b2 delete_goal_on_4 mark_done_4 stack_abstract_4 achieve-goals_12
+51 delete_goal_on b5 b2
+52 mark_done b5
+53 stack_abstract b5 b2 -> newMethod11 b5 b2 26
+54 achieve-goals -> pickup-ready-block b7 b5 27 release_5
+55 acquire_abstract b7 -> newMethod9 b7 27
+56 release -> release-stack b7 b5 delete_goal_on_5 mark_done_5 stack_abstract_5 achieve-goals_13
+57 delete_goal_on b7 b5
+58 mark_done b7
+59 stack_abstract b7 b5 -> newMethod11 b7 b5 28
+60 achieve-goals -> pickup-ready-block b4 b7 29 release_6
+61 acquire_abstract b4 -> newMethod9 b4 29
+62 release -> release-stack b4 b7 delete_goal_on_6 mark_done_6 stack_abstract_6 achieve-goals_14
+63 delete_goal_on b4 b7
+64 mark_done b4
+65 stack_abstract b4 b7 -> newMethod11 b4 b7 30
+66 achieve-goals -> setdone
+<==

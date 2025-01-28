@@ -1,0 +1,79 @@
+==>
+1 nop
+2 nop
+3 nop
+4 nop
+5 nop
+6 nop
+7 nop
+8 nop
+9 nop
+10 nop
+11 nop
+12 nop
+13 nop
+14 nop
+15 nop
+16 nop
+17 nop
+18 nop
+19 nop
+20 nop
+21 nop
+22 nop
+23 nop
+24 nop
+25 nop
+26 nop
+27 nop
+28 nop
+29 nop
+30 nop
+31 nop
+32 nop
+33 nop
+34 nop
+35 nop
+36 nop
+37 nop
+38 nop
+root 0
+0 task0 -> m0_do_put_on crate4 pallet10 1
+1 task1 -> m0_do_put_on crate7 pallet13 2
+2 task2 -> m0_do_put_on crate11 pallet2 3
+3 task3 -> m0_do_put_on crate12 pallet11 4
+4 task4 -> m0_do_put_on crate14 pallet5 5
+5 task5 -> m0_do_put_on crate15 pallet6 6
+6 task6 -> m0_do_put_on crate17 pallet4 7
+7 task7 -> m0_do_put_on crate19 pallet0 8
+8 task8 -> m0_do_put_on crate22 pallet8 9
+9 task9 -> m0_do_put_on crate23 pallet7 10
+10 task10 -> m0_do_put_on crate25 pallet12 11
+11 task11 -> m0_do_put_on crate28 pallet1 12
+12 task12 -> m0_do_put_on crate30 pallet9 13
+13 task13 -> m0_do_put_on crate0 crate4 14
+14 task14 -> m0_do_put_on crate2 crate30 15
+15 task15 -> m0_do_put_on crate8 crate0 16
+16 task16 -> m0_do_put_on crate10 crate22 17
+17 task17 -> m0_do_put_on crate21 crate7 18
+18 task18 -> m0_do_put_on crate26 crate17 19
+19 task19 -> m0_do_put_on crate29 crate23 20
+20 task20 -> m0_do_put_on crate31 crate11 21
+21 task21 -> m0_do_put_on crate32 crate19 22
+22 task22 -> m0_do_put_on crate33 crate28 23
+23 task23 -> m0_do_put_on crate35 crate12 24
+24 task24 -> m0_do_put_on crate36 crate25 25
+25 task25 -> m0_do_put_on crate37 crate2 26
+26 task26 -> m0_do_put_on crate38 crate32 27
+27 task27 -> m0_do_put_on crate39 crate33 28
+28 task28 -> m0_do_put_on crate1 crate21 29
+29 task29 -> m0_do_put_on crate5 crate37 30
+30 task30 -> m0_do_put_on crate6 crate26 31
+31 task31 -> m0_do_put_on crate9 crate29 32
+32 task32 -> m0_do_put_on crate13 crate35 33
+33 task33 -> m0_do_put_on crate20 crate39 34
+34 task34 -> m0_do_put_on crate24 crate9 35
+35 task35 -> m0_do_put_on crate27 crate5 36
+36 task36 -> m0_do_put_on crate16 crate27 37
+37 task37 -> m0_do_put_on crate18 crate20 38
+<==

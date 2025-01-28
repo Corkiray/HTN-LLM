@@ -1,301 +1,47 @@
 ==>
-1 move C10 S9
-2 board S9 C10
-3 move S9 C10
-4 move C3 S7
-5 board S7 C3
-6 move S7 C3
-7 move C4 S2
-8 board S2 C4
-9 move S2 C4
-10 move C5 S3
-11 board S3 C5
-12 move S3 C5
-13 move C6 S6
-14 board S6 C6
-15 move S6 C6
-16 move C7 SA
-17 board SA C7
-18 move SA C7
-19 move C9 C10
-20 board C10 C9
-21 move C10 C9
-22 move D10 C3
-23 board C3 D10
-24 move C3 D10
-25 move D2 H3
-26 board H3 D2
-27 move H3 D2
-28 move D4 C8
-29 board C8 D4
-30 move C8 D4
-31 move D6 C2
-32 board C2 D6
-33 move C2 D6
-34 move D7 H10
-35 board H10 D7
-36 move H10 D7
-37 move D8 H4
-38 board H4 D8
-39 move H4 D8
-40 move DA D2
-41 board D2 DA
-42 move D2 DA
-43 move H10 S5
-44 board S5 H10
-45 move S5 H10
-46 move H2 C4
-47 board C4 H2
-48 move C4 H2
-49 move H3 H8
-50 board H8 H3
-51 move H8 H3
-52 move H4 HA
-53 board HA H4
-54 move H4 HA
-55 move H5 C6
-56 board C6 H5
-57 move C6 H5
-58 move H6 H2
-59 board H2 H6
-60 move H6 H2
-61 move H7 D8
-62 board D8 H7
-63 move D8 H7
-64 move H8 D4
-65 board D4 H8
-66 move D4 H8
-67 move H9 H5
-68 board H5 H9
-69 move H5 H9
-70 move HA D5
-71 board D5 HA
-72 move D5 HA
-73 move S10 CA
-74 board CA S10
-75 move S10 CA
-76 move S2 D9
-77 board D9 S2
-78 move D9 S2
-79 move S4 C7
-80 board C7 S4
-81 move S4 C7
-82 move S5 S10
-83 board S10 S5
-84 move S10 S5
-85 move S7 C5
-86 board C5 S7
-87 move C5 S7
-88 move S8 H7
-89 board H7 S8
-90 move H7 S8
-91 move S9 D6
-92 board D6 S9
-93 move D6 S9
-94 move SA D3
-95 board D3 SA
-96 move D3 SA
-97 move C9 C10
-98 board C10 C9
-99 move C10 C9
-100 move D10 C3
-101 board C3 D10
-102 move C3 D10
-103 move D2 H3
-104 board H3 D2
-105 move H3 D2
-106 move D4 C8
-107 board C8 D4
-108 move C8 D4
-109 move D6 C2
-110 board C2 D6
-111 move C2 D6
-112 move D7 H10
-113 board H10 D7
-114 move H10 D7
-115 move D8 H4
-116 board H4 D8
-117 move H4 D8
-118 move DA D2
-119 board D2 DA
-120 move D2 DA
-121 move H10 S5
-122 board S5 H10
-123 move S5 H10
-124 move H2 C4
-125 board C4 H2
-126 move C4 H2
-127 move H3 H8
-128 board H8 H3
-129 move H8 H3
-130 move H4 HA
-131 board HA H4
-132 move H4 HA
-133 move H5 C6
-134 board C6 H5
-135 move C6 H5
-136 move H6 H2
-137 board H2 H6
-138 move H6 H2
-139 move H7 D8
-140 board D8 H7
-141 move D8 H7
-142 move H8 D4
-143 board D4 H8
-144 move D4 H8
-145 move H9 H5
-146 board H5 H9
-147 move H5 H9
-148 move HA D5
-149 board D5 HA
-150 move D5 HA
-151 move S10 CA
-152 board CA S10
-153 move S10 CA
-154 move S2 D9
-155 board D9 S2
-156 move D9 S2
-157 move S4 C7
-158 board C7 S4
-159 move S4 C7
-160 move S5 S10
-161 board S10 S5
-162 move S10 S5
-163 move S7 C5
-164 board C5 S7
-165 move C5 S7
-166 move S8 H7
-167 board H7 S8
-168 move H7 S8
-169 move S9 D6
-170 board D6 S9
-171 move D6 S9
-172 move SA D3
-173 board D3 SA
-174 move D3 SA
-175 move C9 C10
-176 board C10 C9
-177 move C10 C9
-178 move D10 C3
-179 board C3 D10
-180 move C3 D10
-181 move D2 H3
-182 board H3 D2
-183 move H3 D2
-184 move D4 C8
-185 board C8 D4
-186 move C8 D4
-187 move D6 C2
-188 board C2 D6
-189 move C2 D6
-190 move D7 H10
-191 board H10 D7
-192 move H10 D7
-193 move D8 H4
-194 board H4 D8
-195 move H4 D8
-196 move DA D2
-197 board D2 DA
-198 move D2 DA
-199 move H10 S5
-200 board S5 H10
-201 move S5 H10
-202 move H2 C4
-203 board C4 H2
-204 move C4 H2
-205 move H3 H8
-206 board H8 H3
-207 move H8 H3
-208 move H4 HA
-209 board HA H4
-210 move H4 HA
-211 move H5 C6
-212 board C6 H5
-213 move C6 H5
-214 move H6 H2
-215 board H2 H6
-216 move H6 H2
-217 move H7 D8
-218 board D8 H7
-219 move D8 H7
-220 move H8 D4
-221 board D4 H8
-222 move D4 H8
-223 move H9 H5
-224 board H5 H9
-225 move H5 H9
-226 move HA D5
-227 board D5 HA
-228 move D5 HA
-229 move S10 CA
-230 board CA S10
-231 move S10 CA
-232 move S2 D9
-233 board D9 S2
-234 move D9 S2
-235 move S4 C7
-236 board C7 S4
-237 move S4 C7
-238 move S5 S10
-239 board S10 S5
-240 move S10 S5
-241 move S7 C5
-242 board C5 S7
-243 move C5 S7
-244 move S8 H7
-245 board H7 S8
-246 move H7 S8
-247 move S9 D6
-248 board D6 S9
-249 move D6 S9
-250 move SA D3
-251 board D3 SA
-252 move D3 SA
-253 move C9 C10
-254 board C10 C9
-255 move C10 C9
-256 move D10 C3
-257 board C3 D10
-258 move C3 D10
-259 move D2 H3
-260 board H3 D2
-261 move H3 D2
-262 move D4 C8
-263 board C8 D4
-264 move C8 D4
-265 move D6 C2
-266 board C2 D6
-267 move C2 D6
-268 move D7 H10
-269 board H10 D7
-270 move H10 D7
-271 move D8 H4
-272 board H4 D8
-273 move H4 D8
-274 move DA D2
-275 board D2 DA
-276 move D2 DA
-277 move H10 S5
-278 board S5 H10
-279 move S5 H10
-280 move H2 C4
-281 board C4 H2
-282 move C4 H2
-283 move H3 H8
-284 board H8 H3
-285 move H8 H3
-286 move H4 HA
-287 board HA H4
-288 move H4 HA
-289 move H5 C6
-290 board C6 H5
-291 move C6 H5
-292 move H6 H2
-293 board H2 H6
-294 move H6 H2
-295 move H7 D8
-296 board D8 H7
-297 move D8 H7
-298 move H8 D4
-299 board D4 H8
-300 move D4 H8
+1 send_to_home d9 d10 d d0 n9
+2 send_to_home c9 c10 c c0 n0
+3 from_home_to_free d9 c3 n4 n5
+4 send_to_home h9 h10 h h0 n0
+5 from_home_to_free c6 c2 n4 n5
+6 send_to_home s9 sa s s0 n0
+7 from_home_to_free s3 c5 n4 n5
+8 delete_on c2 d6 d6
+9 from_col_to_col d6 c5 n4 n0
+10 from_col_to_col c7 s10 n4 n0
+11 from_col_to_col c5 c4 n4 n0
+12 delete_on d2 h3 h3
+13 delete_on d2 c7 d2
+14 from_col_to_col s7 c3 n4 n0
+15 from_col_to_col c3 d3 n4 n0
+16 from_col_to_col h3 h8 n4 n0
+17 delete_on h2 c4 c4
+18 delete_on h2 s8 h2
+19 from_col_to_col s8 d4 n4 n0
+20 delete_on c10 s9 c10
+21 from_col_to_col h8 d5 n4 n0
+22 delete_on s2 d9 s2
+23 from_col_to_col h10 s5 n4 n0
+24 delete_on h5 c6 c6
+25 delete_on s5 s10 h5
+26 from_col_to_col s6 d7 n4 n0
+27 delete_on c8 d4 c8
+28 from_col_to_col c4 c2 n4 n0
+29 delete_on s4 c7 s4
+30 from_col_to_col c2 s2 n4 n0
+31 from_col_to_col s10 ca n4 n0
+32 delete_on h4 ha s4
+33 delete_on ha s3 ha
+34 from_col_to_col s3 d2 n4 n0
+<==
+
+root 0
+0 plan -> m0_plan 1 2 3 4 5
+1 m0_order1 -> m1_order1_0 6 7
+2 m0_order1 -> m1_order1_1 8 9 10 11
+3 m0_order1 -> m1_order1_2 12 13 14 15 16
+4 m0_order1 -> m1_order1_3 17 18 19 20
+5 m0_order1 -> m1_order1_4 21 22 23 24 25 26
+6 m0_order2 -> m2_order2_0 27 28 29 30
+7 m0_order2 -> m2_order2_1 31 32 33 34
+<==

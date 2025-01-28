@@ -1,0 +1,81 @@
+==>
+**Sequential Plan**
+```
+1. drive truck_0 city_loc_7 city_loc_1
+2. pick_up truck_0 city_loc_1 package_3 capacity_2 capacity_3
+3. drive truck_0 city_loc_1 city_loc_5
+4. drop truck_0 city_loc_5 package_3 capacity_1 capacity_2
+5. drive truck_0 city_loc_5 city_loc_2
+6. pick_up truck_0 city_loc_2 package_4 capacity_2 capacity_3
+7. drive truck_0 city_loc_2 city_loc_8
+8. drop truck_0 city_loc_8 package_4 capacity_1 capacity_2
+9. drive truck_0 city_loc_8 city_loc_4
+10. pick_up truck_0 city_loc_4 package_0 capacity_2 capacity_3
+11. drive truck_0 city_loc_4 city_loc_8
+12. drop truck_0 city_loc_8 package_0 capacity_1 capacity_2
+13. drive truck_0 city_loc_8 city_loc_6
+14. pick_up truck_0 city_loc_6 package_1 capacity_2 capacity_3
+15. drive truck_0 city_loc_6 city_loc_8
+16. drop truck_0 city_loc_8 package_1 capacity_1 capacity_2
+17. drive truck_0 city_loc_8 city_loc_1
+18. pick_up truck_0 city_loc_1 package_2 capacity_2 capacity_3
+19. drive truck_0 city_loc_1 city_loc_8
+20. drop truck_0 city_loc_8 package_2 capacity_1 capacity_2
+21. drive truck_0 city_loc_8 city_loc_2
+22. pick_up truck_0 city_loc_2 package_5 capacity_2 capacity_3
+23. drive truck_0 city_loc_2 city_loc_4
+24. drop truck_0 city_loc_4 package_5 capacity_1 capacity_2
+25. drive truck_0 city_loc_4 city_loc_0
+26. pick_up truck_0 city_loc_0 package_7 capacity_2 capacity_3
+27. drive truck_0 city_loc_0 city_loc_0
+28. drop truck_0 city_loc_0 package_7 capacity_1 capacity_2
+29. drive truck_0 city_loc_0 city_loc_5
+30. pick_up truck_0 city_loc_5 package_8 capacity_2 capacity_3
+31. drive truck_0 city_loc_5 city_loc_5
+32. drop truck_0 city_loc_5 package_8 capacity_1 capacity_2
+33. drive truck_0 city_loc_5 city_loc_6
+34. pick_up truck_0 city_loc_6 package_6 capacity_2 capacity_3
+35. drive truck_0 city_loc_6 city_loc_6
+36. drop truck_0 city_loc_6 package_6 capacity_1 capacity_2
+```
+**Hierarchical Decomposition**
+```
+root 0
+0 solve_htn -> m_deliver_ordering_0 1 2 3 4 5 6 7 8
+1 deliver package_0 city_loc_8 -> m_drive_to_ordering_0 9 10 11 12
+  9 get_to truck_0 city_loc_4 -> m_i_am_there_ordering_0
+  10 load truck_0 city_loc_4 package_0 -> m_load_ordering_0
+    10.1 pick_up truck_0 city_loc_4 package_0 capacity_2 capacity_3
+  11 get_to truck_0 city_loc_8 -> m_drive_to_via_ordering_0 11.1 11.2
+    11.1 get_to truck_0 city_loc_2 -> m_drive_to_ordering_0
+      11.1.1 drive truck_0 city_loc_4 city_loc_2
+    11.2 drive truck_0 city_loc_2 city_loc_8
+  12 unload truck_0 city_loc_8 package_0 -> m_unload_ordering_0
+    12.1 drop truck_0 city_loc_8 package_0 capacity_1 capacity_2
+
+2 deliver package_1 city_loc_8 -> m_drive_to_ordering_0 13 14 15 16
+ ... (similar decomposition as above)
+
+3 deliver package_2 city_loc_8 -> m_drive_to_ordering_0 17 18 19 20
+ ... (similar decomposition as above)
+
+4 deliver package_3 city_loc_5 -> m_drive_to_ordering_0 2 3 4
+ ... (similar decomposition as above, note the reuse of actions 2-4)
+
+5 deliver package_4 city_loc_8 -> m_drive_to_ordering_0 6 7 8
+ ... (similar decomposition as above, note the reuse of actions 6-8)
+
+6 deliver package_5 city_loc_4 -> m_drive_to_ordering_0 22 23 24
+ ... (similar decomposition as above)
+
+7 deliver package_6 city_loc_6 -> m_drive_to_ordering_0 33 34 36
+ ... (similar decomposition as above)
+
+8 deliver package_7 city_loc_0 -> m_drive_to_ordering_0 25 26 28
+ ... (similar decomposition as above)
+
+9 deliver package_8 city_loc_5 -> m_drive_to_ordering_0 29 30 32
+ ... (similar decomposition as above)
+<==
+```
+Note that the hierarchical decomposition reuses some of the actions from the sequential plan, as indicated by the reused action numbers (e.g., actions 2-4 are reused for `deliver package_3 city_loc_5`). This is because the HTN methods are designed to be reusable and composable. The decomposition shows how each `deliver` task is broken down into `get_to`, `load`, `get_to` (again, to the final destination), and `unload` tasks, which are then further decomposed into primitive actions like `drive`, `pick_up`, and `drop`.

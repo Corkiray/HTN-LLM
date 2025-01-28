@@ -1,48 +1,25 @@
 ==>
-**Sequential Plan:**
-
-1. `i-UNLOCK-AT` `OBJ21` `POS2`
-2. `LOAD-TRUCK` `OBJ21` `TRU2` `POS2`
-3. `DRIVE-TRUCK` `TRU2` `POS2` `APT3` `CIT3`
-4. `UNLOAD-TRUCK` `OBJ21` `TRU2` `APT3`
-5. `i-LOCK-AT` `OBJ21` `APT3`
-
-6. `i-UNLOCK-AT` `OBJ62` `POS6`
-7. `LOAD-TRUCK` `OBJ62` `TRU6` `POS6`
-8. `DRIVE-TRUCK` `TRU6` `POS6` `POS8` `CIT8`
-9. `UNLOAD-TRUCK` `OBJ62` `TRU6` `POS8`
-10. `LOAD-AIRPLANE` `OBJ62` `APN2` `POS8`
-11. `FLY-AIRPLANE` `APN2` `APT8` `APT1`
-12. `UNLOAD-AIRPLANE` `OBJ62` `APN2` `APT8`
-13. `i-LOCK-AT` `OBJ62` `APT8`
-
-14. `i-UNLOCK-AT` `OBJ133` `POS13`
-15. `LOAD-TRUCK` `OBJ133` `TRU13` `POS13`
-16. `DRIVE-TRUCK` `TRU13` `POS13` `POS10` `CIT10`
-17. `UNLOAD-TRUCK` `OBJ133` `TRU13` `POS10`
-18. `LOAD-AIRPLANE` `OBJ133` `APN4` `POS10`
-19. `FLY-AIRPLANE` `APN4` `APT10` `APT1`
-20. `UNLOAD-AIRPLANE` `OBJ133` `APN4` `APT10`
-21. `i-LOCK-AT` `OBJ133` `APT10`
-
-... (rest of the tasks follow a similar pattern, but for brevity, only the first three tasks are fully expanded here)
-
-**Hierarchical Decomposition:**
-
-`root` `0`
-0 `ACHIEVE-AT` `OBJ21` `APT3` -> `M10-ACHIEVE-AT` `1` `2` `3` `4` `5`
-1 `ACHIEVE-AT0` `OBJ21` `APT3` -> `M12-ACHIEVE-AT0` `6` `7` `8` `9` `10`
-2 `ACHIEVE-AT-TRK` `TRU2` `APT3` -> `M34-ACHIEVE-AT` `11` `12`
-3 `IFUNLOCK-AT` `OBJ21` `POS2` -> `IFUNLOCK1-AT` `13`
-4 `DO-AT-LOAD-TRUCK0` `OBJ21` `TRU2` `POS2` -> `M4-DO-AT-LOAD-TRUCK0` `14` `15` `16`
-5 `i-LOCK-AT` `OBJ21` `APT3` 
-
-6 `ACHIEVE-AT` `OBJ62` `APT8` -> `M10-ACHIEVE-AT` `17` `18` `19` `20` `21`
+1 move tru1 tru2 
+2 IFUNLOCK-AT tru1 pos1 -> m1-IFUNLOCK0-AT 1
+3 DO-IN-UNLOAD-TRUCK0 obj11 tru1 pos1 -> M6-DO-IN-UNLOAD-TRUCK0 3 4 5
+4 move tru1 tru3 
+5 IFUNLOCK-AT tru1 pos3 -> m1-IFUNLOCK0-AT 5
+6 DO-IN-UNLOAD-TRUCK0 obj12 tru1 pos3 -> M6-DO-IN-UNLOAD-TRUCK0 6 7 8
+7 move tru1 tru4 
+8 IFUNLOCK-AT tru1 pos4 -> m1-IFUNLOCK0-AT 8
 ...
- 
-**Note:**
-
-* The sequential plan only shows the first three tasks fully expanded for brevity. The rest of the tasks (up to `task38`) would follow a similar pattern, utilizing the methods defined in the domain to achieve their goals.
-* The hierarchical decomposition shows how each task is broken down into subtasks using the methods provided in the domain. The numbers in the decomposition refer to the step numbers in the sequential plan where applicable.
-* Actions not explicitly defined in the provided domain (e.g., `i-UNLOCK-AT`, `i-LOCK-AT`) are assumed to be part of the domain's action set for the purpose of this plan.
-* This plan assumes that the preconditions for each action and method are met at the time of execution, based on the initial state provided and the effects of previous actions.
+29 move tru13 tru13 
+30 DO-AT-LOAD-TRUCK0 obj131 tru13 pos13 -> m4-DO-AT-LOAD-TRUCK0 30 31 32
+31 IFUNLOCK-AT tru13 pos13 -> m1-IFUNLOCK0-AT 31
+32 load_truck obj131 tru13 pos13
+33 move obj131 tru13
+34 move tru13 tru12
+35 do_in_unlock_truck obj131 tru13 pos12
+36 getflag_in obj131 tru13
+37 move obj131 tru13
+38 deliver_person obj131 apos11 pos12
+root 0 5
+0 solve_elevator -> m0_solveordering 1 2
+5 unload_with_truck -> m2_order_with_truck 3 4 5 34 5 38 39
+39 solve_elevator -> m3_ordering_with_truck
+<==

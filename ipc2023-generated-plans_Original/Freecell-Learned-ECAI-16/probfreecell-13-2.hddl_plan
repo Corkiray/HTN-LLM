@@ -1,0 +1,169 @@
+==>
+1 move C10 SK C8 
+2 board S8 SQ N4 
+3 move C8 S8 SQ 
+4 move C7 C6 C8 
+5 move C6 H6 C7 
+6 move H6 C3 C6 
+7 move C3 S2 C3 
+8 move S2 C7 S2 
+9 move C5 D2 C5 
+10 move D2 DK D2 
+11 move D4 DQ D4 
+12 move D5 D2 D5 
+13 move D6 C2 D6 
+14 move C2 S10 C2 
+15 move S10 H4 S10 
+16 move H4 S3 H4 
+17 move S3 S6 S3 
+18 move S6 S8 S6 
+19 move S8 SQ S8 
+20 move SQ C4 SQ 
+21 move C4 CK C4 
+22 move CK C8 CK 
+23 move C8 S8 C8 
+24 move S8 SQ S8 
+25 move SQ DK SQ 
+26 move DK DQ DK 
+27 move DQ CK DQ 
+28 move CK C8 CK 
+29 move C8 S8 C8 
+30 move S8 SQ S8 
+31 move SQ HK SQ 
+32 move HK H9 HK 
+33 move H9 CA HK 
+34 move CA S9 CA 
+35 move S9 D9 S9 
+36 move D9 CJ S9 
+37 move CJ DJ D9 
+38 move DJ CQ CJ 
+39 move CQ CK DJ 
+40 move CK C8 CQ 
+41 move C8 S8 CK 
+42 move S8 SQ C8 
+43 move SQ SK S8 
+44 move SK C10 SQ 
+45 move C10 SK C10 
+46 board CK C10 N4 
+47 move CK C10 CK 
+48 move C10 SK C10 
+49 move SK C8 C10 
+50 move C8 S8 SK 
+51 move S8 SQ C8 
+52 move SQ DK S8 
+53 move DK DQ SQ 
+54 move DQ CK DK 
+55 move CK C8 DQ 
+56 move C8 S8 CK 
+57 move S8 SQ C8 
+58 move SQ HK S8 
+59 move HK H9 SQ 
+60 move H9 CA HK 
+61 move CA S9 H9 
+62 move S9 D9 CA 
+63 move D9 CJ S9 
+64 move CJ DJ D9 
+65 move DJ CQ CJ 
+66 move CQ CK DJ 
+67 move CK C8 CQ 
+68 move C8 S8 CK 
+69 move S8 SQ C8 
+70 move SQ SK S8 
+71 move SK C10 SQ 
+72 move C10 SK C10 
+73 board DK C10 N4 
+74 move DK C10 DK 
+75 move C10 SK C10 
+76 move SK C8 C10 
+77 move C8 S8 SK 
+78 move S8 SQ C8 
+79 move SQ DQ S8 
+80 move DQ CK SQ 
+81 move CK C8 DQ 
+82 move C8 S8 CK 
+83 move S8 SQ C8 
+84 move SQ HK S8 
+85 move HK H9 SQ 
+86 move H9 CA HK 
+87 move CA S9 H9 
+88 move S9 D9 CA 
+89 move D9 CJ S9 
+90 move CJ DJ D9 
+91 move DJ CQ CJ 
+92 move CQ CK DJ 
+93 move CK C8 CQ 
+94 move C8 S8 CK 
+95 move S8 SQ C8 
+96 move SQ SK S8 
+97 move SK C10 SQ 
+98 move C10 SK C10 
+99 board HK C10 N4 
+100 move HK C10 HK 
+101 move C10 SK C10 
+102 move SK C8 C10 
+103 move C8 S8 SK 
+104 move S8 SQ C8 
+105 move SQ DQ S8 
+106 move DQ CK SQ 
+107 move CK C8 DQ 
+108 move C8 S8 CK 
+109 move S8 SQ C8 
+110 move SQ HK S8 
+111 move HK H9 SQ 
+112 move H9 CA HK 
+113 move CA S9 H9 
+114 move S9 D9 CA 
+115 move D9 CJ S9 
+116 move CJ DJ D9 
+117 move DJ CQ CJ 
+118 move CQ CK DJ 
+119 move CK C8 CQ 
+120 move C8 S8 CK 
+121 move S8 SQ C8 
+122 move SQ SK S8 
+123 move SK C10 SQ 
+124 move C10 SK C10 
+125 board SK C10 N4 
+126 move SK C10 SK 
+127 move C10 SK C10 
+128 move SK C8 C10 
+129 move C8 S8 SK 
+130 move S8 SQ C8 
+131 move SQ DQ S8 
+132 move DQ CK SQ 
+133 move CK C8 DQ 
+134 move C8 S8 CK 
+135 move S8 SQ C8 
+136 move SQ HK S8 
+137 move HK H9 SQ 
+138 move H9 CA HK 
+139 move CA S9 H9 
+140 move S9 D9 CA 
+141 move D9 CJ S9 
+142 move CJ DJ D9 
+143 move DJ CQ CJ 
+144 move CQ CK DJ 
+145 move CK C8 CQ 
+146 move C8 S8 CK 
+147 move S8 SQ C8 
+148 move SQ SK S8 
+149 move SK C10 SQ 
+150 move C10 SK C10 
+151 sendtohome C10 SK C N4 
+152 sendtohome CK C8 D N4 
+153 sendtohome DQ SQ D N4 
+154 sendtohome HK H9 H N4 
+155 sendtohome SK C10 S N4 
+<==
+
+root 0
+0 solve -> m1_solve_0 1 2 3
+1 task0 (ACHIEVE-HOME CK) -> m2_achieve_home_0 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 
+2 task1 (ACHIEVE-HOME DK) -> m3_achieve_home_1 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 
+3 task2 (ACHIEVE-HOME HK) -> m4_achieve_home_2 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 
+4 task3 (ACHIEVE-HOME SK) -> m5_achieve_home_3 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 
+5 sendtohome C10 SK C N4 -> m6_sendtohome_0 
+6 sendtohome CK C8 D N4 -> m7_sendtohome_1 
+7 sendtohome DQ SQ D N4 -> m8_sendtohome_2 
+8 sendtohome HK H9 H N4 -> m9_sendtohome_3 
+9 sendtohome SK C10 S N4 -> m10_sendtohome_4

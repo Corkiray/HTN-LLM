@@ -1,41 +1,55 @@
 ==>
-1 DO-ON-MOVE3 C4 S2 D2
-2 DO-ON-MOVE3 D2 C4 H4
-3 DO-ON-MOVE3 H4 D2 S4
-4 DO-ON-MOVE3 S4 H4 C3
-5 DO-ON-MOVE3 C3 S4 H3
-6 DO-ON-MOVE3 H3 C3 D3
-7 DO-ON-MOVE3 D3 H3 C2
-8 DO-ON-MOVE3 C2 D3 CA
-9 DO-ON-MOVE3 CA C2 SA
-10 DO-ON-SENDTOHOME3 SA CA S N1 C0 N0
-11 DO-ON-SENDTOHOME3 C3 H3 C N3 C4 N4
-12 DO-ON-SENDTOHOME3 D3 H6 D N3 D4 N4
-13 DO-ON-SENDTOHOME3 H3 S6 H N3 H4 N4
-14 DO-ON-SENDTOHOME3 S3 D6 S N3 S4 N4
-15 DO-ON-SENDTOHOME3 C5 D5 C N5 C6 N6
-16 DO-ON-SENDTOHOME3 D5 S5 D N5 D6 N6
-17 DO-ON-SENDTOHOME3 H5 S3 H N5 H6 N6
-18 DO-ON-SENDTOHOME3 S5 C5 S N5 S6 N6
+1 move C3
+2 send C3 H6
+3 send D2 H5 
+4 move H2
+5 send H2 S6
+6 send D5 S5
+7 move DA
+8 send DA S4
+9 move S2
+10 send S2 D6
+11 send C5 D5
+12 move H5
+13 send H5 H6
+14 send H4 DA
+15 move CA
+16 send CA D5 
+17 move C2
+18 move C4
+19 move D3
+20 send C2 C3
+21 send D3 H4
+22 move S3
+23 send S3 S4
+24 move C6 
+25 send C6 C5 
 <==
 
 root 0
-0 solve_freecell -> m1_solve_freecell_0 1 2 3
-1 task0 (ACHIEVE-HOME C6) -> m2_achieve_home_0 C6 4 5
-2 task1 (ACHIEVE-HOME D6) -> m3_achieve_home_0 D6 6 7
-3 task2 (ACHIEVE-HOME H6) -> m4_achieve_home_0 H6 8 9
-4 ACHIEVE-HOME0 C6 -> m5_achieve_home0_0 C6 10 11
-5 ACHIEVE-HOME0 C6 -> m6_achieve_home0_0 C6 12
-6 ACHIEVE-HOME0 D6 -> m7_achieve_home0_0 D6 13 14
-7 ACHIEVE-HOME0 D6 -> m8_achieve_home0_0 D6 15
-8 ACHIEVE-HOME0 H6 -> m9_achieve_home0_0 H6 16 17
-9 ACHIEVE-HOME0 H6 -> m10_achieve_home0_0 H6 18
-10 DO-INCELL-HOMEFROMFREECELL3 C6 S N4 C0 N0 N1 N5 -> m11_do_incell_homefromfreecell3_0 C6 S N4 C0 N0 N1 N5
-11 i-LOCK-HOME C6 -> m12_i_lock_home_0 C6
-12 i-LOCK-HOME C6 -> m13_i_lock_home_0 C6
-13 DO-INCELL-HOMEFROMFREECELL3 D6 D N4 D0 N0 N1 N5 -> m14_do_incell_homefromfreecell3_0 D6 D N4 D0 N0 N1 N5
-14 i-LOCK-HOME D6 -> m15_i_lock_home_0 D6
-15 i-LOCK-HOME D6 -> m16_i_lock_home_0 D6
-16 DO-INCELL-HOMEFROMFREECELL3 H6 H N4 H0 N0 N1 N5 -> m17_do_incell_homefromfreecell3_0 H6 H N4 H0 N0 N1 N5
-17 i-LOCK-HOME H6 -> m18_i_lock_home_0 H6
-18 i-LOCK-HOME H6 -> m19_i_lock_home_0 H6
+0 
+    solve_elevator -> m1_newcard_4 1 2
+    move_C3 -> 1 2 3 4
+    send_C3_H6 -> 3 4
+    send_D2_H5 -> 5 6
+1 
+    DO-INCELL-COLFROMFREECELL0 -> m2_ordering_5 7 8 9 10 
+    send_H2_S6 -> 7 8 9
+    DO-INCELL-NEWCOLFROMFREECELL0 -> m2_ordering_5 11 12 13 14 
+    send_D5_S5 -> 11 12
+    send_H4_DA -> 13 14
+2 
+    DO-BOTTOMCOL-SENDTOFREE-B1 -> m2_ordering_2 15 16 17 18 
+    move_DA -> 15 16
+    send_DA_S4 -> 16 17
+    move_CA -> 17 18
+    send_CA_D5 -> 17 18
+3 
+    DO-INCELL-COLFROMFREECELL1 -> m2_ordering_5 19 20 21
+    move_C2 -> 19 20
+    move_C4 -> 19 21
+    send_C2_C3 -> 19 21
+    send_D3_H4 -> 19 21
+    send_H4_H6 -> 22 23 24 
+    DO-INCELL-NEWCOLFROMFREECELL0 -> m2_ordering_5 25  
+    send_S3_S4 -> 25

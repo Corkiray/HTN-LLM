@@ -1,0 +1,39 @@
+==>
+**Sequential Plan**
+1. flip l1 l1 N Y
+2. flip l1 l2 Y N
+3. flip l2 l1 Y N
+4. flip l0 l1 N Y
+5. flip l1 l1 Y N
+6. flip l1 l2 N Y
+7. flip l2 l1 N Y
+8. flip l2 l2 N Y (not necessary, already N in goal, but derived from HTN decomposition)
+**Hierarchical Decomposition**
+root 0
+0 play -> do_play 1 9
+1 turn -> do_turn l1 l1 N Y 2 3 4 5 6 7 8
+2 propagate_up l1 l1 N -> propagate_up_do l1 l1 l2 N Y 2.1 2.2
+  2.1 flip l2 l1 N Y
+  2.2 propagate_up l2 l1 N -> propagate_up_end_field l2 l1 N
+3 propagate_down l1 l1 N -> propagate_down_do l1 l1 l0 N Y 3.1 3.2
+  3.1 flip l0 l1 N Y
+  3.2 propagate_down l0 l1 N -> propagate_down_end_different l0 l1 N (could also end in field, but HTN planner chose this)
+4 propagate_left l1 l1 N -> propagate_left_end_different l1 l1 l0 N (no left propagation needed)
+5 propagate_right l1 l1 N -> propagate_right_do l1 l1 l2 N Y 5.1 5.2
+  5.1 flip l1 l2 N Y
+  5.2 propagate_right l1 l2 N -> propagate_right_end_field l1 l2 N
+6 propagate_up l0 l1 Y -> propagate_up_do l0 l1 l2 Y N 6.1 6.2
+  6.1 flip l2 l1 Y N
+  6.2 propagate_up l2 l1 Y -> propagate_up_end_field l2 l1 Y
+7 propagate_down l2 l1 Y -> propagate_down_end_field l2 l1 Y
+8 propagate_right l2 l1 Y -> propagate_right_end_different l2 l1 Y (no right propagation needed)
+9 play -> end_game 
+<==
+
+**Notes:**
+
+* The plan starts with a `flip` action to change the status of `l1 l1` from `N` to `Y`, which triggers a cascade of propagations.
+* The `propagate_up`, `propagate_down`, `propagate_left`, and `propagate_right` tasks are decomposed according to the HTN methods, considering the initial state and the goal.
+* Some `propagate_*` tasks end in `_end_field` or `_end_different` methods, indicating that the propagation stops at the field boundary or when encountering a different status, respectively.
+* The `flip` actions in the sequential plan are derived from the HTN decomposition, ensuring that the goal state is reached.
+* The final `play -> end_game` decomposition indicates the completion of the game, with no further actions required.

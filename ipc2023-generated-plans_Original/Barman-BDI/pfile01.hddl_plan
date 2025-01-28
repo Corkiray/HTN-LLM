@@ -1,0 +1,70 @@
+==>
+1 AchieveContainsShotCocktail shot2 cocktail1
+**Sequential Plan Decomposition**
+1 AchieveContainsShotCocktail shot2 cocktail1
+-> **Method:** MakeAndPourCocktail
+	2 AchieveContainsShakerCocktail shaker1 cocktail1
+	3 AchieveCleanShot shot2
+	4 AchieveHolding right shaker1
+	5 DoPourShakerToShot shaker1 shot2 cocktail1
+
+**Hierarchical Decomposition**
+root 0
+0 AchieveContainsShotCocktail shot2 cocktail1 -> MakeAndPourCocktail 1 2 4 5
+	1 AchieveContainsShakerCocktail shaker1 cocktail1 -> MakeCocktail 6 7 8 9 10 11
+		6 AchieveCleanShaker shaker1 -> CleanEmptyShaker 12 13
+			12 AchieveHolding left shaker1 -> PickUp 14 15 16
+			13 AchieveHandEmpty right -> HandEmptyNull (already satisfied)
+		7 AchieveContainsShakerIngredient shaker1 ingredient2 -> AddIngredientToEmptyShaker 17 18 19
+			17 AchieveContainsShotIngredient shot1 ingredient2 -> AddIngredientToShot 20 21 22 23
+				20 AchieveCleanShot shot1 -> CleanEmptyShot 24 25
+					24 AchieveHolding left shot1 -> PickUp 26 27 28
+					25 AchieveHandEmpty right -> HandEmptyNull (already satisfied)
+				21 AchieveHolding right shot1 -> PickUp 29 30 31
+				22 AchieveHandEmpty left -> EmptyHand 32
+				23 fill-shot shot1 ingredient2 right left dispenser2
+			18 AchieveHolding left shot1 -> HoldingNull (already satisfied)
+			19 pour-shot-to-clean-shaker shot1 ingredient2 shaker1 left level1 level2
+		8 AchieveContainsShakerIngredient shaker1 ingredient1 -> AddIngredientToUsedShaker 33 34 35
+			33 AchieveContainsShotIngredient shot1 ingredient1 -> AddIngredientToShot 36 37 38 39
+				... (similar decomposition as ingredient2, omitted for brevity)
+			34 AchieveHolding left shot1 -> HoldingNull (already satisfied)
+			35 pour-shot-to-used-shaker shot1 ingredient1 shaker1 left level2 level3
+		9 AchieveHolding right shaker1 -> HoldingNull (already satisfied)
+		10 AchieveHandEmpty left -> EmptyHand 40
+		11 shake cocktail1 ingredient2 ingredient1 shaker1 right left
+	2 AchieveCleanShot shot2 -> CleanEmptyShot 41 42
+		... (similar decomposition as shot1, omitted for brevity)
+	4 AchieveHolding right shaker1 -> HoldingNull (already satisfied)
+	5 DoPourShakerToShot shaker1 shot2 cocktail1 -> pour_shaker_to_shot_action 43
+		43 pour-shaker-to-shot cocktail1 shot2 right shaker1 level3 level2
+<==
+
+**Action Sequence:**
+
+1. 14 grasp left shaker1
+2. 15 AchieveOnTable shaker1 -> OnTableNull (already satisfied)
+3. 16 drop left shaker1
+4. 12 AchieveHolding left shaker1 -> PickUp 14 15 16 ( repeated, as part of MakeCocktail)
+5. 24 AchieveHolding left shot1 -> PickUp 26 27 28
+6. 26 grasp left shot1
+7. 27 AchieveOnTable shot1 -> OnTableNull (already satisfied)
+8. 28 drop left shot1
+9. 20 AchieveCleanShot shot1 -> CleanEmptyShot 24 25
+10. 29 grasp right shot1
+11. 30 AchieveOnTable shot1 -> OnTableNull (already satisfied)
+12. 31 drop right shot1
+13. 22 AchieveHandEmpty left -> EmptyHand 32
+14. 32 drop left shot1
+15. 23 fill-shot shot1 ingredient2 right left dispenser2
+16. 19 pour-shot-to-clean-shaker shot1 ingredient2 shaker1 left level1 level2
+17.... (similar actions for ingredient1, omitted for brevity)
+18. 11 shake cocktail1 ingredient2 ingredient1 shaker1 right left
+19. 41 AchieveHolding left shot2 -> PickUp (similar to shot1, omitted for brevity)
+20. 5 pour-shaker-to-shot cocktail1 shot2 right shaker1 level3 level2
+
+**Note:**
+
+*   Some actions and decompositions are omitted for brevity, as they follow a similar pattern to the ones shown.
+*   The plan assumes that the `next` predicate for levels is correctly defined in the problem instance, ensuring that the shaker levels are properly updated.
+*   The plan also assumes that the `cocktailPart1` and `cocktailPart2` predicates are correctly defined for the cocktail, ensuring that the correct ingredients are used.

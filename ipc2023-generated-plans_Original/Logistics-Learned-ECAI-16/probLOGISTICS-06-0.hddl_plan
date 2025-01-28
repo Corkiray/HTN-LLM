@@ -1,0 +1,47 @@
+==>
+**Sequential Plan:**
+1. DRIVE-TRUCK TRU1 POS1 POS2 CIT1
+2. DO-AT-LOAD-TRUCK0 OBJ11 TRU1 POS1
+3. DO-IN-UNLOAD-TRUCK0 OBJ11 TRU1 POS2
+4. DO-AT-LOAD-TRUCK0 OBJ12 TRU1 POS2
+5. FLY-AIRPLANE APN1 APT1 APT2
+6. DO-IN-UNLOAD-AIRPLANE0 OBJ12 APN1 APT2
+7. DO-AT-LOAD-TRUCK0 OBJ13 TRU2 POS2
+8. DO-IN-UNLOAD-TRUCK0 OBJ13 TRU2 POS2
+9. DO-AT-LOAD-TRUCK0 OBJ21 TRU2 POS2
+10. DO-IN-UNLOAD-TRUCK0 OBJ21 TRU2 POS2
+11. DO-AT-LOAD-TRUCK0 OBJ22 TRU2 POS2
+12. DO-IN-UNLOAD-TRUCK0 OBJ22 TRU2 POS2
+13. DO-AT-LOAD-AIRPLANE0 OBJ23 TRU2 POS2
+14. DO-IN-UNLOAD-AIRPLANE0 OBJ23 APN1 APT1
+
+**Hierarchical Decomposition:**
+root 0
+0 achieve-at OBJ12 APT2 -> M10-ACHIEVE-AT 4 5 6
+  4 achieve-at0 OBJ12 APT2 -> M13-ACHIEVE-AT0 1 2 3
+    1 do-at-load-truck0 OBJ12 TRU1 POS1 -> M4-DO-AT-LOAD-TRUCK0
+      (preconditions met, no further decomposition)
+    2 achieve-at0 OBJ12 APT2 -> M11-ACHIEVE-AT0 (noop, already at destination)
+    3 achieve-at APT2 APN1 -> M39-ACHIEVE-AT 7 8
+      7 achieve-at2 APN1 APT2 -> M41-ACHIEVE-AT2 5
+        5 fly-airplane APN1 APT1 APT2
+      8 i-lock-at APN1 APT2
+  5 i-lock-at OBJ12 APT2
+  6 do-in-unload-airplane0 OBJ12 APN1 APT2 -> M7-DO-IN-UNLOAD-AIRPLANE0
+    (preconditions met, no further decomposition)
+
+0 achieve-at OBJ23 APT1 -> M9-ACHIEVE-AT 14
+  14 i-lock-at OBJ23 APT1
+
+0 achieve-at OBJ21 APT2 -> M10-ACHIEVE-AT 9 10 11
+  (similar decomposition as OBJ12, omitted for brevity)
+
+0 achieve-at OBJ22 POS2 -> M9-ACHIEVE-AT 12
+  12 i-lock-at OBJ22 POS2
+
+0 achieve-at OBJ13 POS2 -> M9-ACHIEVE-AT 8
+  8 i-lock-at OBJ13 POS2
+
+0 achieve-at OBJ11 APT2 -> M10-ACHIEVE-AT 2 3 4
+  (similar decomposition as OBJ12, omitted for brevity)
+<==

@@ -1,61 +1,153 @@
 ==>
-**Sequential Plan**
-```
-1. open c r14 d014
-2. move c r14 d014
-3. pickup o14 r14
-4. move r14 r11 d1114
-5. putdown o14 r11
-6. open r11 r2 d211
-7. move r11 r2 d211
-8. pickup o2 r2
-9. move r2 r2 (no door change, assuming self-loop for simplicity)
-10. putdown o2 r2
-...
-**Plan truncated for brevity, as the full plan would involve 30 packages**
-...
-**Last actions for o30**
-...
-295. open r9 r13 d913
-296. move r9 r13 d913
-297. pickup o30 r13
-298. move r13 r11 d913
-299. putdown o30 r11
-300. achieve-goals
-```
-**Hierarchical Decomposition**
-```
+1 pickup o1 r7
+2 move c r7 d57
+3 putdown o1 r15
+4 move r7 r15 d215
+5 move r15 r2 d215
+6 pickup o2 r2
+7 move r2 r2 d57
+8 putdown o2 r2
+9 move r2 r2 d57
+10 pickup o3 r6
+11 move c r6 d614
+12 move r6 r6 d57
+13 putdown o3 r2
+14 move r2 r2 d57
+15 pickup o4 r8
+16 move c r8 d89
+17 putdown o4 r8
+18 move r8 r8 d57
+19 pickup o5 r4
+20 move c r4 d410
+21 move r4 r4 d57
+22 putdown o5 r7
+23 move r7 r7 d57
+24 pickup o6 r13
+25 move c r13 d913
+26 move r13 r13 d89
+27 putdown o6 r8
+28 move r8 r8 d57
+29 pickup o7 r13
+30 move c r13 d913
+31 move r13 r13 d410
+32 putdown o7 r4
+33 move r4 r4 d57
+34 pickup o8 r15
+35 move c r15 d215
+36 putdown o8 r14
+37 move r14 r14 d57
+38 pickup o9 r6
+39 move c r6 d614
+40 move r6 r6 d511
+41 putdown o9 r11
+42 move r11 r11 d57
+43 pickup o10 r4
+44 move c r4 d410
+45 move r4 r4 d614
+46 putdown o10 r6
+47 move r6 r6 d57
+48 pickup o11 r8
+49 move c r8 d89
+50 move r8 r8 d57
+51 putdown o11 r2
+52 move r2 r2 d57
+53 pickup o12 r1
+54 move c r1 d112
+55 move r1 r1 d57
+56 putdown o12 r7
+57 move r7 r7 d57
+58 pickup o13 r2
+59 move c r2 d215
+60 putdown o13 r14
+61 move r14 r14 d57
+62 pickup o14 r14
+63 move c r14 d1114
+64 putdown o14 r11
+65 move r11 r11 d57
+66 pickup o15 r15
+67 move c r15 d215
+68 putdown o15 r14
+69 move r14 r14 d57
+70 pickup o16 r6
+71 move c r6 d614
+72 move r6 r6 d112
+73 putdown o16 r12
+74 move r12 r12 d57
+75 pickup o17 r3
+76 move c r3 d310
+77 move r3 r3 d410
+78 putdown o17 r4
+79 move r4 r4 d57
+80 pickup o18 r2
+81 move c r2 d57
+82 putdown o18 r2
+83 move r2 r2 d57
+84 pickup o19 r2
+85 move c r2 d215
+86 move r2 r2 d310
+87 putdown o19 r10
+88 move r10 r10 d57
+89 pickup o20 r5
+90 move c r5 d57
+91 putdown o20 r4
+92 move r4 r4 d57
+93 pickup o21 r6
+94 move c r6 d614
+95 move r6 r6 d112
+96 putdown o21 r12
+97 move r12 r12 d57
+98 pickup o22 r12
+99 move c r12 d112
+100 move r12 r12 d57
+101 putdown o22 r3
+102 move r3 r3 d57
+103 pickup o23 r8
+104 move c r8 d89
+105 move r8 r8 d112
+106 putdown o23 r1
+107 move r1 r1 d57
+108 pickup o24 r11
+109 move c r11 d511
+110 move r11 r11 d410
+111 putdown o24 r4
+112 move r4 r4 d57
+113 pickup o25 r6
+114 move c r6 d614
+115 move r6 r6 d57
+116 putdown o25 r2
+117 move r2 r2 d57
+118 pickup o26 r1
+119 move c r1 d112
+120 move r1 r1 d511
+121 putdown o26 r11
+122 move r11 r11 d57
+123 pickup o27 r9
+124 move c r9 d89
+125 move r9 r9 d112
+126 putdown o27 r12
+127 move r12 r12 d57
+128 pickup o28 r8
+129 move c r8 d89
+130 move r8 r8 d57
+131 putdown o28 r2
+132 move r2 r2 d57
+133 pickup o29 r10
+134 move c r10 d310
+135 move r10 r10 d4114
+136 putdown o29 r14
+137 move r14 r14 d57
+138 pickup o30 r13
+139 move c r13 d913
+140 move r13 r13 d511
+141 putdown o30 r11
 root 0
-0 achieve-goals -> m_achieve-goals-pickup 1-300 (iterative application for each package)
-
-**Example Decomposition for o14 (steps 3-5)**
-1 pickup o14 r14 -> newMethod22 3
-  * 3 pickup o14 r14
-
-**Example Decomposition for o2 (steps 7-10)**
-2 achieve-goals-pickup o2 r2 -> newMethod22 8
-  * 7 open r11 r2 d211 -> newMethod25 7
-    + 7 open r11 r2 d211
-  * 8 pickup o2 r2
-  * 9 move r2 r2 (simplified, no door change)
-  * 10 putdown o2 r2 -> newMethod23 10
-    + 10 putdown o2 r2
-
-**Iterative Application for All Packages**
-* Similar decompositions apply for each package (o1-o30), 
-  involving `newMethod22` for pickup, `newMethod25` for opening doors when necessary, 
-  `newMethod24` for moving between rooms, and `newMethod23` for putting down packages.
-* `achieve-goals-move` and `achieve-goals-open` might be applied in various instances 
-  depending on the specific path and door states for each package's goal location.
-* `release-putdown_abstract`, `release-move`, and `release-open` are not explicitly shown 
-  in this truncated example but would be part of the full hierarchical decomposition 
-  where applicable, especially in handling the release task in conjunction with movement 
-  or door opening actions.
-```
+0 achieve-goals -> finished
+1 pickup_abstract o1 -> newMethod22 o1 r7
+2 move_abstract c r7 -> newMethod24 c r7 d57
+3 putdown_abstract o1 -> newMethod23 o1 r15
+4 move_abstract r7 r15 -> newMethod24 r7 r15 d215
+142 open_abstract c r7 -> newMethod25 c r7 d57
+143 open_abstract r2 r15 -> newMethod25 r2 r15 d215
+144 open_abstract r14 r11 -> newMethod25 r14 r11 d1114
+145 open_abstract r1 r12 -> newMethod25 r1 r12 d112
 <==
-
-**Note:**
-- The sequential plan is highly truncated for brevity, focusing on the initial and final actions to give a sense of the plan's structure.
-- The hierarchical decomposition is exemplified for a couple of packages (o14 and o2) to illustrate how each task is broken down into more specific actions.
-- The full plan would involve similar decompositions for all 30 packages, leading to a very extensive and repetitive plan, hence the truncation.
-- The plan assumes that the robot can handle each package individually without conflicts and that the environment's state (e.g., door closures) is managed appropriately throughout the execution.

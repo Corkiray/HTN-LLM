@@ -1,71 +1,51 @@
-Here is a hierarchical plan to solve the given HTN problem:
-
-
 ==>
-**Sequential Plan**
-1. Drive truck1 distributor0 depot2
-2. Load hoist3 crate6 truck1 distributor2
-3. Drive truck1 distributor2 depot2
-4. Unload hoist2 crate6 truck1 depot2
-5. Drop hoist2 crate6 pallet2 depot2
-6. Lift hoist2 crate5 pallet2 depot2
-7. Drop hoist2 crate5 crate6 depot2
-8. Load hoist2 crate4 truck0 depot2
-9. Drive truck0 depot2 distributor0
-10. Unload hoist3 crate4 truck0 distributor0
-11. Drop hoist3 crate4 pallet0 distributor0
-12. Lift hoist0 crate1 pallet0 depot0
-13. Drop hoist0 crate1 pallet4 depot0
-14. Lift hoist1 crate0 pallet1 depot1
-15. Drop hoist1 crate0 crate7 distributor2
-16. Lift hoist5 crate7 crate6 distributor2
-17. Drop hoist5 crate7 crate1 distributor2
-18. Lift hoist2 crate9 crate5 depot2
-19. Drop hoist2 crate9 crate2 depot2
-20. Lift hoist5 crate8 crate7 distributor2
-21. Drop hoist5 crate8 pallet3 distributor2
-22. Lift hoist5 crate3 crate0 distributor2
-23. Drop hoist5 crate3 crate9 distributor2
-
-**Hierarchical Decomposition**
+1 move depot2 depot1
+2 move depot1 depot0
+3 do_get_truck hoist3 truck1 distributor0
+4 load truck1 crate6 hoist3 distributor0
+5 move truck1 depot1
+6 unload hoist2 crate6 truck1 depot1
+7 drop crate6 pallet1 hoist2 depot1
+8 do_get_truck hoist4 truck0 depot0
+9 load truck0 crate5 hoist2 depot1
+10 unload hoist5 crate5 truck0 depot2
+11 drop crate5 pallet2 hoist5 depot2
+12 do_get_truck hoist5 truck1 distributor2
+13 load truck1 crate4 hoist0 distributor0
+14 move truck1 depot0
+15 unload hoist3 crate4 truck1 distributor0
+16 drop crate4 pallet0 hoist3 distributor0
+17 do_load_truck crate9 pallet5 distributor2 hoist5 truck0
+18 drive truck0 depot1
+19 unload hoist3 crate9 truck0 depot1
+20 drop crate9 crate2 hoist3 depot1
+21 do_lift_crate crate1 pallet0 distributor1 hoist4
+22 move crate1 pallet4 depot0
+23 drop crate1 pallet4 hoist4 depot0
+24 do_lift_crate crate7 crate6 depot2 hoist2
+25 move crate7 crate1 depot2
+26 drop crate7 crate1 hoist2 depot2
+27 do_lift_crate crate8 pallet2 depot2 hoist2
+28 move crate8 pallet3 depot2
+29 drop crate8 pallet3 hoist2 depot2
+30 do_load_truck crate0 crate1 depot2 hoist2 truck0
+31 drive truck0 depot1
+32 unload hoist1 crate0 truck0 depot1
+33 drop crate0 crate7 hoist1 depot1
+34 do_lift_crate crate3 crate0 depot0 hoist0
+35 move crate3 crate9 depot0
+36 drop crate3 crate9 hoist0 depot0
+37 move crate2 pallet5 depot2
+38 do_load_truck crate2 pallet5 depot2 hoist2 truck0
+39 drive truck0 distributor2
+40 unload hoist5 crate2 truck0 distributor2
+41 drop crate2 pallet5 hoist5 distributor2
 root 0
-0 solve_depot_problem -> m3_do_put_on 1 2 3 4 5 6 7 8 9 10
-1 do_put_on crate4 pallet0 -> m1_do_put_on 11 12 13
-	* 11 do_clear pallet0 depot0 -> m4_do_clear (nop)
-	* 12 do_clear crate4 depot2 -> m5_do_clear 14 15 16 17
-		+ 14 do_clear crate2 depot2 -> m4_do_clear (nop)
-		+ 15 Lift hoist2 crate2 pallet2 depot2
-		+ 16 do_get_truck truck0 depot2 -> m6_do_get_truck (nop)
-		+ 17 Load hoist2 crate4 truck0 depot2
-	* 13 do_lift_crate crate4 depot2 hoist2 -> m9_do_lift_crate 18
-		+ 18 Lift hoist2 crate4 crate2 depot2
-2 do_put_on crate5 pallet2 -> m1_do_put_on 19 20 21
-	*... (similar decomposition as task1)
-3 do_put_on crate6 crate5 -> m1_do_put_on 22 23 24
-	*... (similar decomposition as task1)
-4 do_put_on crate8 pallet3 -> m2_do_put_on 25 26 27 28
-	* 25 do_get_truck truck1 distributor0 -> m7_do_get_truck 1
-	* 26 do_clear pallet3 distributor0 -> m4_do_clear (nop)
-	* 27 Unload hoist3 crate8 truck1 distributor0
-	* 28 Drop hoist3 crate8 pallet3 distributor0
-5 do_put_on crate1 pallet4 -> m1_do_put_on 29 30 31
-	*... (similar decomposition as task1)
-6 do_put_on crate7 crate1 -> m1_do_put_on 32 33 34
-	*... (similar decomposition as task1)
-7 do_put_on crate0 crate7 -> m1_do_put_on 35 36 37
-	*... (similar decomposition as task1)
-8 do_put_on crate2 pallet5 -> m1_do_put_on 38 39 40
-	*... (similar decomposition as task1)
-9 do_put_on crate9 crate2 -> m1_do_put_on 41 42 43
-	*... (similar decomposition as task1)
-10 do_put_on crate3 crate9 -> m1_do_put_on 44 45 46
-	*... (similar decomposition as task1)
+0 plan_0 -> puton_0 1 4
+4 puton_0 -> puton_0 5 17
+17 puton_0 -> puton_1 18 25
+25 puton_0 -> puton_2 26 32
+32 puton_0 -> puton_0 33 37
+37 puton_0 -> gettruck_0 38 39
+39 puton_0 -> puton_0 40 41
 <==
-
-Note:
-
-* The sequential plan consists of 23 actions to achieve the goal.
-* The hierarchical decomposition shows the task decomposition using the methods defined in the HTN domain. Each task is decomposed into subtasks, and the leaf nodes are the actions in the sequential plan.
-* Some tasks (e.g., `do_clear`) have multiple possible methods, but only one is chosen in this plan. Other methods might lead to alternative plans.
-* The `nop` actions are placeholders, indicating that no additional actions are required for those tasks.
-* This plan assumes that the preconditions for each action and method are met. If not, additional actions might be needed to establish the required preconditions.

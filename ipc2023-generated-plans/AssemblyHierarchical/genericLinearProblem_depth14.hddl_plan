@@ -1,60 +1,59 @@
 ==>
-**Sequential Plan:**
-1. guard
-2. connect pc-bPlugType1 adapterFromPlugType1ToPlugType2-aPlugType1
-3. connect adapterFromPlugType1ToPlugType2-bPlugType2 adapterFromPlugType2ToPlugType3-aPlugType2
-4. connect adapterFromPlugType2ToPlugType3-bPlugType3 adapterFromPlugType3ToPlugType4-aPlugType3
-5. connect adapterFromPlugType3ToPlugType4-bPlugType4 adapterFromPlugType4ToPlugType5-aPlugType4
-6. connect adapterFromPlugType4ToPlugType5-bPlugType5 adapterFromPlugType5ToPlugType6-aPlugType5
-7. connect adapterFromPlugType5ToPlugType6-bPlugType6 adapterFromPlugType6ToPlugType7-aPlugType6
-8. connect adapterFromPlugType6ToPlugType7-bPlugType7 adapterFromPlugType7ToPlugType8-aPlugType7
-9. connect adapterFromPlugType7ToPlugType8-bPlugType8 adapterFromPlugType8ToPlugType9-aPlugType8
-10. connect adapterFromPlugType8ToPlugType9-bPlugType9 adapterFromPlugType9ToPlugType10-aPlugType9
-11. connect adapterFromPlugType9ToPlugType10-bPlugType10 adapterFromPlugType10ToPlugType11-aPlugType10
-12. connect adapterFromPlugType10ToPlugType11-bPlugType11 adapterFromPlugType11ToPlugType12-aPlugType11
-13. connect adapterFromPlugType11ToPlugType12-bPlugType12 adapterFromPlugType12ToPlugType13-aPlugType12
-14. connect adapterFromPlugType12ToPlugType13-bPlugType13 adapterFromPlugType13ToPlugType14-aPlugType13
-15. connect adapterFromPlugType13ToPlugType14-bPlugType14 printer-aPlugType14
-16. ok
+1 connect cableWithPlugType1-a cableWithPlugType1-b
+2 validate cableWithPlugType1-a cableWithPlugType1-b data
+3 connect cableWithPlugType2-a cableWithPlugType2-b
+4 validate cableWithPlugType2-a cableWithPlugType2-b data
+5 connect cableWithPlugType3-a cableWithPlugType3-b
+6 validate cableWithPlugType3-a cableWithPlugType3-b data
+7 connect cableWithPlugType4-a cableWithPlugType4-b
+8 validate cableWithPlugType4-a cableWithPlugType4-b data
+9 connect cableWithPlugType5-a cableWithPlugType5-b
+10 validate cableWithPlugType5-a cableWithPlugType5-b data
+11 connect cableWithPlugType6-a cableWithPlugType6-b
+12 validate cableWithPlugType6-a cableWithPlugType6-b data
+13 connect cableWithPlugType7-a cableWithPlugType7-b
+14 validate cableWithPlugType7-a cableWithPlugType7-b data
+15 validate cableWithPlugType1 cableWithPlugType6 data
+16 validate cableWithPlugType2 cableWithPlugType5 data
+17 validate cableWithPlugType3 cableWithPlugType7 data
+18 validate cableWithPlugType4 cableWithPlugType8 data
+19 validate cableWithPlugType9 cableWithPlugType10 data
+20 connect cableWithPlugType11-a cableWithPlugType11-b
+21 validate cableWithPlugType11-a cableWithPlugType11-b data
+22 connect cableWithPlugType12-a cableWithPlugType12-b
+23 validate cableWithPlugType12-a cableWithPlugType12-b data
+24 connect cableWithPlugType13-a cableWithPlugType13-b
+25 validate cableWithPlugType13-a cableWithPlugType13-b data
+26 connect cableWithPlugType14-a cableWithPlugType14-b
+27 validate cableWithPlugType14-a cableWithPlugType14-b data
+28 validate cableWithPlugType11 cableWithPlugType13 data
+29 validate cableWithPlugType12 cableWithPlugType14 data
+30 validate cableWithPlugType1 cableWithPlugType6 data
+31 validate cableWithPlugType2 cableWithPlugType5 data
+32 validate cableWithPlugType3 cableWithPlugType7 data
+33 validate cableWithPlugType8 cableWithPlugType9 data
+34 validate cableWithPlugType10 cableWithPlugType4 data
+35 validate cableWithPlugType11 cableWithPlugType13 data
+36 validate cableWithPlugType12 cableWithPlugType14 data
 
-**Hierarchical Decomposition:**
 root 0
-0 ConnectDevices pc printer data -> m3 1
-1 guard -> finish 2
-2 ValidateDeviceConnection pc printer data -> vDC_to_vPC_4 3 4 5 6 7 8 9 10 11 12 13 14 15
-3 ValidatePortConnection pc-bPlugType1 adapterFromPlugType1ToPlugType2-aPlugType1 data -> vPC_to_vPC 4 5
-4 ValidatePortConnection adapterFromPlugType1ToPlugType2-bPlugType2 adapterFromPlugType2ToPlugType3-aPlugType2 data -> vPC_to_vPC 6 7
-5 ValidatePortConnection adapterFromPlugType2ToPlugType3-bPlugType3 adapterFromPlugType3ToPlugType4-aPlugType3 data -> vPC_to_vPC 8 9
-6 ValidatePortConnection adapterFromPlugType3ToPlugType4-bPlugType4 adapterFromPlugType4ToPlugType5-aPlugType4 data -> vPC_to_vPC 10 11
-7 ValidatePortConnection adapterFromPlugType4ToPlugType5-bPlugType5 adapterFromPlugType5ToPlugType6-aPlugType5 data -> vPC_to_vPC 12 13
-8 ValidatePortConnection adapterFromPlugType5ToPlugType6-bPlugType6 adapterFromPlugType6ToPlugType7-aPlugType6 data -> vPC_to_vPC 14 15
-9 ValidatePortConnection adapterFromPlugType6ToPlugType7-bPlugType7 adapterFromPlugType7ToPlugType8-aPlugType7 data -> finish 16
-10 ValidatePortConnection adapterFromPlugType7ToPlugType8-bPlugType8 adapterFromPlugType8ToPlugType9-aPlugType8 data -> vPC_to_vPC 17 18
-11 ValidatePortConnection adapterFromPlugType8ToPlugType9-bPlugType9 adapterFromPlugType9ToPlugType10-aPlugType9 data -> vPC_to_vPC 19 20
-12 ValidatePortConnection adapterFromPlugType9ToPlugType10-bPlugType10 adapterFromPlugType10ToPlugType11-aPlugType10 data -> vPC_to_vPC 21 22
-13 ValidatePortConnection adapterFromPlugType10ToPlugType11-bPlugType11 adapterFromPlugType11ToPlugType12-aPlugType11 data -> vPC_to_vPC 23 24
-14 ValidatePortConnection adapterFromPlugType11ToPlugType12-bPlugType12 adapterFromPlugType12ToPlugType13-aPlugType12 data -> vPC_to_vPC 25 26
-15 ValidatePortConnection adapterFromPlugType12ToPlugType13-bPlugType13 adapterFromPlugType13ToPlugType14-aPlugType13 data -> vPC_to_vPC 27 28
-16 connect pc-bPlugType1 adapterFromPlugType1ToPlugType2-aPlugType1 -> c3 2
-17 connect adapterFromPlugType1ToPlugType2-bPlugType2 adapterFromPlugType2ToPlugType3-aPlugType2 -> c3 4
-18 connect adapterFromPlugType2ToPlugType3-bPlugType3 adapterFromPlugType3ToPlugType4-aPlugType3 -> c3 6
-19 connect adapterFromPlugType3ToPlugType4-bPlugType4 adapterFromPlugType4ToPlugType5-aPlugType4 -> c3 8
-20 connect adapterFromPlugType4ToPlugType5-bPlugType5 adapterFromPlugType5ToPlugType6-aPlugType5 -> c3 10
-21 connect adapterFromPlugType5ToPlugType6-bPlugType6 adapterFromPlugType6ToPlugType7-aPlugType6 -> c3 12
-22 connect adapterFromPlugType6ToPlugType7-bPlugType7 adapterFromPlugType7ToPlugType8-aPlugType7 -> c3 14
-23 connect adapterFromPlugType7ToPlugType8-bPlugType8 adapterFromPlugType8ToPlugType9-aPlugType8 -> c3 16
-24 connect adapterFromPlugType8ToPlugType9-bPlugType9 adapterFromPlugType9ToPlugType10-aPlugType9 -> c3 18
-25 connect adapterFromPlugType9ToPlugType10-bPlugType10 adapterFromPlugType10ToPlugType11-aPlugType10 -> c3 20
-26 connect adapterFromPlugType10ToPlugType11-bPlugType11 adapterFromPlugType11ToPlugType12-aPlugType11 -> c3 22
-27 connect adapterFromPlugType11ToPlugType12-bPlugType12 adapterFromPlugType12ToPlugType13-aPlugType12 -> c3 24
-28 connect adapterFromPlugType12ToPlugType13-bPlugType13 adapterFromPlugType13ToPlugType14-aPlugType13 -> c3 26
-29 connect adapterFromPlugType13ToPlugType14-bPlugType14 printer-aPlugType14 -> c5 30
+0 vPC_to_VDC_0 -> m1 1 2
+37 vPC_to_VDC_0 -> m1 3 4
+38 vPC_to_VDC_0 -> m1 5 6
+39 vPC_to_VDC_0 -> m1 7 8
+40 vPC_to_VDC_0 -> m1 9 10
+41 vPC_to_VDC_0 -> m1 11 12
+42 vPC_to_VDC_0 -> m1 13 14
+43 vDC_to_vPC_0 -> m3 15 16
+44 vDC_to_vPC_0 -> m3 17 18
+45 vDC_to_vPC_0 -> m3 19 20
+46 vPC_to_VDC_0 -> m1 21 22
+47 vPC_to_VDC_0 -> m1 23 24
+48 vPC_to_VDC_0 -> m1 25 26
+49 vPC_to_VDC_0 -> m1 27 28
+50 vDC_to_vPC_0 -> m3 29 30
+51 vDC_to_vPC_0 -> m3 31 32
+52 vDC_to_vPC_0 -> m3 33 34
+53 vDC_to_vPC_0 -> m3 35 36 
+
 <==
-
-**Note:**
-
-* The plan assumes that the `guard` action is necessary before starting the connection process, and the `ok` action is necessary after completing the connection process to achieve the `pAim` goal.
-* The `vDC_to_vPC_4` method is chosen for validating device connections because it matches the precondition of having both ports with `both` direction.
-* The `vPC_to_vPC` method is recursively applied to validate port connections through the chain of adapters.
-* The `c3` method is chosen for connecting ports because it matches the precondition of having female-female ports with `both` direction.
-* The `c5` method is chosen for the final connection to the printer because it matches the precondition of having female-male ports with `out`-`in` direction.

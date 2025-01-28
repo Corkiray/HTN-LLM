@@ -1,96 +1,120 @@
-Here is a hierarchical plan to solve the given HTN problem, following the specified output format:
-```
 ==>
-**Sequential Plan**
-1. unstack b7 b3 arm1
-2. putdown b7 arm1
-3. unstack b1 b2 arm2
-4. putdown b1 arm2
-5. unstack b14 b11 arm3
-6. putdown b14 arm3
-7. unstack b4 b9 arm4
-8. putdown b4 arm4
-9. pickup b13 arm5
-10. stack b13 b8 arm5
-11. pickup b8 arm6
-12. stack b8 b1 arm6
-13. pickup b1 arm1
-14. stack b1 b2 arm1
-15. pickup b2 arm2
-16. stack b2 b6 arm2
-17. pickup b6 arm2
-18. putdown b6 arm2
-19. pickup b11 arm3
-20. stack b11 b10 arm3
-21. pickup b10 arm3
-22. stack b10 b12 arm3
-23. pickup b12 arm3
-24. stack b12 b7 arm3
-25. pickup b7 arm3
-26. stack b7 b14 arm3
-27. pickup b14 arm4
-28. stack b14 b4 arm4
-29. pickup b4 arm4
-30. stack b4 b15 arm4
-31. pickup b15 arm4
-32. stack b15 b9 arm4
-33. pickup b9 arm4
-34. stack b9 b5 arm4
-35. pickup b5 arm4
-36. stack b5 b3 arm4
-37. pickup b3 arm4
-38. putdown b3 arm4
-**Hierarchical Decomposition**
+1 hand-empty arm1
+2 on-table b6
+3 clear b11
+4 on-table b3
+5 on b13 b8
+6 on b8 b1
+7 on b1 b2
+8 on b2 b6
+9 on b11 b10
+10 on b10 b12
+11 on b12 b7
+12 on b7 b14
+13 on b14 b4
+14 on b15 b9
+15 on b9 b5
+16 on b5 b3
 root 0
-0 achieve-goals arm1 -> m1_unstack_0 1 2
-  1 unstack b7 b3 arm1 -> newMethod16 1
-  2 putdown b7 arm1 -> newMethod14 2
- ...
-0 achieve-goals arm2 -> m2_unstack_3 3 4
-  3 unstack b1 b2 arm2 -> newMethod16 3
-  4 putdown b1 arm2 -> newMethod14 4
- ...
-0 achieve-goals arm3 -> m3_unstack_5 5 6
-  5 unstack b14 b11 arm3 -> newMethod16 5
-  6 putdown b14 arm3 -> newMethod14 6
- ...
-0 achieve-goals arm4 -> m4_unstack_7 7 8
-  7 unstack b4 b9 arm4 -> newMethod16 7
-  8 putdown b4 arm4 -> newMethod14 8
- ...
-0 achieve-goals arm5 -> m5_pickup_9 9
-  9 pickup b13 arm5 -> newMethod13 9
- ...
-0 achieve-goals arm6 -> m6_pickup_10 10
-  10 pickup b8 arm6 -> newMethod13 10
- ...
-1 acquire_abstract b13 arm5 -> newMethod13 9
-2 putdown_abstract b7 -> newMethod14 2
-3 acquire_abstract b8 arm6 -> newMethod13 10
-4 putdown_abstract b1 -> newMethod14 4
-5 acquire_abstract b11 arm3 -> newMethod13 (19)
-6 putdown_abstract b14 -> newMethod14 6
-7 acquire_abstract b4 arm4 -> newMethod13 (23)
-8 putdown_abstract b4 -> newMethod14 8
-9 stack_abstract b13 b8 -> newMethod15 (10, 11)
-10 stack_abstract b8 b1 -> newMethod15 (12, 13)
-11 stack_abstract b1 b2 -> newMethod15 (14, 15)
-12 stack_abstract b2 b6 -> newMethod15 (16, 17)
-13 putdown_abstract b6 -> newMethod14 (18)
-14 stack_abstract b11 b10 -> newMethod15 (20, 21)
-15 stack_abstract b10 b12 -> newMethod15 (22, 23)
-16 stack_abstract b12 b7 -> newMethod15 (24, 25)
-17 stack_abstract b7 b14 -> newMethod15 (26, 27)
-18 stack_abstract b14 b4 -> newMethod15 (28, 29)
-19 stack_abstract b4 b15 -> newMethod15 (30, 31)
-20 stack_abstract b15 b9 -> newMethod15 (32, 33)
-21 stack_abstract b9 b5 -> newMethod15 (34, 35)
-22 stack_abstract b5 b3 -> newMethod15 (36, 37)
-23 putdown_abstract b3 -> newMethod14 (38)
+0 achieve-goals arm1 -> m1_stack_5 13 14 2 1
+5 achieve-goals arm2 -> m1_release_table_done_3 3 4
+17 acquire_abstract b14 arm1 -> newMethod16 18 19
+18 unstack b14 b15 arm1
+19 release arm1 -> release-stack b14 b5 arm1 20 21 22 23
+20 stack_abstract b14 b4 -> newMethod15 24 25 26
+root 1
+24 stack b14 b4 arm2
+24.1 release arm2 -> release-table-done b3 arm2 27 28 29 30
+25 move b7 b14 arm2
+26 putdown_abstract b7 -> newMethod14 31 32
+24.1.1 acquire_abstract b7 arm2 -> newMethod13 33 34
+27 delete_goal_on_table b3
+28 mark_done b3
+29 putdown b15 arm2
+30 achieve-goals arm2
+31 putdown b7 arm2
+32 hand-empty arm2
+33 pickup b7 arm2
+34 hand-empty arm2
+24.1.2 release arm2  -> release-stack b7 b14 arm2 35 36 37 38
+35 delete_goal_on b7 b14
+36 mark_done b7
+37 stack_abstract b7 b14 -> newMethod15 39 40 41
+38 achieve-goals arm2
+39 stack b7 b14 arm3
+39.1 release arm3 -> release-stack b7 b14 arm3 42 43 44 45
+40 move b11 b7 arm3
+41 putdown b10 arm3
+42 delete_goal_on b7 b14
+43 mark_done b7
+root 2
+43.1 release arm3  -> release-table-done b12 arm3 46 47 48 49
+44 move b12 b11 arm3
+45 putdown b11 arm3
+46 delete_goal_on_table b12
+47 mark_done b12
+48 putdown b10 arm3
+49 achieve-goals arm3
+44.1 release arm3 -> release-stack b12 b11 arm3 50 51 52 53
+45.1 release arm3  -> release-stack b11 b10 arm3 54 55 56 57
+46.1 release arm3 -> release-stack b11 b10 arm3 58 59 60 61
+50 delete_goal_on b12 b11
+51 mark_done b12
+52 stack b12 b11 -> newMethod15 62 63 64
+53 achieve-goals arm3
+54 delete_goal_on b11 b10
+55 mark_done b11
+56 stack b11 b10 -> newMethod15 65 66 67
+57 achieve-goals arm3
+58 delete_goal_on b11 b10
+59 mark_done b11
+root 3
+60 stack b11 b10 -> newMethod15 68 69 70
+61 achieve-goals arm3
+62 stack b12 b11 arm4
+62.1 release arm4 -> release-stack b12 b11 arm4 71 72 73 74
+63 move b5 b12 arm4
+64 putdown b10 arm4
+65 stack b11 b10 arm4
+65.1  release arm4  -> release-stack b11 b10 arm4 75 76 77 78
+66 move b10 b11 arm4
+67 putdown b3 arm4
+68 stack b11 b10 arm5
+68.1 release arm5 -> release-stack b11 b10 arm5 79 80 81 82
+69 move b9 b11 arm5
+70 putdown b5 arm5
+root 4
+71 delete_goal_on b12 b11
+72 mark_done b12
+73 stack_abstract b12 b11 -> newMethod15 83 84 85
+74 achieve-goals arm4
+75 delete_goal_on b11 b10
+76 mark_done b11
+root 5
+76.1 release arm4  -> release-stack b11 b10 arm4 86 87 88 89
+77 stack b11 b10 -> newMethod15 90 91 92
+78 achieve-goals arm4
+79 delete_goal_on b11 b10
+80 mark_done b11
+81 stack_abstract b11 b10 -> newMethod15 93 94 95
+82 achieve-goals arm5
+83 stack b12 b11 arm5
+84 move b15 b12 arm5
+85 putdown b10 arm5
+86 delete_goal_on b11 b10
+87 mark_done b11
+88 stack_abstract b11 b10 -> newMethod15 96 97 98
+89 achieve-goals arm4
+90 stack b11 b10 arm5
+91 move b3 b11 arm5
+92 putdown b5 arm5
+93 stack b11 b10 arm6
+93.1 achieve-goals arm6 -> set_done 99 100 arm6
+94 move b9 b11 arm6
+95 putdown b3 arm6
+96 stack b11 b10 arm6
+97 move b1 b11 arm6
+98 putdown b9 arm6
+99 forall (?b) (done ?b) 
+100 done b13
 <==
-```
-**Note:**
-
-* The sequential plan consists of 38 actions, which are the result of decomposing the high-level tasks (`achieve-goals` for each arm) into lower-level tasks and eventually into primitive actions.
-* The hierarchical decomposition shows how each high-level task is broken down into smaller tasks, using the methods defined in the HTN domain. The numbers in parentheses refer to the corresponding action numbers in the sequential plan.
-* Due to the complexity of the problem and the output format, some parts of the hierarchical decomposition are omitted (represented by `...`) to maintain readability. If you need the complete output, please let me know.

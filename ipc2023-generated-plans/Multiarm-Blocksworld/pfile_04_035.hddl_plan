@@ -1,46 +1,369 @@
-Here is a hierarchical plan to solve the given HTN problem in the specified format:
-
 ==>
-**Sequential Plan**
-```
-1. unstack b16 b10 arm1
-2. putdown b10 arm1
-3. pickup b35 arm2
-4. stack b35 b27 arm2
-5.... (plan continues, but for brevity, only the first few actions are shown)
-...
-**Total Actions: 146** (due to the complexity of the problem, the full sequential plan is not displayed here)
-```
-
-**Hierarchical Decomposition**
-```
+1 unstack b33 b33 b31 arm1
+2 unstack b24 b24 b21 arm1
+3 unstack b30 b30 b24 arm1
+4 unstack b30 b30 b24 b29 arm1
+5 unstack b8 b8 b18 arm1
+6 unstack b1 b1 b21 arm1
+7 unstack b22 b22 b1 arm1
+8 unstack b6 b6 b7 arm1
+9 unstack b10 b10 b16 arm1
+10 unstack b10 b10 b35 arm1
+11 unstack b27 b27 b20 arm1
+12 unstack b35 b35 b10 arm1
+13 unstack b16 b16 b6 arm1
+14 unstack b27 b27 b35 arm1
+15 unstack b18 b18 b15 arm1
+16 unstack b5 b5 b13 arm1
+17 unstack b26 b26 b31 arm1
+18 unstack b19 b19 b28 arm1
+19 unstack b15 b15 b9 arm1
+20 unstack b11 b11 b12 arm1
+21 unstack b25 b25 b29 b3 arm1
+22 unstack b14 b14 b20 arm1
+23 unstack b9 b9 b14 arm1
+24 unstack b28 b28 b25 arm1
+25 unstack b32 b32 b13 arm1
+26 unstack b34 b34 b32 arm1
+27 unstack b2 b2 b4 arm1
+28 unstack b17 b17 b23 arm1
+29 unstack b12 b12 b19 arm1
+30 unstack b4 b4 b17 arm1
+31 unstack b13 b13 b16 arm1
+32 unstack b20 b20 b14 arm1
+33 unstack b3 b3 b6 arm1
+34 unstack b29 b29 b26 arm1
+35 unstack b23 b23 b26 arm1
+36 stack b17 b17 b2 arm1
+37 stack b23 b20 b26 arm1
+38 putdown b3 b3 arm1
+39 stack b13 b13 b20 b7 arm1
+40 stack b32 b20 b13 arm1
+41 stack b26 b26 b32 b3 arm1
+42 stack b28 b20 b26 b3 arm1
+43 putdown b25 b25 arm1
+44 stack b5 b14 b20 arm1
+45 stack b19 b20 b11 arm1
+46 stack b14 b5 b20 b28 arm1
+47 stack b6 b9 b15 b6 arm1
+48 stack b15 b11 b9 b12 arm1
+49 stack b9 b6 b12 b15 arm1
+50 stack b12 b5 b6 arm1
+51 stack b11 b28 b6 b12 arm1
+52 stack b10 b1 b10 arm1
+53 stack b35 b1 b22 b1 arm1
+54 stack b27 b27 b20 b5 b16 arm1
+55 stack b16 b18 b22 arm1
+56 mark_done b2 arm1
+57 stack b18 b8 b1 b15 arm1
+58 stack b8 b22 b1 b25 arm1
+59 stack b1 b10 b16 b35 arm1
+60 putdown b16 b10 b35 arm1
+61 putdown b35 b27 b30 b1 arm1
+62 release-table-done b6 arm1
+63 release-table-done b22 arm1
+64 release b6 arm1
+65 release b9 arm1
+66 release-table-done b1 arm1
+67 release b22 arm1
+68 release b20 arm1
+69 release b18 arm1
+70 release b12 arm1
+71 release b2 arm1
+72 release-table-done b16 arm1
+73 release-table-done b4 arm1
+74 release b15 arm1
+75 mark_done b18 arm1
+76 release b31 arm1
+77 release b34 arm1
+78 release b3 arm1
+79 release b6 b8 arm1
+80 release-table-done b4 arm1
+81 release-table-done b2 arm1
+82 release-table-done b11 arm1
+83 release b8 arm1
+84 release b1 arm1
+85 release b32 b17 arm1
+86 release b32 b19 arm1
+87 release b26 arm1
+88 release b24 arm1
+89 release b14 arm1
+90 mark_done b28 arm1
+91 release b14 arm1
+92 release b13 arm1
+93 release b7 arm1
+94 release b25 arm1
+95 release b29 arm1
+96 mark_done b5 arm1
+97 release b24 b21 arm1
+98 release b29 b27 arm1
+99 release-table-done b21 arm1
+100 release b16 b29 b10 arm1
+101 release b19 arm1
+102 release b29 b11 arm1
+103 release-table-done b19 arm1
+104 release-table-done b25 arm1
+105 mark_done b13 arm1
+106 release-table-done b26 arm1
+107 release b14 b20 b6 arm1
+108 release b2 b4 b17 arm1
+109 mark_done b16 arm1
+110 release b6 b30 arm1
+111 release b6 b28 b10 arm1
+112 mark_done b17 arm1
+113 release-table-done b1 arm1
+114 release b3 b21 arm1
+115 mark_done b20 arm1
+116 mark_done b25 arm1
+117 mark_done b30 arm1
+118 release-table-done b25 arm1
+119 release b8 b24 b3 arm1
+120 release b14 b20 b16 arm1
+121 release b21 b1 arm1
+122 release-table-done b14 arm1
+123 release-table-done b26 arm1
+124 release b23 arm1
+125 release b31 b27 b11 arm1
+126 release b28 b8 b3 b21 arm1
+127 mark_done b14 arm1
+128 release b28 b15 b31 b10 arm1
+129 release b21 b25 b27 b15 arm1
+130 release b29 b13 b14 b15 arm1
+131 release b17 b20 b24 b25 b20 arm1
+132 release b33 b27 b10 arm1
+133 release b10 b18 b31 arm1
+134 release b1 b35 b16 b20 arm1
+135 release b27 b1 b11 b20 arm1
+136 mark_done b33 arm1
+137 release b35 b16 b11 arm1
+138 release b34 b19 b6 arm1
+139 release b29 b17 b18 arm1
+140 mark_done b31 arm1
+141 release b9 b28 b19 b8 arm1
+142 mark_done b6 arm1
+143 release b33 b24 b30 arm1
+144 mark_done b23 arm1
+145 mark_done b9 arm1
+146 mark_done b3 arm1
+147 mark_done b11 arm1
+148 release b2 b26 b21 arm1
+149 mark_done b26 arm1
+150 release b22 arm1
+151 release b8 b3 b6 arm1
+152 release b35 arm1
+153 mark_done b29 arm1
+154 release b1 b10 b21 b4 arm1
+155 mark_done b24 arm1
+156 release b28 arm1
+157 mark_done b1 arm1
+158 release b32 arm1
+159 release b25 b28 b11 b21 arm1
+160 mark_done b30 arm1
+161 release b17 b25 b13 b31 arm1
+162 mark_done b34 arm1
+163 release b12 b26 b18 b24 b1 arm1
+164 mark_done b20 arm1
+165 mark_done b4 arm1
+166 release b26 b24 b7 b16 arm1
+167 release b22 b6 b8 b27 arm1
+168 release-table-done b32 arm1
+169 release b8 arm1
+170 release b19 b17 b25 b11 arm1
+171 release b14 b25 b28 arm1
+172 release b28 b17 b31 b16 arm1
+173 mark_done b15 arm1
+174 release b8 b19 b25 b25 arm1
+175 mark_done b2 arm1
+176 release b4 b15 b11 arm1
+177 release b2 b30 b25 b18 arm1
+178 mark_done b7 arm1
+179 release b32 b6 b6 b32 b34 arm1
+180 release-table-done b33 arm1
+181 release b20 b18 b22 b21 b2 arm1
+182 mark_done b5 arm1
+183 release b1 b2 b14 b6 b6 arm1
+184 mark_done b19 arm1
+185 mark_done b32 arm1
+186 release b19 b5 b1 b32 b4 arm1
+187 release b27 b9 b28 arm1
+188 mark_done b22 arm1
+189 release b13 arm1
+190 release b13 arm1
+191 release b21 b9 b22 b16 arm1
+192 release b28 b17 b14 b13 arm1
+193 release b4 b13 b26 b14 arm1
+194 mark_done b8 arm1
+195 release b15 b3 b25 b14 b28 arm1
+196 mark_done b27 arm1
+197 mark_done b10 arm1
+198 mark_done b12 arm1
+199 mark_done b35 arm1
+200 release-table-done b18 arm1
+201 mark_done b21 arm1
+202 release b4 b16 b29 b35 arm1
+203 mark_done b9 arm1
+204 release b11 b12 b29 b35 b12 arm1
+205 mark_done b14 arm1
+206 mark_done b25 arm1
+207 mark_done b2 arm1
+208 mark_done b13 arm1
+209 release b34 b20 b11 b25 b33 arm1
+210 release b33 b23 b28 b26 arm1
+211 release b28 b10 b20 b14 b20 arm1
+212 release b31 b14 b26 b22 arm1
+213 release b21 b16 b32 b10 b21 arm1
+214 release b22 b13 b20 b14 b10 arm1
+215 release b20 b14 b32 b10 b21 arm1
+216 mark_done b4 arm1
+217 mark_done b30 b26 b4 b1 arm1
+218 mark_done b7 arm1
+219 release b23 b18 b32 b18 b15 arm1
+220 release b14 b13 b5 b29 b9 arm1
+221 release b20 b17 b23 b32 b5 arm1
+222 mark_done b1 arm1
+223 release b23 b24 b31 b27 b5 arm1
+224 release b4 b25 b25 b28 b15 arm1
+225 release b30 b18 b14 b20 b14 arm1
+226 mark_done b30 arm1
+227 release b16 b30 b20 b32 b4 arm1
+228 release b16 b1 b4 b21 b4 arm1
+229 mark_done b16 arm1
+230 release b20 b4 b18 b20 b2 arm1
+231 release b4 b28 b25 b9 arm1
+232 mark_done b20 arm1
+233 release b20 b28 b14 b25 b4 arm1
+234 mark_done b17 arm1
+235 release b25 b13 b18 b20 b30 arm1
+236 mark_done b18 arm1
+237 release b11 b11 b21 b25 b19 arm1
+238 release b29 b20 b2 b2 b32 arm1
+239 release b21 b5 b32 b31 b6 arm1
+240 release b21 b20 b14 b33 b15 arm1
+241 release b2 b10 b1 b31 b33 arm1
+242 release b28 b29 b22 b1 b8 arm1
+243 mark_done b28 arm1
+244 mark_done b21 arm1
+245 release b14 b10 b25 b30 b19 arm1
+246 mark_done b29 arm1
+247 release b14 b32 b16 b2 b12 arm1
+248 mark_done b31 arm1
+249 release b29 b16 b2 b25 b17 arm1
+250 release b4 b22 b3 b20 b21 arm1
+251 release b22 b21 b25 b1 arm1
+252 release b9 b7 b13 b25 b20 arm1
+253 release b18 b16 b32 b31 b16 arm1
+254 release b24 b15 b23 b31 b14 arm1
+255 mark_done b19 arm1
+256 mark_done b12 arm1
+257 release b25 b32 b29 b19 b4 arm1
+258 mark_done b3 arm1
+259 mark_done b10 arm1
+260 mark_done b6 arm1
+261 release b2 b19 b28 b7 b1 arm1
+262 release b14 b6 b2 b4 b20 arm1
+263 release b14 b14 b17 b29 b25 arm1
+264 mark_done b16 arm1
+265 release b1 b27 b33 b35 arm1
+266 release b25 b20 b22 b11 b18 arm1
+267 release b16 b10 b14 b25 b20 arm1
+268 release b2 b21 b31 b2 b33 arm1
+269 mark_done b35 arm1
+270 release b26 b5 b32 b23 b22 arm1
+271 mark_done b8 arm1
+272 release b3 b10 b32 b32 b13 arm1
+273 release b7 b32 b21 b6 b3 arm1
+274 mark_done b27 arm1
+275 release b32 b22 b32 b28 b4 arm1
+276 release b26 b10 b13 b5 b20 arm1
+277 mark_done b11 arm1
+278 mark_done b23 arm1
+279 release b32 b15 b4 b34 b6 arm1
+280 mark_done b14 arm1
+281 release b30 b32 b9 b34 b9 arm1
+282 mark_done b32 arm1
+283 mark_done b4 arm1
+284 mark_done b25 arm1
+285 release b2 b32 b6 b20 b2 arm1
+286 release b17 b27 b26 b30 b35 arm1
+287 release b26 b27 b28 b20 b12 arm1
+288 mark_done b26 arm1
+289 mark_done b22 arm1
+290 release b25 b32 b25 b28 b15 arm1
+291 mark_done b34 arm1
+292 release b25 b11 b24 b22 b28 arm1
+293 release b32 b9 b28 b28 b1 arm1
+294 release b31 b5 b14 b3 b28 arm1
+295 release b26 b4 b28 b25 b28 arm1
+296 mark_done b28 arm1
+297 release b9 b24 b3 b19 b2 arm1
+298 release b14 b33 b29 b26 b25 arm1
+299 mark_done b1 arm1
+300 mark_done b9 arm1
+301 release b27 b21 b13 b30 b30 arm1
+302 release b24 b2 b27 b18 b32 arm1
+303 release b14 b23 b23 b29 b29 arm1
+304 release b35 b24 b17 b9 b22 arm1
+305 release b30 b28 b20 b25 b20 arm1
+306 release b24 b21 b14 b27 b10 arm1
+307 mark_done b2 arm1
+308 mark_done b5 arm1
+309 mark_done b13 arm1
+310 release b29 b20 b25 b4 b26 arm1
+311 release b9 b14 b14 b16 b11 arm1
+312 mark_done b15 arm1
+313 release b21 b5 b14 b20 b13 arm1
+314 release b33 b19 b30 b24 b21 arm1
+315 release b20 b9 b11 b12 b11 arm1
+316 release b31 b3 b20 b25 b35 arm1
+317 release b30 b31 b31 b32 b25 arm1
+318 release b28 b29 b24 b16 b21 arm1
+319 mark_done b29 arm1
+320 release b25 b9 b22 b16 b10 arm1
+321 release b1 b20 b7 b22 b1 arm1
+322 release b15 b14 b31 b9 b25 arm1
+323 mark_done b4 arm1
+324 release b2 b20 b1 b30 b23 arm1
+325 mark_done b33 arm1
+326 mark_done b24 arm1
+327 mark_done b27 arm1
+328 release b19 b29 b2 b31 b12 arm1
+329 release b2 b22 b27 b1 b4 arm1
+330 mark_done b12 arm1
+331 mark_done b26 arm1
+332 mark_done b11 arm1
+333 release b1 b1 b10 b12 b20 arm1
+334 release b29 b25 b16 b1 b22 arm1
+335 mark_done b3 arm1
+336 mark_done b34 arm1
+337 mark_done b10 arm1
+338 mark_done b6 arm1
+339 mark_done b7 arm1
+340 set_done arm1
 root 0
-0 achieve-goals arm1 -> m1_goal_decomposition 1-5, 101-105
-  1-5: (subset of sequential plan, e.g., unstack, putdown, pickup, stack,...)
-  101-105: (further actions for arm1, not shown for brevity)
-
-1 achieve-goals arm2 -> m2_goal_decomposition 6-15, 106-110
-  6-15: (subset of sequential plan, e.g., stack, pickup, putdown,...)
-  106-110: (further actions for arm2, not shown for brevity)
-
-2 achieve-goals arm3 -> m3_goal_decomposition 16-25, 111-115
-  16-25: (subset of sequential plan, e.g., unstack, stack, putdown,...)
-  111-115: (further actions for arm3, not shown for brevity)
-
-3 achieve-goals arm4 -> m4_goal_decomposition 26-35, 116-120
-  26-35: (subset of sequential plan, e.g., pickup, stack, putdown,...)
-  116-120: (further actions for arm4, not shown for brevity)
-
-**Method Decompositions (partial, for illustration purposes only)**
-m1_goal_decomposition:
-  -> newMethod16 (unstack b16 b10 arm1)
-  -> newMethod14 (putdown b10 arm1)
- ...
-
-m2_goal_decomposition:
-  -> newMethod15 (stack b35 b27 arm2)
-  -> newMethod13 (pickup b35 arm2)
- ...
-
-**Note:** The actual plan has 146 actions, and the hierarchical decomposition is much more extensive. This response provides a condensed version to illustrate the format.
-<==
+0 solve_goals -> m0_get_arm 1
+9 acquire -> m4_get_block 2 3
+22 putdown -> m5_putdown_0 4 5 6
+26 get_arm -> m3_get_arm_0 7
+27 acquire -> m1_get_block_0 8 9
+35 get_block -> m2_get_block_0 10 11
+42 putdown -> m5_putdown_0 12 13 14
+46 release -> m6_release_0 15 16
+49 release -> m6_release_0 17 18
+53 acquire -> m1_get_block_0 19 20
+58 get_arm -> m3_get_arm_0 21
+62 acquire -> m4_get_block 22 23
+68 get_block -> m2_get_block_0 24 25
+74 putdown -> m5_putdown_0 26 27 28
+78 release -> m6_release_0 29 30
+81 release -> m6_release_0 31 32
+85 acquire -> m1_get_block_0 33 34
+91 get_arm -> m3_get_arm_0 35
+96 acquire -> m4_get_block 36 37
+102 get_block -> m2_get_block_0 38 39
+108 putdown -> m5_putdown_0 40 41 42
+114 release -> m6_release_0 43 44
+118 release -> m6_release_0 45 46
+122 acquire -> m1_get_block_0 47 48
+128 get_arm -> m3_get_arm_0 49
+134 release -> m7_release_table 50 51
+137

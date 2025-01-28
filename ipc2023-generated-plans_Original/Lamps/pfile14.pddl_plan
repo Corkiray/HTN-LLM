@@ -1,0 +1,46 @@
+==>
+**Sequential Plan**
+1. `flip l1 l1 Y N` 
+2. `flip l2 l2 Y N` 
+3. `flip l3 l3 N Y` 
+4. `flip l3 l2 N Y` 
+5. `flip l2 l1 N Y` 
+6. `flip l1 l3 Y N` 
+7. `flip l1 l2 N Y` 
+8. `flip l2 l3 Y N` 
+9. `flip l3 l4 N Y` 
+10. `flip l4 l4 Y N` 
+11. `flip l4 l3 Y N` 
+12. `flip l4 l2 Y N` 
+13. `flip l4 l1 Y N` 
+14. `flip l4 l0 Y N` 
+
+**Hierarchical Decomposition**
+```
+root 0
+0 play -> do_play 1 15
+1 turn -> do_turn l1 l1 Y N 2 3 4 5
+2 propagate_up l1 l1 Y -> propagate_up_do l1 l1 l2 Y N 6
+3 propagate_down l1 l1 Y -> propagate_down_do l1 l1 l0 Y N (no further decomposition, as it's at the min boundary)
+4 propagate_left l1 l1 Y -> propagate_left_end_different l1 l1 l0 Y (no further decomposition, as the adjacent cell is different)
+5 propagate_right l1 l1 Y -> propagate_right_do l1 l1 l2 Y N 7
+6 propagate_up l2 l1 Y -> propagate_up_do l2 l1 l3 Y N 8
+7 propagate_right l2 l1 Y -> propagate_right_do l2 l1 l3 Y N 9
+8 propagate_up l3 l1 Y -> propagate_up_end_field l3 l1 Y (no further decomposition, as it's at the max boundary)
+9 propagate_right l3 l1 Y -> propagate_right_end_different l3 l1 l4 Y (no further decomposition, as the adjacent cell is different)
+10 turn -> do_turn l3 l2 N Y 11 12 13 14
+11 propagate_up l3 l2 N -> propagate_up_do l3 l2 l4 N Y (no further decomposition, as the next cell is out of bounds for this specific task)
+12 propagate_down l3 l2 N -> propagate_down_do l3 l2 l2 N Y 12.1
+   12.1 propagate_down l2 l2 N -> propagate_down_end_field l2 l2 N (no further decomposition, as it's at the min boundary for this specific task)
+13 propagate_left l3 l2 N -> propagate_left_do l3 l2 l1 N Y 13.1
+   13.1 propagate_left l1 l2 N -> propagate_left_end_different l1 l2 l0 N (no further decomposition, as the adjacent cell is different)
+14 propagate_right l3 l2 N -> propagate_right_end_field l3 l2 N (no further decomposition, as it's at the max boundary)
+15 play -> end_game (empty, as the game is considered ended after the last turn)
+<==
+```
+**Note:**
+
+* The sequential plan consists of 14 `flip` actions, which are the only actions available in the domain.
+* The hierarchical decomposition shows how the `play` task is decomposed into `turn` tasks, and how each `turn` task is further decomposed into `propagate_*` tasks. Some `propagate_*` tasks are decomposed further, while others are not, depending on the preconditions and boundaries.
+* The decomposition assumes that the `next`, `max`, and `min` predicates are used to determine the boundaries and adjacent cells.
+* The plan is not guaranteed to be optimal, as the HTN planning process can produce different plans depending on the search strategy and heuristics used.

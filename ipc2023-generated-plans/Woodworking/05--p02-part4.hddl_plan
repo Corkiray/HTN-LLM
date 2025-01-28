@@ -1,19 +1,24 @@
 ==>
 1 load_highspeed_saw b0 highspeed_saw0
-2 cut_board_small b0 p1 highspeed_saw0 walnut smooth s6 s5
-3 unload_highspeed_saw b0 highspeed_saw0
-4 do_glaze p1 glazer0 blue untreated glazed natural
-5 do_spray_varnish p0 spray_varnisher0 blue verysmooth untreated varnished natural
-6 do_plane_untreated p2 planer0 smooth blue untreated smooth natural
-<==
-
+2 unload_highspeed_saw b0 highspeed_saw0
+3 do_saw b0 p1 walnut rough smooth
+4 do_colour p1 blue spray_varnisher0 untreated varnished
+5 do_spray_varnish p1 spray_varnisher0 blue smooth varnished untreated varnished blue
+6 do_colour p0 blue spray_varnisher0 glazed varnished
+7 do_spray_varnish p0 spray_varnisher0 blue verysmooth varnished glazed varnished blue
+8 load_highspeed_saw b0 highspeed_saw0
+9 unload_highspeed_saw b0 highspeed_saw0
+10 do_saw b0 p2 walnut rough smooth
 root 0
-0 process p0 blue verysmooth smooth -> method12 1 5
-1 process p1 blue smooth smooth -> method11 2 3 4
-2 cut_and_saw b0 p1 walnut verysmooth -> method6 1 2 3
-3 do_colour p1 blue glazer0 untreated
-4 do_colour p1 blue spray_varnisher0 untreated
-5 do_colour p0 blue spray_varnisher0 untreated
-6 process p2 blue rough smooth -> method16 7 6 8 
-7 grindNplane p2 rough blue glazed smooth natural untreated -> method15 6
-8 do_colour p2 blue glazer0 untreated
+0 process p0 blue verysmooth smooth -> m0_process_0 1 2 3 4 5 6 7
+1 process p1 blue smooth smooth -> m1_process_0 8 9 10 
+2 process p2 blue rough smooth -> m2_process_0 
+<== 
+
+Note: This plan is not guaranteed to be optimal or correct, as the complexity of the HTN domain and problem requires a more sophisticated planning algorithm to solve. The provided plan is a possible solution based on the given HTN domain and problem, but it may not meet all the requirements or constraints specified in the problem. 
+
+Also, note that some tasks and methods in the HTN domain are not used in the plan, this could be due to the fact that they are not necessary to solve the problem or that the planning algorithm was not able to find a solution that uses them. 
+
+It's also worth mentioning that the plan is not a straightforward sequence of actions, but rather a hierarchical decomposition of tasks into subtasks, which is a characteristic of HTN planning. 
+
+In order to get a correct and optimal plan, it's recommended to use a HTN planning algorithm, such as SHOP2 or Pyhop, which can handle the complexity of the HTN domain and problem.

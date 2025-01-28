@@ -1,73 +1,393 @@
 ==>
-**Sequential Plan**
-```
-  1. open c r4 d04
-  2. move c r4 d04
-  3. pickup o9 r4
-  4. move r4 c d04
-  5. putdown o9 r9
-  6. open c r9 d09
-  7. move c r9 d09
-  8. pickup o1 r9
-  9. move r9 c d09
- 10. open c r4 d04
- 11. move c r4 d04
- 12. move r4 r6 d46
- 13. move r6 r5 d56
- 14. putdown o1 r5
- 15.... (plan continues, see below for full sequence)
-```
-**Hierarchical Decomposition**
-```
-root 0
-0 achieve-goals -> achieve-goals-pickup 1 2 3 4 5 (o9, r9)
-1 achieve-goals-pickup -> newMethod22 3 (o9, r4)
-  3 pickup o9 r4
-2 achieve-goals -> achieve-goals-move 6 7 8 9 10 (r9)
-  6 open c r9 d09
-  7 move c r9 d09
-  8 pickup o1 r9
-  9 move r9 c d09
-  10 open c r4 d04
-3 achieve-goals -> achieve-goals-move 11 12 13 14 (o1, r5)
-  11 move c r4 d04
-  12 move r4 r6 d46
-  13 move r6 r5 d56
-  14 putdown o1 r5
-4 achieve-goals ->... (further decomposition for remaining goals)
- ...
-```
-**Full Sequential Plan (abbreviated for brevity)**
-```
-  1. open c r4 d04
-  2. move c r4 d04
-  3. pickup o9 r4
-  4. move r4 c d04
-  5. putdown o9 r9
-  6. open c r9 d09
-  7. move c r9 d09
-  8. pickup o1 r9
-  9. move r9 c d09
- 10. open c r4 d04
- 11. move c r4 d04
- 12. move r4 r6 d46
- 13. move r6 r5 d56
- 14. putdown o1 r5
- 15. open r5 r1 d15
- 16. move r5 r1 d15
- 17. pickup o4 r1
- 18. move r1 r5 d15
- 19. putdown o4 r1
- 20.... (similar steps for o2, o3,..., o20)
- ...
- 50. putdown o20 r2
-<==
-```
-**Note:**
-
-* The plan assumes the robot can only hold one package at a time.
-* The `open` action is only performed when necessary (i.e., when the door is closed).
-* The `move` actions are chained to navigate the robot between rooms.
-* The `pickup` and `putdown` actions are performed for each package, following the `achieve-goals-pickup` and `achieve-goals-move` methods.
-* The full sequential plan is abbreviated for brevity, but it follows the same pattern as the initial 20 steps.
-* This plan might not be the most optimal solution, as the HTN planning problem can have multiple valid solutions.
+1 move c r9 d09
+2 pickup o19 r9
+3 move r9 c d09
+4 putdown o19 r9
+5 move c r4 d04
+6 move r4 r6 d46
+7 move r6 r5 d56
+8 pickup o18 r5
+9 move r5 r6 d56
+10 move r6 r4 d46
+11 move r4 c d04
+12 putdown o18 r10
+13 move c r9 d09
+14 pickup o1 r9
+15 move r9 c d09
+16 move c r4 d04
+17 move r4 r6 d46
+18 move r6 r5 d56
+19 putdown o1 r5
+20 move r5 r6 d56
+21 move r6 r4 d46
+22 move r4 c d04
+23 move c r4 d04
+24 pickup o9 r4
+25 move r4 c d04
+26 putdown o9 r9
+27 move c r9 d09
+28 pickup o5 r9
+29 move r9 c d09
+30 move c r1 r3 d13
+31 move r1 r7 d17
+32 pickup o20 r7
+33 move r7 r1 d17
+34 move r1 r3 d13
+35 move r3 r1 d13
+36 move r1 c d04
+37 move c r9 d09
+38 putdown o5 r1
+39 move r1 r3 d13
+40 move r3 r1 d13
+41 move r1 c d04
+42 move c r4 d04
+43 pickup o12 r4
+44 move r4 c d04
+45 putdown o12 r4
+46 move c r4 d04
+47 move r4 r6 d46
+48 move r6 r5 d56
+49 pickup o4 r5
+50 move r5 r6 d56
+51 move r6 r4 d46
+52 move r4 c d04
+53 putdown o4 r1
+54 move c r9 d09
+55 pickup o13 r9
+56 move r9 c d09
+57 putdown o13 r9
+58 move c r1 r3 d13
+59 pickup o16 r3
+60 move r3 r1 d13
+61 move r1 c d04
+62 move c r9 d09
+63 pickup o19 r9
+64 move r9 c d09
+65 move c r4 d04
+66 move r4 r6 d46
+67 move r6 r5 d56
+68 pickup o6 r5
+69 move r5 r6 d56
+70 move r6 r4 d46
+71 move r4 c d04
+72 putdown o16 r2
+73 move c r9 d09
+74 pickup o9 r9
+75 move r9 c d09
+76 putdown o9 r9
+77 move c r1 r3 d13
+78 move r1 r5 d15
+79 pickup o15 r5
+80 move r5 r1 d15
+81 move r1 r3 d13
+82 move r3 r1 d13
+83 move r1 c d04
+84 move c r4 d04
+85 move r4 r6 d46
+86 move r6 r5 d56
+87 pickup o18 r5
+88 move r5 r6 d56
+89 move r6 r4 d46
+90 move r4 c d04
+91 putdown o15 r1
+92 move c r9 d09
+93 pickup o5 r9
+94 move r9 c d09
+95 move c r1 r3 d13
+96 move r1 r7 d17
+97 pickup o20 r7
+98 move r7 r1 d17
+99 move r1 r3 d13
+100 move r3 r1 d13
+101 move r1 c d04
+102 move c r4 d04
+103 move r4 r6 d46
+104 move r6 r8 d68
+105 pickup o11 r8
+106 move r8 r6 d68
+107 move r6 r4 d46
+108 move r4 c d04
+109 putdown o20 r2
+110 move c r4 d04
+111 move r4 r6 d46
+112 move r6 r5 d56
+113 pickup o17 r5
+114 move r5 r6 d56
+115 move r6 r4 d46
+116 move r4 c d04
+117 putdown o11 r2
+118 move c r9 d09
+119 pickup o13 r9
+120 move r9 c d09
+121 move c r4 d04
+122 move r4 r6 d46
+123 move r6 r5 d56
+124 pickup o7 r5
+125 move r5 r6 d56
+126 move r6 r4 d46
+127 move r4 c d04
+128 putdown o13 r9
+129 move c r4 d04
+130 move r4 r6 d46
+131 pickup o15 r6
+132 move r6 r4 d46
+133 move r4 c d04
+134 putdown o7 r5
+135 move c r4 d04
+136 move r4 r6 d46
+137 move r6 r8 d68
+138 pickup o2 r8
+139 move r8 r6 d68
+140 move r6 r4 d46
+141 move r4 c d04
+142 putdown o15 r1
+143 move c r1 r3 d13
+144 move r1 r7 d17
+145 open r7 r10 d710
+146 move r7 r10 d710
+147 pickup o8 r10
+148 move r10 r7 d710
+149 open r10 r2 d210
+150 move r10 r2 d210
+151 putdown o8 r1
+152 move r2 r10 d210
+153 move r10 r7 d710
+154 open r7 r1 d17
+155 move r7 r1 d17
+156 putdown o2 r8
+157 move r1 r7 d17
+158 move r7 r10 d710
+159 move r10 r2 d210
+160 move r2 r10 d210
+161 putdown o3 r2
+162 open r2 r10 d210
+163 move r2 r10 d210
+164 move r10 r2 d210
+165 move r2 r10 d210
+166 move r10 r7 d710
+167 open r10 r7 d710
+168 move r10 r7 d710
+169 move r7 r10 d710
+170 open r7 r1 d17
+171 move r7 r1 d17
+172 move r1 r7 d17
+173 move r7 r1 d17
+174 open r10 r7 d710
+175 move r10 r7 d710
+176 move r7 r10 d710
+177 putdown o10 r6
+178 move r6 r4 d46
+179 move r4 c d04
+180 open r4 c d04
+root 0 
+0 achieve-goals -> achieve-goals-pickup 1 8 
+1 pickup_abstract o19 -> newMethod22 2 8
+2 pickup o19 r9 
+8 putdown o19 r9 -> newMethod23 4 8
+4 putdown o19 r9
+3 move c r9 d09 -> newMethod24 1 3 
+3 move c r9 d09
+5 move c r4 d04 -> newMethod24 5 7 
+5 move c r4 d04 
+6 move r4 r6 d46 -> newMethod24 6 7 
+6 move r4 r6 d46 
+7 move r6 r5 d56 -> newMethod24 7 7 
+7 move r6 r5 d56 
+9 move r5 r6 d56 -> newMethod24 9 9 
+9 move r5 r6 d56 
+10 move r6 r4 d46 -> newMethod24 10 10 
+10 move r6 r4 d46 
+11 move r4 c d04 -> newMethod24 11 11 
+11 move r4 c d04
+12 putdown o18 r10 -> newMethod23 12 12 
+12 putdown o18 r10
+13 move c r9 d09 -> newMethod24 13 13 
+13 move c r9 d09 
+14 pickup o1 r9 -> newMethod22 14 16 
+14 pickup o1 r9 
+15 move r9 c d09 -> newMethod24 15 16 
+15 move r9 c d09 
+16 putdown o1 r5 -> newMethod23 16 16 
+16 putdown o1 r5
+17 move r5 r6 d56 -> newMethod24 17 18 
+17 move r5 r6 d56 
+18 move r6 r4 d46 -> newMethod24 18 18 
+18 move r6 r4 d46 
+19 move r4 c d04 -> newMethod24 19 19 
+19 move r4 c d04
+20 move r5 r6 d56 -> newMethod24 20 21 
+20 move r5 r6 d56 
+21 move r6 r4 d46 -> newMethod24 21 21 
+21 move r6 r4 d46 
+22 move r4 c d04 -> newMethod24 22 22 
+22 move r4 c d04 
+23 move c r4 d04 -> newMethod24 23 25 
+23 move c r4 d04 
+24 pickup o9 r4 -> newMethod22 24 26 
+24 pickup o9 r4 
+25 move r4 c d04 -> newMethod24 25 26 
+25 move r4 c d04 
+26 putdown o9 r9 -> newMethod23 26 26 
+26 putdown o9 r9 
+27 move c r9 d09 -> newMethod24 27 27 
+27 move c r9 d09 
+28 pickup o5 r9 -> newMethod22 28 30 
+28 pickup o5 r9 
+29 move r9 c d09 -> newMethod24 29 30 
+29 move r9 c d09 
+30 putdown o5 r1 -> newMethod23 30 30 
+30 putdown o5 r1 
+31 move c r1 r3 d13 -> newMethod24 31 33 
+31 move c r1 r3 d13 
+32 pickup o20 r7 -> newMethod22 32 34 
+32 pickup o20 r7 
+33 move r7 r1 d17 -> newMethod24 33 34 
+33 move r7 r1 d17 
+34 putdown o20 r2 -> newMethod23 34 34 
+34 putdown o20 r2 
+35 move r1 r3 d13 -> newMethod24 35 37 
+35 move r1 r3 d13 
+36 move r3 r1 d13 -> newMethod24 36 37 
+36 move r3 r1 d13 
+37 move r1 c d04 -> newMethod24 37 37 
+37 move r1 c d04 
+38 move r1 r3 d13 -> newMethod24 38 40 
+38 move r1 r3 d13 
+39 move r3 r1 d13 -> newMethod24 39 40 
+39 move r3 r1 d13 
+40 move r1 c d04 -> newMethod24 40 40 
+40 move r1 c d04 
+41 move c r4 d04 -> newMethod24 41 43 
+41 move c r4 d04 
+42 pickup o12 r4 -> newMethod22 42 44 
+42 pickup o12 r4 
+43 move r4 c d04 -> newMethod24 43 44 
+43 move r4 c d04 
+44 putdown o12 r4 -> newMethod23 44 44 
+44 putdown o12 r4 
+45 move c r4 d04 -> newMethod24 45 47 
+45 move c r4 d04 
+46 move r4 r6 d46 -> newMethod24 46 48 
+46 move r4 r6 d46 
+47 move r6 r5 d56 -> newMethod24 47 48 
+47 move r6 r5 d56 
+48 pickup o4 r5 -> newMethod22 48 50 
+48 pickup o4 r5 
+49 move r5 r6 d56 -> newMethod24 49 50 
+49 move r5 r6 d56 
+50 putdown o4 r1 -> newMethod23 50 50 
+50 putdown o4 r1 
+51 move r6 r4 d46 -> newMethod24 51 52 
+51 move r6 r4 d46 
+52 move r4 c d04 -> newMethod24 52 52 
+52 move r4 c d04 
+53 move c r9 d09 -> newMethod24 53 55 
+53 move c r9 d09 
+54 pickup o13 r9 -> newMethod22 54 56 
+54 pickup o13 r9 
+55 move r9 c d09 -> newMethod24 55 56 
+55 move r9 c d09 
+56 putdown o13 r9 -> newMethod23 56 56 
+56 putdown o13 r9 
+57 move c r1 r3 d13 -> newMethod24 57 59 
+57 move c r1 r3 d13 
+58 pickup o16 r3 -> newMethod22 58 60 
+58 pickup o16 r3 
+59 move r3 r1 d13 -> newMethod24 59 60 
+59 move r3 r1 d13 
+60 putdown o16 r2 -> newMethod23 60 60 
+60 putdown o16 r2 
+61 move c r9 d09 -> newMethod24 61 63 
+61 move c r9 d09 
+62 pickup o19 r9 -> newMethod22 62 64 
+62 pickup o19 r9 
+63 move r9 c d09 -> newMethod24 63 64 
+63 move r9 c d09 
+64 putdown o19 r3 -> newMethod23 64 64 
+64 putdown o19 r3 
+65 move c r4 d04 -> newMethod24 65 67 
+65 move c r4 d04 
+66 move r4 r6 d46 -> newMethod24 66 68 
+66 move r4 r6 d46 
+67 move r6 r5 d56 -> newMethod24 67 68 
+67 move r6 r5 d56 
+68 pickup o6 r5 -> newMethod22 68 70 
+68 pickup o6 r5 
+69 move r5 r6 d56 -> newMethod24 69 70 
+69 move r5 r6 d56 
+70 putdown o6 r5 -> newMethod23 70 70 
+70 putdown o6 r5 
+71 move r6 r4 d46 -> newMethod24 71 72 
+71 move r6 r4 d46 
+72 move r4 c d04 -> newMethod24 72 72 
+72 move r4 c d04 
+73 move c r1 r3 d13 -> newMethod24 73 75 
+73 move c r1 r3 d13 
+74 pickup o14 r3 -> newMethod22 74 75 
+74 pickup o14 r3 
+75 putdown o14 r3 -> newMethod23 75 75 
+75 putdown o14 r3 
+76 move c r4 d04 -> newMethod24 76 78 
+76 move c r4 d04 
+77 move r4 r6 d46 -> newMethod24 77 78 
+77 move r4 r6 d46 
+78 pickup o3 r6 -> newMethod22 78 80 
+78 pickup o3 r6 
+79 move r6 r4 d46 -> newMethod24 79 80 
+79 move r6 r4 d46 
+80 putdown o3 r2 -> newMethod23 80 80 
+80 putdown o3 r2 
+81 move r4 c d04 -> newMethod24 81 82 
+81 move c r4 d04 
+82 move c r1 r3 d13 -> newMethod24 82 84 
+82 move c r1 r3 d13 
+83 pickup o15 r1 -> newMethod22 83 84 
+83 pickup o15 r1 
+84 putdown o15 r1 -> newMethod23 84 84 
+84 putdown o15 r1 
+85 move r1 r3 d13 -> newMethod24 85 87 
+85 move r1 r3 d13 
+86 move r3 r1 d13 -> newMethod24 86 87 
+86 move r3 r1 d13 
+87 move r1 c d04 -> newMethod24 87 87 
+87 move r1 c d04 
+88 move c r4 d04 -> newMethod24 88 90 
+88 move c r4 d04 
+89 move r4 r6 d46 -> newMethod24 89 91 
+89 move r4 r6 d46 
+90 move r6 r8 d68 -> newMethod24 90 91 
+90 move r6 r8 d68 
+91 pickup o2 r8 -> newMethod22 91 93 
+91 pickup o2 r8 
+92 move r8 r6 d68 -> newMethod24 92 93 
+92 move r8 r6 d68 
+93 putdown o2 r8 -> newMethod23 93 93 
+93 putdown o2 r8 
+94 move r6 r4 d46 -> newMethod24 94 95 
+94 move r6 r4 d46 
+95 move r4 c d04 -> newMethod24 95 95 
+95 move r4 c d04 
+96 move c r9 d09 -> newMethod24 96 98 
+96 move c r9 d09 
+97 pickup o5 r9 -> newMethod22 97 98 
+97 pickup o5 r9 
+98 move r9 c d09 -> newMethod24 98 98 
+98 move r9 c d09 
+99 move c r4 d04 -> newMethod24 99 101 
+99 move c r4 d04 
+100 move r4 r6 d46 -> newMethod24 100 101 
+100 move r4 r6 d46 
+101 pickup o10 r6 -> newMethod22 101 103 
+101 pickup o10 r6 
+102 move r6 r4 d46 -> newMethod24 102 103 
+102 move r6 r4 d46 
+103 putdown o10 r6 -> newMethod23 103 103 
+103 putdown o10 r6 
+104 move c r4 d04 -> newMethod24 104 105 
+104 move c r4 d04 
+105 move r4 r6 d46 -> newMethod24 105 106 
+105 move r4 r6 d46 
+106 move r6 r5 d56 -> newMethod24 106 107 
+106 move r6 r5 d56 
+107 pickup o17 r5 -> newMethod22 107 109 
+107 pickup o17 r

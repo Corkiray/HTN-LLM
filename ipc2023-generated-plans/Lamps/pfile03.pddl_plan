@@ -1,68 +1,12 @@
 ==>
-1 turn 
-2 play 
-<==
-
+1 flip l1 l0 N Y
 root 0
-0 play -> do_play 1 2
-1 turn -> do_turn 3 4 5 6 7 8
-2 play -> end_game 
-3 flip l0 l0 Y N
-4 propagate_up l0 l0 Y
-5 propagate_down l0 l0 Y
-6 propagate_left l0 l0 Y
-7 propagate_right l0 l0 Y
-
-root 4
-4 propagate_up l0 l0 Y
-  -> propagate_up_do 9 10 (next l0 l1, on l1 l0 Y)
-  (preconditions met: next l0 l1, on l1 l0 Y)
-
-root 9
-9 flip l1 l0 Y N
-10 propagate_up l1 l0 Y
-  -> propagate_up_end_field (max l1, no further propagation)
-
-root 5
-5 propagate_down l0 l0 Y
-  -> propagate_down_end_field (min l0, no further propagation)
-
-root 6
-6 propagate_left l0 l0 Y
-  -> propagate_left_end_field (max l0 in column, assuming l0 is max in init; no further propagation)
-
-root 7
-7 propagate_right l0 l0 Y
-  -> propagate_right_do 11 12 (next l0 l1, on l0 l1 Y)
-  (preconditions met: next l0 l1, on l0 l1 Y)
-
-root 11
-11 flip l0 l1 Y N
-12 propagate_right l0 l1 Y
-  -> propagate_right_end_different (next l1 l0, not (on l0 l1 Y) after flip in 11)
-
+0 do_turn -> do_turn_0 1 2 3 4 5 6
+1 propagate_up l0 l0 N -> propagate_up_end_different 2 3
+2 propagate_down l0 l0 N -> propagate_down_end_field
+3 propagate_left l0 l0 N -> propagate_left_end_different 5 6
+4 propagate_right l0 l0 N -> propagate_right_end_field
+5 flip l0 l1 N Y
+6 propagate_right l0 l1 N -> propagate_right_end_field
+7 do_turn -> end_game
 <==
-
-**Plan Explanation:**
-
-1. **Initial Turn**: 
-   - `turn` (1) is executed, which leads to:
-     - `flip l0 l0 Y N` (3) to change the status of `l0 l0` from `Y` to `N`.
-     - Four propagation tasks are initiated from `l0 l0` in all directions.
-
-2. **Propagation Up**:
-   - From `l0 l0`, moving up to `l1 l0`:
-     - `flip l1 l0 Y N` (9) changes the status of `l1 l0` from `Y` to `N`.
-     - `propagate_up l1 l0 Y` (10) stops as it reaches the maximum boundary (`max l1`).
-
-3. **Propagation Down, Left, and Right**:
-   - **Down**: Stops immediately at `l0 l0` since it's the minimum (`min l0`).
-   - **Left**: Assuming `l0` is considered the maximum in its column in the initial state, it stops.
-   - **Right**: 
-     - Moves from `l0 l0` to `l0 l1`, flipping the state: `flip l0 l1 Y N` (11).
-     - Further propagation to the right from `l0 l1` stops because the next cell in the direction (which would be `l1 l1` if considering a wrap-around or non-existent if not) does not match the precondition for further propagation in this specific implementation context.
-
-4. **Subsequent Play**:
-   - The plan ends with `play` (2) being solved by `end_game`, indicating no further actions are planned beyond the initial turn and its propagations.
-
-**Note**: The plan's effectiveness in achieving the goal state depends on the domain's specifics, especially the `next` and boundary predicates. This solution assumes a straightforward interpretation of the given HTN domain and problem. The actual outcome might vary based on the planner's capabilities and the domain's nuances not explicitly covered here.

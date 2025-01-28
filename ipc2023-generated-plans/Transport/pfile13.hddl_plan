@@ -1,53 +1,33 @@
 ==>
-**Sequential Plan**
-1. drive truck_0 city_loc_0 city_loc_4
-2. pick_up truck_0 city_loc_4 package_0 capacity_1 capacity_2
-3. drive truck_0 city_loc_4 city_loc_0
-4. drop truck_0 city_loc_0 package_0 capacity_0 capacity_1
-5. drive truck_0 city_loc_0 city_loc_2
-6. pick_up truck_0 city_loc_2 package_1 capacity_1 capacity_2
-7. drive truck_0 city_loc_2 city_loc_4
-8. drop truck_0 city_loc_4 package_1 capacity_0 capacity_1
-9. pick_up truck_0 city_loc_4 package_2 capacity_1 capacity_2
-10. drop truck_0 city_loc_4 package_2 capacity_0 capacity_1
-11. drive truck_0 city_loc_4 city_loc_1
-12. pick_up truck_0 city_loc_1 package_3 capacity_1 capacity_2
-13. drive truck_0 city_loc_1 city_loc_3
-14. drop truck_0 city_loc_3 package_3 capacity_0 capacity_1
-15. drive truck_0 city_loc_3 city_loc_0
-16. pick_up truck_0 city_loc_0 package_4 capacity_1 capacity_2
-17. drive truck_0 city_loc_0 city_loc_4
-18. drop truck_0 city_loc_4 package_4 capacity_0 capacity_1
-
-**Hierarchical Decomposition**
+1 drive truck_0 city_loc_0 city_loc_2
+2 pick_up truck_0 city_loc_2 package_1 capacity_1 capacity_2
+3 drive truck_0 city_loc_2 city_loc_0
+4 drive truck_0 city_loc_0 city_loc_1
+5 drive truck_0 city_loc_1 city_loc_4
+6 drop truck_0 city_loc_4 package_1 capacity_0 capacity_1
+7 drive truck_0 city_loc_4 city_loc_0
+8 pick_up truck_0 city_loc_0 package_4 capacity_1 capacity_2
+9 drive truck_0 city_loc_0 city_loc_1
+10 drive truck_0 city_loc_1 city_loc_4
+11 drop truck_0 city_loc_4 package_4 capacity_0 capacity_1
+12 drive truck_0 city_loc_4 city_loc_2
+13 pick_up truck_0 city_loc_2 package_2 capacity_1 capacity_2
+14 drive truck_0 city_loc_2 city_loc_0
+15 drive truck_0 city_loc_0 city_loc_1
+16 drive truck_0 city_loc_1 city_loc_4
+17 drop truck_0 city_loc_4 package_2 capacity_0 capacity_1
+18 drive truck_0 city_loc_4 city_loc_0
+19 pick_up truck_0 city_loc_0 package_0 capacity_1 capacity_2
+20 drive truck_0 city_loc_0 city_loc_0
+21 drop truck_0 city_loc_0 package_0 capacity_0 capacity_1
+22 drive truck_0 city_loc_0 city_loc_1
+23 pick_up truck_0 city_loc_1 package_3 capacity_1 capacity_2
+24 drive truck_0 city_loc_1 city_loc_3
+25 drop truck_0 city_loc_3 package_3 capacity_0 capacity_1
 root 0
-0 solve_htn -> m_deliver_ordering_0 1 2 3 4
-1 deliver package_1 city_loc_4 -> m_deliver_ordering_0 6 7 8
-	* 1.1 get_to truck_0 city_loc_2 -> m_drive_to_ordering_0 5
-	* 1.2 load truck_0 city_loc_2 package_1 -> m_load_ordering_0 6
-	* 1.3 get_to truck_0 city_loc_4 -> m_drive_to_ordering_0 7
-	* 1.4 unload truck_0 city_loc_4 package_1 -> m_unload_ordering_0 8
-2 deliver package_2 city_loc_4 -> m_deliver_ordering_0 9 10
-	* 2.1 get_to truck_0 city_loc_4 (already at location, using m_i_am_there_ordering_0)
-	* 2.2 load truck_0 city_loc_4 package_2 -> m_load_ordering_0 9
-	* 2.3 get_to truck_0 city_loc_4 (already at location, using m_i_am_there_ordering_0)
-	* 2.4 unload truck_0 city_loc_4 package_2 -> m_unload_ordering_0 10
-3 deliver package_3 city_loc_3 -> m_deliver_ordering_0 11 12 13 14
-	* 3.1 get_to truck_0 city_loc_1 -> m_drive_to_via_ordering_0 11
-		+ 3.1.1 get_to truck_0 city_loc_4 (already solved)
-		+ 3.1.2 drive truck_0 city_loc_4 city_loc_1
-	* 3.2 load truck_0 city_loc_1 package_3 -> m_load_ordering_0 12
-	* 3.3 get_to truck_0 city_loc_3 -> m_drive_to_ordering_0 13
-	* 3.4 unload truck_0 city_loc_3 package_3 -> m_unload_ordering_0 14
-4 deliver package_0 city_loc_0 -> m_deliver_ordering_0 1 2 3 4
-	* 4.1 get_to truck_0 city_loc_4 (already solved)
-	* 4.2 load truck_0 city_loc_4 package_0 -> m_load_ordering_0 2
-	* 4.3 get_to truck_0 city_loc_0 -> m_drive_to_ordering_0 3
-	* 4.4 unload truck_0 city_loc_0 package_0 -> m_unload_ordering_0 4
-	* (Note: This decomposition seems to have been incorrectly generated based on the initial problem statement's ordering constraints. Normally, package_0's delivery would not be decomposed in this manner given the initial conditions and the ordering specified in the problem. It's included here for completeness based on the sequential plan provided, but in a real scenario, this part of the decomposition might be incorrect or redundant.)
-<== 
-
-**Note**: 
-- The provided sequential plan assumes that `truck_0` is the vehicle used for all deliveries. If `truck_1` is also intended to be used, the plan and decomposition would need to reflect this, potentially reducing the overall number of actions by distributing tasks between the two trucks.
-- The decomposition for `deliver package_0 city_loc_0` seems anomalous given the initial conditions (package_0 is initially at city_loc_4, and the goal is to deliver it to city_loc_0, which matches its initial location in the plan but not in the decomposition explanation). This might be a misunderstanding in generating the decomposition based on the provided sequential plan and initial problem setup. 
-- The action numbers in the hierarchical decomposition refer to the actions in the sequential plan for clarity. In a typical HTN plan, these would directly reference the task names (e.g., `get_to`, `load`, etc.) without needing to cross-reference a separate sequential plan.
+0 deliver package_0 city_loc_0 -> m_deliver_ordering_0 city_loc_4 city_loc_0 package_0 truck_0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21
+1 deliver package_1 city_loc_4 -> m_deliver_ordering_0 city_loc_2 city_loc_4 package_1 truck_0 1 2 3 4 5 6
+2 deliver package_2 city_loc_4 -> m_deliver_ordering_0 city_loc_2 city_loc_4 package_2 truck_0 12 13 14 15 16 17
+3 deliver package_3 city_loc_3 -> m_deliver_ordering_0 city_loc_1 city_loc_3 package_3 truck_0 22 23 24 25
+4 deliver package_4 city_loc_4 -> m_deliver_ordering_0 city_loc_0 city_loc_4 package_4 truck_0 7 8 9 10 11
+<==

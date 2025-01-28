@@ -1,60 +1,44 @@
-==>
-**Sequential Plan**
-1. AchieveContainsShotCocktail shot14 cocktail1
-2. AchieveContainsShotCocktail shot11 cocktail2
-3. AchieveContainsShotCocktail shot9 cocktail3
-4. AchieveContainsShotCocktail shot1 cocktail4
-5. AchieveContainsShotCocktail shot15 cocktail5
-6. AchieveContainsShotCocktail shot2 cocktail6
-7. AchieveContainsShotCocktail shot10 cocktail7
-8. AchieveContainsShotCocktail shot3 cocktail8
-9. AchieveContainsShotCocktail shot5 cocktail9
-10. AchieveContainsShotCocktail shot4 cocktail10
-11. AchieveContainsShotCocktail shot13 cocktail11
-12. AchieveContainsShotCocktail shot12 cocktail12
-13. AchieveContainsShotCocktail shot8 cocktail13
-14. AchieveContainsShotCocktail shot6 cocktail14
-
-**Hierarchical Decomposition**
-root 0
-0 AchieveContainsShotCocktail shot14 cocktail1 -> m1_MakeAndPourCocktail 1 2 3 4 5
-	1 MakeAndPourCocktail shot14 cocktail1 shaker1 left
-		* Precondition: (not (contains shot14 cocktail1))
-		* Subtasks:
-			1.1 AchieveContainsShakerCocktail shaker1 cocktail1 -> m2_MakeCocktail 1.1.1 1.1.2 1.1.3 1.1.4 1.1.5 1.1.6
-				1.1.1 MakeCocktail shaker1 cocktail1 ingredient1 ingredient5 left right
-					* Precondition: (cocktailPart1 cocktail1 ingredient5) (cocktailPart2 cocktail1 ingredient1) (not (= right left))
-					* Subtasks:
-						1.1.1.1 AchieveCleanShaker shaker1 -> m3_CleanShakerNull (already clean)
-						1.1.1.2 AchieveContainsShakerIngredient shaker1 ingredient5 -> m4_AddIngredientToEmptyShaker 1.1.1.2.1 1.1.1.2.2 1.1.1.2.3
-							1.1.1.2.1 AddIngredientToEmptyShaker shaker1 ingredient5 level1 level2 shotX left (shotX and dispenser for ingredient5 not specified, assuming exists)
-								* Precondition: (empty shaker1) (clean shaker1) (shakerLevel shaker1 level1) (next level1 level2)
-								* Subtasks:
-									1.1.1.2.1.1 AchieveContainsShotIngredient shotX ingredient5 -> m5_AddIngredientToShotNull (assuming already contains or handled by previous tasks)
-									1.1.1.2.1.2 AchieveHolding left shotX -> m6_PickUp 1.1.1.2.1.2.1 1.1.1.2.1.2.2 1.1.1.2.1.2.3
-										1.1.1.2.1.2.1 PickUp left shotX
-											* Precondition: (not (holding left shotX)) 
-											* Subtasks:
-												1.1.1.2.1.2.1.1 AchieveHandEmpty left -> m7_HandEmptyNull (already empty)
-												1.1.1.2.1.2.1.2 AchieveOnTable shotX -> m8_OnTableNull (already on table)
-												1.1.1.2.1.2.1.3 grasp left shotX
-									1.1.1.2.1.3 pour-shot-to-clean-shaker shotX ingredient5 shaker1 left level1 level2
-						... (similar decomposition for ingredient1 and remaining tasks)
-			1.2 AchieveCleanShot shot14 -> m9_CleanShotNull (already clean)
-			1.3 AchieveHolding left shaker1 -> m10_PickUp (similar to 1.1.1.2.1.2)
-			1.4 DoPourShakerToShot shaker1 shot14 cocktail1 -> m11_pour_shaker_to_shot_action
-				* Precondition: (holding left shaker1) (shaked shaker1) (empty shot14) (clean shot14) (contains shaker1 cocktail1)...
-				* Subtasks:
-					1.4.1 pour-shaker-to-shot cocktail1 shot14 left shaker1 level2 level1
-
-2. AchieveContainsShotCocktail shot11 cocktail2 ->... (similar decomposition to 0)
+==> 
+1 move shaker1 shaker1
+2 board shaker1 right
+3 move shot15 shot15
+4 board shot15 left
+5 move left shot15 shaker1 level2
+6 move shaker1 shaker1
+7 board shaker1 left
+8 move dispenser5 dispenser5
+9 board dispenser5 right
+10 move right dispenser5 shot15 shaker1 level2
+11 move left shot15 shaker1 level2
+12 move shaker1 shaker1
+13 board shaker1 right
+14 unshake shaker1 cocktail5 ingredient2 ingredient5 left right
+15 move shaker1 shaker1
+16 board shaker1 left
+17 move shot14 shot14
+18 board shot14 right
+19 move right shot14 shaker1 cocktail5
+20 move shaker1 shaker1
+21 move left shaker1
+22 debark left shaker1
+23 unhold left shaker1 right
+24 move right shaker1
+25 move shaker1 shaker1
+26 debark right shaker1
+27 unhold right shaker1 left
+28 move left shaker1
+29 move shaker1 shaker1
+30 debark left shaker1
 ...
-14. AchieveContainsShotCocktail shot6 cocktail14 ->... (similar decomposition to 0)
 
-<==
+This plan will be repeated for each cocktail. Here is the hierarchical plan:
 
-**Note:**
-- This plan assumes that the dispensers for each ingredient and shots (when not explicitly mentioned) are available and correctly assigned, as this information is not fully specified in the provided problem.
-- The plan focuses on the hierarchical decomposition for the first task (AchieveContainsShotCocktail shot14 cocktail1) in detail and indicates similar decompositions for subsequent tasks due to the repetitive nature of the problem's requirements.
-- Actions and subtasks without explicitly defined methods (e.g., `m5_AddIngredientToShotNull`, assuming the shot already contains the ingredient or is handled) are simplified for brevity, assuming they either have a null method (no action needed) or are resolved through similar method applications not fully detailed here.
-- The actual execution and full expansion of all tasks would require a more detailed and lengthy output, adhering to the exact specifications of each method and action in the HTN domain.
+root 0
+0 AchieveContainsShakerCocktail -> MakeCocktail 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35
+35 AchieveContainsShotCocktail shot14 cocktail1 -> MakeAndPourCocktail 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76
+root 1
+1 AchieveContainsShakerCocktail -> MakeCocktail 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117
+117 AchieveContainsShotCocktail shot11 cocktail2 -> MakeAndPourCocktail 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160
+...
+
+This is a sample output of the hierarchical plan. Please note that the order of the tasks might not be the same as in this example.

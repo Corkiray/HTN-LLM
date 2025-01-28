@@ -1,44 +1,85 @@
 ==>
-**Sequential Plan:**
-
-1. `i-LOCK-AT OBJ11 POS5` (lock OBJ11 at POS5, as it's already there)
-2. `i-LOCK-AT OBJ31 APT2` (lock OBJ31 at APT2, prerequisite for further actions)
-3. `DO-AT-LOAD-TRUCK0 OBJ31 TRU3 POS3` (load OBJ31 onto TRU3 at POS3)
-4. `DRIVE-TRUCK TRU3 POS3 APT2 CIT2` (drive TRU3 from POS3 to APT2 within CIT2)
-5. `UNLOAD-TRUCK OBJ31 TRU3 APT2` (unload OBJ31 from TRU3 at APT2)
-6. `i-LOCK-AT OBJ52 APT4` (lock OBJ52 at APT4, prerequisite for further actions)
-7. `DO-AT-LOAD-TRUCK0 OBJ52 TRU5 POS5` (load OBJ52 onto TRU5 at POS5)
-8. `DRIVE-TRUCK TRU5 POS5 APT4 CIT4` (drive TRU5 from POS5 to APT4 within CIT4)
-9. `UNLOAD-TRUCK OBJ52 TRU5 APT4` (unload OBJ52 from TRU5 at APT4)
-10.... (similar steps for each remaining task, adapting to the specific object, location, and vehicle constraints)
-
-**Hierarchical Decomposition:**
-
-`root 0`
-0 `ACHIEVE-AT` -> `M10-ACHIEVE-AT` 1 2... 15
-  * Decomposition for each `ACHIEVE-AT` task (e.g., `task0` to `task15`)
-
-**Detailed Decomposition for the First Few Tasks:**
-
-1. `task0 (ACHIEVE-AT OBJ11 POS5)` -> `M9-ACHIEVE-AT` (since OBJ11 is already at POS1, but needs to be locked at POS5, which requires it to be moved first)
-	* `M12-ACHIEVE-AT0 OBJ11 POS5 POS1 TRU1` (move OBJ11 from POS1 to POS5 using TRU1)
-		+ `DO-AT-LOAD-TRUCK0 OBJ11 TRU1 POS1`
-		+ `DRIVE-TRUCK TRU1 POS1 POS5 CIT5`
-		+ `UNLOAD-TRUCK OBJ11 TRU1 POS5`
-		+ `i-LOCK-AT OBJ11 POS5`
-
-2. `task1 (ACHIEVE-AT OBJ31 APT2)` -> `M13-ACHIEVE-AT0 OBJ31 APT2 POS3 APN2` (since OBJ31 is at POS3, load onto APN2, and then move to APT2)
-	* `DO-AT-LOAD-AIRPLANE0 OBJ31 APN2 POS3`
-	* `FLY-AIRPLANE APN2 APT5 APT2`
-	* `UNLOAD-AIRPLANE OBJ31 APN2 APT2`
-	* `i-LOCK-AT OBJ31 APT2`
-
-3. `task2 (ACHIEVE-AT OBJ52 APT4)` -> `M14-ACHIEVE-AT0 OBJ52 APT4 POS5 TRU5` (since OBJ52 is at POS5, load onto TRU5, and then move to APT4)
-	* `DO-AT-LOAD-TRUCK0 OBJ52 TRU5 POS5`
-	* `DRIVE-TRUCK TRU5 POS5 APT4 CIT4`
-	* `UNLOAD-TRUCK OBJ52 TRU5 APT4`
-	* `i-LOCK-AT OBJ52 APT4`
-
-... (Each task from `task3` to `task15` would follow a similar decomposition process, adapting to the object's current location, the target location, and the available vehicles.)
-
+1 move TRU5 POS5 APT5 
+2 move TRU5 APT5 POS5 
+3 load-airplane OBJ11 TRU5 POS5 
+4 load-airplane OBJ22 TRU5 POS5 
+5 move APN2 APT5 APT4 
+6 unlock-at APN2 APT4 
+7 unload-airplane OBJ11 APN2 APT4 
+8 unload-airplane OBJ22 APN2 APT4 
+9 move TRU4 POS4 APT4 
+10 move TRU4 APT4 POS4 
+11 load-truck OBJ31 TRU4 POS4 
+12 load-truck OBJ52 TRU4 POS4 
+13 move TRU4 POS4 APT2 
+14 unlock-at TRU4 APT2 
+15 unload-truck OBJ31 TRU4 APT2 
+16 unload-truck OBJ52 TRU4 APT2 
+17 move APN2 APT4 APT1 
+18 unlock-at APN2 APT1 
+19 unload-airplane OBJ13 APN2 APT1 
+20 move TRU1 POS1 APT1 
+21 move TRU1 APT1 POS1 
+22 load-truck OBJ32 TRU1 POS1 
+23 load-truck OBJ53 TRU1 POS1 
+24 move TRU1 POS1 APT6 
+25 unlock-at TRU1 APT6 
+26 unload-truck OBJ32 TRU1 APT6 
+27 unload-truck OBJ53 TRU1 APT6 
+28 move TRU1 POS1 APT3 
+29 unlock-at TRU1 APT3 
+30 unload-truck OBJ13 TRU1 APT3 
+31 move TRU3 POS3 APT3 
+32 move TRU3 APT3 POS3 
+33 load-truck OBJ63 TRU3 POS3 
+34 load-truck OBJ42 TRU3 POS3 
+35 move TRU6 POS6 APT5 
+36 move TRU6 APT5 POS6 
+37 load-truck OBJ12 TRU6 POS6 
+38 load-truck OBJ62 TRU6 POS6 
+39 move TRU6 POS6 APT6 
+40 unlock-at TRU6 APT6 
+41 unload-truck OBJ12 TRU6 APT6 
+42 unlock-at TRU6 APT6 
+43 unload-truck OBJ62 TRU6 APT6 
+44 move TRU6 POS6 APT4 
+45 move TRU6 APT4 POS6 
+46 load-truck OBJ21 TRU6 POS6 
+47 load-truck OBJ33 TRU6 POS6 
+48 move TRU6 POS6 APT4 
+49 unlock-at TRU6 APT4 
+50 unlock-at TRU6 APT4 
+51 unload-truck OBJ33 TRU6 APT4 
+52 move TRU6 POS6 POS2 
+53 move TRU6 POS2 POS6 
+54 load-truck OBJ43 TRU6 POS6 
+55 load-truck OBJ51 TRU6 POS6 
+56 move TRU6 POS6 APT6 
+57 unlock-at TRU6 APT6 
+58 unlock-at TRU6 APT6 
+59 unload-truck OBJ43 TRU6 APT6 
+60 move TRU6 POS6 APT6 
+61 move TRU6 APT6 POS6 
+62 load-truck OBJ61 TRU6 POS6 
+63 load-truck OBJ22 TRU6 POS6 
+64 move TRU6 POS6 APT5 
+65 move TRU6 APT5 POS6 
+65 load-truck OBJ22 TRU6 POS5 
+66 move TRU6 POS6 POS5 
+67 move TRU6 POS5 POS6 
+68 load-truck OBJ12 TRU6 POS6 
+69 move APN2 APT5 POS5 
+70 move APN2 POS5 APT5 
+71 move APN2 APT5 POS5 
+72 move APN2 POS5 APT5 
+root 0 
+0 do-at-load-truck0 -> m4-do-at-load-truck0 1 2 3 3 4 5 6 3 3 4 7 8 3 5 6 
+5 achieve-at -> m3-achieve-at 11 12 13 7 3 5 14 15 16 
+19 achieve-at1 -> m2-achieve-at1 23 24 25 26 10 9 8 27 28 29 30 
+39 achieve-at2 -> m2-achieve-at2 39 40 41 42 43 36 37 44 45 46 47 48 49 50 
+55 achieve-at-air -> m1-achieve-at-air 68 5 4 17 18 19 20 21 22 6 65 
+5 achieve-at -> m3-achieve-at 17 6 19 13 9 20 8 11 9 27 14 
+64 do-at-unload-truck0 -> m6-do-in-unload-truck0 63 59 62 51 55 58 
+68 achieve-at-air -> m1-achieve-at-air 68 3 56 61 17 18 19 5 57 
+69 do-at-load-airplane0 -> m5-do-at-load-airplane0 55 6 3 50 45 40 
 <==

@@ -1,0 +1,137 @@
+==>
+1 unstack b7 b14
+2 putdown b7
+3 unstack b9 b23
+4 putdown b9
+5 unstack b16 b17
+6 putdown b16
+7 unstack b22 b1
+8 putdown b22
+9 pickup b7
+10 stack b7 b25
+11 unstack b10 b6
+12 putdown b10
+13 pickup b9
+14 stack b9 b18
+15 pickup b16
+16 stack b16 b21
+17 pickup b22
+18 stack b22 b20
+19 pickup b10
+20 stack b10 b19
+21 unstack b23 b25
+22 putdown b23
+23 unstack b14 b3
+24 putdown b14
+25 unstack b6 b5
+26 putdown b6
+27 unstack b17 b8
+28 putdown b17
+29 unstack b1 b13
+30 putdown b1
+31 unstack b5 b20
+32 putdown b5
+33 unstack b3 b12
+34 putdown b3
+35 pickup b5
+36 stack b5 b24
+37 pickup b6
+38 stack b6 b8
+39 pickup b14
+40 stack b14 b6
+root 0
+0 achieve-goals -> unstack-block 1 2
+1 achieve-goals -> unstack-block 3 4
+2 achieve-goals -> unstack-block 5 6
+3 achieve-goals -> unstack-block 7 8
+4 achieve-goals -> pickup-ready-block 9 10
+5 achieve-goals -> unstack-block 11 12
+6 achieve-goals -> pickup-ready-block 13 14
+7 achieve-goals -> pickup-ready-block 15 16
+8 achieve-goals -> pickup-ready-block 17 18
+9 achieve-goals -> pickup-ready-block 19 20
+10 achieve-goals -> unstack-block 21 22
+11 achieve-goals -> unstack-block 23 24
+12 achieve-goals -> unstack-block 25 26
+13 achieve-goals -> unstack-block 27 28
+14 achieve-goals -> unstack-block 29 30
+15 achieve-goals -> unstack-block 31 32
+16 achieve-goals -> unstack-block 33 34
+17 achieve-goals -> pickup-ready-block 35 36
+18 achieve-goals -> pickup-ready-block 37 38
+19 achieve-goals -> pickup-ready-block 39 40
+20 release -> release-table 2 21
+21 achieve-goals -> unstack-block 3 4
+22 release -> release-table 4 23
+23 achieve-goals -> unstack-block 5 6
+24 release -> release-table 6 25
+25 achieve-goals -> unstack-block 7 8
+26 release -> release-stack 8 9 10 27
+27 achieve-goals -> unstack-block 11 12
+28 release -> release-table 12 29
+29 achieve-goals -> unstack-block 3 4
+30 release -> release-stack 14 15 16 31
+31 achieve-goals -> unstack-block 5 6
+32 release -> release-stack 16 17 18 33
+33 achieve-goals -> unstack-block 7 8
+34 release -> release-stack 18 19 20 35
+35 achieve-goals -> unstack-block 11 12
+36 release -> release-table 22 37
+37 achieve-goals -> unstack-block 11 12
+38 release -> release-table 24 39
+39 achieve-goals -> unstack-block 11 12
+40 release -> release-table 26 41
+41 achieve-goals -> unstack-block 27 28
+42 release -> release-table 28 43
+43 achieve-goals -> unstack-block 29 30
+44 release -> release-table 30 45
+45 achieve-goals -> unstack-block 31 32
+46 release -> release-table 32 47
+47 achieve-goals -> unstack-block 33 34
+48 release -> release-table 34 49
+49 achieve-goals -> unstack-block 29 30
+50 release -> release-stack 36 37 38 51
+51 achieve-goals -> unstack-block 29 30
+52 release -> release-stack 38 39 40 53
+53 achieve-goals -> setdone
+54 acquire_abstract b7 -> newMethod12 1
+55 putdown_abstract b7 -> newMethod10 2
+56 acquire_abstract b9 -> newMethod12 3
+57 putdown_abstract b9 -> newMethod10 4
+58 acquire_abstract b16 -> newMethod12 5
+59 putdown_abstract b16 -> newMethod10 6
+60 acquire_abstract b22 -> newMethod12 7
+61 putdown_abstract b22 -> newMethod10 8
+62 acquire_abstract b7 -> newMethod9 9
+63 stack_abstract b7 b25 -> newMethod11 10
+64 acquire_abstract b10 -> newMethod12 11
+65 putdown_abstract b10 -> newMethod10 12
+66 acquire_abstract b9 -> newMethod9 13
+67 stack_abstract b9 b18 -> newMethod11 14
+68 acquire_abstract b16 -> newMethod9 15
+69 stack_abstract b16 b21 -> newMethod11 16
+70 acquire_abstract b22 -> newMethod9 17
+71 stack_abstract b22 b20 -> newMethod11 18
+72 acquire_abstract b10 -> newMethod9 19
+73 stack_abstract b10 b19 -> newMethod11 20
+74 acquire_abstract b23 -> newMethod12 21
+75 putdown_abstract b23 -> newMethod10 22
+76 acquire_abstract b14 -> newMethod12 23
+77 putdown_abstract b14 -> newMethod10 24
+78 acquire_abstract b6 -> newMethod12 25
+79 putdown_abstract b6 -> newMethod10 26
+80 acquire_abstract b17 -> newMethod12 27
+81 putdown_abstract b17 -> newMethod10 28
+82 acquire_abstract b1 -> newMethod12 29
+83 putdown_abstract b1 -> newMethod10 30
+84 acquire_abstract b5 -> newMethod12 31
+85 putdown_abstract b5 -> newMethod10 32
+86 acquire_abstract b3 -> newMethod12 33
+87 putdown_abstract b3 -> newMethod10 34
+88 acquire_abstract b5 -> newMethod9 35
+89 stack_abstract b5 b24 -> newMethod11 36
+90 acquire_abstract b6 -> newMethod9 37
+91 stack_abstract b6 b8 -> newMethod11 38
+92 acquire_abstract b14 -> newMethod9 39
+93 stack_abstract b14 b6 -> newMethod11 40
+<==

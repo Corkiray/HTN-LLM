@@ -1,104 +1,57 @@
 ==>
-1 load_highspeed_saw b0 highspeed_saw0
-2 cut_board b0 p3 highspeed_saw0 oak rough
-3 unload_highspeed_saw b0 highspeed_saw0
-4 load_highspeed_saw b1 highspeed_saw1
-5 cut_board b1 p2 highspeed_saw1 walnut rough
-6 unload_highspeed_saw b1 highspeed_saw1
-7 load_highspeed_saw b2 highspeed_saw2
-8 cut_board b2 p20 oak rough
-9 unload_highspeed_saw b2 highspeed_saw2
-10 load_highspeed_saw b3 highspeed_saw3
-11 cut_board b3 p7 oak smooth
-12 unload_highspeed_saw b3 highspeed_saw3
-13 load_highspeed_saw b4 highspeed_saw4
-14 cut_board b4 p24 teak rough
-15 unload_highspeed_saw b4 highspeed_saw4
-16 load_highspeed_saw b5 highspeed_saw5
-17 cut_board b5 p26 teak rough
-18 unload_highspeed_saw b5 highspeed_saw5
-19 load_highspeed_saw b6 highspeed_saw6
-20 cut_board b6 p21 teak smooth
-21 unload_highspeed_saw b6 highspeed_saw6
-22 load_highspeed_saw b7 highspeed_saw7
-23 cut_board b7 p9 mahogany rough
-24 unload_highspeed_saw b7 highspeed_saw7
-25 load_highspeed_saw b8 highspeed_saw8
-26 cut_board b8 p6 cherry rough
-27 unload_highspeed_saw b8 highspeed_saw8
-28 load_highspeed_saw b9 highspeed_saw9
-29 cut_board b9 p34 pine rough
-30 unload_highspeed_saw b9 highspeed_saw9
-31 load_highspeed_saw b10 highspeed_saw10
-32 cut_board b10 p12 beech rough
-33 unload_highspeed_saw b10 highspeed_saw10
-34 do_grind p3 grinder0 rough natural untreated untreated untreated verysmooth natural
-35 do_grind p2 grinder1 rough natural untreated untreated untreated verysmooth natural
-36 do_grind p20 grinder2 rough natural untreated untreated untreated verysmooth natural
-37 do_grind p7 grinder3 smooth natural untreated untreated untreated verysmooth natural
-38 do_grind p24 grinder4 rough natural untreated untreated untreated verysmooth natural
-39 do_grind p26 grinder5 rough natural untreated untreated untreated verysmooth natural
-40 do_grind p21 grinder6 smooth natural untreated untreated untreated verysmooth natural
-41 do_grind p9 grinder7 rough natural untreated untreated untreated verysmooth natural
-42 do_grind p6 grinder8 rough natural untreated untreated untreated verysmooth natural
-43 do_grind p34 grinder9 rough natural untreated untreated untreated verysmooth natural
-44 do_grind p12 grinder10 rough natural untreated untreated untreated verysmooth natural
-45 do_grind p1 grinder11 rough natural untreated untreated untreated verysmooth natural
-46 do_grind p5 grinder12 rough natural untreated untreated untreated verysmooth natural
-47 do_grind p8 grinder13 rough natural untreated untreated untreated verysmooth natural
-48 do_grind p10 grinder14 rough natural untreated untreated untreated verysmooth natural
-49 do_immersion_varnish p0 immersion_varnisher0 blue natural untreated untreated varnished natural
-50 do_immersion_varnish p11 immersion_varnisher1 white natural untreated untreated varnished natural
-51 do_immersion_varnish p13 immersion_varnisher2 white natural untreated untreated varnished natural
-52 do_immersion_varnish p23 immersion_varnisher3 mauve natural untreated untreated varnished natural
-53 do_immersion_varnish p27 immersion_varnisher4 mauve smooth untreated untreated varnished natural
-54 do_spray_varnish p4 glazer0 mauve verysmooth untreated untreated glazed natural
-55 do_spray_varnish p14 glazer1 red rough untreated untreated glazed natural
-56 do_spray_varnish p15 glazer2 mauve smooth untreated untreated glazed natural
-57 do_spray_varnish p16 immersion_varnisher5 black verysmooth untreated untreated glazed natural
-58 do_spray_varnish p17 immersion_varnisher6 red verysmooth untreated untreated glazed natural
-59 do_spray_varnish p18 immersion_varnisher7 black verysmooth untreated untreated glazed natural
-60 do_spray_varnish p19 immersion_varnisher8 black smooth untreated untreated glazed natural
-61 do_spray_varnish p22 immersion_varnisher9 red verysmooth untreated untreated glazed natural
-62 do_spray_varnish p25 immersion_varnisher10 red smooth untreated untreated glazed natural
-63 do_spray_varnish p28 immersion_varnisher11 blue smooth untreated untreated glazed natural
-64 do_spray_varnish p29 immersion_varnisher12 blue verysmooth untreated untreated glazed natural
-65 do_spray_varnish p30 immersion_varnisher13 red verysmooth untreated untreated glazed natural
-66 do_spray_varnish p32 glazer3 white verysmooth untreated untreated glazed natural
-67 do_spray_varnish p33 glazer4 red smooth untreated untreated glazed natural
-68 do_glaze p5 glazer5 mauve verysmooth untreated untreated glazed natural
-69 do_glaze p6 glazer6 red verysmooth untreated untreated glazed natural
-70 do_glaze p8 glazer7 black verysmooth untreated untreated glazed natural
-71 do_glaze p9 glazer8 mauve verysmooth untreated untreated glazed natural
-72 do_glaze p10 glazer9 green verysmooth untreated untreated glazed natural
-73 do_glaze p12 glazer10 white verysmooth untreated untreated glazed natural
-74 do_glaze p20 glazer11 black verysmooth untreated untreated glazed natural
-75 do_glaze p24 glazer12 red verysmooth untreated untreated glazed natural
-76 do_glaze p26 glazer13 blue verysmooth untreated untreated glazed natural
-77 do_glaze p31 glazer14 white verysmooth untreated untreated glazed natural
-78 do_plane_untreated p33 planer0 red smooth untreated untreated smooth natural
-79 do_plane_untreated p34 planer1 red rough untreated untreated smooth natural
-80 do_plane_untreated p35 planer2 red rough untreated untreated smooth natural
+1 process p0 cherry natural rough verysmooth 
+2 grindNplane p1 verysmooth natural untreated colourfragments 
+3 process p1 walnut natural rough verysmooth 
+4 do_colour p2 oak natural spray_varnisher untreated glazed 
+5 process p3 oak natural rough verysmooth 
+6 do_colour p4 oak blue immersion_varnisher untreated varnished 
+7 process p5 mahogany mauve rough verysmooth 
+8 do_colour p6 walnut natural spray_varnisher untreated glazed 
+9 process p7 teak white rough verysmooth 
+10 do_colour p8 teak red immersion_varnisher untreated varnished 
+11 process p9 mahogany natural rough verysmooth 
+12 do_colour p10 walnut natural spray_varnisher untreated glazed 
+13 process p11 pine natural rough verysmooth 
+14 do_colour p12 pine green immersion_varnisher untreated varnished 
+15 process p13 walnut mauve rough verysmooth 
+16 do_colour p14 walnut mauve immersion_varnisher untreated varnished 
+17 process p15 oak natural rough verysmooth 
+18 do_colour p16 teak black spray_varnisher untreated varnished 
+19 process p17 teak red rough verysmooth 
+20 do_colour p18 oak black immersion_varnisher untreated varnished 
+21 process p19 oak black rough verysmooth 
+22 do_colour p20 oak natural spray_varnisher untreated glazed 
+23 process p21 teak natural rough verysmooth 
+24 do_colour p22 teak natural immersion_varnisher untreated varnished 
+25 process p23 pine natural rough verysmooth 
+26 do_colour p24 beech red spray_varnisher untreated varnished 
+27 process p25 cherry red rough verysmooth 
+28 do_colour p26 walnut blue immersion_varnisher untreated glazed 
+29 process p27 walnut blue rough verysmooth 
+30 do_colour p28 walnut blue spray_varnisher untreated varnished 
+31 process p29 walnut blue rough verysmooth 
+32 do_colour p30 walnut red immersion_varnisher untreated varnished 
+33 process p31 beech natural rough verysmooth 
+34 do_colour p32 walnut white immersion_varnisher untreated varnished 
+35 process p33 teak red rough verysmooth 
+36 do_colour p34 teak red immersion_varnisher untreated varnished 
+37 process p35 cherry natural rough verysmooth 
+root 0
+0 solve_woodworking -> method1 1 2 
+1 process -> process_part 3 4 
+2 grindNplane -> grindNplane_part 5 6 
+3 do_colour -> do_colour_part 7 8 
+4 do_saw -> do_saw_part 9 10 
+5 do_immersion_varnish -> do_immersion_varnish_part 11 12 
+6 do_spray_varnish -> do_spray_varnish_part 13 14 
 <==
 
-root 0
-0 process_all -> m14_process_all_0 1 2... 80
-  1 load_highspeed_saw_and_cut_board b0 p3 highspeed_saw0 oak rough -> m6_load_highspeed_saw_and_cut_board_1 1 2 3
-  2 load_highspeed_saw_and_cut_board b1 p2 highspeed_saw1 walnut rough -> m6_load_highspeed_saw_and_cut_board_2 4 5 6
- ...
-  34 do_grind p3 grinder0 rough natural untreated untreated untreated verysmooth natural -> m3_do_grind_34 34
-  35 do_grind p2 grinder1 rough natural untreated untreated untreated verysmooth natural -> m3_do_grind_35 35
- ...
-  49 do_immersion_varnish p0 immersion_varnisher0 blue natural untreated untreated varnished natural -> m0_do_immersion_varnish_49 49
-  50 do_immersion_varnish p11 immersion_varnisher1 white natural untreated untreated varnished natural -> m0_do_immersion_varnish_50 50
- ...
-  78 do_plane_untreated p33 planer0 red smooth untreated untreated smooth natural -> m15_do_plane_untreated_78 78
-  79 do_plane_untreated p34 planer1 red rough untreated untreated smooth natural -> m15_do_plane_untreated_79 79
-  80 do_plane_untreated p35 planer2 red rough untreated untreated smooth natural -> m15_do_plane_untreated_80 80
+This plan consists of a sequence of tasks to achieve the goal. The tasks include processing, grinding and planing, coloring, and sawing. The method1 is used to decompose the solve_woodworking task into smaller subtasks. The process_part, grindNplane_part, do_colour_part, do_saw_part, do_immersion_varnish_part, and do_spray_varnish_part are the subtasks that are decomposed from the main tasks. 
 
-Note: 
-* The plan is too long to be fully displayed here, so I've truncated it to show the first and last few actions, as well as the hierarchical decomposition.
-* The method numbers (e.g., `m6_load_highspeed_saw_and_cut_board_1`) are arbitrary and for illustration purposes only.
-* The `process_all` task is assumed to be a custom method that decomposes into the individual `process` tasks for each part.
-* The `load_highspeed_saw_and_cut_board` task is assumed to be a custom method that decomposes into the `load_highspeed_saw`, `cut_board`, and `unload_highspeed_saw` actions.
-* The `do_grind`, `do_immersion_varnish`, `do_spray_varnish`, `do_glaze`, and `do_plane_untreated` tasks are assumed to be custom methods that directly map to the corresponding actions.
+Note that this is just one possible plan, and there may be other plans that can solve the problem. Also, the plan is not necessarily optimal, and there may be other plans that are more efficient. 
+
+Also, note that this plan is based on the provided domain and goal, and it may not be applicable to other domains or goals. 
+
+It's worth mentioning that the plan is quite long and complex, and it may be difficult to understand and implement without a clear understanding of the domain and the goal. 
+
+Please let me know if you need any further clarification or details.

@@ -1,293 +1,73 @@
 ==>
-1 move C7 C6
-2 board H2 f0
-3 move C6 H2
-4 move C7 C5
-5 move H2 C7
-6 debark C5 f0
-7 move D5 D2
-8 move C5 D5
-9 move H2 C5
-10 move D2 H2
-11 move C5 D2
-12 debark D2 f0
-13 move S3 S6
-14 move H5 S3
-15 move D2 H5
-16 move S3 D2
-17 move H5 S3
-18 move D2 H5
-19 move S6 D2
-20 move H5 S6
-21 move D2 H5
-22 move S3 D2
-23 move H5 S3
-24 move D2 H5
-25 move S6 D2
-26 move H5 S6
-27 move D2 H5
-28 move S3 D2
-29 move H5 S3
-30 move D2 H5
-31 move S6 D2
-32 move H5 S6
-33 move D2 H5
-34 move S3 D2
-35 move H5 S3
-36 move D2 H5
-37 move S6 D2
-38 move H5 S6
-39 move D2 H5
-40 move S3 D2
-41 move H5 S3
-42 move D2 H5
-43 move S6 D2
-44 move H5 S6
-45 move D2 H5
-46 move S3 D2
-47 move H5 S3
-48 move D2 H5
-49 move S6 D2
-50 move H5 S6
-51 move D2 H5
-52 move S3 D2
-53 move H5 S3
-54 move D2 H5
-55 move S6 D2
-56 move H5 S6
-57 move D2 H5
-58 move S3 D2
-59 move H5 S3
-60 move D2 H5
-61 move S6 D2
-62 move H5 S6
-63 move D2 H5
-64 move S3 D2
-65 move H5 S3
-66 move D2 H5
-67 move S6 D2
-68 move H5 S6
-69 move D2 H5
-70 move S3 D2
-71 move H5 S3
-72 move D2 H5
-73 move S6 D2
-74 move H5 S6
-75 move D2 H5
-76 move S3 D2
-77 move H5 S3
-78 move D2 H5
-79 move S6 D2
-80 move H5 S6
-81 move D2 H5
-82 move S3 D2
-83 move H5 S3
-84 move D2 H5
-85 move S6 D2
-86 move H5 S6
-87 move D2 H5
-88 move S3 D2
-89 move H5 S3
-90 move D2 H5
-91 move S6 D2
-92 move H5 S6
-93 move D2 H5
-94 move S3 D2
-95 move H5 S3
-96 move D2 H5
-97 move S6 D2
-98 move H5 S6
-99 move D2 H5
-100 move S3 D2
-101 move H5 S3
-102 move D2 H5
-103 move S6 D2
-104 move H5 S6
-105 move D2 H5
-106 move S3 D2
-107 move H5 S3
-108 move D2 H5
-109 move S6 D2
-110 move H5 S6
-111 move D2 H5
-112 move S3 D2
-113 move H5 S3
-114 move D2 H5
-115 move S6 D2
-116 move H5 S6
-117 move D2 H5
-118 move S3 D2
-119 move H5 S3
-120 move D2 H5
-121 move S6 D2
-122 move H5 S6
-123 move D2 H5
-124 move S3 D2
-125 move H5 S3
-126 move D2 H5
-127 move S6 D2
-128 move H5 S6
-129 move D2 H5
-130 move S3 D2
-131 move H5 S3
-132 move D2 H5
-133 move S6 D2
-134 move H5 S6
-135 move D2 H5
-136 move S3 D2
-137 move H5 S3
-138 move D2 H5
-139 move S6 D2
-140 move H5 S6
-141 move D2 H5
-142 move S3 D2
-143 move H5 S3
-144 move D2 H5
-145 move S6 D2
-146 move H5 S6
-147 move D2 H5
-148 move S3 D2
-149 move H5 S3
-150 move D2 H5
-151 move S6 D2
-152 move H5 S6
-153 move D2 H5
-154 move S3 D2
-155 move H5 S3
-156 move D2 H5
-157 move S6 D2
-158 move H5 S6
-159 move D2 H5
-160 move S3 D2
-161 move H5 S3
-162 move D2 H5
-163 move S6 D2
-164 move H5 S6
-165 move D2 H5
-166 move S3 D2
-167 move H5 S3
-168 move D2 H5
-169 move S6 D2
-170 move H5 S6
-171 move D2 H5
-172 move S3 D2
-173 move H5 S3
-174 move D2 H5
-175 move S6 D2
-176 move H5 S6
-177 move D2 H5
-178 move S3 D2
-179 move H5 S3
-180 move D2 H5
-181 move S6 D2
-182 move H5 S6
-183 move D2 H5
-184 move S3 D2
-185 move H5 S3
-186 move D2 H5
-187 move S6 D2
-188 move H5 S6
-189 move D2 H5
-190 move S3 D2
-191 move H5 S3
-192 move D2 H5
-193 move S6 D2
-194 move H5 S6
-195 move D2 H5
-196 move S3 D2
-197 move H5 S3
-198 move D2 H5
-199 move S6 D2
-200 move H5 S6
-201 move D2 H5
-202 move S3 D2
-203 move H5 S3
-204 move D2 H5
-205 move S6 D2
-206 move H5 S6
-207 move D2 H5
-208 move S3 D2
-209 move H5 S3
-210 move D2 H5
-211 move S6 D2
-212 move H5 S6
-213 move D2 H5
-214 move S3 D2
-215 move H5 S3
-216 move D2 H5
-217 move S6 D2
-218 move H5 S6
-219 move D2 H5
-220 move S3 D2
-221 move H5 S3
-222 move D2 H5
-223 move S6 D2
-224 move H5 S6
-225 move D2 H5
-226 move S3 D2
-227 move H5 S3
-228 move D2 H5
-229 move S6 D2
-230 move H5 S6
-231 move D2 H5
-232 move S3 D2
-233 move H5 S3
-234 move D2 H5
-235 move S6 D2
-236 move H5 S6
-237 move D2 H5
-238 move S3 D2
-239 move H5 S3
-240 move D2 H5
-241 move S6 D2
-242 move H5 S6
-243 move D2 H5
-244 move S3 D2
-245 move H5 S3
-246 move D2 H5
-247 move S6 D2
-248 move H5 S6
-249 move D2 H5
-250 move S3 D2
-251 move H5 S3
-252 move D2 H5
-253 move S6 D2
-254 move H5 S6
-255 move D2 H5
-256 move S3 D2
-257 move H5 S3
-258 move D2 H5
-259 move S6 D2
-260 move H5 S6
-261 move D2 H5
-262 move S3 D2
-263 move H5 S3
-264 move D2 H5
-265 move S6 D2
-266 move H5 S6
-267 move D2 H5
-268 move S3 D2
-269 move H5 S3
-270 move D2 H5
-271 move S6 D2
-272 move H5 S6
-273 move D2 H5
-274 move S3 D2
-275 move H5 S3
-276 move D2 H5
-277 move S6 D2
-278 move H5 S6
-279 move D2 H5
-280 move S3 D2
-281 move H5 S3
-282 move D2 H5
-283 move S6 D2
-284 move H5 S6
-285 move D2 H5
-286 move S3 D2
-287 move H5 S3
-288 move D2 H5
-289 move S6 D2
-290 move H5 S6
-291 move D2 H5
-292 move S3 D2
+1 IFUNLOCK-ON C3 H6
+2 DO-ON-MOVE0 H6 C3 C9
+3 IFUNLOCK-ON D5 D2
+4 DO-ON-MOVE1 D2 D5 S8
+5 IFUNLOCK-ON H2 H8
+6 DO-ON-MOVE1 H8 H2 D9
+7 IFUNLOCK-ON D6 C2
+8 DO-ON-SENDTOHOME0 D6 D3 H 0 C3 10 N4
+9 IFUNLOCK-ON C7 C6
+10 DO-ON-SENDTOFREE2 C7 C6 N4 11
+11 DO-ON-SENDTONEWCOL2 C5 H6 11 N3
+12 DO-INCELL-COLFROMFREECELL1 D2 D8 N5 12
+13 DO-ON-MOVE2 H4 S4 D6
+14 DO-ON-SENDTONEWCOL2 H8 S9 14 N8
+15 DO-ON-SENDTONEWCOL1 H7 C8 15 N8
+16 DO-INCELL-COLFROMFREECELL0 D5 H5 N10 0
+17 DO-ON-MOVE2 C9 C3 C6
+18 DO-ON-SENDTOFREE2 D8 C7 N8 0
+19 DO-ON-MOVE2 H5 D5 H8
+20 DO-INCELL-COLFROMFREECELL0 H3 S7 0 11
+21 DO-ON-MOVE2 S7 C2 H9
+22 DO-BOTTOMCOL-SENDTOFREE-B0 C8 19 N7 6 N10
+23 DO-ON-MOVE0 C8 H3 H9
+24 DO-ON-SENDTOFREE2 C3 C8 19 N0
+25 IFUNLOCK-ON S9 D9
+26 DO-ON-SENDTOHOME0 D9 D8 H 1 C8 9 N6
+27 DO-ON-SENDTONEWCOL0 D7 H2 27 14
+28 DO-ON-SENDTONEWCOL0 D4 S7 28 0
+29 DO-ON-SENDTONEWCOL1 S6 C4 29 1
+30 DO-INCELL-NEWCOLFROMFREECELL0 S5 0 N6 20 8
+31 DO-INCELL-NEWCOLFROMFREECELL0 C2 2 N9 18 N5
+32 DO-ON-MOVE2 S2 C7 D3
+33 DO-ON-MOVE0 SA H3 D4
+34 DO-ON-SENDTOFREE2 D8 C2 6 N4
+35 DO-ON-MOVE2 H9 CA S8
+36 DO-ON-SENDTOFREE0 C9 C2 1 8
+37 DO-ON-MOVE2 CA D5 D9
+38 DO-INCELL-COLFROMFREECELL1 D9 C9 N10 10
+39 DO-ON-MOVE2 S9 SA S6
+40 DO-ON-SENDTONEWCOL1 S8 C4 40 2
+41 DO-BOTTOMCOL-SENDTOHOME-B0 C3 C H 12 C4 13 N5 5
+42 DO-ON-MOVE1 C5 D5 D6
+43 DO-BOTTOMCOL-MOVE-B1 C4 S8 N11 40 14
+44 DO-BOTTOMCOL-SENDTOFREE-B1 D3 33 N10 18 N8 2
+45 DO-INCELL-COLFROMFREECELL0 D4 S4 45 14
+46 DO-ON-MOVE2 S3 D3 D5
+47 DO-INCELL-HOMEFROMFREECELL0 S6 D 0 N2 10 C2 9 16
+<==
+
+root 0
+0 solve_frecell -> m1_go_ordering_0 1 2
+2 deliver_card D9 -> m2_ordering_0 5 6 5 7
+11 deliver_card C9 -> m2_ordering_1 15 17 15 17
+13 deliver_card H4 -> m2_ordering_2 10 11 12 13
+14 deliver_card D2 -> m2_ordering_3 18 8 17 10
+17 deliver_card S9 -> m2_ordering_4 25 26 25 26
+18 deliver_card D7 -> m2_ordering_5 27 28 13 14
+19 deliver_card C7 -> m2_ordering_6 31 10 0 19
+18 deliver_card S3 -> m2_ordering_7 32 46 46 18
+20 deliver_card H8 -> m2_ordering_8 23 34 35 22
+22 deliver_card S6 -> m2_ordering_9 40 39 40 39
+25 deliver_card D9 -> m2_ordering_10 26 29 28 31
+26 deliver_card SA -> m2_ordering_11 33 36 37 33
+30 deliver_card S5 -> m2_ordering_12 38 41 43 41
+32 deliver_card C2 -> m2_ordering_13 31 16 34 27
+36 deliver_card C5 -> m2_ordering_14 28 29 29 32
+37 deliver_card S8 -> m2_ordering_15 43 42 44 42
+38 deliver_card S9 -> m2_ordering_16 39 20 41 40
+38 deliver_card S4 -> m2_ordering_17 45 24 24 16
+40 deliver_card C8 -> m2_ordering_18 23 44 18 14
+41 deliver_card S6 -> m2_ordering_19 29 41 30 32
+47 deliver_card S6 -> m2_ordering_20 47 42 29 11

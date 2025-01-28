@@ -1,57 +1,36 @@
 ==>
-1 move C5 C4
-2 move C6 H4
-3 move C7 C9
-4 move C8 S9
-5 move C9 H10
-6 move CA H6
-7 move D10 SA
-8 move D3 C7
-9 move D5 H7
-10 move D6 S8
-11 move D8 D5
-12 move DA D4
-13 move H2 D6
-14 move H3 S2
-15 move H4 C10
-16 move H5 S3
-17 move H6 S6
-18 move H9 CA
-19 move HA H9
-20 move S10 D9
-21 move S2 S10
-22 move S3 DA
-23 move S4 C2
-24 move S5 H3
-25 move S7 D3
-26 move S8 H8
-27 move S9 C6
-28 move SA D2
-29 board p0 f0
-30 move f0 f1
-31 move f1 f0
-32 debark p0 f0
+1 DO-INCELL-COLFROMFREECELL0 C0 S0 N0 N9
+2 DO-INCELL-COLFROMFREECELL0 D0 S0 N1 N9
+3 DO-INCELL-COLFROMFREECELL0 H0 S0 N2 N9
+4 DO-INCELL-COLFROMFREECELL0 S0 S0 N3 N9
+5 DO-INCELL-NEWCOLFROMFREECELL0 C2 S0 N4 N9 N8 N3
+6 DO-INCELL-NEWCOLFROMFREECELL0 DA S0 N6 N9 N7 N4
+7 DO-BOTTOMCOL-MOVE-B1 H8 S2 N6 N7 N4 N9
+8 DO-ON-MOVE1 C9 H3 C8 S3 D8 S10 S9 H5 N8
+9 DO-ON-SENDTOFREE1 CA S6 N5 N9 N6 N4
+10 DO-ON-SENDTOFREE1 D4 S4 N5 N9 N6 N4
+11 DO-ON-MOVE1 H9 HA C9 H6 CA D8 S10 N5 N4
+12 DO-ON-SENDTONEWCOL1 C7 S7 N1 N5 N9 N8 N4
+13 DO-ON-SENDTONEWCOL1 D3 S7 N1 N5 N9 N8 N4
+14 DO-ON-MOVE1 H4 C10 D5 H7 N5 N4
+15 DO-ON-SENDTONEWCOL1 H7 D10 N2 N5 N9 N8 N4
+16 DO-ON-SENDTONEWCOL1 D6 S2 N2 N5 N9 N8 N4
+17 DO-ON-SENDTONEWCOL1 C10 S5 N2 N5 N9 N8 N4
+18 DO-ON-SENDTONEWCOL1 C6 S5 N2 N5 N9 N8 N4
+19 DO-ON-MOVE1 C8 D9 S9 N5 N4
+20 DO-ON-MOVE1 S10 D9 C9 H10 N5 N4
+21 DO-ON-SENDTONEWCOL1 S8 D7 N3 N5 N9 N8 N4
+22 DO-ON-SENDTONEWCOL1 S5 H3 N3 N5 N9 N8 N4
+23 DO-ON-SENDTOFREE1 S7 C7 N5 N5 N3
+24 DO-ON-SENDTONEWCOL1 C5 C8 N0 N5 N9 N8 N4
+25 DO-ON-SENDTONEWCOL1 C4 C5 N0 N5 N9 N8 N4
+26 DO-ON-SENDTONEWCOL1 C3 C4 N0 N5 N9 N8 N4
+27 DO-ON-MOVE1 SA D2 S3 N5 N4
+28 DO-BOTTOMCOL-MOVE-B0 D9 SA N3 N9 N8 N4
+29 DO-INCELL-HOMEFROMFREECELL0 S9 H0 S0 H1 4 H6 HA N9 N0
+30 DO-INCELL-HOMEFROMFREECELL0 H10 H0 S0 H1 5 S8 H4 N9 N0
+31 DO-INCELL-HOMEFROMFREECELL0 D10 D0 S0 D1 5 H7 H9 N9 N1
+32 DO-INCELL-HOMEFROMFREECELL0 C10 C0 S0 C2 5 D4 D7 N9 N2
 <==
-
 root 0
-0 solve_elevator -> m1_go_ordering_0 1 2
-1 deliver_person p0 f1 f0 -> m2_ordering_0 3 4 5 6
-2 solve_elevator -> m1_abort_ordering_0 
-
-**Note:** The provided HTN domain and problem are quite complex, and the plan generated above is a simplified solution. The actual plan may vary based on the specific requirements and constraints of the problem.
-
-**Plan Explanation:**
-
-The plan consists of 32 actions, which can be grouped into three main phases:
-
-1. **Initial Moves (1-28)**: These actions involve moving cards to their respective positions to set up the game state for the subsequent phases.
-2. **Board and Move Actions (29-31)**: These actions involve placing a person (p0) on a free cell (f0), moving the free cell to another free cell (f1), and then moving it back to the original free cell (f0). Finally, the person is debarked from the free cell.
-3. **Elevator Scheduling (root 0)**: The hierarchical task network (HTN) plan is represented as a tree, where:
-	* `solve_elevator` is the top-level task, which has two possible methods: `m1_go_ordering_0` and `m1_abort_ordering_0`.
-	* `deliver_person p0 f1 f0` is a subtask of `m2_ordering_0`, which involves the actions from 29 to 32.
-
-**Please note that:**
-
-* The plan generated is based on the provided HTN domain and problem, but might not be the only possible solution.
-* The plan's correctness and optimality depend on the accuracy of the provided domain and problem definitions.
-* The plan's execution assumes that the game state is updated correctly after each action.
+0 freecell -> solve_freecell 1 32

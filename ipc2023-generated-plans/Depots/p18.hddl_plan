@@ -1,56 +1,30 @@
-Here is a hierarchical plan to solve the given HTN problem, following the specified output format:
-```
-==>
-**Sequential Plan**
-1. Drive truck3 distributor1 depot0
-2. do_get_truck truck3 depot0
-3. do_clear crate7 depot0 hoist0
-4. Lift hoist0 crate13 crate7 depot0
-5. Drop hoist0 crate13 pallet3 depot0
-6....
-**Total Sequential Plan Length: 143 actions** (abbreviated for brevity)
+==> 
+1 move crate14 crate12 distributor0 
+2 move crate10 crate9 distributor1 
+3 move crate0 pallet1 depot1 hoist1 
+4 move crate10 pallet1 depot1 hoist1 
+5 move crate13 crate7 depot0 hoist0 
+6 move crate13 pallet3 depot0 hoist0 
+7 move crate9 crate1 depot1 hoist1 
+8 move crate1 pallet6 depot1 hoist1 
+9 move crate12 pallet2 distributor0 
+10 move crate8 crate6 distributor0 
+11 move crate5 pallet2 depot1 hoist1 
+12 move crate6 pallet7 depot1 hoist1 
+13 move crate11 pallet5 depot1 hoist1 
+14 lift crate4 pallet0 depot0 hoist0 
+15 drop hoist0 crate4 crate14 pallet0 depot0 
+16 move crate8 crate4 depot0 hoist0 
+root 0 
+0 solve -> m3_do_put_on_7 1 2
+1 m4_do_clear_0 -> m0_do_put_on 3 
+3 m10_do_load_truck_19 -> m5_do_clear 4 5
+6 m10_do_load_truck_20 -> m5_do_clear 7 8
+9 m10_do_load_truck_21 -> m5_do_clear 10 11
+12 m10_do_load_truck_22 -> m5_do_clear 13 14
+15 m9_do_lift_crate_4 -> m0_do_put_on 16 
+16 m11_do_unload_truck_39  -> m5_do_clear 17 18
+18 m11_do_unload_truck_40 -> m5_do_clear 19 20
+20 m11_do_unload_truck_41 -> m5_do_clear 21 22
+22 m11_do_unload_truck_42 -> m5_do_clear 23 24 
 <==
-
-**Hierarchical Decomposition**
-root 0
-0 solve_depotprob1916 -> m3_do_put_on_0 1-143 (task1-task14)
-  **Task Breakdown**
-  1 do_put_on crate14 pallet0 -> m2_do_put_on_1 1-5
-    1.1 do_get_truck truck3 depot0
-    1.2 do_clear pallet0 depot0
-    1.3 Unload hoist0 crate14 truck3 depot0
-    1.4 Drop hoist0 crate14 pallet0 depot0
-    1.5 (nop)
-  
-  2 do_put_on crate10 pallet1 -> m1_do_put_on_2 6-15
-    2.1 do_clear crate9 distributor1
-    2.2 do_clear pallet1 depot1
-    2.3 do_lift_crate crate10 distributor1 hoist3
-    2.4 Drop hoist3 crate10 pallet1 distributor1
-   ...
-  
- ...
-  
-  14 do_put_on crate6 pallet7 -> m2_do_put_on_14 139-143
-    14.1 do_get_truck truck2 depot0
-    14.2 do_clear pallet7 depot1
-    14.3 Unload hoist5 crate6 truck2 depot0
-    14.4 Drop hoist5 crate6 pallet7 depot0
-    14.5 (nop)
-
-**Method Invocation Details**
-m3_do_put_on_0: (task1-task14, no preconditions)
-m2_do_put_on_1: (crate14, pallet0, depot0, truck3, hoist0)
-m1_do_put_on_2: (crate10, pallet1, distributor1, hoist3)
-...
-m2_do_put_on_14: (crate6, pallet7, depot0, truck2, hoist5)
-```
-**Plan Explanation**
-
-1. The sequential plan consists of 143 actions, which are not fully listed due to brevity. The plan starts with driving `truck3` to `depot0` and then proceeds with a series of `do_get_truck`, `do_clear`, `Lift`, `Drop`, and other actions to achieve the goal.
-2. The hierarchical decomposition begins with the `solve_depotprob1916` task, which is decomposed into 14 `do_put_on` tasks (task1-task14) using method `m3_do_put_on_0`.
-3. Each `do_put_on` task is further decomposed using various methods (`m1_do_put_on`, `m2_do_put_on`) based on the preconditions. For example:
-	* `do_put_on crate14 pallet0` uses `m2_do_put_on_1` since `crate14` is in a truck and `pallet0` is clear.
-	* `do_put_on crate10 pallet1` uses `m1_do_put_on_2` since `crate10` is at `distributor1` and `pallet1` is clear.
-
-**Note**: The plan is generated based on the provided HTN domain and problem, but its optimality and correctness depend on the accuracy and completeness of the input models.

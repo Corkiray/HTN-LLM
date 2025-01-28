@@ -1,46 +1,104 @@
-==>
-**Sequential Plan**
-1. prepare_trip place0
-2. trip_to1 couple0 place6
-3. prepare_trip place0
-4. trip_to1 couple1 place6
-5. prepare_trip place0
-6. trip_to1 couple2 place6
-
-**Hierarchical Decomposition**
+==> 
+1 walk_together tent2 place6 guy2 place5 girl2 couple2 
+2 walk_everyone tent2 place6 place5 
+3 drive_tent guy1 place0 place1 car1 tent1 
+4 put_up guy1 place1 tent1 
+5 drive_passenger girl1 place1 place0 car1 guy1 
+6 walk_together tent1 place1 guy1 place0 girl1 couple1 
+7 walk_everyone tent1 place1 place0 
+8 drive_tent guy0 place0 place1 car0 tent0 
+9 put_up guy0 place1 tent0 
+10 drive_passenger girl0 place1 place0 car0 guy0 
+11 walk_together tent0 place1 guy0 place0 girl0 couple0 
+12 walk_everyone tent0 place1 place0 
+13 drive car1 place1 place2 car1 
+14 drive car0 place1 place2 car0 
+15 drive car2 place0 place2 car2 
+16 drive car3 place0 place2 car3 
+17 drive_tent guy1 place1 place2 car1 tent1 
+18 put_up guy1 place2 tent1 
+19 drive_passenger girl1 place2 place1 car1 guy1 
+20 walk_together tent1 place2 guy1 place1 girl1 couple1 
+21 walk_everyone tent1 place2 place1 
+22 drive_tent guy0 place1 place2 car0 tent0 
+23 put_up guy0 place2 tent0 
+24 drive_passenger girl0 place2 place1 car0 guy0 
+25 walk_together tent0 place2 guy0 place1 girl0 couple0 
+26 walk_everyone tent0 place2 place1 
+27 drive car1 place2 place3 car1 
+28 drive car0 place2 place3 car0 
+29 drive car2 place2 place3 car2 
+30 drive car3 place2 place3 car3 
+31 drive_tent guy1 place2 place3 car1 tent1 
+32 put_up guy1 place3 tent1 
+33 drive_passenger girl1 place3 place2 car1 guy1 
+34 walk_together tent1 place3 guy1 place2 girl1 couple1 
+35 walk_everyone tent1 place3 place2 
+36 drive_tent guy0 place2 place3 car0 tent0 
+37 put_up guy0 place3 tent0 
+38 drive_passenger girl0 place3 place2 car0 guy0 
+39 walk_together tent0 place3 guy0 place2 girl0 couple0 
+40 walk_everyone tent0 place3 place2 
+41 drive car1 place3 place4 car1 
+42 drive car0 place3 place4 car0 
+43 drive car2 place3 place4 car2 
+44 drive car3 place3 place4 car3 
+45 drive_tent guy1 place3 place4 car1 tent1 
+46 put_up guy1 place4 tent1 
+47 drive_passenger girl1 place4 place3 car1 guy1 
+48 walk_together tent1 place4 guy1 place3 girl1 couple1 
+49 walk_everyone tent1 place4 place3 
+50 drive_tent guy0 place3 place4 car0 tent0 
+51 put_up guy0 place4 tent0 
+52 drive_passenger girl0 place4 place3 car0 guy0 
+53 walk_together tent0 place4 guy0 place3 girl0 couple0 
+54 walk_everyone tent0 place4 place3 
+55 drive car1 place4 place5 car1 
+56 drive car0 place4 place5 car0 
+57 drive car2 place4 place5 car2 
+58 drive car3 place4 place5 car3 
+59 drive_tent guy1 place4 place5 car1 tent1 
+60 put_up guy1 place5 tent1 
+61 drive_passenger girl1 place5 place4 car1 guy1 
+62 walk_together tent1 place5 guy1 place4 girl1 couple1 
+63 walk_everyone tent1 place5 place4 
+64 drive_tent guy0 place4 place5 car0 tent0 
+65 put_up guy0 place5 tent0 
+66 drive_passenger girl0 place5 place4 car0 guy0 
+67 walk_together tent0 place5 guy0 place4 girl0 couple0 
+68 walk_everyone tent0 place5 place4 
+69 walk_together tent1 place5 guy1 place4 girl1 couple1 
+70 walk_everyone tent1 place5 place4 
+71 walk_together tent0 place6 guy0 place5 girl0 couple0 
 root 0
-0 everyone_go_hiking place6 -> m14_everyone_go_hiking 1 2
-  1 prepare_trip place0 -> m6_prepare_trip 7 8
-    7 bring_tent place0 -> m9_bring_tent (tent0 is already down and at place0, so nop)
-      * nop *
-    8 bring_cars place0 -> m11_bring_cars (all cars are already at place0, so nop)
-      * nop *
-  2 trip_to1 couple0 place6 -> m0_trip_to1 3 9
-    3 trip_to2 couple0 place0 place6 -> m2_trip_to2 3.1 3.2
-      3.1 trip_to2 couple0 place0 place1 -> m2_trip_to2 3.1.1 3.1.2
-       ...
-        * recursive decomposition for each place *
-      3.2 trip_to2 couple0 place1 place6 -> m2_trip_to2... (similar to 3.1)
-    9 trip_to2 couple0 place5 place6 -> m3_trip_to2 10 11 12 13 14 15 16 17 18
-      10 drive_tent guy0 place5 place6 car0 tent0
-      11 drive girl0 place5 place6 car1
-      12 put_up guy0 place6 tent0
-      13 drive_passenger girl0 place6 place5 car1 guy0
-      14 walk_everyone tent0 place6 place5 -> m5_walk_everyone 19 20
-        19 walk_together tent0 place6 guy0 place5 girl0 couple0
-        20 walk_everyone tent0 place6 place5 -> m4_walk_everyone (nop, as everyone has walked)
-          * nop *
-      15 put_down girl0 place6 tent0
-      16 drive_passenger guy0 place6 place5 car0 girl0
-      17 drive guy0 place5 place6 car0
-      18 drive girl0 place5 place6 car1
-  * similar decomposition for couple1 (actions 4-6) and couple2 (actions 4-6, considering tent2 is already up) *
-
+0 everyone_go_hiking -> m14_everyone_go_hiking 1 2
+72 prepare_trip -> m6_prepare_trip 3 4
+73 bring_tent -> m10_bring_tent 5 6
+74 bring_tent -> m10_bring_tent 7 8
+75 bring_tent -> m9_bring_tent 9 10
+76 bring_cars -> m11_bring_cars 11 12
+77 trip_to1 -> m0_trip_to1 13 14
+78 trip_to2 -> m3_trip_to2 15 16
+79 trip_to2 -> m3_trip_to2 17 18
+80 trip_to2 -> m3_trip_to2 19 20
+81 trip_to2 -> m3_trip_to2 21 22
+82 trip_to2 -> m3_trip_to2 23 24
+83 trip_to2 -> m3_trip_to2 25 26
+84 trip_to2 -> m3_trip_to2 27 28
+85 trip_to2 -> m3_trip_to2 29 30
+86 trip_to2 -> m3_trip_to2 31 32
+87 trip_to2 -> m3_trip_to2 33 34
+88 trip_to2 -> m3_trip_to2 35 36
+89 trip_to2 -> m3_trip_to2 37 38
+90 walk_everyone -> m5_walk_everyone 39 40
+91 walk_everyone -> m5_walk_everyone 41 42
+92 walk_everyone -> m5_walk_everyone 43 44
+93 walk_everyone -> m5_walk_everyone 45 46
+94 walk_everyone -> m5_walk_everyone 47 48
+95 walk_everyone -> m4_walk_everyone 49 50
+96 walk_everyone -> m4_walk_everyone 51 52
+97 walk_everyone -> m4_walk_everyone 53 54
+98 walk_everyone -> m4_walk_everyone 55 56
+99 walk_everyone -> m4_walk_everyone 57 58
+100 walk_everyone -> m5_walk_everyone 59 60
 <==
-
-**Note:**
-
-* Due to the complexity and recursive nature of the plan, the decomposition for each `trip_to2` and subsequent tasks is not fully expanded. The pattern of decomposition should be clear from the provided sections.
-* The `walk_everyone` task is decomposed using `m5_walk_everyone` initially, but since the precondition for `walked` is already met for the couples at the starting place, the recursive call to `walk_everyone` results in a `nop` (no operation) via `m4_walk_everyone`.
-* Actions and their parameters are abbreviated for brevity (e.g., `drive_tent guy0 place5 place6 car0 tent0` is shortened from `drive_tent?p - person?from - place?to - place?car - car?t - tent` with the respective bindings).
-* This plan assumes the planner successfully resolves the recursive decompositions and variable bindings as specified in the HTN domain and problem definitions.

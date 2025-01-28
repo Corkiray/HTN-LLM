@@ -1,45 +1,281 @@
+Here is a plan to solve the given HTN problem:
+
 ==>
-**Sequential Plan**
-```
-1. DRIVE-TRUCK TRU7 POS7 POS2 CIT7
-2. LOAD-TRUCK OBJ71 TRU7 POS2
-3. DRIVE-TRUCK TRU7 POS2 APT6 CIT2
-4. UNLOAD-TRUCK OBJ71 TRU7 APT6
-5....
-**... (plan for each task, truncated for brevity)...**
-23. FLY-AIRPLANE APN2 APT7 APT2
-24. LOAD-AIRPLANE OBJ82 APN2 APT2
-25. FLY-AIRPLANE APN2 APT2 APT8
-26. UNLOAD-AIRPLANE OBJ82 APN2 APT8
-**... (plan for remaining tasks, truncated for brevity)...**
-43. UNLOAD-TRUCK OBJ33 TRU8 POS3
-44. DRIVE-TRUCK TRU8 POS3 APT8 CIT8
-45. LOAD-TRUCK OBJ33 TRU8 APT8
-```
-**Hierarchical Decomposition**
-```
+
+1 load-airplane OBJ71 APN2 APT6
+2 achieve-at-air APN2 APT6
+3 i-unlock-at APN2 APT6
+4 deliver-person OBJ71 APT6 APT6
+5 deliver-person OBJ82 POS8 POS8
+6 achieve-at OBJ82 POS8
+7 move-truck TRU8 POS8 POS8
+8 i-unlock-at TRU8 POS8
+9 unload-truck OBJ82 TRU8 POS8
+10 i-unlock-in OBJ82 TRU8
+11 i-unflag-in OBJ82 TRU8
+12 move-airplane APN1 APT8 APT8
+13 move-airplane APN1 APT8 APT7
+14 i-unlock-at APN1 APT7
+15 load-airplane OBJ82 APN1 APT7
+16 move-airplane APN1 APT7 APT2
+17 i-unlock-at APN1 APT2
+18 unload-airplane OBJ82 APN1 APT2
+19 i-unlock-in OBJ82 APN1
+20 i-unflag-in OBJ82 APN1
+21 load-airplane OBJ52 APN2 APT6
+22 load-airplane OBJ63 APN1 APT2
+23 load-airplane OBJ32 TRU2 POS2
+24 i-unlock-in OBJ32 TRU2
+25 i-unflag-in OBJ32 TRU2
+26 i-flag-in OBJ32 TRU2
+27 move-truck TRU2 POS2 POS7
+28 i-unlock-at TRU2 POS7
+29 unload-truck OBJ32 TRU2 POS7
+30 i-unlock-in OBJ32 TRU2
+31 i-unflag-in OBJ32 TRU2
+32 move-airplane APN2 APT6 APT7
+33 i-unlock-at APN2 APT7
+34 load-airplane OBJ32 APN2 APT7
+35 move-airplane APN2 APT7 POS7
+36 i-unlock-at APN2 POS7
+37 unload-airplane OBJ32 APN2 POS7
+38 i-unlock-in OBJ32 APN2
+39 i-unflag-in OBJ32 APN2
+40 move-airplane APN1 APT2 APT8
+41 i-unlock-at APN1 APT8
+42 load-airplane OBJ33 APN1 APT8
+43 move-airplane APN1 APT8 APT5
+44 i-unlock-at APN1 APT5
+45 unload-airplane OBJ33 APN1 APT5
+46 i-unlock-in OBJ33 APN1
+47 i-unflag-in OBJ33 APN1
+48 load-airplane OBJ33 TRU5 POS5
+49 i-unlock-in OBJ33 TRU5
+50 i-unflag-in OBJ33 TRU5
+51 i-flag-in OBJ33 TRU5
+52 move-truck TRU5 POS5 APT5
+53 i-unlock-at TRU5 APT5
+54 unload-truck OBJ33 TRU5 APT5
+55 i-unlock-in OBJ33 TRU5
+56 i-unflag-in OBJ33 TRU5
+57 load-airplane OBJ41 TRU3 POS3
+58 i-unlock-in OBJ41 TRU3
+59 i-unflag-in OBJ41 TRU3
+60 i-flag-in OBJ41 TRU3
+61 move-truck TRU3 POS3 POS3
+62 i-unlock-at TRU3 POS3
+63 unload-truck OBJ41 TRU3 POS3
+64 i-unlock-in OBJ41 TRU3
+65 i-unflag-in OBJ41 TRU3
+66 move-airplane APN2 APT7 APT5
+67 i-unlock-at APN2 APT5
+68 load-airplane OBJ41 APN2 APT5
+69 move-airplane APN2 APT5 POS3
+70 i-unlock-at APN2 POS3
+71 unload-airplane OBJ41 APN2 POS3
+72 i-unlock-in OBJ41 APN2
+73 i-unflag-in OBJ41 APN2
+74 load-airplane OBJ61 TRU6 POS6
+75 i-unlock-in OBJ61 TRU6
+76 i-unflag-in OBJ61 TRU6
+77 i-flag-in OBJ61 TRU6
+78 move-truck TRU6 POS6 POS2
+79 i-unlock-at TRU6 POS2
+80 unload-truck OBJ61 TRU6 POS2
+81 i-unlock-in OBJ61 TRU6
+82 i-unflag-in OBJ61 TRU6
+83 move-airplane APN2 APT5 APT6
+84 i-unlock-at APN2 APT6
+85 load-airplane OBJ61 APN2 APT6
+86 move-airplane APN2 APT6 POS2
+87 i-unlock-at APN2 POS2
+88 unload-airplane OBJ61 APN2 POS2
+89 i-unlock-in OBJ61 APN2
+90 i-unflag-in OBJ61 APN2
+91 load-airplane OBJ83 TRU3 POS3
+92 i-unlock-in OBJ83 TRU3
+93 i-unflag-in OBJ83 TRU3
+94 i-flag-in OBJ83 TRU3
+95 move-truck TRU3 POS3 POS3
+96 i-unlock-at TRU3 POS3
+97 unload-truck OBJ83 TRU3 POS3
+98 i-unlock-in OBJ83 TRU3
+99 i-unflag-in OBJ83 TRU3
+100 move-airplane APN2 APT6 APT2
+101 i-unlock-at APN2 APT2
+102 load-airplane OBJ81 APN2 APT2
+103 move-airplane APN2 APT2 POS3
+104 i-unlock-at APN2 POS3
+105 unload-airplane OBJ81 APN2 POS3
+106 i-unlock-in OBJ81 APN2
+107 i-unflag-in OBJ81 APN2
+108 load-truck OBJ72 TRU7 POS7
+109 i-unlock-in OBJ72 TRU7
+110 i-unflag-in OBJ72 TRU7
+111 i-flag-in OBJ72 TRU7
+112 move-truck TRU7 POS7 APT2
+113 i-unlock-at TRU7 APT2
+114 unload-truck OBJ72 TRU7 APT2
+115 i-unlock-in OBJ72 TRU7
+116 i-unflag-in OBJ72 TRU7
+117 move-airplane APN1 APT5 APT1
+118 i-unlock-at APN1 APT1
+119 load-airplane OBJ13 APN1 APT1
+120 move-airplane APN1 APT1 POS1
+121 i-unlock-at APN1 POS1
+122 unload-airplane OBJ13 APN1 POS1
+123 i-unlock-in OBJ13 APN1
+124 i-unflag-in OBJ13 APN1
+125 load-airplane OBJ43 TRU4 POS4
+126 i-unlock-in OBJ43 TRU4
+127 i-unflag-in OBJ43 TRU4
+128 i-flag-in OBJ43 TRU4
+129 move-truck TRU4 POS4 APT2
+130 i-unlock-at TRU4 APT2
+131 unload-truck OBJ43 TRU4 APT2
+132 i-unlock-in OBJ43 TRU4
+133 i-unflag-in OBJ43 TRU4
+134 load-truck OBJ62 TRU1 POS1
+135 i-unlock-in OBJ62 TRU1
+136 i-unflag-in OBJ62 TRU1
+137 i-flag-in OBJ62 TRU1
+138 move-truck TRU1 POS1 APT6
+139 i-unlock-at TRU1 APT6
+140 unload-truck OBJ62 TRU1 APT6
+141 i-unlock-in OBJ62 TRU1
+142 i-unflag-in OBJ62 TRU1
+143 move-airplane APN2 APT2 APT4
+144 i-unlock-at APN2 APT4
+145 load-airplane OBJ51 APN2 APT4
+146 move-airplane APN2 APT4 POS4
+147 i-unlock-at APN2 POS4
+148 unload-airplane OBJ51 APN2 POS4
+149 i-unlock-in OBJ51 APN2
+150 i-unflag-in OBJ51 APN2
+151 load-truck OBJ51 TRU2 POS2
+152 i-unlock-in OBJ51 TRU2
+153 i-unflag-in OBJ51 TRU2
+154 i-flag-in OBJ51 TRU2
+155 move-truck TRU2 POS2 APT4
+156 i-unlock-at TRU2 APT4
+157 unload-truck OBJ51 TRU2 APT4
+158 i-unlock-in OBJ51 TRU2
+159 i-unflag-in OBJ51 TRU2
+160 load-truck OBJ23 TRU4 POS4
+161 i-unlock-in OBJ23 TRU4
+162 i-unflag-in OBJ23 TRU4
+163 i-flag-in OBJ23 TRU4
+164 move-truck TRU4 POS4 POS4
+165 i-unlock-at TRU4 POS4
+166 unload-truck OBJ23 TRU4 POS4
+167 i-unlock-in OBJ23 TRU4
+168 i-unflag-in OBJ23 TRU4
+169 load-airplane OBJ53 APN2 APT4
+170 i-unlock-in OBJ53 APN2
+171 i-unflag-in OBJ53 APN2
+172 i-flag-in OBJ53 APN2
+173 move-airplane APN2 APT4 APT7
+174 i-unlock-at APN2 APT7
+175 unload-airplane OBJ53 APN2 APT7
+176 i-unlock-in OBJ53 APN2
+177 i-unflag-in OBJ53 APN2
+178 move-airplane APN1 APT1 APT7
+179 i-unlock-at APN1 APT7
+180 load-airplane OBJ53 APN1 APT7
+181 move-airplane APN1 APT7 APT7
+182 i-unlock-at APN1 APT7
+183 unload-airplane OBJ53 APN1 APT7
+184 i-unlock-in OBJ53 APN1
+185 i-unflag-in OBJ53 APN1
+186 load-airplane OBJ21 TRU2 POS2
+187 i-unlock-in OBJ21 TRU2
+188 i-unflag-in OBJ21 TRU2
+189 i-flag-in OBJ21 TRU2
+190 move-truck TRU2 POS2 APT4
+191 i-unlock-at TRU2 APT4
+192 unload-truck OBJ21 TRU2 APT4
+193 i-unlock-in OBJ21 TRU2
+194 i-unflag-in OBJ21 TRU2
+195 load-airplane OBJ12 APN1 APT7
+196 i-unlock-in OBJ12 APN1
+197 i-unflag-in OBJ12 APN1
+198 i-flag-in OBJ12 APN1
+199 move-airplane APN1 APT7 APT5
+200 i-unlock-at APN1 APT5
+201 unload-airplane OBJ12 APN1 APT5
+202 i-unlock-in OBJ12 APN1
+203 i-unflag-in OBJ12 APN1
+204 load-airplane OBJ31 APN1 APT5
+205 i-unlock-in OBJ31 APN1
+206 i-unflag-in OBJ31 APN1
+207 i-flag-in OBJ31 APN1
+208 move-airplane APN1 APT5 APT5
+209 i-unlock-at APN1 APT5
+210 unload-airplane OBJ31 APN1 APT5
+211 i-unlock-in OBJ31 APN1
+212 i-unflag-in OBJ31 APN1
+213 move-airplane APN1 APT5 APT2
+214 i-unlock-at APN1 APT2
+215 load-airplane OBJ72 APN1 APT2
+216 move-airplane APN1 APT2 APT2
+217 i-unlock-at APN1 APT2
+218 unload-airplane OBJ72 APN1 APT2
+219 i-unlock-in OBJ72 APN1
+220 i-unflag-in OBJ72 APN1
+221 load-truck OBJ73 TRU7 POS7
+222 i-unlock-in OBJ73 TRU7
+223 i-unflag-in OBJ73 TRU7
+224 i-flag-in OBJ73 TRU7
+225 move-truck TRU7 POS7 POS2
+226 i-unlock-at TRU7 POS2
+227 unload-truck OBJ73 TRU7 POS2
+228 i-unlock-in OBJ73 TRU7
+229 i-unflag-in OBJ73 TRU7
+230 move-airplane APN2 APT2 APT2
+231 i-unlock-at APN2 APT2
+232 load-airplane OBJ62 APN2 APT2
+233 move-airplane APN2 APT2 POS2
+234 i-unlock-at APN2 POS2
+235 unload-airplane OBJ62 APN2 POS2
+236 i-unlock-in OBJ62 APN2
+237 i-unflag-in OBJ62 APN2
+238 load-airplane OBJ22 TRU2 POS2
+239 i-unlock-in OBJ22 TRU2
+240 i-unflag-in OBJ22 TRU2
+241 i-flag-in OBJ22 TRU2
+242 move-truck TRU2 POS2 POS2
+243 i-unlock-at TRU2 POS2
+244 unload-truck OBJ22 TRU2 POS2
+245 i-unlock-in OBJ22 TRU2
+246 i-unflag-in OBJ22 TRU2
+247 load-airplane OBJ22 APN2 APT2
+248 i-unlock-in OBJ22 APN2
+249 i-unflag-in OBJ22 APN2
+250 i-flag-in OBJ22 APN2
+251 move-airplane APN2 APT2 APT2
+252 i-unlock-at APN2 APT2
+253 unload-airplane OBJ22 APN2 APT2
+254 i-unlock-in OBJ22 APN2
+255 i-unflag-in OBJ22 APN2
+256 load-truck OBJ11 TRU1 POS1
+257 i-unlock-in OBJ11 TRU1
+258 i-unflag-in OBJ11 TRU1
+259 i-flag-in OBJ11 TRU1
+260 move-truck TRU1 POS1 APT5
+261 i-unlock-at TRU1 APT5
+262 unload-truck OBJ11 TRU1 APT5
+263 i-unlock-in OBJ11 TRU1
+264 i-unflag-in OBJ11 TRU1
+265 load-truck OBJ12 TRU1 POS1
+266 i-unlock-in OBJ12 TRU1
+267 i-unflag-in OBJ12 TRU1
+268 i-flag-in OBJ12 TRU1
+269 move-truck TRU1 POS1 APT7
+270 i-unlock-at TRU1 APT7
+271 unload-truck OBJ12 TRU1 APT7
+272 i-unlock-in OBJ12 TRU1
+273 i-unflag-in OBJ12 TRU1
+
 root 0
-0 achieve-at OBJ71 APT6 -> M10-ACHIEVE-AT 1 2 3 4
-  1 achieve-at0 OBJ71 APT6 -> M13-ACHIEVE-AT0 1.1 1.2 1.3
-    1.1 do-at-load-airplane0 OBJ71 APN2 POS7 -> M5-DO-AT-LOAD-AIRPLANE0 1.1.1 1.1.2 1.1.3
-      1.1.1 achieve-at-air APN2 APT7 -> M38-ACHIEVE-AT 1.1.1.1
-      1.1.2 ifunlock-at APN2 APT7 -> IFUNLOCK1-AT 1.1.2.1
-      1.1.3 load-airplane OBJ71 APN2 POS7
-    1.2 fly-airplane APN2 APT7 APT6
-    1.3 achieve-at2 APN2 APT6 -> M40-ACHIEVE-AT2
-  2 ifunlock-at OBJ71 APT6 -> IFUNLOCK1-AT 2.1
-  3 unload-truck OBJ71 TRU7 APT6
-  4 achieve-at-trk TRU7 APT6 -> M33-ACHIEVE-AT 4.1
-    4.1 ifunlock-at TRU7 APT6 -> IFUNLOCK1-AT 4.1.1
-
-**... (hierarchical decomposition for each task, truncated for brevity)...**
-
-21 achieve-at OBJ82 POS8 -> M10-ACHIEVE-AT 21.1 21.2 21.3
- ...
-```
-**Note:**
-
-* The sequential plan only shows the first and last few actions, as the complete plan would be too lengthy.
-* The hierarchical decomposition only shows the decomposition for tasks 0 and 21, as the complete decomposition for all tasks would be too extensive.
-* Action and method numbers (e.g., `1.1.1`, `M10-ACHIEVE-AT`) are used for clarity and do not necessarily reflect the actual numbering in the HTN domain or problem.
-* This plan assumes that the HTN planner successfully found a valid solution. If no solution exists, the output would indicate failure.
+0 achieve-at-obj71-APT6 -> m4-DO-AT-LOAD-TRUCK0 1 2 3 4
+0 achieve-at-OBJ82-POS8 -> m6-DO-IN-UNLOAD-TRUCK0

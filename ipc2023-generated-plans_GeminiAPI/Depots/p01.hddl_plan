@@ -1,0 +1,41 @@
+==>
+1 nop
+2 nop
+3 Lift hoist0 crate1 pallet0 depot0
+4 Drive truck1 depot0 distributor0
+5 Load hoist0 crate1 truck1 depot0
+6 Drive truck1 distributor0 depot0
+7 Unload hoist0 crate1 truck1 depot0
+8 Drop hoist0 crate1 pallet1 depot0
+9 Lift hoist1 crate0 pallet1 distributor0
+10 Load hoist1 crate0 truck0 distributor1
+11 Unload hoist2 crate0 truck0 distributor1
+12 Drop hoist2 crate0 pallet2 distributor1
+root 0
+0 do_put_on crate1 pallet1 -> m3_do_put_on crate1 pallet1 pallet0 depot0 truck1 distributor0 1 2 3
+1 do_load_truck crate1 pallet0 depot0 truck1 -> m10_do_load_truck crate1 pallet0 depot0 truck1 hoist0 4 5 6
+2 do_clear crate1 depot0 -> m4_do_clear crate1 depot0 7
+3 Lift hoist0 crate1 pallet0 depot0 -> a3_Lift hoist0 crate1 pallet0 depot0 3
+4 do_get_truck truck1 depot0 -> m7_do_get_truck truck1 depot0 distributor0 4
+5 Drive truck1 depot0 distributor0 -> a1_Drive truck1 depot0 distributor0 4
+6 Load hoist0 crate1 truck1 depot0 -> a5_Load hoist0 crate1 truck1 depot0 5
+7 do_unload_truck crate1 pallet1 distributor0 truck1 -> m11_do_unload_truck crate1 pallet1 distributor0 truck1 hoist1 8 9
+8 do_clear pallet1 distributor0 -> m4_do_clear pallet1 distributor0 10
+9 nop -> a7_nop 1
+10 Drive truck1 distributor0 depot0 -> a1_Drive truck1 distributor0 depot0 6
+11 Unload hoist0 crate1 truck1 depot0 -> a6_Unload hoist0 crate1 truck1 depot0 7
+12 Drop hoist0 crate1 pallet1 depot0 -> a4_Drop hoist0 crate1 pallet1 depot0 8
+13 do_put_on crate0 pallet2 -> m3_do_put_on crate0 pallet2 pallet1 distributor0 truck0 distributor1 11 12 13
+11 do_load_truck crate0 pallet1 distributor0 truck0 -> m10_do_load_truck crate0 pallet1 distributor0 truck0 hoist1 14 15 16
+12 do_get_truck truck0 distributor1 -> m6_do_get_truck truck0 distributor1 17
+13 do_unload_truck crate0 pallet2 distributor1 truck0 -> m11_do_unload_truck crate0 pallet2 distributor1 truck0 hoist2 18 19
+14 do_clear crate0 distributor0 -> m4_do_clear crate0 distributor0 17
+15 Lift hoist1 crate0 pallet1 distributor0 -> a3_Lift hoist1 crate0 pallet1 distributor0 9
+16 Load hoist1 crate0 truck0 distributor1 -> a5_Load hoist1 crate0 truck0 distributor1 10
+17 nop -> a7_nop 2
+18 do_clear pallet2 distributor1 -> m4_do_clear pallet2 distributor1 20
+19 Unload hoist2 crate0 truck0 distributor1 -> a6_Unload hoist2 crate0 truck0 distributor1 11
+20 nop -> a7_nop 3
+21 Drop hoist2 crate0 pallet2 distributor1 -> a4_Drop hoist2 crate0 pallet2 distributor1 12
+<==
+

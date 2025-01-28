@@ -1,0 +1,39 @@
+==>
+1 drive truck_4 city_loc_1 city_loc_18
+2 pick_up truck_4 city_loc_18 package_0 capacity_2 capacity_3
+3 drive truck_4 city_loc_18 city_loc_9
+4 drive truck_4 city_loc_9 city_loc_15
+5 drive truck_4 city_loc_15 city_loc_12
+6 drop truck_4 city_loc_12 package_0 capacity_2 capacity_3
+7 drive truck_1 city_loc_16 city_loc_20
+8 pick_up truck_1 city_loc_20 package_16 capacity_2 capacity_3
+9 drive truck_1 city_loc_20 city_loc_3
+10 drive truck_1 city_loc_3 city_loc_22
+11 drop truck_1 city_loc_22 package_16 capacity_2 capacity_3
+root 0
+0 deliver package_0 city_loc_12 -> m_deliver_ordering_0 city_loc_18 city_loc_12 package_0 truck_4 1 2 3 4 5 6
+1 deliver package_1 city_loc_22 -> m_deliver_ordering_0
+2 deliver package_2 city_loc_23 -> m_deliver_ordering_0
+3 deliver package_3 city_loc_17 -> m_deliver_ordering_0
+4 deliver package_4 city_loc_7 -> m_deliver_ordering_0
+5 deliver package_5 city_loc_18 -> m_deliver_ordering_0
+6 deliver package_6 city_loc_4 -> m_deliver_ordering_0
+7 deliver package_7 city_loc_13 -> m_deliver_ordering_0
+8 deliver package_8 city_loc_8 -> m_deliver_ordering_0
+9 deliver package_9 city_loc_21 -> m_deliver_ordering_0
+10 deliver package_10 city_loc_20 -> m_deliver_ordering_0
+11 deliver package_11 city_loc_21 -> m_deliver_ordering_0
+12 deliver package_12 city_loc_0 -> m_deliver_ordering_0
+13 deliver package_13 city_loc_4 -> m_deliver_ordering_0
+14 deliver package_14 city_loc_8 -> m_deliver_ordering_0
+15 deliver package_15 city_loc_17 -> m_deliver_ordering_0
+16 deliver package_16 city_loc_22 -> m_deliver_ordering_0 city_loc_20 city_loc_22 package_16 truck_1 7 8 9 10 11
+17 deliver package_17 city_loc_13 -> m_deliver_ordering_0
+18 deliver package_18 city_loc_18 -> m_deliver_ordering_0
+19 deliver package_19 city_loc_10 -> m_deliver_ordering_0
+20 deliver package_20 city_loc_15 -> m_deliver_ordering_0
+21 deliver package_21 city_loc_9 -> m_deliver_ordering_0
+22 deliver package_22 city_loc_20 -> m_deliver_ordering_0
+23 deliver package_23 city_loc_9 -> m_deliver_ordering_0
+24 deliver package_24 city_loc_15 -> m_deliver_ordering_0
+<==

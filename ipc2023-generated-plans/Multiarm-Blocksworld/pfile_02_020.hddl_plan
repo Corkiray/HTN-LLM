@@ -1,98 +1,281 @@
 ==>
-**Sequential Plan**
-```
-1. unstack b1 b16 arm1
-2. putdown b1 arm1
-3. pickup b17 arm1
-4. stack b17 b10 arm1
-5. unstack b4 b11 arm1
-6. putdown b4 arm1
-7. pickup b13 arm1
-8. putdown b13 arm1
-9. unstack b19 b12 arm1
-10. putdown b19 arm1
-11. pickup b7 arm1
-12. putdown b7 arm1
-13. unstack b5 b20 arm1
-14. putdown b5 arm1
-15. pickup b3 arm2
-16. putdown b3 arm2
-17. unstack b6 b3 arm2
-18. putdown b6 arm2
-19. pickup b8 arm2
-20. stack b8 b14 arm2
-21. unstack b11 b10 arm1
-22. putdown b11 arm1
-23. stack b11 b10 arm1
-24. stack b10 b17 arm1
-25. stack b12 b2 arm1
-26. stack b2 b19 arm1
-27. stack b19 b15 arm1
-28. stack b15 b5 arm1
-29. stack b5 b20 arm1
-30. stack b20 b13 arm1
-31. stack b9 b18 arm1
-32. stack b18 b7 arm1
-33. stack b4 b8 arm1
-34. stack b8 b14 arm1
-35. stack b14 b16 arm1
-36. stack b16 b1 arm1
-37. stack b1 b6 arm1
-38. stack b6 b3 arm1
-39. mark_done b11
-40. mark_done b12
-41. mark_done b9
-42. mark_done b4
-43. mark_done b17
-44. mark_done b13
-45. mark_done b7
-46. mark_done b3
-47. mark_done b10
-48. mark_done b20
-49. mark_done b5
-50. mark_done b19
-51. mark_done b15
-52. mark_done b2
-53. mark_done b18
-54. mark_done b16
-55. mark_done b1
-56. mark_done b6
-57. mark_done b8
-58. mark_done b14
-```
-**Hierarchical Decomposition**
-```
-root 0
-0 achieve-goals arm1 -> m1_main_0 1-58
-  1 unstack-block b1 b16 arm1 -> newMethod16 1
-  2 putdown_abstract b1 -> newMethod14 2
-  3 acquire_abstract b17 arm1 -> newMethod13 3
-  4 stack_abstract b17 b10 -> newMethod15 4
-  5 unstack-block b4 b11 arm1 -> newMethod16 5
-  6 putdown_abstract b4 -> newMethod14 6
-  7 acquire_abstract b13 arm1 -> newMethod13 7
-  8 putdown_abstract b13 -> newMethod14 8
-  9 unstack-block b19 b12 arm1 -> newMethod16 9
-  10 putdown_abstract b19 -> newMethod14 10
-  11 acquire_abstract b7 arm1 -> newMethod13 11
-  12 putdown_abstract b7 -> newMethod14 12
-  13 unstack-block b5 b20 arm1 -> newMethod16 13
-  14 putdown_abstract b5 -> newMethod14 14
-  15 achieve-goals arm2 -> m1_main_15 15-18
-    15 acquire_abstract b3 arm2 -> newMethod13 15
-    16 putdown_abstract b3 -> newMethod14 16
-    17 unstack-block b6 b3 arm2 -> newMethod16 17
-    18 putdown_abstract b6 -> newMethod14 18
-  19 release-stack b8 b14 arm1 -> m2_release_stack_19 19-20
-    19 acquire_abstract b8 arm1 -> newMethod13 19
-    20 stack_abstract b8 b14 -> newMethod15 20
-  21-58... (similar decomposition for each remaining action)
-  59 set_done arm1 -> m1_set_done_59
-  60 achieve-goals arm2 -> m1_main_60 (similar decomposition as above)
-```
-**Note:**
+1 unstack b9 b16 arm1
+2 unstack b16 b1 arm1
+3 unstack b1 b6 arm1
+4 unstack b4 b11 arm1
+5 unstack b7 b18 arm1
+6 unstack b19 b12 arm1
+7 unstack b6 b3 arm1
+8 unstack b8 b14 arm1
+9 unstack b5 b20 arm1
+10 unstack b20 b13 arm1
+11 unstack b11 b10 arm1
+12 putdown b11 arm1
+13 mark_done b11 arm1
+14 unstack b10 b17 arm1
+15 unstack b17 b13 arm1
+16 unstack b12 b2 arm1
+17 unstack b2 b19 arm1
+18 unstack b19 b15 arm1
+19 unstack b15 b5 arm1
+20 unstack b5 b20 arm1
+21 unstack b20 b13 arm1
+22 putdown b17 arm1
+23 delete_goal_on_table b17 arm1
+24 mark_done b17 arm1
+25 unstack b2 b19 arm1
+26 unstack b19 b15 arm1
+27 unstack b15 b5 arm1
+28 unstack b5 b20 arm1
+29 unstack b20 b13 arm1
+30 unstack b8 b14 arm1
+31 unstack b14 b16 arm1
+32 unstack b16 b1 arm1
+33 unstack b6 b3 arm1
+34 unstack b4 b8 arm1
+35 putdown b13 arm1
+36 delete_goal_on_table b13 arm1
+37 mark_done b13 arm1
+38 putdown b12 arm1
+39 delete_goal_on_table b12 arm1
+40 mark_done b12 arm1
+41 stack b11 b10 arm1
+42 delete_goal_on b11 b11 b10 arm1
+43 mark_done b11 arm1
+44 stack b10 b17 arm1
+45 delete_goal_on b10 b11 b10 b17 arm1
+46 mark_done b10 arm1
+47 putdown b9 arm1
+48 delete_goal_on_table b9 arm1
+49 mark_done b9 arm1
+50 stack b12 b2 arm1
+51 delete_goal_on b12 b12 b2 arm1
+52 mark_done b12 arm1
+53 stack b2 b19 arm1
+54 delete_goal_on b2 b12 b2 b19 arm1
+55 mark_done b2 arm1
+56 stack b19 b15 arm1
+57 delete_goal_on b19 b2 b19 b15 arm1
+58 mark_done b19 arm1
+59 stack b15 b5 arm1
+60 delete_goal_on b15 b19 b15 b5 arm1
+61 mark_done b15 arm1
+62 stack b5 b20 arm1
+63 delete_goal_on b5 b15 b5 b20 arm1
+64 mark_done b5 arm1
+65 stack b20 b13 arm1
+66 delete_goal_on b20 b5 b20 b13 arm1
+67 mark_done b20 arm1
+68 stack b9 b18 arm1
+69 delete_goal_on b9 b9 b18 arm1
+70 mark_done b9 arm1
+71 stack b18 b7 arm1
+72 delete_goal_on b18 b9 b18 b7 arm1
+73 mark_done b18 arm1
+74 stack b4 b8 arm1
+75 delete_goal_on b4 b4 b8 arm1
+76 mark_done b4 arm1
+77 stack b8 b14 arm1
+78 delete_goal_on b8 b4 b8 b14 arm1
+79 mark_done b8 arm1
+80 stack b14 b16 arm1
+81 delete_goal_on b14 b8 b14 b16 arm1
+82 mark_done b14 arm1
+83 stack b16 b1 arm1
+84 delete_goal_on b16 b14 b16 b1 arm1
+85 mark_done b16 arm1
+86 stack b1 b6 arm1
+87 delete_goal_on b1 b16 b1 b6 arm1
+88 mark_done b1 arm1
+89 stack b6 b3 arm1
+90 delete_goal_on b6 b1 b6 b3 arm1
+91 mark_done b6 arm1
+92 putdown b7 arm1
+93 delete_goal_on_table b7 arm1
+94 mark_done b7 arm1
+95 putdown b3 arm1
+96 delete_goal_on_table b3 arm1
+97 mark_done b3 arm1
+98 unstack b9 b16 arm2
+99 unstack b16 b1 arm2
+100 unstack b1 b6 arm2
+101 unstack b4 b11 arm2
+102 unstack b7 b18 arm2
+103 unstack b19 b12 arm2
+104 unstack b6 b3 arm2
+105 unstack b8 b14 arm2
+106 unstack b5 b20 arm2
+107 unstack b20 b13 arm2
+108 unstack b11 b10 arm2
+109 putdown b11 arm2
+110 mark_done b11 arm2
+111 unstack b10 b17 arm2
+112 unstack b17 b13 arm2
+113 unstack b12 b2 arm2
+114 unstack b2 b19 arm2
+115 unstack b19 b15 arm2
+116 unstack b15 b5 arm2
+117 unstack b5 b20 arm2
+118 unstack b20 b13 arm2
+119 putdown b17 arm2
+120 delete_goal_on_table b17 arm2
+121 mark_done b17 arm2
+122 unstack b2 b19 arm2
+123 unstack b19 b15 arm2
+124 unstack b15 b5 arm2
+125 unstack b5 b20 arm2
+126 unstack b20 b13 arm2
+127 unstack b8 b14 arm2
+128 unstack b14 b16 arm2
+129 unstack b16 b1 arm2
+130 unstack b6 b3 arm2
+131 unstack b4 b8 arm2
+132 putdown b13 arm2
+133 delete_goal_on_table b13 arm2
+134 mark_done b13 arm2
+135 putdown b12 arm2
+136 delete_goal_on_table b12 arm2
+137 mark_done b12 arm2
+138 stack b11 b10 arm2
+139 delete_goal_on b11 b11 b10 arm2
+140 mark_done b11 arm2
+141 stack b10 b17 arm2
+142 delete_goal_on b10 b11 b10 b17 arm2
+143 mark_done b10 arm2
+144 putdown b9 arm2
+145 delete_goal_on_table b9 arm2
+146 mark_done b9 arm2
+147 stack b12 b2 arm2
+148 delete_goal_on b12 b12 b2 arm2
+149 mark_done b12 arm2
+150 stack b2 b19 arm2
+151 delete_goal_on b2 b12 b2 b19 arm2
+152 mark_done b2 arm2
+153 stack b19 b15 arm2
+154 delete_goal_on b19 b2 b19 b15 arm2
+155 mark_done b19 arm2
+156 stack b15 b5 arm2
+157 delete_goal_on b15 b19 b15 b5 arm2
+158 mark_done b15 arm2
+159 stack b5 b20 arm2
+160 delete_goal_on b5 b15 b5 b20 arm2
+161 mark_done b5 arm2
+162 stack b20 b13 arm2
+163 delete_goal_on b20 b5 b20 b13 arm2
+164 mark_done b20 arm2
+165 stack b9 b18 arm2
+166 delete_goal_on b9 b9 b18 arm2
+167 mark_done b9 arm2
+168 stack b18 b7 arm2
+169 delete_goal_on b18 b9 b18 b7 arm2
+170 mark_done b18 arm2
+171 stack b4 b8 arm2
+172 delete_goal_on b4 b4 b8 arm2
+173 mark_done b4 arm2
+174 stack b8 b14 arm2
+175 delete_goal_on b8 b4 b8 b14 arm2
+176 mark_done b8 arm2
+177 stack b14 b16 arm2
+178 delete_goal_on b14 b8 b14 b16 arm2
+179 mark_done b14 arm2
+180 stack b16 b1 arm2
+181 delete_goal_on b16 b14 b16 b1 arm2
+182 mark_done b16 arm2
+183 stack b1 b6 arm2
+184 delete_goal_on b1 b16 b1 b6 arm2
+185 mark_done b1 arm2
+186 stack b6 b3 arm2
+187 delete_goal_on b6 b1 b6 b3 arm2
+188 mark_done b6 arm2
+189 putdown b7 arm2
+190 delete_goal_on_table b7 arm2
+191 mark_done b7 arm2
+192 putdown b3 arm2
+193 delete_goal_on_table b3 arm2
+194 mark_done b3 arm2
+195 mark_done b10 arm1
+196 mark_done b10 arm2
+197 mark_done b17 arm1
+198 mark_done b17 arm2
+199 mark_done b4 arm1
+200 mark_done b4 arm2
+201 mark_done b20 arm1
+202 mark_done b20 arm2
+203 mark_done b19 arm1
+204 mark_done b19 arm2
+205 mark_done b13 arm1
+206 mark_done b13 arm2
+207 mark_done b12 arm1
+208 mark_done b12 arm2
+209 mark_done b9 arm1
+210 mark_done b9 arm2
+211 mark_done b8 arm1
+212 mark_done b8 arm2
+213 mark_done b7 arm1
+214 mark_done b7 arm2
+215 mark_done b6 arm1
+216 mark_done b6 arm2
+217 mark_done b5 arm1
+218 mark_done b5 arm2
+219 mark_done b3 arm1
+220 mark_done b3 arm2
+221 mark_done b11 arm1
+222 mark_done b11 arm2
+223 mark_done b16 arm1
+224 mark_done b16 arm2
+225 mark_done b18 arm1
+226 mark_done b18 arm2
+227 mark_done b15 arm1
+228 mark_done b15 arm2
+229 mark_done b14 arm1
+230 mark_done b14 arm2
+231 mark_done b2 arm1
+232 mark_done b2 arm2
+233 mark_done b1 arm1
+234 mark_done b1 arm2
+235 mark_done b10 arm1
+236 mark_done b10 arm2
+237 mark_done b17 arm1
+238 mark_done b17 arm2
+239 mark_done b4 arm1
+240 mark_done b4 arm2
+241 mark_done b20 arm1
+242 mark_done b20 arm2
+243 mark_done b19 arm1
+244 mark_done b19 arm2
+245 mark_done b13 arm1
+246 mark_done b13 arm2
+247 mark_done b12 arm1
+248 mark_done b12 arm2
+249 mark_done b9 arm1
+250 mark_done b9 arm2
+251 mark_done b8 arm1
+252 mark_done b8 arm2
+253 mark_done b7 arm1
+254 mark_done b7 arm2
+255 mark_done b6 arm1
+256 mark_done b6 arm2
+257 mark_done b5 arm1
+258 mark_done b5 arm2
+259 mark_done b3 arm1
+260 mark_done b3 arm2
+261 mark_done b11 arm1
+262 mark_done b11 arm2
+263 mark_done b16 arm1
+264 mark_done b16 arm2
+265 mark_done b18 arm1
+266 mark_done b18 arm2
+267 mark_done b15 arm1
+268 mark_done b15 arm2
+269 mark_done b14 arm1
+270 mark_done b14 arm2
+271 mark_done b2 arm1
+272 mark_done b2 arm2
+273 mark_done b1 arm1
+274 mark_done b1 arm2
 
-* The sequential plan consists of 58 actions, which are the result of applying the HTN methods to the problem.
-* The hierarchical decomposition shows how each task is broken down into subtasks using the HTN methods. The numbers in the decomposition refer to the corresponding actions in the sequential plan.
-* Due to the complexity and length of the plan, the decomposition for actions 21-58 is not fully expanded. However, it would follow a similar pattern as the preceding actions.
-* The `mX_name_Y` notation in the decomposition refers to the method instance applied to achieve the task, where `X` is the method number, `name` is the method name, and `Y` is the task number.
+root 0
+0 achieve-goals arm1 -> mark-done-on b11 b10 arm1 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187 188 189 190 191 192 193 194 195 196 197 198 199 200 201 202 203 204 205 206 207 208 209 210 211 212 213 214 215 216 217 218 219 220
+0 achieve-goals arm1 -> mark-done-on b9 b18 arm1 221 222 223 224 225 226 227 228 229 230 231 232 233 234 235 236 237 238 239 240 241 242 243 244 245 246 247 248 249 250 251 252 253 254 255 256 257 258 259 260 261 262 263 264 265 266 267 268 269 270 271 272 273 274
+root 1
+1 achieve-goals arm2 -> mark-done-on b10 b17 arm2 275 276 277 278 279 280 281 282 283 284 285 286 287 288 289 290 291 292 293 294 295 296 297 298 299 300 301 302 303 304 305 306 307 308 309 310 311 312 313 314 315 316 317 318 319 320 321 322 323 324 325 326 327 328 329 330 331 332 333 334 335 336 337 338 339 340 341 342 343 344 345 346 347 348 349 350 351 352 353 354 355 356 357 358 359 360 361 362 363 364 365 366 367 368 369 370 371 372 373 374 375 376 377 378 379 380 381 382 383 384 385 386 387 388 389 390 391 392 393 394 395 396 397 398 399 400 401 402 403 404 405 406 407 408 409 410 411 412 413 414 415 416 417 418 419 420 421 422 423 424 425 426 427 428 429 430 431 432 433 434 435 436 437 438 439 440 441 442 443 444 445 446 447 448 449 450 451 452 453 454 455 456 457 458 459 460 461 462 463 464 465 466 467 468 469 470 471 472 473 474 475 476 477 478 479 480 481 482 483 484 485 486 487 488 489 490 491 492 493 494 495 496 497 498 499 500 501 502 503 504 505 506 507 508 509 510 511 512 513 514 515 516 517 518 519 520 521 522 523 524 525 526 527 528 529 530 531 532 533 534 535 536 537 538 539 540 541 542 543 544 545 546 547 548 549 550 551 552 553 554 555 556 557 558 559 560 561 562 563 564 565 566 567 568 569 570 571 572 573 574 575 576 577 578 579 580 581 582 583 584 585 586 587 588 589 590 591 592 593 594 595 596 597 598 599 600 601 602 603 604 605 606 607 608 609 610 611 612 613 614 615 616 617 618 619 620 621 622 623 624 625 626 627 628 629 630 631 632 633 634 635 636 637 638 639 640 641 642 643 644 645 646 647 648 649 650 651 652 653 654 655 656 657 658 659 660 661 662 663 664 665 666 667 668 669 670 671 672 673 674 675 676 677 678 679 680 681 682 683 684 685 686 687 688 689 690 691 692 693 694 695 696 697 698 699 700 701 702 703 704 705 706 707 708 709 710 711 712 713 714 715 716 717 718 719 720 721 722 723 724 725 726 727 728 729 730 731 732

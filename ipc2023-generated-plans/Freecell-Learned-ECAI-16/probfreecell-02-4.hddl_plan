@@ -1,17 +1,47 @@
 ==>
-1 DO-ON-MOVE3 S2 H2 DA
-2 DO-ON-SENDTOFREE3 DA H2 N4 N5
-3 DO-ON-SENDTONEWCOL3 H2 S2 N5 N6
-4 DO-ON-SENDTOHOME3 H2 S2 S N6 S2
-5 DO-ON-MOVE3 CA DA S2
-6 DO-ON-SENDTOFREE3 DA CA N4 N7
-7 DO-ON-SENDTONEWCOL3 CA DA N7 N8
-8 DO-ON-SENDTOHOME3 CA DA C N8 C2
+1 move s2 h2
+2 move ca da
+3 move ca s2
+4 move h2 ca
+5 move da h2
+6 move d2 da
+7 move s2 c2
+8 move h2 s2
+9 move da h2
+10 move ca da
+11 move da ca
+12 move h2 da
+13 move s2 h2
+14 move d2 s2
+15 move ca d2
+16 move c2 ca
+17 move h2 c2
+18 move da h2
+19 move s2 da
+20 move d2 s2
+21 move ca d2
+22 move c2 ca
+23 move h2 c2
+24 move s2 h2
+25 move da s2
+26 move ca da
+27 move d2 ca
+28 move s2 d2
 <==
-
 root 0
-0 solve_freecell -> m1_solve_freecell_0 1 2 3
-1 task0 (ACHIEVE-HOME C2) -> m2_achieve_home_0 C2 4 5 6 7 8
-2 task1 (ACHIEVE-HOME D2) -> m3_achieve_home_0 D2
-3 task2 (ACHIEVE-HOME H2) -> m4_achieve_home_0 H2
-4 task3 (ACHIEVE-HOME S2) -> m5_achieve_home_0 S2
+0 solve_cards -> m1_ordering_0 1 2
+2 send_cards_to_home_column -> m2_ordering_0 3 4 5
+7 send_cards_to_home_column -> m2_ordering_1 6 7
+4 send_cards_to_home_column -> m2_ordering_2 8 4
+3 send_cards_to_home_column -> m2_ordering_3 2 9
+8 send_cards_to_home_column -> m2_ordering_4 11 10
+14 send_home -> m3_ordering_0 14 13
+10 send_cards_to_home_column -> m2_ordering_5 12 10
+6 send_cards_to_home_column -> m2_ordering_6 8 6
+16 send_home -> m3_ordering_1 16 15
+12 send_cards_to_home_column -> m2_ordering_7 13 12
+18 send_home -> m3_ordering_2 18 17
+20 send_cards_to_home_column -> m2_ordering_8 22 21
+24 send_home -> m3_ordering_3 24 23
+26 send_cards_to_home_column -> m2_ordering_9 28 27
+27 move_s2_to_home -> m_s2_0 28 26

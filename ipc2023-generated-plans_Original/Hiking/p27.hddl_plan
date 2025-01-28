@@ -1,0 +1,58 @@
+==>
+**Sequential Plan:**
+
+1. `prepare_trip` place0 (m6_prepare_trip)
+2. `bring_tent` place0 (m10_bring_tent) x10 (for each tent)
+	* e.g., `put_down` guy0 place0 tent0,..., `put_down` guy9 place0 tent9
+3. `bring_cars` place0 (m11_bring_cars) (no-op, as all cars are already at place0)
+4. `trip_to1` couple0 place19 (m0_trip_to1)
+	* `trip_to2` couple0 place0 place19 (m2_trip_to2) x19 (recursive, but we'll expand one step)
+		+ `trip_to2` couple0 place0 place1 (m2_trip_to2)
+		+...
+		+ `trip_to2` couple0 place18 place19 (m3_trip_to2) (expanded below)
+5. Repeat step 4 for each couple (couple1 to couple9)
+
+**Expanded Step for couple0 place18 place19 (m3_trip_to2):**
+
+1. `drive_tent` guy0 place18 place19 car0 tent0
+2. `drive` girl0 place18 place19 car1
+3. `put_up` guy0 place19 tent0
+4. `drive_passenger` girl0 place19 place18 car1 guy0
+5. `walk_everyone` tent0 place19 place18 (m5_walk_everyone)
+	* `walk_together` tent0 place19 guy0 place18 girl0 couple0
+6. `put_down` girl0 place19 tent0
+7. `drive_passenger` guy0 place19 place18 car0 girl0
+8. `drive` guy0 place18 place19 car0
+9. `drive` girl0 place18 place19 car1
+
+**Hierarchical Decomposition:**
+
+root 0
+0 everyone_go_hiking place19 -> m14_everyone_go_hiking 1 2
+1 prepare_trip place0 -> m6_prepare_trip 3 4
+2 trip_to1 couple0 place19 -> m0_trip_to1 5
+...
+2 trip_to1 couple9 place19 -> m0_trip_to1 5 ( repeated for each couple )
+3 bring_tent place0 -> m10_bring_tent 6 ( repeated for each tent, e.g., tent0 to tent9 )
+	* 6 put_down guy0 place0 tent0
+	*...
+	* 6 put_down guy9 place0 tent9
+4 bring_cars place0 -> m11_bring_cars (no-op)
+5 trip_to2 couple0 place0 place19 -> m2_trip_to2 7 ( recursive, see above for one expanded step )
+...
+5 trip_to2 couple9 place0 place19 -> m2_trip_to2 7 ( recursive, for each couple )
+7 trip_to2 couple0 place18 place19 -> m3_trip_to2 8-16 ( expanded above )
+...
+7 trip_to2 couple9 place18 place19 -> m3_trip_to2 8-16 ( for each couple, expanded similarly )
+8 drive_tent guy0 place18 place19 car0 tent0
+9 drive girl0 place18 place19 car1
+10 put_up guy0 place19 tent0
+11 drive_passenger girl0 place19 place18 car1 guy0
+12 walk_everyone tent0 place19 place18 -> m5_walk_everyone 13 14
+13 walk_together tent0 place19 guy0 place18 girl0 couple0
+14 walk_everyone tent0 place19 place18 -> m5_walk_everyone ( recursive, omitted for brevity )
+15 put_down girl0 place19 tent0
+16 drive_passenger guy0 place19 place18 car0 girl0
+17 drive guy0 place18 place19 car0
+18 drive girl0 place18 place19 car1
+<==

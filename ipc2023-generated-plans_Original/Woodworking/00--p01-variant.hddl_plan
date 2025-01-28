@@ -1,0 +1,39 @@
+==>
+1 load_highspeed_saw b0 highspeed_saw0
+2 cut_board b0 p1 highspeed_saw0 pine rough s3 s2 s1 small natural untreated
+3 unload_highspeed_saw b0 highspeed_saw0
+4 do_spray_varnish p1 spray_varnisher0 red smooth untreated untreated varnished natural
+5 load_highspeed_saw b0 highspeed_saw0
+6 cut_board b0 p2 highspeed_saw0 pine rough s3 s2 large natural untreated
+7 unload_highspeed_saw b0 highspeed_saw0
+8 do_glaze p2 glazer0 red verysmooth untreated untreated glazed natural
+<==
+
+root 0
+0 process p1 red smooth smooth -> method11 1 2 3 4
+1 cut_and_saw b0 p1 pine smooth -> method6 1 2 3
+1 load_highspeed_saw b0 highspeed_saw0
+2 cut_board b0 p1 highspeed_saw0 pine rough s3 s2 s1 small natural untreated -> method4c 1 2 3 4 5 6 7
+  1 cut_board_small b0 p1 highspeed_saw0 pine rough s3 s1 small natural untreated
+  2 boardsize_successor s1 s2
+  3 boardsize_successor s2 s3
+  4 boardsize b0 s3
+  5 wood b0 pine
+  6 surface_condition b0 rough
+  7 available b0
+3 unload_highspeed_saw b0 highspeed_saw0
+4 do_colour p1 red spray_varnisher0 untreated -> method1 4
+  4 do_spray_varnish p1 spray_varnisher0 red smooth untreated untreated varnished natural
+
+root 1
+1 process p2 red verysmooth verysmooth -> method12 5 6 7 8
+5 grindNplane p2 verysmooth natural varnished smooth natural untreated -> method7 5
+  5 do_plane p2 verysmooth natural varnished smooth untreated natural
+6 do_colour p2 red glazer0 untreated -> method2 8
+  8 do_glaze p2 glazer0 red verysmooth untreated untreated glazed natural
+7 (no-op, already achieved)
+8 (no-op, already achieved)
+
+root 2
+2 process p0 red smooth smooth -> (no-op, already achieved)
+  (all preconditions already met in initial state)

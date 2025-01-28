@@ -1,51 +1,17 @@
-Here is a hierarchical plan to solve the given HTN problem. Due to the complexity and size of the problem (30 cocktails to prepare), the plan will be condensed to focus on the hierarchical structure, highlighting the method applications and their sequential tasks. Actions (e.g., `grasp`, `pour-shaker-to-shot`) are not fully expanded for brevity but are indicated where they would be applied.
-
-**Sequential Plan Overview (Condensed)**
-```
 ==>
-1-30: AchieveContainsShotCocktail tasks for each shot and cocktail pair
-    (Detailed hierarchical decomposition below)
+1 clean shaker1
+2 clean shot1
+3 containing shot1 ingredient30
+4 holding right shot1
+5 pour-shot-to-clean-shaker shot1 ingredient30 shaker1 right level1 level1
+6 holding left shaker1
+7 handEmpty right
+8 containing shot34 ingredient21
+9 holding right shot34
+10 pour-shot-to-used-shaker shot34 ingredient21 shaker1 right level1 level1
+11 shake cocktail1 ingredient30 ingredient21 shaker1 left right
+12 pour-shaker-to-shot shaker1 shot1 cocktail1
 <==
-```
 
-**Hierarchical Decomposition (Exampled for the first 3 AchieveContainsShotCocktail tasks, then generalized)**
-```
 root 0
-0 AchieveContainsShotCocktail shot11 cocktail1 -> m1_MakeAndPourCocktail 1-6
-1 MakeAndPourCocktail shot11 cocktail1 shaker1 left
-  :ordered-subtasks
-  1.1 AchieveContainsShakerCocktail shaker1 cocktail1 -> m2_MakeCocktail 1.1.1-1.1.6
-  1.2 AchieveCleanShot shot11 -> m3_CleanEmptyShot 1.2.1-1.2.3
-  1.3 AchieveHolding left shaker1 -> m4_PickUp 1.3.1-1.3.3
-  1.4 DoPourShakerToShot shaker1 shot11 cocktail1 -> m5_pour_shaker_to_shot_action 1.4.1
-
-1.1 MakeCocktail shaker1 cocktail1 ingredient30 ingredient21 left right
-  :ordered-subtasks
-  1.1.1 AchieveCleanShaker shaker1 -> m6_CleanEmptyShaker 1.1.1.1-1.1.1.3
-  1.1.2 AchieveContainsShakerIngredient shaker1 ingredient30 -> m7_AddIngredientToEmptyShaker 1.1.2.1-1.1.2.3
-  1.1.3 AchieveContainsShakerIngredient shaker1 ingredient21 -> m8_AddIngredientToUsedShaker 1.1.3.1-1.1.3.3
-  1.1.4 AchieveHolding right shaker1 -> m9_PickUp 1.1.4.1-1.1.4.3
-  1.1.5 AchieveHandEmpty left -> m10_EmptyHand 1.1.5.1
-  1.1.6 shake cocktail1 ingredient30 ingredient21 shaker1 right left
-
-... (Similar decomposition for shot10 cocktail2 and shot30 cocktail3, then generalized for the rest)
-
-2 AchieveContainsShotCocktail shot10 cocktail2 -> m1_MakeAndPourCocktail (Similar tasks as above with different parameters)
-3 AchieveContainsShotCocktail shot30 cocktail3 -> m1_MakeAndPourCocktail (Similar tasks as above with different parameters)
-...
-30 AchieveContainsShotCocktail shot8 cocktail30 -> m1_MakeAndPourCocktail (Similar tasks as above with different parameters)
-```
-
-**Generalized Method Applications for Each Cocktail Preparation:**
-
-- `m1_MakeAndPourCocktail`: For each AchieveContainsShotCocktail task, applying MakeAndPourCocktail method.
-- `m2_MakeCocktail`: Within `m1`, applying MakeCocktail for the shaker and cocktail.
-- `m3_CleanEmptyShot`, `m4_PickUp`, `m5_pour_shaker_to_shot_action`: As shown, for cleaning the shot, picking up the shaker, and pouring into the shot, respectively.
-- `m6_CleanEmptyShaker` to `m10_EmptyHand`: Within `m2`, for cleaning the shaker, adding ingredients, handling the shaker, and ensuring a hand is empty.
-
-**Actions (e.g., `grasp`, `pour-shaker-to-shot`) are executed within the method tasks (e.g., `m4_PickUp`, `m5_pour_shaker_to_shot_action`) as per their preconditions and effects.**
-
-Please note, due to the vast number of objects and tasks, this plan:
-- Assumes the availability of all necessary ingredients and equipment.
-- Does not account for potential optimizations (e.g., preparing multiple cocktails in one shaker if ingredients align).
-- Focuses on demonstrating the hierarchical structure of the plan rather than every single action for each of the 30 tasks.
+0 AchieveContainsShotCocktail shot1 cocktail1 -> MakeAndPourCocktail shot1 cocktail1 shaker1 left 1 2 3 4 5 6 7 8 9 10 11 12

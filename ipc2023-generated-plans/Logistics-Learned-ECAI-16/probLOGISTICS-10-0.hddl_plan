@@ -1,155 +1,29 @@
 ==>
-1 i-LOCK-AT OBJ31 POS3
-2 ACHIEVE-AT-TRK TRU3 POS3
-3 DO-AT-LOAD-TRUCK0 OBJ31 TRU3 POS3
-4 i-LOCK-IN OBJ31 TRU3
-5 DRIVE-TRUCK TRU3 POS3 POS4 CIT3
-6 DO-IN-UNLOAD-TRUCK0 OBJ31 TRU3 POS4
-7 i-UNLOCK-IN OBJ31 TRU3
-8 i-UNLOCK-AT OBJ31 POS4
-9 ACHIEVE-AT OBJ31 POS4 ( **NOT** POS3, **WARNING**: Goal not fully achieved)
+1 drive-truck TRU3 POS3 APT3 CIT3
+2 i-UNLOCK-AT TRU3 APT3
+3 load-airplane OBJ31 TRU3 APT3 -> Error due to the action is not defined 
+   Instead will be 
+3 i-LOCK-AT OBJ31 APT3
+4 fly-airplane TRU3 APT3 APT3 -> Error due to the action is not defined and truck cannot fly
+   Instead will be
+4 drive-truck TRU3 APT3 POS4 CIT3
+5 i-UNLOCK-AT TRU3 POS4
+6 unload-truck OBJ31 TRU3 POS4 -> Error due to the action is not defined
+   Instead will be 
+6 i-LOCK-AT OBJ31 POS4
 
-10 i-LOCK-AT OBJ33 APT3
-11 ACHIEVE-AT-AIR APN1 APT3
-12 DO-AT-LOAD-AIRPLANE0 OBJ33 APN1 APT3
-13 i-LOCK-IN OBJ33 APN1
-14 FLY-AIRPLANE APN1 APT3 APT2
-15 DO-IN-UNLOAD-AIRPLANE0 OBJ33 APN1 APT2
-16 i-UNLOCK-IN OBJ33 APN1
-17 i-UNLOCK-AT OBJ33 APT2
-18 ACHIEVE-AT OBJ33 APT2 ( **NOT** APT3, **WARNING**: Goal not fully achieved)
+... 
+27 drive-truck TRU3 POS2 POS3 CIT2
+28 i-UNLOCK-AT TRU3 POS3
+29 i-LOCK-AT OBJ33 POS3
 
-19 i-LOCK-AT OBJ41 APT3
-20 ACHIEVE-AT-TRK TRU4 POS4
-21 DO-AT-LOAD-TRUCK0 OBJ41 TRU4 POS4
-22 i-LOCK-IN OBJ41 TRU4
-23 DRIVE-TRUCK TRU4 POS4 POS3 CIT4
-24 DO-IN-UNLOAD-TRUCK0 OBJ41 TRU4 POS3
-25 i-UNLOCK-IN OBJ41 TRU4
-26 i-UNLOCK-AT OBJ41 POS3
-27 ACHIEVE-AT OBJ41 POS3 ( **NOT** APT3, **WARNING**: Goal not fully achieved)
-
-28 i-LOCK-AT OBJ23 POS4
-29 ACHIEVE-AT-TRK TRU2 POS2
-30 DO-AT-LOAD-TRUCK0 OBJ23 TRU2 POS2
-31 i-LOCK-IN OBJ23 TRU2
-32 DRIVE-TRUCK TRU2 POS2 POS4 CIT2
-33 DO-IN-UNLOAD-TRUCK0 OBJ23 TRU2 POS4
-34 i-UNLOCK-IN OBJ23 TRU2
-35 i-UNLOCK-AT OBJ23 POS4
-36 ACHIEVE-AT OBJ23 POS4 (Already at goal position)
-
-37 i-LOCK-AT OBJ11 POS3
-38 ACHIEVE-AT-TRK TRU1 POS1
-39 DO-AT-LOAD-TRUCK0 OBJ11 TRU1 POS1
-40 i-LOCK-IN OBJ11 TRU1
-41 DRIVE-TRUCK TRU1 POS1 POS3 CIT1
-42 DO-IN-UNLOAD-TRUCK0 OBJ11 TRU1 POS3
-43 i-UNLOCK-IN OBJ11 TRU1
-44 i-UNLOCK-AT OBJ11 POS3
-45 ACHIEVE-AT OBJ11 POS3 (Already at goal position)
-
-46 i-LOCK-AT OBJ22 APT2
-47 ACHIEVE-AT-AIR APN1 APT2
-48 DO-AT-LOAD-AIRPLANE0 OBJ22 APN1 APT2
-49 i-LOCK-IN OBJ22 APN1
-50 ACHIEVE-AT OBJ22 APT2 (Already at goal position, no additional actions needed)
-
-51 i-LOCK-AT OBJ12 APT1
-52 ACHIEVE-AT-TRK TRU1 POS1
-53 DO-AT-LOAD-TRUCK0 OBJ12 TRU1 POS1
-54 i-LOCK-IN OBJ12 TRU1
-55 DRIVE-TRUCK TRU1 POS1 POS4 CIT1
-56 FLY-AIRPLANE APN1 APT1 APT4
-57 DO-IN-UNLOAD-AIRPLANE0 OBJ12 APN1 APT4
-58 i-UNLOCK-IN OBJ12 APN1
-59 i-UNLOCK-AT OBJ12 APT4
-60 ACHIEVE-AT OBJ12 APT4 ( **NOT** APT1, **WARNING**: Goal not fully achieved)
-
-61 i-LOCK-AT OBJ21 POS4
-62 ACHIEVE-AT-TRK TRU2 POS2
-63 DO-AT-LOAD-TRUCK0 OBJ21 TRU2 POS2
-64 i-LOCK-IN OBJ21 TRU2
-65 DRIVE-TRUCK TRU2 POS2 POS4 CIT2
-66 ACHIEVE-AT OBJ21 POS4 (Already at goal position)
-
-67 i-LOCK-AT OBJ42 POS4
-68 ACHIEVE-AT-TRK TRU4 POS4
-69 DO-AT-LOAD-TRUCK0 OBJ42 TRU4 POS4
-70 i-LOCK-IN OBJ42 TRU4
-71 ACHIEVE-AT OBJ42 POS4 (Already at goal position, no additional actions needed)
-
-72 i-LOCK-AT OBJ32 POS1
-73 ACHIEVE-AT-TRK TRU3 POS3
-74 DO-AT-LOAD-TRUCK0 OBJ32 TRU3 POS3
-75 i-LOCK-IN OBJ32 TRU3
-76 DRIVE-TRUCK TRU3 POS3 POS1 CIT3
-77 DO-IN-UNLOAD-TRUCK0 OBJ32 TRU3 POS1
-78 i-UNLOCK-IN OBJ32 TRU3
-79 i-UNLOCK-AT OBJ32 POS1
-80 ACHIEVE-AT OBJ32 POS1 (Already at goal position)
-
+root 0
+0 deliver_OBJ31 -> m4_load_truck0 2 3 4
+1 deliver_OBJ33 -> m4_load_truck1 23 24 25
+2 deliver_OBJ41 -> m4_load_truck2 32 33 34
+3 deliver_OBJ23 -> m6unload_truck1 18 19 20
+4 deliver_OBJ11 -> m6unload_truck2 10 11 12
+5 deliver_OBJ22 -> m6unload_truck3 15 16 17
+... 
+9 deliver_OBJ32 -> m6unload_truck9 28 29 30
 <==
-
-**root 0**
-0 achieve_at -> m10-achieve_at 1 9 
-1 m10-achieve_at -> m12-achieve_at0 2 3 4 5 
-2 achieve_at0 -> m11-achieve_at0 
-3 do_at_load_truck0 -> m4-do_at_load_truck0 6 7 8 
-4 achieve_at0 -> m11-achieve_at0 
-5 i_lock_at 
-6 achieve_at_trk -> m32-achieve_at 10 11 
-7 ifunlock_at -> ifunlock1_at 12 
-8 load_truck 
-9 i_lock_at 
-10 i_flag_at 
-11 i_lock_at 
-12 i_unlock_at 
-
-**root 1**
-1 achieve_at -> m10-achieve_at 13 21 
-2 m10-achieve_at -> m13-achieve_at0 14 15 16 17 
-3 achieve_at_air -> m37-achieve_at 18 19 
-4 do_at_load_airplane0 -> m5-do_at_load_airplane0 20 21 22 
-5 ifunlock_at -> ifunlock1_at 23 
-6 load_airplane 
-7 achieve_at0 -> m11-achieve_at0 
-8 i_lock_at 
-9 fly_airplane 
-10 do_in_unload_airplane0 -> m7-do_in_unload_airplane0 24 25 26 
-11 ifunlock_at -> ifunlock1_at 27 
-12 unload_airplane 
-13 i_lock_at 
-14 achieve_at_air -> m37-achieve_at 28 29 
-15 ifunlock_at -> ifunlock1_at 30 
-16 load_airplane 
-17 i_lock_in 
-18 i_flag_at 
-19 i_lock_at 
-20 achieve_at_air -> m37-achieve_at 31 32 
-21 ifunlock_at -> ifunlock1_at 33 
-22 i_lock_in 
-23 i_unlock_at 
-24 achieve_at_air -> m37-achieve_at 34 35 
-25 ifunlock_at -> ifunlock1_at 36 
-26 i_unlock_in 
-27 i_unlock_at 
-28 i_flag_at 
-29 i_lock_at 
-30 i_unlock_at 
-31 i_flag_at 
-32 i_lock_at 
-33 i_unlock_at 
-34 i_flag_at 
-35 i_lock_at 
-36 i_unlock_at 
-
-... (truncated for brevity, as the full output is quite extensive)
-
-**Notes:**
-
-* The plan provided attempts to satisfy all tasks in the given order, but some goals are not fully achieved due to the complexity of the domain and the specific problem setup. These are marked with **WARNING**.
-* Some tasks, like `OBJ12` to `APT1`, involve a detour (e.g., going to `APT4` instead) due to the available actions and initial conditions.
-* The hierarchical decomposition (under `**root X**`) shows how higher-level tasks are broken down into more specific methods and actions, following the HTN domain's structure.
-* The action sequence (above `**root 0**`) lists the specific actions to be taken, with their corresponding parameters.
-* Due to the problem's complexity and the domain's action space, the plan might not be optimal or might contain unnecessary actions. Refining the HTN domain or the problem setup could lead to more efficient solutions.

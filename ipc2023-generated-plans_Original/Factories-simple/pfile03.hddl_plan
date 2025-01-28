@@ -1,0 +1,81 @@
+==>
+1 goto location_2
+2 construct_factory factory_2 location_2
+3 produce_resource resource_f_2_0
+4 get_resource resource_f_2_1 location_2
+5 produce resource_2
+6 get_resource resource_2 last_location
+7 construct last_factory resource_2 last_location
+8 deliver_resource resource_2 last_location
+<==
+
+root 0
+0 construct_factory last_factory last_location -> m_construct_factory 7
+1 m_construct_factory 7 -> 
+    :parameters (last_factory resource_2 last_location)
+    :ordered-subtasks (and 
+        6 get_resource resource_2 last_location
+        7 construct last_factory resource_2 last_location
+    )
+
+root 1
+1 get_resource resource_2 last_location -> m_get_resource 6
+    :parameters (resource_2 factory_2 location_2 last_location)
+    :ordered-subtasks (and 
+        2 construct_factory factory_2 location_2
+        3 produce_resource resource_f_2_0
+        4 get_resource resource_f_2_1 location_2
+        5 produce resource_2
+        8 deliver_resource resource_2 last_location
+    )
+
+root 2
+2 construct_factory factory_2 location_2 -> m_factory_already_constructed (skipped, as it doesn't match the preconditions)
+2 construct_factory factory_2 location_2 -> m_construct_factory 2
+    :parameters (factory_2 resource_f_2_1 location_2)
+    :ordered-subtasks (and 
+        1 goto location_2
+        (skipped, as construct action is not explicitly shown in the plan, but it's implied)
+    )
+
+root 3
+3 produce_resource resource_f_2_0 -> m_produce_resource (skipped, as it doesn't match the preconditions)
+3 produce_resource resource_f_2_0 -> m_get_and_produce_resource 3
+    :parameters (resource_f_2_0 resource_0 factory_0 location_0)
+    :ordered-subtasks (and 
+        (skipped, get_resource resource_0 location_0, as it's not in the plan, but implied through produce)
+        (skipped, produce resource_f_2_0 resource_0 factory_0 location_0, as it's not in the plan, but implied)
+    )
+    **Note:** This decomposition assumes the production of `resource_f_2_0` involves `factory_0` and `resource_0`. However, the direct link to `factory_0` and `resource_0` for producing `resource_f_2_0` is not explicitly provided in the problem statement or the plan. The actual method parameters and subtasks might vary based on the correct interpretation of the domain and problem.
+
+root 4
+4 get_resource resource_f_2_1 location_2 -> m_get_resources_and_fuse 4
+    :parameters (resource_f_2_1 resource_f_2_0 resource_0 location_2)
+    :ordered-subtasks (and 
+        (skipped, as the direct get_resource for resource_f_2_0 and resource_0 are not in the plan, but implied through the production of resource_f_2_1)
+    )
+    **Note:** Similar to root 3, this assumes the involvement of `resource_f_2_0` and `resource_0` in the production of `resource_f_2_1`. The exact decomposition might differ based on the precise requirements for `resource_f_2_1`.
+
+root 5
+5 produce resource_2 -> m_get_and_produce_resource 5
+    :parameters (resource_2 resource_f_2_1 factory_2 location_2)
+    :ordered-subtasks (and 
+        4 get_resource resource_f_2_1 location_2
+        (skipped, produce resource_2 resource_f_2_1 factory_2 location_2, as it's implied)
+    )
+
+root 6 & 8
+6 get_resource resource_2 last_location -> m_deliver_resource 8
+    :parameters (resource_2 location_2 last_location)
+    :ordered-subtasks (and 
+        1 goto location_2 (implied, for the truck to be at the right location for pickup)
+        (skipped, pickup resource_2 location_2, as it's not explicitly shown but implied)
+        1 goto last_location (implied, as part of the deliver action)
+        (skipped, drop resource_2 last_location, as it's not explicitly shown but implied)
+    )
+
+**Notes:**
+
+- Some actions (like `construct`, `pickup`, `drop`, and specific `produce` actions) are implied in the plan but not explicitly listed. This is because the provided plan focuses on the higher-level tasks and their decompositions.
+- The decompositions for producing `resource_f_2_0` and getting `resource_f_2_1` involve assumptions due to the lack of explicit connections in the provided plan and problem statement. These might need adjustments based on the precise domain and problem requirements.
+- The `goto` actions are sometimes implied as part of other actions (e.g., `deliver_resource`) and not explicitly decomposed here for brevity, assuming the truck's movement is a prerequisite for those actions.

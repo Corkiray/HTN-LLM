@@ -1,0 +1,16 @@
+==>
+1 grasp right shot2
+2 fill-shot shot2 ingredient2 right left dispenser2
+3 grasp left shot2
+4 empty-shot left shot2 ingredient2
+5 clean-shot shot2 ingredient2 left right
+6 grasp left shaker1
+7 pour-shot-to-clean-shaker shot2 ingredient2 shaker1 left level1 level1
+8 grasp right shot1
+9 fill-shot shot1 ingredient1 right left dispenser1
+10 pour-shot-to-used-shaker shot1 ingredient1 shaker1 right level1 level1
+11 shake cocktail1 ingredient2 ingredient1 shaker1 left right
+12 pour-shaker-to-shot cocktail1 shot2 left shaker1 level1 level1
+root 0
+0 AchieveContainsShotCocktail shot2 cocktail1 -> MakeAndPourCocktail shot2 cocktail1 shaker1 left 1 2 3 4 5 6 7 8 9 10 11 12
+<==

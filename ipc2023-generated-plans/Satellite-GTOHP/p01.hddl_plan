@@ -1,55 +1,26 @@
-Here is a hierarchical plan to solve the given HTN problem:
-```
 ==>
-**Sequential Plan**
-1. turn_to satellite0 Phenomenon4 Phenomenon6
-2. do_prepare satellite0 instrument0 Phenomenon4
-3. take_image satellite0 Phenomenon4 instrument0 thermograph0
-4. turn_to satellite0 Star5 Phenomenon4
-5. do_prepare satellite0 instrument0 Star5
-6. take_image satellite0 Star5 instrument0 thermograph0
-7. turn_to satellite0 Phenomenon6 Star5
-8. do_prepare satellite0 instrument0 Phenomenon6
-9. take_image satellite0 Phenomenon6 instrument0 thermograph0
-
-**Hierarchical Decomposition**
+1 turn_to satellite0 Phenomenon4 Phenomenon6
+2 make_power_available satellite0 instrument0
+3 switch_on instrument0 satellite0
+4 do_calibration satellite0 instrument0 GroundStation2
+5 take_image satellite0 Phenomenon4 instrument0 thermograph0
+6 turn_to satellite0 Star5 Phenomenon4
+7 take_image satellite0 Star5 instrument0 thermograph0
+8 turn_to satellite0 Phenomenon6 Star5
+9 take_image satellite0 Phenomenon6 instrument0 thermograph0
 root 0
-0 do_mission Phenomenon4 thermograph0 -> m0_do_mission 1 2 3
-  1 do_prepare satellite0 instrument0 Phenomenon4 -> m1_do_prepare 4 5
-    4 do_switching satellite0 instrument0 -> m3_do_switching 6 7 (precondition: power_avail satellite0)
-      6 switch_on instrument0 satellite0
-      7 do_calibration satellite0 instrument0 Phenomenon4 -> m6_do_calibration (precondition: calibrated instrument0 not applicable, assuming initial calibration target is not the same as the direction; in a real scenario, additional actions might be required)
-        (nop) 
-    5 do_turning satellite0 Phenomenon4 -> m9_do_turning (precondition: pointing satellite0 Phenomenon4 not initially true, but achieved by action 1 in the sequential plan)
-      (nop)
-  2 take_image satellite0 Phenomenon4 instrument0 thermograph0 (action, no decomposition)
-
-1 do_mission Star5 thermograph0 -> m0_do_mission 8 9 10
-  8 do_prepare satellite0 instrument0 Star5 -> m1_do_prepare 11 12
-    11 do_switching satellite0 instrument0 -> m4_do_switching 13 (precondition: power_on instrument0, achieved by previous switch_on)
-      13 (nop)
-    12 do_turning satellite0 Star5 -> m8_do_turning 14
-      14 turn_to satellite0 Star5 Phenomenon4
-  9 take_image satellite0 Star5 instrument0 thermograph0 (action, no decomposition)
-
-2 do_mission Phenomenon6 thermograph0 -> m0_do_mission 15 16 17
-  15 do_prepare satellite0 instrument0 Phenomenon6 -> m1_do_prepare 18 19
-    18 do_switching satellite0 instrument0 -> m4_do_switching 20 (precondition: power_on instrument0)
-      20 (nop)
-    19 do_turning satellite0 Phenomenon6 -> m9_do_turning (precondition: pointing satellite0 Phenomenon6, initially true)
-      (nop)
-  16 take_image satellite0 Phenomenon6 instrument0 thermograph0 (action, no decomposition)
+0 do_mission Phenomenon4 thermograph0 -> m0_do_mission 1 2 3 4 5
+1 do_prepare satellite0 instrument0 Phenomenon4 -> m1_do_prepare 1 2
+2 do_switching satellite0 instrument0 -> m3_do_switching 3 4
+3 do_calibration satellite0 instrument0 Phenomenon4 -> m6_do_calibration 
+4 do_turning satellite0 Phenomenon4 -> m9_do_turning 
+5 take_image satellite0 Phenomenon4 instrument0 thermograph0 -> 
+6 do_mission Star5 thermograph0 -> m0_do_mission 6 7 8 9
+7 do_prepare satellite0 instrument0 Star5 -> m1_do_prepare 6 7
+8 do_switching satellite0 instrument0 -> m4_do_switching 
+9 take_image satellite0 Star5 instrument0 thermograph0 -> 
+10 do_mission Phenomenon6 thermograph0 -> m0_do_mission 8 10 11
+11 do_prepare satellite0 instrument0 Phenomenon6 -> m1_do_prepare 8 10
+12 do_switching satellite0 instrument0 -> m4_do_switching 
+13 take_image satellite0 Phenomenon6 instrument0 thermograph0 -> 
 <==
-```
-**Notes:**
-
-1. **Assumptions**: 
-   - The initial calibration target for `instrument0` is not `Phenomenon4`, `Star5`, or `Phenomenon6`. If it were, additional calibration actions might be necessary before taking images.
-   - The `do_calibration` task for `Phenomenon4` is directly satisfied with `m6_do_calibration` (nop) due to the lack of explicit calibration actions in the initial state for this specific direction. In a real scenario, you might need to add calibration steps if the instrument's calibration target doesn't match the direction.
-
-2. **Method Selection**:
-   - `m0_do_mission` is used for each `do_mission` task as it directly matches the task structure.
-   - `m1_do_prepare` is chosen for `do_prepare` tasks as it provides the necessary subtasks for switching and turning.
-   - `m3_do_switching` and `m4_do_switching` are selected based on the availability of power and the power state of the instrument, respectively.
-   - `m6_do_calibration` is used under the assumption mentioned above. If the instrument needs calibration for the specific direction, `m5_do_calibration` would be more appropriate, but it's not directly applicable given the provided initial state.
-   - `m8_do_turning` and `m9_do_turning` are chosen based on whether the satellite is already pointing in the desired direction.

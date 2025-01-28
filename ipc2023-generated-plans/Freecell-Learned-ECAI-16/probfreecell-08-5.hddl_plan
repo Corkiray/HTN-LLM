@@ -1,294 +1,110 @@
 ==>
-1 move C8 D2
-2 board p0 f1
-3 move D2 C8
-4 move C7 C8
-5 move C8 C7
-6 move D8 S4
-7 move S4 D8
-8 move H8 H6
-9 move H6 H8
-10 move S8 S7
-11 move S7 S8
-12 move C8 C7
-13 move C7 C8
-14 move D8 D7
-15 move D7 D8
-16 move H8 H7
-17 move H7 H8
-18 move S8 S7
-19 move S7 S8
-20 move C8 C7
-21 move C7 C8
-22 move D8 D7
-23 move D7 D8
-24 move H8 H7
-25 move H7 H8
-26 move S8 S7
-27 move S7 S8
-28 move C8 C7
-29 move C7 C8
-30 move D8 D7
-31 move D7 D8
-32 move H8 H7
-33 move H7 H8
-34 move S8 S7
-35 move S7 S8
-36 move C8 C7
-37 move C7 C8
-38 move D8 D7
-39 move D7 D8
-40 move H8 H7
-41 move H7 H8
-42 move S8 S7
-43 move S7 S8
-44 move C8 C7
-45 move C7 C8
-46 move D8 D7
-47 move D7 D8
-48 move H8 H7
-49 move H7 H8
-50 move S8 S7
-51 move S7 S8
-52 move C8 C7
-53 move C7 C8
-54 move D8 D7
-55 move D7 D8
-56 move H8 H7
-57 move H7 H8
-58 move S8 S7
-59 move S7 S8
-60 move C8 C7
-61 move C7 C8
-62 move D8 D7
-63 move D7 D8
-64 move H8 H7
-65 move H7 H8
-66 move S8 S7
-67 move S7 S8
-68 move C8 C7
-69 move C7 C8
-70 move D8 D7
-71 move D7 D8
-72 move H8 H7
-73 move H7 H8
-74 move S8 S7
-75 move S7 S8
-76 move C8 C7
-77 move C7 C8
-78 move D8 D7
-79 move D7 D8
-80 move H8 H7
-81 move H7 H8
-82 move S8 S7
-83 move S7 S8
-84 move C8 C7
-85 move C7 C8
-86 move D8 D7
-87 move D7 D8
-88 move H8 H7
-89 move H7 H8
-90 move S8 S7
-91 move S7 S8
-92 move C8 C7
-93 move C7 C8
-94 move D8 D7
-95 move D7 D8
-96 move H8 H7
-97 move H7 H8
-98 move S8 S7
-99 move S7 S8
-100 move C8 C7
-101 move C7 C8
-102 move D8 D7
-103 move D7 D8
-104 move H8 H7
-105 move H7 H8
-106 move S8 S7
-107 move S7 S8
-108 move C8 C7
-109 move C7 C8
-110 move D8 D7
-111 move D7 D8
-112 move H8 H7
-113 move H7 H8
-114 move S8 S7
-115 move S7 S8
-116 move C8 C7
-117 move C7 C8
-118 move D8 D7
-119 move D7 D8
-120 move H8 H7
-121 move H7 H8
-122 move S8 S7
-123 move S7 S8
-124 move C8 C7
-125 move C7 C8
-126 move D8 D7
-127 move D7 D8
-128 move H8 H7
-129 move H7 H8
-130 move S8 S7
-131 move S7 S8
-132 move C8 C7
-133 move C7 C8
-134 move D8 D7
-135 move D7 D8
-136 move H8 H7
-137 move H7 H8
-138 move S8 S7
-139 move S7 S8
-140 move C8 C7
-141 move C7 C8
-142 move D8 D7
-143 move D7 D8
-144 move H8 H7
-145 move H7 H8
-146 move S8 S7
-147 move S7 S8
-148 move C8 C7
-149 move C7 C8
-150 move D8 D7
-151 move D7 D8
-152 move H8 H7
-153 move H7 H8
-154 move S8 S7
-155 move S7 S8
-156 move C8 C7
-157 move C7 C8
-158 move D8 D7
-159 move D7 D8
-160 move H8 H7
-161 move H7 H8
-162 move S8 S7
-163 move S7 S8
-164 move C8 C7
-165 move C7 C8
-166 move D8 D7
-167 move D7 D8
-168 move H8 H7
-169 move H7 H8
-170 move S8 S7
-171 move S7 S8
-172 move C8 C7
-173 move C7 C8
-174 move D8 D7
-175 move D7 D8
-176 move H8 H7
-177 move H7 H8
-178 move S8 S7
-179 move S7 S8
-180 move C8 C7
-181 move C7 C8
-182 move D8 D7
-183 move D7 D8
-184 move H8 H7
-185 move H7 H8
-186 move S8 S7
-187 move S7 S8
-188 move C8 C7
-189 move C7 C8
-190 move D8 D7
-191 move D7 D8
-192 move H8 H7
-193 move H7 H8
-194 move S8 S7
-195 move S7 S8
-196 move C8 C7
-197 move C7 C8
-198 move D8 D7
-199 move D7 D8
-200 move H8 H7
-201 move H7 H8
-202 move S8 S7
-203 move S7 S8
-204 move C8 C7
-205 move C7 C8
-206 move D8 D7
-207 move D7 D8
-208 move H8 H7
-209 move H7 H8
-210 move S8 S7
-211 move S7 S8
-212 move C8 C7
-213 move C7 C8
-214 move D8 D7
-215 move D7 D8
-216 move H8 H7
-217 move H7 H8
-218 move S8 S7
-219 move S7 S8
-220 move C8 C7
-221 move C7 C8
-222 move D8 D7
-223 move D7 D8
-224 move H8 H7
-225 move H7 H8
-226 move S8 S7
-227 move S7 S8
-228 move C8 C7
-229 move C7 C8
-230 move D8 D7
-231 move D7 D8
-232 move H8 H7
-233 move H7 H8
-234 move S8 S7
-235 move S7 S8
-236 move C8 C7
-237 move C7 C8
-238 move D8 D7
-239 move D7 D8
-240 move H8 H7
-241 move H7 H8
-242 move S8 S7
-243 move S7 S8
-244 move C8 C7
-245 move C7 C8
-246 move D8 D7
-247 move D7 D8
-248 move H8 H7
-249 move H7 H8
-250 move S8 S7
-251 move S7 S8
-252 move C8 C7
-253 move C7 C8
-254 move D8 D7
-255 move D7 D8
-256 move H8 H7
-257 move H7 H8
-258 move S8 S7
-259 move S7 S8
-260 move C8 C7
-261 move C7 C8
-262 move D8 D7
-263 move D7 D8
-264 move H8 H7
-265 move H7 H8
-266 move S8 S7
-267 move S7 S8
-268 move C8 C7
-269 move C7 C8
-270 move D8 D7
-271 move D7 D8
-272 move H8 H7
-273 move H7 H8
-274 move S8 S7
-275 move S7 S8
-276 move C8 C7
-277 move C7 C8
-278 move D8 D7
-279 move D7 D8
-280 move H8 H7
-281 move H7 H8
-282 move S8 S7
-283 move S7 S8
-284 move C8 C7
-285 move C7 C8
-286 move D8 D7
-287 move D7 D8
-288 move H8 H7
-289 move H7 H8
-290 move S8 S7
-291 move S7 S8
-292 move C8 C7
-293 move
+1 free C2 from H5
+2 move C2 to C3
+3 free D8 from S4
+4 move D8 to D7
+5 free S8 from SA
+6 move S8 to S7
+7 free C5 from H2
+8 move C5 to S5
+9 free H7 from D6
+10 move H7 to S6
+11 free C8 from D2
+12 move C8 to C7
+13 free D4 from H8
+14 move D4 to D5
+15 free D7 from CA
+16 move D7 to D6
+17 free CA from D8
+18 move CA to DA
+19 free S6 from C3
+20 move S6 to S5
+21 free S5 from S3
+22 move S5 to S4
+23 free C6 from H2
+24 move C6 to H4
+25 free H3 from H7
+26 move H3 to H5
+27 free D6 from H7
+28 move D6 to S6
+29 free D3 from S4
+30 move D3 to D4
+31 free D2 from C8
+32 move D2 to H8
+33 free S7 from HA
+34 move S7 to S2
+35 free S2 from S6
+36 free S4 from D8
+37 move S4 to S3
+38 free S3 from S5
+39 move S3 to H6
+40 free H5 from C6
+41 move H5 to DA
+42 free HA from C5
+43 move HA to SA
+44 free C3 from S6
+45 move C3 to S3
+46 free H4 from C6
+47 move H4 to H7
+48 free H8 from D4
+49 move H8 to H3
+50 move C4 to C3
+51 move C7 to C8
+52 move D5 to D4
+53 move H6 to H5
+54 move S5 to S3
+55 free C2 from C4
+56 free D2 from D4
+57 free H2 from H4
+58 move C5 to C6
+59 move D7 to D8
+60 move H7 to H6
+61 move S6 to S4
+62 move H8 to H4
+63 free C8 from C7
+64 free D3 from D4
+65 free H3 from H5
+66 free S8 from S7
+67 free S4 from S6
+68 free C4 from C3
+69 free D4 from D3
+70 free H5 from H4
+71 free H4 from H3
+72 move C6 to H4
+73 move C3 to H3
+74 move C7 to H5
+75 move C2 to H2
+76 move D8 to H8
+77 move D5 to H7
+78 move D6 to H6
+79 move S7 to H3
+80 move S6 to H5
+81 move S5 to H6
+82 move S4 to H7
+83 move S8 to H8
+84 move C5 to S5
+85 move C8 to S8
+86 move D7 to S7
+87 move DA to SA
+88 move CA to HA
+89 move C4 to C3
+90 move C3 to S3
+<==
+
+root 0
+0 free_cards_0 
+    - initial_method 1 2 3
+    - open_card_columns_1 4 5 6 7 8 9 10 11
+    - free_columns_cards_2 12 13 14 15 16 17 18 19 20
+    - sendtofree1_3 21 22 23 24 25 26 27 28 29
+    - sendtohome0_3 30 31 32 33 34 35 36 37 38
+    - clear_cards_and_moves_0 39 40 41 42 43 44 45 46 47 48
+    - sendtohome1_3 49 50 51 52 53 54 55 56 57 58 59
+    - second_move_cards_1 60 61 62 63 64 65 66 67 68 69 70 71
+    - second_sendtohome1_3 
+        - sendtonehome_1 72 73 74 75 
+        - second_sendtohome0_3 76 77 78 79 
+    - second_sendtohome2_3 
+        - second_sendtonehome_1 80 81 82 83 
+        - second_sendtohome0_4 84 85 86 87 88 89 
+    - second_initial_method 90
